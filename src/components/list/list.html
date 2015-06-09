@@ -1,0 +1,13 @@
+
+<title ba-if="{{title}}">{{title}}</title>
+
+<list ba-repeat="{{listitem :: listcollection}}">
+
+    <listitem
+            ba-class="{{{'selected' : listitem == currentitem}}}"
+            ba-click="select_item(listitem)">
+        {{listitem.name}}
+    </listitem>
+
+</list>
+

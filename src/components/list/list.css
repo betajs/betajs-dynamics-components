@@ -1,0 +1,16 @@
+ba-list {
+  flex: 1 1 0;
+  display: block; }
+  ba-list title {
+    display: block;
+    border-bottom: 1px solid black; }
+  ba-list list {
+    display: block;
+    flex-direction: column; }
+    ba-list list listitem {
+      display: block;
+      flex: 1 1 0; }
+  ba-list .selected {
+    background: grey; }
+
+/*# sourceMappingURL=list.css.map */

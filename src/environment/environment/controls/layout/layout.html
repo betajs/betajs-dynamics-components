@@ -1,0 +1,9 @@
+
+<ba-list
+        ba-title="System"
+        ba-currentitem="{{=current_system}}"
+        ba-listcollection="{{systems}}"></ba-list>
+
+<ba-list ba-title="Device"
+         ba-currentitem="{{=current_device}}"
+         ba-listcollection="{{current_system.devices}}"></ba-list>

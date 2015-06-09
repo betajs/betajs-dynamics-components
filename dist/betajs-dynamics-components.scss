@@ -1,0 +1,667 @@
+/*!
+betajs-dynamics-components - v0.0.1 - 2015-06-09
+Copyright (c) Oliver Friedmann,Victor Lingenthal
+MIT Software License.
+*/
+
+component {
+  margin: 10px;
+}
+
+
+li {
+  list-style: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+
+
+/*******************************
+ **           Timer           **
+ *******************************/
+$timer: .1s;
+$timer-showMenu: $timer;
+$timer-tagbar: $timer;
+
+/*******************************
+ **          Layout           **
+ *******************************/
+// Device Specific
+$iphone_batterybar_height: 20px;
+
+// Set Device
+$batterybar_height: $iphone_batterybar_height;
+
+// General
+$height1: 44px;
+$height2: $height1;
+$height3: 34px;
+$divider_height: 14px;
+
+// Header & Footer
+$header_height: $height1;
+$footer_height: $height1;
+$doodadtabs_height: $height1;
+
+// Lists
+$listitemheight: $height1;
+
+$task_height: $listitemheight;
+$mailinput_height: $height3;
+
+// Addotron
+$addotronheight: $height2;
+
+
+/*******************************
+ **           Style           **
+ *******************************/
+$grey1: #ddd;
+$grey2: #E2E2E2;
+$grey3: #777;
+
+$greywhite1: #fcfcfc;
+$greywhite2: #fdfdfd;
+
+$greyred1: #ffb3b3;
+
+$grey4: #333;
+$grey5: #999;
+$grey6: #555;
+$blue1: dodgerblue;
+
+//Style 2
+$blue2: #479CFC;
+
+
+a {color: $blue1}
+
+.icon-star {color: #428bca}
+.icon-star-empty {color: $grey1}
+.icon-search {color: $grey3}
+
+/*
+ * Mixins
+ */
+
+@mixin display-flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+@mixin flex-direction($direction) {
+  -webkit-flex-direction: $direction;
+  -ms-flex-direction: $direction;
+  flex-direction: $direction;
+}
+@mixin flex-wrap($wrap) {
+  -webkit-flex-wrap: $wrap;
+  -ms-flex-wrap: $wrap;
+  flex-wrap: $wrap;
+}
+@mixin flex($settings) {
+  -webkit-box-flex: $settings;
+  -moz-box-flex: $settings;
+  -webkit-flex: $settings;
+  -ms-flex: $settings;
+  flex: $settings;
+}
+@mixin flex-settings($settings) {
+  -webkit-box-flex: $settings;
+  -moz-box-flex: $settings;
+  -webkit-flex: $settings;
+  -ms-flex: $settings;
+  flex: $settings;
+}
+@mixin flex-wrap($settings) {
+  -webkit-flex-wrap: $settings;
+  -ms-flex-wrap: $settings;
+  flex-wrap: $settings;
+}
+@mixin flex-order($order) {
+  -webkit-order: $order;
+  -ms-flex-order: $order;
+  order: $order;
+}
+@mixin align-items($settings) {
+  -webkit-box-align: $settings;
+  -moz-box-align: $settings;
+  -ms-flex-align: $settings;
+
+  @if $settings == start or $settings == end {
+    -webkit-align-items: flex- + $settings;
+    align-items: flex- + $settings;
+  } @else {
+    -webkit-align-items: $settings;
+    align-items: $settings;
+  }
+}
+
+@mixin align-content($settings) {
+  -ms-flex-line-pack: $settings;
+
+  @if $settings == start or $settings == end {
+    -webkit-align-content: flex- + $settings;
+    align-content: flex- + $settings;
+  } @else {
+    -webkit-align-content: $settings;
+    align-content: $settings;
+  }
+}
+@mixin justify-content ($settings) {
+  -webkit-box-pack: $settings;
+  -moz-box-pack: $settings;
+  -ms-flex-pack: $settings;
+
+  @if $settings == start or $settings == end {
+    -webkit-justify-content: flex- + $settings;
+    justify-content: flex- + $settings;
+  } @else {
+    -webkit-justify-content: $settings;
+    justify-content: $settings;
+  }
+}
+//
+///*
+// * Used
+// */
+//.flex-horizontal-list {
+//  @include display-flex;
+//  @include flex-direction(row);
+//  @include flex-wrap(nowrap);
+//  @include align-content(stretch);
+//  justify-content: space-between;
+//  align-items: stretch;
+//}
+//.flex-vertical-list {
+//  @include display-flex;
+//  @include flex-direction(column);
+//  @include flex-wrap(nowrap);
+//  @include align-content(stretch);
+//  justify-content: space-between;
+//  align-items: stretch;
+//}
+//.flex-item {
+//  order: 0;
+//  align-self: auto;
+//  -webkit-font-smoothing:antialiased;
+//}
+//
+///*
+// * From Website
+// */
+//.flex-container {
+//  @include display-flex;
+//  @include flex-direction(row);
+//  @include flex-wrap(nowrap);
+//  @include align-content(stretch);
+//
+//    -webkit-box-direction: normal;
+//    -moz-box-direction: normal;
+//    -webkit-box-orient: horizontal;
+//    -moz-box-orient: horizontal;
+//
+//    -webkit-box-pack: justify;
+//    -moz-box-pack: justify;
+//    -webkit-justify-content: space-between;
+//    -ms-flex-pack: justify;
+//    justify-content: space-between;
+//    -webkit-box-align: start;
+//    -moz-box-align: start;
+//    -webkit-align-items: flex-start;
+//    -ms-flex-align: start;
+//    align-items: flex-start;
+//}
+//
+///*
+//    Legacy Firefox implementation treats all flex containers
+//    as inline-block elements.
+//*/
+//
+//@-moz-document url-prefix() {
+//.flex-container {
+//    width: 100%;
+//    -moz-box-sizing: border-box;
+//    }
+//
+//}
+
+ba-emailinput {
+  @include display-flex;
+  @include flex-direction(column);
+  border-bottom: 1px solid $grey1;
+  font-size: 14px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: $grey3;
+  overflow-x: hidden;
+  overflow-y: scroll;
+
+
+  inputarea {
+    @include display-flex;
+    @include flex-direction(row);
+    @include flex-wrap(wrap);
+
+    button {@include flex-settings(0 0 $mailinput_height)}
+
+    p {
+      @include flex-settings(0 0 auto);
+      @include display-flex;
+      margin: auto 0;
+    }
+
+    input {
+      @include flex-settings(1 1 auto);
+      height: 90%;
+    }
+
+    > div {
+      @include flex-settings(0 0 auto);
+      @include display-flex;
+      height: $mailinput_height;
+
+      > div {
+        margin: auto 0 auto 4px;
+        padding: 3px 4px;
+      }
+      &:last-of-type {@include flex-settings(1 0 $mailinput_height*2)}
+    }
+    .active {
+      color: white;
+      background: dodgerblue;
+      border-radius: 3px;
+    }
+  }
+
+  diitemlist {
+    @include flex-settings(1 1 auto);
+    overflow-x: scroll;
+    width: 100%;
+    z-index: 3;
+    background: $grey2;
+  }
+}
+
+
+ba-list {
+  flex: 1 1 0;
+
+  display: block;
+
+  title {
+    display: block;
+    border-bottom: 1px solid black;
+  }
+
+  list {
+    display: block;
+    flex-direction: column;
+
+    listitem {
+        display: block;
+        flex: 1 1 0;
+    }
+  }
+  .selected {background: grey}
+}
+ba-basicitem {
+  display: block;
+  padding: 0 10px;
+}
+ba-selectable {
+
+  selectable_item {
+    display: block;
+  }
+
+  .highlight_selected {
+    background: lightgrey;
+  }
+}
+
+ba-testcomponent {
+
+  padding: 10px;
+
+  border-bottom: 1px solid black;
+
+}
+
+ba-controls {
+  padding: 10px;
+  overflow: hidden;
+
+  border-bottom: 1px solid black;
+
+  display: flex;
+  flex-direction: column;
+
+  controls {
+    flex: 1 1 0;
+    display: flex;
+
+    ba-layout, ba-list {flex: 1 1 0}
+    ba-layout {flex-direction: column}
+    ba-list {border: 1px solid grey}
+  }
+
+}
+
+ba-layout {
+  display: flex;
+  flex-direction: column;
+
+  ba-list {
+    border: 1px solid grey;
+  }
+}
+
+ba-environment {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+
+  display: flex;
+  flex-direction: column;
+
+  ba-controls {
+    flex: 0 0 150px;
+  }
+
+  ba-simulator {
+    flex: 1 1 0;
+    overflow-y: scroll;
+  }
+
+}
+
+ba-simulator {
+
+  appframe {
+    display: flex;
+  }
+
+  //System
+  .mobile {
+    margin: 10px;
+    flex-direction: column;
+    border: 1px solid black;
+  }
+  .web {
+    margin: 0;
+  }
+
+  //Devices
+  .iphone5 {
+    height: 667px;
+    width: 375px;
+  }
+  .iphone4 {
+    height: 480px;
+    width: 320px;
+  }
+  .notebook {
+
+  }
+}
+/*******************************
+ **           Style           **
+ *******************************/
+$grey1: #ddd;
+$grey2: #E2E2E2;
+$grey3: #777;
+
+$greywhite1: #fcfcfc;
+$greywhite2: #fdfdfd;
+
+$greyred1: #ffb3b3;
+
+$grey4: #333;
+$grey5: #999;
+$grey6: #555;
+$blue1: dodgerblue;
+
+//Style 2
+$blue2: #479CFC;
+
+
+a {color: $blue1}
+
+.icon-star {color: #428bca}
+.icon-star-empty {color: $grey1}
+.icon-search {color: $grey3}
+/*
+ * Mixins
+ */
+
+@mixin display-flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+@mixin flex-direction($direction) {
+  -webkit-flex-direction: $direction;
+  -ms-flex-direction: $direction;
+  flex-direction: $direction;
+}
+@mixin flex-wrap($wrap) {
+  -webkit-flex-wrap: $wrap;
+  -ms-flex-wrap: $wrap;
+  flex-wrap: $wrap;
+}
+@mixin flex($settings) {
+  -webkit-box-flex: $settings;
+  -moz-box-flex: $settings;
+  -webkit-flex: $settings;
+  -ms-flex: $settings;
+  flex: $settings;
+}
+@mixin flex-settings($settings) {
+  -webkit-box-flex: $settings;
+  -moz-box-flex: $settings;
+  -webkit-flex: $settings;
+  -ms-flex: $settings;
+  flex: $settings;
+}
+@mixin flex-wrap($settings) {
+  -webkit-flex-wrap: $settings;
+  -ms-flex-wrap: $settings;
+  flex-wrap: $settings;
+}
+@mixin flex-order($order) {
+  -webkit-order: $order;
+  -ms-flex-order: $order;
+  order: $order;
+}
+@mixin align-items($settings) {
+  -webkit-box-align: $settings;
+  -moz-box-align: $settings;
+  -ms-flex-align: $settings;
+
+  @if $settings == start or $settings == end {
+    -webkit-align-items: flex- + $settings;
+    align-items: flex- + $settings;
+  } @else {
+    -webkit-align-items: $settings;
+    align-items: $settings;
+  }
+}
+
+@mixin align-content($settings) {
+  -ms-flex-line-pack: $settings;
+
+  @if $settings == start or $settings == end {
+    -webkit-align-content: flex- + $settings;
+    align-content: flex- + $settings;
+  } @else {
+    -webkit-align-content: $settings;
+    align-content: $settings;
+  }
+}
+@mixin justify-content ($settings) {
+  -webkit-box-pack: $settings;
+  -moz-box-pack: $settings;
+  -ms-flex-pack: $settings;
+
+  @if $settings == start or $settings == end {
+    -webkit-justify-content: flex- + $settings;
+    justify-content: flex- + $settings;
+  } @else {
+    -webkit-justify-content: $settings;
+    justify-content: $settings;
+  }
+}
+//
+///*
+// * Used
+// */
+//.flex-horizontal-list {
+//  @include display-flex;
+//  @include flex-direction(row);
+//  @include flex-wrap(nowrap);
+//  @include align-content(stretch);
+//  justify-content: space-between;
+//  align-items: stretch;
+//}
+//.flex-vertical-list {
+//  @include display-flex;
+//  @include flex-direction(column);
+//  @include flex-wrap(nowrap);
+//  @include align-content(stretch);
+//  justify-content: space-between;
+//  align-items: stretch;
+//}
+//.flex-item {
+//  order: 0;
+//  align-self: auto;
+//  -webkit-font-smoothing:antialiased;
+//}
+//
+///*
+// * From Website
+// */
+//.flex-container {
+//  @include display-flex;
+//  @include flex-direction(row);
+//  @include flex-wrap(nowrap);
+//  @include align-content(stretch);
+//
+//    -webkit-box-direction: normal;
+//    -moz-box-direction: normal;
+//    -webkit-box-orient: horizontal;
+//    -moz-box-orient: horizontal;
+//
+//    -webkit-box-pack: justify;
+//    -moz-box-pack: justify;
+//    -webkit-justify-content: space-between;
+//    -ms-flex-pack: justify;
+//    justify-content: space-between;
+//    -webkit-box-align: start;
+//    -moz-box-align: start;
+//    -webkit-align-items: flex-start;
+//    -ms-flex-align: start;
+//    align-items: flex-start;
+//}
+//
+///*
+//    Legacy Firefox implementation treats all flex containers
+//    as inline-block elements.
+//*/
+//
+//@-moz-document url-prefix() {
+//.flex-container {
+//    width: 100%;
+//    -moz-box-sizing: border-box;
+//    }
+//
+//}
+/*
+ * Mixins
+ */
+@mixin centertext($height) {
+  height: $height;
+  line-height: $height;
+  padding: 0 $height/2;
+}
+/*******************************
+ **           Reset           **
+ *******************************/
+
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px;
+}
+
+body {font-family: "Helvetica Neue",Helvetica,Arial,sans-serif}
+
+a {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  text-decoration: none;
+}
+
+button, input {
+  border: none;
+  background: transparent;
+}
+input, textarea {
+  border: none;
+  -webkit-appearance: none;
+}
+
+textarea {resize: none}
+button:focus, input:focus, textarea:focus {outline: none}
+ul {list-style-type: none}
+
+// Mobile
+* {-webkit-tap-highlight-color: transparent}
+
+/*******************************
+ **           Timer           **
+ *******************************/
+$timer: .1s;
+$timer-showMenu: $timer;
+$timer-tagbar: $timer;
+
+/*******************************
+ **          Layout           **
+ *******************************/
+// Device Specific
+$iphone_batterybar_height: 20px;
+
+// Set Device
+$batterybar_height: $iphone_batterybar_height;
+
+// General
+$height1: 44px;
+$height2: $height1;
+$height3: 34px;
+$divider_height: 14px;
+
+// Header & Footer
+$header_height: $height1;
+$footer_height: $height1;
+$doodadtabs_height: $height1;
+
+// Lists
+$listitemheight: $height1;
+
+$task_height: $listitemheight;
+$mailinput_height: $height3;
+
+// Addotron
+$addotronheight: $height2;
+
+
+a:hover {cursor: pointer}

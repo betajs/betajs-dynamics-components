@@ -1,0 +1,22 @@
+
+ba-list {
+  flex: 1 1 0;
+
+  display: block;
+
+  title {
+    display: block;
+    border-bottom: 1px solid black;
+  }
+
+  list {
+    display: block;
+    flex-direction: column;
+
+    listitem {
+        display: block;
+        flex: 1 1 0;
+    }
+  }
+  .selected {background: grey}
+}

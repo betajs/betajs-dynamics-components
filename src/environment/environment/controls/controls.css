@@ -1,0 +1,17 @@
+ba-controls {
+  padding: 10px;
+  overflow: hidden;
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-direction: column; }
+  ba-controls controls {
+    flex: 1 1 0;
+    display: flex; }
+    ba-controls controls ba-layout, ba-controls controls ba-list {
+      flex: 1 1 0; }
+    ba-controls controls ba-layout {
+      flex-direction: column; }
+    ba-controls controls ba-list {
+      border: 1px solid grey; }
+
+/*# sourceMappingURL=controls.css.map */

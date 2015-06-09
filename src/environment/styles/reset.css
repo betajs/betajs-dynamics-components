@@ -1,0 +1,35 @@
+/*******************************
+ **           Reset           **
+ *******************************/
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px; }
+
+body {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; }
+
+a {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  text-decoration: none; }
+
+button, input {
+  border: none;
+  background: transparent; }
+
+input, textarea {
+  border: none;
+  -webkit-appearance: none; }
+
+textarea {
+  resize: none; }
+
+button:focus, input:focus, textarea:focus {
+  outline: none; }
+
+ul {
+  list-style-type: none; }
+
+* {
+  -webkit-tap-highlight-color: transparent; }

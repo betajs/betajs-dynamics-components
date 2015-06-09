@@ -1,0 +1,35 @@
+/*******************************
+ **           Timer           **
+ *******************************/
+$timer: .1s;
+$timer-showMenu: $timer;
+$timer-tagbar: $timer;
+
+/*******************************
+ **          Layout           **
+ *******************************/
+// Device Specific
+$iphone_batterybar_height: 20px;
+
+// Set Device
+$batterybar_height: $iphone_batterybar_height;
+
+// General
+$height1: 44px;
+$height2: $height1;
+$height3: 34px;
+$divider_height: 14px;
+
+// Header & Footer
+$header_height: $height1;
+$footer_height: $height1;
+$doodadtabs_height: $height1;
+
+// Lists
+$listitemheight: $height1;
+
+$task_height: $listitemheight;
+$mailinput_height: $height3;
+
+// Addotron
+$addotronheight: $height2;

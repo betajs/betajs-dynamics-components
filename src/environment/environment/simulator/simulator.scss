@@ -1,0 +1,30 @@
+
+ba-simulator {
+
+  appframe {
+    display: flex;
+  }
+
+  //System
+  .mobile {
+    margin: 10px;
+    flex-direction: column;
+    border: 1px solid black;
+  }
+  .web {
+    margin: 0;
+  }
+
+  //Devices
+  .iphone5 {
+    height: 667px;
+    width: 375px;
+  }
+  .iphone4 {
+    height: 480px;
+    width: 320px;
+  }
+  .notebook {
+
+  }
+}

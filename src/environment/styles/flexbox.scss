@@ -1,0 +1,147 @@
+/*
+ * Mixins
+ */
+
+@mixin display-flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+@mixin flex-direction($direction) {
+  -webkit-flex-direction: $direction;
+  -ms-flex-direction: $direction;
+  flex-direction: $direction;
+}
+@mixin flex-wrap($wrap) {
+  -webkit-flex-wrap: $wrap;
+  -ms-flex-wrap: $wrap;
+  flex-wrap: $wrap;
+}
+@mixin flex($settings) {
+  -webkit-box-flex: $settings;
+  -moz-box-flex: $settings;
+  -webkit-flex: $settings;
+  -ms-flex: $settings;
+  flex: $settings;
+}
+@mixin flex-settings($settings) {
+  -webkit-box-flex: $settings;
+  -moz-box-flex: $settings;
+  -webkit-flex: $settings;
+  -ms-flex: $settings;
+  flex: $settings;
+}
+@mixin flex-wrap($settings) {
+  -webkit-flex-wrap: $settings;
+  -ms-flex-wrap: $settings;
+  flex-wrap: $settings;
+}
+@mixin flex-order($order) {
+  -webkit-order: $order;
+  -ms-flex-order: $order;
+  order: $order;
+}
+@mixin align-items($settings) {
+  -webkit-box-align: $settings;
+  -moz-box-align: $settings;
+  -ms-flex-align: $settings;
+
+  @if $settings == start or $settings == end {
+    -webkit-align-items: flex- + $settings;
+    align-items: flex- + $settings;
+  } @else {
+    -webkit-align-items: $settings;
+    align-items: $settings;
+  }
+}
+
+@mixin align-content($settings) {
+  -ms-flex-line-pack: $settings;
+
+  @if $settings == start or $settings == end {
+    -webkit-align-content: flex- + $settings;
+    align-content: flex- + $settings;
+  } @else {
+    -webkit-align-content: $settings;
+    align-content: $settings;
+  }
+}
+@mixin justify-content ($settings) {
+  -webkit-box-pack: $settings;
+  -moz-box-pack: $settings;
+  -ms-flex-pack: $settings;
+
+  @if $settings == start or $settings == end {
+    -webkit-justify-content: flex- + $settings;
+    justify-content: flex- + $settings;
+  } @else {
+    -webkit-justify-content: $settings;
+    justify-content: $settings;
+  }
+}
+//
+///*
+// * Used
+// */
+//.flex-horizontal-list {
+//  @include display-flex;
+//  @include flex-direction(row);
+//  @include flex-wrap(nowrap);
+//  @include align-content(stretch);
+//  justify-content: space-between;
+//  align-items: stretch;
+//}
+//.flex-vertical-list {
+//  @include display-flex;
+//  @include flex-direction(column);
+//  @include flex-wrap(nowrap);
+//  @include align-content(stretch);
+//  justify-content: space-between;
+//  align-items: stretch;
+//}
+//.flex-item {
+//  order: 0;
+//  align-self: auto;
+//  -webkit-font-smoothing:antialiased;
+//}
+//
+///*
+// * From Website
+// */
+//.flex-container {
+//  @include display-flex;
+//  @include flex-direction(row);
+//  @include flex-wrap(nowrap);
+//  @include align-content(stretch);
+//
+//    -webkit-box-direction: normal;
+//    -moz-box-direction: normal;
+//    -webkit-box-orient: horizontal;
+//    -moz-box-orient: horizontal;
+//
+//    -webkit-box-pack: justify;
+//    -moz-box-pack: justify;
+//    -webkit-justify-content: space-between;
+//    -ms-flex-pack: justify;
+//    justify-content: space-between;
+//    -webkit-box-align: start;
+//    -moz-box-align: start;
+//    -webkit-align-items: flex-start;
+//    -ms-flex-align: start;
+//    align-items: flex-start;
+//}
+//
+///*
+//    Legacy Firefox implementation treats all flex containers
+//    as inline-block elements.
+//*/
+//
+//@-moz-document url-prefix() {
+//.flex-container {
+//    width: 100%;
+//    -moz-box-sizing: border-box;
+//    }
+//
+//}

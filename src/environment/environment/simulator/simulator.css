@@ -1,0 +1,16 @@
+ba-simulator appframe {
+  display: flex; }
+ba-simulator .mobile {
+  margin: 10px;
+  flex-direction: column;
+  border: 1px solid black; }
+ba-simulator .web {
+  margin: 0; }
+ba-simulator .iphone5 {
+  height: 667px;
+  width: 375px; }
+ba-simulator .iphone4 {
+  height: 480px;
+  width: 320px; }
+
+/*# sourceMappingURL=simulator.css.map */

@@ -1,0 +1,8 @@
+/*
+ * Mixins
+ */
+@mixin centertext($height) {
+  height: $height;
+  line-height: $height;
+  padding: 0 $height/2;
+}

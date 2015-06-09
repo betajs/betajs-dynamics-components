@@ -1,0 +1,37 @@
+
+<inputarea onkeydown="{{keydown(event)}}">
+
+    <button class="icon-user"></button>
+
+    <p>TO:</p>
+
+    <div ba-repeat-element="{{recipient :: recipients}}">
+
+        <div
+                ba-class="{{{active : recipient.email == selected_recipient.email}}}"
+                ba-tap="selected_recipient = recipient">
+            {{recipient.email}}&nbsp;
+        </div>
+
+    </div>
+
+    <div ba-tap="select(recipient)">
+
+        <input ba-keypress="showcontacts=true"
+               ba-click="selected=null"
+               value="{{=value}}"
+               id="recipient_input" autofocus>
+
+        <button ba-tap="showcontacts = !showcontacts">
+            <span ba-if="{{!showcontacts}}" class="icon-plus"></span>
+            <span ba-if="{{showcontacts}}" class="icon-minus"></span>
+        </button>
+
+    </div>
+
+</inputarea>
+
+<ba-itemlist type="contact"
+        ba-if="{{showcontacts}}"
+        search-query="searchQueryValue">
+</ba-itemlist>

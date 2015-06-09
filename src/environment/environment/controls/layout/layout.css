@@ -1,0 +1,7 @@
+ba-layout {
+  display: flex;
+  flex-direction: column; }
+  ba-layout ba-list {
+    border: 1px solid grey; }
+
+/*# sourceMappingURL=layout.css.map */

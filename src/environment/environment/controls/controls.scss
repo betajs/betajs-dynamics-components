@@ -1,0 +1,20 @@
+
+ba-controls {
+  padding: 10px;
+  overflow: hidden;
+
+  border-bottom: 1px solid black;
+
+  display: flex;
+  flex-direction: column;
+
+  controls {
+    flex: 1 1 0;
+    display: flex;
+
+    ba-layout, ba-list {flex: 1 1 0}
+    ba-layout {flex-direction: column}
+    ba-list {border: 1px solid grey}
+  }
+
+}

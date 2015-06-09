@@ -1,0 +1,273 @@
+/*!
+betajs-dynamics-components - v0.0.1 - 2015-06-09
+Copyright (c) Oliver Friedmann,Victor Lingenthal
+MIT Software License.
+*/
+component {
+  margin: 10px; }
+
+li {
+  list-style: none; }
+
+ul {
+  margin: 0;
+  padding: 0; }
+
+/*******************************
+ **           Timer           **
+ *******************************/
+/*******************************
+ **          Layout           **
+ *******************************/
+/*******************************
+ **           Style           **
+ *******************************/
+a {
+  color: dodgerblue; }
+
+.icon-star {
+  color: #428bca; }
+
+.icon-star-empty {
+  color: #ddd; }
+
+.icon-search {
+  color: #777; }
+
+/*
+ * Mixins
+ */
+ba-emailinput {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  border-bottom: 1px solid #ddd;
+  font-size: 14px;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #777;
+  overflow-x: hidden;
+  overflow-y: scroll; }
+  ba-emailinput inputarea {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row;
+    -webkit-flex-wrap: wrap;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap; }
+    ba-emailinput inputarea button {
+      -webkit-box-flex: 0 0 34px;
+      -moz-box-flex: 0 0 34px;
+      -webkit-flex: 0 0 34px;
+      -ms-flex: 0 0 34px;
+      flex: 0 0 34px; }
+    ba-emailinput inputarea p {
+      -webkit-box-flex: 0 0 auto;
+      -moz-box-flex: 0 0 auto;
+      -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+      flex: 0 0 auto;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      margin: auto 0; }
+    ba-emailinput inputarea input {
+      -webkit-box-flex: 1 1 auto;
+      -moz-box-flex: 1 1 auto;
+      -webkit-flex: 1 1 auto;
+      -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+      height: 90%; }
+    ba-emailinput inputarea > div {
+      -webkit-box-flex: 0 0 auto;
+      -moz-box-flex: 0 0 auto;
+      -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+      flex: 0 0 auto;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      height: 34px; }
+      ba-emailinput inputarea > div > div {
+        margin: auto 0 auto 4px;
+        padding: 3px 4px; }
+      ba-emailinput inputarea > div:last-of-type {
+        -webkit-box-flex: 1 0 68px;
+        -moz-box-flex: 1 0 68px;
+        -webkit-flex: 1 0 68px;
+        -ms-flex: 1 0 68px;
+        flex: 1 0 68px; }
+    ba-emailinput inputarea .active {
+      color: white;
+      background: dodgerblue;
+      border-radius: 3px; }
+  ba-emailinput diitemlist {
+    -webkit-box-flex: 1 1 auto;
+    -moz-box-flex: 1 1 auto;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    overflow-x: scroll;
+    width: 100%;
+    z-index: 3;
+    background: #E2E2E2; }
+
+ba-list {
+  flex: 1 1 0;
+  display: block; }
+  ba-list title {
+    display: block;
+    border-bottom: 1px solid black; }
+  ba-list list {
+    display: block;
+    flex-direction: column; }
+    ba-list list listitem {
+      display: block;
+      flex: 1 1 0; }
+  ba-list .selected {
+    background: grey; }
+
+ba-basicitem {
+  display: block;
+  padding: 0 10px; }
+
+ba-selectable selectable_item {
+  display: block; }
+ba-selectable .highlight_selected {
+  background: lightgrey; }
+
+ba-testcomponent {
+  padding: 10px;
+  border-bottom: 1px solid black; }
+
+ba-controls {
+  padding: 10px;
+  overflow: hidden;
+  border-bottom: 1px solid black;
+  display: flex;
+  flex-direction: column; }
+  ba-controls controls {
+    flex: 1 1 0;
+    display: flex; }
+    ba-controls controls ba-layout, ba-controls controls ba-list {
+      flex: 1 1 0; }
+    ba-controls controls ba-layout {
+      flex-direction: column; }
+    ba-controls controls ba-list {
+      border: 1px solid grey; }
+
+ba-layout {
+  display: flex;
+  flex-direction: column; }
+  ba-layout ba-list {
+    border: 1px solid grey; }
+
+ba-environment {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: flex;
+  flex-direction: column; }
+  ba-environment ba-controls {
+    flex: 0 0 150px; }
+  ba-environment ba-simulator {
+    flex: 1 1 0;
+    overflow-y: scroll; }
+
+ba-simulator appframe {
+  display: flex; }
+ba-simulator .mobile {
+  margin: 10px;
+  flex-direction: column;
+  border: 1px solid black; }
+ba-simulator .web {
+  margin: 0; }
+ba-simulator .iphone5 {
+  height: 667px;
+  width: 375px; }
+ba-simulator .iphone4 {
+  height: 480px;
+  width: 320px; }
+
+/*******************************
+ **           Style           **
+ *******************************/
+a {
+  color: dodgerblue; }
+
+.icon-star {
+  color: #428bca; }
+
+.icon-star-empty {
+  color: #ddd; }
+
+.icon-search {
+  color: #777; }
+
+/*
+ * Mixins
+ */
+/*
+ * Mixins
+ */
+/*******************************
+ **           Reset           **
+ *******************************/
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px; }
+
+body {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; }
+
+a {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  text-decoration: none; }
+
+button, input {
+  border: none;
+  background: transparent; }
+
+input, textarea {
+  border: none;
+  -webkit-appearance: none; }
+
+textarea {
+  resize: none; }
+
+button:focus, input:focus, textarea:focus {
+  outline: none; }
+
+ul {
+  list-style-type: none; }
+
+* {
+  -webkit-tap-highlight-color: transparent; }
+
+/*******************************
+ **           Timer           **
+ *******************************/
+/*******************************
+ **          Layout           **
+ *******************************/
+a:hover {
+  cursor: pointer; }
+
+/*# sourceMappingURL=betajs-dynamics-components.css.map */
