@@ -2,35 +2,78 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72d0b85e-2146-4f66-96cd-41ba7c2a2eae" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendors/icomoon/fonts/icomoon.eot" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendors/icomoon/fonts/icomoon.ttf" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendors/icomoon/fonts/icomoon.woff" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendors/icomoon/Read Me.txt" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/environment/environment/controls/controls.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/environment/environment/controls/controls.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/environment/environment/controls/controls.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendors/icomoon/demo-files/demo.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendors/icomoon/demo.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendors/icomoon/demo-files/demo.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/emailinput/emailinput/emailinput.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/emailinput/emailinput/emailinput.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/emailinput/emailinput/emailinput.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/emailinput/emailinput/emailinput.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/environment/environment/environment.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/environment/environment/environment.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/environment/environment/environment.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendors/icomoon/fonts/icomoon.svg" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/emailinput/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/list/list.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/list/list.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/list/list.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/emailinput/component/script.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendors/icomoon/selection.json" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/emailinput/component/style.css.map" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/emailinput/component/style.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vendors/icomoon/style.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/emailinput/component/style.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/emailinput/component/template.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/environment/config/components.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/environment/config/config.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/timepicker/datepicker/datepicker.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/timepicker/datepicker/datepicker.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/timepicker/datepicker/datepicker.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/timepicker/datepicker/datepicker.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/timepicker/daypicker/daypicker.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/timepicker/daypicker/daypicker.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/timepicker/daypicker/daypicker.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/timepicker/daypicker/daypicker.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/timepicker/numberscrollpicker/numberscrollpicker.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/timepicker/numberscrollpicker/numberscrollpicker.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/timepicker/numberscrollpicker/numberscrollpicker.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/timepicker/numberscrollpicker/numberscrollpicker.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/environment/config/router.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/timepicker/timepicker.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/timepicker/timepicker.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/timepicker/timepicker.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/timepicker/timepicker.scss" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components-noscoped.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components.css.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/aa_template_component/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/emailinput/component/script.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/emailinput/component/style.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/emailinput/component/style.css.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/emailinput/component/style.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/emailinput/component/template.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/emailinput/index.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/list_component/index.html" afterPath="" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/aa_template_component/component/script.js" afterPath="$PROJECT_DIR$/src/components/aa_template/script.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/aa_template_component/component/style.css" afterPath="$PROJECT_DIR$/src/components/aa_template/style.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/aa_template_component/component/style.css.map" afterPath="$PROJECT_DIR$/src/components/aa_template/style.css.map" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/aa_template_component/component/style.scss" afterPath="$PROJECT_DIR$/src/components/aa_template/style.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/aa_template_component/component/template.html" afterPath="$PROJECT_DIR$/src/components/aa_template/template.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/emailinput/emailinput/emailinput.css" afterPath="$PROJECT_DIR$/src/components/emailinput/emailinput.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/emailinput/emailinput/emailinput.css.map" afterPath="$PROJECT_DIR$/src/components/emailinput/emailinput.css.map" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/emailinput/emailinput/emailinput.html" afterPath="$PROJECT_DIR$/src/components/emailinput/emailinput.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/emailinput/emailinput/emailinput.js" afterPath="$PROJECT_DIR$/src/components/emailinput/emailinput.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/emailinput/emailinput/emailinput.scss" afterPath="$PROJECT_DIR$/src/components/emailinput/emailinput.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list_component/component/list.css" afterPath="$PROJECT_DIR$/src/components/list_component/list.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list_component/component/list.css.map" afterPath="$PROJECT_DIR$/src/components/list_component/list.css.map" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list_component/component/list.html" afterPath="$PROJECT_DIR$/src/components/list_component/list.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list_component/component/list.js" afterPath="$PROJECT_DIR$/src/components/list_component/list.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list_component/component/list.scss" afterPath="$PROJECT_DIR$/src/components/list_component/list.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list_component/component/subcomponents/selectable/selectable.css" afterPath="$PROJECT_DIR$/src/components/list_component/subcomponents/selectable/selectable.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list_component/component/subcomponents/selectable/selectable.css.map" afterPath="$PROJECT_DIR$/src/components/list_component/subcomponents/selectable/selectable.css.map" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list_component/component/subcomponents/selectable/selectable.html" afterPath="$PROJECT_DIR$/src/components/list_component/subcomponents/selectable/selectable.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list_component/component/subcomponents/selectable/selectable.js" afterPath="$PROJECT_DIR$/src/components/list_component/subcomponents/selectable/selectable.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list_component/component/subcomponents/selectable/selectable.scss" afterPath="$PROJECT_DIR$/src/components/list_component/subcomponents/selectable/selectable.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.sass-cache/141b1d2d07e3b6f7e527f55c5ae7e5b45a0bad79/betajs-dynamics-components.scssc" afterPath="$PROJECT_DIR$/.sass-cache/141b1d2d07e3b6f7e527f55c5ae7e5b45a0bad79/betajs-dynamics-components.scssc" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gruntfile.js" afterPath="$PROJECT_DIR$/Gruntfile.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/beta-browser-noscoped.js" afterPath="$PROJECT_DIR$/vendors/beta-browser-noscoped.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/betajs-dynamics-noscoped.js" afterPath="$PROJECT_DIR$/vendors/betajs-dynamics-noscoped.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/environment/controls/controls.css.map" afterPath="$PROJECT_DIR$/src/environment/environment/controls/controls.css.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/environment/controls/controls.css" afterPath="$PROJECT_DIR$/src/environment/environment/controls/controls.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/environment/controls/controls.html" afterPath="$PROJECT_DIR$/src/environment/environment/controls/controls.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/environment/controls/controls.js" afterPath="$PROJECT_DIR$/src/environment/environment/controls/controls.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/environment/controls/controls.scss" afterPath="$PROJECT_DIR$/src/environment/environment/controls/controls.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/environment/environment.css" afterPath="$PROJECT_DIR$/src/environment/environment/environment.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/environment/environment.scss" afterPath="$PROJECT_DIR$/src/environment/environment/environment.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/index.html" afterPath="$PROJECT_DIR$/src/environment/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/environment/controls/layout/layout.css.map" afterPath="$PROJECT_DIR$/src/environment/environment/controls/layout/layout.css.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/environment/controls/layout/layout.css" afterPath="$PROJECT_DIR$/src/environment/environment/controls/layout/layout.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/environment/controls/layout/layout.scss" afterPath="$PROJECT_DIR$/src/environment/environment/controls/layout/layout.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/environment/simulator/simulator.css.map" afterPath="$PROJECT_DIR$/src/environment/environment/simulator/simulator.css.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/environment/simulator/simulator.css" afterPath="$PROJECT_DIR$/src/environment/environment/simulator/simulator.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/environment/simulator/simulator.js" afterPath="$PROJECT_DIR$/src/environment/environment/simulator/simulator.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/environment/simulator/simulator.scss" afterPath="$PROJECT_DIR$/src/environment/environment/simulator/simulator.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="betajs-dynamics-components.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -54,71 +97,31 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="layout.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/environment/environment/controls/layout/layout.js">
+      <file leaf-file-name="timepicker.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/timepicker/timepicker.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="660">
-              <caret line="13" column="39" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
+            <state vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="525">
+              <caret line="4" column="32" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="simulator.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/environment/environment/simulator/simulator.html">
+      <file leaf-file-name="numberscrollpicker.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/timepicker/numberscrollpicker/numberscrollpicker.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="255">
-              <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1275">
+              <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="simulator.scss" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/environment/environment/simulator/simulator.scss">
+      <file leaf-file-name="timepicker.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/timepicker/timepicker.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="525">
-              <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="controls.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/environment/environment/controls/controls.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
-              <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="emailinput.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/emailinput/emailinput/emailinput.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1995">
-              <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="emailinput.scss" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/emailinput/emailinput/emailinput.scss">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-10.0" vertical-offset="720" max-vertical-offset="4095">
-              <caret line="64" column="2" selection-start-line="64" selection-start-column="2" selection-end-line="64" selection-end-column="2" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/package.json">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.886076" vertical-offset="0" max-vertical-offset="1005">
-              <caret line="28" column="21" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
+            <state vertical-scroll-proportion="0.6325301" vertical-offset="0" max-vertical-offset="615">
+              <caret line="21" column="15" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
               <folding />
             </state>
           </provider>
@@ -132,14 +135,12 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/components/emailinput/component/template.html" />
         <option value="$PROJECT_DIR$/src/components/emailinput/component/script.js" />
         <option value="$PROJECT_DIR$/src/components/emailinput/index.html" />
         <option value="$PROJECT_DIR$/src/environment/controls/controls.js" />
         <option value="$PROJECT_DIR$/src/environment/simulator/simulator.js" />
         <option value="$PROJECT_DIR$/src/environment/environment/environment.html" />
         <option value="$PROJECT_DIR$/src/environment/environment/environment.js" />
-        <option value="$PROJECT_DIR$/src/environment/environment/environment.scss" />
         <option value="$PROJECT_DIR$/src/environment/environment/testcomponent/testcomponent.html" />
         <option value="$PROJECT_DIR$/src/environment/environment/testcomponent/testcomponent.scss" />
         <option value="$PROJECT_DIR$/src/environment/environment/testcomponent/testcomponent.js" />
@@ -149,25 +150,42 @@
         <option value="$PROJECT_DIR$/src/environment/environment/controls/layout/list/list.scss" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/src/components/emailinput/component/style.scss" />
-        <option value="$PROJECT_DIR$/Gruntfile.js" />
         <option value="$PROJECT_DIR$/src/environment/environment/controls/layout/list/list.html" />
         <option value="$PROJECT_DIR$/src/environment/environment/controls/layout/list/list.js" />
-        <option value="$PROJECT_DIR$/src/environment/environment/controls/layout/layout.scss" />
-        <option value="$PROJECT_DIR$/src/environment/environment/controls/controls.scss" />
-        <option value="$PROJECT_DIR$/src/environment/environment/controls/controls.html" />
         <option value="$PROJECT_DIR$/src/components/testcomponent/testcomponent.js" />
         <option value="$PROJECT_DIR$/src/components/list/list.js" />
         <option value="$PROJECT_DIR$/src/components/list_component/component/list.js" />
-        <option value="$PROJECT_DIR$/src/environment/index.html" />
         <option value="$PROJECT_DIR$/src/environment/environment/controls/layout/layout.js" />
         <option value="$PROJECT_DIR$/src/environment/environment/controls/layout/layout.html" />
         <option value="$PROJECT_DIR$/src/environment/environment/simulator/simulator.html" />
-        <option value="$PROJECT_DIR$/src/environment/environment/simulator/simulator.js" />
-        <option value="$PROJECT_DIR$/src/environment/environment/simulator/simulator.scss" />
-        <option value="$PROJECT_DIR$/src/environment/environment/controls/controls.js" />
-        <option value="$PROJECT_DIR$/src/components/emailinput/emailinput/emailinput.js" />
         <option value="$PROJECT_DIR$/src/components/emailinput/emailinput/emailinput.scss" />
         <option value="$PROJECT_DIR$/src/components/aa_template_component/component/style.scss" />
+        <option value="$PROJECT_DIR$/src/environment/config.js" />
+        <option value="$PROJECT_DIR$/src/environment/config/config.js" />
+        <option value="$PROJECT_DIR$/src/components/emailinput/emailinput/emailinput.js" />
+        <option value="$PROJECT_DIR$/src/components/emailinput/emailinput.js" />
+        <option value="$PROJECT_DIR$/src/components/aa_template/script.js" />
+        <option value="$PROJECT_DIR$/src/environment/environment/controls/components/components.html" />
+        <option value="$PROJECT_DIR$/src/environment/environment/simulator/simulator.js" />
+        <option value="$PROJECT_DIR$/src/environment/environment/controls/controls.js" />
+        <option value="$PROJECT_DIR$/src/environment/environment/controls/controls.html" />
+        <option value="$PROJECT_DIR$/src/components/timepicker/daypicker/daypicker.js" />
+        <option value="$PROJECT_DIR$/src/environment/config/components.js" />
+        <option value="$PROJECT_DIR$/src/environment/config/router.js" />
+        <option value="$PROJECT_DIR$/src/environment/environment/controls/components/components.js" />
+        <option value="$PROJECT_DIR$/src/components/timepicker/datepicker/datepicker.js" />
+        <option value="$PROJECT_DIR$/Gruntfile.js" />
+        <option value="$PROJECT_DIR$/src/environment/index.html" />
+        <option value="$PROJECT_DIR$/src/environment/environment/controls/components/components.scss" />
+        <option value="$PROJECT_DIR$/src/environment/environment/controls/layout/layout.scss" />
+        <option value="$PROJECT_DIR$/src/environment/environment/controls/controls.scss" />
+        <option value="$PROJECT_DIR$/src/environment/environment/simulator/simulator.scss" />
+        <option value="$PROJECT_DIR$/src/environment/environment/environment.scss" />
+        <option value="$PROJECT_DIR$/src/components/timepicker/numberscrollpicker/numberscrollpicker.html" />
+        <option value="$PROJECT_DIR$/src/components/timepicker/numberscrollpicker/numberscrollpicker.scss" />
+        <option value="$PROJECT_DIR$/src/components/timepicker/timepicker.html" />
+        <option value="$PROJECT_DIR$/src/components/timepicker/numberscrollpicker/numberscrollpicker.js" />
+        <option value="$PROJECT_DIR$/src/components/timepicker/timepicker.js" />
       </list>
     </option>
   </component>
@@ -185,7 +203,7 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="4" />
     <option name="y" value="23" />
-    <option name="width" value="981" />
+    <option name="width" value="805" />
     <option name="height" value="877" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
@@ -211,7 +229,6 @@
       <sortByType />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -254,24 +271,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="vendors" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="icomoon" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -312,7 +311,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="styles" />
+              <option name="myItemId" value="environment" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -327,6 +326,44 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="environment" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="environment" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controls" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="betajs-dynamics-components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="betajs-dynamics-components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="environment" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="environment" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controls" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -352,7 +389,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="emailinput" />
+              <option name="myItemId" value="timepicker" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -374,33 +411,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="emailinput" />
+              <option name="myItemId" value="timepicker" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="emailinput" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="aa_template_component" />
+              <option name="myItemId" value="numberscrollpicker" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -420,48 +435,11 @@
             <PATH_ELEMENT>
               <option name="myItemId" value="components" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="aa_template_component" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="component" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="aa_template_component" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="component" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="style.scss" />
-              <option name="myItemType" value="com.intellij.plugins.watcher.projectView.NestingTreeNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -471,25 +449,29 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components" />
+      <recent name="$PROJECT_DIR$/src/environment/environment/controls/components" />
       <recent name="$PROJECT_DIR$/vendors" />
       <recent name="$PROJECT_DIR$/src/environment/environment/controls/layout/list" />
       <recent name="$PROJECT_DIR$/src/environment/environment/controls/layout_selector" />
-      <recent name="$PROJECT_DIR$/src/environment/environment" />
-      <recent name="$PROJECT_DIR$/src/environment" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/list_component" />
+      <recent name="$PROJECT_DIR$/src/components/aa_template_component" />
+      <recent name="$PROJECT_DIR$/src/components/emailinput" />
+      <recent name="$PROJECT_DIR$/src/environment/config" />
       <recent name="$PROJECT_DIR$/src/components" />
-      <recent name="$PROJECT_DIR$/src/environment" />
-      <recent name="$PROJECT_DIR$/src" />
-      <recent name="$PROJECT_DIR$/src/environment/environment" />
-      <recent name="$PROJECT_DIR$/src/components/emailpinut" />
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <method />
     </configuration>
-    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -497,10 +479,6 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -516,6 +494,11 @@
       <method />
     </configuration>
     <configuration default="true" type="js.build_tools.gulp" factoryName="Gulp.js">
+      <node-options />
+      <gulpfile />
+      <tasks />
+      <pass-parent-envs>true</pass-parent-envs>
+      <envs />
       <method />
     </configuration>
     <list size="0" />
@@ -531,24 +514,24 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="4" y="23" width="981" height="877" extended-state="0" />
-    <editor active="true" />
+    <frame x="4" y="23" width="805" height="877" extended-state="0" />
+    <editor active="false" />
     <layout>
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3299363" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32866243" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32909784" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3299363" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.21875" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.26785713" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32866243" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32866243" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -572,30 +555,38 @@
     </option>
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/src/components/emailinput/emailinput.js</url>
+          <line>30</line>
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="1" />
+    </breakpoint-manager>
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/components/emailinput/emailinput/emailinput.html">
+    <entry file="file://$PROJECT_DIR$/src/environment/config/components.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-9.375" vertical-offset="0" max-vertical-offset="645">
-          <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="30" max-vertical-offset="360">
+          <caret line="2" column="22" selection-start-line="2" selection-start-column="22" selection-end-line="2" selection-end-column="22" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/emailinput/component/template.html">
+    <entry file="file://$PROJECT_DIR$/src/environment/environment/controls/controls.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.875" vertical-offset="0" max-vertical-offset="645">
-          <caret line="19" column="17" selection-start-line="19" selection-start-column="17" selection-end-line="19" selection-end-column="17" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="135" max-vertical-offset="315">
+          <caret line="9" column="43" selection-start-line="9" selection-start-column="43" selection-end-line="9" selection-end-column="43" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/emailinput/component/script.js">
+    <entry file="file://$PROJECT_DIR$/src/environment/environment/controls/controls.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="2025">
-          <caret line="4" column="18" selection-start-line="4" selection-start-column="18" selection-end-line="4" selection-end-column="18" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="225">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
       </provider>
@@ -604,7 +595,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="615">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -612,15 +602,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-10.0" vertical-offset="0" max-vertical-offset="405">
           <caret line="16" column="8" selection-start-line="16" selection-start-column="8" selection-end-line="16" selection-end-column="8" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/environment/environment/environment.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.37815127" vertical-offset="0" max-vertical-offset="476">
-          <caret line="12" column="16" selection-start-line="12" selection-start-column="16" selection-end-line="12" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -628,55 +609,13 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="285">
           <caret line="6" column="57" selection-start-line="6" selection-start-column="57" selection-end-line="6" selection-end-column="57" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/environment/environment/controls/layout/layout.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="210">
-          <caret line="8" column="1" selection-start-line="8" selection-start-column="1" selection-end-line="8" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/environment/environment/controls/controls.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-11.875" vertical-offset="0" max-vertical-offset="375">
-          <caret line="19" column="1" selection-start-line="19" selection-start-column="1" selection-end-line="19" selection-end-column="1" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/aa_template_component/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="759">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/testcomponent/testcomponent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.09" vertical-offset="0" max-vertical-offset="500">
-          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Gruntfile.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="760" max-vertical-offset="2670">
-          <caret line="83" column="31" selection-start-line="83" selection-start-column="31" selection-end-line="83" selection-end-column="31" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/list_component/component/list.js">
+    <entry file="file://$PROJECT_DIR$/src/components/list_component/list.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
           <caret line="15" column="0" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -684,23 +623,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="735">
           <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/environment/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-14.125" vertical-offset="261" max-vertical-offset="750">
-          <caret line="40" column="38" selection-start-line="40" selection-start-column="38" selection-end-line="40" selection-end-column="38" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/environment/environment/controls/controls.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="270">
-          <caret line="12" column="6" selection-start-line="12" selection-start-column="6" selection-end-line="12" selection-end-column="6" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -708,7 +630,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.375" vertical-offset="0" max-vertical-offset="225">
           <caret line="7" column="42" selection-start-line="7" selection-start-column="42" selection-end-line="7" selection-end-column="42" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -716,7 +637,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="360">
           <caret line="12" column="36" selection-start-line="12" selection-start-column="36" selection-end-line="12" selection-end-column="36" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -724,23 +644,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="132" max-vertical-offset="660">
           <caret line="13" column="39" selection-start-line="13" selection-start-column="39" selection-end-line="13" selection-end-column="39" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/environment/environment/environment.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="150">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/environment/environment/simulator/simulator.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="435">
-          <caret line="8" column="44" selection-start-line="8" selection-start-column="44" selection-end-line="8" selection-end-column="44" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -748,47 +651,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.094936706" vertical-offset="0" max-vertical-offset="474">
           <caret line="3" column="16" selection-start-line="3" selection-start-column="16" selection-end-line="3" selection-end-column="16" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/testcomponent/testcomponent.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="195">
-          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/environment/environment/simulator/simulator.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="525">
-          <caret line="11" column="28" selection-start-line="11" selection-start-column="28" selection-end-line="11" selection-end-column="28" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/environment/environment/simulator/simulator.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="255">
-          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/environment/environment/controls/controls.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
-          <caret line="24" column="0" selection-start-line="24" selection-start-column="0" selection-end-line="24" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/emailinput/emailinput/emailinput.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1995">
-          <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -800,15 +662,108 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/emailinput/component/style.scss">
+    <entry file="file://$PROJECT_DIR$/src/components/aa_template/style.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="476">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="498">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/emailinput/emailinput.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5063291" vertical-offset="720" max-vertical-offset="4095">
+          <caret line="64" column="2" selection-start-line="64" selection-start-column="2" selection-end-line="64" selection-end-column="2" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/aa_template_component/component/style.scss">
+    <entry file="file://$PROJECT_DIR$/src/fragments/begin.js-fragment">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="498">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vendors/icomoon/demo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="17910">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.08227848" vertical-offset="531" max-vertical-offset="1005">
+          <caret line="38" column="73" selection-start-line="38" selection-start-column="73" selection-end-line="38" selection-end-column="73" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/environment/environment/simulator/simulator.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-6.875" vertical-offset="0" max-vertical-offset="255">
+          <caret line="11" column="0" selection-start-line="11" selection-start-column="0" selection-end-line="11" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/environment/environment/environment.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="150">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/testcomponent/testcomponent.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="195">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/testcomponent/testcomponent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="375">
+          <caret line="3" column="21" selection-start-line="3" selection-start-column="21" selection-end-line="3" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/environment/config/config.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="498">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/aa_template/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.090361446" vertical-offset="0" max-vertical-offset="498">
+          <caret line="3" column="43" selection-start-line="3" selection-start-column="43" selection-end-line="3" selection-end-column="43" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/emailinput/emailinput.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.090361446" vertical-offset="0" max-vertical-offset="1995">
+          <caret line="3" column="31" selection-start-line="3" selection-start-column="31" selection-end-line="3" selection-end-column="31" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/emailinput/emailinput.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16455697" vertical-offset="147" max-vertical-offset="645">
+          <caret line="15" column="10" selection-start-line="15" selection-start-column="10" selection-end-line="15" selection-end-column="10" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/environment/environment/simulator/simulator.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24096386" vertical-offset="0" max-vertical-offset="498">
+          <caret line="8" column="58" selection-start-line="8" selection-start-column="58" selection-end-line="8" selection-end-column="58" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/aa_template/template.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="498">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
@@ -816,26 +771,170 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/emailinput/index.html">
+    <entry file="file://$PROJECT_DIR$/src/environment/environment/controls/controls.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8544304" vertical-offset="0" max-vertical-offset="675">
-          <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
+        <state vertical-scroll-proportion="0.25210086" vertical-offset="0" max-vertical-offset="476">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/emailinput/emailinput/emailinput.scss">
+    <entry file="file://$PROJECT_DIR$/src/environment/environment/controls/controls.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-10.0" vertical-offset="720" max-vertical-offset="4095">
-          <caret line="64" column="2" selection-start-line="64" selection-start-column="2" selection-end-line="64" selection-end-column="2" />
+        <state vertical-scroll-proportion="0.03" vertical-offset="0" max-vertical-offset="500">
+          <caret line="1" column="58" selection-start-line="1" selection-start-column="48" selection-end-line="1" selection-end-column="58" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
+    <entry file="file://$PROJECT_DIR$/src/components/timepicker/daypicker/daypicker.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.886076" vertical-offset="0" max-vertical-offset="1005">
-          <caret line="28" column="21" selection-start-line="28" selection-start-column="21" selection-end-line="28" selection-end-column="21" />
+        <state vertical-scroll-proportion="0.09" vertical-offset="0" max-vertical-offset="500">
+          <caret line="3" column="68" selection-start-line="3" selection-start-column="68" selection-end-line="3" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/environment/environment/controls/components/components.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12605043" vertical-offset="0" max-vertical-offset="476">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/environment/config/router.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.42" vertical-offset="0" max-vertical-offset="510">
+          <caret line="14" column="0" selection-start-line="14" selection-start-column="0" selection-end-line="14" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/environment/config/components.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="390">
+          <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/timepicker/datepicker/datepicker.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="500">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/timepicker/datepicker/datepicker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39" vertical-offset="0" max-vertical-offset="1395">
+          <caret line="13" column="19" selection-start-line="13" selection-start-column="19" selection-end-line="13" selection-end-column="19" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Gruntfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="1152" max-vertical-offset="2745">
+          <caret line="90" column="20" selection-start-line="90" selection-start-column="20" selection-end-line="90" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/environment/environment/controls/components/components.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.16371077" vertical-offset="0" max-vertical-offset="733">
+          <caret line="8" column="34" selection-start-line="8" selection-start-column="34" selection-end-line="8" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/environment/environment/controls/layout/layout.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.094736844" vertical-offset="0" max-vertical-offset="475">
+          <caret line="3" column="33" selection-start-line="3" selection-start-column="33" selection-end-line="3" selection-end-column="33" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/environment/environment/controls/controls.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.28649387" vertical-offset="0" max-vertical-offset="733">
+          <caret line="14" column="28" selection-start-line="14" selection-start-column="28" selection-end-line="14" selection-end-column="28" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/environment/environment/simulator/simulator.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.7263158" vertical-offset="0" max-vertical-offset="540">
+          <caret line="23" column="12" selection-start-line="23" selection-start-column="12" selection-end-line="23" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/environment/environment/environment.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-12.5" vertical-offset="0" max-vertical-offset="390">
+          <caret line="20" column="1" selection-start-line="20" selection-start-column="1" selection-end-line="20" selection-end-column="1" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/timepicker/numberscrollpicker/numberscrollpicker.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-1.25" vertical-offset="0" max-vertical-offset="120">
+          <caret line="2" column="9" selection-start-line="2" selection-start-column="9" selection-end-line="2" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/environment/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.39873418" vertical-offset="6" max-vertical-offset="555">
+          <caret line="13" column="20" selection-start-line="13" selection-start-column="20" selection-end-line="13" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/timepicker/numberscrollpicker/numberscrollpicker.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-15.625" vertical-offset="0" max-vertical-offset="465">
+          <caret line="25" column="0" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/environment/environment/controls/components/components.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.21084337" vertical-offset="0" max-vertical-offset="498">
+          <caret line="7" column="0" selection-start-line="7" selection-start-column="0" selection-end-line="7" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/timepicker/numberscrollpicker/numberscrollpicker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="360" max-vertical-offset="1275">
+          <caret line="20" column="25" selection-start-line="20" selection-start-column="25" selection-end-line="20" selection-end-column="25" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/timepicker/timepicker.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-2.5" vertical-offset="0" max-vertical-offset="525">
+          <caret line="4" column="32" selection-start-line="4" selection-start-column="32" selection-end-line="4" selection-end-column="32" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/timepicker/timepicker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.6325301" vertical-offset="0" max-vertical-offset="615">
+          <caret line="21" column="15" selection-start-line="21" selection-start-column="15" selection-end-line="21" selection-end-column="15" />
           <folding />
         </state>
       </provider>

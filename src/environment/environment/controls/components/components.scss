@@ -5,14 +5,14 @@ ba-controls {
 
   border-bottom: 1px solid black;
 
-  @include display-flex;
+  @include flex(1 1 0);
   @include flex-direction(column);
 
   controls {
     @include flex(1 1 0);
     @include display-flex;
 
-    >* {@include flex(1 1 0)}
+    ba-layout, ba-list {flex: 1 1 0}
     ba-layout {@include flex-direction(column)}
     ba-list {border: 1px solid grey}
   }

@@ -1,28 +1,28 @@
 /*
-Error: Undefined mixin 'display-flex'.
-        on line 8 of controls.scss, in `display-flex'
-        from line 8 of controls.scss
+Error: Undefined variable: "$grey1".
+        on line 9 of styles.scss
 
-3:   padding: 10px;
-4:   overflow: hidden;
-5: 
-6:   border-bottom: 1px solid black;
-7: 
-8:   @include display-flex;
-9:   @include flex-direction(column);
-10: 
-11:   controls {
-12:     @include flex(1 1 0);
-13:     @include display-flex;
+4:   top: 0px;
+5:   bottom: 0px;
+6:   right: 0px;
+7:   width: 50%;
+8:   background: white;
+9:   border-left: 1px solid $grey1;
+10:   overflow: hidden;
+11: 
+12:   @include display-flex;
+13:   @include flex-direction(column);
+14: 
 
 Backtrace:
-controls.scss:8:in `display-flex'
-controls.scss:8
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:338:in `block in visit_mixin'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/stack.rb:98:in `block in with_mixin'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/stack.rb:115:in `with_frame'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/stack.rb:98:in `with_mixin'
-/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:336:in `visit_mixin'
+styles.scss:9
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/script/tree/variable.rb:49:in `_perform'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/script/tree/node.rb:50:in `perform'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/script/tree/list_literal.rb:62:in `block in _perform'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/script/tree/list_literal.rb:62:in `map'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/script/tree/list_literal.rb:62:in `_perform'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/script/tree/node.rb:50:in `perform'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:384:in `visit_prop'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `visit'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/stack.rb:79:in `block in with_base'
@@ -71,4 +71,4 @@ controls.scss:8
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined mixin 'display-flex'.\A         on line 8 of controls.scss, in `display-flex'\A         from line 8 of controls.scss\A \A 3:   padding: 10px;\A 4:   overflow: hidden;\A 5: \A 6:   border-bottom: 1px solid black;\A 7: \A 8:   @include display-flex;\A 9:   @include flex-direction(column);\A 10: \A 11:   controls {\A 12:     @include flex(1 1 0);\A 13:     @include display-flex;"; }
+  content: "Error: Undefined variable: \"$grey1\".\A         on line 9 of styles.scss\A \A 4:   top: 0px;\A 5:   bottom: 0px;\A 6:   right: 0px;\A 7:   width: 50%;\A 8:   background: white;\A 9:   border-left: 1px solid $grey1;\A 10:   overflow: hidden;\A 11: \A 12:   @include display-flex;\A 13:   @include flex-direction(column);\A 14: "; }

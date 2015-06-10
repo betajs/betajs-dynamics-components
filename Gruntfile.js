@@ -19,14 +19,17 @@ module.exports = function(grunt) {
 					dest : 'dist/betajs-dynamics-components-raw.js',
 					src : [
 						'src/fragments/begin.js-fragment',
-						'src/**/*.js',
+						'src/environment/config/components.js',
+						'src/components/**/*.js',
+						'src/environment/environment/**/*.js',
 						'src/fragments/end.js-fragment'
 					]
 				},
 				dist_scoped : {
 					dest : 'dist/betajs-dynamics-components.js',
 					src : [ 'vendors/scoped.js',
-						'dist/betajs-dynamics-components-noscoped.js' ]
+						'dist/betajs-dynamics-components-noscoped.js',
+					]
 				},
 				dist_scss: {
 					dest: 'dist/betajs-dynamics-components.scss',
@@ -85,8 +88,10 @@ module.exports = function(grunt) {
 						overwrite : true
 					},
 					files : {
+						"./vendors/jquery-hashchange.js" : "http://cdn.rawgit.com/cowboy/jquery-hashchange/master/jquery.ba-hashchange.js",
 						"./vendors/scoped.js" : "https://raw.githubusercontent.com/betajs/betajs-scoped/master/dist/scoped.js",
 						"./vendors/beta.js" : "https://raw.githubusercontent.com/betajs/betajs/master/dist/beta.js",
+						"./vendors/betajs-ui.js" : "https://raw.githubusercontent.com/betajs/betajs-ui/master/dist/beta-ui.js",
 						"./vendors/beta-browser-noscoped.js" : "https://raw.githubusercontent.com/betajs/betajs-browser/master/dist/beta-browser-noscoped.js",
 						"./vendors/betajs-dynamics-noscoped.js" : "https://raw.githubusercontent.com/betajs/betajs-dynamics/master/dist/betajs-dynamics-noscoped.js",
 						"./vendors/jquery-1.9.closure-extern.js" : "https://raw.githubusercontent.com/google/closure-compiler/master/contrib/externs/jquery-1.9.js"

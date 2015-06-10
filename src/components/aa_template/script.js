@@ -1,10 +1,7 @@
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Template", {
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Aa_template", {
 
-    templateUrl: "component/%.html",
-
- //   template: BetaJS.Dynamics.Components.Templates["Template"]
-
+    templateUrl: "../components/aa_template/template.html",
 
     initial: {
 

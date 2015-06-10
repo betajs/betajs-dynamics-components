@@ -19,7 +19,6 @@ ul {
 }
 
 
-
 /*******************************
  **           Timer           **
  *******************************/
@@ -333,29 +332,178 @@ ba-testcomponent {
 
 }
 
+$numberscrollheight: 30px;
+
+ba-datepicker {
+  @include flex(1 1 0);
+  @include display-flex;
+
+  overflow: hidden;
+
+  numbers {
+    @include flex(1 1 0);
+    @include display-flex;
+    @include flex-direction(column);
+
+    overflow-y: scroll;
+
+    number {
+      @include flex(0 0 $numberscrollheight);
+      @include display-flex;
+      color: $grey5;
+      background: #f4f4f4;
+
+      line-height: $numberscrollheight;
+
+      p {
+        @include flex(3 0 0);
+        display: block;
+        text-transform:capitalize;
+        text-align: left;
+      }
+      p:nth-child(2) {
+        text-align: center;
+      }
+      p:first-child {
+        @include flex(4 0 0);
+        text-align: right;
+      }
+    }
+  }
+
+  .selected {color: black}
+}
+
+
+ba-daypicker {
+  @include flex-settings(1 1 0);
+  @include display-flex;
+  @include flex-direction(column);
+
+  overflow-y: scroll;
+
+  div {
+    @include flex(0 0 $listitemheight);
+    @include display-flex;
+    border-bottom: 1px solid $grey1;
+
+    line-height: $listitemheight;
+    padding-left: $listitemheight/2;
+  }
+}
+
+
+$numbercsrollheight: 30px;
+
+
+ba-numberscrollpicker {
+  @include flex(1 1 0);
+  @include display-flex;
+  @include flex-direction(column);
+  overflow-y: scroll;
+
+//  overflow: hidden;
+
+  number {
+    @include flex(0 0 $numbercsrollheight);
+    @include display-flex;
+    color: $grey5;
+    background: #F4F4F4;
+
+    line-height: $numbercsrollheight;
+    display: block;
+    text-align: center;
+  }
+
+  .selected {color: black}
+}
+
+
+ba-timepicker {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  width: 50%;
+  background: white;
+  border-left: 1px solid $grey1;
+  overflow: hidden;
+
+  @include display-flex;
+  @include flex-direction(column);
+
+  time {
+    @include flex-settings(1 1 0);
+    @include display-flex;
+  }
+
+
+  divider {
+    @include flex(0 0 $listitemheight*4/3);
+    @include display-flex;
+    @include flex-direction(column);
+    background: $grey1;
+
+    div {
+      @include flex(1 0 auto);
+      text-align: center;
+      line-height: $listitemheight*2/3;
+    }
+    div:first-child {border-bottom: 1px solid black}
+  }
+
+  date {
+    @include flex-settings(1 1 0);
+    @include display-flex;
+
+//    display: block;
+  }
+}
+
+
 ba-controls {
   padding: 10px;
   overflow: hidden;
 
   border-bottom: 1px solid black;
 
-  display: flex;
-  flex-direction: column;
+  @include flex(1 1 0);
+  @include flex-direction(column);
 
   controls {
-    flex: 1 1 0;
-    display: flex;
+    @include flex(1 1 0);
+    @include display-flex;
 
     ba-layout, ba-list {flex: 1 1 0}
-    ba-layout {flex-direction: column}
+    ba-layout {@include flex-direction(column)}
+    ba-list {border: 1px solid grey}
+  }
+
+}
+
+ba-controls {
+  padding: 10px;
+  overflow: hidden;
+
+  border-bottom: 1px solid black;
+
+  @include display-flex;
+  @include flex-direction(column);
+
+  controls {
+    @include flex(1 1 0);
+    @include display-flex;
+
+    >* {@include flex(1 1 0)}
+    ba-layout {@include flex-direction(column)}
     ba-list {border: 1px solid grey}
   }
 
 }
 
 ba-layout {
-  display: flex;
-  flex-direction: column;
+  @include flex(1 1 0);
+  @include flex-direction(column);
 
   ba-list {
     border: 1px solid grey;
@@ -369,15 +517,15 @@ ba-environment {
   bottom: 0;
   left: 0;
 
-  display: flex;
-  flex-direction: column;
+  @include display-flex;
+  @include flex-direction(column);
 
   ba-controls {
-    flex: 0 0 150px;
+    @include flex(0 0 150px);
   }
 
   ba-simulator {
-    flex: 1 1 0;
+    @include flex(1 1 0);
     overflow-y: scroll;
   }
 
@@ -386,13 +534,14 @@ ba-environment {
 ba-simulator {
 
   appframe {
-    display: flex;
+    position: relative;
+    @include display-flex;
   }
 
   //System
   .mobile {
     margin: 10px;
-    flex-direction: column;
+    @include flex-direction(column);
     border: 1px solid black;
   }
   .web {

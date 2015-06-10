@@ -1,7 +1,7 @@
 
 ba-layout {
-  display: flex;
-  flex-direction: column;
+  @include flex(1 1 0);
+  @include flex-direction(column);
 
   ba-list {
     border: 1px solid grey;

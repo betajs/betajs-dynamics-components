@@ -1,0 +1,41 @@
+
+ba-timepicker {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  width: 50%;
+  background: white;
+  border-left: 1px solid $grey1;
+  overflow: hidden;
+
+  @include display-flex;
+  @include flex-direction(column);
+
+  time {
+    @include flex-settings(1 1 0);
+    @include display-flex;
+  }
+
+
+  divider {
+    @include flex(0 0 $listitemheight*4/3);
+    @include display-flex;
+    @include flex-direction(column);
+    background: $grey1;
+
+    div {
+      @include flex(1 0 auto);
+      text-align: center;
+      line-height: $listitemheight*2/3;
+    }
+    div:first-child {border-bottom: 1px solid black}
+  }
+
+  date {
+    @include flex-settings(1 1 0);
+    @include display-flex;
+
+//    display: block;
+  }
+}

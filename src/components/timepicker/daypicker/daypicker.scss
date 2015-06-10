@@ -1,0 +1,17 @@
+
+ba-daypicker {
+  @include flex-settings(1 1 0);
+  @include display-flex;
+  @include flex-direction(column);
+
+  overflow-y: scroll;
+
+  div {
+    @include flex(0 0 $listitemheight);
+    @include display-flex;
+    border-bottom: 1px solid $grey1;
+
+    line-height: $listitemheight;
+    padding-left: $listitemheight/2;
+  }
+}

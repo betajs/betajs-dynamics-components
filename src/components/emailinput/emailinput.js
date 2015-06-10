@@ -1,7 +1,7 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Emailinput", {
 
-    templateUrl: "../components/%/%/%.html",
+    templateUrl: "../components/%/%.html",
 
     initial : {
 

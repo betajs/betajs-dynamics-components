@@ -7,27 +7,16 @@
     <script src="../../vendors/jquery-2.1.4.js"></script>
     <script src="../../vendors/scoped.js"></script>
     <script src="../../vendors/beta.js"></script>
+    <script src="../../vendors/betajs-ui.js"></script>
     <script src="../../vendors/beta-browser-noscoped.js"></script>
     <script src="../../vendors/betajs-dynamics.js"></script>
 
+    <link rel="stylesheet" href="../../vendors/icomoon/style.css" />
+
     <link rel="stylesheet" href="../../dist/betajs-dynamics-components.css" />
     <script src="../../dist/betajs-dynamics-components.js"></script>
+
     <script src="//localhost:1337/livereload.js"></script>
-    <!--<link rel="stylesheet" href="styles/reset.css">-->
-
-    <!--<script src="environment/environment.js"></script>-->
-    <!--<link rel="stylesheet" href="environment/environment.css">-->
-
-    <!--<script src="environment/testcomponent/testcomponent.js"></script>-->
-    <!--<link rel="stylesheet" href="environment/testcomponent/testcomponent.css">-->
-    <!--<script src="environment/controls/controls.js"></script>-->
-    <!--<link rel="stylesheet" href="environment/controls/controls.css">-->
-    <!--<script src="environment/controls/layout/layout.js"></script>-->
-    <!--<link rel="stylesheet" href="environment/controls/layout/layout.css">-->
-    <!--<script src="environment/controls/layout/list/list.js"></script>-->
-    <!--<link rel="stylesheet" href="environment/controls/layout/list/list.css">-->
-    <!--<script src="environment/simulator/simulator.js"></script>-->
-    <!--<link rel="stylesheet" href="environment/simulator/simulator.css">-->
 
     <title></title>
 
@@ -36,10 +25,8 @@
 
     <ba-environment></ba-environment>
 
-    <script>
-        var main = BetaJS.Dynamics.Dynamic.activate({element: document.body});
-        var simulator = main.scope(">[tagname='ba-simulator']");
-    </script>
+    <script src="config/config.js"></script>
+    <script src="config/router.js"></script>
 
 </body>
 </html>

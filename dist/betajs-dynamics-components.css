@@ -153,24 +153,273 @@ ba-testcomponent {
   padding: 10px;
   border-bottom: 1px solid black; }
 
+ba-datepicker {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  overflow: hidden; }
+  ba-datepicker numbers {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    overflow-y: scroll; }
+    ba-datepicker numbers number {
+      -webkit-box-flex: 0 0 30px;
+      -moz-box-flex: 0 0 30px;
+      -webkit-flex: 0 0 30px;
+      -ms-flex: 0 0 30px;
+      flex: 0 0 30px;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      color: #999;
+      background: #f4f4f4;
+      line-height: 30px; }
+      ba-datepicker numbers number p {
+        -webkit-box-flex: 3 0 0;
+        -moz-box-flex: 3 0 0;
+        -webkit-flex: 3 0 0;
+        -ms-flex: 3 0 0;
+        flex: 3 0 0;
+        display: block;
+        text-transform: capitalize;
+        text-align: left; }
+      ba-datepicker numbers number p:nth-child(2) {
+        text-align: center; }
+      ba-datepicker numbers number p:first-child {
+        -webkit-box-flex: 4 0 0;
+        -moz-box-flex: 4 0 0;
+        -webkit-flex: 4 0 0;
+        -ms-flex: 4 0 0;
+        flex: 4 0 0;
+        text-align: right; }
+  ba-datepicker .selected {
+    color: black; }
+
+ba-daypicker {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  overflow-y: scroll; }
+  ba-daypicker div {
+    -webkit-box-flex: 0 0 44px;
+    -moz-box-flex: 0 0 44px;
+    -webkit-flex: 0 0 44px;
+    -ms-flex: 0 0 44px;
+    flex: 0 0 44px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    border-bottom: 1px solid #ddd;
+    line-height: 44px;
+    padding-left: 22px; }
+
+ba-numberscrollpicker {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  overflow-y: scroll; }
+  ba-numberscrollpicker number {
+    -webkit-box-flex: 0 0 30px;
+    -moz-box-flex: 0 0 30px;
+    -webkit-flex: 0 0 30px;
+    -ms-flex: 0 0 30px;
+    flex: 0 0 30px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    color: #999;
+    background: #F4F4F4;
+    line-height: 30px;
+    display: block;
+    text-align: center; }
+  ba-numberscrollpicker .selected {
+    color: black; }
+
+ba-timepicker {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  width: 50%;
+  background: white;
+  border-left: 1px solid #ddd;
+  overflow: hidden;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+  ba-timepicker time {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex; }
+  ba-timepicker divider {
+    -webkit-box-flex: 0 0 58.66667px;
+    -moz-box-flex: 0 0 58.66667px;
+    -webkit-flex: 0 0 58.66667px;
+    -ms-flex: 0 0 58.66667px;
+    flex: 0 0 58.66667px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background: #ddd; }
+    ba-timepicker divider div {
+      -webkit-box-flex: 1 0 auto;
+      -moz-box-flex: 1 0 auto;
+      -webkit-flex: 1 0 auto;
+      -ms-flex: 1 0 auto;
+      flex: 1 0 auto;
+      text-align: center;
+      line-height: 29.33333px; }
+    ba-timepicker divider div:first-child {
+      border-bottom: 1px solid black; }
+  ba-timepicker date {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex; }
+
 ba-controls {
   padding: 10px;
   overflow: hidden;
   border-bottom: 1px solid black;
-  display: flex;
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column; }
   ba-controls controls {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
     flex: 1 1 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
     display: flex; }
     ba-controls controls ba-layout, ba-controls controls ba-list {
       flex: 1 1 0; }
     ba-controls controls ba-layout {
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column; }
+    ba-controls controls ba-list {
+      border: 1px solid grey; }
+
+ba-controls {
+  padding: 10px;
+  overflow: hidden;
+  border-bottom: 1px solid black;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+  ba-controls controls {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex; }
+    ba-controls controls > * {
+      -webkit-box-flex: 1 1 0;
+      -moz-box-flex: 1 1 0;
+      -webkit-flex: 1 1 0;
+      -ms-flex: 1 1 0;
+      flex: 1 1 0; }
+    ba-controls controls ba-layout {
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
       flex-direction: column; }
     ba-controls controls ba-list {
       border: 1px solid grey; }
 
 ba-layout {
-  display: flex;
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column; }
   ba-layout ba-list {
     border: 1px solid grey; }
@@ -181,18 +430,39 @@ ba-environment {
   right: 0;
   bottom: 0;
   left: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column; }
   ba-environment ba-controls {
+    -webkit-box-flex: 0 0 150px;
+    -moz-box-flex: 0 0 150px;
+    -webkit-flex: 0 0 150px;
+    -ms-flex: 0 0 150px;
     flex: 0 0 150px; }
   ba-environment ba-simulator {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
     flex: 1 1 0;
     overflow-y: scroll; }
 
 ba-simulator appframe {
+  position: relative;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
   display: flex; }
 ba-simulator .mobile {
   margin: 10px;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
   flex-direction: column;
   border: 1px solid black; }
 ba-simulator .web {

@@ -2,13 +2,14 @@
 ba-simulator {
 
   appframe {
-    display: flex;
+    position: relative;
+    @include display-flex;
   }
 
   //System
   .mobile {
     margin: 10px;
-    flex-direction: column;
+    @include flex-direction(column);
     border: 1px solid black;
   }
   .web {
