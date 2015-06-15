@@ -1,0 +1,24 @@
+
+overlaycontainer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow: scroll;
+  background: rgba(0, 0, 0, 0.5);
+
+  @include display-flex;
+
+  overlayinner {
+    margin: auto;
+    max-width : 85%;
+    max-height : 80%;
+
+    message {
+      background: white;
+      border-radius: 2px;
+      padding: 10px;
+    }
+  }
+}

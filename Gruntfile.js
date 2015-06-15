@@ -19,6 +19,7 @@ module.exports = function(grunt) {
 					dest : 'dist/betajs-dynamics-components-raw.js',
 					src : [
 						'src/fragments/begin.js-fragment',
+						'dist/betajs-dynamics-components-templates.js',
 						'src/environment/config/components.js',
 						'src/components/**/*.js',
 						'src/environment/environment/**/*.js',
@@ -34,7 +35,7 @@ module.exports = function(grunt) {
 				dist_scss: {
 					dest: 'dist/betajs-dynamics-components.scss',
 					src: [
-						'src/general/**/*.scss',
+						'src/global/**/*.scss',
 						'src/**/*.scss'
 					]
 				}
@@ -59,7 +60,8 @@ module.exports = function(grunt) {
 				}
 			},
 			clean : {
-				raw: "dist/betajs-dynamics-components-raw.js"
+				raw: "dist/betajs-dynamics-components-raw.js",
+				templates: "dist/betajs-dynamics-components-templates.js"
 			},
 			uglify : {
 				options : {
@@ -135,6 +137,18 @@ module.exports = function(grunt) {
 					}
 				}
 			},
+			betajs_templates: {
+				dist: {
+					files: {
+						"dist/betajs-dynamics-components-templates.js": [
+							"src/**/*.html"
+						]
+					},
+					options: {
+						namespace: 'BetaJS.Dynamics.Dynamic.Components.Templates'
+					}
+				}
+			},
 			watch: {
 				scripts: {
 					files: ['src/**/*.js', 'src/**/*.scss', 'src/**/*.html'],
@@ -162,9 +176,10 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-sass');
 	grunt.loadNpmTasks('grunt-contrib-cssmin');
 	grunt.loadNpmTasks('grunt-contrib-watch');
+	grunt.loadNpmTasks('grunt-betajs-templates');
 
-	grunt.registerTask('default', [ 'revision-count', 'concat:dist_raw', 'concat:dist_scss', 'sass:dist',
-		'preprocess', 'clean:raw', /*"cssmin",*/ 'concat:dist_scoped'/*, 'uglify'*/ ]);
+	grunt.registerTask('default', [ 'revision-count', "betajs_templates", 'concat:dist_raw', 'concat:dist_scss', 'sass:dist',
+		'preprocess', 'clean:raw', 'clean:templates', /*"cssmin",*/ 'concat:dist_scoped'/*, 'uglify'*/ ]);
 	grunt.registerTask('qunit', [ 'shell:tests' ]);
 	grunt.registerTask('lint', [ 'jshint:source', 'jshint:dist',
 		'jshint:gruntfile', "jshint:tests" ]);

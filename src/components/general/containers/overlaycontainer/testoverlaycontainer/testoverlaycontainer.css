@@ -1,0 +1,13 @@
+ba-testoverlaycontainer {
+  padding: 10px; }
+  ba-testoverlaycontainer button {
+    color: white;
+    border-radius: 1px;
+    background-color: #4E8EF7;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    padding: 14px 28px;
+    font-size: 13px;
+    font-family: "AvenirNextLTPro-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+/*# sourceMappingURL=testoverlaycontainer.css.map */

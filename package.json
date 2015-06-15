@@ -23,7 +23,8 @@
 		"grunt-jsdoc": "",
 		"grunt-shell": "",
 		"grunt-template": "",
-	    "grunt-contrib-watch": ""
+	    "grunt-contrib-watch": "",
+	    "grunt-betajs-templates": ""
 	},
 	"repository": {
 		"type": "git",

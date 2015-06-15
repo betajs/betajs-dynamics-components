@@ -15,3 +15,5 @@ Scoped.define("module:", function () {
 		version: '/* @echo MAJOR_VERSION */./* @echo MINOR_VERSION */'
 	};
 });
+
+BetaJS.Dynamics.Dynamic.Components = {};

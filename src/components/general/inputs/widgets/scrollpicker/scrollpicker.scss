@@ -1,0 +1,25 @@
+
+$scrollelementheight: 30px;
+
+
+ba-scrollpicker {
+  @include flex(1 1 0);
+  @include display-flex;
+  @include flex-direction(column);
+  overflow-y: scroll;
+
+//  overflow: hidden;
+
+  element {
+    @include flex(0 0 $scrollelementheight);
+    @include display-flex;
+    color: $grey5;
+    background: #F4F4F4;
+
+    line-height: $scrollelementheight;
+    display: block;
+    text-align: center;
+  }
+
+  .selected {color: black}
+}

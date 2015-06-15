@@ -65,9 +65,17 @@ depsWriter.createCommand = function createCommand( options, fileObj ) {
   var directives = ['root', 'root_with_prefix', 'path_with_depspath'],
       directive = directives.shift();
   while(directive) {
+    // check if the global options has a definition for this
+    // parameter type
     if ( options.hasOwnProperty(directive) ) {
       cmd += cHelpers.makeParam( options[directive], '--' + directive + '=', true);
     }
+
+    // check if the target has a definition for this parameter type
+    if( fileObj.hasOwnProperty( directive ) ) {
+      cmd += cHelpers.makeParam( fileObj[directive], '--' + directive + '=', true);
+    }
+
     directive = directives.shift();
   }
 

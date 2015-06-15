@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.1 - 2015-06-09
+betajs-dynamics-components - v0.0.1 - 2015-06-15
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -17,35 +17,254 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '2.1433897049305'
+		version: '3.1434392739933'
 	};
 });
 
+BetaJS.Dynamics.Dynamic.Components = {};
+BetaJS.Dynamics.Dynamic.Components.Templates = BetaJS.Dynamics.Dynamic.Components.Templates || {};
+BetaJS.Dynamics.Dynamic.Components.Templates['overlaycontainer'] = '<overlaycontainer     ba-click="showoverlay = false"     ba-if="{{showoverlay}}">      <overlayinner>          <ba-{{overlay}}>             <message>This is an overlay</message>         </ba-{{overlay}}>      </overlayinner>  </overlaycontainer>';
 
-window.componentsJSON = [
+BetaJS.Dynamics.Dynamic.Components.Templates['testoverlaycontainer'] = ' <button ba-click="showoverlay = !showoverlay">Show Overlaycontainer</button>  <ba-overlaycontainer         ba-overlay="{{=overlay}}"         ba-showoverlay="{{=showoverlay}}">          </ba-overlaycontainer>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['generalsetting'] = '<item ba-tap="showwidget = !showwidget">         <icon class="{{type_icon}}"></icon>         <key>{{key_value}}</key>         <value>{{value_value}}</value>         <icon class="icon-chevron-right"></icon>          <ba-{{widget}} ba-if="{{showwidget}}">         </ba-{{widget}}>  </item>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['titlesetting'] = ' <icon class="{{type_icon}}"></icon> <input         autofocus="true"         placeholder="{{placeholder}}"         value="{{=value_title}}"> <icon ba-if="{{dictation}}" class="icon-microphone"></icon>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['scrollpicker'] = '<element ba-repeat-element="{{element_value :: value_array}}" data-id="{{element_value}}">         {{element_value}} </element>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['template'] = '<div>     {{placeholder}} </div>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['emailinput'] = ' <inputarea onkeydown="{{keydown(event)}}">      <button class="icon-user"></button>      <p>TO:</p>      <div ba-repeat-element="{{recipient :: recipients}}">          <div                 ba-class="{{{active : recipient.email == selected_recipient.email}}}"                 ba-tap="selected_recipient = recipient">             {{recipient.email}}&nbsp;         </div>      </div>      <div ba-tap="select(recipient)">          <input ba-keypress="showcontacts=true"                ba-click="selected=null"                value="{{=value}}"                id="recipient_input" autofocus>          <button ba-tap="showcontacts = !showcontacts">             <span ba-if="{{!showcontacts}}" class="icon-plus"></span>             <span ba-if="{{showcontacts}}" class="icon-minus"></span>         </button>      </div>  </inputarea>  <ba-itemlist type="contact"         ba-if="{{showcontacts}}"         search-query="searchQueryValue"> </ba-itemlist> ';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['list'] = ' <title ba-if="{{title}}">{{title}}</title>  <list ba-repeat="{{listitem :: listcollection}}">      <listitem             ba-class="{{{\'selected\' : listitem == currentitem}}}"             ba-click="select_item(listitem)">         {{listitem.name}}     </listitem>  </list>  ';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['testcomponent'] = ' <h4>This is a Testcomponent</h4>  <br>  <div>     {{placeholder}} </div>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['datepicker'] = '<numbers>  </numbers> ';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['daypicker'] = '<div>Today</div> <div>Tomorrow</div> <div>Weekend</div> <div>Next Week</div> <div>Someday</div> <div>Pick Date</div>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['numberscrollpicker'] = '<number ba-repeat-element="{{number :: numbers}}" data-number="{{number}}">         {{number}} </number>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['timepicker'] = ' <time>      <ba-numberscrollpicker             ba-currentTop="{{false}}"             ba-value="{{=valueHour}}">     </ba-numberscrollpicker>      <ba-numberscrollpicker             ba-currentTop="{{false}}"             ba-value="{{=valueMinute}}"             ba-increment="{{5}}"             ba-last="{{55}}">     </ba-numberscrollpicker>  </time>  <divider>      <div>Time</div>      <div>Date</div>  </divider>  <date>      <ba-datepicker>     </ba-datepicker>  </date> ';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['list'] = ' <div ba-repeat="{{collectionitem :: listcollection}}">     <div>     <ba-{{itemtype}} ba-data="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{itemtype}}>      </div> </div>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['selectable'] = ' <selectable_item         ba-class="{{{highlight_selected : highlight_element}}}"         ba-click="select(data)">     {{data.title}} </selectable_item>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['components'] = '<ba-list         ba-title="Components"         ba-currentitem="{{=current_component}}"         ba-listcollection="{{components}}"></ba-list> ';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['controls'] = ' <h4>Controls </h4>  <controls>      <ba-layout></ba-layout>      <ba-components></ba-components>  </controls>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['layout'] = ' <ba-list         ba-title="System"         ba-currentitem="{{=current_system}}"         ba-listcollection="{{systems}}"></ba-list>  <ba-list ba-title="Device"          ba-currentitem="{{=current_device}}"          ba-listcollection="{{current_system.devices}}"></ba-list> ';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['environment'] = ' <ba-controls></ba-controls>  <ba-simulator></ba-simulator> ';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['simulator'] = '  <appframe         class="             {{current_system.name}}             {{current_device.name}}         ">      <ba-{{current_component.name}}></ba-{{current_component.name}}>  </appframe> ';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['index'] = '<!DOCTYPE html> <html> <head lang="en">     <meta charset="UTF-8">      <!--<script src="../../vendors/jquery-1.9.closure-extern.js"></script>-->     <script src="../../vendors/jquery-2.1.4.js"></script>     <script src="../../vendors/scoped.js"></script>     <script src="../../vendors/beta.js"></script>     <script src="../../vendors/betajs-ui.js"></script>     <script src="../../vendors/beta-browser-noscoped.js"></script>     <script src="../../vendors/betajs-dynamics-noscoped.js"></script>      <link rel="stylesheet" href="../../vendors/icomoon/style.css" />      <link rel="stylesheet" href="../../dist/betajs-dynamics-components.css" />     <script src="../../dist/betajs-dynamics-components.js"></script>      <script src="//localhost:1337/livereload.js"></script>      <title></title>  </head> <body>      <ba-environment></ba-environment>      <script src="config/config.js"></script>     <script src="config/router.js"></script>  </body> </html>';
+
+
+window.components = new BetaJS.Collections.Collection({objects: [
     {name:'aa_template'},
+    {name:'testoverlaycontainer'},
+    {name:'titlesetting'},
+    {name:'generalsetting'},
     {name:'numberscrollpicker'},
+    {name:'scrollpicker'},
     {name:'timepicker'},
-    {name:'testcomponent'},
-    {name:'emailinput'},
-    {name:'list'}
-];
-
-window.components = BetaJS.Objs.map(window.componentsJSON, function (entry) {
-   return new BetaJS.Properties.Properties(entry);
-});
+    {name:'emailinput'}
+]});
 
 window.componentsByName = function (name) {
     var comp = window.components;
-    for (var i = 0; i < comp.length; ++i)
-        if (comp[i].get("name") == name)
-            return comp[i];
+    for (var i = 0; i < comp.count(); ++i)
+        if (comp.getByIndex(i).get("name") == name)
+            return comp.getByIndex(i);
     return null;
 };
 
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Overlaycontainer", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.overlaycontainer,
+
+    initial : {
+
+        attrs : {
+            overlay : "",
+            showoverlay : true
+        }
+
+    }
+
+}).register();
+
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Testoverlaycontainer", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.testoverlaycontainer,
+
+    initial : {
+
+        attrs : {
+            showoverlay : false,
+            overlay : "timepicker"
+        }
+
+    }
+
+}).register();
+
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Generalsetting", {
+
+    templateUrl: "../components/general/inputs/settingslist/%/%.html?" + BetaJS.Time.now(),
+
+    initial : {
+
+        attrs : {
+            key_value : "Duration",
+            type_icon : "icon-time",
+            value_value : "Value",
+            showwidget : false,
+            widget : "emailinput"
+        },
+
+        create : function () {
+
+        },
+
+        functions : {
+            on_click : function () {
+                console.log('You clicked the ' + this.get('key_value') + ' Settings');
+            }
+        }
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titlesetting", {
+
+    templateUrl: "../components/general/inputs/settingslist/%/%.html?" + BetaJS.Time.now(),
+
+    initial : {
+
+        attrs : {
+            value_title : "",
+            type_icon : "icon-ok-circle",
+            placeholder: "New Title",
+            dictation: true
+        },
+
+        create : function () {
+
+        },
+
+        functions : {
+
+        }
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Scrollpicker", {
+
+    templateUrl: "../components/general/inputs/widgets/%/%.html",
+
+    initial : {
+
+        attrs : {
+            value : 5,
+            first : 0,
+            last : 23,
+            increment : 1,
+            currentTop : true,
+            value_array : []
+        },
+
+        create : function () {
+
+            console.log('Create Scrollpicker');
+
+            this.call('initialize_value_array');
+
+            this.compute("displayed_value", function () {
+                var inc = this.get('increment');
+                var rounded_value = inc * Math.round(this.get('value')/inc);
+                var index = this.get('value_array').indexOf(rounded_value);
+                var displayed_value = index > -1 ? rounded_value : this.get('value_array')[0];
+                return parseInt(displayed_value, 10);
+            }, ["value", "increment"]);
+
+        },
+
+        functions : {
+
+            initialize_value_array : function () {
+
+                var first = this.get('first');
+                var last = this.get('last');
+                var inc = this.get('increment');
+
+                var value_array  = [];
+                for (var i = last ; i > first ; i -= inc) {
+                    value_array.push(i);
+                }
+                this.set('value_array',value_array);
+
+            }
+
+        }
+    },
+
+    _afterActivate : function (element) {
+
+        var scroll = new BetaJS.UI.Interactions.LoopScroll(element, {
+            enabled: true,
+            currentTop: this.get('currentTop'),
+            discrete: true,
+            scrollEndTimeout: 200,
+            currentCenter: true
+        });
+
+        window.test = scroll;
+        var ele = $(element.find("[data-id='" + this.get('displayed_value') + "']"));
+        scroll.scrollToElement(ele, {
+            animate: false
+        });
+        ele.css({
+            "color": "black",
+            "background" : "white"
+        });
+
+        scroll.on("scrolltoend", function () {
+            this.set('value', scroll.currentElement().data( "id" ));
+        },this);
+
+        scroll.on("scroll", function () {
+            element.children().css({
+                "color" : "#999999",
+                "background" : "#F4F4F4"
+            });
+            scroll.currentElement().css({
+                "color" : "black",
+                "background" : "white"
+            });
+        });
+
+    }
+
+}).register();
+
+
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Aa_template", {
 
-    templateUrl: "../components/aa_template/template.html",
+    templateUrl: "../components/unsorted/aa_template/template.html",
 
     initial: {
 
@@ -64,7 +283,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Aa_template", {
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Emailinput", {
 
-    templateUrl: "../components/%/%.html",
+    templateUrl: "../components/unsorted/%/%.html",
 
     initial : {
 
@@ -192,7 +411,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Emailinput", 
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
 
-    templateUrl: "../components/%/%.html",
+    templateUrl: "../components/unsorted/%/%.html",
 
     initial: {
 
@@ -214,8 +433,10 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
 
             console.log( this.get('title') + ' List Loaded');
 
-            if (!this.get("currentitem"))
+            if (!this.get("currentitem")) {
+                console.log(this.get('listcollection'));
                 this.set('currentitem', this.get('listcollection').getByIndex(0));
+            }
 
             this.on("change:listcollection", function () {
                 this.set('currentitem', this.get('listcollection').getByIndex(0));
@@ -232,6 +453,155 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
     }
 
 }).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testcomponent", {
+
+    templateUrl: "../components/unsorted/%/%.html",
+
+
+    initial: {
+
+        attrs: {
+            placeholder: 'This is the Testcomponent template'
+        },
+
+        create : function () {
+            console.log('Testcomponent Loaded');
+        }
+
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Datepicker", {
+
+    templateUrl: "../components/unsorted/timepicker/%/%.html"
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Daypicker", {
+
+    templateUrl: "../components/unsorted/timepicker/%/%.html"
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Numberscrollpicker", {
+
+    templateUrl: "../components/unsorted/timepicker/%/%.html",
+    //template: BetaJS.Dynamics.Templates.Numberscrollpicker,
+
+    initial : {
+
+        attrs : {
+            value : 5,
+            first : 0,
+            last : 23,
+            increment : 1,
+            currentTop : false,
+            numbers : []
+        },
+
+        create : function () {
+
+            console.log('Create Numberscrollpicker');
+
+            this.call('initializer_numbers');
+
+            this.compute("displayed_value", function () {
+                var inc = this.get('increment');
+                var rounded_value = inc * Math.round(this.get('value')/inc);
+                var index = this.get('numbers').indexOf(rounded_value);
+                var displayed_value = index > -1 ? rounded_value : this.get('numbers')[0];
+                return parseInt(displayed_value, 10);
+            }, ["value", "increment"]);
+
+        },
+
+        functions : {
+
+            initializer_numbers : function () {
+
+                var first = this.get('first');
+                var last = this.get('last');
+                var inc = this.get('increment');
+
+                var numbers  = [];
+                for (var i = last ; i > first ; i -= inc) {
+                    numbers.push(i);
+                }
+                this.set('numbers',numbers);
+
+            }
+
+        }
+    },
+
+    _afterActivate : function (element) {
+
+        var scroll = new BetaJS.UI.Interactions.LoopScroll(element, {
+            enabled: true,
+            currentTop: this.get('currentTop'),
+            discrete: true,
+            scrollEndTimeout: 200,
+            currentCenter: true
+        });
+
+        window.test = scroll;
+        var ele = $(element.find("[data-number='" + this.get('displayed_value') + "']"));
+        scroll.scrollToElement(ele, {
+            animate: false
+        });
+        ele.css({
+            "color": "black",
+            "background" : "white"
+        });
+
+        scroll.on("scrolltoend", function () {
+            this.set('value', scroll.currentElement().data( "number" ));
+        },this);
+
+        scroll.on("scroll", function () {
+            element.children().css({
+                "color" : "#999999",
+                "background" : "#F4F4F4"
+            });
+            scroll.currentElement().css({
+                "color" : "black",
+                "background" : "white"
+            });
+        });
+
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Timepicker", {
+
+    templateUrl: "../components/unsorted/%/%.html?" + BetaJS.Time.now(),
+
+    initial : {
+
+        attrs: {
+            valueHour : BetaJS.Time.decodeTime(BetaJS.Time.now(),true).hour,
+            valueMinute : BetaJS.Time.decodeTime(BetaJS.Time.now(),true).minute
+        },
+
+        create : function () {
+
+            this.on("change:valueMinute",function () {
+                console.log('Minute was changed to : ' + this.get('valueMinute'));
+            });
+
+        }
+    }
+
+}).register();
+
 
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List2", {
@@ -288,245 +658,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectable", {
 }).register();
 
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testcomponent", {
-
-    templateUrl: "../components/%/%.html",
-
-
-    initial: {
-
-        attrs: {
-            placeholder: 'This is the Testcomponent template'
-        },
-
-        create : function () {
-            console.log('Testcomponent Loaded');
-        }
-
-    }
-
-}).register();
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Datepicker", {
-
-    templateUrl: "../components/timepicker/%/%.html"
-
-}).register();
-
-//app.directive('diDatepicker', function() {
-//
-//    return {
-//        restrict : 'E',
-//        replace : true,
-//        templateUrl : App.Paths.asset("{pages-directives}/doodadcontainer/inputs/timepicker/datepicker/template.html"),
-//        scope : {
-//            data : "=",
-//            increment : "@"
-//        },
-//        controller : function ($scope) {
-//
-//            $scope.start_value = $scope.data.value || BetaJS.Time.now();
-//
-//        },
-//        link : function ($scope, $element) {
-//
-//            var numberselement = $element.find( 'numbers' );
-//
-//            BetaJS.Async.eventually(function () {
-//                var element = numberselement;
-//
-//                var today = BetaJS.Time.floorTime($scope.start_value, "hours");
-//                inc_day = function (i) {
-//                    var inc_day = new Date(BetaJS.Time.incrementTime(today, {day: i}));
-//                    return inc_day;
-//                };
-//
-//                var low = 0;
-//                var high = 35;
-//
-//                appendedelement = function (i) {
-//                    return "<number data-date='" + inc_day(i).getTime() + "'>"
-//                        + "<p>" + App.Helpers.Time.day_to_string(inc_day(i).getDay()).slice(0,3).toLowerCase() + "&nbsp;" + "</p>"
-//                        + "<p>" + App.Helpers.Time.two_digits(inc_day(i).getDate()) + "</p>"
-//                        + "<p>" + App.Helpers.Time.month_to_string(inc_day(i).getMonth()).slice(0,3).toLowerCase() + "</p>"
-//                        + "</number>";
-//                };
-//
-//                for (var i = 0; i <= high; ++i)
-//                    element.append(appendedelement(i));
-//
-//                element.find( '>:nth-child(1)' ).css({"background":"white","color":"black"});
-//
-//                var scroll = new BetaJS.UI.Interactions.InfiniteScroll(element, {
-//                    enabled: true,
-//                    discrete: true,
-//                    currentCenter: true,
-//                    append: function (count, callback) {
-//                        for (var i = high+1; i <= high+1 + count; ++i)
-//                            element.append(appendedelement(i));
-//                        high += count;
-//                        document.title = low + " - " + high;
-//                        callback(count, true);
-//                    },
-//                    prepend: function (count, callback) {
-//                        for (var i = low-1; i >= low-1-count; --i)
-//                            element.prepend(appendedelement(i));
-//                        low -= count;
-//                        document.title = low + " - " + high;
-//                        callback(count, true);
-//                    }
-//                });
-//
-//                scroll.on("scroll", function () {
-//                    numberselement.children().css({"background":"#F4F4F4","color":"#999999"});
-//                    scroll.currentElement().css({"background":"white","color":"black"});
-//                });
-//
-//                scroll.on("scrolltoend", function () {
-//                    $scope.data.value = scroll.currentElement().data( "date" );
-//                    $scope.$apply();
-//                });
-//
-//            });
-//
-//        }
-//    };
-//
-//});
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Daypicker", {
-
-    templateUrl: "../components/timepicker/daypicker/daypicker.html"
-
-}).register("ba-daypicker");
-
-//app.directive('diDaypicker', function() {
-//    return {
-//        restrict : 'E',
-//        replace : true,
-//        templateUrl : App.Paths.asset("{pages-directives}/doodadcontainer/inputs/timepicker/daypicker/template.html")
-//    };
-//});
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Numberscrollpicker", {
-
-    templateUrl: "../components/timepicker/%/%.html",
-    //template: BetaJS.Dynamics.Templates.Numberscrollpicker,
-
-    initial : {
-
-        attrs : {
-            value : 5,
-            first : 0,
-            last : 23,
-            increment : 1,
-            currentTop : true,
-            numbers : []
-        },
-
-        create : function () {
-
-            console.log('Create Numberscrollpicker');
-            console.log(this.get('value'));
-
-            this.call('initializer_numbers');
-
-        },
-
-        functions : {
-
-            initializer_numbers : function () {
-
-                var first = this.get('first');
-                var last = this.get('last');
-                var inc = this.get('increment');
-
-                var numbers  = [];
-                for (var i = first ; i <= last ; i += inc) {
-                    numbers.push(i);
-                }
-                this.set('numbers',numbers);
-
-            }
-
-        }
-    },
-
-    _afterActivate : function (element) {
-
-        var scroll = new BetaJS.UI.Interactions.LoopScroll(element, {
-            enabled: true,
-            currentTop: this.get('currentTop'),
-            discrete: true,
-            scrollEndTimeout: 200,
-            currentCenter: true
-        });
-
-        window.test = scroll;
-
-        var ele = $(element.find("[data-number='" + parseInt(this.get('value')) + "']"));
-        scroll.scrollToElement(ele, {
-            animate: false
-        });
-        ele.css("color", "black");
-        ele.css("background", "white");
-
-        scroll.on("scrolltoend", function () {
-            this.set('value', scroll.currentElement().data( "number" ));
-        },this);
-
-        scroll.on("scroll", function () {
-            element.children().css("color", "#999999");
-            element.children().css("background", "#F4F4F4");
-            //console.log("Current Element: " + scroll.currentElement());
-            scroll.currentElement().css("color", "black");
-            scroll.currentElement().css("background", "white");
-        });
-
-    }
-
-}).register();
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Timepicker", {
-
-    templateUrl: "../components/%/%.html",
-
-    initial : {
-
-        attrs: {
-            valueMinute : 10,
-            valueHour : 3
-        },
-
-        create : function () {
-
-            console.log(this.get('valueMinute'));
-            console.log(this.get('valueHour'));
-
-            this.on("change:valueMinute",function () {
-                console.log('Minute was changed!!');
-            });
-
-            //this.set('valueMinute',20);
-
-        }
-    },
-
-    _afterActivate : function () {
-
-        console.log(this.get('valueMinute'));
-        console.log(this.get('valueHour'));
-
-    }
-
-}).register();
-
-
-
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Components", {
 
     templateUrl: "environment/controls/%/%.html",
@@ -539,9 +670,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Components", {
         },
 
         create : function () {
-            console.log('Controls Loaded');
+            console.log('Components Loaded');
 
-            this.set('current_component', appstate.get("component_type") ? componentsByName(appstate.get("component_type")) : this.get('components')[0]);
+            this.set('current_component', appstate.get("component_type") ? componentsByName(appstate.get("component_type")) : this.get('components').getByIndex(0));
             appstate.on("change:component_type", function (component_type) {
                 this.set('current_component', componentsByName(component_type));
             }, this);

@@ -1,17 +1,10 @@
 /*!
-betajs-dynamics-components - v0.0.1 - 2015-06-09
+betajs-dynamics-components - v0.0.1 - 2015-06-15
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
 component {
   margin: 10px; }
-
-li {
-  list-style: none; }
-
-ul {
-  margin: 0;
-  padding: 0; }
 
 /*******************************
  **           Timer           **
@@ -37,6 +30,127 @@ a {
 /*
  * Mixins
  */
+li {
+  list-style: none; }
+
+ul {
+  margin: 0;
+  padding: 0; }
+
+overlaycontainer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow: scroll;
+  background: rgba(0, 0, 0, 0.5);
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; }
+  overlaycontainer overlayinner {
+    margin: auto;
+    max-width: 85%;
+    max-height: 80%; }
+    overlaycontainer overlayinner message {
+      background: white;
+      border-radius: 2px;
+      padding: 10px; }
+
+ba-testoverlaycontainer {
+  padding: 10px; }
+  ba-testoverlaycontainer button {
+    color: white;
+    border-radius: 1px;
+    background-color: #4E8EF7;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    padding: 14px 28px;
+    font-size: 13px;
+    font-family: "AvenirNextLTPro-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+ba-generalsetting item {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; }
+
+ba-generalsetting, ba-titlesetting {
+  -webkit-box-flex: 0 0 44px;
+  -moz-box-flex: 0 0 44px;
+  -webkit-flex: 0 0 44px;
+  -ms-flex: 0 0 44px;
+  flex: 0 0 44px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  border-bottom: 1px solid #ddd !important;
+  background: white; }
+  ba-generalsetting key, ba-generalsetting value, ba-generalsetting icon, ba-titlesetting key, ba-titlesetting value, ba-titlesetting icon {
+    line-height: 44px;
+    height: 44px; }
+  ba-generalsetting icon, ba-titlesetting icon {
+    -webkit-box-flex: 0 0 44px;
+    -moz-box-flex: 0 0 44px;
+    -webkit-flex: 0 0 44px;
+    -ms-flex: 0 0 44px;
+    flex: 0 0 44px;
+    text-align: center; }
+  ba-generalsetting key, ba-generalsetting value, ba-generalsetting input, ba-generalsetting button, ba-titlesetting key, ba-titlesetting value, ba-titlesetting input, ba-titlesetting button {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0; }
+  ba-generalsetting value, ba-titlesetting value {
+    text-align: right; }
+  ba-generalsetting key, ba-titlesetting key {
+    color: #999; }
+
+ba-scrollpicker {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  overflow-y: scroll; }
+  ba-scrollpicker element {
+    -webkit-box-flex: 0 0 30px;
+    -moz-box-flex: 0 0 30px;
+    -webkit-flex: 0 0 30px;
+    -ms-flex: 0 0 30px;
+    flex: 0 0 30px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    color: #999;
+    background: #F4F4F4;
+    line-height: 30px;
+    display: block;
+    text-align: center; }
+  ba-scrollpicker .selected {
+    color: black; }
+
 ba-emailinput {
   display: -webkit-box;
   display: -moz-box;
@@ -139,15 +253,6 @@ ba-list {
       flex: 1 1 0; }
   ba-list .selected {
     background: grey; }
-
-ba-basicitem {
-  display: block;
-  padding: 0 10px; }
-
-ba-selectable selectable_item {
-  display: block; }
-ba-selectable .highlight_selected {
-  background: lightgrey; }
 
 ba-testcomponent {
   padding: 10px;
@@ -344,37 +449,17 @@ ba-timepicker {
     display: -webkit-flex;
     display: flex; }
 
-ba-controls {
-  padding: 10px;
-  overflow: hidden;
-  border-bottom: 1px solid black;
-  -webkit-box-flex: 1 1 0;
-  -moz-box-flex: 1 1 0;
-  -webkit-flex: 1 1 0;
-  -ms-flex: 1 1 0;
-  flex: 1 1 0;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column; }
-  ba-controls controls {
-    -webkit-box-flex: 1 1 0;
-    -moz-box-flex: 1 1 0;
-    -webkit-flex: 1 1 0;
-    -ms-flex: 1 1 0;
-    flex: 1 1 0;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex; }
-    ba-controls controls ba-layout, ba-controls controls ba-list {
-      flex: 1 1 0; }
-    ba-controls controls ba-layout {
-      -webkit-flex-direction: column;
-      -ms-flex-direction: column;
-      flex-direction: column; }
-    ba-controls controls ba-list {
-      border: 1px solid grey; }
+ba-basicitem {
+  display: block;
+  padding: 0 10px; }
+
+ba-selectable selectable_item {
+  display: block; }
+ba-selectable .highlight_selected {
+  background: lightgrey; }
+
+ba-components {
+  overflow: scroll; }
 
 ba-controls {
   padding: 10px;

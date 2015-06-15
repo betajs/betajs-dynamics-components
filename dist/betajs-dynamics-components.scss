@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.1 - 2015-06-09
+betajs-dynamics-components - v0.0.1 - 2015-06-15
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -7,18 +7,6 @@ MIT Software License.
 component {
   margin: 10px;
 }
-
-
-li {
-  list-style: none;
-}
-
-ul {
-  margin: 0;
-  padding: 0;
-}
-
-
 /*******************************
  **           Timer           **
  *******************************/
@@ -166,70 +154,114 @@ a {color: $blue1}
     justify-content: $settings;
   }
 }
-//
-///*
-// * Used
-// */
-//.flex-horizontal-list {
-//  @include display-flex;
-//  @include flex-direction(row);
-//  @include flex-wrap(nowrap);
-//  @include align-content(stretch);
-//  justify-content: space-between;
-//  align-items: stretch;
-//}
-//.flex-vertical-list {
-//  @include display-flex;
-//  @include flex-direction(column);
-//  @include flex-wrap(nowrap);
-//  @include align-content(stretch);
-//  justify-content: space-between;
-//  align-items: stretch;
-//}
-//.flex-item {
-//  order: 0;
-//  align-self: auto;
-//  -webkit-font-smoothing:antialiased;
-//}
-//
-///*
-// * From Website
-// */
-//.flex-container {
-//  @include display-flex;
-//  @include flex-direction(row);
-//  @include flex-wrap(nowrap);
-//  @include align-content(stretch);
-//
-//    -webkit-box-direction: normal;
-//    -moz-box-direction: normal;
-//    -webkit-box-orient: horizontal;
-//    -moz-box-orient: horizontal;
-//
-//    -webkit-box-pack: justify;
-//    -moz-box-pack: justify;
-//    -webkit-justify-content: space-between;
-//    -ms-flex-pack: justify;
-//    justify-content: space-between;
-//    -webkit-box-align: start;
-//    -moz-box-align: start;
-//    -webkit-align-items: flex-start;
-//    -ms-flex-align: start;
-//    align-items: flex-start;
-//}
-//
-///*
-//    Legacy Firefox implementation treats all flex containers
-//    as inline-block elements.
-//*/
-//
-//@-moz-document url-prefix() {
-//.flex-container {
-//    width: 100%;
-//    -moz-box-sizing: border-box;
-//    }
-//
-//}
+
+
+li {
+  list-style: none;
+}
+
+ul {
+  margin: 0;
+  padding: 0;
+}
+
+
+overlaycontainer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow: scroll;
+  background: rgba(0, 0, 0, 0.5);
+
+  @include display-flex;
+
+  overlayinner {
+    margin: auto;
+    max-width : 85%;
+    max-height : 80%;
+
+    message {
+      background: white;
+      border-radius: 2px;
+      padding: 10px;
+    }
+  }
+}
+
+
+ba-testoverlaycontainer {
+  padding: 10px;
+
+  button {
+    color: white;
+    border-radius: 1px;
+    background-color: #4E8EF7;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    padding: 14px 28px;
+    font-size: 13px;
+    font-family: "AvenirNextLTPro-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  }
+}
+
+ba-generalsetting {
+  item {
+    @include flex(1 1 0);
+    @include display-flex;
+  }
+}
+
+$settingsitem-height : $listitemheight;
+$settingsitem-bordercolor : $grey1;
+$settingsitem-keycolor : $grey5;
+
+ba-generalsetting, ba-titlesetting {
+  @include flex(0 0 $settingsitem-height);
+  @include display-flex;
+  border-bottom: 1px solid $settingsitem-bordercolor !important;
+  background: white;
+
+  key, value, icon {
+    line-height: $settingsitem-height;
+    height: $settingsitem-height;
+  }
+  icon {
+    @include flex(0 0 $settingsitem-height);
+    text-align: center;
+  }
+  key, value, input, button {@include flex(1 1 0)}
+  value{text-align: right}
+  key {color: $settingsitem-keycolor}
+}
+
+$scrollelementheight: 30px;
+
+
+ba-scrollpicker {
+  @include flex(1 1 0);
+  @include display-flex;
+  @include flex-direction(column);
+  overflow-y: scroll;
+
+//  overflow: hidden;
+
+  element {
+    @include flex(0 0 $scrollelementheight);
+    @include display-flex;
+    color: $grey5;
+    background: #F4F4F4;
+
+    line-height: $scrollelementheight;
+    display: block;
+    text-align: center;
+  }
+
+  .selected {color: black}
+}
+
+
 
 ba-emailinput {
   @include display-flex;
@@ -308,20 +340,6 @@ ba-list {
     }
   }
   .selected {background: grey}
-}
-ba-basicitem {
-  display: block;
-  padding: 0 10px;
-}
-ba-selectable {
-
-  selectable_item {
-    display: block;
-  }
-
-  .highlight_selected {
-    background: lightgrey;
-  }
 }
 
 ba-testcomponent {
@@ -460,25 +478,23 @@ ba-timepicker {
   }
 }
 
+ba-basicitem {
+  display: block;
+  padding: 0 10px;
+}
+ba-selectable {
 
-ba-controls {
-  padding: 10px;
-  overflow: hidden;
-
-  border-bottom: 1px solid black;
-
-  @include flex(1 1 0);
-  @include flex-direction(column);
-
-  controls {
-    @include flex(1 1 0);
-    @include display-flex;
-
-    ba-layout, ba-list {flex: 1 1 0}
-    ba-layout {@include flex-direction(column)}
-    ba-list {border: 1px solid grey}
+  selectable_item {
+    display: block;
   }
 
+  .highlight_selected {
+    background: lightgrey;
+  }
+}
+
+ba-components {
+  overflow: scroll;
 }
 
 ba-controls {

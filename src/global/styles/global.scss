@@ -1,0 +1,147 @@
+/*******************************
+ **           Timer           **
+ *******************************/
+$timer: .1s;
+$timer-showMenu: $timer;
+$timer-tagbar: $timer;
+
+/*******************************
+ **          Layout           **
+ *******************************/
+// Device Specific
+$iphone_batterybar_height: 20px;
+
+// Set Device
+$batterybar_height: $iphone_batterybar_height;
+
+// General
+$height1: 44px;
+$height2: $height1;
+$height3: 34px;
+$divider_height: 14px;
+
+// Header & Footer
+$header_height: $height1;
+$footer_height: $height1;
+$doodadtabs_height: $height1;
+
+// Lists
+$listitemheight: $height1;
+
+$task_height: $listitemheight;
+$mailinput_height: $height3;
+
+// Addotron
+$addotronheight: $height2;
+
+
+/*******************************
+ **           Style           **
+ *******************************/
+$grey1: #ddd;
+$grey2: #E2E2E2;
+$grey3: #777;
+
+$greywhite1: #fcfcfc;
+$greywhite2: #fdfdfd;
+
+$greyred1: #ffb3b3;
+
+$grey4: #333;
+$grey5: #999;
+$grey6: #555;
+$blue1: dodgerblue;
+
+//Style 2
+$blue2: #479CFC;
+
+
+a {color: $blue1}
+
+.icon-star {color: #428bca}
+.icon-star-empty {color: $grey1}
+.icon-search {color: $grey3}
+
+/*
+ * Mixins
+ */
+
+@mixin display-flex {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+}
+@mixin flex-direction($direction) {
+  -webkit-flex-direction: $direction;
+  -ms-flex-direction: $direction;
+  flex-direction: $direction;
+}
+@mixin flex-wrap($wrap) {
+  -webkit-flex-wrap: $wrap;
+  -ms-flex-wrap: $wrap;
+  flex-wrap: $wrap;
+}
+@mixin flex($settings) {
+  -webkit-box-flex: $settings;
+  -moz-box-flex: $settings;
+  -webkit-flex: $settings;
+  -ms-flex: $settings;
+  flex: $settings;
+}
+@mixin flex-settings($settings) {
+  -webkit-box-flex: $settings;
+  -moz-box-flex: $settings;
+  -webkit-flex: $settings;
+  -ms-flex: $settings;
+  flex: $settings;
+}
+@mixin flex-wrap($settings) {
+  -webkit-flex-wrap: $settings;
+  -ms-flex-wrap: $settings;
+  flex-wrap: $settings;
+}
+@mixin flex-order($order) {
+  -webkit-order: $order;
+  -ms-flex-order: $order;
+  order: $order;
+}
+@mixin align-items($settings) {
+  -webkit-box-align: $settings;
+  -moz-box-align: $settings;
+  -ms-flex-align: $settings;
+
+  @if $settings == start or $settings == end {
+    -webkit-align-items: flex- + $settings;
+    align-items: flex- + $settings;
+  } @else {
+    -webkit-align-items: $settings;
+    align-items: $settings;
+  }
+}
+
+@mixin align-content($settings) {
+  -ms-flex-line-pack: $settings;
+
+  @if $settings == start or $settings == end {
+    -webkit-align-content: flex- + $settings;
+    align-content: flex- + $settings;
+  } @else {
+    -webkit-align-content: $settings;
+    align-content: $settings;
+  }
+}
+@mixin justify-content ($settings) {
+  -webkit-box-pack: $settings;
+  -moz-box-pack: $settings;
+  -ms-flex-pack: $settings;
+
+  @if $settings == start or $settings == end {
+    -webkit-justify-content: flex- + $settings;
+    justify-content: flex- + $settings;
+  } @else {
+    -webkit-justify-content: $settings;
+    justify-content: $settings;
+  }
+}

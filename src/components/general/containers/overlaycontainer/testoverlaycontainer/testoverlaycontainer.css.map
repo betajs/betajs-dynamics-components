@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACA,uBAAwB;EACtB,OAAO,EAAE,IAAI;EAEb,8BAAO;IACL,KAAK,EAAE,KAAK;IACZ,aAAa,EAAE,GAAG;IAClB,gBAAgB,EAAE,OAAO;IACzB,cAAc,EAAE,SAAS;IACzB,cAAc,EAAE,GAAG;IACnB,OAAO,EAAE,SAAS;IAClB,SAAS,EAAE,IAAI;IACf,WAAW,EAAE,wEAAwE",
+"sources": ["testoverlaycontainer.scss"],
+"names": [],
+"file": "testoverlaycontainer.css"
+}

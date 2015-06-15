@@ -1,20 +1,4 @@
 
-ba-controls {
-  padding: 10px;
-  overflow: hidden;
-
-  border-bottom: 1px solid black;
-
-  @include flex(1 1 0);
-  @include flex-direction(column);
-
-  controls {
-    @include flex(1 1 0);
-    @include display-flex;
-
-    ba-layout, ba-list {flex: 1 1 0}
-    ba-layout {@include flex-direction(column)}
-    ba-list {border: 1px solid grey}
-  }
-
+ba-components {
+  overflow: scroll;
 }

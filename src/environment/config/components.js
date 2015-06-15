@@ -1,21 +1,19 @@
 
-window.componentsJSON = [
+window.components = new BetaJS.Collections.Collection({objects: [
     {name:'aa_template'},
+    {name:'testoverlaycontainer'},
+    {name:'titlesetting'},
+    {name:'generalsetting'},
     {name:'numberscrollpicker'},
+    {name:'scrollpicker'},
     {name:'timepicker'},
-    {name:'testcomponent'},
-    {name:'emailinput'},
-    {name:'list'}
-];
-
-window.components = BetaJS.Objs.map(window.componentsJSON, function (entry) {
-   return new BetaJS.Properties.Properties(entry);
-});
+    {name:'emailinput'}
+]});
 
 window.componentsByName = function (name) {
     var comp = window.components;
-    for (var i = 0; i < comp.length; ++i)
-        if (comp[i].get("name") == name)
-            return comp[i];
+    for (var i = 0; i < comp.count(); ++i)
+        if (comp.getByIndex(i).get("name") == name)
+            return comp.getByIndex(i);
     return null;
 };
