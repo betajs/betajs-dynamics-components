@@ -1,7 +1,7 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titlesetting", {
 
-    templateUrl: "../components/general/inputs/settingslist/%/%.html?" + BetaJS.Time.now(),
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.titlesetting,
 
     initial : {
 

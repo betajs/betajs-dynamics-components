@@ -2,258 +2,48 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72d0b85e-2146-4f66-96cd-41ba7c2a2eae" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/general/inputs/settingslist/settingslist.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/general/containers/overlaycontainer/testoverlaycontainer/testoverlaycontainer.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/general/containers/overlaycontainer/testoverlaycontainer/testoverlaycontainer.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/general/containers/overlaycontainer/testoverlaycontainer/testoverlaycontainer.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/general/containers/overlaycontainer/testoverlaycontainer/testoverlaycontainer.scss" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/unsorted/timepicker/timepicker.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/general/inputs/settingslist/titlesetting/titlesetting.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/general/inputs/settingslist/titlesetting/titlesetting.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/general/inputs/settingslist/titlesetting/titlesetting.js" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components-noscoped.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components.css" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components.css.map" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components.scss" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/test/array.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/test/buffer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/test/infer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/test/nothing.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/test/objects.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/test/server/ls.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/test/string.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/test/typedarray.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/.npmignore" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/test/array.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/test/buffer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/test/infer.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/test/nothing.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/test/objects.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/test/server/ls.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/test/string.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/test/typedarray.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/timepicker/timepicker.js" afterPath="" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vendors/betajs-dynamics.js" afterPath="" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/aa_template/script.js" afterPath="$PROJECT_DIR$/src/components/unsorted/aa_template/script.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/aa_template/style.css" afterPath="$PROJECT_DIR$/src/components/unsorted/aa_template/style.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/aa_template/style.css.map" afterPath="$PROJECT_DIR$/src/components/unsorted/aa_template/style.css.map" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/aa_template/style.scss" afterPath="$PROJECT_DIR$/src/components/unsorted/aa_template/style.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/aa_template/template.html" afterPath="$PROJECT_DIR$/src/components/unsorted/aa_template/template.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/emailinput/emailinput.css" afterPath="$PROJECT_DIR$/src/components/unsorted/emailinput/emailinput.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/emailinput/emailinput.css.map" afterPath="$PROJECT_DIR$/src/components/unsorted/emailinput/emailinput.css.map" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/emailinput/emailinput.html" afterPath="$PROJECT_DIR$/src/components/unsorted/emailinput/emailinput.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/emailinput/emailinput.js" afterPath="$PROJECT_DIR$/src/components/unsorted/emailinput/emailinput.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/emailinput/emailinput.scss" afterPath="$PROJECT_DIR$/src/components/unsorted/emailinput/emailinput.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list/list.css" afterPath="$PROJECT_DIR$/src/components/unsorted/list/list.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list/list.css.map" afterPath="$PROJECT_DIR$/src/components/unsorted/list/list.css.map" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list/list.html" afterPath="$PROJECT_DIR$/src/components/unsorted/list/list.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list/list.js" afterPath="$PROJECT_DIR$/src/components/unsorted/list/list.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list/list.scss" afterPath="$PROJECT_DIR$/src/components/unsorted/list/list.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list_component/list.css" afterPath="$PROJECT_DIR$/src/components/unsorted/zz_list_component/list.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list_component/list.css.map" afterPath="$PROJECT_DIR$/src/components/unsorted/zz_list_component/list.css.map" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list_component/list.html" afterPath="$PROJECT_DIR$/src/components/unsorted/zz_list_component/list.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list_component/list.js" afterPath="$PROJECT_DIR$/src/components/unsorted/zz_list_component/list.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list_component/list.scss" afterPath="$PROJECT_DIR$/src/components/unsorted/zz_list_component/list.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list_component/subcomponents/selectable/selectable.css" afterPath="$PROJECT_DIR$/src/components/unsorted/zz_list_component/subcomponents/selectable/selectable.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list_component/subcomponents/selectable/selectable.css.map" afterPath="$PROJECT_DIR$/src/components/unsorted/zz_list_component/subcomponents/selectable/selectable.css.map" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list_component/subcomponents/selectable/selectable.html" afterPath="$PROJECT_DIR$/src/components/unsorted/zz_list_component/subcomponents/selectable/selectable.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list_component/subcomponents/selectable/selectable.js" afterPath="$PROJECT_DIR$/src/components/unsorted/zz_list_component/subcomponents/selectable/selectable.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/list_component/subcomponents/selectable/selectable.scss" afterPath="$PROJECT_DIR$/src/components/unsorted/zz_list_component/subcomponents/selectable/selectable.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/testcomponent/testcomponent.css" afterPath="$PROJECT_DIR$/src/components/unsorted/testcomponent/testcomponent.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/testcomponent/testcomponent.css.map" afterPath="$PROJECT_DIR$/src/components/unsorted/testcomponent/testcomponent.css.map" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/testcomponent/testcomponent.html" afterPath="$PROJECT_DIR$/src/components/unsorted/testcomponent/testcomponent.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/testcomponent/testcomponent.js" afterPath="$PROJECT_DIR$/src/components/unsorted/testcomponent/testcomponent.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/testcomponent/testcomponent.scss" afterPath="$PROJECT_DIR$/src/components/unsorted/testcomponent/testcomponent.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/timepicker/datepicker/datepicker.css" afterPath="$PROJECT_DIR$/src/components/unsorted/timepicker/datepicker/datepicker.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/timepicker/datepicker/datepicker.html" afterPath="$PROJECT_DIR$/src/components/unsorted/timepicker/datepicker/datepicker.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/timepicker/datepicker/datepicker.js" afterPath="$PROJECT_DIR$/src/components/unsorted/timepicker/datepicker/datepicker.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/timepicker/datepicker/datepicker.scss" afterPath="$PROJECT_DIR$/src/components/unsorted/timepicker/datepicker/datepicker.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/timepicker/daypicker/daypicker.css" afterPath="$PROJECT_DIR$/src/components/unsorted/timepicker/daypicker/daypicker.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/timepicker/daypicker/daypicker.html" afterPath="$PROJECT_DIR$/src/components/unsorted/timepicker/daypicker/daypicker.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/timepicker/daypicker/daypicker.js" afterPath="$PROJECT_DIR$/src/components/unsorted/timepicker/daypicker/daypicker.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/timepicker/daypicker/daypicker.scss" afterPath="$PROJECT_DIR$/src/components/unsorted/timepicker/daypicker/daypicker.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/timepicker/numberscrollpicker/numberscrollpicker.css" afterPath="$PROJECT_DIR$/src/components/unsorted/timepicker/numberscrollpicker/numberscrollpicker.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/timepicker/numberscrollpicker/numberscrollpicker.css.map" afterPath="$PROJECT_DIR$/src/components/unsorted/timepicker/numberscrollpicker/numberscrollpicker.css.map" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/timepicker/numberscrollpicker/numberscrollpicker.html" afterPath="$PROJECT_DIR$/src/components/unsorted/timepicker/numberscrollpicker/numberscrollpicker.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/timepicker/numberscrollpicker/numberscrollpicker.js" afterPath="$PROJECT_DIR$/src/components/unsorted/timepicker/numberscrollpicker/numberscrollpicker.js" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/timepicker/numberscrollpicker/numberscrollpicker.scss" afterPath="$PROJECT_DIR$/src/components/unsorted/timepicker/numberscrollpicker/numberscrollpicker.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/timepicker/timepicker.css" afterPath="$PROJECT_DIR$/src/components/unsorted/timepicker/timepicker.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/timepicker/timepicker.html" afterPath="$PROJECT_DIR$/src/components/unsorted/timepicker/timepicker.html" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/timepicker/timepicker.scss" afterPath="$PROJECT_DIR$/src/components/unsorted/timepicker/timepicker.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/general/styles/components.css" afterPath="$PROJECT_DIR$/src/global/styles/components.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/general/styles/components.css.map" afterPath="$PROJECT_DIR$/src/global/styles/components.css.map" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/general/styles/components.scss" afterPath="$PROJECT_DIR$/src/global/styles/components.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/general/styles/general.css.map" afterPath="$PROJECT_DIR$/src/global/styles/general.css.map" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/general/styles/global.css" afterPath="$PROJECT_DIR$/src/global/styles/global.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/general/styles/global.scss" afterPath="$PROJECT_DIR$/src/global/styles/global.scss" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/general/styles/reset.css" afterPath="$PROJECT_DIR$/src/global/styles/reset.css" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/general/styles/reset.css.map" afterPath="$PROJECT_DIR$/src/global/styles/reset.css.map" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/general/styles/reset.scss" afterPath="$PROJECT_DIR$/src/global/styles/reset.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/unsorted/zz_itemlist/itemlist.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/unsorted/zz_itemlist/itemlist.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/unsorted/zz_itemlist/itemlist.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/unsorted/zz_itemlist/itemlist.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/unsorted/zz_itemlist/subcomponents/selectable/selectable.css.map" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/unsorted/zz_itemlist/subcomponents/selectable/selectable.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/unsorted/zz_itemlist/subcomponents/selectable/selectable.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/unsorted/zz_itemlist/subcomponents/selectable/selectable.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/unsorted/zz_itemlist/subcomponents/selectable/selectable.scss" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/Unsorted/zz_list_component/list.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/Unsorted/zz_list_component/list.css.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/Unsorted/zz_list_component/list.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/Unsorted/zz_list_component/list.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/Unsorted/zz_list_component/list.scss" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/Unsorted/zz_list_component/subcomponents/selectable/selectable.css" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/Unsorted/zz_list_component/subcomponents/selectable/selectable.css.map" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/Unsorted/zz_list_component/subcomponents/selectable/selectable.html" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/Unsorted/zz_list_component/subcomponents/selectable/selectable.js" afterPath="" />
+      <change type="DELETED" beforePath="$PROJECT_DIR$/src/components/Unsorted/zz_list_component/subcomponents/selectable/selectable.scss" afterPath="" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.sass-cache/141b1d2d07e3b6f7e527f55c5ae7e5b45a0bad79/betajs-dynamics-components.scssc" afterPath="$PROJECT_DIR$/.sass-cache/141b1d2d07e3b6f7e527f55c5ae7e5b45a0bad79/betajs-dynamics-components.scssc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/htmlparser2/.travis.yml" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/htmlparser2/.travis.yml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/htmlparser2/test/Events/08-implicit-close-tags.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/htmlparser2/test/Events/08-implicit-close-tags.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-jsdoc/node_modules/jsdoc/CHANGES.md" afterPath="$PROJECT_DIR$/node_modules/grunt-jsdoc/node_modules/jsdoc/CHANGES.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gruntfile.js" afterPath="$PROJECT_DIR$/Gruntfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/HISTORY.md" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/HISTORY.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/HISTORY.md" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/HISTORY.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/clean-css/History.md" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/clean-css/History.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/htmlparser2/lib/Parser.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/htmlparser2/lib/Parser.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-closure-tools/README.md" afterPath="$PROJECT_DIR$/node_modules/grunt-closure-tools/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-closure-tools/node_modules/task-closure-tools/README.md" afterPath="$PROJECT_DIR$/node_modules/grunt-closure-tools/node_modules/task-closure-tools/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-concat/node_modules/source-map/node_modules/amdefine/README.md" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-concat/node_modules/source-map/node_modules/amdefine/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/clean-css/node_modules/source-map/node_modules/amdefine/README.md" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/clean-css/node_modules/source-map/node_modules/amdefine/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/README.md" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/htmlparser2/README.md" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/htmlparser2/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/README.md" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/uglify-js/node_modules/source-map/node_modules/amdefine/README.md" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/uglify-js/node_modules/source-map/node_modules/amdefine/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-jsdoc/node_modules/jsdoc/README.md" afterPath="$PROJECT_DIR$/node_modules/grunt-jsdoc/node_modules/jsdoc/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/request/node_modules/tough-cookie/README.md" afterPath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/request/node_modules/tough-cookie/README.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/adler32.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/adler32.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/adler32.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/adler32.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-concat/node_modules/source-map/node_modules/amdefine/amdefine.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-concat/node_modules/source-map/node_modules/amdefine/amdefine.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/clean-css/node_modules/source-map/node_modules/amdefine/amdefine.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/clean-css/node_modules/source-map/node_modules/amdefine/amdefine.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/uglify-js/node_modules/source-map/node_modules/amdefine/amdefine.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/uglify-js/node_modules/source-map/node_modules/amdefine/amdefine.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-jsdoc/node_modules/jsdoc/lib/jsdoc/src/astnode.js" afterPath="$PROJECT_DIR$/node_modules/grunt-jsdoc/node_modules/jsdoc/lib/jsdoc/src/astnode.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/fragments/begin.js-fragment" afterPath="$PROJECT_DIR$/src/fragments/begin.js-fragment" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/utils/common.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/utils/common.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/utils/common.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/utils/common.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/environment/controls/components/components.css.map" afterPath="$PROJECT_DIR$/src/environment/environment/controls/components/components.css.map" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/environment/controls/components/components.css" afterPath="$PROJECT_DIR$/src/environment/environment/controls/components/components.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/config/components.js" afterPath="$PROJECT_DIR$/src/environment/config/components.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/environment/controls/components/components.js" afterPath="$PROJECT_DIR$/src/environment/environment/controls/components/components.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/environment/controls/components/components.scss" afterPath="$PROJECT_DIR$/src/environment/environment/controls/components/components.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/constants.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/constants.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/constants.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/constants.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/request/node_modules/tough-cookie/lib/cookie.js" afterPath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/request/node_modules/tough-cookie/lib/cookie.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/request/node_modules/tough-cookie/test/cookie_sorting_test.js" afterPath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/request/node_modules/tough-cookie/test/cookie_sorting_test.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/request/node_modules/tough-cookie/test/cookie_to_json_test.js" afterPath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/request/node_modules/tough-cookie/test/cookie_to_json_test.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/crc32.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/crc32.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/crc32.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/crc32.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/deflate.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/deflate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/deflate.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/deflate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/deflate.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/deflate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/deflate.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/deflate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/gzheader.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/gzheader.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/gzheader.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/gzheader.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/request/node_modules/tough-cookie/test/ietf_test.js" afterPath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/request/node_modules/tough-cookie/test/ietf_test.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/index.html" afterPath="$PROJECT_DIR$/src/environment/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/index.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/index.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/index.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/inflate.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/inflate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/inflate.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/inflate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/inflate.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/inflate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/inflate.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/inflate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/inftrees.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/inftrees.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/inftrees.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/inftrees.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vendors/jquery-1.9.closure-extern.js" afterPath="$PROJECT_DIR$/vendors/jquery-1.9.closure-extern.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-closure-tools/node_modules/task-closure-tools/lib/libDepsWriter.js" afterPath="$PROJECT_DIR$/node_modules/grunt-closure-tools/node_modules/task-closure-tools/lib/libDepsWriter.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/request/node_modules/tough-cookie/lib/memstore.js" afterPath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/request/node_modules/tough-cookie/lib/memstore.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/messages.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/messages.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/messages.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/messages.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/clean-css/lib/selectors/optimization-metadata.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/clean-css/lib/selectors/optimization-metadata.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-closure-tools/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-closure-tools/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-closure-tools/node_modules/task-closure-tools/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-closure-tools/node_modules/task-closure-tools/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-clean/node_modules/rimraf/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-clean/node_modules/rimraf/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-concat/node_modules/chalk/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-concat/node_modules/chalk/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-concat/node_modules/chalk/node_modules/has-ansi/node_modules/ansi-regex/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-concat/node_modules/chalk/node_modules/has-ansi/node_modules/ansi-regex/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-concat/node_modules/chalk/node_modules/strip-ansi/node_modules/ansi-regex/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-concat/node_modules/chalk/node_modules/strip-ansi/node_modules/ansi-regex/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-concat/node_modules/source-map/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-concat/node_modules/source-map/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-concat/node_modules/source-map/node_modules/amdefine/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-concat/node_modules/source-map/node_modules/amdefine/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/clean-css/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/clean-css/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/clean-css/node_modules/source-map/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/clean-css/node_modules/source-map/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/clean-css/node_modules/source-map/node_modules/amdefine/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/clean-css/node_modules/source-map/node_modules/amdefine/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/pretty-bytes/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/pretty-bytes/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/pretty-bytes/node_modules/meow/node_modules/camelcase-keys/node_modules/camelcase/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/pretty-bytes/node_modules/meow/node_modules/camelcase-keys/node_modules/camelcase/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/pretty-bytes/node_modules/meow/node_modules/object-assign/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/pretty-bytes/node_modules/meow/node_modules/object-assign/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/cli/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/cli/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/console-browserify/node_modules/date-now/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/console-browserify/node_modules/date-now/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/htmlparser2/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/htmlparser2/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/lodash/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/lodash/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/shelljs/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-jshint/node_modules/jshint/node_modules/shelljs/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-nodeunit/node_modules/nodeunit/node_modules/tap/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-nodeunit/node_modules/nodeunit/node_modules/tap/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-sass/node_modules/async/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-sass/node_modules/async/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-sass/node_modules/chalk/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-sass/node_modules/chalk/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-sass/node_modules/cross-spawn/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-sass/node_modules/cross-spawn/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/node_modules/inherits/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/node_modules/inherits/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/pretty-bytes/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/pretty-bytes/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/pretty-bytes/node_modules/meow/node_modules/indent-string/node_modules/repeating/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/pretty-bytes/node_modules/meow/node_modules/indent-string/node_modules/repeating/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/pretty-bytes/node_modules/meow/node_modules/object-assign/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/pretty-bytes/node_modules/meow/node_modules/object-assign/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/uglify-js/node_modules/async/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/uglify-js/node_modules/async/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/uglify-js/node_modules/source-map/node_modules/amdefine/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/uglify-js/node_modules/source-map/node_modules/amdefine/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/uglify-js/node_modules/yargs/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/uglify-js/node_modules/yargs/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/uglify-js/node_modules/yargs/node_modules/window-size/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/uglify-js/node_modules/yargs/node_modules/window-size/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-watch/node_modules/async/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-watch/node_modules/async/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-watch/node_modules/gaze/node_modules/globule/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-watch/node_modules/gaze/node_modules/globule/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-watch/node_modules/lodash/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-watch/node_modules/lodash/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-watch/node_modules/tiny-lr-fork/node_modules/debug/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-watch/node_modules/tiny-lr-fork/node_modules/debug/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-watch/node_modules/tiny-lr-fork/node_modules/faye-websocket/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-watch/node_modules/tiny-lr-fork/node_modules/faye-websocket/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-watch/node_modules/tiny-lr-fork/node_modules/noptify/node_modules/nopt/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-watch/node_modules/tiny-lr-fork/node_modules/noptify/node_modules/nopt/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-watch/node_modules/tiny-lr-fork/node_modules/qs/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-watch/node_modules/tiny-lr-fork/node_modules/qs/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-jsdoc/node_modules/ink-docstrap/node_modules/moment/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-jsdoc/node_modules/ink-docstrap/node_modules/moment/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-jsdoc/node_modules/jsdoc/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-jsdoc/node_modules/jsdoc/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-jsdoc/node_modules/jsdoc/node_modules/catharsis/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-jsdoc/node_modules/jsdoc/node_modules/catharsis/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-preprocess/node_modules/preprocess/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-preprocess/node_modules/preprocess/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/async/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/async/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/request/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/request/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/request/node_modules/hawk/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/request/node_modules/hawk/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/request/node_modules/tough-cookie/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/request/node_modules/tough-cookie/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt/node_modules/async/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt/node_modules/async/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt/node_modules/coffee-script/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt/node_modules/coffee-script/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt/node_modules/colors/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt/node_modules/colors/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt/node_modules/dateformat/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt/node_modules/dateformat/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt/node_modules/findup-sync/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt/node_modules/findup-sync/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt/node_modules/glob/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt/node_modules/glob/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt/node_modules/grunt-legacy-log/node_modules/lodash/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt/node_modules/grunt-legacy-log/node_modules/lodash/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt/node_modules/grunt-legacy-log/node_modules/underscore.string/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt/node_modules/grunt-legacy-log/node_modules/underscore.string/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt/node_modules/iconv-lite/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt/node_modules/iconv-lite/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt/node_modules/js-yaml/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt/node_modules/js-yaml/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt/node_modules/lodash/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt/node_modules/lodash/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt/node_modules/minimatch/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt/node_modules/minimatch/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt/node_modules/nopt/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt/node_modules/nopt/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt/node_modules/nopt/node_modules/abbrev/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt/node_modules/nopt/node_modules/abbrev/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt/node_modules/rimraf/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt/node_modules/rimraf/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt/node_modules/underscore.string/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt/node_modules/underscore.string/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt/node_modules/which/package.json" afterPath="$PROJECT_DIR$/node_modules/grunt/node_modules/which/package.json" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako.min.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako.min.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako_deflate.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako_deflate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako_deflate.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako_deflate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako_deflate.min.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako_deflate.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako_deflate.min.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako_deflate.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako_inflate.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako_inflate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako_inflate.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako_inflate.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako_inflate.min.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako_inflate.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako_inflate.min.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/dist/pako_inflate.min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/request/node_modules/tough-cookie/public-suffix.txt" afterPath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/request/node_modules/tough-cookie/public-suffix.txt" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-jsdoc/node_modules/jsdoc/templates/haruki/publish.js" afterPath="$PROJECT_DIR$/node_modules/grunt-jsdoc/node_modules/jsdoc/templates/haruki/publish.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/readme.md" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/readme.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/readme.md" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/concat-stream/readme.md" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/clean-css/lib/selectors/optimizers/simple.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/clean-css/lib/selectors/optimizers/simple.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/request/node_modules/tough-cookie/lib/store.js" afterPath="$PROJECT_DIR$/node_modules/grunt-wget/node_modules/request/node_modules/tough-cookie/lib/store.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/utils/strings.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/utils/strings.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/utils/strings.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/utils/strings.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/clean-css/lib/tokenizer/tokenize.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/clean-css/lib/tokenizer/tokenize.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/trees.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/trees.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/trees.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/trees.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-jsdoc/node_modules/jsdoc/lib/jsdoc/src/walker.js" afterPath="$PROJECT_DIR$/node_modules/grunt-jsdoc/node_modules/jsdoc/lib/jsdoc/src/walker.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components-noscoped.js" afterPath="$PROJECT_DIR$/dist/betajs-dynamics-components-noscoped.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components.css.map" afterPath="$PROJECT_DIR$/dist/betajs-dynamics-components.css.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components.css" afterPath="$PROJECT_DIR$/dist/betajs-dynamics-components.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components.js" afterPath="$PROJECT_DIR$/dist/betajs-dynamics-components.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components.scss" afterPath="$PROJECT_DIR$/dist/betajs-dynamics-components.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/environment/controls/controls.js" afterPath="$PROJECT_DIR$/src/environment/environment/controls/controls.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/unsorted/timepicker/datepicker/datepicker.js" afterPath="$PROJECT_DIR$/src/components/unsorted/timepicker/datepicker/datepicker.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/unsorted/timepicker/daypicker/daypicker.js" afterPath="$PROJECT_DIR$/src/components/unsorted/timepicker/daypicker/daypicker.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/unsorted/emailinput/emailinput.js" afterPath="$PROJECT_DIR$/src/components/unsorted/emailinput/emailinput.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.css" afterPath="$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.html" afterPath="$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.js" afterPath="$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.scss" afterPath="$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/unsorted/list/list.js" afterPath="$PROJECT_DIR$/src/components/unsorted/list/list.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/unsorted/timepicker/numberscrollpicker/numberscrollpicker.js" afterPath="$PROJECT_DIR$/src/components/unsorted/timepicker/numberscrollpicker/numberscrollpicker.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/general/inputs/widgets/scrollpicker/scrollpicker.js" afterPath="$PROJECT_DIR$/src/components/general/inputs/widgets/scrollpicker/scrollpicker.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/general/inputs/settingslist/settingslist.css" afterPath="$PROJECT_DIR$/src/components/general/inputs/settingslist/settingslist.css" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/general/inputs/settingslist/settingslist.scss" afterPath="$PROJECT_DIR$/src/components/general/inputs/settingslist/settingslist.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/unsorted/testcomponent/testcomponent.js" afterPath="$PROJECT_DIR$/src/components/unsorted/testcomponent/testcomponent.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/unsorted/timepicker/timepicker.js" afterPath="$PROJECT_DIR$/src/components/unsorted/timepicker/timepicker.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/general/inputs/settingslist/titlesetting/titlesetting.js" afterPath="$PROJECT_DIR$/src/components/general/inputs/settingslist/titlesetting/titlesetting.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/zstream.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-cssmin/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/zstream.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/zstream.js" afterPath="$PROJECT_DIR$/node_modules/grunt-contrib-uglify/node_modules/maxmin/node_modules/gzip-size/node_modules/browserify-zlib/node_modules/pako/lib/zlib/zstream.js" />
     </list>
     <ignored path="betajs-dynamics-components.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -277,21 +67,71 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="generalsetting.html" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.html">
+      <file leaf-file-name="generalsetting.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.25316456" vertical-offset="0" max-vertical-offset="474">
-              <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
+              <caret line="3" column="73" selection-start-line="3" selection-start-column="73" selection-end-line="3" selection-end-column="73" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="generalsetting.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.js">
+      <file leaf-file-name="controls.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/environment/environment/controls/controls.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
-              <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="300">
+              <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="list.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/unsorted/list/list.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.24096386" vertical-offset="0" max-vertical-offset="765">
+              <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="overlaycontainer.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/general/containers/overlaycontainer/overlaycontainer.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
+              <caret line="3" column="76" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="76" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="numberscrollpicker.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/unsorted/timepicker/numberscrollpicker/numberscrollpicker.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1425">
+              <caret line="3" column="77" selection-start-line="3" selection-start-column="77" selection-end-line="3" selection-end-column="77" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="scrollpicker.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/general/inputs/widgets/scrollpicker/scrollpicker.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1425">
+              <caret line="3" column="71" selection-start-line="3" selection-start-column="71" selection-end-line="3" selection-end-column="71" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="titlesetting.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/general/inputs/settingslist/titlesetting/titlesetting.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
+              <caret line="3" column="71" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="71" />
               <folding />
             </state>
           </provider>
@@ -305,8 +145,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/components/timepicker/numberscrollpicker/numberscrollpicker.js" />
-        <option value="$PROJECT_DIR$/src/components/Unsorted/emailinput/emailinput.js" />
         <option value="$PROJECT_DIR$/src/components/Unsorted/list/list.js" />
         <option value="$PROJECT_DIR$/src/components/Unsorted/list_component/list.js" />
         <option value="$PROJECT_DIR$/src/components/Unsorted/testcomponent/testcomponent.js" />
@@ -315,32 +153,18 @@
         <option value="$PROJECT_DIR$/src/components/Unsorted/timepicker/daypicker/daypicker.js" />
         <option value="$PROJECT_DIR$/src/components/Unsorted/timepicker/datepicker/datepicker.js" />
         <option value="$PROJECT_DIR$/src/components/Unsorted/aa_template/script.js" />
-        <option value="$PROJECT_DIR$/src/components/unsorted/aa_template/script.js" />
-        <option value="$PROJECT_DIR$/src/components/unsorted/emailinput/emailinput.js" />
-        <option value="$PROJECT_DIR$/src/components/unsorted/testcomponent/testcomponent.js" />
-        <option value="$PROJECT_DIR$/src/components/unsorted/timepicker/timepicker.js" />
-        <option value="$PROJECT_DIR$/src/components/unsorted/timepicker/numberscrollpicker/numberscrollpicker.js" />
-        <option value="$PROJECT_DIR$/src/components/unsorted/timepicker/daypicker/daypicker.js" />
-        <option value="$PROJECT_DIR$/src/components/unsorted/timepicker/datepicker/datepicker.js" />
         <option value="$PROJECT_DIR$/src/components/unsorted/emailinput/emailinput.scss" />
         <option value="$PROJECT_DIR$/src/global/styles/global.scss" />
         <option value="$PROJECT_DIR$/src/components/general/inputs/scrollpicker/scrollpicker.html" />
         <option value="$PROJECT_DIR$/src/components/general/inputs/scrollpicker/scrollpicker.scss" />
         <option value="$PROJECT_DIR$/src/components/general/inputs/scrollpicker/scrollpicker.js" />
-        <option value="$PROJECT_DIR$/src/components/general/inputs/widgets/scrollpicker/scrollpicker.js" />
         <option value="$PROJECT_DIR$/src/components/general/inputs/listinputs/titleinput/titleinput.scss" />
         <option value="$PROJECT_DIR$/src/components/general/inputs/listinputs/titleinput/titleinput.html" />
         <option value="$PROJECT_DIR$/src/components/general/inputs/listinputs/titleinput/titleinput.js" />
         <option value="$PROJECT_DIR$/src/components/general/inputs/settingslist/titilesetting/titlesetting.scss" />
         <option value="$PROJECT_DIR$/src/components/general/inputs/settingslist/titilesetting/titlesetting.js" />
-        <option value="$PROJECT_DIR$/src/components/unsorted/list/list.js" />
         <option value="$PROJECT_DIR$/src/environment/environment/controls/components/components.js" />
         <option value="$PROJECT_DIR$/src/components/general/inputs/settingslist/titlesetting/titlesetting.html" />
-        <option value="$PROJECT_DIR$/src/components/general/inputs/settingslist/titlesetting/titlesetting.js" />
-        <option value="$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.scss" />
-        <option value="$PROJECT_DIR$/src/components/general/inputs/settingslist/settingslist.scss" />
-        <option value="$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.html" />
-        <option value="$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.js" />
         <option value="$PROJECT_DIR$/package.json" />
         <option value="$PROJECT_DIR$/dist/templates.js" />
         <option value="$PROJECT_DIR$/src/fragments/begin.js-fragment" />
@@ -356,6 +180,22 @@
         <option value="$PROJECT_DIR$/src/components/general/containers/overlaycontainer/overlaycontainer.js" />
         <option value="$PROJECT_DIR$/src/components/general/containers/overlaycontainer/testoverlaycontainer/testoverlaycontainer.html" />
         <option value="$PROJECT_DIR$/src/components/general/containers/overlaycontainer/testoverlaycontainer/testoverlaycontainer.js" />
+        <option value="$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.html" />
+        <option value="$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.scss" />
+        <option value="$PROJECT_DIR$/src/components/general/inputs/settingslist/settingslist.scss" />
+        <option value="$PROJECT_DIR$/src/components/unsorted/emailinput/emailinput.js" />
+        <option value="$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.js" />
+        <option value="$PROJECT_DIR$/src/components/general/inputs/settingslist/titlesetting/titlesetting.js" />
+        <option value="$PROJECT_DIR$/src/components/general/inputs/widgets/scrollpicker/scrollpicker.js" />
+        <option value="$PROJECT_DIR$/src/components/unsorted/timepicker/timepicker.js" />
+        <option value="$PROJECT_DIR$/src/components/unsorted/timepicker/datepicker/datepicker.js" />
+        <option value="$PROJECT_DIR$/src/components/unsorted/timepicker/daypicker/daypicker.js" />
+        <option value="$PROJECT_DIR$/src/components/unsorted/timepicker/numberscrollpicker/numberscrollpicker.js" />
+        <option value="$PROJECT_DIR$/src/components/unsorted/testcomponent/testcomponent.js" />
+        <option value="$PROJECT_DIR$/src/components/unsorted/aa_template/script.js" />
+        <option value="$PROJECT_DIR$/src/environment/environment/controls/controls.js" />
+        <option value="$PROJECT_DIR$/src/components/unsorted/list/list.js" />
+        <option value="$PROJECT_DIR$/dist/betajs-dynamics-components.js" />
       </list>
     </option>
   </component>
@@ -567,7 +407,63 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="config" />
+              <option name="myItemId" value="environment" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="betajs-dynamics-components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="betajs-dynamics-components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="environment" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="environment" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controls" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="betajs-dynamics-components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="betajs-dynamics-components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="environment" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="environment" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="controls" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -586,6 +482,62 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="unsorted" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="zz_itemlist" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="betajs-dynamics-components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="betajs-dynamics-components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="unsorted" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="betajs-dynamics-components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="betajs-dynamics-components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="unsorted" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="list" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -700,6 +652,10 @@
               <option name="myItemId" value="general" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="containers" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -721,7 +677,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../doodadsapp" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
   </component>
@@ -795,22 +751,22 @@
     <frame x="-17" y="23" width="748" height="877" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299363" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32909784" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3299363" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32866243" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299363" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299363" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.37964237" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32866243" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299363" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32866243" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -845,46 +801,10 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/components/unsorted/testcomponent/testcomponent.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.090361446" vertical-offset="0" max-vertical-offset="498">
-          <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/unsorted/timepicker/numberscrollpicker/numberscrollpicker.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.090361446" vertical-offset="0" max-vertical-offset="1440">
-          <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/unsorted/timepicker/timepicker.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="435">
-          <caret line="1" column="0" selection-start-line="1" selection-start-column="0" selection-end-line="1" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/unsorted/timepicker/daypicker/daypicker.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.090361446" vertical-offset="0" max-vertical-offset="498">
-          <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/unsorted/timepicker/timepicker.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-11.875" vertical-offset="0" max-vertical-offset="555">
           <caret line="19" column="8" selection-start-line="19" selection-start-column="8" selection-end-line="19" selection-end-column="8" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/unsorted/timepicker/datepicker/datepicker.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="180">
-          <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
         </state>
       </provider>
     </entry>
@@ -906,6 +826,7 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="4.651899" vertical-offset="0" max-vertical-offset="2295">
           <caret line="147" column="0" selection-start-line="147" selection-start-column="0" selection-end-line="147" selection-end-column="0" />
+          <folding />
         </state>
       </provider>
     </entry>
@@ -945,25 +866,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/inputs/widgets/scrollpicker/scrollpicker.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.05944518" vertical-offset="0" max-vertical-offset="1425">
-          <caret line="3" column="54" selection-start-line="3" selection-start-column="54" selection-end-line="3" selection-end-column="54" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/environment/environment/controls/components/components.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="150">
           <caret line="3" column="39" selection-start-line="3" selection-start-column="29" selection-end-line="3" selection-end-column="39" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/unsorted/zz_list_component/list.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.090361446" vertical-offset="0" max-vertical-offset="498">
-          <caret line="3" column="18" selection-start-line="3" selection-start-column="18" selection-end-line="3" selection-end-column="18" />
         </state>
       </provider>
     </entry>
@@ -982,25 +888,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/unsorted/list/list.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.78313255" vertical-offset="15" max-vertical-offset="765">
-          <caret line="27" column="0" selection-start-line="27" selection-start-column="0" selection-end-line="27" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/environment/environment/environment.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="498">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/environment/environment/controls/controls.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="315">
-          <caret line="1" column="58" selection-start-line="1" selection-start-column="48" selection-end-line="1" selection-end-column="58" />
         </state>
       </provider>
     </entry>
@@ -1011,13 +902,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/inputs/settingslist/titlesetting/titlesetting.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.6325301" vertical-offset="0" max-vertical-offset="498">
-          <caret line="21" column="5" selection-start-line="21" selection-start-column="5" selection-end-line="21" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/general/inputs/settingslist/titlesetting/titlesetting.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.18987341" vertical-offset="0" max-vertical-offset="474">
@@ -1025,33 +909,10 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/inputs/settingslist/settingslist.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="420">
-          <caret line="12" column="29" selection-start-line="12" selection-start-column="29" selection-end-line="12" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.094736844" vertical-offset="0" max-vertical-offset="475">
-          <caret line="3" column="25" selection-start-line="3" selection-start-column="25" selection-end-line="3" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-21.25" vertical-offset="0" max-vertical-offset="1020">
           <caret line="34" column="29" selection-start-line="34" selection-start-column="29" selection-end-line="34" selection-end-column="29" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/unsorted/emailinput/emailinput.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1995">
-          <caret line="8" column="38" selection-start-line="8" selection-start-column="38" selection-end-line="8" selection-end-column="38" />
           <folding />
         </state>
       </provider>
@@ -1109,16 +970,6 @@
         <state vertical-scroll-proportion="-0.6927711" vertical-offset="345" max-vertical-offset="11940">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/dist/betajs-dynamics-components.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.5120482" vertical-offset="30" max-vertical-offset="20010">
-          <caret line="19" column="6" selection-start-line="19" selection-start-column="6" selection-end-line="19" selection-end-column="6" />
-          <folding>
             <element signature="n#!!doc" expanded="false" />
           </folding>
         </state>
@@ -1164,14 +1015,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/containers/overlaycontainer/testoverlaycontainer/testoverlaycontainer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.30120483" vertical-offset="0" max-vertical-offset="498">
-          <caret line="10" column="9" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/components/general/containers/overlaycontainer/testoverlaycontainer/testoverlaycontainer.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.12658228" vertical-offset="0" max-vertical-offset="474">
@@ -1188,7 +1031,31 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/containers/overlaycontainer/overlaycontainer.js">
+    <entry file="file://$PROJECT_DIR$/src/components/general/inputs/settingslist/settingslist.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.125" vertical-offset="0" max-vertical-offset="420">
+          <caret line="5" column="4" selection-start-line="5" selection-start-column="4" selection-end-line="5" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.06315789" vertical-offset="0" max-vertical-offset="475">
+          <caret line="2" column="0" selection-start-line="2" selection-start-column="0" selection-end-line="2" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.25263157" vertical-offset="0" max-vertical-offset="475">
+          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/general/containers/overlaycontainer/testoverlaycontainer/testoverlaycontainer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.30120483" vertical-offset="0" max-vertical-offset="498">
           <caret line="10" column="9" selection-start-line="10" selection-start-column="9" selection-end-line="10" selection-end-column="9" />
@@ -1196,18 +1063,130 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.js">
+    <entry file="file://$PROJECT_DIR$/src/components/unsorted/timepicker/datepicker/datepicker.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
-          <caret line="12" column="32" selection-start-line="12" selection-start-column="32" selection-end-line="12" selection-end-column="32" />
+        <state vertical-scroll-proportion="0.090361446" vertical-offset="0" max-vertical-offset="498">
+          <caret line="3" column="69" selection-start-line="3" selection-start-column="69" selection-end-line="3" selection-end-column="69" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.html">
+    <entry file="file://$PROJECT_DIR$/src/components/unsorted/timepicker/daypicker/daypicker.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.25316456" vertical-offset="0" max-vertical-offset="474">
-          <caret line="8" column="0" selection-start-line="8" selection-start-column="0" selection-end-line="8" selection-end-column="0" />
+        <state vertical-scroll-proportion="0.090361446" vertical-offset="0" max-vertical-offset="498">
+          <caret line="3" column="68" selection-start-line="3" selection-start-column="68" selection-end-line="3" selection-end-column="68" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/unsorted/testcomponent/testcomponent.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12048193" vertical-offset="0" max-vertical-offset="498">
+          <caret line="4" column="4" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/unsorted/emailinput/emailinput.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.090361446" vertical-offset="0" max-vertical-offset="1995">
+          <caret line="3" column="70" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="70" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/unsorted/timepicker/timepicker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="435">
+          <caret line="8" column="36" selection-start-line="8" selection-start-column="36" selection-end-line="8" selection-end-column="36" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/unsorted/aa_template/script.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.090361446" vertical-offset="0" max-vertical-offset="498">
+          <caret line="3" column="15" selection-start-line="3" selection-start-column="15" selection-end-line="3" selection-end-column="15" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/unsorted/timepicker/numberscrollpicker/numberscrollpicker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1425">
+          <caret line="3" column="77" selection-start-line="3" selection-start-column="77" selection-end-line="3" selection-end-column="77" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/general/inputs/widgets/scrollpicker/scrollpicker.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1425">
+          <caret line="3" column="71" selection-start-line="3" selection-start-column="71" selection-end-line="3" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/general/inputs/settingslist/titlesetting/titlesetting.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
+          <caret line="3" column="71" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="71" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/general/containers/overlaycontainer/overlaycontainer.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="330">
+          <caret line="3" column="76" selection-start-line="3" selection-start-column="14" selection-end-line="3" selection-end-column="76" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="495">
+          <caret line="3" column="73" selection-start-line="3" selection-start-column="73" selection-end-line="3" selection-end-column="73" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/environment/environment/controls/controls.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="300">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/dist/betajs-dynamics-components.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.5180723" vertical-offset="8517" max-vertical-offset="19800">
+          <caret line="589" column="62" selection-start-line="589" selection-start-column="66" selection-end-line="589" selection-end-column="114" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/unsorted/zz_itemlist/itemlist.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.12048193" vertical-offset="0" max-vertical-offset="498">
+          <caret line="4" column="0" selection-start-line="4" selection-start-column="0" selection-end-line="4" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/unsorted/zz_itemlist/itemlist.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="498">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/unsorted/list/list.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.24096386" vertical-offset="0" max-vertical-offset="765">
+          <caret line="8" column="23" selection-start-line="8" selection-start-column="23" selection-end-line="8" selection-end-column="23" />
           <folding />
         </state>
       </provider>

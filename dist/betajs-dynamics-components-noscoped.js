@@ -17,7 +17,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '3.1434392739933'
+		version: '4.1434398606510'
 	};
 });
 
@@ -27,7 +27,7 @@ BetaJS.Dynamics.Dynamic.Components.Templates['overlaycontainer'] = '<overlaycont
 
 BetaJS.Dynamics.Dynamic.Components.Templates['testoverlaycontainer'] = ' <button ba-click="showoverlay = !showoverlay">Show Overlaycontainer</button>  <ba-overlaycontainer         ba-overlay="{{=overlay}}"         ba-showoverlay="{{=showoverlay}}">          </ba-overlaycontainer>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['generalsetting'] = '<item ba-tap="showwidget = !showwidget">         <icon class="{{type_icon}}"></icon>         <key>{{key_value}}</key>         <value>{{value_value}}</value>         <icon class="icon-chevron-right"></icon>          <ba-{{widget}} ba-if="{{showwidget}}">         </ba-{{widget}}>  </item>';
+BetaJS.Dynamics.Dynamic.Components.Templates['generalsetting'] = '<item ba-tap="showwidget = !showwidget">          <icon class="{{type_icon}}"></icon>         <key>{{key_value}}</key>         <value>{{value_value}}</value>         <icon class="icon-chevron-right"></icon>  </item>  <ba-{{widget}} ba-if="{{showwidget}}"> </ba-{{widget}}>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['titlesetting'] = ' <icon class="{{type_icon}}"></icon> <input         autofocus="true"         placeholder="{{placeholder}}"         value="{{=value_title}}"> <icon ba-if="{{dictation}}" class="icon-microphone"></icon>';
 
@@ -49,7 +49,7 @@ BetaJS.Dynamics.Dynamic.Components.Templates['numberscrollpicker'] = '<number ba
 
 BetaJS.Dynamics.Dynamic.Components.Templates['timepicker'] = ' <time>      <ba-numberscrollpicker             ba-currentTop="{{false}}"             ba-value="{{=valueHour}}">     </ba-numberscrollpicker>      <ba-numberscrollpicker             ba-currentTop="{{false}}"             ba-value="{{=valueMinute}}"             ba-increment="{{5}}"             ba-last="{{55}}">     </ba-numberscrollpicker>  </time>  <divider>      <div>Time</div>      <div>Date</div>  </divider>  <date>      <ba-datepicker>     </ba-datepicker>  </date> ';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['list'] = ' <div ba-repeat="{{collectionitem :: listcollection}}">     <div>     <ba-{{itemtype}} ba-data="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{itemtype}}>      </div> </div>';
+BetaJS.Dynamics.Dynamic.Components.Templates['itemlist'] = ' <div ba-repeat="{{collectionitem :: listcollection}}">     <div>     <ba-{{itemtype}} ba-data="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{itemtype}}>      </div> </div>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['selectable'] = ' <selectable_item         ba-class="{{{highlight_selected : highlight_element}}}"         ba-click="select(data)">     {{data.title}} </selectable_item>';
 
@@ -121,7 +121,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Testoverlayco
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Generalsetting", {
 
-    templateUrl: "../components/general/inputs/settingslist/%/%.html?" + BetaJS.Time.now(),
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.generalsetting,
 
     initial : {
 
@@ -149,7 +149,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Generalsetting", {
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titlesetting", {
 
-    templateUrl: "../components/general/inputs/settingslist/%/%.html?" + BetaJS.Time.now(),
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.titlesetting,
 
     initial : {
 
@@ -174,7 +174,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titlesetting", {
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Scrollpicker", {
 
-    templateUrl: "../components/general/inputs/widgets/%/%.html",
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.scrollpicker,
 
     initial : {
 
@@ -283,7 +283,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Aa_template", {
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Emailinput", {
 
-    templateUrl: "../components/unsorted/%/%.html",
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.emailinput,
 
     initial : {
 
@@ -411,7 +411,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Emailinput", 
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
 
-    templateUrl: "../components/unsorted/%/%.html",
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.list,
 
     initial: {
 
@@ -457,8 +457,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testcomponent", {
 
-    templateUrl: "../components/unsorted/%/%.html",
-
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.testcomponent,
 
     initial: {
 
@@ -477,22 +476,21 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testcomponent", {
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Datepicker", {
 
-    templateUrl: "../components/unsorted/timepicker/%/%.html"
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.datepicker
 
 }).register();
 
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Daypicker", {
 
-    templateUrl: "../components/unsorted/timepicker/%/%.html"
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.daypicker
 
 }).register();
 
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Numberscrollpicker", {
 
-    templateUrl: "../components/unsorted/timepicker/%/%.html",
-    //template: BetaJS.Dynamics.Templates.Numberscrollpicker,
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.numberscrollpicker,
 
     initial : {
 
@@ -582,7 +580,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Numberscrollpicker", 
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Timepicker", {
 
-    templateUrl: "../components/unsorted/%/%.html?" + BetaJS.Time.now(),
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.timepicker,
 
     initial : {
 
@@ -687,7 +685,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Components", {
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Controls", {
 
     templateUrl: "environment/%/%.html",
-
 
     initial: {
 

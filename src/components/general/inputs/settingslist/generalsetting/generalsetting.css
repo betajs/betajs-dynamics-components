@@ -1,19 +1,20 @@
 /*
 Error: Undefined mixin 'flex'.
-        on line 4 of generalsetting.scss, in `flex'
-        from line 4 of generalsetting.scss
+        on line 5 of generalsetting.scss, in `flex'
+        from line 5 of generalsetting.scss
 
 1: 
 2: ba-generalsetting {
-3:   item {
-4:     @include flex(1 1 0);
-5:     @include display-flex;
-6:   }
-7: }
+3: 
+4:   item {
+5:     @include flex(1 1 0);
+6:     @include display-flex;
+7:   }
+8: }
 
 Backtrace:
-generalsetting.scss:4:in `flex'
-generalsetting.scss:4
+generalsetting.scss:5:in `flex'
+generalsetting.scss:5
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:338:in `block in visit_mixin'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/stack.rb:98:in `block in with_mixin'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/stack.rb:115:in `with_frame'
@@ -78,4 +79,4 @@ generalsetting.scss:4
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined mixin 'flex'.\A         on line 4 of generalsetting.scss, in `flex'\A         from line 4 of generalsetting.scss\A \A 1: \A 2: ba-generalsetting {\A 3:   item {\A 4:     @include flex(1 1 0);\A 5:     @include display-flex;\A 6:   }\A 7: }"; }
+  content: "Error: Undefined mixin 'flex'.\A         on line 5 of generalsetting.scss, in `flex'\A         from line 5 of generalsetting.scss\A \A 1: \A 2: ba-generalsetting {\A 3: \A 4:   item {\A 5:     @include flex(1 1 0);\A 6:     @include display-flex;\A 7:   }\A 8: }"; }

@@ -1,7 +1,7 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Timepicker", {
 
-    templateUrl: "../components/unsorted/%/%.html?" + BetaJS.Time.now(),
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.timepicker,
 
     initial : {
 

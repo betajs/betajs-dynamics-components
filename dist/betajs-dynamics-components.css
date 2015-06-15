@@ -83,7 +83,7 @@ ba-generalsetting item {
   display: -webkit-flex;
   display: flex; }
 
-ba-generalsetting, ba-titlesetting {
+item, ba-titlesetting {
   -webkit-box-flex: 0 0 44px;
   -moz-box-flex: 0 0 44px;
   -webkit-flex: 0 0 44px;
@@ -96,25 +96,25 @@ ba-generalsetting, ba-titlesetting {
   display: flex;
   border-bottom: 1px solid #ddd !important;
   background: white; }
-  ba-generalsetting key, ba-generalsetting value, ba-generalsetting icon, ba-titlesetting key, ba-titlesetting value, ba-titlesetting icon {
+  item key, item value, item icon, ba-titlesetting key, ba-titlesetting value, ba-titlesetting icon {
     line-height: 44px;
     height: 44px; }
-  ba-generalsetting icon, ba-titlesetting icon {
+  item icon, ba-titlesetting icon {
     -webkit-box-flex: 0 0 44px;
     -moz-box-flex: 0 0 44px;
     -webkit-flex: 0 0 44px;
     -ms-flex: 0 0 44px;
     flex: 0 0 44px;
     text-align: center; }
-  ba-generalsetting key, ba-generalsetting value, ba-generalsetting input, ba-generalsetting button, ba-titlesetting key, ba-titlesetting value, ba-titlesetting input, ba-titlesetting button {
+  item key, item value, item input, item button, ba-titlesetting key, ba-titlesetting value, ba-titlesetting input, ba-titlesetting button {
     -webkit-box-flex: 1 1 0;
     -moz-box-flex: 1 1 0;
     -webkit-flex: 1 1 0;
     -ms-flex: 1 1 0;
     flex: 1 1 0; }
-  ba-generalsetting value, ba-titlesetting value {
+  item value, ba-titlesetting value {
     text-align: right; }
-  ba-generalsetting key, ba-titlesetting key {
+  item key, ba-titlesetting key {
     color: #999; }
 
 ba-scrollpicker {

@@ -1,6 +1,6 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Datepicker", {
 
-    templateUrl: "../components/unsorted/timepicker/%/%.html"
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.datepicker
 
 }).register();

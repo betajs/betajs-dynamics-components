@@ -7,7 +7,7 @@ Error: Undefined variable: "$listitemheight".
 3: $settingsitem-bordercolor : $grey1;
 4: $settingsitem-keycolor : $grey5;
 5: 
-6: ba-generalsetting, ba-titlesetting {
+6: item, ba-titlesetting {
 7:   @include flex(0 0 $settingsitem-height);
 
 Backtrace:
@@ -52,4 +52,4 @@ settingslist.scss:2
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$listitemheight\".\A         on line 2 of settingslist.scss\A \A 1: \A 2: $settingsitem-height : $listitemheight;\A 3: $settingsitem-bordercolor : $grey1;\A 4: $settingsitem-keycolor : $grey5;\A 5: \A 6: ba-generalsetting, ba-titlesetting {\A 7:   @include flex(0 0 $settingsitem-height);"; }
+  content: "Error: Undefined variable: \"$listitemheight\".\A         on line 2 of settingslist.scss\A \A 1: \A 2: $settingsitem-height : $listitemheight;\A 3: $settingsitem-bordercolor : $grey1;\A 4: $settingsitem-keycolor : $grey5;\A 5: \A 6: item, ba-titlesetting {\A 7:   @include flex(0 0 $settingsitem-height);"; }

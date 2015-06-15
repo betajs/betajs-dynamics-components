@@ -1,7 +1,7 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Scrollpicker", {
 
-    templateUrl: "../components/general/inputs/widgets/%/%.html",
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.scrollpicker,
 
     initial : {
 

@@ -207,6 +207,7 @@ ba-testoverlaycontainer {
 }
 
 ba-generalsetting {
+
   item {
     @include flex(1 1 0);
     @include display-flex;
@@ -217,7 +218,7 @@ $settingsitem-height : $listitemheight;
 $settingsitem-bordercolor : $grey1;
 $settingsitem-keycolor : $grey5;
 
-ba-generalsetting, ba-titlesetting {
+item, ba-titlesetting {
   @include flex(0 0 $settingsitem-height);
   @include display-flex;
   border-bottom: 1px solid $settingsitem-bordercolor !important;

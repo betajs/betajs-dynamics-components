@@ -1,8 +1,7 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Numberscrollpicker", {
 
-    templateUrl: "../components/unsorted/timepicker/%/%.html",
-    //template: BetaJS.Dynamics.Templates.Numberscrollpicker,
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.numberscrollpicker,
 
     initial : {
 

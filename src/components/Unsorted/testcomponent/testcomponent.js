@@ -1,8 +1,7 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testcomponent", {
 
-    templateUrl: "../components/unsorted/%/%.html",
-
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.testcomponent,
 
     initial: {
 
