@@ -555,7 +555,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '4.1434398606510'
+		version: '5.1434403425932'
 	};
 });
 
@@ -565,7 +565,9 @@ BetaJS.Dynamics.Dynamic.Components.Templates['overlaycontainer'] = '<overlaycont
 
 BetaJS.Dynamics.Dynamic.Components.Templates['testoverlaycontainer'] = ' <button ba-click="showoverlay = !showoverlay">Show Overlaycontainer</button>  <ba-overlaycontainer         ba-overlay="{{=overlay}}"         ba-showoverlay="{{=showoverlay}}">          </ba-overlaycontainer>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['generalsetting'] = '<item ba-tap="showwidget = !showwidget">          <icon class="{{type_icon}}"></icon>         <key>{{key_value}}</key>         <value>{{value_value}}</value>         <icon class="icon-chevron-right"></icon>  </item>  <ba-{{widget}} ba-if="{{showwidget}}"> </ba-{{widget}}>';
+BetaJS.Dynamics.Dynamic.Components.Templates['generalsetting'] = '<item ba-tap="showwidget = !showwidget">          <icon class="{{type_icon}}"></icon>         <key>{{key_value}}</key>         <value>{{value_value}}</value>         <icon class="icon-chevron-right"></icon>  </item>  <ba-{{widget}} ba-if="{{showwidget && !overlay}}"> </ba-{{widget}}>  <ba-overlaycontainer         ba-if="{{showwidget && overlay}}"         ba-showoverlay="{{=showwidget}}"         ba-overlay="{{overlay}}"> </ba-overlaycontainer>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['testtimesetting'] = ' <ba-generalsetting         ba-key_value="Duration"         ba-overlay="timepicker">  </ba-generalsetting> ';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['titlesetting'] = ' <icon class="{{type_icon}}"></icon> <input         autofocus="true"         placeholder="{{placeholder}}"         value="{{=value_title}}"> <icon ba-if="{{dictation}}" class="icon-microphone"></icon>';
 
@@ -607,6 +609,7 @@ BetaJS.Dynamics.Dynamic.Components.Templates['index'] = '<!DOCTYPE html> <html> 
 window.components = new BetaJS.Collections.Collection({objects: [
     {name:'aa_template'},
     {name:'testoverlaycontainer'},
+    {name:'testtimesetting'},
     {name:'titlesetting'},
     {name:'generalsetting'},
     {name:'numberscrollpicker'},
@@ -622,6 +625,7 @@ window.componentsByName = function (name) {
             return comp.getByIndex(i);
     return null;
 };
+
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Overlaycontainer", {
 
@@ -668,7 +672,8 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Generalsetting", {
             type_icon : "icon-time",
             value_value : "Value",
             showwidget : false,
-            widget : "emailinput"
+            widget : "emailinput",
+            overlay : null
         },
 
         create : function () {
@@ -676,11 +681,17 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Generalsetting", {
         },
 
         functions : {
-            on_click : function () {
-                console.log('You clicked the ' + this.get('key_value') + ' Settings');
-            }
+
         }
+
     }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testtimesetting", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.testtimesetting,
 
 }).register();
 
@@ -872,80 +883,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Emailinput", 
     }
 
 }).register();
-
-
-//app.directive('diEmailinput', function() {
-//	return {
-//		restrict : 'E',
-//		replace : true,
-//        templateUrl : App.Paths.asset("{pages-directives}/doodadcontainer/inputs/email_input/template.html"),
-//        controller: function($scope) {
-//            $scope.searchQueryValue = {
-//                value: ""
-//            };
-//            $scope.items = [{
-//                name: "Oliver Friedmann", email: "Oliver.Friedmann@gmail.com"},{
-//                name: "Victor Lingenthal", email: "Victor.Lingenthal@gmail.com"
-//            }];
-//            var findIndexByKeyValue = function(obj, key, value) {
-//                for (var i = 0; i < obj.length; i++) {
-//                    if (obj[i][key] == value) {
-//                        return i;
-//                    }
-//                }
-//                return null;
-//            };
-//            this.add = function (email) {
-//                $scope.add(email);
-//            };
-//            $scope.add = function(email) {
-//                if (email != undefined && BetaJS.Strings.is_email_address(email)) {
-//                    if (findIndexByKeyValue($scope.items, "email", email) == null) {
-//                        $scope.items.push({name: null, email: email});
-//                        $scope.to = "";
-//                    }
-//                    else $scope.to = "";
-//                }
-//            };
-//            $scope.globalKeypress = function(key) {
-//                if (key == 32 || key == 13) {
-//                    $scope.add($scope.to);
-//                } else if (key != 8) {
-//                    $scope.selected = null;
-//                } else if ($scope.selected && key == 8) {
-//                    var index = findIndexByKeyValue($scope.items, "email", $scope.selected);
-//                    console.log(index);
-//                    $scope.items.splice(index, 1);
-//                    $scope.selected = null;
-//                    $("#emails").focus();
-//                } else if (key == 8 && !($scope.searchQueryValue.value) && $("#emails").is(":focus")) {
-//                    var lastitem = $scope.items[$scope.items.length-1];
-//                    $scope.setMaster(lastitem.email);
-//                }
-//            };
-//            $scope.isSelected = function(email) {
-//                return $scope.selected === email;
-//            };
-//        },
-//		link : function(scope, elem, attrs) {
-//            scope.setMaster = function (email) {
-//                scope.selected = email;
-//            };
-//		}
-//	};
-//});
-//
-//app.directive('onKeyupFn', function() {
-//    return function(scope, elm, attrs) {
-//        var keyupFn = scope.$eval(attrs.onKeyupFn);
-//        $("body").bind('keyup', function(evt) {
-//            scope.$apply(function() {
-//                keyupFn.call(scope, evt.which);
-//            });
-//        });
-//    };
-//});
-
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
 

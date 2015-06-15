@@ -2,6 +2,7 @@
 window.components = new BetaJS.Collections.Collection({objects: [
     {name:'aa_template'},
     {name:'testoverlaycontainer'},
+    {name:'testtimesetting'},
     {name:'titlesetting'},
     {name:'generalsetting'},
     {name:'numberscrollpicker'},

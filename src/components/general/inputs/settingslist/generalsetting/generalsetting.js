@@ -10,7 +10,8 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Generalsetting", {
             type_icon : "icon-time",
             value_value : "Value",
             showwidget : false,
-            widget : "emailinput"
+            widget : "emailinput",
+            overlay : null
         },
 
         create : function () {
@@ -18,10 +19,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Generalsetting", {
         },
 
         functions : {
-            on_click : function () {
-                console.log('You clicked the ' + this.get('key_value') + ' Settings');
-            }
+
         }
+
     }
 
 }).register();

@@ -7,5 +7,11 @@
 
 </item>
 
-<ba-{{widget}} ba-if="{{showwidget}}">
+<ba-{{widget}} ba-if="{{showwidget && !overlay}}">
 </ba-{{widget}}>
+
+<ba-overlaycontainer
+        ba-if="{{showwidget && overlay}}"
+        ba-showoverlay="{{=showwidget}}"
+        ba-overlay="{{overlay}}">
+</ba-overlaycontainer>

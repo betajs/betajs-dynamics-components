@@ -117,6 +117,18 @@ item, ba-titlesetting {
   item key, ba-titlesetting key {
     color: #999; }
 
+ba-testtimesetting item {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; }
+
 ba-scrollpicker {
   -webkit-box-flex: 1 1 0;
   -moz-box-flex: 1 1 0;
@@ -202,7 +214,9 @@ ba-emailinput {
       -webkit-flex: 1 1 auto;
       -ms-flex: 1 1 auto;
       flex: 1 1 auto;
-      height: 90%; }
+      height: 90%;
+      font-size: 14px;
+      padding: 0 10px; }
     ba-emailinput inputarea > div {
       -webkit-box-flex: 0 0 auto;
       -moz-box-flex: 0 0 auto;

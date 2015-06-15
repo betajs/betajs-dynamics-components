@@ -237,6 +237,14 @@ item, ba-titlesetting {
   key {color: $settingsitem-keycolor}
 }
 
+ba-testtimesetting {
+
+  item {
+    @include flex(1 1 0);
+    @include display-flex;
+  }
+}
+
 $scrollelementheight: 30px;
 
 
@@ -291,6 +299,9 @@ ba-emailinput {
     input {
       @include flex-settings(1 1 auto);
       height: 90%;
+
+      font-size: 14px;
+      padding: 0 10px;
     }
 
     > div {
