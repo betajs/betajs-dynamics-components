@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.1 - 2015-06-15
+betajs-dynamics-components - v0.0.1 - 2015-06-16
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -264,8 +264,8 @@ item, ba-titlesetting {
 }
 $settingslistitemheight : 44px;
 
-ba-testtimesetting {
-  @include flex(0 0 $settingslistitemheight);
+ba-timesetting {
+  @include flex(0 0);
 
   item {
     @include flex(1 1 0);

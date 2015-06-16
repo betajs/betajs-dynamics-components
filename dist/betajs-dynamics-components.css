@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.1 - 2015-06-15
+betajs-dynamics-components - v0.0.1 - 2015-06-16
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -151,13 +151,13 @@ item, ba-titlesetting {
   item key, ba-titlesetting key {
     color: #999; }
 
-ba-testtimesetting {
-  -webkit-box-flex: 0 0 44px;
-  -moz-box-flex: 0 0 44px;
-  -webkit-flex: 0 0 44px;
-  -ms-flex: 0 0 44px;
-  flex: 0 0 44px; }
-  ba-testtimesetting item {
+ba-timesetting {
+  -webkit-box-flex: 0 0;
+  -moz-box-flex: 0 0;
+  -webkit-flex: 0 0;
+  -ms-flex: 0 0;
+  flex: 0 0; }
+  ba-timesetting item {
     -webkit-box-flex: 1 1 0;
     -moz-box-flex: 1 1 0;
     -webkit-flex: 1 1 0;
