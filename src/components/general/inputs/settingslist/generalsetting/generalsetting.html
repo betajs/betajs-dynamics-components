@@ -2,16 +2,19 @@
 
         <icon class="{{type_icon}}"></icon>
         <key>{{key_value}}</key>
-        <value>{{value_value}}</value>
+        <value>{{displayed_value}}</value>
         <icon class="icon-chevron-right"></icon>
 
 </item>
 
-<ba-{{widget}} ba-if="{{showwidget && !overlay}}">
+<ba-{{widget}}
+        ba-if="{{showwidget && !overlay}}"
+        ba-value="{{=value}}">
 </ba-{{widget}}>
 
 <ba-overlaycontainer
         ba-if="{{showwidget && overlay}}"
+        ba-value="{{=value}}"
         ba-showoverlay="{{=showwidget}}"
         ba-overlay="{{overlay}}">
 </ba-overlaycontainer>

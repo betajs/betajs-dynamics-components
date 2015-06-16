@@ -1,11 +1,9 @@
 
 window.components = new BetaJS.Collections.Collection({objects: [
     {name:'aa_template'},
-    {name:'testoverlaycontainer'},
-    {name:'testtimesetting'},
+    {name:'timesetting'},
     {name:'titlesetting'},
     {name:'generalsetting'},
-    {name:'numberscrollpicker'},
     {name:'scrollpicker'},
     {name:'timepicker'},
     {name:'emailinput'}

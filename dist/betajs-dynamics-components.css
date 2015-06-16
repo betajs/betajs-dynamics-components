@@ -37,6 +37,40 @@ ul {
   margin: 0;
   padding: 0; }
 
+ba-scrollpicker {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  overflow-y: scroll; }
+  ba-scrollpicker element {
+    -webkit-box-flex: 0 0 30px;
+    -moz-box-flex: 0 0 30px;
+    -webkit-flex: 0 0 30px;
+    -ms-flex: 0 0 30px;
+    flex: 0 0 30px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    color: #999;
+    background: #F4F4F4;
+    line-height: 30px;
+    display: block;
+    text-align: center; }
+  ba-scrollpicker .selected {
+    color: black; }
+
 overlaycontainer {
   position: absolute;
   top: 0;
@@ -117,51 +151,26 @@ item, ba-titlesetting {
   item key, ba-titlesetting key {
     color: #999; }
 
-ba-testtimesetting item {
-  -webkit-box-flex: 1 1 0;
-  -moz-box-flex: 1 1 0;
-  -webkit-flex: 1 1 0;
-  -ms-flex: 1 1 0;
-  flex: 1 1 0;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex; }
-
-ba-scrollpicker {
-  -webkit-box-flex: 1 1 0;
-  -moz-box-flex: 1 1 0;
-  -webkit-flex: 1 1 0;
-  -ms-flex: 1 1 0;
-  flex: 1 1 0;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  overflow-y: scroll; }
-  ba-scrollpicker element {
-    -webkit-box-flex: 0 0 30px;
-    -moz-box-flex: 0 0 30px;
-    -webkit-flex: 0 0 30px;
-    -ms-flex: 0 0 30px;
-    flex: 0 0 30px;
+ba-testtimesetting {
+  -webkit-box-flex: 0 0 44px;
+  -moz-box-flex: 0 0 44px;
+  -webkit-flex: 0 0 44px;
+  -ms-flex: 0 0 44px;
+  flex: 0 0 44px; }
+  ba-testtimesetting item {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
     display: -webkit-flex;
-    display: flex;
-    color: #999;
-    background: #F4F4F4;
-    line-height: 30px;
-    display: block;
-    text-align: center; }
-  ba-scrollpicker .selected {
-    color: black; }
+    display: flex; }
+
+ba-titlesetting input {
+  font-size: inherit; }
 
 ba-emailinput {
   display: -webkit-box;
@@ -253,87 +262,6 @@ ba-emailinput {
     z-index: 3;
     background: #E2E2E2; }
 
-ba-list {
-  flex: 1 1 0;
-  display: block; }
-  ba-list title {
-    display: block;
-    border-bottom: 1px solid black; }
-  ba-list list {
-    display: block;
-    flex-direction: column; }
-    ba-list list listitem {
-      display: block;
-      flex: 1 1 0; }
-  ba-list .selected {
-    background: grey; }
-
-ba-testcomponent {
-  padding: 10px;
-  border-bottom: 1px solid black; }
-
-ba-datepicker {
-  -webkit-box-flex: 1 1 0;
-  -moz-box-flex: 1 1 0;
-  -webkit-flex: 1 1 0;
-  -ms-flex: 1 1 0;
-  flex: 1 1 0;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  overflow: hidden; }
-  ba-datepicker numbers {
-    -webkit-box-flex: 1 1 0;
-    -moz-box-flex: 1 1 0;
-    -webkit-flex: 1 1 0;
-    -ms-flex: 1 1 0;
-    flex: 1 1 0;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    overflow-y: scroll; }
-    ba-datepicker numbers number {
-      -webkit-box-flex: 0 0 30px;
-      -moz-box-flex: 0 0 30px;
-      -webkit-flex: 0 0 30px;
-      -ms-flex: 0 0 30px;
-      flex: 0 0 30px;
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      color: #999;
-      background: #f4f4f4;
-      line-height: 30px; }
-      ba-datepicker numbers number p {
-        -webkit-box-flex: 3 0 0;
-        -moz-box-flex: 3 0 0;
-        -webkit-flex: 3 0 0;
-        -ms-flex: 3 0 0;
-        flex: 3 0 0;
-        display: block;
-        text-transform: capitalize;
-        text-align: left; }
-      ba-datepicker numbers number p:nth-child(2) {
-        text-align: center; }
-      ba-datepicker numbers number p:first-child {
-        -webkit-box-flex: 4 0 0;
-        -moz-box-flex: 4 0 0;
-        -webkit-flex: 4 0 0;
-        -ms-flex: 4 0 0;
-        flex: 4 0 0;
-        text-align: right; }
-  ba-datepicker .selected {
-    color: black; }
-
 ba-daypicker {
   -webkit-box-flex: 1 1 0;
   -moz-box-flex: 1 1 0;
@@ -363,40 +291,6 @@ ba-daypicker {
     border-bottom: 1px solid #ddd;
     line-height: 44px;
     padding-left: 22px; }
-
-ba-numberscrollpicker {
-  -webkit-box-flex: 1 1 0;
-  -moz-box-flex: 1 1 0;
-  -webkit-flex: 1 1 0;
-  -ms-flex: 1 1 0;
-  flex: 1 1 0;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  overflow-y: scroll; }
-  ba-numberscrollpicker number {
-    -webkit-box-flex: 0 0 30px;
-    -moz-box-flex: 0 0 30px;
-    -webkit-flex: 0 0 30px;
-    -ms-flex: 0 0 30px;
-    flex: 0 0 30px;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    color: #999;
-    background: #F4F4F4;
-    line-height: 30px;
-    display: block;
-    text-align: center; }
-  ba-numberscrollpicker .selected {
-    color: black; }
 
 ba-timepicker {
   position: absolute;
@@ -462,6 +356,21 @@ ba-timepicker {
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex; }
+
+ba-list {
+  flex: 1 1 0;
+  display: block; }
+  ba-list title {
+    display: block;
+    border-bottom: 1px solid black; }
+  ba-list list {
+    display: block;
+    flex-direction: column; }
+    ba-list list listitem {
+      display: block;
+      flex: 1 1 0; }
+  ba-list .selected {
+    background: grey; }
 
 ba-basicitem {
   display: block;

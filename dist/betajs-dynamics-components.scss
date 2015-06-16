@@ -166,6 +166,32 @@ ul {
 }
 
 
+$scrollelementheight: 30px;
+
+
+ba-scrollpicker {
+  @include flex(1 1 0);
+  @include display-flex;
+  @include flex-direction(column);
+  overflow-y: scroll;
+
+//  overflow: hidden;
+
+  element {
+    @include flex(0 0 $scrollelementheight);
+    @include display-flex;
+    color: $grey5;
+    background: #F4F4F4;
+
+    line-height: $scrollelementheight;
+    display: block;
+    text-align: center;
+  }
+
+  .selected {color: black}
+}
+
+
 overlaycontainer {
   position: absolute;
   top: 0;
@@ -236,41 +262,21 @@ item, ba-titlesetting {
   value{text-align: right}
   key {color: $settingsitem-keycolor}
 }
+$settingslistitemheight : 44px;
 
 ba-testtimesetting {
+  @include flex(0 0 $settingslistitemheight);
 
   item {
     @include flex(1 1 0);
     @include display-flex;
   }
 }
-
-$scrollelementheight: 30px;
-
-
-ba-scrollpicker {
-  @include flex(1 1 0);
-  @include display-flex;
-  @include flex-direction(column);
-  overflow-y: scroll;
-
-//  overflow: hidden;
-
-  element {
-    @include flex(0 0 $scrollelementheight);
-    @include display-flex;
-    color: $grey5;
-    background: #F4F4F4;
-
-    line-height: $scrollelementheight;
-    display: block;
-    text-align: center;
+ba-titlesetting {
+  input {
+    font-size: inherit;
   }
-
-  .selected {color: black}
 }
-
-
 
 ba-emailinput {
   @include display-flex;
@@ -332,79 +338,6 @@ ba-emailinput {
 }
 
 
-ba-list {
-  flex: 1 1 0;
-
-  display: block;
-
-  title {
-    display: block;
-    border-bottom: 1px solid black;
-  }
-
-  list {
-    display: block;
-    flex-direction: column;
-
-    listitem {
-        display: block;
-        flex: 1 1 0;
-    }
-  }
-  .selected {background: grey}
-}
-
-ba-testcomponent {
-
-  padding: 10px;
-
-  border-bottom: 1px solid black;
-
-}
-
-$numberscrollheight: 30px;
-
-ba-datepicker {
-  @include flex(1 1 0);
-  @include display-flex;
-
-  overflow: hidden;
-
-  numbers {
-    @include flex(1 1 0);
-    @include display-flex;
-    @include flex-direction(column);
-
-    overflow-y: scroll;
-
-    number {
-      @include flex(0 0 $numberscrollheight);
-      @include display-flex;
-      color: $grey5;
-      background: #f4f4f4;
-
-      line-height: $numberscrollheight;
-
-      p {
-        @include flex(3 0 0);
-        display: block;
-        text-transform:capitalize;
-        text-align: left;
-      }
-      p:nth-child(2) {
-        text-align: center;
-      }
-      p:first-child {
-        @include flex(4 0 0);
-        text-align: right;
-      }
-    }
-  }
-
-  .selected {color: black}
-}
-
-
 ba-daypicker {
   @include flex-settings(1 1 0);
   @include display-flex;
@@ -420,32 +353,6 @@ ba-daypicker {
     line-height: $listitemheight;
     padding-left: $listitemheight/2;
   }
-}
-
-
-$numbercsrollheight: 30px;
-
-
-ba-numberscrollpicker {
-  @include flex(1 1 0);
-  @include display-flex;
-  @include flex-direction(column);
-  overflow-y: scroll;
-
-//  overflow: hidden;
-
-  number {
-    @include flex(0 0 $numbercsrollheight);
-    @include display-flex;
-    color: $grey5;
-    background: #F4F4F4;
-
-    line-height: $numbercsrollheight;
-    display: block;
-    text-align: center;
-  }
-
-  .selected {color: black}
 }
 
 
@@ -490,6 +397,29 @@ ba-timepicker {
   }
 }
 
+
+
+ba-list {
+  flex: 1 1 0;
+
+  display: block;
+
+  title {
+    display: block;
+    border-bottom: 1px solid black;
+  }
+
+  list {
+    display: block;
+    flex-direction: column;
+
+    listitem {
+        display: block;
+        flex: 1 1 0;
+    }
+  }
+  .selected {background: grey}
+}
 ba-basicitem {
   display: block;
   padding: 0 10px;

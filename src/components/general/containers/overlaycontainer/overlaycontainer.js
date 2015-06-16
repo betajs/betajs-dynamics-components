@@ -7,6 +7,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Overlaycontai
 
         attrs : {
             overlay : "",
+            value : null,
             showoverlay : true
         }
 

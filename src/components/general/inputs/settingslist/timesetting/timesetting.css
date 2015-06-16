@@ -1,23 +1,21 @@
 /*
 Error: Undefined mixin 'flex'.
-        on line 6 of numberscrollpicker.scss, in `flex'
-        from line 6 of numberscrollpicker.scss
+        on line 4 of testtimesetting.scss, in `flex'
+        from line 4 of testtimesetting.scss
 
-1: 
-2: $numbercsrollheight: 30px;
-3: 
-4: 
-5: ba-numberscrollpicker {
-6:   @include flex(1 1 0);
-7:   @include display-flex;
-8:   @include flex-direction(column);
-9:   overflow-y: scroll;
-10: 
-11: //  overflow: hidden;
+1: $settingslistitemheight : 44px;
+2: 
+3: ba-testtimesetting {
+4:   @include flex(0 0 $settingslistitemheight);
+5: 
+6:   item {
+7:     @include flex(1 1 0);
+8:     @include display-flex;
+9:   }
 
 Backtrace:
-numberscrollpicker.scss:6:in `flex'
-numberscrollpicker.scss:6
+testtimesetting.scss:4:in `flex'
+testtimesetting.scss:4
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:338:in `block in visit_mixin'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/stack.rb:98:in `block in with_mixin'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/stack.rb:115:in `with_frame'
@@ -71,4 +69,4 @@ numberscrollpicker.scss:6
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined mixin 'flex'.\A         on line 6 of numberscrollpicker.scss, in `flex'\A         from line 6 of numberscrollpicker.scss\A \A 1: \A 2: $numbercsrollheight: 30px;\A 3: \A 4: \A 5: ba-numberscrollpicker {\A 6:   @include flex(1 1 0);\A 7:   @include display-flex;\A 8:   @include flex-direction(column);\A 9:   overflow-y: scroll;\A 10: \A 11: //  overflow: hidden;"; }
+  content: "Error: Undefined mixin 'flex'.\A         on line 4 of testtimesetting.scss, in `flex'\A         from line 4 of testtimesetting.scss\A \A 1: $settingslistitemheight : 44px;\A 2: \A 3: ba-testtimesetting {\A 4:   @include flex(0 0 $settingslistitemheight);\A 5: \A 6:   item {\A 7:     @include flex(1 1 0);\A 8:     @include display-flex;\A 9:   }"; }

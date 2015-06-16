@@ -6,11 +6,11 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Scrollpicker", {
     initial : {
 
         attrs : {
-            value : 5,
+            value : 22,
             first : 0,
             last : 23,
             increment : 1,
-            currentTop : true,
+            currentTop : false,
             value_array : []
         },
 
@@ -39,7 +39,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Scrollpicker", {
                 var inc = this.get('increment');
 
                 var value_array  = [];
-                for (var i = last ; i > first ; i -= inc) {
+                for (var i = last ; i >= first ; i -= inc) {
                     value_array.push(i);
                 }
                 this.set('value_array',value_array);

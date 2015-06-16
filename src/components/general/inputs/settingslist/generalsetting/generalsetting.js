@@ -6,15 +6,20 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Generalsetting", {
     initial : {
 
         attrs : {
+            value : null,
             key_value : "Duration",
             type_icon : "icon-time",
-            value_value : "Value",
+            displayed_value : "Value",
+
             showwidget : false,
             widget : "emailinput",
             overlay : null
         },
 
         create : function () {
+
+
+            this.set('')
 
         },
 

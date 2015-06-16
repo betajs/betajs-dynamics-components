@@ -1,0 +1,7 @@
+{
+"version": 3,
+"mappings": "AACE,qBAAM;EACJ,SAAS,EAAE,OAAO",
+"sources": ["titlesetting.scss"],
+"names": [],
+"file": "titlesetting.css"
+}

@@ -1,5 +1,7 @@
+$settingslistitemheight : 44px;
 
 ba-testtimesetting {
+  @include flex(0 0 $settingslistitemheight);
 
   item {
     @include flex(1 1 0);
