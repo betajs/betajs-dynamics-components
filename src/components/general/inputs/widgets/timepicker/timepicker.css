@@ -1,10 +1,10 @@
 /*
 Error: Undefined variable: "$grey1".
-        on line 9 of styles.scss
+        on line 9 of timepicker.scss
 
-4:   top: 0px;
-5:   bottom: 0px;
-6:   right: 0px;
+4:   top: 0;
+5:   bottom: 0;
+6:   right: 0;
 7:   width: 50%;
 8:   background: white;
 9:   border-left: 1px solid $grey1;
@@ -15,7 +15,7 @@ Error: Undefined variable: "$grey1".
 14: 
 
 Backtrace:
-styles.scss:9
+timepicker.scss:9
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/script/tree/variable.rb:49:in `_perform'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/script/tree/node.rb:50:in `perform'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/script/tree/list_literal.rb:62:in `block in _perform'
@@ -71,4 +71,4 @@ styles.scss:9
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined variable: \"$grey1\".\A         on line 9 of styles.scss\A \A 4:   top: 0px;\A 5:   bottom: 0px;\A 6:   right: 0px;\A 7:   width: 50%;\A 8:   background: white;\A 9:   border-left: 1px solid $grey1;\A 10:   overflow: hidden;\A 11: \A 12:   @include display-flex;\A 13:   @include flex-direction(column);\A 14: "; }
+  content: "Error: Undefined variable: \"$grey1\".\A         on line 9 of timepicker.scss\A \A 4:   top: 0;\A 5:   bottom: 0;\A 6:   right: 0;\A 7:   width: 50%;\A 8:   background: white;\A 9:   border-left: 1px solid $grey1;\A 10:   overflow: hidden;\A 11: \A 12:   @include display-flex;\A 13:   @include flex-direction(column);\A 14: "; }

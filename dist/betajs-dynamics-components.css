@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.1 - 2015-06-16
+betajs-dynamics-components - v0.0.1 - 2015-06-17
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -37,6 +37,19 @@ ul {
   margin: 0;
   padding: 0; }
 
+ba-selectableitem selectableitem {
+  display: block; }
+ba-selectableitem .selected {
+  background: lightgrey; }
+
+ba-list ba-listitem {
+  display: block; }
+
+ba-titledlist title {
+  display: block; }
+ba-titledlist ba-listitem {
+  display: block; }
+
 ba-scrollpicker {
   -webkit-box-flex: 1 1 0;
   -moz-box-flex: 1 1 0;
@@ -70,6 +83,21 @@ ba-scrollpicker {
     text-align: center; }
   ba-scrollpicker .selected {
     color: black; }
+
+ba-simplelist {
+  flex: 1 1 0;
+  display: block; }
+  ba-simplelist title {
+    display: block;
+    border-bottom: 1px solid black; }
+  ba-simplelist list {
+    display: block;
+    flex-direction: column; }
+    ba-simplelist list listitem {
+      display: block;
+      flex: 1 1 0; }
+  ba-simplelist .selected {
+    background: grey; }
 
 overlaycontainer {
   position: absolute;
@@ -294,9 +322,9 @@ ba-daypicker {
 
 ba-timepicker {
   position: absolute;
-  top: 0px;
-  bottom: 0px;
-  right: 0px;
+  top: 0;
+  bottom: 0;
+  right: 0;
   width: 50%;
   background: white;
   border-left: 1px solid #ddd;
@@ -320,7 +348,7 @@ ba-timepicker {
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex; }
-  ba-timepicker divider {
+  ba-timepicker timepicker-divider {
     -webkit-box-flex: 0 0 58.66667px;
     -moz-box-flex: 0 0 58.66667px;
     -webkit-flex: 0 0 58.66667px;
@@ -335,7 +363,7 @@ ba-timepicker {
     -ms-flex-direction: column;
     flex-direction: column;
     background: #ddd; }
-    ba-timepicker divider div {
+    ba-timepicker timepicker-divider div {
       -webkit-box-flex: 1 0 auto;
       -moz-box-flex: 1 0 auto;
       -webkit-flex: 1 0 auto;
@@ -343,7 +371,7 @@ ba-timepicker {
       flex: 1 0 auto;
       text-align: center;
       line-height: 29.33333px; }
-    ba-timepicker divider div:first-child {
+    ba-timepicker timepicker-divider div:first-child {
       border-bottom: 1px solid black; }
   ba-timepicker date {
     -webkit-box-flex: 1 1 0;
@@ -356,30 +384,6 @@ ba-timepicker {
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex; }
-
-ba-list {
-  flex: 1 1 0;
-  display: block; }
-  ba-list title {
-    display: block;
-    border-bottom: 1px solid black; }
-  ba-list list {
-    display: block;
-    flex-direction: column; }
-    ba-list list listitem {
-      display: block;
-      flex: 1 1 0; }
-  ba-list .selected {
-    background: grey; }
-
-ba-basicitem {
-  display: block;
-  padding: 0 10px; }
-
-ba-selectable selectable_item {
-  display: block; }
-ba-selectable .highlight_selected {
-  background: lightgrey; }
 
 ba-components {
   overflow: scroll; }
@@ -417,7 +421,7 @@ ba-controls {
       -webkit-flex-direction: column;
       -ms-flex-direction: column;
       flex-direction: column; }
-    ba-controls controls ba-list {
+    ba-controls controls ba-simplelist {
       border: 1px solid grey; }
 
 ba-layout {

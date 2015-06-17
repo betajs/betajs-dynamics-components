@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.1 - 2015-06-16
+betajs-dynamics-components - v0.0.1 - 2015-06-17
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -165,6 +165,27 @@ ul {
   padding: 0;
 }
 
+ba-selectableitem {
+
+  selectableitem {
+    display: block;
+  }
+
+  .selected {
+    background: lightgrey;
+  }
+}
+
+ba-list {
+
+  ba-listitem {display: block}
+}
+
+ba-titledlist {
+
+  title {display: block}
+  ba-listitem {display: block}
+}
 
 $scrollelementheight: 30px;
 
@@ -191,6 +212,28 @@ ba-scrollpicker {
   .selected {color: black}
 }
 
+
+ba-simplelist {
+  flex: 1 1 0;
+
+  display: block;
+
+  title {
+    display: block;
+    border-bottom: 1px solid black;
+  }
+
+  list {
+    display: block;
+    flex-direction: column;
+
+    listitem {
+        display: block;
+        flex: 1 1 0;
+    }
+  }
+  .selected {background: grey}
+}
 
 overlaycontainer {
   position: absolute;
@@ -358,9 +401,9 @@ ba-daypicker {
 
 ba-timepicker {
   position: absolute;
-  top: 0px;
-  bottom: 0px;
-  right: 0px;
+  top: 0;
+  bottom: 0;
+  right: 0;
   width: 50%;
   background: white;
   border-left: 1px solid $grey1;
@@ -375,7 +418,7 @@ ba-timepicker {
   }
 
 
-  divider {
+  timepicker-divider {
     @include flex(0 0 $listitemheight*4/3);
     @include display-flex;
     @include flex-direction(column);
@@ -399,42 +442,6 @@ ba-timepicker {
 
 
 
-ba-list {
-  flex: 1 1 0;
-
-  display: block;
-
-  title {
-    display: block;
-    border-bottom: 1px solid black;
-  }
-
-  list {
-    display: block;
-    flex-direction: column;
-
-    listitem {
-        display: block;
-        flex: 1 1 0;
-    }
-  }
-  .selected {background: grey}
-}
-ba-basicitem {
-  display: block;
-  padding: 0 10px;
-}
-ba-selectable {
-
-  selectable_item {
-    display: block;
-  }
-
-  .highlight_selected {
-    background: lightgrey;
-  }
-}
-
 ba-components {
   overflow: scroll;
 }
@@ -454,7 +461,7 @@ ba-controls {
 
     >* {@include flex(1 1 0)}
     ba-layout {@include flex-direction(column)}
-    ba-list {border: 1px solid grey}
+    ba-simplelist {border: 1px solid grey}
   }
 
 }

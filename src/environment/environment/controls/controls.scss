@@ -14,7 +14,7 @@ ba-controls {
 
     >* {@include flex(1 1 0)}
     ba-layout {@include flex-direction(column)}
-    ba-list {border: 1px solid grey}
+    ba-simplelist {border: 1px solid grey}
   }
 
 }

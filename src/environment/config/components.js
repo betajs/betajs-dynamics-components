@@ -1,12 +1,14 @@
 
 window.components = new BetaJS.Collections.Collection({objects: [
     {name:'aa_template'},
+    {name:'list'},
+    {name:'titledlist'},
+    {name:'searchlist'},
+    {name:'simplelist'},
     {name:'timesetting'},
-    {name:'titlesetting'},
     {name:'generalsetting'},
     {name:'scrollpicker'},
     {name:'timepicker'},
-    {name:'emailinput'}
 ]});
 
 window.componentsByName = function (name) {

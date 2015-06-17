@@ -1,16 +1,16 @@
-ba-list {
+ba-simplelist {
   flex: 1 1 0;
   display: block; }
-  ba-list title {
+  ba-simplelist title {
     display: block;
     border-bottom: 1px solid black; }
-  ba-list list {
+  ba-simplelist list {
     display: block;
     flex-direction: column; }
-    ba-list list listitem {
+    ba-simplelist list listitem {
       display: block;
       flex: 1 1 0; }
-  ba-list .selected {
+  ba-simplelist .selected {
     background: grey; }
 
-/*# sourceMappingURL=list.css.map */
+/*# sourceMappingURL=simplelist.css.map */

@@ -1,9 +1,9 @@
 
 ba-timepicker {
   position: absolute;
-  top: 0px;
-  bottom: 0px;
-  right: 0px;
+  top: 0;
+  bottom: 0;
+  right: 0;
   width: 50%;
   background: white;
   border-left: 1px solid $grey1;
@@ -18,7 +18,7 @@ ba-timepicker {
   }
 
 
-  divider {
+  timepicker-divider {
     @include flex(0 0 $listitemheight*4/3);
     @include display-flex;
     @include flex-direction(column);

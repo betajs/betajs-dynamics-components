@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.1 - 2015-06-16
+betajs-dynamics-components - v0.0.1 - 2015-06-17
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -17,13 +17,21 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '8.1434428465798'
+		version: '9.1434558790806'
 	};
 });
 
 BetaJS.Dynamics.Dynamic.Components = {};
 BetaJS.Dynamics.Dynamic.Components.Templates = BetaJS.Dynamics.Dynamic.Components.Templates || {};
+BetaJS.Dynamics.Dynamic.Components.Templates['selectableitem'] = ' <selectableitem         ba-class="{{{selected : selected == value}}}"         ba-click="select(value)">     {{value.name}} </selectableitem>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['list'] = ' <div ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{listitem}} ba-value="{{collectionitem}}">         {{collectionitem.name}}     </ba-{{listitem}}>   </div>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['titledlist'] = '<title ba-click="showlist = !showlist">{{title}}</title>  <div ba-if="{{showlist}}" ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{listitem}} ba-value="{{collectionitem}}">         {{collectionitem.name}}     </ba-{{listitem}}>  </div>';
+
 BetaJS.Dynamics.Dynamic.Components.Templates['scrollpicker'] = '<element ba-repeat-element="{{element_value :: value_array}}" data-id="{{element_value}}">         {{element_value}} </element>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['simplelist'] = ' <title ba-if="{{title}}">{{title}}</title>  <list ba-repeat="{{listitem :: listcollection}}">      <listitem             ba-class="{{{\'selected\' : listitem == currentitem}}}"             ba-click="select_item(listitem)">         {{listitem.name}}     </listitem>  </list>  ';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['overlaycontainer'] = '<overlaycontainer     ba-click="showoverlay = false"     ba-if="{{showoverlay}}">      <overlayinner>          <ba-{{overlay}} ba-value=\'{{=value}}\'>             <message>This is an overlay</message>         </ba-{{overlay}}>      </overlayinner>  </overlaycontainer>';
 
@@ -39,21 +47,15 @@ BetaJS.Dynamics.Dynamic.Components.Templates['emailinput'] = ' <inputarea onkeyd
 
 BetaJS.Dynamics.Dynamic.Components.Templates['daypicker'] = '<div>Today</div> <div>Tomorrow</div> <div>Weekend</div> <div>Next Week</div> <div>Someday</div> <div>Pick Date</div>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['timepicker'] = ' <time>      <ba-scrollpicker             ba-currentTop="{{false}}"             ba-value="{{=timevalue.hour}}">     </ba-scrollpicker>      <ba-scrollpicker             ba-currentTop="{{false}}"             ba-value="{{=timevalue.minute}}"             ba-increment="{{5}}"             ba-last="{{55}}">     </ba-scrollpicker>  </time>  <divider>      <div>Time</div>      <div>Date</div>  </divider>  <date>      <ba-datepicker>     </ba-datepicker>  </date> ';
+BetaJS.Dynamics.Dynamic.Components.Templates['timepicker'] = ' <time>      <ba-scrollpicker             ba-currentTop="{{false}}"             ba-value="{{=timevalue.hour}}">     </ba-scrollpicker>      <ba-scrollpicker             ba-currentTop="{{false}}"             ba-value="{{=timevalue.minute}}"             ba-increment="{{5}}"             ba-last="{{55}}">     </ba-scrollpicker>  </time>  <timepicker-divider>      <div>Time</div>      <div>Date</div>  </timepicker-divider>  <date>      <ba-datepicker>     </ba-datepicker>  </date> ';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['template'] = '<div>     {{placeholder}} </div>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['list'] = ' <title ba-if="{{title}}">{{title}}</title>  <list ba-repeat="{{listitem :: listcollection}}">      <listitem             ba-class="{{{\'selected\' : listitem == currentitem}}}"             ba-click="select_item(listitem)">         {{listitem.name}}     </listitem>  </list>  ';
-
-BetaJS.Dynamics.Dynamic.Components.Templates['itemlist'] = ' <div ba-repeat="{{collectionitem :: listcollection}}">     <div>     <ba-{{itemtype}} ba-data="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{itemtype}}>      </div> </div>';
-
-BetaJS.Dynamics.Dynamic.Components.Templates['selectable'] = ' <selectable_item         ba-class="{{{highlight_selected : highlight_element}}}"         ba-click="select(data)">     {{data.title}} </selectable_item>';
-
-BetaJS.Dynamics.Dynamic.Components.Templates['components'] = '<ba-list         ba-title="Components"         ba-currentitem="{{=current_component}}"         ba-listcollection="{{components}}"></ba-list> ';
+BetaJS.Dynamics.Dynamic.Components.Templates['components'] = '<ba-simplelist         ba-title="Components"         ba-currentitem="{{=current_component}}"         ba-listcollection="{{components}}"></ba-simplelist> ';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['controls'] = ' <h4>Controls </h4>  <controls>      <ba-layout></ba-layout>      <ba-components></ba-components>  </controls>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['layout'] = ' <ba-list         ba-title="System"         ba-currentitem="{{=current_system}}"         ba-listcollection="{{systems}}"></ba-list>  <ba-list ba-title="Device"          ba-currentitem="{{=current_device}}"          ba-listcollection="{{current_system.devices}}"></ba-list> ';
+BetaJS.Dynamics.Dynamic.Components.Templates['layout'] = ' <ba-simplelist         ba-title="System"         ba-currentitem="{{=current_system}}"         ba-listcollection="{{systems}}"></ba-simplelist>  <ba-titledlist ba-title="Device"          ba-selected_item="{{=current_device}}"          ba-listcollection="{{current_system.devices}}"></ba-titledlist> ';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['environment'] = ' <ba-controls></ba-controls>  <ba-simulator></ba-simulator> ';
 
@@ -64,12 +66,14 @@ BetaJS.Dynamics.Dynamic.Components.Templates['index'] = '<!DOCTYPE html> <html> 
 
 window.components = new BetaJS.Collections.Collection({objects: [
     {name:'aa_template'},
+    {name:'list'},
+    {name:'titledlist'},
+    {name:'searchlist'},
+    {name:'simplelist'},
     {name:'timesetting'},
-    {name:'titlesetting'},
     {name:'generalsetting'},
     {name:'scrollpicker'},
     {name:'timepicker'},
-    {name:'emailinput'}
 ]});
 
 window.componentsByName = function (name) {
@@ -79,6 +83,115 @@ window.componentsByName = function (name) {
             return comp.getByIndex(i);
     return null;
 };
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.selectableitem,
+
+    initial: {
+
+        bind : {
+            selected : "<:selected_item",
+            parentlistcollection : "<:listcollection"
+        },
+
+        attrs: {
+            selected: false,
+            value: {
+                name :'Data Placeholder',
+                selected : false
+            }
+        },
+
+        create : function () {
+
+            console.log("Selected Item : !!! :");
+            console.log(this.parent());
+            console.log(this.parent().get('selected_item'));
+            console.log(this.get('selected'));
+
+            var index = this.get('parentlistcollection').getIndex(this.get('value'));
+            if (index == 0 && !this.parent().get('selected_item'))
+                this.parent().set('selected_item',this.get('value'));
+
+            console.log("Index : " + index);
+            console.log(this.get('value'));
+
+        },
+
+        functions : {
+            select : function (data) {
+                this.parent().set('selected_item',this.get('value'));
+                console.log('Set new');
+                console.log(this.get('value'));
+                console.log(this.parent().get('selected_item'));
+                console.log(this.get('selected'));
+                //this.set('selected',!this.get('selected'));
+            }
+        }
+
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.list,
+
+    initial: {
+
+        attrs: {
+            listitem : "selectableitem"
+        },
+
+        collections : {
+            listcollection : [
+                {name: "Item 1"},
+                {name: "Item 2"},
+                {name: "Item 3"}
+            ]
+        },
+
+        create : function () {
+
+        }
+
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.titledlist,
+
+    initial: {
+
+        attrs: {
+            showlist : true,
+            title : "Title",
+            listitem : "selectableitem"
+        },
+
+        collections : {
+            listcollection : [
+                {name: "Item 1"},
+                {name: "Item 2"},
+                {name: "Item 3"}
+            ]
+        },
+
+        create : function () {
+            console.log("List : !!! : ");
+            console.log(this.get('selected_item'));
+
+        }
+
+    }
+
+}).register();
 
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Scrollpicker", {
@@ -165,6 +278,53 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Scrollpicker", {
                 "background" : "white"
             });
         });
+
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.SimpleList", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.simplelist,
+
+    initial: {
+
+        attrs : {
+            title: null,
+            initial_item: 0
+        },
+
+        collections : {
+            listcollection : [
+                {
+                    name:'Item 1'
+                },{
+                    name:'Item 2'
+                }
+            ]
+        },
+
+        create : function () {
+
+            console.log( this.get('title') + ' List Loaded');
+
+            if (!this.get("currentitem")) {
+                console.log(this.get('listcollection'));
+                this.set('currentitem', this.get('listcollection').getByIndex(0));
+            }
+
+            this.on("change:listcollection", function () {
+                this.set('currentitem', this.get('listcollection').getByIndex(0));
+            }, this);
+        },
+
+        functions : {
+            select_item : function (system) {
+                if (system != this.get('currentitem'))
+                    this.set('currentitem',system);
+            }
+        }
 
     }
 
@@ -410,106 +570,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Aa_template", {
 
         create : function () {
             console.log('Dynamic Loaded');
-        }
-
-    }
-
-}).register();
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
-
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.list,
-
-    initial: {
-
-        attrs : {
-            title: null
-        },
-
-        collections : {
-            listcollection : [
-                {
-                    name:'Item 1'
-                },{
-                    name:'Item 2'
-                }
-            ]
-        },
-
-        create : function () {
-
-            console.log( this.get('title') + ' List Loaded');
-
-            if (!this.get("currentitem")) {
-                console.log(this.get('listcollection'));
-                this.set('currentitem', this.get('listcollection').getByIndex(0));
-            }
-
-            this.on("change:listcollection", function () {
-                this.set('currentitem', this.get('listcollection').getByIndex(0));
-            }, this);
-        },
-
-        functions : {
-            select_item : function (system) {
-                if (system != this.get('currentitem'))
-                    this.set('currentitem',system);
-            }
-        }
-
-    }
-
-}).register();
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List2", {
-
-    templateUrl: "component/%.html",
-
-    initial: {
-
-        attrs: {
-            itemtype : "basicitem"
-        },
-
-        collections : {
-            listcollection : [
-                {title: "Item 1"}, {title: "Item 2"},{title:  "Item 3"}]
-        },
-
-        create : function () {
-
-
-        }
-
-    }
-
-}).register();
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectable", {
-
-    templateUrl: "component/subcomponents/%/%.html",
-
-    initial: {
-
-        attrs: {
-            data: {
-                title :'Data Placeholder',
-                highlight_element : false
-            }
-        },
-
-        create : function () {
-
-
-        },
-
-        functions : {
-            select : function (data) {
-                this.set('highlight_element',!this.get('highlight_element'));
-            }
         }
 
     }

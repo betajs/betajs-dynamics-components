@@ -1,12 +1,13 @@
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.SimpleList", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.list,
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.simplelist,
 
     initial: {
 
         attrs : {
-            title: null
+            title: null,
+            initial_item: 0
         },
 
         collections : {
