@@ -11,7 +11,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
         },
 
         attrs: {
-            selected: false,
+            //selected: false,
             value: {
                 name :'Data Placeholder',
                 selected : false

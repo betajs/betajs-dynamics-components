@@ -555,12 +555,14 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '9.1434558790806'
+		version: '10.1434559833226'
 	};
 });
 
 BetaJS.Dynamics.Dynamic.Components = {};
 BetaJS.Dynamics.Dynamic.Components.Templates = BetaJS.Dynamics.Dynamic.Components.Templates || {};
+BetaJS.Dynamics.Dynamic.Components.Templates['template'] = '<div>     {{placeholder}} </div>';
+
 BetaJS.Dynamics.Dynamic.Components.Templates['selectableitem'] = ' <selectableitem         ba-class="{{{selected : selected == value}}}"         ba-click="select(value)">     {{value.name}} </selectableitem>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['list'] = ' <div ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{listitem}} ba-value="{{collectionitem}}">         {{collectionitem.name}}     </ba-{{listitem}}>   </div>';
@@ -586,8 +588,6 @@ BetaJS.Dynamics.Dynamic.Components.Templates['emailinput'] = ' <inputarea onkeyd
 BetaJS.Dynamics.Dynamic.Components.Templates['daypicker'] = '<div>Today</div> <div>Tomorrow</div> <div>Weekend</div> <div>Next Week</div> <div>Someday</div> <div>Pick Date</div>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['timepicker'] = ' <time>      <ba-scrollpicker             ba-currentTop="{{false}}"             ba-value="{{=timevalue.hour}}">     </ba-scrollpicker>      <ba-scrollpicker             ba-currentTop="{{false}}"             ba-value="{{=timevalue.minute}}"             ba-increment="{{5}}"             ba-last="{{55}}">     </ba-scrollpicker>  </time>  <timepicker-divider>      <div>Time</div>      <div>Date</div>  </timepicker-divider>  <date>      <ba-datepicker>     </ba-datepicker>  </date> ';
-
-BetaJS.Dynamics.Dynamic.Components.Templates['template'] = '<div>     {{placeholder}} </div>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['components'] = '<ba-simplelist         ba-title="Components"         ba-currentitem="{{=current_component}}"         ba-listcollection="{{components}}"></ba-simplelist> ';
 
@@ -623,6 +623,25 @@ window.componentsByName = function (name) {
 };
 
 
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Aa_template", {
+
+    templateUrl: "../components/unsorted/aa_template/template.html",
+
+    initial: {
+
+        attrs: {
+            placeholder: 'This is a demo template'
+        },
+
+        create : function () {
+            console.log('Dynamic Loaded');
+        }
+
+    }
+
+}).register();
+
+
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
 
     template: BetaJS.Dynamics.Dynamic.Components.Templates.selectableitem,
@@ -635,7 +654,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
         },
 
         attrs: {
-            selected: false,
+            //selected: false,
             value: {
                 name :'Data Placeholder',
                 selected : false
@@ -1094,25 +1113,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Timepicker", {
 
 }).register();
 
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Aa_template", {
-
-    templateUrl: "../components/unsorted/aa_template/template.html",
-
-    initial: {
-
-        attrs: {
-            placeholder: 'This is a demo template'
-        },
-
-        create : function () {
-            console.log('Dynamic Loaded');
-        }
-
-    }
-
-}).register();
 
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Components", {
