@@ -357,6 +357,11 @@ ba-timepicker {
     display: -webkit-flex;
     display: flex; }
 
+ba-emaillist {
+  overflow-y: scroll; }
+  ba-emaillist ba-listitem {
+    display: block; }
+
 ba-tasklist {
   overflow-y: scroll; }
   ba-tasklist ba-listitem {

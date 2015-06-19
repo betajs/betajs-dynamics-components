@@ -17,7 +17,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '11.1434742117931'
+		version: '13.1434744124518'
 	};
 });
 
@@ -41,6 +41,8 @@ BetaJS.Dynamics.Dynamic.Components.Templates['daypicker'] = '<div>Today</div> <d
 
 BetaJS.Dynamics.Dynamic.Components.Templates['timepicker'] = ' <time>      <ba-scrollpicker             ba-currentTop="{{false}}"             ba-value="{{=timevalue.hour}}">     </ba-scrollpicker>      <ba-scrollpicker             ba-currentTop="{{false}}"             ba-value="{{=timevalue.minute}}"             ba-increment="{{5}}"             ba-last="{{55}}">     </ba-scrollpicker>  </time>  <timepicker-divider>      <div>Time</div>      <div>Date</div>  </timepicker-divider>  <date>      <ba-datepicker>     </ba-datepicker>  </date> ';
 
+BetaJS.Dynamics.Dynamic.Components.Templates['emaillist'] = ' <ba-searchlist         ba-listcollection="{{emailcollection}}"         ba-listitem="swipeitem">  </ba-searchlist>';
+
 BetaJS.Dynamics.Dynamic.Components.Templates['tasklist'] = ' <ba-list         ba-listcollection="{{outer_collection}}"         ba-listitem="titledlist">  </ba-list>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['swipeitem'] = ' <behind>     <icon class=\'{{lefticon}}\'></icon>     <div></div>     <icon class=\'{{righticon}}\'></icon> </behind>  <swipe>      <ba-{{type}}         class=\'{{itemclass}}\'         ba-model=\'{{model}}\'>         {{title}}     </ba-{{type}}>      <swipeleft>         <div></div>         <icon class=\'{{lefticon}}\'></icon>     </swipeleft>      <swiperight>         <icon class=\'{{righticon}}\'></icon>         <div></div>     </swiperight>  </swipe> ';
@@ -61,7 +63,7 @@ BetaJS.Dynamics.Dynamic.Components.Templates['selectableitem'] = ' <selectableit
 
 BetaJS.Dynamics.Dynamic.Components.Templates['list'] = ' <list ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{listitem}}         ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{listitem}}>  </list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['searchlist'] = '<searchbox>     <icon class="icon-search"></icon>     <input placeholder="{{placeholder}}" value="{{=searchvalue}}"> </searchbox> <ba-list         ba-listitem="{{listitem}}"         ba-listollection="{{listcollection}}">  </ba-list>';
+BetaJS.Dynamics.Dynamic.Components.Templates['searchlist'] = '<searchbox>     <icon class="icon-search"></icon>     <input placeholder="{{placeholder}}" value="{{=searchvalue}}"> </searchbox> <ba-list         ba-listitem="{{listitem}}"         ba-listcollection="{{listcollection}}">  </ba-list>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['titledlist'] = '<title ba-click="collapsed = !collapsed">{{title}}</title>  <listrepeat ba-if="{{!collapsed && collapsible}}" ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{type}} ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{type}}>  </listrepeat>';
 
@@ -81,7 +83,7 @@ BetaJS.Dynamics.Dynamic.Components.Templates['index'] = '<!DOCTYPE html> <html> 
 
 
 window.components = new BetaJS.Collections.Collection({objects: [
-    {title:'searchlist'},
+    {title:'emaillist'},
     {title:'tasklist'},
     {title:'aa_template'},
     {title:'emailitem'},
@@ -473,6 +475,57 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Timepicker", {
 
 
 
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Emaillist", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.emaillist,
+
+    initial: {
+
+        collections : {
+            emailcollection : [
+                {
+                    type : "emailitem",
+                    sender_salutatory_display : "Sender",
+                    recipient_salutatory_display : "Recipient",
+                    subject : "Subject",
+                    preview : "First Line...",
+                    time : "18:30"
+                },
+                {
+                    type : "emailitem",
+                    sender_salutatory_display : "V@g.com",
+                    recipient_salutatory_display : "O@g.com",
+                    subject : "Email Subject",
+                    preview : "Hello O,",
+                    time : "11:55"
+                }
+            ]
+        },
+
+        create : function () {
+            //var outer_n = 10;
+            //var inner_n = 10;
+            //var outer_collection = new BetaJS.Collections.Collection();
+            //for (var outer_index = 0; outer_index < outer_n; ++outer_index) {
+            //    var outer_properties = new BetaJS.Properties.Properties();
+            //    outer_collection.add(outer_properties);
+            //    outer_properties.set("title", "Group " + outer_index);
+            //    var inner_collection = new BetaJS.Collections.Collection();
+            //    outer_properties.set("listcollection", inner_collection);
+            //    for (var inner_index = 0; inner_index < inner_n; ++inner_index) {
+            //        var inner_properties = new BetaJS.Properties.Properties();
+            //        inner_collection.add(inner_properties);
+            //        inner_properties.set("title", "Item " + outer_index + ", " + inner_index);
+            //    }
+            //}
+            //this.set("outer_collection", outer_collection);
+        }
+
+    }
+
+}).register();
+
+
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Tasklist", {
 
     template: BetaJS.Dynamics.Dynamic.Components.Templates.tasklist,
@@ -549,7 +602,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Swipeitem", {
 	initial: {
 
 		attrs : {
-			type : "emailitem",
+			type : "clickitem",
 			title : "Swipeitem",
 			lefticon : 'icon-ok',
 			righticon : 'icon-time',
@@ -582,6 +635,8 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Swipeitem", {
 		},
 
 		create : function () {
+			console.log("Swipeitem 1 : ");
+			console.log(this.get('model'));
 
 			if (this.get("model")) {
 				BetaJS.Objs.iter(this.get("model").data(), function (modelValue, attrKey) {
@@ -591,6 +646,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Swipeitem", {
 					this.properties().bind(attrKey, this.get("model"));
 				}, this);
 			}
+
+			console.log("Swipeitem 2 : ");
+			console.log(this.get('model'));
 		},
 
 		functions : {
@@ -739,6 +797,17 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Emailitem", {
             subject : "Subject",
             preview : "First Line...",
             time : "18:30"
+        },
+
+        create : function () {
+            if (this.get("model")) {
+                BetaJS.Objs.iter(this.get("model").data(), function (modelValue, attrKey) {
+                    var attrValue = this.isArgumentAttr(attrKey) ? this.get(attrKey) : modelValue;
+                    this.set(attrKey, attrValue);
+                    this.get("model").set(attrKey, attrValue);
+                    this.properties().bind(attrKey, this.get("model"));
+                }, this);
+            }
         }
     }
 
@@ -908,7 +977,14 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
         },
 
         create : function () {
-
+            if (this.get("model")) {
+                BetaJS.Objs.iter(this.get("model").data(), function (modelValue, attrKey) {
+                    var attrValue = this.isArgumentAttr(attrKey) ? this.get(attrKey) : modelValue;
+                    this.set(attrKey, attrValue);
+                    this.get("model").set(attrKey, attrValue);
+                    this.properties().bind(attrKey, this.get("model"));
+                }, this);
+            }
         }
 
     }
@@ -925,7 +1001,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Searchlist", {
         attrs: {
             placeholder : "Search for",
             searchvalue : "",
-            listitem : "emailitem"
+            listitem : "clickitem"
         },
 
         collections : {
@@ -937,7 +1013,14 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Searchlist", {
         },
 
         create : function () {
-
+            if (this.get("model")) {
+                BetaJS.Objs.iter(this.get("model").data(), function (modelValue, attrKey) {
+                    var attrValue = this.isArgumentAttr(attrKey) ? this.get(attrKey) : modelValue;
+                    this.set(attrKey, attrValue);
+                    this.get("model").set(attrKey, attrValue);
+                    this.properties().bind(attrKey, this.get("model"));
+                }, this);
+            }
         }
 
     }

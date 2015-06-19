@@ -1,6 +1,6 @@
 
 window.components = new BetaJS.Collections.Collection({objects: [
-    {title:'searchlist'},
+    {title:'emaillist'},
     {title:'tasklist'},
     {title:'aa_template'},
     {title:'emailitem'},

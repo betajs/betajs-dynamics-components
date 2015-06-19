@@ -6,7 +6,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Swipeitem", {
 	initial: {
 
 		attrs : {
-			type : "emailitem",
+			type : "clickitem",
 			title : "Swipeitem",
 			lefticon : 'icon-ok',
 			righticon : 'icon-time',
@@ -39,6 +39,8 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Swipeitem", {
 		},
 
 		create : function () {
+			console.log("Swipeitem 1 : ");
+			console.log(this.get('model'));
 
 			if (this.get("model")) {
 				BetaJS.Objs.iter(this.get("model").data(), function (modelValue, attrKey) {
@@ -48,6 +50,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Swipeitem", {
 					this.properties().bind(attrKey, this.get("model"));
 				}, this);
 			}
+
+			console.log("Swipeitem 2 : ");
+			console.log(this.get('model'));
 		},
 
 		functions : {
