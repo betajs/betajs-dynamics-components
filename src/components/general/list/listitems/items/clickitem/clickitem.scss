@@ -1,0 +1,15 @@
+
+$clickitemheigth : 44px;
+
+ba-clickitem {
+  background: white;
+  border-bottom: 1px solid grey;
+
+  clickitem {
+    padding: 0 $clickitemheigth/2;
+    height: $clickitemheigth;
+    line-height: $clickitemheigth;
+    display: block;
+  }
+
+}

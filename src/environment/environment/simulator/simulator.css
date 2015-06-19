@@ -9,11 +9,11 @@ Error: Undefined mixin 'display-flex'.
 4:   appframe {
 5:     position: relative;
 6:     @include display-flex;
-7:   }
-8: 
-9:   //System
-10:   .mobile {
-11:     margin: 10px;
+7:     overflow: hidden;
+8:   }
+9: 
+10:   //System
+11:   .mobile {
 
 Backtrace:
 simulator.scss:6:in `display-flex'
@@ -82,4 +82,4 @@ simulator.scss:6
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined mixin 'display-flex'.\A         on line 6 of simulator.scss, in `display-flex'\A         from line 6 of simulator.scss\A \A 1: \A 2: ba-simulator {\A 3: \A 4:   appframe {\A 5:     position: relative;\A 6:     @include display-flex;\A 7:   }\A 8: \A 9:   //System\A 10:   .mobile {\A 11:     margin: 10px;"; }
+  content: "Error: Undefined mixin 'display-flex'.\A         on line 6 of simulator.scss, in `display-flex'\A         from line 6 of simulator.scss\A \A 1: \A 2: ba-simulator {\A 3: \A 4:   appframe {\A 5:     position: relative;\A 6:     @include display-flex;\A 7:     overflow: hidden;\A 8:   }\A 9: \A 10:   //System\A 11:   .mobile {"; }

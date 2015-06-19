@@ -8,15 +8,15 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Layout", {
         collections : {
             systems : [
                 {
-                    name:'mobile',
+                    title:'mobile',
                     devices: new BetaJS.Collections.Collection({objects: [
-                        {name: 'iphone4'},
-                        {name: 'iphone5'}
+                        {title: 'iphone4'},
+                        {title: 'iphone5'}
                     ]})
                 },{
-                    name:'web',
+                    title:'web',
                     devices: new BetaJS.Collections.Collection({objects: [
-                        {name: 'notebook'}
+                        {title: 'notebook'}
                     ]})
                 }
             ]
@@ -27,10 +27,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Layout", {
 
             this.set('current_system', this.get('systems').getByIndex(0));
             this.set('current_device', this.get('current_system').get('devices').getByIndex(0));
-        },
-
-        functions : {
-
         }
 
     }

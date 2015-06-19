@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.1 - 2015-06-17
+betajs-dynamics-components - v0.0.1 - 2015-06-19
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -537,7 +537,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.0.1 - 2015-06-17
+betajs-dynamics-components - v0.0.1 - 2015-06-19
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -555,21 +555,13 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '9.1434558790806'
+		version: '10.1434581718248'
 	};
 });
 
 BetaJS.Dynamics.Dynamic.Components = {};
 BetaJS.Dynamics.Dynamic.Components.Templates = BetaJS.Dynamics.Dynamic.Components.Templates || {};
-BetaJS.Dynamics.Dynamic.Components.Templates['selectableitem'] = ' <selectableitem         ba-class="{{{selected : selected == value}}}"         ba-click="select(value)">     {{value.name}} </selectableitem>';
-
-BetaJS.Dynamics.Dynamic.Components.Templates['list'] = ' <div ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{listitem}} ba-value="{{collectionitem}}">         {{collectionitem.name}}     </ba-{{listitem}}>   </div>';
-
-BetaJS.Dynamics.Dynamic.Components.Templates['titledlist'] = '<title ba-click="showlist = !showlist">{{title}}</title>  <div ba-if="{{showlist}}" ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{listitem}} ba-value="{{collectionitem}}">         {{collectionitem.name}}     </ba-{{listitem}}>  </div>';
-
 BetaJS.Dynamics.Dynamic.Components.Templates['scrollpicker'] = '<element ba-repeat-element="{{element_value :: value_array}}" data-id="{{element_value}}">         {{element_value}} </element>';
-
-BetaJS.Dynamics.Dynamic.Components.Templates['simplelist'] = ' <title ba-if="{{title}}">{{title}}</title>  <list ba-repeat="{{listitem :: listcollection}}">      <listitem             ba-class="{{{\'selected\' : listitem == currentitem}}}"             ba-click="select_item(listitem)">         {{listitem.name}}     </listitem>  </list>  ';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['overlaycontainer'] = '<overlaycontainer     ba-click="showoverlay = false"     ba-if="{{showoverlay}}">      <overlayinner>          <ba-{{overlay}} ba-value=\'{{=value}}\'>             <message>This is an overlay</message>         </ba-{{overlay}}>      </overlayinner>  </overlaycontainer>';
 
@@ -587,149 +579,68 @@ BetaJS.Dynamics.Dynamic.Components.Templates['daypicker'] = '<div>Today</div> <d
 
 BetaJS.Dynamics.Dynamic.Components.Templates['timepicker'] = ' <time>      <ba-scrollpicker             ba-currentTop="{{false}}"             ba-value="{{=timevalue.hour}}">     </ba-scrollpicker>      <ba-scrollpicker             ba-currentTop="{{false}}"             ba-value="{{=timevalue.minute}}"             ba-increment="{{5}}"             ba-last="{{55}}">     </ba-scrollpicker>  </time>  <timepicker-divider>      <div>Time</div>      <div>Date</div>  </timepicker-divider>  <date>      <ba-datepicker>     </ba-datepicker>  </date> ';
 
+BetaJS.Dynamics.Dynamic.Components.Templates['tasklist'] = ' <ba-list         ba-listcollection="{{outer_collection}}"         ba-listitem="titledlist">  </ba-list>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['swipeitem'] = ' <behind>     <icon class=\'{{lefticon}}\'></icon>     <div></div>     <icon class=\'{{righticon}}\'></icon> </behind>  <swipe>      <ba-{{type}}         class=\'{{itemclass}}\'         ba-model=\'{{model}}\'>         {{title}}     </ba-{{type}}>      <swipeleft>         <div></div>         <icon class=\'{{lefticon}}\'></icon>     </swipeleft>      <swiperight>         <icon class=\'{{righticon}}\'></icon>         <div></div>     </swiperight>  </swipe> ';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['clickitem'] = ' <clickitem         ba-click="click(model)">     {{model.title}} </clickitem>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['contactitem'] = '<div ba-tap="addEmail(doodad)">      <iconbox>         <icon>             {{doodad.symbol}}         </icon>     </iconbox>      <contactmain>          <contactname>             {{doodad.name}}         </contactname>          <contactemail>             {{doodad.email}}         </contactemail>      </contactmain>  </div>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['emailitem'] = ' <email-status class="icon-circle show-{{doodad.read}}"></email-status>  <email-main>     <email-topline>         <from>{{sender_salutatory_display}} to {{recipient_salutatory_display}}</from>         <time>{{time}}</time>     </email-topline>     <email-bottom>         <email-content>             <subject>                 {{subject}}             </subject>             <firstline>{{preview}}</firstline>         </email-content>         <star class="icon-star"></star>     </email-bottom> </email-main>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['eventitem'] = '<time ba-tap-href="#">     <start>         {{two_digits(doodad.start_date_decoded.hour)}}:{{two_digits(doodad.start_date_decoded.minute)}}     </start>     <duration>         {{doodad.duration}}h     </duration> </time>  <title>     {{doodad.preview}} </title>  <span class="icon-star-empty" ba-tap-href="#"></span>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['noteitem'] = '<noteitem>     {{doodad.preview}}     <!--{{type}}--> </noteitem> ';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['taskitem'] = '<div>     {{title}} </div>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['selectableitem'] = ' <selectableitem         ba-class="{{{selected : selected == model}}}"         ba-click="select(model)">     {{model.title}} </selectableitem>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['list'] = ' <list ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{listitem}}         ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{listitem}}>  </list>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['searchlist'] = '<searchbox>     <icon class="icon-search"></icon>     <input placeholder="{{placeholder}}" value="{{=searchvalue}}"> </searchbox> <ba-list         ba-listitem="{{listitem}}"         ba-listollection="{{listcollection}}">  </ba-list>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['titledlist'] = '<title ba-click="collapsed = !collapsed">{{title}}</title>  <listrepeat ba-if="{{!collapsed && collapsible}}" ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{type}} ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{type}}>  </listrepeat>';
+
 BetaJS.Dynamics.Dynamic.Components.Templates['template'] = '<div>     {{placeholder}} </div>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['components'] = '<ba-simplelist         ba-title="Components"         ba-currentitem="{{=current_component}}"         ba-listcollection="{{components}}"></ba-simplelist> ';
+BetaJS.Dynamics.Dynamic.Components.Templates['components'] = '<ba-titledlist         ba-title="Components"         ba-selected_item="{{=current_component}}"         ba-listcollection="{{components}}"></ba-titledlist> ';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['controls'] = ' <h4>Controls </h4>  <controls>      <ba-layout></ba-layout>      <ba-components></ba-components>  </controls>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['layout'] = ' <ba-simplelist         ba-title="System"         ba-currentitem="{{=current_system}}"         ba-listcollection="{{systems}}"></ba-simplelist>  <ba-titledlist ba-title="Device"          ba-selected_item="{{=current_device}}"          ba-listcollection="{{current_system.devices}}"></ba-titledlist> ';
+BetaJS.Dynamics.Dynamic.Components.Templates['layout'] = ' <ba-titledlist         ba-title="System"         ba-selected_item="{{=current_system}}"         ba-listcollection="{{systems}}"></ba-titledlist>  <ba-titledlist ba-title="Device"          ba-selected_item="{{=current_device}}"          ba-listcollection="{{current_system.devices}}"></ba-titledlist> ';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['environment'] = ' <ba-controls></ba-controls>  <ba-simulator></ba-simulator> ';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['simulator'] = '  <appframe         class="             {{current_system.name}}             {{current_device.name}}         ">      <ba-{{current_component.name}}></ba-{{current_component.name}}>  </appframe> ';
+BetaJS.Dynamics.Dynamic.Components.Templates['simulator'] = '  <appframe         class="             {{current_system.title}}             {{current_device.title}}         ">      <ba-{{current_component.title}}></ba-{{current_component.title}}>  </appframe> ';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['index'] = '<!DOCTYPE html> <html> <head lang="en">     <meta charset="UTF-8">      <!--<script src="../../vendors/jquery-1.9.closure-extern.js"></script>-->     <script src="../../vendors/jquery-2.1.4.js"></script>     <script src="../../vendors/scoped.js"></script>     <script src="../../vendors/beta.js"></script>     <script src="../../vendors/betajs-ui.js"></script>     <script src="../../vendors/beta-browser-noscoped.js"></script>     <script src="../../vendors/betajs-dynamics-noscoped.js"></script>      <link rel="stylesheet" href="../../vendors/icomoon/style.css" />      <link rel="stylesheet" href="../../dist/betajs-dynamics-components.css" />     <script src="../../dist/betajs-dynamics-components.js"></script>      <script src="//localhost:1337/livereload.js"></script>      <title></title>  </head> <body>      <ba-environment></ba-environment>      <script src="config/config.js"></script>     <script src="config/router.js"></script>  </body> </html>';
+BetaJS.Dynamics.Dynamic.Components.Templates['index'] = '<!DOCTYPE html> <html> <head lang="en">     <meta charset="UTF-8">      <!--<script src="../../vendors/jquery-1.9.closure-extern.js"></script>-->     <script src="../../vendors/jquery-2.1.4.js"></script>     <script src="../../vendors/scoped.js"></script>     <script src="../../vendors/beta.js"></script>     <script src="../../vendors/beta-browser-noscoped.js"></script>     <script src="../../vendors/betajs-ui.js"></script>     <script src="../../vendors/betajs-dynamics-noscoped.js"></script>      <link rel="stylesheet" href="../../vendors/icomoon/style.css" />      <link rel="stylesheet" href="../../dist/betajs-dynamics-components.css" />     <script src="../../dist/betajs-dynamics-components.js"></script>      <script src="//localhost:1337/livereload.js"></script>      <title></title>  </head> <body>      <ba-environment></ba-environment>      <script src="config/config.js"></script>     <script src="config/router.js"></script>  </body> </html>';
 
 
 window.components = new BetaJS.Collections.Collection({objects: [
-    {name:'aa_template'},
-    {name:'list'},
-    {name:'titledlist'},
-    {name:'searchlist'},
-    {name:'simplelist'},
-    {name:'timesetting'},
-    {name:'generalsetting'},
-    {name:'scrollpicker'},
-    {name:'timepicker'},
+    {title:'searchlist'},
+    {title:'tasklist'},
+    {title:'aa_template'},
+    {title:'emailitem'},
+    {title:'clickitem'},
+    {title:'swipeitem'},
+    {title:'list'},
+    {title:'titledlist'},
+    {title:'simplelist'},
+    {title:'timesetting'},
+    {title:'generalsetting'},
+    {title:'scrollpicker'},
+    {title:'timepicker'},
 ]});
 
-window.componentsByName = function (name) {
+window.componentsBytitle = function (title) {
     var comp = window.components;
     for (var i = 0; i < comp.count(); ++i)
-        if (comp.getByIndex(i).get("name") == name)
+        if (comp.getByIndex(i).get("title") == title)
             return comp.getByIndex(i);
     return null;
 };
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
-
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.selectableitem,
-
-    initial: {
-
-        bind : {
-            selected : "<:selected_item",
-            parentlistcollection : "<:listcollection"
-        },
-
-        attrs: {
-            selected: false,
-            value: {
-                name :'Data Placeholder',
-                selected : false
-            }
-        },
-
-        create : function () {
-
-            console.log("Selected Item : !!! :");
-            console.log(this.parent());
-            console.log(this.parent().get('selected_item'));
-            console.log(this.get('selected'));
-
-            var index = this.get('parentlistcollection').getIndex(this.get('value'));
-            if (index == 0 && !this.parent().get('selected_item'))
-                this.parent().set('selected_item',this.get('value'));
-
-            console.log("Index : " + index);
-            console.log(this.get('value'));
-
-        },
-
-        functions : {
-            select : function (data) {
-                this.parent().set('selected_item',this.get('value'));
-                console.log('Set new');
-                console.log(this.get('value'));
-                console.log(this.parent().get('selected_item'));
-                console.log(this.get('selected'));
-                //this.set('selected',!this.get('selected'));
-            }
-        }
-
-    }
-
-}).register();
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
-
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.list,
-
-    initial: {
-
-        attrs: {
-            listitem : "selectableitem"
-        },
-
-        collections : {
-            listcollection : [
-                {name: "Item 1"},
-                {name: "Item 2"},
-                {name: "Item 3"}
-            ]
-        },
-
-        create : function () {
-
-        }
-
-    }
-
-}).register();
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
-
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.titledlist,
-
-    initial: {
-
-        attrs: {
-            showlist : true,
-            title : "Title",
-            listitem : "selectableitem"
-        },
-
-        collections : {
-            listcollection : [
-                {name: "Item 1"},
-                {name: "Item 2"},
-                {name: "Item 3"}
-            ]
-        },
-
-        create : function () {
-            console.log("List : !!! : ");
-            console.log(this.get('selected_item'));
-
-        }
-
-    }
-
-}).register();
 
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Scrollpicker", {
@@ -816,53 +727,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Scrollpicker", {
                 "background" : "white"
             });
         });
-
-    }
-
-}).register();
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.SimpleList", {
-
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.simplelist,
-
-    initial: {
-
-        attrs : {
-            title: null,
-            initial_item: 0
-        },
-
-        collections : {
-            listcollection : [
-                {
-                    name:'Item 1'
-                },{
-                    name:'Item 2'
-                }
-            ]
-        },
-
-        create : function () {
-
-            console.log( this.get('title') + ' List Loaded');
-
-            if (!this.get("currentitem")) {
-                console.log(this.get('listcollection'));
-                this.set('currentitem', this.get('listcollection').getByIndex(0));
-            }
-
-            this.on("change:listcollection", function () {
-                this.set('currentitem', this.get('listcollection').getByIndex(0));
-            }, this);
-        },
-
-        functions : {
-            select_item : function (system) {
-                if (system != this.get('currentitem'))
-                    this.set('currentitem',system);
-            }
-        }
 
     }
 
@@ -1096,6 +960,515 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Timepicker", {
 
 
 
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Tasklist", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.tasklist,
+
+    initial: {
+
+        attrs: {
+            listitem : "swipeitem"
+        },
+
+        collections : {
+            outer_collection : [
+                {
+                    title : "Group - 1",
+                    collapsed : false,
+                    type : "swipeitem",
+                    listcollection : new BetaJS.Collections.Collection({objects: [
+                        {
+                            type : "clickitem",
+                            title : "Name 1"
+                        },
+                        {
+                            type : "clickitem",
+                            title : "Name 2"
+                        }
+                    ]})
+                },
+                {
+                    title: "Group - 2",
+                    collapsed : true,
+                    type : "swipeitem",
+                    listcollection : new BetaJS.Collections.Collection({objects: [
+                        {
+                            type : "clickitem",
+                            title : "Name 1"
+                        },
+                        {
+                            type : "clickitem",
+                            title : "Name 2"
+                        }
+                    ]})
+                }
+            ]
+        },
+
+        create : function () {
+            //var outer_n = 10;
+            //var inner_n = 10;
+            //var outer_collection = new BetaJS.Collections.Collection();
+            //for (var outer_index = 0; outer_index < outer_n; ++outer_index) {
+            //    var outer_properties = new BetaJS.Properties.Properties();
+            //    outer_collection.add(outer_properties);
+            //    outer_properties.set("title", "Group " + outer_index);
+            //    var inner_collection = new BetaJS.Collections.Collection();
+            //    outer_properties.set("listcollection", inner_collection);
+            //    for (var inner_index = 0; inner_index < inner_n; ++inner_index) {
+            //        var inner_properties = new BetaJS.Properties.Properties();
+            //        inner_collection.add(inner_properties);
+            //        inner_properties.set("title", "Item " + outer_index + ", " + inner_index);
+            //    }
+            //}
+            //this.set("outer_collection", outer_collection);
+        }
+
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Swipeitem", {
+
+	template: BetaJS.Dynamics.Dynamic.Components.Templates.swipeitem,
+
+	initial: {
+
+		attrs : {
+			type : "emailitem",
+			title : "Swipeitem",
+			lefticon : 'icon-ok',
+			righticon : 'icon-time',
+			actions : {
+				"other": {
+					less: -1/4,
+					execute: function () {
+						//alert("other?");
+						console.log(this.get("model"));
+						var m = this.get("model");
+						m ? m.set("archived", true) : {};
+					}
+				},
+				"archive": {
+					less: 1/3,
+					execute: function () {
+						//alert("archive?");
+					}
+				},
+				"delete": {
+					greater: 1/3,
+					execute: function (element) {
+
+						//alert("yes");
+						element.parent().parent().slideUp();
+						//scope.doodad_properties.remove();
+					}
+				}
+			}
+		},
+
+		create : function () {
+
+			if (this.get("model")) {
+				BetaJS.Objs.iter(this.get("model").data(), function (modelValue, attrKey) {
+					var attrValue = this.isArgumentAttr(attrKey) ? this.get(attrKey) : modelValue;
+					this.set(attrKey, attrValue);
+					this.get("model").set(attrKey, attrValue);
+					this.properties().bind(attrKey, this.get("model"));
+				}, this);
+			}
+		},
+
+		functions : {
+
+		}
+
+	},
+
+	_afterActivate : function (element) {
+		var actions = this.get('actions');
+
+		var swipe_element = element.find("swipe");
+		var drag = new BetaJS.UI.Interactions.Drag(swipe_element, {
+			enabled : true,
+			draggable_y: false,
+			start_event: null
+		});
+		var drag_gesture = new BetaJS.UI.Gestures.Gesture(drag.element(), BetaJS.UI.Gestures.defaultGesture({
+			mouse_up_activate: false,
+			wait_time: 250,
+			wait_activate: false,
+			disable_x: -1,
+			disable_y: 10,
+			enable_x: 10,
+			enable_y: -1
+		}));
+		drag_gesture.on("activate", drag.start, drag);
+		drag_gesture.on("deactivate", drag.stop, drag);
+		drag.on("move", function (event) {
+			var element = event.element;
+			var parent = element.parent();
+			var x = parseInt(element.css("left"), 10);
+			var w = parseInt(element.css("width"), 10);
+			var a = {};
+			for (var cls in actions) {
+				a = actions[cls];
+				if ((!a.less || x <= w * a.less) && (!a.greater || x >= w * a.greater))
+					parent.addClass(cls);
+				else
+					parent.removeClass(cls);
+			}
+		}, this);
+		drag.on("release", function (event) {
+			var element = event.element;
+			var x = parseInt(element.css("left"), 10);
+			var w = parseInt(element.css("width"), 10);
+			for (var cls in actions) {
+				a = actions[cls];
+				if ((!a.less || x <= w * a.less) && (!a.greater || x >= w * a.greater)) {
+					event.source.abort();
+					if (a.execute)
+						a.execute.call(this, element);
+				}
+			}
+		}, this);
+
+	}
+
+}).register();
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Clickitem", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.clickitem,
+
+    initial: {
+
+        attrs: {
+            model: {
+                title :'Title'
+            }
+        },
+
+        create : function () {
+
+        },
+
+        functions : {
+            click : function () {
+                console.log("Route to ...")
+            }
+        }
+
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Contactitem", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.contactitem
+
+}).register();
+
+//
+//app.directive('diContactitem', function () {
+//    return {
+//        restrict : 'E',
+//        templateUrl : App.Paths.asset("{pages-directives}/list/multilist/listitems/items/contactitem/template.html"),
+//        replace : true,
+//        scope : false,
+//        link : function(scope,element) {
+//            scope.addEmail = function(doodad) {
+////                if (emailinputCtrl)
+////                    emailinputCtrl.add(doodad.email);
+////                else
+//                 console.log("add email");
+//            };
+//
+//            // what should happen when we drop onto an item? for now, we simply replace it's number with the original one as an example
+//            var drop = new BetaJS.UI.Interactions.Drop(element, {
+//                enabled: true,
+//                droppable: function () {
+//                    return true;
+//                },
+//                bounding_box: function (bb) {
+//                    var height = bb.bottom - bb.top + 1;
+//                    var margin = Math.floor(height * 0.2);
+//                    bb.top += margin;
+//                    bb.bottom -= margin;
+//                    return bb;
+//                }
+//            });
+//            drop.on("hover", function (dr) {
+//                dr.modifier.css("background-color", "green");
+//            });
+//            drop.on("hover-invalid", function (dr) {
+//                dr.modifier.css("background-color", "gray");
+//            });
+//            drop.on("dropped", function (event) {
+//                console.log("Dropped Data: " + JSON.stringify(event.source.data));
+//                scope.number = event.source.data.number;
+//                scope.$digest();
+//            });
+//        }
+//    };
+//});
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Emailitem", {
+
+    template : BetaJS.Dynamics.Dynamic.Components.Templates.emailitem,
+
+    initial : {
+        attrs : {
+            sender_salutatory_display : "Sender",
+            recipient_salutatory_display : "Recipient",
+            subject : "Subject",
+            preview : "First Line...",
+            time : "18:30"
+        }
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Eventitem", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.eventitem
+
+}).register("ba-eventitem");
+
+//app.directive('diEventitem', function () {
+//    return {
+//        restrict: 'E',
+//        templateUrl: App.Paths.asset("{pages-directives}/list/multilist/listitems/items/eventitem/template.html"),
+//        replace: true,
+//        scope: false,
+//
+//        link: function($scope,element) {
+//
+//            // TODO: what should happen when we drop onto an item? for now, we simply replace it's number with the original one as an example
+//            var drop = new BetaJS.UI.Interactions.Drop(element, {
+//                enabled: true,
+//                droppable: function () {
+//                    return true;
+//                },
+//                bounding_box: function (bb) {
+//                    var height = bb.bottom - bb.top + 1;
+//                    var margin = Math.floor(height * 0.2);
+//                    bb.top += margin;
+//                    bb.bottom -= margin;
+//                    return bb;
+//                }
+//            });
+//            drop.on("hover", function (dr) {
+//                dr.modifier.css("background-color", "green");
+//            });
+//            drop.on("hover-invalid", function (dr) {
+//                dr.modifier.css("background-color", "gray");
+//            });
+//            drop.on("dropped", function (event) {
+//                console.log("Dropped Data: " + JSON.stringify(event.source.data));
+//                $scope.number = event.source.data.number;
+//                $scope.$digest();
+//            });
+//        }
+//    };
+//});
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Noteitem", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.noteitem,
+
+    initial : {
+
+        create : function () {}
+
+    }
+
+}).register();
+
+//app.directive('diNoteitem', function () {
+//    return {
+//        restrict: 'E',
+//        templateUrl: App.Paths.asset("{pages-directives}/list/multilist/listitems/items/noteitem/template.html"),
+//        replace: true,
+//        scope: false,
+//        link: function(scope,element) {
+//            // what should happen when we drop onto an item? for now, we simply replace it's number with the original one as an example
+//            var drop = new BetaJS.UI.Interactions.Drop(element, {
+//                enabled: true,
+//                droppable: function () {
+//                    return true;
+//                },
+//                bounding_box: function (bb) {
+//                    var height = bb.bottom - bb.top + 1;
+//                    var margin = Math.floor(height * 0.2);
+//                    bb.top += margin;
+//                    bb.bottom -= margin;
+//                    return bb;
+//                }
+//            });
+//            drop.on("hover", function (dr) {
+//                dr.modifier.css("background-color", "green");
+//            });
+//            drop.on("hover-invalid", function (dr) {
+//                dr.modifier.css("background-color", "gray");
+//            });
+//            drop.on("dropped", function (event) {
+//                console.log("Dropped Data: " + JSON.stringify(event.source.data));
+//                scope.number = event.source.data.number;
+//                scope.$digest();
+//            });
+//        }
+//    };
+//});
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Taskitem", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.taskitem,
+
+    initial : {
+
+        attrs : {
+            title : "Task"
+        }
+
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.selectableitem,
+
+    initial: {
+
+        bind : {
+            selected : "<:selected_item",
+            parentlistcollection : "<:listcollection"
+        },
+
+        attrs: {
+            model: {
+                title :'Data Placeholder',
+                selected : false
+            }
+        },
+
+        create : function () {
+
+            var index = this.get('parentlistcollection').getIndex(this.get('model'));
+            if (index == 0 && !this.parent().get('selected_item'))
+                this.parent().set('selected_item',this.get('model'));
+
+        },
+
+        functions : {
+            select : function () {
+                this.parent().set('selected_item',this.get('model'));
+            }
+        }
+
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.list,
+
+    initial: {
+
+        attrs: {
+            listitem : "item"
+        },
+
+        collections : {
+            listcollection : [
+                {title: "Item 1"},
+                {title: "Item 2"},
+                {title: "Item 3"}
+            ]
+        },
+
+        create : function () {
+
+        }
+
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Searchlist", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.searchlist,
+
+    initial: {
+
+        attrs: {
+            placeholder : "Search for",
+            searchvalue : "",
+            listitem : "emailitem"
+        },
+
+        collections : {
+            listcollection : [
+                {title: "Item 1"},
+                {title: "Item 2"},
+                {title: "Item 3"}
+            ]
+        },
+
+        create : function () {
+
+        }
+
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.titledlist,
+
+    initial: {
+
+        attrs: {
+            collapsed : false,
+            collapsible : true,
+            title : "Title",
+            type : "selectableitem"
+        },
+
+        collections : {
+            listcollection : [
+                {title: "Item 1"},
+                {title: "Item 2"},
+                {title: "Item 3"}
+            ]
+        },
+
+        create : function () {
+            if (this.get("model")) {
+                BetaJS.Objs.iter(this.get("model").data(), function (modelValue, attrKey) {
+                    var attrValue = this.isArgumentAttr(attrKey) ? this.get(attrKey) : modelValue;
+                    this.set(attrKey, attrValue);
+                    this.get("model").set(attrKey, attrValue);
+                    this.properties().bind(attrKey, this.get("model"));
+                }, this);
+            }
+        }
+
+    }
+
+}).register();
+
+
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Aa_template", {
 
     templateUrl: "../components/unsorted/aa_template/template.html",
@@ -1165,15 +1538,15 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Layout", {
         collections : {
             systems : [
                 {
-                    name:'mobile',
+                    title:'mobile',
                     devices: new BetaJS.Collections.Collection({objects: [
-                        {name: 'iphone4'},
-                        {name: 'iphone5'}
+                        {title: 'iphone4'},
+                        {title: 'iphone5'}
                     ]})
                 },{
-                    name:'web',
+                    title:'web',
                     devices: new BetaJS.Collections.Collection({objects: [
-                        {name: 'notebook'}
+                        {title: 'notebook'}
                     ]})
                 }
             ]
@@ -1184,10 +1557,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Layout", {
 
             this.set('current_system', this.get('systems').getByIndex(0));
             this.set('current_device', this.get('current_system').get('devices').getByIndex(0));
-        },
-
-        functions : {
-
         }
 
     }

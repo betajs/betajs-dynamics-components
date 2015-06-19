@@ -4,6 +4,7 @@ ba-simulator {
   appframe {
     position: relative;
     @include display-flex;
+    overflow: hidden;
   }
 
   //System

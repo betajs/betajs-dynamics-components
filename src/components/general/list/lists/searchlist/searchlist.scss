@@ -1,0 +1,19 @@
+$searchboxheight : 44px;
+
+ba-searchlist {
+
+  searchbox {
+    @include display-flex;
+    height: $searchboxheight;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+
+    icon {
+      @include flex(0 0 $searchboxheight);
+      line-height: $searchboxheight;
+      text-align: center;
+    }
+  }
+  ba-listitem {display: block}
+
+}

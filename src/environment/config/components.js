@@ -1,20 +1,24 @@
 
 window.components = new BetaJS.Collections.Collection({objects: [
-    {name:'aa_template'},
-    {name:'list'},
-    {name:'titledlist'},
-    {name:'searchlist'},
-    {name:'simplelist'},
-    {name:'timesetting'},
-    {name:'generalsetting'},
-    {name:'scrollpicker'},
-    {name:'timepicker'},
+    {title:'searchlist'},
+    {title:'tasklist'},
+    {title:'aa_template'},
+    {title:'emailitem'},
+    {title:'clickitem'},
+    {title:'swipeitem'},
+    {title:'list'},
+    {title:'titledlist'},
+    {title:'simplelist'},
+    {title:'timesetting'},
+    {title:'generalsetting'},
+    {title:'scrollpicker'},
+    {title:'timepicker'},
 ]});
 
-window.componentsByName = function (name) {
+window.componentsBytitle = function (title) {
     var comp = window.components;
     for (var i = 0; i < comp.count(); ++i)
-        if (comp.getByIndex(i).get("name") == name)
+        if (comp.getByIndex(i).get("title") == title)
             return comp.getByIndex(i);
     return null;
 };

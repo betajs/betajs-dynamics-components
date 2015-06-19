@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.1 - 2015-06-17
+betajs-dynamics-components - v0.0.1 - 2015-06-19
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -165,27 +165,6 @@ ul {
   padding: 0;
 }
 
-ba-selectableitem {
-
-  selectableitem {
-    display: block;
-  }
-
-  .selected {
-    background: lightgrey;
-  }
-}
-
-ba-list {
-
-  ba-listitem {display: block}
-}
-
-ba-titledlist {
-
-  title {display: block}
-  ba-listitem {display: block}
-}
 
 $scrollelementheight: 30px;
 
@@ -212,28 +191,6 @@ ba-scrollpicker {
   .selected {color: black}
 }
 
-
-ba-simplelist {
-  flex: 1 1 0;
-
-  display: block;
-
-  title {
-    display: block;
-    border-bottom: 1px solid black;
-  }
-
-  list {
-    display: block;
-    flex-direction: column;
-
-    listitem {
-        display: block;
-        flex: 1 1 0;
-    }
-  }
-  .selected {background: grey}
-}
 
 overlaycontainer {
   position: absolute;
@@ -441,9 +398,369 @@ ba-timepicker {
 }
 
 
+ba-tasklist {
+  overflow-y: scroll;
+
+  ba-listitem {display: block}
+}
+$swipeitemheight: 44px;
+$leftrightopacity: 0.5;
+
+ba-swipeitem {
+  position: relative;
+  display: block;
+  overflow: hidden;
+
+  icon {
+    @include flex(0 0 $swipeitemheight);
+    text-align: center;
+    margin: auto;
+  }
+
+  behind {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    @include display-flex;
+    z-index: 0;
+    box-sizing: border-box;
+    background: $grey1;
+
+    div {@include flex(1 0 0)}
+  }
+
+  swipe {
+    @include display-flex;
+    position: relative;
+    left: -100%;
+    width: 300%;
+
+    ba-item {
+      border-bottom: 1px solid #d3d3d3;
+      height: $swipeitemheight;
+      line-height: $swipeitemheight;
+      vertical-align: middle;
+      background: white;
+    }
+
+    swipeleft {
+      @include flex(1 1 0);
+      @include display-flex;
+      @include flex-order(1);
+      width: 1px;
+      z-index: 1;
+
+      background: #33CC00;
+      opacity: $leftrightopacity;
+
+      div {@include flex(1 0 0)}
+    }
+
+    >*:nth-child(1) {
+      @include flex(1 0 0);
+      @include flex-order(2);
+    }
+
+    swiperight {
+      @include flex(1 1 0);
+      @include display-flex;
+      @include flex-order(3);
+      z-index: 1;
+      width: 1px;
+
+      background: yellow;
+      opacity: $leftrightopacity;
+
+      div {@include flex(1 0 0)}
+    }
+
+    .showdrag {opacity: 1!important}
+  }
+}
+
+
+
+$clickitemheigth : 44px;
+
+ba-clickitem {
+  background: white;
+  border-bottom: 1px solid grey;
+
+  clickitem {
+    padding: 0 $clickitemheigth/2;
+    height: $clickitemheigth;
+    line-height: $clickitemheigth;
+    display: block;
+  }
+
+}
+
+$contact_listitem_height: $listitemheight;
+$contact_icon_dimension: .8 * $contact_listitem_height;
+
+ba-contactitem {
+  @include flex(1 0 0);
+  @include display-flex;
+
+  height: $contact_listitem_height;
+  border-bottom: 1px solid #d3d3d3;
+  background: white;
+  border-bottom: 1px solid $grey5;
+
+  iconbox {
+    @include flex-settings(0 0 $contact_listitem_height);
+    @include display-flex;
+
+    icon {
+      margin: auto;
+      height: $contact_icon_dimension;
+      width: $contact_icon_dimension;
+      line-height: $contact_icon_dimension;
+      border-radius: 2px;
+      background: green;
+
+      vertical-align: middle;
+      text-align: center;
+      color: white;
+    }
+  }
+  contactmain {
+    @include flex-settings(1 1 auto);
+    @include display-flex;
+    @include flex-direction(column);
+    font-size: 13px;
+
+    contactname {
+      @include flex-settings(1 1 auto);
+      @include display-flex;
+      margin: auto 0;
+      line-height: $contact_listitem_height/2;
+      font-weight: bold;
+//      align-items: flex-end;
+      color: $grey3;
+    }
+    contactemail {
+      @include flex-settings(1 1 auto);
+      line-height: $contact_listitem_height/2;
+      margin: auto 0;
+      color: $grey3;
+    }
+  }
+
+
+}
+$emailheight: 66px;
+
+ba-emailitem {
+  //TODO: Clean up Email SCSS (Margin main & Star Button)
+  @include flex(0 0 $emailheight);
+  @include display-flex;
+
+
+  border-bottom: 1px solid #d3d3d3;
+  vertical-align: middle;
+  background: white;
+
+  email-status {
+    @include flex(0 0 24px);
+    text-align: center;
+    height: 100%;
+    line-height: $emailheight;
+    color: $blue1;
+  }
+
+  email-main {
+    @include flex(1 1 0);
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 6px 12px 6px 0;
+    @include display-flex;
+    @include flex-direction(column);
+
+    email-topline {
+      @include flex(0 0 15px);
+      @include display-flex;
+
+      from {
+        font-size: 12px;
+        @include flex(1 0 auto);
+        width: 1px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+      }
+
+      time {
+        font-size: 12px;
+        color: $grey3;
+        text-align: right;
+        @include flex(0 0 auto);
+      }
+    }
+
+    email-bottom {
+      @include flex(1 0 0);
+      @include display-flex;
+
+      email-content {
+        @include flex(1 0 0);
+        @include display-flex;
+        @include flex-direction(column);
+
+        subject {
+          padding: 2px 0 2px;
+          overflow: hidden;
+          white-space: nowrap;
+          color: black;
+          text-overflow: ellipsis;
+        }
+        firstline {
+          font-size: 12px;
+          color: $grey3;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis;
+        }
+      }
+
+      star {
+        @include flex(0 0 24px);
+        text-align: center;
+        line-height: 39px;
+      }
+    }
+  }
+}
+
+$eventheight: $listitemheight;
+
+ba-eventitem {
+  @include flex(1 0 auto);
+  width: 100%;
+  @include display-flex;
+  background: white;
+  border-bottom: 1px solid $grey1;
+
+  time {
+    @include flex(0 0 $listitemheight+15);
+    @include display-flex;
+    @include flex-direction(column);
+
+    * {
+      @include flex(1 1 0);
+      line-height: $listitemheight/2;
+      padding-left: $listitemheight/4;
+      font-size: 14px;
+    }
+    duration {color: $grey3}
+  }
+
+  title {
+    @include flex(1 1 0);
+    display: inline-block;
+
+    padding-left: $listitemheight/4;
+    line-height: $listitemheight;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  span{
+    @include flex(0 0 $listitemheight);
+    text-align: middle;
+    line-height: $listitemheight;
+  }
+}
+$noteheight: $listitemheight;
+
+noteitem {
+  //TODO: Clean up Email SCSS (Margin main & Star Button)
+  @include flex(1 0 0);
+  @include display-flex;
+
+  border-bottom: 1px solid #d3d3d3;
+  height: $noteheight;
+  line-height: $noteheight;
+  padding-left: $noteheight/2;
+  list-style: none;
+  margin: 0;
+  vertical-align: middle;
+  background: white;
+}
+$taskheight: $listitemheight;
+
+.taskitem {
+  //TODO: Clean up Email SCSS (Margin main & Star Button)
+  @include flex(1 0 0);
+  @include display-flex;
+  background: white;
+
+  border-bottom: 1px solid #d3d3d3;
+  height: $taskheight;
+  line-height: $taskheight;
+  padding-left: $taskheight;
+  list-style: none;
+  margin: 0px;
+  vertical-align: middle;
+}
+ba-selectableitem {
+
+  selectableitem {
+    display: block;
+  }
+
+  .selected {
+    background: lightgrey;
+  }
+}
+
+ba-list {
+  list {
+    overflow-y: scroll;
+
+    ba-item {display: block}
+  }
+}
+$searchboxheight : 44px;
+
+ba-searchlist {
+
+  searchbox {
+    @include display-flex;
+    height: $searchboxheight;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+
+    icon {
+      @include flex(0 0 $searchboxheight);
+      line-height: $searchboxheight;
+      text-align: center;
+    }
+  }
+  ba-listitem {display: block}
+
+}
+
+ba-titledlist {
+  @include flex(1 1 0);
+  @include display-flex;
+  @include flex-direction(column);
+
+  title {
+    @include flex(0 0);
+    display: block
+  }
+
+  listrepeat {
+    overflow: scroll;
+    ba-listitem {display: block}
+  }
+}
+
 
 ba-components {
-  overflow: scroll;
+  @include display-flex
 }
 
 ba-controls {
@@ -461,7 +778,10 @@ ba-controls {
 
     >* {@include flex(1 1 0)}
     ba-layout {@include flex-direction(column)}
-    ba-simplelist {border: 1px solid grey}
+    ba-titledlist {
+      border: 1px solid grey;
+      title {border-bottom: 1px solid grey;}
+    }
   }
 
 }
@@ -501,6 +821,7 @@ ba-simulator {
   appframe {
     position: relative;
     @include display-flex;
+    overflow: hidden;
   }
 
   //System

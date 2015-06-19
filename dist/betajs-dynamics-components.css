@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.1 - 2015-06-17
+betajs-dynamics-components - v0.0.1 - 2015-06-19
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -37,19 +37,6 @@ ul {
   margin: 0;
   padding: 0; }
 
-ba-selectableitem selectableitem {
-  display: block; }
-ba-selectableitem .selected {
-  background: lightgrey; }
-
-ba-list ba-listitem {
-  display: block; }
-
-ba-titledlist title {
-  display: block; }
-ba-titledlist ba-listitem {
-  display: block; }
-
 ba-scrollpicker {
   -webkit-box-flex: 1 1 0;
   -moz-box-flex: 1 1 0;
@@ -83,21 +70,6 @@ ba-scrollpicker {
     text-align: center; }
   ba-scrollpicker .selected {
     color: black; }
-
-ba-simplelist {
-  flex: 1 1 0;
-  display: block; }
-  ba-simplelist title {
-    display: block;
-    border-bottom: 1px solid black; }
-  ba-simplelist list {
-    display: block;
-    flex-direction: column; }
-    ba-simplelist list listitem {
-      display: block;
-      flex: 1 1 0; }
-  ba-simplelist .selected {
-    background: grey; }
 
 overlaycontainer {
   position: absolute;
@@ -385,8 +357,481 @@ ba-timepicker {
     display: -webkit-flex;
     display: flex; }
 
+ba-tasklist {
+  overflow-y: scroll; }
+  ba-tasklist ba-listitem {
+    display: block; }
+
+ba-swipeitem {
+  position: relative;
+  display: block;
+  overflow: hidden; }
+  ba-swipeitem icon {
+    -webkit-box-flex: 0 0 44px;
+    -moz-box-flex: 0 0 44px;
+    -webkit-flex: 0 0 44px;
+    -ms-flex: 0 0 44px;
+    flex: 0 0 44px;
+    text-align: center;
+    margin: auto; }
+  ba-swipeitem behind {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    z-index: 0;
+    box-sizing: border-box;
+    background: #ddd; }
+    ba-swipeitem behind div {
+      -webkit-box-flex: 1 0 0;
+      -moz-box-flex: 1 0 0;
+      -webkit-flex: 1 0 0;
+      -ms-flex: 1 0 0;
+      flex: 1 0 0; }
+  ba-swipeitem swipe {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    position: relative;
+    left: -100%;
+    width: 300%; }
+    ba-swipeitem swipe ba-item {
+      border-bottom: 1px solid #d3d3d3;
+      height: 44px;
+      line-height: 44px;
+      vertical-align: middle;
+      background: white; }
+    ba-swipeitem swipe swipeleft {
+      -webkit-box-flex: 1 1 0;
+      -moz-box-flex: 1 1 0;
+      -webkit-flex: 1 1 0;
+      -ms-flex: 1 1 0;
+      flex: 1 1 0;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-order: 1;
+      -ms-flex-order: 1;
+      order: 1;
+      width: 1px;
+      z-index: 1;
+      background: #33CC00;
+      opacity: 0.5; }
+      ba-swipeitem swipe swipeleft div {
+        -webkit-box-flex: 1 0 0;
+        -moz-box-flex: 1 0 0;
+        -webkit-flex: 1 0 0;
+        -ms-flex: 1 0 0;
+        flex: 1 0 0; }
+    ba-swipeitem swipe > *:nth-child(1) {
+      -webkit-box-flex: 1 0 0;
+      -moz-box-flex: 1 0 0;
+      -webkit-flex: 1 0 0;
+      -ms-flex: 1 0 0;
+      flex: 1 0 0;
+      -webkit-order: 2;
+      -ms-flex-order: 2;
+      order: 2; }
+    ba-swipeitem swipe swiperight {
+      -webkit-box-flex: 1 1 0;
+      -moz-box-flex: 1 1 0;
+      -webkit-flex: 1 1 0;
+      -ms-flex: 1 1 0;
+      flex: 1 1 0;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-order: 3;
+      -ms-flex-order: 3;
+      order: 3;
+      z-index: 1;
+      width: 1px;
+      background: yellow;
+      opacity: 0.5; }
+      ba-swipeitem swipe swiperight div {
+        -webkit-box-flex: 1 0 0;
+        -moz-box-flex: 1 0 0;
+        -webkit-flex: 1 0 0;
+        -ms-flex: 1 0 0;
+        flex: 1 0 0; }
+    ba-swipeitem swipe .showdrag {
+      opacity: 1 !important; }
+
+ba-clickitem {
+  background: white;
+  border-bottom: 1px solid grey; }
+  ba-clickitem clickitem {
+    padding: 0 22px;
+    height: 44px;
+    line-height: 44px;
+    display: block; }
+
+ba-contactitem {
+  -webkit-box-flex: 1 0 0;
+  -moz-box-flex: 1 0 0;
+  -webkit-flex: 1 0 0;
+  -ms-flex: 1 0 0;
+  flex: 1 0 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  height: 44px;
+  border-bottom: 1px solid #d3d3d3;
+  background: white;
+  border-bottom: 1px solid #999; }
+  ba-contactitem iconbox {
+    -webkit-box-flex: 0 0 44px;
+    -moz-box-flex: 0 0 44px;
+    -webkit-flex: 0 0 44px;
+    -ms-flex: 0 0 44px;
+    flex: 0 0 44px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex; }
+    ba-contactitem iconbox icon {
+      margin: auto;
+      height: 35.2px;
+      width: 35.2px;
+      line-height: 35.2px;
+      border-radius: 2px;
+      background: green;
+      vertical-align: middle;
+      text-align: center;
+      color: white; }
+  ba-contactitem contactmain {
+    -webkit-box-flex: 1 1 auto;
+    -moz-box-flex: 1 1 auto;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    font-size: 13px; }
+    ba-contactitem contactmain contactname {
+      -webkit-box-flex: 1 1 auto;
+      -moz-box-flex: 1 1 auto;
+      -webkit-flex: 1 1 auto;
+      -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      margin: auto 0;
+      line-height: 22px;
+      font-weight: bold;
+      color: #777; }
+    ba-contactitem contactmain contactemail {
+      -webkit-box-flex: 1 1 auto;
+      -moz-box-flex: 1 1 auto;
+      -webkit-flex: 1 1 auto;
+      -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+      line-height: 22px;
+      margin: auto 0;
+      color: #777; }
+
+ba-emailitem {
+  -webkit-box-flex: 0 0 66px;
+  -moz-box-flex: 0 0 66px;
+  -webkit-flex: 0 0 66px;
+  -ms-flex: 0 0 66px;
+  flex: 0 0 66px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  border-bottom: 1px solid #d3d3d3;
+  vertical-align: middle;
+  background: white; }
+  ba-emailitem email-status {
+    -webkit-box-flex: 0 0 24px;
+    -moz-box-flex: 0 0 24px;
+    -webkit-flex: 0 0 24px;
+    -ms-flex: 0 0 24px;
+    flex: 0 0 24px;
+    text-align: center;
+    height: 100%;
+    line-height: 66px;
+    color: dodgerblue; }
+  ba-emailitem email-main {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    box-sizing: border-box;
+    overflow: hidden;
+    padding: 6px 12px 6px 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column; }
+    ba-emailitem email-main email-topline {
+      -webkit-box-flex: 0 0 15px;
+      -moz-box-flex: 0 0 15px;
+      -webkit-flex: 0 0 15px;
+      -ms-flex: 0 0 15px;
+      flex: 0 0 15px;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex; }
+      ba-emailitem email-main email-topline from {
+        font-size: 12px;
+        -webkit-box-flex: 1 0 auto;
+        -moz-box-flex: 1 0 auto;
+        -webkit-flex: 1 0 auto;
+        -ms-flex: 1 0 auto;
+        flex: 1 0 auto;
+        width: 1px;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis; }
+      ba-emailitem email-main email-topline time {
+        font-size: 12px;
+        color: #777;
+        text-align: right;
+        -webkit-box-flex: 0 0 auto;
+        -moz-box-flex: 0 0 auto;
+        -webkit-flex: 0 0 auto;
+        -ms-flex: 0 0 auto;
+        flex: 0 0 auto; }
+    ba-emailitem email-main email-bottom {
+      -webkit-box-flex: 1 0 0;
+      -moz-box-flex: 1 0 0;
+      -webkit-flex: 1 0 0;
+      -ms-flex: 1 0 0;
+      flex: 1 0 0;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex; }
+      ba-emailitem email-main email-bottom email-content {
+        -webkit-box-flex: 1 0 0;
+        -moz-box-flex: 1 0 0;
+        -webkit-flex: 1 0 0;
+        -ms-flex: 1 0 0;
+        flex: 1 0 0;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+        flex-direction: column; }
+        ba-emailitem email-main email-bottom email-content subject {
+          padding: 2px 0 2px;
+          overflow: hidden;
+          white-space: nowrap;
+          color: black;
+          text-overflow: ellipsis; }
+        ba-emailitem email-main email-bottom email-content firstline {
+          font-size: 12px;
+          color: #777;
+          overflow: hidden;
+          white-space: nowrap;
+          text-overflow: ellipsis; }
+      ba-emailitem email-main email-bottom star {
+        -webkit-box-flex: 0 0 24px;
+        -moz-box-flex: 0 0 24px;
+        -webkit-flex: 0 0 24px;
+        -ms-flex: 0 0 24px;
+        flex: 0 0 24px;
+        text-align: center;
+        line-height: 39px; }
+
+ba-eventitem {
+  -webkit-box-flex: 1 0 auto;
+  -moz-box-flex: 1 0 auto;
+  -webkit-flex: 1 0 auto;
+  -ms-flex: 1 0 auto;
+  flex: 1 0 auto;
+  width: 100%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  background: white;
+  border-bottom: 1px solid #ddd; }
+  ba-eventitem time {
+    -webkit-box-flex: 0 0 59px;
+    -moz-box-flex: 0 0 59px;
+    -webkit-flex: 0 0 59px;
+    -ms-flex: 0 0 59px;
+    flex: 0 0 59px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column; }
+    ba-eventitem time * {
+      -webkit-box-flex: 1 1 0;
+      -moz-box-flex: 1 1 0;
+      -webkit-flex: 1 1 0;
+      -ms-flex: 1 1 0;
+      flex: 1 1 0;
+      line-height: 22px;
+      padding-left: 11px;
+      font-size: 14px; }
+    ba-eventitem time duration {
+      color: #777; }
+  ba-eventitem title {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    display: inline-block;
+    padding-left: 11px;
+    line-height: 44px;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis; }
+  ba-eventitem span {
+    -webkit-box-flex: 0 0 44px;
+    -moz-box-flex: 0 0 44px;
+    -webkit-flex: 0 0 44px;
+    -ms-flex: 0 0 44px;
+    flex: 0 0 44px;
+    text-align: middle;
+    line-height: 44px; }
+
+noteitem {
+  -webkit-box-flex: 1 0 0;
+  -moz-box-flex: 1 0 0;
+  -webkit-flex: 1 0 0;
+  -ms-flex: 1 0 0;
+  flex: 1 0 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  border-bottom: 1px solid #d3d3d3;
+  height: 44px;
+  line-height: 44px;
+  padding-left: 22px;
+  list-style: none;
+  margin: 0;
+  vertical-align: middle;
+  background: white; }
+
+.taskitem {
+  -webkit-box-flex: 1 0 0;
+  -moz-box-flex: 1 0 0;
+  -webkit-flex: 1 0 0;
+  -ms-flex: 1 0 0;
+  flex: 1 0 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  background: white;
+  border-bottom: 1px solid #d3d3d3;
+  height: 44px;
+  line-height: 44px;
+  padding-left: 44px;
+  list-style: none;
+  margin: 0px;
+  vertical-align: middle; }
+
+ba-selectableitem selectableitem {
+  display: block; }
+ba-selectableitem .selected {
+  background: lightgrey; }
+
+ba-list list {
+  overflow-y: scroll; }
+  ba-list list ba-item {
+    display: block; }
+
+ba-searchlist searchbox {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  height: 44px;
+  width: 100%;
+  border-bottom: 1px solid #ddd; }
+  ba-searchlist searchbox icon {
+    -webkit-box-flex: 0 0 44px;
+    -moz-box-flex: 0 0 44px;
+    -webkit-flex: 0 0 44px;
+    -ms-flex: 0 0 44px;
+    flex: 0 0 44px;
+    line-height: 44px;
+    text-align: center; }
+ba-searchlist ba-listitem {
+  display: block; }
+
+ba-titledlist {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+  ba-titledlist title {
+    -webkit-box-flex: 0 0;
+    -moz-box-flex: 0 0;
+    -webkit-flex: 0 0;
+    -ms-flex: 0 0;
+    flex: 0 0;
+    display: block; }
+  ba-titledlist listrepeat {
+    overflow: scroll; }
+    ba-titledlist listrepeat ba-listitem {
+      display: block; }
+
 ba-components {
-  overflow: scroll; }
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; }
 
 ba-controls {
   padding: 10px;
@@ -421,8 +866,10 @@ ba-controls {
       -webkit-flex-direction: column;
       -ms-flex-direction: column;
       flex-direction: column; }
-    ba-controls controls ba-simplelist {
+    ba-controls controls ba-titledlist {
       border: 1px solid grey; }
+      ba-controls controls ba-titledlist title {
+        border-bottom: 1px solid grey; }
 
 ba-layout {
   -webkit-box-flex: 1 1 0;
@@ -470,7 +917,8 @@ ba-simulator appframe {
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
-  display: flex; }
+  display: flex;
+  overflow: hidden; }
 ba-simulator .mobile {
   margin: 10px;
   -webkit-flex-direction: column;

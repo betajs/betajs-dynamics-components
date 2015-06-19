@@ -1,0 +1,18 @@
+
+<email-status class="icon-circle show-{{doodad.read}}"></email-status>
+
+<email-main>
+    <email-topline>
+        <from>{{sender_salutatory_display}} to {{recipient_salutatory_display}}</from>
+        <time>{{time}}</time>
+    </email-topline>
+    <email-bottom>
+        <email-content>
+            <subject>
+                {{subject}}
+            </subject>
+            <firstline>{{preview}}</firstline>
+        </email-content>
+        <star class="icon-star"></star>
+    </email-bottom>
+</email-main>

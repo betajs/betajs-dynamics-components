@@ -1,0 +1,41 @@
+
+$eventheight: $listitemheight;
+
+ba-eventitem {
+  @include flex(1 0 auto);
+  width: 100%;
+  @include display-flex;
+  background: white;
+  border-bottom: 1px solid $grey1;
+
+  time {
+    @include flex(0 0 $listitemheight+15);
+    @include display-flex;
+    @include flex-direction(column);
+
+    * {
+      @include flex(1 1 0);
+      line-height: $listitemheight/2;
+      padding-left: $listitemheight/4;
+      font-size: 14px;
+    }
+    duration {color: $grey3}
+  }
+
+  title {
+    @include flex(1 1 0);
+    display: inline-block;
+
+    padding-left: $listitemheight/4;
+    line-height: $listitemheight;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+  }
+
+  span{
+    @include flex(0 0 $listitemheight);
+    text-align: middle;
+    line-height: $listitemheight;
+  }
+}

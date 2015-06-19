@@ -1,0 +1,75 @@
+$swipeitemheight: 44px;
+$leftrightopacity: 0.5;
+
+ba-swipeitem {
+  position: relative;
+  display: block;
+  overflow: hidden;
+
+  icon {
+    @include flex(0 0 $swipeitemheight);
+    text-align: center;
+    margin: auto;
+  }
+
+  behind {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    @include display-flex;
+    z-index: 0;
+    box-sizing: border-box;
+    background: $grey1;
+
+    div {@include flex(1 0 0)}
+  }
+
+  swipe {
+    @include display-flex;
+    position: relative;
+    left: -100%;
+    width: 300%;
+
+    ba-item {
+      border-bottom: 1px solid #d3d3d3;
+      height: $swipeitemheight;
+      line-height: $swipeitemheight;
+      vertical-align: middle;
+      background: white;
+    }
+
+    swipeleft {
+      @include flex(1 1 0);
+      @include display-flex;
+      @include flex-order(1);
+      width: 1px;
+      z-index: 1;
+
+      background: #33CC00;
+      opacity: $leftrightopacity;
+
+      div {@include flex(1 0 0)}
+    }
+
+    >*:nth-child(1) {
+      @include flex(1 0 0);
+      @include flex-order(2);
+    }
+
+    swiperight {
+      @include flex(1 1 0);
+      @include display-flex;
+      @include flex-order(3);
+      z-index: 1;
+      width: 1px;
+
+      background: yellow;
+      opacity: $leftrightopacity;
+
+      div {@include flex(1 0 0)}
+    }
+
+    .showdrag {opacity: 1!important}
+  }
+}
+
