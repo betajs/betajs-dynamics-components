@@ -358,6 +358,14 @@ ba-timepicker {
     display: flex; }
 
 ba-emaillist {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
   overflow-y: scroll; }
   ba-emaillist ba-listitem {
     display: block; }
@@ -785,25 +793,38 @@ ba-list list {
   ba-list list ba-item {
     display: block; }
 
-ba-searchlist searchbox {
+ba-searchlist {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  height: 44px;
-  width: 100%;
-  border-bottom: 1px solid #ddd; }
-  ba-searchlist searchbox icon {
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+  ba-searchlist searchbox {
     -webkit-box-flex: 0 0 44px;
     -moz-box-flex: 0 0 44px;
     -webkit-flex: 0 0 44px;
     -ms-flex: 0 0 44px;
     flex: 0 0 44px;
-    line-height: 44px;
-    text-align: center; }
-ba-searchlist ba-listitem {
-  display: block; }
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid #ddd; }
+    ba-searchlist searchbox icon {
+      -webkit-box-flex: 0 0 44px;
+      -moz-box-flex: 0 0 44px;
+      -webkit-flex: 0 0 44px;
+      -ms-flex: 0 0 44px;
+      flex: 0 0 44px;
+      line-height: 44px;
+      text-align: center; }
+  ba-searchlist ba-listitem {
+    display: block; }
 
 ba-titledlist {
   -webkit-box-flex: 1 1 0;

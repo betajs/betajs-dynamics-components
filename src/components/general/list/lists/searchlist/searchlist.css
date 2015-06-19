@@ -1,20 +1,20 @@
 /*
-Error: Undefined mixin 'display-flex'.
-        on line 4 of searchlist.scss, in `display-flex'
+Error: Undefined mixin 'flex'.
+        on line 4 of searchlist.scss, in `flex'
         from line 4 of searchlist.scss
 
 1: $searchboxheight : 44px;
 2: 
 3: ba-searchlist {
-4:   @include display-flex;
-5:   @include flex-direction(column);
-6: 
-7:   searchbox {
-8:     @include flex(0 0 $searchboxheight);
-9:     @include display-flex;
+4:   @include flex(1 1 0);
+5:   @include display-flex;
+6:   @include flex-direction(column);
+7: 
+8:   searchbox {
+9:     @include flex(0 0 $searchboxheight);
 
 Backtrace:
-searchlist.scss:4:in `display-flex'
+searchlist.scss:4:in `flex'
 searchlist.scss:4
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:338:in `block in visit_mixin'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/stack.rb:98:in `block in with_mixin'
@@ -69,4 +69,4 @@ searchlist.scss:4
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined mixin 'display-flex'.\A         on line 4 of searchlist.scss, in `display-flex'\A         from line 4 of searchlist.scss\A \A 1: $searchboxheight : 44px;\A 2: \A 3: ba-searchlist {\A 4:   @include display-flex;\A 5:   @include flex-direction(column);\A 6: \A 7:   searchbox {\A 8:     @include flex(0 0 $searchboxheight);\A 9:     @include display-flex;"; }
+  content: "Error: Undefined mixin 'flex'.\A         on line 4 of searchlist.scss, in `flex'\A         from line 4 of searchlist.scss\A \A 1: $searchboxheight : 44px;\A 2: \A 3: ba-searchlist {\A 4:   @include flex(1 1 0);\A 5:   @include display-flex;\A 6:   @include flex-direction(column);\A 7: \A 8:   searchbox {\A 9:     @include flex(0 0 $searchboxheight);"; }
