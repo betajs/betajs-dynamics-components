@@ -4,6 +4,7 @@ ba-searchlist {
   @include flex(1 1 0);
   @include display-flex;
   @include flex-direction(column);
+  width: 100%;
 
   searchbox {
     @include flex(0 0 $searchboxheight);

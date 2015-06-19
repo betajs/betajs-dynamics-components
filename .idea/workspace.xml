@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="72d0b85e-2146-4f66-96cd-41ba7c2a2eae" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-    </list>
+    <list default="true" id="72d0b85e-2146-4f66-96cd-41ba7c2a2eae" name="Default" comment="" />
     <ignored path="betajs-dynamics-components.iws" />
     <ignored path=".idea/workspace.xml" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -46,11 +44,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="emaillist.scss" pinned="false" current-in-tab="false">
+      <file leaf-file-name="emaillist.scss" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="195">
-              <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
+            <state vertical-scroll-proportion="0.08704062" vertical-offset="0" max-vertical-offset="517">
+              <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
               <folding />
             </state>
           </provider>
@@ -66,10 +64,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="searchlist.scss" pinned="false" current-in-tab="true">
+      <file leaf-file-name="searchlist.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/general/list/lists/searchlist/searchlist.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.08704062" vertical-offset="0" max-vertical-offset="517">
+            <state vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="405">
               <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
               <folding />
             </state>
@@ -163,8 +161,8 @@
         <option value="$PROJECT_DIR$/src/components/general/list/listitems/itemcontainers/swipeitem/swipeitem.js" />
         <option value="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/emailitem/emailitem.js" />
         <option value="$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.js" />
-        <option value="$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.scss" />
         <option value="$PROJECT_DIR$/src/components/general/list/lists/searchlist/searchlist.scss" />
+        <option value="$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.scss" />
       </list>
     </option>
   </component>
@@ -1263,15 +1261,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.scss">
+    <entry file="file://$PROJECT_DIR$/src/components/general/list/lists/searchlist/searchlist.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="195">
-          <caret line="3" column="34" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
+        <state vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="405">
+          <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/lists/searchlist/searchlist.scss">
+    <entry file="file://$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.08704062" vertical-offset="0" max-vertical-offset="517">
           <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />

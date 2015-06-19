@@ -9,9 +9,9 @@ Error: Undefined mixin 'flex'.
 4:   @include flex(1 1 0);
 5:   @include display-flex;
 6:   @include flex-direction(column);
-7: 
-8:   searchbox {
-9:     @include flex(0 0 $searchboxheight);
+7:   width: 100%;
+8: 
+9:   searchbox {
 
 Backtrace:
 searchlist.scss:4:in `flex'
@@ -69,4 +69,4 @@ searchlist.scss:4
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined mixin 'flex'.\A         on line 4 of searchlist.scss, in `flex'\A         from line 4 of searchlist.scss\A \A 1: $searchboxheight : 44px;\A 2: \A 3: ba-searchlist {\A 4:   @include flex(1 1 0);\A 5:   @include display-flex;\A 6:   @include flex-direction(column);\A 7: \A 8:   searchbox {\A 9:     @include flex(0 0 $searchboxheight);"; }
+  content: "Error: Undefined mixin 'flex'.\A         on line 4 of searchlist.scss, in `flex'\A         from line 4 of searchlist.scss\A \A 1: $searchboxheight : 44px;\A 2: \A 3: ba-searchlist {\A 4:   @include flex(1 1 0);\A 5:   @include display-flex;\A 6:   @include flex-direction(column);\A 7:   width: 100%;\A 8: \A 9:   searchbox {"; }
