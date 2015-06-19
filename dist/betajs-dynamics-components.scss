@@ -400,8 +400,10 @@ ba-timepicker {
 
 ba-emaillist {
   @include display-flex;
+  @include flex(1 1 0);
   @include flex-direction(column);
   overflow-y: scroll;
+  width: 100%;
 
   ba-listitem {display: block}
 }
@@ -733,8 +735,10 @@ ba-list {
 $searchboxheight : 44px;
 
 ba-searchlist {
+  @include flex(1 1 0);
   @include display-flex;
   @include flex-direction(column);
+  width: 100%;
 
   searchbox {
     @include flex(0 0 $searchboxheight);

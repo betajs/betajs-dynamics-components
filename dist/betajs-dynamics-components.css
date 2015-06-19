@@ -363,10 +363,16 @@ ba-emaillist {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  overflow-y: scroll; }
+  overflow-y: scroll;
+  width: 100%; }
   ba-emaillist ba-listitem {
     display: block; }
 
@@ -794,6 +800,11 @@ ba-list list {
     display: block; }
 
 ba-searchlist {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -801,7 +812,8 @@ ba-searchlist {
   display: flex;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
-  flex-direction: column; }
+  flex-direction: column;
+  width: 100%; }
   ba-searchlist searchbox {
     -webkit-box-flex: 0 0 44px;
     -moz-box-flex: 0 0 44px;

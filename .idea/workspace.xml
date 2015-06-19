@@ -46,11 +46,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="emaillist.scss" pinned="false" current-in-tab="false">
+      <file leaf-file-name="emaillist.scss" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="210">
-              <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
+            <state vertical-scroll-proportion="0.17408124" vertical-offset="0" max-vertical-offset="517">
+              <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
               <folding />
             </state>
           </provider>
@@ -66,10 +66,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="searchlist.scss" pinned="false" current-in-tab="true">
+      <file leaf-file-name="searchlist.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/general/list/lists/searchlist/searchlist.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.17408124" vertical-offset="0" max-vertical-offset="517">
+            <state vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="420">
               <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
               <folding />
             </state>
@@ -163,8 +163,8 @@
         <option value="$PROJECT_DIR$/src/components/general/list/listitems/itemcontainers/swipeitem/swipeitem.js" />
         <option value="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/emailitem/emailitem.js" />
         <option value="$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.js" />
-        <option value="$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.scss" />
         <option value="$PROJECT_DIR$/src/components/general/list/lists/searchlist/searchlist.scss" />
+        <option value="$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.scss" />
       </list>
     </option>
   </component>
@@ -1263,15 +1263,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.scss">
+    <entry file="file://$PROJECT_DIR$/src/components/general/list/lists/searchlist/searchlist.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="210">
-          <caret line="3" column="23" selection-start-line="3" selection-start-column="23" selection-end-line="3" selection-end-column="23" />
+        <state vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="420">
+          <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/lists/searchlist/searchlist.scss">
+    <entry file="file://$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.17408124" vertical-offset="0" max-vertical-offset="517">
           <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
