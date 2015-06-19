@@ -9,8 +9,8 @@ Error: Undefined mixin 'display-flex'.
 4:   @include flex(1 1 0);
 5:   @include flex-direction(column);
 6:   overflow-y: scroll;
-7: 
-8:   ba-listitem {display: block}
+7:   width: 100%;
+8: 
 
 Backtrace:
 emaillist.scss:3:in `display-flex'
@@ -68,4 +68,4 @@ emaillist.scss:3
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined mixin 'display-flex'.\A         on line 3 of emaillist.scss, in `display-flex'\A         from line 3 of emaillist.scss\A \A 1: \A 2: ba-emaillist {\A 3:   @include display-flex;\A 4:   @include flex(1 1 0);\A 5:   @include flex-direction(column);\A 6:   overflow-y: scroll;\A 7: \A 8:   ba-listitem {display: block}"; }
+  content: "Error: Undefined mixin 'display-flex'.\A         on line 3 of emaillist.scss, in `display-flex'\A         from line 3 of emaillist.scss\A \A 1: \A 2: ba-emaillist {\A 3:   @include display-flex;\A 4:   @include flex(1 1 0);\A 5:   @include flex-direction(column);\A 6:   overflow-y: scroll;\A 7:   width: 100%;\A 8: "; }

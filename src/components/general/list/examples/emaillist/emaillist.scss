@@ -4,6 +4,7 @@ ba-emaillist {
   @include flex(1 1 0);
   @include flex-direction(column);
   overflow-y: scroll;
+  width: 100%;
 
   ba-listitem {display: block}
 }
