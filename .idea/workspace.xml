@@ -46,10 +46,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="emaillist.scss" pinned="false" current-in-tab="true">
+      <file leaf-file-name="emaillist.scss" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.17408124" vertical-offset="0" max-vertical-offset="517">
+            <state vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="225">
               <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
               <folding />
             </state>
@@ -66,10 +66,10 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="searchlist.scss" pinned="false" current-in-tab="false">
+      <file leaf-file-name="searchlist.scss" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/components/general/list/lists/searchlist/searchlist.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="420">
+            <state vertical-scroll-proportion="0.17408124" vertical-offset="0" max-vertical-offset="517">
               <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
               <folding />
             </state>
@@ -825,7 +825,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="4" y="23" width="1047" height="877" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299363" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32909784" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -1263,15 +1263,15 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/lists/searchlist/searchlist.scss">
+    <entry file="file://$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.scss">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="420">
+        <state vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="225">
           <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.scss">
+    <entry file="file://$PROJECT_DIR$/src/components/general/list/lists/searchlist/searchlist.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.17408124" vertical-offset="0" max-vertical-offset="517">
           <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
