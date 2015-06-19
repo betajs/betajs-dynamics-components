@@ -1,10 +1,12 @@
 $searchboxheight : 44px;
 
 ba-searchlist {
+  @include display-flex;
+  @include flex-direction(column);
 
   searchbox {
+    @include flex(0 0 $searchboxheight);
     @include display-flex;
-    height: $searchboxheight;
     width: 100%;
     border-bottom: 1px solid #ddd;
 
