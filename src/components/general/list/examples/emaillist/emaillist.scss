@@ -1,6 +1,7 @@
 
 ba-emaillist {
   @include display-flex;
+  @include flex(1 1 0);
   @include flex-direction(column);
   overflow-y: scroll;
 
