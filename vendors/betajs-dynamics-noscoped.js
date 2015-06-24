@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics - v0.0.1 - 2015-06-17
+betajs-dynamics - v0.0.1 - 2015-06-18
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -16,7 +16,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "d71ebf84-e555-4e9b-b18a-11d74fdcefe2",
-		version: '112.1434579597378'
+		version: '121.1434666548434'
 	};
 });
 
@@ -743,6 +743,16 @@ Scoped.define("module:Handlers.Attr", [
 				inherited.destroy.call(this);
 			},
 			
+			__inputVal: function (el, value) {
+				if (arguments.length > 1) {
+					if (el.type == "checkbox")
+						el.checked = value;
+					else
+						el.value = value;
+				}
+				return el.type == "checkbox" ? el.checked : el.value;
+			},
+			
 			updateElement: function (element, attribute) {
 				this._element = element;
 				this._$element = $(element);
@@ -758,18 +768,19 @@ Scoped.define("module:Handlers.Attr", [
 					var self = this;
 					if (this._dyn.bidirectional && this._attrName == "value") {
 						this._$element.on("change keyup keypress keydown blur focus update", function () {
-							self._node.mesh().write(self._dyn.variable, self._element.value);
+							self._node.mesh().write(self._dyn.variable, self.__inputVal(self._element));
 						});
 					}
 					if (this._isEvent) {
 						this._attribute.value = '';
 						this._$element.on(this._attrName.substring(2), function () {
-              // Ensures the domEvent does not continue to
-              // overshadow another variable after the __executeDyn call ends.
-              var oldDomEvent = self._node._locals.domEvent;
+							// Ensures the domEvent does not continue to
+							// overshadow another variable after the __executeDyn call ends.
+							var oldDomEvent = self._node._locals.domEvent;
 							self._node._locals.domEvent = arguments;
 							self._node.__executeDyn(self._dyn);
-              self._node._locals.domEvent = oldDomEvent;
+							if (self._node && self._node._locals)
+								self._node._locals.domEvent = oldDomEvent;
 						});
 					}
 				}
@@ -782,11 +793,12 @@ Scoped.define("module:Handlers.Attr", [
 				if ((value != this._attrValue || Types.is_array(value)) && !(!value && !this._attrValue)) {
 					var old = this._attrValue;
 					this._attrValue = value;
+					
 					this._attribute.value = value;
 					if (this._partial)
 						this._partial.change(value, old);
 					if (this._attrName === "value" && this._element.value !== value)
-						this._element.value = value;
+						this.__inputVal(this._element, value);
 					if (this._tagHandler && this._dyn)
 						this._tagHandler.properties().set(this._attrName.substring("ba-".length), value);
 				}
@@ -1277,8 +1289,8 @@ Scoped.define("module:Handlers.Node", [
 Scoped.define("module:Registries", ["base:Classes.ClassRegistry"], function (ClassRegistry) {
 	return {		
 		
-		handler: new ClassRegistry(),
-		partial: new ClassRegistry()
+		handler: new ClassRegistry({}, true),
+		partial: new ClassRegistry({}, true)
 	
 	};
 });

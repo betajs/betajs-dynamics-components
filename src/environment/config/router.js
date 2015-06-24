@@ -1,6 +1,5 @@
 
-
-var router = new BetaJS.Browser.Router({
+var router = new BetaJS.Router.Router({
         routes: {
             "/components/(.*)" : {
                 state: "Component",
@@ -11,7 +10,7 @@ var router = new BetaJS.Browser.Router({
 
     router.hashRoute = new BetaJS.Browser.HashRouteBinder(router);
     router.stateHost = new BetaJS.States.Host();
-    router.stateRoute = new BetaJS.Browser.StateRouteBinder(router, router.stateHost);
+    router.stateRoute = new BetaJS.Router.StateRouteBinder(router, router.stateHost);
 
     router.stateHost.register("Base", {});
 

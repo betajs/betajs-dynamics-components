@@ -1,7 +1,7 @@
 /*
 Error: Undefined mixin 'flex'.
-        on line 10 of swipeitem.scss, in `flex'
-        from line 10 of swipeitem.scss
+        on line 10 of swipecontainer.scss, in `flex'
+        from line 10 of swipecontainer.scss
 
 5:   position: relative;
 6:   display: block;
@@ -16,8 +16,8 @@ Error: Undefined mixin 'flex'.
 15:   behind {
 
 Backtrace:
-swipeitem.scss:10:in `flex'
-swipeitem.scss:10
+swipecontainer.scss:10:in `flex'
+swipecontainer.scss:10
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:338:in `block in visit_mixin'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/stack.rb:98:in `block in with_mixin'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/stack.rb:115:in `with_frame'
@@ -82,4 +82,4 @@ swipeitem.scss:10
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined mixin 'flex'.\A         on line 10 of swipeitem.scss, in `flex'\A         from line 10 of swipeitem.scss\A \A 5:   position: relative;\A 6:   display: block;\A 7:   overflow: hidden;\A 8: \A 9:   icon {\A 10:     @include flex(0 0 $swipeitemheight);\A 11:     text-align: center;\A 12:     margin: auto;\A 13:   }\A 14: \A 15:   behind {"; }
+  content: "Error: Undefined mixin 'flex'.\A         on line 10 of swipecontainer.scss, in `flex'\A         from line 10 of swipecontainer.scss\A \A 5:   position: relative;\A 6:   display: block;\A 7:   overflow: hidden;\A 8: \A 9:   icon {\A 10:     @include flex(0 0 $swipeitemheight);\A 11:     text-align: center;\A 12:     margin: auto;\A 13:   }\A 14: \A 15:   behind {"; }

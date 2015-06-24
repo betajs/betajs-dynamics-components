@@ -1,9 +1,9 @@
 <title ba-click="collapsed = !collapsed">{{title}}</title>
 
-<listrepeat ba-if="{{!collapsed && collapsible}}" ba-repeat="{{collectionitem :: listcollection}}">
+<list ba-if="{{!collapsed && collapsible}}" ba-repeat="{{collectionitem :: listcollection}}">
 
     <ba-{{type}} ba-model="{{collectionitem}}">
         {{collectionitem.title}}
     </ba-{{type}}>
 
-</listrepeat>
+</list>

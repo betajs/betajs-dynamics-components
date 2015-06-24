@@ -5,7 +5,7 @@ window.components = new BetaJS.Collections.Collection({objects: [
     {title:'aa_template'},
     {title:'emailitem'},
     {title:'clickitem'},
-    {title:'swipeitem'},
+    {title:'swipecontainer'},
     {title:'list'},
     {title:'titledlist'},
     {title:'simplelist'},

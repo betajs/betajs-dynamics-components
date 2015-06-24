@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.1 - 2015-06-19
+betajs-dynamics-components - v0.0.1 - 2015-06-24
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -17,7 +17,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '19.1434752205479'
+		version: '21.1435176203274'
 	};
 });
 
@@ -41,11 +41,11 @@ BetaJS.Dynamics.Dynamic.Components.Templates['daypicker'] = '<div>Today</div> <d
 
 BetaJS.Dynamics.Dynamic.Components.Templates['timepicker'] = ' <time>      <ba-scrollpicker             ba-currentTop="{{false}}"             ba-value="{{=timevalue.hour}}">     </ba-scrollpicker>      <ba-scrollpicker             ba-currentTop="{{false}}"             ba-value="{{=timevalue.minute}}"             ba-increment="{{5}}"             ba-last="{{55}}">     </ba-scrollpicker>  </time>  <timepicker-divider>      <div>Time</div>      <div>Date</div>  </timepicker-divider>  <date>      <ba-datepicker>     </ba-datepicker>  </date> ';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['emaillist'] = ' <ba-searchlist         ba-listcollection="{{emailcollection}}"         ba-listitem="swipeitem">  </ba-searchlist>';
+BetaJS.Dynamics.Dynamic.Components.Templates['emaillist'] = ' <ba-searchlist         ba-listcollection="{{emailcollection}}"         ba-listitem="swipecontainer">  </ba-searchlist>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['tasklist'] = ' <ba-list         ba-listcollection="{{outer_collection}}"         ba-listitem="titledlist">  </ba-list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['swipeitem'] = ' <behind>     <icon class=\'{{lefticon}}\'></icon>     <div></div>     <icon class=\'{{righticon}}\'></icon> </behind>  <swipe>      <ba-{{type}}         class=\'{{itemclass}}\'         ba-model=\'{{model}}\'>         {{title}}     </ba-{{type}}>      <swipeleft>         <div></div>         <icon class=\'{{lefticon}}\'></icon>     </swipeleft>      <swiperight>         <icon class=\'{{righticon}}\'></icon>         <div></div>     </swiperight>  </swipe> ';
+BetaJS.Dynamics.Dynamic.Components.Templates['swipecontainer'] = ' <behind>     <icon class=\'{{lefticon}}\'></icon>     <div></div>     <icon class=\'{{righticon}}\'></icon> </behind>  <swipe>      <ba-{{type}}         class=\'{{itemclass}}\'         ba-model=\'{{model}}\'>         {{title}}     </ba-{{type}}>      <swipeleft>         <div></div>         <icon class=\'{{lefticon}}\'></icon>     </swipeleft>      <swiperight>         <icon class=\'{{righticon}}\'></icon>         <div></div>     </swiperight>  </swipe> ';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['clickitem'] = ' <clickitem         ba-click="click(model)">     {{model.title}} </clickitem>';
 
@@ -65,7 +65,7 @@ BetaJS.Dynamics.Dynamic.Components.Templates['list'] = ' <list ba-repeat="{{coll
 
 BetaJS.Dynamics.Dynamic.Components.Templates['searchlist'] = '<searchbox>     <icon class="icon-search"></icon>     <input placeholder="{{placeholder}}" value="{{=searchvalue}}"> </searchbox> <ba-list         ba-listitem="{{listitem}}"         ba-listcollection="{{listcollection}}">  </ba-list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['titledlist'] = '<title ba-click="collapsed = !collapsed">{{title}}</title>  <listrepeat ba-if="{{!collapsed && collapsible}}" ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{type}} ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{type}}>  </listrepeat>';
+BetaJS.Dynamics.Dynamic.Components.Templates['titledlist'] = '<title ba-click="collapsed = !collapsed">{{title}}</title>  <list ba-if="{{!collapsed && collapsible}}" ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{type}} ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{type}}>  </list>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['template'] = '<div>     {{placeholder}} </div>';
 
@@ -88,7 +88,7 @@ window.components = new BetaJS.Collections.Collection({objects: [
     {title:'aa_template'},
     {title:'emailitem'},
     {title:'clickitem'},
-    {title:'swipeitem'},
+    {title:'swipecontainer'},
     {title:'list'},
     {title:'titledlist'},
     {title:'simplelist'},
@@ -595,9 +595,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Tasklist", {
 }).register();
 
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Swipeitem", {
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Swipecontainer", {
 
-	template: BetaJS.Dynamics.Dynamic.Components.Templates.swipeitem,
+	template: BetaJS.Dynamics.Dynamic.Components.Templates.swipecontainer,
 
 	initial: {
 
@@ -1097,12 +1097,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Components", {
 
         create : function () {
             console.log('Components Loaded');
-
-            this.set('current_component', appstate.get("component_type") ? componentsByName(appstate.get("component_type")) : this.get('components').getByIndex(0));
-            appstate.on("change:component_type", function (component_type) {
-                this.set('current_component', componentsByName(component_type));
-            }, this);
-
         }
 
     }

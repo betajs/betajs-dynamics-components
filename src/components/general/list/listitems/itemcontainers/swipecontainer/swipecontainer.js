@@ -1,7 +1,7 @@
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Swipeitem", {
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Swipecontainer", {
 
-	template: BetaJS.Dynamics.Dynamic.Components.Templates.swipeitem,
+	template: BetaJS.Dynamics.Dynamic.Components.Templates.swipecontainer,
 
 	initial: {
 

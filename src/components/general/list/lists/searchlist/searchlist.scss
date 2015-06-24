@@ -12,6 +12,10 @@ ba-searchlist {
     width: 100%;
     border-bottom: 1px solid #ddd;
 
+    input {
+      @include flex(1 1 0);
+    }
+
     icon {
       @include flex(0 0 $searchboxheight);
       line-height: $searchboxheight;

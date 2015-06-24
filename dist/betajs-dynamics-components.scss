@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.1 - 2015-06-19
+betajs-dynamics-components - v0.0.1 - 2015-06-24
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -416,7 +416,7 @@ ba-tasklist {
 $swipeitemheight: 44px;
 $leftrightopacity: 0.5;
 
-ba-swipeitem {
+ba-swipecontainer {
   position: relative;
   display: block;
   overflow: hidden;
@@ -746,6 +746,10 @@ ba-searchlist {
     width: 100%;
     border-bottom: 1px solid #ddd;
 
+    input {
+      @include flex(1 1 0);
+    }
+
     icon {
       @include flex(0 0 $searchboxheight);
       line-height: $searchboxheight;
@@ -766,7 +770,7 @@ ba-titledlist {
     display: block
   }
 
-  listrepeat {
+  list {
     overflow: scroll;
     ba-listitem {display: block}
   }
