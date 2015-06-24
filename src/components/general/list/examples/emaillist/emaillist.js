@@ -9,16 +9,16 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Emaillist", {
             emailcollection : [
                 {
                     type : "emailitem",
-                    sender_salutatory_display : "Sender",
-                    recipient_salutatory_display : "Recipient",
+                    sender_display : "Sender",
+                    recipient_display : "Recipient",
                     subject : "Subject",
                     preview : "First Line...",
                     time : "18:30"
                 },
                 {
                     type : "emailitem",
-                    sender_salutatory_display : "V@g.com",
-                    recipient_salutatory_display : "O@g.com",
+                    sender_display : "V@g.com",
+                    recipient_display : "O@g.com",
                     subject : "Email Subject",
                     preview : "Hello O,",
                     time : "11:55"

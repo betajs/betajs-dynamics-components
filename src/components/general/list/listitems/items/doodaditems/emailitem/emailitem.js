@@ -5,8 +5,8 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Emailitem", {
 
     initial : {
         attrs : {
-            sender_salutatory_display : "Sender",
-            recipient_salutatory_display : "Recipient",
+            sender_display : "Sender",
+            recipient_display : "Recipient",
             subject : "Subject",
             preview : "First Line...",
             time : "18:30"
