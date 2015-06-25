@@ -555,7 +555,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '21.1435176203274'
+		version: '23.1435189832132'
 	};
 });
 
@@ -589,7 +589,7 @@ BetaJS.Dynamics.Dynamic.Components.Templates['clickitem'] = ' <clickitem        
 
 BetaJS.Dynamics.Dynamic.Components.Templates['contactitem'] = '<div ba-tap="addEmail(doodad)">      <iconbox>         <icon>             {{doodad.symbol}}         </icon>     </iconbox>      <contactmain>          <contactname>             {{doodad.name}}         </contactname>          <contactemail>             {{doodad.email}}         </contactemail>      </contactmain>  </div>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['emailitem'] = ' <email-status class="icon-circle show-{{doodad.read}}"></email-status>  <email-main>     <email-topline>         <from>{{sender_salutatory_display}} to {{recipient_salutatory_display}}</from>         <time>{{time}}</time>     </email-topline>     <email-bottom>         <email-content>             <subject>                 {{subject}}             </subject>             <firstline>{{preview}}</firstline>         </email-content>         <star class="icon-star"></star>     </email-bottom> </email-main>';
+BetaJS.Dynamics.Dynamic.Components.Templates['emailitem'] = ' <email-status class="icon-circle show-{{doodad.read}}"></email-status>  <email-main>     <email-topline>         <from>{{sender_display}} to {{recipient_display}}</from>         <time>{{displayed_time}}</time>     </email-topline>     <email-bottom>         <email-content>             <subject>                 {{subject}}             </subject>             <firstline>{{preview}}</firstline>         </email-content>         <star class="icon-star"></star>     </email-bottom> </email-main>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['eventitem'] = '<time ba-tap-href="#">     <start>         {{two_digits(doodad.start_date_decoded.hour)}}:{{two_digits(doodad.start_date_decoded.minute)}}     </start>     <duration>         {{doodad.duration}}h     </duration> </time>  <title>     {{doodad.preview}} </title>  <span class="icon-star-empty" ba-tap-href="#"></span>';
 
@@ -1023,19 +1023,19 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Emaillist", {
             emailcollection : [
                 {
                     type : "emailitem",
-                    sender_salutatory_display : "Sender",
-                    recipient_salutatory_display : "Recipient",
+                    sender_display : "Sender",
+                    recipient_display : "Recipient",
                     subject : "Subject",
                     preview : "First Line...",
-                    time : "18:30"
+                    time : BetaJS.Time.now()
                 },
                 {
                     type : "emailitem",
-                    sender_salutatory_display : "V@g.com",
-                    recipient_salutatory_display : "O@g.com",
+                    sender_display : "V@g.com",
+                    recipient_display : "O@g.com",
                     subject : "Email Subject",
                     preview : "Hello O,",
-                    time : "11:55"
+                    time : BetaJS.Time.now()
                 }
             ]
         },
@@ -1330,14 +1330,16 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Emailitem", {
 
     initial : {
         attrs : {
-            sender_salutatory_display : "Sender",
-            recipient_salutatory_display : "Recipient",
+            sender_display : "Sender",
+            recipient_display : "Recipient",
             subject : "Subject",
             preview : "First Line...",
-            time : "18:30"
+            time : (BetaJS.Time.now()-100000000),
+            displayed_time :  "18:00"
         },
 
         create : function () {
+
             if (this.get("model")) {
                 BetaJS.Objs.iter(this.get("model").data(), function (modelValue, attrKey) {
                     var attrValue = this.isArgumentAttr(attrKey) ? this.get(attrKey) : modelValue;
@@ -1346,7 +1348,32 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Emailitem", {
                     this.properties().bind(attrKey, this.get("model"));
                 }, this);
             }
+
+            this.call('set_display_time');
+
+        },
+
+        functions : {
+            set_display_time : function() {
+                var now = BetaJS.Time.now();
+                var decodedTime = BetaJS.Time.decodeTime(this.get('time'),true);
+                var currentTime = BetaJS.Time.decodeTime(now,true);
+
+                var r = function (n) {return ("0" + n).slice(-2);}
+
+                if (decodedTime.day == currentTime.day && (now - this.get('time')) < 25 * 60 * 60 * 1000)
+                    this.set('displayed_time',
+                        decodedTime.hour + ':' +
+                        decodedTime.minute
+                    );
+                else
+                    this.set('displayed_time',
+                        decodedTime.day + '/' +
+                        r(decodedTime.month)
+                    );
+            }
         }
+
     }
 
 }).register();

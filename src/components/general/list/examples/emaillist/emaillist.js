@@ -13,7 +13,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Emaillist", {
                     recipient_display : "Recipient",
                     subject : "Subject",
                     preview : "First Line...",
-                    time : "18:30"
+                    time : BetaJS.Time.now()
                 },
                 {
                     type : "emailitem",
@@ -21,7 +21,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Emaillist", {
                     recipient_display : "O@g.com",
                     subject : "Email Subject",
                     preview : "Hello O,",
-                    time : "11:55"
+                    time : BetaJS.Time.now()
                 }
             ]
         },
