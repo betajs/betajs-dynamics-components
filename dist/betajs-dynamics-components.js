@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.1 - 2015-06-24
+betajs-dynamics-components - v0.0.1 - 2015-07-07
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -537,7 +537,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.0.1 - 2015-06-24
+betajs-dynamics-components - v0.0.1 - 2015-07-07
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -555,17 +555,21 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '23.1435189832132'
+		version: '24.1436278878855'
 	};
 });
 
 BetaJS.Dynamics.Dynamic.Components = {};
 BetaJS.Dynamics.Dynamic.Components.Templates = BetaJS.Dynamics.Dynamic.Components.Templates || {};
-BetaJS.Dynamics.Dynamic.Components.Templates['scrollpicker'] = '<element ba-repeat-element="{{element_value :: value_array}}" data-id="{{element_value}}">         {{element_value}} </element>';
+BetaJS.Dynamics.Dynamic.Components.Templates['signin'] = ' <logoarea>     <welcome>         <span>{{welcomemessage}}</span>     </welcome>     <name>         <h1>{{brandname}}</h1>     </name>     <div>         <img src="assets/assets/Zipper.png" />     </div>     <slogan>         <span>{{slogan}}</span>     </slogan>     <version>         <h6>Version {{version}}</h6>     </version> </logoarea>  <signuparea>      <input             placeholder="Email"             type="text"             ba-value="email">     <input             placeholder="Password"             type="password"             ba-value="password">     <button ba-click="signin()">         {{signin}}     </button>     <a ba-click="register()">{{register}}</a>  </signuparea> ';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['signingoogle'] = '  <logoarea>     <welcome>         <span>{{welcomemessage}}</span>     </welcome>     <name>         <h1>{{brandname}}</h1>     </name>     <div>         <img src="assets/assets/Zipper.png" />     </div>     <slogan>         <span>{{slogan}}</span>     </slogan>     <version>         <h6>Version {{version}}</h6>     </version> </logoarea>  <signuparea>      <div>         <h6>For this Version we only support Google Accounts,             we will add support for other services soon</h6>     </div>     <button ba-click="signin()">         Sign in via Google     </button>     <a ng-click="startmessage.show = true">{{register}}</a>  </signuparea>  <ba-overlaycontainer         show="startmessage"         input="My Message"         overlay="ba-messageoverlay"> </ba-overlaycontainer> ';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['overlaycontainer'] = '<overlaycontainer     ba-click="showoverlay = false"     ba-if="{{showoverlay}}">      <overlayinner>          <ba-{{overlay}} ba-value=\'{{=value}}\'>             <message>This is an overlay</message>         </ba-{{overlay}}>      </overlayinner>  </overlaycontainer>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['testoverlaycontainer'] = ' <button ba-click="showoverlay = !showoverlay">Show Overlaycontainer</button>  <ba-overlaycontainer         ba-overlay="{{=overlay}}"         ba-showoverlay="{{=showoverlay}}">          </ba-overlaycontainer>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['scrollpicker'] = '<element ba-repeat-element="{{element_value :: value_array}}" data-id="{{element_value}}">         {{element_value}} </element>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['generalsetting'] = '<item ba-tap="showwidget = !showwidget">          <icon class="{{type_icon}}"></icon>         <key>{{key_value}}</key>         <value>{{displayed_value}}</value>         <icon class="icon-chevron-right"></icon>  </item>  <ba-{{widget}}         ba-if="{{showwidget && !overlay}}"         ba-value="{{=value}}"> </ba-{{widget}}>  <ba-overlaycontainer         ba-if="{{showwidget && overlay}}"         ba-value="{{=value}}"         ba-showoverlay="{{=showwidget}}"         ba-overlay="{{overlay}}"> </ba-overlaycontainer>';
 
@@ -587,16 +591,6 @@ BetaJS.Dynamics.Dynamic.Components.Templates['swipecontainer'] = ' <behind>     
 
 BetaJS.Dynamics.Dynamic.Components.Templates['clickitem'] = ' <clickitem         ba-click="click(model)">     {{model.title}} </clickitem>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['contactitem'] = '<div ba-tap="addEmail(doodad)">      <iconbox>         <icon>             {{doodad.symbol}}         </icon>     </iconbox>      <contactmain>          <contactname>             {{doodad.name}}         </contactname>          <contactemail>             {{doodad.email}}         </contactemail>      </contactmain>  </div>';
-
-BetaJS.Dynamics.Dynamic.Components.Templates['emailitem'] = ' <email-status class="icon-circle show-{{doodad.read}}"></email-status>  <email-main>     <email-topline>         <from>{{sender_display}} to {{recipient_display}}</from>         <time>{{displayed_time}}</time>     </email-topline>     <email-bottom>         <email-content>             <subject>                 {{subject}}             </subject>             <firstline>{{preview}}</firstline>         </email-content>         <star class="icon-star"></star>     </email-bottom> </email-main>';
-
-BetaJS.Dynamics.Dynamic.Components.Templates['eventitem'] = '<time ba-tap-href="#">     <start>         {{two_digits(doodad.start_date_decoded.hour)}}:{{two_digits(doodad.start_date_decoded.minute)}}     </start>     <duration>         {{doodad.duration}}h     </duration> </time>  <title>     {{doodad.preview}} </title>  <span class="icon-star-empty" ba-tap-href="#"></span>';
-
-BetaJS.Dynamics.Dynamic.Components.Templates['noteitem'] = '<noteitem>     {{doodad.preview}}     <!--{{type}}--> </noteitem> ';
-
-BetaJS.Dynamics.Dynamic.Components.Templates['taskitem'] = '<div>     {{title}} </div>';
-
 BetaJS.Dynamics.Dynamic.Components.Templates['selectableitem'] = ' <selectableitem         ba-class="{{{selected : selected == model}}}"         ba-click="select(model)">     {{model.title}} </selectableitem>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['list'] = ' <list ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{listitem}}         ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{listitem}}>  </list>';
@@ -604,6 +598,16 @@ BetaJS.Dynamics.Dynamic.Components.Templates['list'] = ' <list ba-repeat="{{coll
 BetaJS.Dynamics.Dynamic.Components.Templates['searchlist'] = '<searchbox>     <icon class="icon-search"></icon>     <input placeholder="{{placeholder}}" value="{{=searchvalue}}"> </searchbox> <ba-list         ba-listitem="{{listitem}}"         ba-listcollection="{{listcollection}}">  </ba-list>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['titledlist'] = '<title ba-click="collapsed = !collapsed">{{title}}</title>  <list ba-if="{{!collapsed && collapsible}}" ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{type}} ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{type}}>  </list>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['contactitem'] = '<div ba-tap="addEmail(doodad)">      <iconbox>         <icon>             {{doodad.symbol}}         </icon>     </iconbox>      <contactmain>          <contactname>             {{doodad.name}}         </contactname>          <contactemail>             {{doodad.email}}         </contactemail>      </contactmain>  </div>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['emailitem'] = ' <email-status class="icon-circle show-{{read}}"></email-status>  <email-main>     <email-topline>         <from>{{sender_display}} to {{recipient_display}}</from>         <time>{{displayed_time}}</time>     </email-topline>     <email-bottom>         <email-content>             <subject>                 {{subject}}             </subject>             <firstline>{{preview}}</firstline>         </email-content>         <star class="icon-star"></star>     </email-bottom> </email-main>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['eventitem'] = '<time ba-tap-href="#">     <start>         {{two_digits(doodad.start_date_decoded.hour)}}:{{two_digits(doodad.start_date_decoded.minute)}}     </start>     <duration>         {{doodad.duration}}h     </duration> </time>  <title>     {{doodad.preview}} </title>  <span class="icon-star-empty" ba-tap-href="#"></span>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['noteitem'] = '<noteitem>     {{doodad.preview}}     <!--{{type}}--> </noteitem> ';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['taskitem'] = '<div>     {{title}} </div>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['template'] = '<div>     {{placeholder}} </div>';
 
@@ -621,6 +625,8 @@ BetaJS.Dynamics.Dynamic.Components.Templates['index'] = '<!DOCTYPE html> <html> 
 
 
 window.components = new BetaJS.Collections.Collection({objects: [
+    {title:'signin'},
+    {title:'signingoogle'},
     {title:'emaillist'},
     {title:'tasklist'},
     {title:'aa_template'},
@@ -645,55 +651,201 @@ window.componentsBytitle = function (title) {
 };
 
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Pages.Signin", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.selectableitem,
+	template: BetaJS.Dynamics.Dynamic.Components.Templates.signin,
 
-    initial: {
+	initial: {
 
-        bind : {
-            selected : "<:selected_item",
-            parentlistcollection : "<:listcollection"
-        },
+		attrs: {
+			welcomemessage : 'Welcome',
+			brandname : 'Doodads',
+			slogan : 'Simplify your life',
+			signin : "Signin",
+			register : "Register"
+		},
 
-        attrs: {
-            //selected: false,
-            value: {
-                name :'Data Placeholder',
-                selected : false
-            }
-        },
+		create: function () {
 
-        create : function () {
+		},
 
-            console.log("Selected Item : !!! :");
-            console.log(this.parent());
-            console.log(this.parent().get('selected_item'));
-            console.log(this.get('selected'));
+		functions: {
 
-            var index = this.get('parentlistcollection').getIndex(this.get('value'));
-            if (index == 0 && !this.parent().get('selected_item'))
-                this.parent().set('selected_item',this.get('value'));
+			signin : function () {
+				//if (App.Config.tags.server) {
+				//	BetaJS.$.ajax({
+				//		type : "POST",
+				//		async : true,
+				//		url : "/api/v1/auth",
+				//		data : {
+				//			gmail_user : $scope.email,
+				//			gmail_password : $scope.password
+				//		},
+				//		success : function() {
+				//			App.Config.email = $scope.email;
+				//			App.Config.signed_in = true;
+				//			//Remotely.user($scope.email);
+				//			//$state.go("list.mix");
+				//		},
+				//		error : function() {
+				//			alert("Password not recognised");
+				//		}
+				//	});
+				//} else {
+				//	App.Config.email = $scope.email;
+				//	App.Config.signed_in = true;
+				//	//$state.go("list.mix");
+				//}
+			}
 
-            console.log("Index : " + index);
-            console.log(this.get('value'));
+		}
+	}
 
-        },
+}).register();
 
-        functions : {
-            select : function (data) {
-                this.parent().set('selected_item',this.get('value'));
-                console.log('Set new');
-                console.log(this.get('value'));
-                console.log(this.parent().get('selected_item'));
-                console.log(this.get('selected'));
-                //this.set('selected',!this.get('selected'));
-            }
+//
+//appControllers.controller('startscreenController', ['$scope', '$state', '$routeParams', '$http', '$location',
+//function($scope, $state, $http, $location) {
+//
+//	BetaJS.Angular.Scope.linkKeyValue($scope, App.Settings, "email", "email", true);
+//
+//	$scope.version = App.Config.app.version;
+//	$scope._ = function(s) {
+//		return BetaJS.Locales.get("doodadsapp.account." + s);
+//	};
+//	$scope.signin = function() {
+//		if (App.Config.tags.server) {
+//			BetaJS.$.ajax({
+//				type : "POST",
+//				async : true,
+//				url : "/api/v1/auth",
+//				data : {
+//					gmail_user : $scope.email,
+//					gmail_password : $scope.password
+//				},
+//				success : function() {
+//					App.Config.email = $scope.email;
+//					App.Config.signed_in = true;
+//					//Remotely.user($scope.email);
+//                    //$state.go("list.mix");
+//				},
+//				error : function() {
+//					alert("Password not recognised");
+//				}
+//			});
+//		} else {
+//			App.Config.email = $scope.email;
+//			App.Config.signed_in = true;
+//            //$state.go("list.mix");
+//		}
+//	};
+//	$scope.more = function() {
+//		// Nothing here for you.
+//	};
+//	//if (App.Config.signed_in)
+//	//	$state.go("list.mix");
+//}]);
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Pages.XXX", {
+
+	template: BetaJS.Dynamics.Dynamic.Components.Templates.xxx,
+
+	initial: {
+
+		attrs: {
+
+		},
+
+		create: function () {
+
+		},
+
+		functions: {
+
+		}
+	}
+
+}).register();
+
+//
+//appControllers.controller('signingoogleController', ['$scope', '$state', '$routeParams', '$http', '$location',
+//function($scope, $state, $http, $location) {
+//
+//	var url;
+//
+//	if (App.Config.tags.server) {
+//		BetaJS.$.ajax({
+//			type : "POST",
+//			async : true,
+//			url : "/api/accounts/signin",
+//			data: {
+//				redirect: "/"
+//			},
+//			success : function(data) {
+//				if (data.email) {
+//					App.Config.email = data.email;
+//					App.Config.signed_in = true;
+//					$state.go("list.mix");
+//				} else {
+//					console.log(data);
+//					url = data.oauth;
+//				}
+//			}
+//		});
+//	}
+//
+//	$scope.startmessage = {show: false};
+//
+//	$scope.version = App.Config.app.version;
+//	$scope._ = function(s) {
+//		return BetaJS.Locales.get("doodadsapp.account." + s);
+//	};
+//	$scope.signin = function() {
+//		if (App.Config.tags.server) {
+//			document.location.href = url;
+//		} else {
+//			//App.Config.email = $scope.email;
+//			App.Config.signed_in = true;
+//            $state.go("list.mix");
+//		}
+//	};
+//}]);
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Overlaycontainer", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.overlaycontainer,
+
+    initial : {
+
+        attrs : {
+            overlay : "",
+            value : null,
+            showoverlay : true
         }
 
     }
 
 }).register();
+
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Testoverlaycontainer", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.testoverlaycontainer,
+
+    initial : {
+
+        attrs : {
+            showoverlay : false,
+            overlay : "timepicker"
+        }
+
+    }
+
+}).register();
+
 
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Scrollpicker", {
@@ -786,39 +938,55 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Scrollpicker", {
 }).register();
 
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Overlaycontainer", {
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.overlaycontainer,
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.selectableitem,
 
-    initial : {
+    initial: {
 
-        attrs : {
-            overlay : "",
-            value : null,
-            showoverlay : true
+        bind : {
+            selected : "<:selected_item",
+            parentlistcollection : "<:listcollection"
+        },
+
+        attrs: {
+            //selected: false,
+            value: {
+                name :'Data Placeholder',
+                selected : false
+            }
+        },
+
+        create : function () {
+
+            console.log("Selected Item : !!! :");
+            console.log(this.parent());
+            console.log(this.parent().get('selected_item'));
+            console.log(this.get('selected'));
+
+            var index = this.get('parentlistcollection').getIndex(this.get('value'));
+            if (index == 0 && !this.parent().get('selected_item'))
+                this.parent().set('selected_item',this.get('value'));
+
+            console.log("Index : " + index);
+            console.log(this.get('value'));
+
+        },
+
+        functions : {
+            select : function (data) {
+                this.parent().set('selected_item',this.get('value'));
+                console.log('Set new');
+                console.log(this.get('value'));
+                console.log(this.parent().get('selected_item'));
+                console.log(this.get('selected'));
+                //this.set('selected',!this.get('selected'));
+            }
         }
 
     }
 
 }).register();
-
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Testoverlaycontainer", {
-
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.testoverlaycontainer,
-
-    initial : {
-
-        attrs : {
-            showoverlay : false,
-            overlay : "timepicker"
-        }
-
-    }
-
-}).register();
-
 
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Generalsetting", {
@@ -1274,6 +1442,150 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Clickitem", {
 }).register();
 
 
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.selectableitem,
+
+    initial: {
+
+        bind : {
+            selected : "<:selected_item",
+            parentlistcollection : "<:listcollection"
+        },
+
+        attrs: {
+            model: {
+                title :'Data Placeholder',
+                selected : false
+            }
+        },
+
+        create : function () {
+
+            var index = this.get('parentlistcollection').getIndex(this.get('model'));
+            if (index == 0 && !this.parent().get('selected_item'))
+                this.parent().set('selected_item',this.get('model'));
+
+        },
+
+        functions : {
+            select : function () {
+                this.parent().set('selected_item',this.get('model'));
+            }
+        }
+
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.list,
+
+    initial: {
+
+        attrs: {
+            listitem : "item"
+        },
+
+        collections : {
+            listcollection : [
+                {title: "Item 1"},
+                {title: "Item 2"},
+                {title: "Item 3"}
+            ]
+        },
+
+        create : function () {
+            if (this.get("model")) {
+                BetaJS.Objs.iter(this.get("model").data(), function (modelValue, attrKey) {
+                    var attrValue = this.isArgumentAttr(attrKey) ? this.get(attrKey) : modelValue;
+                    this.set(attrKey, attrValue);
+                    this.get("model").set(attrKey, attrValue);
+                    this.properties().bind(attrKey, this.get("model"));
+                }, this);
+            }
+        }
+
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Searchlist", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.searchlist,
+
+    initial: {
+
+        attrs: {
+            placeholder : "Search for",
+            searchvalue : "",
+            listitem : "clickitem"
+        },
+
+        collections : {
+            listcollection : [
+                {title: "Item 1"},
+                {title: "Item 2"},
+                {title: "Item 3"}
+            ]
+        },
+
+        create : function () {
+            if (this.get("model")) {
+                BetaJS.Objs.iter(this.get("model").data(), function (modelValue, attrKey) {
+                    var attrValue = this.isArgumentAttr(attrKey) ? this.get(attrKey) : modelValue;
+                    this.set(attrKey, attrValue);
+                    this.get("model").set(attrKey, attrValue);
+                    this.properties().bind(attrKey, this.get("model"));
+                }, this);
+            }
+        }
+
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.titledlist,
+
+    initial: {
+
+        attrs: {
+            collapsed : false,
+            collapsible : true,
+            title : "Title",
+            type : "selectableitem"
+        },
+
+        collections : {
+            listcollection : [
+                {title: "Item 1"},
+                {title: "Item 2"},
+                {title: "Item 3"}
+            ]
+        },
+
+        create : function () {
+            if (this.get("model")) {
+                BetaJS.Objs.iter(this.get("model").data(), function (modelValue, attrKey) {
+                    var attrValue = this.isArgumentAttr(attrKey) ? this.get(attrKey) : modelValue;
+                    this.set(attrKey, attrValue);
+                    this.get("model").set(attrKey, attrValue);
+                    this.properties().bind(attrKey, this.get("model"));
+                }, this);
+            }
+        }
+
+    }
+
+}).register();
+
+
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Contactitem", {
 
     template: BetaJS.Dynamics.Dynamic.Components.Templates.contactitem
@@ -1479,150 +1791,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Taskitem", {
 
         attrs : {
             title : "Task"
-        }
-
-    }
-
-}).register();
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
-
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.selectableitem,
-
-    initial: {
-
-        bind : {
-            selected : "<:selected_item",
-            parentlistcollection : "<:listcollection"
-        },
-
-        attrs: {
-            model: {
-                title :'Data Placeholder',
-                selected : false
-            }
-        },
-
-        create : function () {
-
-            var index = this.get('parentlistcollection').getIndex(this.get('model'));
-            if (index == 0 && !this.parent().get('selected_item'))
-                this.parent().set('selected_item',this.get('model'));
-
-        },
-
-        functions : {
-            select : function () {
-                this.parent().set('selected_item',this.get('model'));
-            }
-        }
-
-    }
-
-}).register();
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
-
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.list,
-
-    initial: {
-
-        attrs: {
-            listitem : "item"
-        },
-
-        collections : {
-            listcollection : [
-                {title: "Item 1"},
-                {title: "Item 2"},
-                {title: "Item 3"}
-            ]
-        },
-
-        create : function () {
-            if (this.get("model")) {
-                BetaJS.Objs.iter(this.get("model").data(), function (modelValue, attrKey) {
-                    var attrValue = this.isArgumentAttr(attrKey) ? this.get(attrKey) : modelValue;
-                    this.set(attrKey, attrValue);
-                    this.get("model").set(attrKey, attrValue);
-                    this.properties().bind(attrKey, this.get("model"));
-                }, this);
-            }
-        }
-
-    }
-
-}).register();
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Searchlist", {
-
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.searchlist,
-
-    initial: {
-
-        attrs: {
-            placeholder : "Search for",
-            searchvalue : "",
-            listitem : "clickitem"
-        },
-
-        collections : {
-            listcollection : [
-                {title: "Item 1"},
-                {title: "Item 2"},
-                {title: "Item 3"}
-            ]
-        },
-
-        create : function () {
-            if (this.get("model")) {
-                BetaJS.Objs.iter(this.get("model").data(), function (modelValue, attrKey) {
-                    var attrValue = this.isArgumentAttr(attrKey) ? this.get(attrKey) : modelValue;
-                    this.set(attrKey, attrValue);
-                    this.get("model").set(attrKey, attrValue);
-                    this.properties().bind(attrKey, this.get("model"));
-                }, this);
-            }
-        }
-
-    }
-
-}).register();
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
-
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.titledlist,
-
-    initial: {
-
-        attrs: {
-            collapsed : false,
-            collapsible : true,
-            title : "Title",
-            type : "selectableitem"
-        },
-
-        collections : {
-            listcollection : [
-                {title: "Item 1"},
-                {title: "Item 2"},
-                {title: "Item 3"}
-            ]
-        },
-
-        create : function () {
-            if (this.get("model")) {
-                BetaJS.Objs.iter(this.get("model").data(), function (modelValue, attrKey) {
-                    var attrValue = this.isArgumentAttr(attrKey) ? this.get(attrKey) : modelValue;
-                    this.set(attrKey, attrValue);
-                    this.get("model").set(attrKey, attrValue);
-                    this.properties().bind(attrKey, this.get("model"));
-                }, this);
-            }
         }
 
     }

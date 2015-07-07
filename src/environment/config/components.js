@@ -1,5 +1,7 @@
 
 window.components = new BetaJS.Collections.Collection({objects: [
+    {title:'signin'},
+    {title:'signingoogle'},
     {title:'emaillist'},
     {title:'tasklist'},
     {title:'aa_template'},

@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.1 - 2015-06-24
+betajs-dynamics-components - v0.0.1 - 2015-07-07
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -37,7 +37,7 @@ ul {
   margin: 0;
   padding: 0; }
 
-ba-scrollpicker {
+ba-signin {
   -webkit-box-flex: 1 1 0;
   -moz-box-flex: 1 1 0;
   -webkit-flex: 1 1 0;
@@ -51,25 +51,198 @@ ba-scrollpicker {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column;
-  overflow-y: scroll; }
-  ba-scrollpicker element {
-    -webkit-box-flex: 0 0 30px;
-    -moz-box-flex: 0 0 30px;
-    -webkit-flex: 0 0 30px;
-    -ms-flex: 0 0 30px;
-    flex: 0 0 30px;
+  top: 0;
+  bottom: 0;
+  text-align: center;
+  background: #ffffff; }
+  ba-signin logoarea {
+    -webkit-box-flex: 5 0 0;
+    -moz-box-flex: 5 0 0;
+    -webkit-flex: 5 0 0;
+    -ms-flex: 5 0 0;
+    flex: 5 0 0;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
-    color: #999;
-    background: #F4F4F4;
-    line-height: 30px;
-    display: block;
-    text-align: center; }
-  ba-scrollpicker .selected {
-    color: black; }
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column; }
+    ba-signin logoarea * {
+      -webkit-box-flex: 1 1 auto;
+      -moz-box-flex: 1 1 auto;
+      -webkit-flex: 1 1 auto;
+      -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      margin: auto; }
+    ba-signin logoarea slogan {
+      color: #999; }
+  ba-signin signuparea {
+    -webkit-box-flex: 3 0 0;
+    -moz-box-flex: 3 0 0;
+    -webkit-flex: 3 0 0;
+    -ms-flex: 3 0 0;
+    flex: 3 0 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding: 10px 0; }
+    ba-signin signuparea div {
+      -webkit-box-flex: 1 0 0;
+      -moz-box-flex: 1 0 0;
+      -webkit-flex: 1 0 0;
+      -ms-flex: 1 0 0;
+      flex: 1 0 0;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex; }
+      ba-signin signuparea div h6 {
+        margin: auto; }
+    ba-signin signuparea input {
+      -webkit-box-flex: 0 1 35px;
+      -moz-box-flex: 0 1 35px;
+      -webkit-flex: 0 1 35px;
+      -ms-flex: 0 1 35px;
+      flex: 0 1 35px;
+      width: 80%;
+      margin: auto;
+      margin-bottom: 10px;
+      border-radius: 2px;
+      border: 1px solid #E2E2E2;
+      padding-left: 5px; }
+    ba-signin signuparea button {
+      -webkit-box-flex: 0 1 40px;
+      -moz-box-flex: 0 1 40px;
+      -webkit-flex: 0 1 40px;
+      -ms-flex: 0 1 40px;
+      flex: 0 1 40px;
+      width: 80%;
+      margin: 10px auto;
+      border-radius: 2px;
+      background: dodgerblue;
+      color: #ffffff;
+      letter-spacing: 1px; }
+    ba-signin signuparea a {
+      -webkit-box-flex: 1 0 0;
+      -moz-box-flex: 1 0 0;
+      -webkit-flex: 1 0 0;
+      -ms-flex: 1 0 0;
+      flex: 1 0 0;
+      text-decoration: underline; }
+
+.keyboard-active h6,
+.keyboard-active img {
+  display: none; }
+
+ba-signingoogle {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  top: 0;
+  bottom: 0;
+  text-align: center;
+  background: #ffffff; }
+  ba-signingoogle logoarea {
+    -webkit-box-flex: 5 0 0;
+    -moz-box-flex: 5 0 0;
+    -webkit-flex: 5 0 0;
+    -ms-flex: 5 0 0;
+    flex: 5 0 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column; }
+    ba-signingoogle logoarea * {
+      -webkit-box-flex: 1 1 auto;
+      -moz-box-flex: 1 1 auto;
+      -webkit-flex: 1 1 auto;
+      -ms-flex: 1 1 auto;
+      flex: 1 1 auto;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      margin: auto; }
+    ba-signingoogle logoarea slogan {
+      color: #999; }
+  ba-signingoogle signuparea {
+    -webkit-box-flex: 3 0 0;
+    -moz-box-flex: 3 0 0;
+    -webkit-flex: 3 0 0;
+    -ms-flex: 3 0 0;
+    flex: 3 0 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    padding: 10px 0; }
+    ba-signingoogle signuparea input {
+      -webkit-box-flex: 0 1 35px;
+      -moz-box-flex: 0 1 35px;
+      -webkit-flex: 0 1 35px;
+      -ms-flex: 0 1 35px;
+      flex: 0 1 35px;
+      width: 80%;
+      margin: auto;
+      margin-bottom: 10px;
+      border-radius: 2px;
+      border: 1px solid #E2E2E2;
+      padding-left: 5px; }
+    ba-signingoogle signuparea button {
+      -webkit-box-flex: 0 1 40px;
+      -moz-box-flex: 0 1 40px;
+      -webkit-flex: 0 1 40px;
+      -ms-flex: 0 1 40px;
+      flex: 0 1 40px;
+      width: 80%;
+      margin: 10px auto;
+      border-radius: 2px;
+      background: dodgerblue;
+      color: #ffffff;
+      letter-spacing: 1px; }
+    ba-signingoogle signuparea a {
+      -webkit-box-flex: 1 0 0;
+      -moz-box-flex: 1 0 0;
+      -webkit-flex: 1 0 0;
+      -ms-flex: 1 0 0;
+      flex: 1 0 0;
+      text-decoration: underline; }
+
+.keyboard-active h6,
+.keyboard-active img {
+  display: none; }
 
 overlaycontainer {
   position: absolute;
@@ -104,6 +277,40 @@ ba-testoverlaycontainer {
     padding: 14px 28px;
     font-size: 13px;
     font-family: "AvenirNextLTPro-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif; }
+
+ba-scrollpicker {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  overflow-y: scroll; }
+  ba-scrollpicker element {
+    -webkit-box-flex: 0 0 30px;
+    -moz-box-flex: 0 0 30px;
+    -webkit-flex: 0 0 30px;
+    -ms-flex: 0 0 30px;
+    flex: 0 0 30px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    color: #999;
+    background: #F4F4F4;
+    line-height: 30px;
+    display: block;
+    text-align: center; }
+  ba-scrollpicker .selected {
+    color: black; }
 
 ba-generalsetting item {
   -webkit-box-flex: 1 1 0;
@@ -495,6 +702,87 @@ ba-clickitem {
     line-height: 44px;
     display: block; }
 
+ba-selectableitem selectableitem {
+  display: block; }
+ba-selectableitem .selected {
+  background: lightgrey; }
+
+ba-list list {
+  overflow-y: scroll; }
+  ba-list list ba-item {
+    display: block; }
+
+ba-searchlist {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%; }
+  ba-searchlist searchbox {
+    -webkit-box-flex: 0 0 44px;
+    -moz-box-flex: 0 0 44px;
+    -webkit-flex: 0 0 44px;
+    -ms-flex: 0 0 44px;
+    flex: 0 0 44px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    width: 100%;
+    border-bottom: 1px solid #ddd; }
+    ba-searchlist searchbox input {
+      -webkit-box-flex: 1 1 0;
+      -moz-box-flex: 1 1 0;
+      -webkit-flex: 1 1 0;
+      -ms-flex: 1 1 0;
+      flex: 1 1 0; }
+    ba-searchlist searchbox icon {
+      -webkit-box-flex: 0 0 44px;
+      -moz-box-flex: 0 0 44px;
+      -webkit-flex: 0 0 44px;
+      -ms-flex: 0 0 44px;
+      flex: 0 0 44px;
+      line-height: 44px;
+      text-align: center; }
+  ba-searchlist ba-listitem {
+    display: block; }
+
+ba-titledlist {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+  ba-titledlist title {
+    -webkit-box-flex: 0 0;
+    -moz-box-flex: 0 0;
+    -webkit-flex: 0 0;
+    -ms-flex: 0 0;
+    flex: 0 0;
+    display: block; }
+  ba-titledlist list {
+    overflow: scroll; }
+    ba-titledlist list ba-listitem {
+      display: block; }
+
 ba-contactitem {
   -webkit-box-flex: 1 0 0;
   -moz-box-flex: 1 0 0;
@@ -788,87 +1076,6 @@ noteitem {
   list-style: none;
   margin: 0px;
   vertical-align: middle; }
-
-ba-selectableitem selectableitem {
-  display: block; }
-ba-selectableitem .selected {
-  background: lightgrey; }
-
-ba-list list {
-  overflow-y: scroll; }
-  ba-list list ba-item {
-    display: block; }
-
-ba-searchlist {
-  -webkit-box-flex: 1 1 0;
-  -moz-box-flex: 1 1 0;
-  -webkit-flex: 1 1 0;
-  -ms-flex: 1 1 0;
-  flex: 1 1 0;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-  width: 100%; }
-  ba-searchlist searchbox {
-    -webkit-box-flex: 0 0 44px;
-    -moz-box-flex: 0 0 44px;
-    -webkit-flex: 0 0 44px;
-    -ms-flex: 0 0 44px;
-    flex: 0 0 44px;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    width: 100%;
-    border-bottom: 1px solid #ddd; }
-    ba-searchlist searchbox input {
-      -webkit-box-flex: 1 1 0;
-      -moz-box-flex: 1 1 0;
-      -webkit-flex: 1 1 0;
-      -ms-flex: 1 1 0;
-      flex: 1 1 0; }
-    ba-searchlist searchbox icon {
-      -webkit-box-flex: 0 0 44px;
-      -moz-box-flex: 0 0 44px;
-      -webkit-flex: 0 0 44px;
-      -ms-flex: 0 0 44px;
-      flex: 0 0 44px;
-      line-height: 44px;
-      text-align: center; }
-  ba-searchlist ba-listitem {
-    display: block; }
-
-ba-titledlist {
-  -webkit-box-flex: 1 1 0;
-  -moz-box-flex: 1 1 0;
-  -webkit-flex: 1 1 0;
-  -ms-flex: 1 1 0;
-  flex: 1 1 0;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column; }
-  ba-titledlist title {
-    -webkit-box-flex: 0 0;
-    -moz-box-flex: 0 0;
-    -webkit-flex: 0 0;
-    -ms-flex: 0 0;
-    flex: 0 0;
-    display: block; }
-  ba-titledlist list {
-    overflow: scroll; }
-    ba-titledlist list ba-listitem {
-      display: block; }
 
 ba-components {
   display: -webkit-box;

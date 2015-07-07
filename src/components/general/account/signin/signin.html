@@ -1,0 +1,35 @@
+
+<logoarea>
+    <welcome>
+        <span>{{welcomemessage}}</span>
+    </welcome>
+    <name>
+        <h1>{{brandname}}</h1>
+    </name>
+    <div>
+        <img src="assets/assets/Zipper.png" />
+    </div>
+    <slogan>
+        <span>{{slogan}}</span>
+    </slogan>
+    <version>
+        <h6>Version {{version}}</h6>
+    </version>
+</logoarea>
+
+<signuparea>
+
+    <input
+            placeholder="Email"
+            type="text"
+            ba-value="email">
+    <input
+            placeholder="Password"
+            type="password"
+            ba-value="password">
+    <button ba-click="signin()">
+        {{signin}}
+    </button>
+    <a ba-click="register()">{{register}}</a>
+
+</signuparea>

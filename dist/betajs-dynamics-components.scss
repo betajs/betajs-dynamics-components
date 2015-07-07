@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.1 - 2015-06-24
+betajs-dynamics-components - v0.0.1 - 2015-07-07
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -166,31 +166,132 @@ ul {
 }
 
 
-$scrollelementheight: 30px;
-
-
-ba-scrollpicker {
-  @include flex(1 1 0);
+ba-signin {
+  @include flex-settings(1 1 0);
   @include display-flex;
   @include flex-direction(column);
-  overflow-y: scroll;
+  top: 0;
+  bottom: 0;
+  text-align: center;
+  background: #ffffff;
 
-//  overflow: hidden;
-
-  element {
-    @include flex(0 0 $scrollelementheight);
+  logoarea {
+    @include flex-settings(5 0 0);
     @include display-flex;
-    color: $grey5;
-    background: #F4F4F4;
+    @include flex-direction(column);
 
-    line-height: $scrollelementheight;
-    display: block;
-    text-align: center;
+    * {
+      @include flex-settings(1 1 auto);
+      @include display-flex;
+      margin: auto;
+    }
+    slogan {color: $grey5}
   }
 
-  .selected {color: black}
+  signuparea {
+    @include flex-settings(3 0 0);
+    @include display-flex;
+    @include flex-direction(column);
+    padding: 10px 0;
+
+    div {
+      @include flex-settings(1 0 0);
+      @include display-flex;
+
+      h6 {margin : auto}
+    }
+
+    input {
+      @include flex-settings(0 1 35px);
+      width: 80%;
+      margin: auto;
+      margin-bottom: 10px;
+      border-radius: 2px;
+      border: 1px solid  $grey2;
+      padding-left: 5px;
+    }
+
+    button {
+      @include flex-settings(0 1 40px);
+      width: 80%;
+      margin: 10px auto;
+      border-radius: 2px;
+      background: $blue1;
+      color: #ffffff;
+      letter-spacing: 1px;
+    }
+
+    a {
+      @include flex-settings(1 0 0);
+      text-decoration: underline;
+    }
+  }
 }
 
+.keyboard-active h6,
+.keyboard-active img{
+  display: none;
+}
+
+ba-signingoogle {
+  @include flex-settings(1 1 0);
+  @include display-flex;
+  @include flex-direction(column);
+  top: 0;
+  bottom: 0;
+  text-align: center;
+  background: #ffffff;
+
+  logoarea {
+    @include flex-settings(5 0 0);
+    @include display-flex;
+    @include flex-direction(column);
+
+    * {
+      @include flex-settings(1 1 auto);
+      @include display-flex;
+      margin: auto;
+    }
+    slogan {color: $grey5}
+  }
+
+  signuparea {
+    @include flex-settings(3 0 0);
+    @include display-flex;
+    @include flex-direction(column);
+    padding: 10px 0;
+
+    input {
+      @include flex-settings(0 1 35px);
+      width: 80%;
+      margin: auto;
+      margin-bottom: 10px;
+      border-radius: 2px;
+      border: 1px solid  $grey2;
+      padding-left: 5px;
+    }
+
+    button {
+      @include flex-settings(0 1 40px);
+      width: 80%;
+      margin: 10px auto;
+      border-radius: 2px;
+      background: $blue1;
+      color: #ffffff;
+      letter-spacing: 1px;
+    }
+
+    a {
+      @include flex-settings(1 0 0);
+      text-decoration: underline;
+    }
+  }
+}
+
+.keyboard-active h6,
+.keyboard-active img{
+  display: none;
+}
 
 overlaycontainer {
   position: absolute;
@@ -231,6 +332,32 @@ ba-testoverlaycontainer {
     font-family: "AvenirNextLTPro-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif;
   }
 }
+
+$scrollelementheight: 30px;
+
+
+ba-scrollpicker {
+  @include flex(1 1 0);
+  @include display-flex;
+  @include flex-direction(column);
+  overflow-y: scroll;
+
+//  overflow: hidden;
+
+  element {
+    @include flex(0 0 $scrollelementheight);
+    @include display-flex;
+    color: $grey5;
+    background: #F4F4F4;
+
+    line-height: $scrollelementheight;
+    display: block;
+    text-align: center;
+  }
+
+  .selected {color: black}
+}
+
 
 ba-generalsetting {
 
@@ -504,6 +631,67 @@ ba-clickitem {
   }
 
 }
+ba-selectableitem {
+
+  selectableitem {
+    display: block;
+  }
+
+  .selected {
+    background: lightgrey;
+  }
+}
+
+ba-list {
+  list {
+    overflow-y: scroll;
+
+    ba-item {display: block}
+  }
+}
+$searchboxheight : 44px;
+
+ba-searchlist {
+  @include flex(1 1 0);
+  @include display-flex;
+  @include flex-direction(column);
+  width: 100%;
+
+  searchbox {
+    @include flex(0 0 $searchboxheight);
+    @include display-flex;
+    width: 100%;
+    border-bottom: 1px solid #ddd;
+
+    input {
+      @include flex(1 1 0);
+    }
+
+    icon {
+      @include flex(0 0 $searchboxheight);
+      line-height: $searchboxheight;
+      text-align: center;
+    }
+  }
+  ba-listitem {display: block}
+
+}
+
+ba-titledlist {
+  @include flex(1 1 0);
+  @include display-flex;
+  @include flex-direction(column);
+
+  title {
+    @include flex(0 0);
+    display: block
+  }
+
+  list {
+    overflow: scroll;
+    ba-listitem {display: block}
+  }
+}
 
 $contact_listitem_height: $listitemheight;
 $contact_icon_dimension: .8 * $contact_listitem_height;
@@ -713,67 +901,6 @@ $taskheight: $listitemheight;
   list-style: none;
   margin: 0px;
   vertical-align: middle;
-}
-ba-selectableitem {
-
-  selectableitem {
-    display: block;
-  }
-
-  .selected {
-    background: lightgrey;
-  }
-}
-
-ba-list {
-  list {
-    overflow-y: scroll;
-
-    ba-item {display: block}
-  }
-}
-$searchboxheight : 44px;
-
-ba-searchlist {
-  @include flex(1 1 0);
-  @include display-flex;
-  @include flex-direction(column);
-  width: 100%;
-
-  searchbox {
-    @include flex(0 0 $searchboxheight);
-    @include display-flex;
-    width: 100%;
-    border-bottom: 1px solid #ddd;
-
-    input {
-      @include flex(1 1 0);
-    }
-
-    icon {
-      @include flex(0 0 $searchboxheight);
-      line-height: $searchboxheight;
-      text-align: center;
-    }
-  }
-  ba-listitem {display: block}
-
-}
-
-ba-titledlist {
-  @include flex(1 1 0);
-  @include display-flex;
-  @include flex-direction(column);
-
-  title {
-    @include flex(0 0);
-    display: block
-  }
-
-  list {
-    overflow: scroll;
-    ba-listitem {display: block}
-  }
 }
 
 

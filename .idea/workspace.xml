@@ -2,11 +2,122 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72d0b85e-2146-4f66-96cd-41ba7c2a2eae" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/general/account/signin/signin.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/general/account/signin/signin.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/general/account/signin/signin.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/general/account/signin/signin.scss" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/general/account/signingoogle/signingoogle.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/general/account/signingoogle/signingoogle.html" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/general/account/signingoogle/signingoogle.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/components/general/account/signingoogle/signingoogle.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/base/scrollpicker/scrollpicker.css" afterPath="$PROJECT_DIR$/src/components/general/base/inputs/scrollpicker/scrollpicker.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/base/scrollpicker/scrollpicker.html" afterPath="$PROJECT_DIR$/src/components/general/base/inputs/scrollpicker/scrollpicker.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/base/scrollpicker/scrollpicker.js" afterPath="$PROJECT_DIR$/src/components/general/base/inputs/scrollpicker/scrollpicker.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/base/scrollpicker/scrollpicker.scss" afterPath="$PROJECT_DIR$/src/components/general/base/inputs/scrollpicker/scrollpicker.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/containers/overlaycontainer/overlaycontainer.css" afterPath="$PROJECT_DIR$/src/components/general/base/containers/overlaycontainer/overlaycontainer.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/containers/overlaycontainer/overlaycontainer.html" afterPath="$PROJECT_DIR$/src/components/general/base/containers/overlaycontainer/overlaycontainer.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/containers/overlaycontainer/overlaycontainer.js" afterPath="$PROJECT_DIR$/src/components/general/base/containers/overlaycontainer/overlaycontainer.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/containers/overlaycontainer/overlaycontainer.scss" afterPath="$PROJECT_DIR$/src/components/general/base/containers/overlaycontainer/overlaycontainer.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/containers/overlaycontainer/testoverlaycontainer/testoverlaycontainer.css" afterPath="$PROJECT_DIR$/src/components/general/base/containers/overlaycontainer/testoverlaycontainer/testoverlaycontainer.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/containers/overlaycontainer/testoverlaycontainer/testoverlaycontainer.css.map" afterPath="$PROJECT_DIR$/src/components/general/base/containers/overlaycontainer/testoverlaycontainer/testoverlaycontainer.css.map" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/containers/overlaycontainer/testoverlaycontainer/testoverlaycontainer.html" afterPath="$PROJECT_DIR$/src/components/general/base/containers/overlaycontainer/testoverlaycontainer/testoverlaycontainer.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/containers/overlaycontainer/testoverlaycontainer/testoverlaycontainer.js" afterPath="$PROJECT_DIR$/src/components/general/base/containers/overlaycontainer/testoverlaycontainer/testoverlaycontainer.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/containers/overlaycontainer/testoverlaycontainer/testoverlaycontainer.scss" afterPath="$PROJECT_DIR$/src/components/general/base/containers/overlaycontainer/testoverlaycontainer/testoverlaycontainer.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.css" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/settingslist/generalsetting/generalsetting.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.html" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/settingslist/generalsetting/generalsetting.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.js" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/settingslist/generalsetting/generalsetting.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/settingslist/generalsetting/generalsetting.scss" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/settingslist/generalsetting/generalsetting.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/settingslist/settingslist.css" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/settingslist/settingslist.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/settingslist/settingslist.scss" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/settingslist/settingslist.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/settingslist/timesetting/timesetting.css" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/settingslist/timesetting/timesetting.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/settingslist/timesetting/timesetting.html" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/settingslist/timesetting/timesetting.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/settingslist/timesetting/timesetting.js" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/settingslist/timesetting/timesetting.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/settingslist/timesetting/timesetting.scss" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/settingslist/timesetting/timesetting.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/settingslist/titlesetting/titlesetting.css" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/settingslist/titlesetting/titlesetting.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/settingslist/titlesetting/titlesetting.css.map" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/settingslist/titlesetting/titlesetting.css.map" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/settingslist/titlesetting/titlesetting.html" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/settingslist/titlesetting/titlesetting.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/settingslist/titlesetting/titlesetting.js" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/settingslist/titlesetting/titlesetting.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/settingslist/titlesetting/titlesetting.scss" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/settingslist/titlesetting/titlesetting.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/widgets/emailinput/emailinput.css" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/widgets/emailinput/emailinput.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/widgets/emailinput/emailinput.css.map" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/widgets/emailinput/emailinput.css.map" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/widgets/emailinput/emailinput.html" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/widgets/emailinput/emailinput.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/widgets/emailinput/emailinput.js" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/widgets/emailinput/emailinput.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/widgets/emailinput/emailinput.scss" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/widgets/emailinput/emailinput.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/widgets/timepicker/daypicker/daypicker.css" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/widgets/timepicker/daypicker/daypicker.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/widgets/timepicker/daypicker/daypicker.html" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/widgets/timepicker/daypicker/daypicker.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/widgets/timepicker/daypicker/daypicker.js" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/widgets/timepicker/daypicker/daypicker.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/widgets/timepicker/daypicker/daypicker.scss" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/widgets/timepicker/daypicker/daypicker.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/widgets/timepicker/timepicker.css" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/widgets/timepicker/timepicker.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/widgets/timepicker/timepicker.html" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/widgets/timepicker/timepicker.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/widgets/timepicker/timepicker.js" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/widgets/timepicker/timepicker.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/inputs/widgets/timepicker/timepicker.scss" afterPath="$PROJECT_DIR$/src/components/general/derivatives/inputs/widgets/timepicker/timepicker.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.css" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/examples/emaillist/emaillist.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.css.map" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/examples/emaillist/emaillist.css.map" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.html" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/examples/emaillist/emaillist.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.js" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/examples/emaillist/emaillist.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.scss" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/examples/emaillist/emaillist.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/examples/emaillist/tasklist.css.map" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/examples/emaillist/tasklist.css.map" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/examples/tasklist/tasklist.css" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/examples/tasklist/tasklist.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/examples/tasklist/tasklist.css.map" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/examples/tasklist/tasklist.css.map" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/examples/tasklist/tasklist.html" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/examples/tasklist/tasklist.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/examples/tasklist/tasklist.js" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/examples/tasklist/tasklist.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/examples/tasklist/tasklist.scss" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/examples/tasklist/tasklist.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/itemcontainers/swipecontainer/swipecontainer.css" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/listitems/itemcontainers/swipecontainer/swipecontainer.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/itemcontainers/swipecontainer/swipecontainer.html" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/listitems/itemcontainers/swipecontainer/swipecontainer.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/itemcontainers/swipecontainer/swipecontainer.js" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/listitems/itemcontainers/swipecontainer/swipecontainer.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/itemcontainers/swipecontainer/swipecontainer.scss" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/listitems/itemcontainers/swipecontainer/swipecontainer.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/clickitem/clickitem.css" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/listitems/items/clickitem/clickitem.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/clickitem/clickitem.css.map" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/listitems/items/clickitem/clickitem.css.map" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/clickitem/clickitem.html" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/listitems/items/clickitem/clickitem.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/clickitem/clickitem.js" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/listitems/items/clickitem/clickitem.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/clickitem/clickitem.scss" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/listitems/items/clickitem/clickitem.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/contactitem/contactitem.css" afterPath="$PROJECT_DIR$/src/components/general/doodads/list/listitems/contactitem/contactitem.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/contactitem/contactitem.html" afterPath="$PROJECT_DIR$/src/components/general/doodads/list/listitems/contactitem/contactitem.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/contactitem/contactitem.js" afterPath="$PROJECT_DIR$/src/components/general/doodads/list/listitems/contactitem/contactitem.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/contactitem/contactitem.scss" afterPath="$PROJECT_DIR$/src/components/general/doodads/list/listitems/contactitem/contactitem.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/emailitem/emailitem.css" afterPath="$PROJECT_DIR$/src/components/general/doodads/list/listitems/emailitem/emailitem.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/emailitem/emailitem.html" afterPath="$PROJECT_DIR$/src/components/general/doodads/list/listitems/emailitem/emailitem.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/emailitem/emailitem.js" afterPath="$PROJECT_DIR$/src/components/general/doodads/list/listitems/emailitem/emailitem.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/emailitem/emailitem.scss" afterPath="$PROJECT_DIR$/src/components/general/doodads/list/listitems/emailitem/emailitem.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/eventitem/eventitem.css" afterPath="$PROJECT_DIR$/src/components/general/doodads/list/listitems/eventitem/eventitem.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/eventitem/eventitem.html" afterPath="$PROJECT_DIR$/src/components/general/doodads/list/listitems/eventitem/eventitem.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/eventitem/eventitem.js" afterPath="$PROJECT_DIR$/src/components/general/doodads/list/listitems/eventitem/eventitem.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/eventitem/eventitem.scss" afterPath="$PROJECT_DIR$/src/components/general/doodads/list/listitems/eventitem/eventitem.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/noteitem/noteitem.css" afterPath="$PROJECT_DIR$/src/components/general/doodads/list/listitems/noteitem/noteitem.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/noteitem/noteitem.html" afterPath="$PROJECT_DIR$/src/components/general/doodads/list/listitems/noteitem/noteitem.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/noteitem/noteitem.js" afterPath="$PROJECT_DIR$/src/components/general/doodads/list/listitems/noteitem/noteitem.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/noteitem/noteitem.scss" afterPath="$PROJECT_DIR$/src/components/general/doodads/list/listitems/noteitem/noteitem.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/taskitem/taskitem.css" afterPath="$PROJECT_DIR$/src/components/general/doodads/list/listitems/taskitem/taskitem.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/taskitem/taskitem.html" afterPath="$PROJECT_DIR$/src/components/general/doodads/list/listitems/taskitem/taskitem.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/taskitem/taskitem.js" afterPath="$PROJECT_DIR$/src/components/general/doodads/list/listitems/taskitem/taskitem.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/taskitem/taskitem.scss" afterPath="$PROJECT_DIR$/src/components/general/doodads/list/listitems/taskitem/taskitem.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/selectableitem/selectableitem.css" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/listitems/items/selectableitem/selectableitem.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/selectableitem/selectableitem.html" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/listitems/items/selectableitem/selectableitem.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/selectableitem/selectableitem.js" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/listitems/items/selectableitem/selectableitem.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/selectableitem/selectableitem.scss" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/listitems/items/selectableitem/selectableitem.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/lists/list/list.css" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/lists/list/list.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/lists/list/list.css.map" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/lists/list/list.css.map" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/lists/list/list.html" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/lists/list/list.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/lists/list/list.js" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/lists/list/list.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/lists/list/list.scss" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/lists/list/list.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/lists/searchlist/richlist.map" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/lists/searchlist/richlist.map" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/lists/searchlist/searchlist.css" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/lists/searchlist/searchlist.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/lists/searchlist/searchlist.css.map" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/lists/searchlist/searchlist.css.map" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/lists/searchlist/searchlist.html" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/lists/searchlist/searchlist.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/lists/searchlist/searchlist.js" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/lists/searchlist/searchlist.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/lists/searchlist/searchlist.scss" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/lists/searchlist/searchlist.scss" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/lists/titledlist/titledlist.css" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/lists/titledlist/titledlist.css" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/lists/titledlist/titledlist.css.map" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/lists/titledlist/titledlist.css.map" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/lists/titledlist/titledlist.html" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/lists/titledlist/titledlist.html" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/lists/titledlist/titledlist.js" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/lists/titledlist/titledlist.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/components/general/list/lists/titledlist/titledlist.scss" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/lists/titledlist/titledlist.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.sass-cache/141b1d2d07e3b6f7e527f55c5ae7e5b45a0bad79/betajs-dynamics-components.scssc" afterPath="$PROJECT_DIR$/.sass-cache/141b1d2d07e3b6f7e527f55c5ae7e5b45a0bad79/betajs-dynamics-components.scssc" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components-noscoped.js" afterPath="$PROJECT_DIR$/dist/betajs-dynamics-components-noscoped.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components.css.map" afterPath="$PROJECT_DIR$/dist/betajs-dynamics-components.css.map" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components.css" afterPath="$PROJECT_DIR$/dist/betajs-dynamics-components.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components.js" afterPath="$PROJECT_DIR$/dist/betajs-dynamics-components.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/emailitem/emailitem.html" afterPath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/emailitem/emailitem.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/emailitem/emailitem.js" afterPath="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/emailitem/emailitem.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.js" afterPath="$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components.scss" afterPath="$PROJECT_DIR$/dist/betajs-dynamics-components.scss" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/environment/config/components.js" afterPath="$PROJECT_DIR$/src/environment/config/components.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="betajs-dynamics-components.iws" />
@@ -31,11 +142,41 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file leaf-file-name="emaillist.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.js">
+      <file leaf-file-name="signin.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/general/account/signin/signin.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="840">
-              <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1110">
+              <caret line="8" column="37" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="signin.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/general/account/signin/signin.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="615">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="17" selection-end-column="11" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="signin.scss" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/general/account/signin/signin.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="-3.2083333" vertical-offset="328" max-vertical-offset="1080">
+              <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="20" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="signingoogle.scss" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/components/general/account/signingoogle/signingoogle.scss">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.46902654" vertical-offset="238" max-vertical-offset="975">
+              <caret line="30" column="35" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
               <folding />
             </state>
           </provider>
@@ -44,38 +185,28 @@
       <file leaf-file-name="components.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/environment/config/components.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
-              <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
+              <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="emailitem.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/emailitem/emailitem.html">
+      <file leaf-file-name="signingoogle.html" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/general/account/signingoogle/signingoogle.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="345">
-              <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+            <state vertical-scroll-proportion="-7.625" vertical-offset="312" max-vertical-offset="660">
+              <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="37" selection-end-column="22" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="emailitem.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/emailitem/emailitem.js">
+      <file leaf-file-name="signingoogle.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/components/general/account/signingoogle/signingoogle.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8595194" vertical-offset="225" max-vertical-offset="900">
-              <caret line="46" column="44" selection-start-line="46" selection-start-column="44" selection-end-line="46" selection-end-column="44" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="swipecontainer.html" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/components/general/list/listitems/itemcontainers/swipecontainer/swipecontainer.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="480">
-              <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1065">
+              <caret line="3" column="62" selection-start-line="3" selection-start-column="62" selection-end-line="3" selection-end-column="62" />
               <folding />
             </state>
           </provider>
@@ -89,14 +220,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/environment/environment/controls/controls.scss" />
-        <option value="$PROJECT_DIR$/src/components/general/base/list/lists/titledlist/titledlist.js" />
-        <option value="$PROJECT_DIR$/src/environment/index.html" />
-        <option value="$PROJECT_DIR$/src/components/general/base/list/lists/list/list.js" />
-        <option value="$PROJECT_DIR$/src/components/general/base/list/lists/list/list.html" />
-        <option value="$PROJECT_DIR$/src/components/general/base/list/listitems/items/doodaditems/contactitem/contactitem.js" />
-        <option value="$PROJECT_DIR$/src/components/general/base/list/listitems/items/doodaditems/eventitem/eventitem.js" />
-        <option value="$PROJECT_DIR$/src/components/general/base/list/listitems/items/doodaditems/noteitem/noteitem.js" />
         <option value="$PROJECT_DIR$/src/components/general/base/list/listitems/itemcontainers/swipeitem/swipeitem.html" />
         <option value="$PROJECT_DIR$/src/components/general/base/list/listitems/itemcontainers/swipeitem/swipeitem.scss" />
         <option value="$PROJECT_DIR$/src/components/general/base/list/listitems/items/doodaditems/emailitem/emailitem.js" />
@@ -131,15 +254,23 @@
         <option value="$PROJECT_DIR$/src/environment/environment/controls/components/components.js" />
         <option value="$PROJECT_DIR$/src/components/general/list/lists/searchlist/searchlist.scss" />
         <option value="$PROJECT_DIR$/src/components/general/list/listitems/itemcontainers/swipecontainer/swipeitem.js" />
-        <option value="$PROJECT_DIR$/src/environment/config/components.js" />
         <option value="$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.html" />
         <option value="$PROJECT_DIR$/src/components/general/list/listitems/itemcontainers/swipecontainer/swipecontainer.scss" />
         <option value="$PROJECT_DIR$/src/components/general/list/listitems/items/selectableitem/selectableitem.js" />
         <option value="$PROJECT_DIR$/src/components/general/list/lists/titledlist/titledlist.scss" />
         <option value="$PROJECT_DIR$/src/components/general/list/lists/titledlist/titledlist.html" />
-        <option value="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/emailitem/emailitem.html" />
         <option value="$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.js" />
         <option value="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/emailitem/emailitem.js" />
+        <option value="$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/emailitem/emailitem.html" />
+        <option value="$PROJECT_DIR$/src/components/general/account/signins/google/signingoogle.js" />
+        <option value="$PROJECT_DIR$/src/components/general/base/containers/overlaycontainer/overlaycontainer.js" />
+        <option value="$PROJECT_DIR$/src/components/general/account/signingoogle/signingoogle.js" />
+        <option value="$PROJECT_DIR$/src/components/general/account/signin/signin.js" />
+        <option value="$PROJECT_DIR$/src/components/general/account/signin/signin.html" />
+        <option value="$PROJECT_DIR$/src/components/general/account/signingoogle/signingoogle.html" />
+        <option value="$PROJECT_DIR$/src/environment/config/components.js" />
+        <option value="$PROJECT_DIR$/src/components/general/account/signin/signin.scss" />
+        <option value="$PROJECT_DIR$/src/components/general/account/signingoogle/signingoogle.scss" />
       </list>
     </option>
   </component>
@@ -156,6 +287,12 @@
           <alias-task value="server" />
         </alias-tasks>
         <multi-tasks>
+          <GruntMultiTaskState>
+            <name>betajs_templates</name>
+            <targets>
+              <target value="dist" />
+            </targets>
+          </GruntMultiTaskState>
           <GruntMultiTaskState>
             <name>clean</name>
           </GruntMultiTaskState>
@@ -257,8 +394,8 @@
   <component name="ProjectFrameBounds">
     <option name="x" value="4" />
     <option name="y" value="23" />
-    <option name="width" value="1047" />
-    <option name="height" value="877" />
+    <option name="width" value="1060" />
+    <option name="height" value="836" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="false">
     <OptionsSetting value="true" id="Add" />
@@ -283,6 +420,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -351,84 +489,6 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="environment" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="environment" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="environment" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controls" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="environment" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="environment" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="controls" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="environment" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
               <option name="myItemId" value="config" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -472,16 +532,30 @@
               <option name="myItemId" value="general" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+          </PATH>
+          <PATH>
             <PATH_ELEMENT>
-              <option name="myItemId" value="list" />
+              <option name="myItemId" value="betajs-dynamics-components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="betajs-dynamics-components" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="lists" />
+              <option name="myItemId" value="src" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="titledlist" />
+              <option name="myItemId" value="components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="general" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="base" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -507,453 +581,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="list" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lists" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="searchlist" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="general" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="list" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="lists" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="list" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="general" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="list" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="listitems" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="items" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="selectableitem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="general" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="list" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="listitems" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="items" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="doodaditems" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="general" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="list" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="listitems" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="items" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="doodaditems" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="emailitem" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="general" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="list" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="listitems" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="items" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="general" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="list" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="listitems" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="itemcontainers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="swipecontainer" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="general" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="list" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="examples" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="general" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="list" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="examples" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="emaillist" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="general" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="inputs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="widgets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="timepicker" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="general" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="inputs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="widgets" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="general" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="inputs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="settingslist" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="general" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="inputs" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="settingslist" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="timesetting" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="src" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="general" />
+              <option name="myItemId" value="base" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
@@ -987,11 +615,11 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="base" />
+              <option name="myItemId" value="account" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="scrollpicker" />
+              <option name="myItemId" value="signingoogle" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1017,31 +645,20 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="base" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="betajs-dynamics-components" />
+              <option name="myItemId" value="account" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="dist" />
+              <option name="myItemId" value="signin" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../betajs-web" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/.." />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="HbShouldOpenHtmlAsHb" value="" />
     <property name="list.type.of.created.stylesheet" value="SCSS" />
@@ -1049,25 +666,29 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/src/components/general" />
       <recent name="$PROJECT_DIR$/src/components/general/list/examples" />
       <recent name="$PROJECT_DIR$/src/components/general/list/listitems/items" />
       <recent name="$PROJECT_DIR$/src/components/general/base/list/listitems/items" />
       <recent name="$PROJECT_DIR$/src/components/general/base/list/listitems/itemcontainers" />
-      <recent name="$PROJECT_DIR$/src/components/general/base/list/lists" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
-      <recent name="$PROJECT_DIR$/src/components/general" />
-      <recent name="$PROJECT_DIR$/src/components/general/base/list/listitems/items" />
-      <recent name="$PROJECT_DIR$/src/components/general/base/list/lists" />
-      <recent name="$PROJECT_DIR$/src/components/general/base/list/lists/list" />
+      <recent name="$PROJECT_DIR$/src/components/general/account/signins" />
+      <recent name="$PROJECT_DIR$/src/components/general/doodads/list/listitems" />
+      <recent name="$PROJECT_DIR$/src/components/general/derivatives" />
       <recent name="$PROJECT_DIR$/src/components/general/base" />
+      <recent name="$PROJECT_DIR$/src/components/general/base/inputs" />
     </key>
   </component>
   <component name="RunManager">
+    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+      <method />
+    </configuration>
     <configuration default="true" type="DartUnitRunConfigurationType" factoryName="DartUnit">
       <method />
     </configuration>
-    <configuration default="true" type="DartCommandLineRunConfigurationType" factoryName="Dart Command Line Application">
+    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
+      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JSTestDriver:ConfigurationType" factoryName="JsTestDriver">
@@ -1075,10 +696,6 @@
       <setting name="settingsFile" value="" />
       <setting name="serverType" value="INTERNAL" />
       <setting name="preferredDebugBrowser" value="Chrome" />
-      <method />
-    </configuration>
-    <configuration default="true" type="JavaScriptTestRunnerKarma" factoryName="Karma" config-file="">
-      <envs />
       <method />
     </configuration>
     <configuration default="true" type="JavascriptDebugType" factoryName="JavaScript Debug">
@@ -1117,28 +734,28 @@
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="4" y="23" width="1047" height="877" extended-state="0" />
+    <frame x="4" y="23" width="1060" height="836" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299363" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293011" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32909784" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Terminal" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.27515924" sideWeight="0.49840596" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4623656" sideWeight="0.49840596" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24867162" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.30506822" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3012512" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32866243" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32258064" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.277707" sideWeight="0.5005314" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3299363" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32866243" sideWeight="0.49946865" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
     </layout>
   </component>
   <component name="Vcs.Log.UiProperties">
@@ -1164,57 +781,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/environment/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34736842" vertical-offset="0" max-vertical-offset="555">
-          <caret line="11" column="24" selection-start-line="11" selection-start-column="24" selection-end-line="11" selection-end-column="24" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/contactitem/contactitem.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="541">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/contactitem/contactitem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.16635859" vertical-offset="0" max-vertical-offset="825">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/eventitem/eventitem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.083179295" vertical-offset="0" max-vertical-offset="735">
-          <caret line="3" column="68" selection-start-line="3" selection-start-column="68" selection-end-line="3" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/noteitem/noteitem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.083179295" vertical-offset="0" max-vertical-offset="795">
-          <caret line="3" column="67" selection-start-line="3" selection-start-column="67" selection-end-line="3" selection-end-column="67" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/emailitem/emailitem.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.49113232" vertical-offset="0" max-vertical-offset="1305">
-          <caret line="24" column="3" selection-start-line="24" selection-start-column="3" selection-end-line="24" selection-end-column="3" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/taskitem/taskitem.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="300">
-          <caret line="8" column="17" selection-start-line="8" selection-start-column="17" selection-end-line="8" selection-end-column="17" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/taskitem/taskitem.html">
+    <entry file="file://$PROJECT_DIR$/src/components/general/doodads/list/listitems/taskitem/taskitem.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-0.625" vertical-offset="0" max-vertical-offset="120">
           <caret line="1" column="11" selection-start-line="1" selection-start-column="11" selection-end-line="1" selection-end-column="11" />
@@ -1256,14 +823,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/lists/list/list.scss">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/lists/list/list.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-4.375" vertical-offset="0" max-vertical-offset="195">
           <caret line="7" column="1" selection-start-line="7" selection-start-column="1" selection-end-line="7" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/examples/tasklist/tasklist.scss">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/examples/tasklist/tasklist.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.125" vertical-offset="0" max-vertical-offset="165">
           <caret line="5" column="1" selection-start-line="5" selection-start-column="1" selection-end-line="5" selection-end-column="1" />
@@ -1291,54 +858,52 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/listitems/items/selectableitem/selectableitem.html">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/listitems/items/selectableitem/selectableitem.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.125" vertical-offset="0" max-vertical-offset="165">
           <caret line="5" column="12" selection-start-line="5" selection-start-column="12" selection-end-line="5" selection-end-column="12" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/listitems/items/clickitem/clickitem.scss">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/listitems/items/clickitem/clickitem.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.40618956" vertical-offset="0" max-vertical-offset="517">
           <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/listitems/items/clickitem/clickitem.html">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/listitems/items/clickitem/clickitem.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.116054155" vertical-offset="0" max-vertical-offset="517">
           <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/listitems/items/clickitem/clickitem.js">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/listitems/items/clickitem/clickitem.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.2495379" vertical-offset="0" max-vertical-offset="541">
           <caret line="9" column="29" selection-start-line="9" selection-start-column="29" selection-end-line="9" selection-end-column="29" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/examples/tasklist/tasklist.js">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/examples/tasklist/tasklist.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.63955635" vertical-offset="89" max-vertical-offset="1110">
           <caret line="29" column="18" selection-start-line="29" selection-start-column="18" selection-end-line="29" selection-end-column="18" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/examples/tasklist/tasklist.html">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/examples/tasklist/tasklist.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.14506769" vertical-offset="0" max-vertical-offset="517">
           <caret line="5" column="2" selection-start-line="5" selection-start-column="2" selection-end-line="5" selection-end-column="2" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.scss">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/examples/emaillist/emaillist.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="225">
           <caret line="6" column="14" selection-start-line="6" selection-start-column="14" selection-end-line="6" selection-end-column="14" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1346,7 +911,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-2.271719" vertical-offset="1229" max-vertical-offset="2970">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1354,7 +918,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.5" vertical-offset="10926" max-vertical-offset="16875">
           <caret line="734" column="23" selection-start-line="734" selection-start-column="23" selection-end-line="734" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1362,31 +925,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="541">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/containers/overlaycontainer/overlaycontainer.html">
+    <entry file="file://$PROJECT_DIR$/src/components/general/base/containers/overlaycontainer/overlaycontainer.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="541">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/containers/overlaycontainer/overlaycontainer.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.083179295" vertical-offset="0" max-vertical-offset="541">
-          <caret line="3" column="76" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="76" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/lists/searchlist/searchlist.scss">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/lists/searchlist/searchlist.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-9.375" vertical-offset="0" max-vertical-offset="480">
           <caret line="15" column="25" selection-start-line="15" selection-start-column="25" selection-end-line="15" selection-end-column="25" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1394,23 +946,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.57114226" vertical-offset="0" max-vertical-offset="499">
           <caret line="19" column="0" selection-start-line="19" selection-start-column="0" selection-end-line="19" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/lists/searchlist/searchlist.html">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/lists/searchlist/searchlist.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.18947369" vertical-offset="0" max-vertical-offset="475">
           <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/lists/searchlist/searchlist.js">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/lists/searchlist/searchlist.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.87374747" vertical-offset="14" max-vertical-offset="615">
           <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
@@ -1418,99 +967,103 @@
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-1.875" vertical-offset="0" max-vertical-offset="150">
           <caret line="3" column="58" selection-start-line="3" selection-start-column="58" selection-end-line="3" selection-end-column="58" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/lists/list/list.js">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/lists/list/list.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.7504621" vertical-offset="14" max-vertical-offset="585">
           <caret line="28" column="0" selection-start-line="28" selection-start-column="0" selection-end-line="28" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/listitems/itemcontainers/swipecontainer/swipecontainer.scss">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/listitems/itemcontainers/swipecontainer/swipecontainer.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-8.75" vertical-offset="0" max-vertical-offset="1215">
           <caret line="14" column="10" selection-start-line="14" selection-start-column="10" selection-end-line="14" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/lists/list/list.html">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/lists/list/list.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.17408124" vertical-offset="0" max-vertical-offset="517">
           <caret line="6" column="22" selection-start-line="6" selection-start-column="22" selection-end-line="6" selection-end-column="22" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/lists/titledlist/titledlist.scss">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/lists/titledlist/titledlist.scss">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="315">
           <caret line="6" column="9" selection-start-line="6" selection-start-column="9" selection-end-line="6" selection-end-column="9" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/listitems/items/selectableitem/selectableitem.js">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/listitems/items/selectableitem/selectableitem.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="29" max-vertical-offset="630">
           <caret line="10" column="10" selection-start-line="10" selection-start-column="10" selection-end-line="10" selection-end-column="10" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/lists/titledlist/titledlist.html">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/lists/titledlist/titledlist.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="-5.0" vertical-offset="0" max-vertical-offset="210">
           <caret line="8" column="7" selection-start-line="8" selection-start-column="7" selection-end-line="8" selection-end-column="7" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/listitems/itemcontainers/swipecontainer/swipecontainer.html">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/listitems/itemcontainers/swipecontainer/swipecontainer.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-7.5" vertical-offset="0" max-vertical-offset="480">
+        <state vertical-scroll-proportion="0.0" vertical-offset="180" max-vertical-offset="480">
           <caret line="12" column="13" selection-start-line="12" selection-start-column="13" selection-end-line="12" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/listitems/itemcontainers/swipecontainer/swipecontainer.js">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/listitems/itemcontainers/swipecontainer/swipecontainer.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.33271718" vertical-offset="0" max-vertical-offset="1785">
           <caret line="12" column="23" selection-start-line="12" selection-start-column="23" selection-end-line="12" selection-end-column="23" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/lists/titledlist/titledlist.js">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/lists/titledlist/titledlist.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="630">
           <caret line="13" column="0" selection-start-line="13" selection-start-column="0" selection-end-line="13" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.html">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/examples/emaillist/emaillist.html">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.08704062" vertical-offset="0" max-vertical-offset="517">
           <caret line="3" column="26" selection-start-line="3" selection-start-column="26" selection-end-line="3" selection-end-column="26" />
-          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/environment/config/components.js">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/inputs/widgets/timepicker/timepicker.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="450">
-          <caret line="12" column="12" selection-start-line="12" selection-start-column="12" selection-end-line="12" selection-end-column="12" />
+        <state vertical-scroll-proportion="0.52680224" vertical-offset="0" max-vertical-offset="705">
+          <caret line="19" column="27" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="50" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/inputs/settingslist/timesetting/timesetting.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.52680224" vertical-offset="0" max-vertical-offset="541">
+          <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="66" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/general/doodads/list/listitems/emailitem/emailitem.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="90" max-vertical-offset="900">
+          <caret line="43" column="20" selection-start-line="43" selection-start-column="20" selection-end-line="43" selection-end-column="20" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/examples/emaillist/emaillist.js">
+    <entry file="file://$PROJECT_DIR$/src/components/general/derivatives/list/examples/emaillist/emaillist.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="840">
           <caret line="13" column="31" selection-start-line="13" selection-start-column="31" selection-end-line="13" selection-end-column="31" />
@@ -1518,34 +1071,81 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/emailitem/emailitem.html">
+    <entry file="file://$PROJECT_DIR$/src/components/general/doodads/list/listitems/contactitem/contactitem.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-3.75" vertical-offset="0" max-vertical-offset="345">
-          <caret line="6" column="26" selection-start-line="6" selection-start-column="26" selection-end-line="6" selection-end-column="26" />
+        <state vertical-scroll-proportion="0.16635859" vertical-offset="0" max-vertical-offset="825">
+          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/general/doodads/list/listitems/emailitem/emailitem.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.625" vertical-offset="0" max-vertical-offset="345">
+          <caret line="1" column="40" selection-start-line="1" selection-start-column="40" selection-end-line="1" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/inputs/widgets/timepicker/timepicker.js">
+    <entry file="file://$PROJECT_DIR$/src/components/general/base/containers/overlaycontainer/overlaycontainer.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52680224" vertical-offset="0" max-vertical-offset="705">
-          <caret line="19" column="27" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="50" />
+        <state vertical-scroll-proportion="0.062849164" vertical-offset="0" max-vertical-offset="716">
+          <caret line="3" column="4" selection-start-line="3" selection-start-column="4" selection-end-line="3" selection-end-column="76" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/inputs/settingslist/timesetting/timesetting.js">
+    <entry file="file://$PROJECT_DIR$/src/components/general/account/signingoogle/signingoogle.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.52680224" vertical-offset="0" max-vertical-offset="541">
-          <caret line="19" column="16" selection-start-line="19" selection-start-column="16" selection-end-line="19" selection-end-column="66" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1065">
+          <caret line="3" column="62" selection-start-line="3" selection-start-column="62" selection-end-line="3" selection-end-column="62" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/components/general/list/listitems/items/doodaditems/emailitem/emailitem.js">
+    <entry file="file://$PROJECT_DIR$/src/components/general/account/signin/signin.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8595194" vertical-offset="225" max-vertical-offset="900">
-          <caret line="46" column="44" selection-start-line="46" selection-start-column="44" selection-end-line="46" selection-end-column="44" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="1110">
+          <caret line="8" column="37" selection-start-line="8" selection-start-column="37" selection-end-line="8" selection-end-column="37" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/general/account/signin/signin.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-0.0" vertical-offset="0" max-vertical-offset="615">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="17" selection-end-column="11" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/general/account/signingoogle/signingoogle.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-7.625" vertical-offset="312" max-vertical-offset="660">
+          <caret line="33" column="0" selection-start-line="33" selection-start-column="0" selection-end-line="37" selection-end-column="22" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/environment/config/components.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="480">
+          <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="24" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/general/account/signin/signin.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="-3.2083333" vertical-offset="328" max-vertical-offset="1080">
+          <caret line="27" column="4" selection-start-line="27" selection-start-column="4" selection-end-line="27" selection-end-column="20" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/components/general/account/signingoogle/signingoogle.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.46902654" vertical-offset="238" max-vertical-offset="975">
+          <caret line="30" column="35" selection-start-line="30" selection-start-column="35" selection-end-line="30" selection-end-column="35" />
           <folding />
         </state>
       </provider>
