@@ -266,9 +266,9 @@ overlaycontainer {
       border-radius: 2px;
       padding: 10px; }
 
-ba-testoverlaycontainer {
+ba-overlaycontainertest {
   padding: 10px; }
-  ba-testoverlaycontainer button {
+  ba-overlaycontainertest button {
     color: white;
     border-radius: 1px;
     background-color: #4E8EF7;

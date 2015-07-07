@@ -6,11 +6,11 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Pages.XXX", {
 	initial: {
 
 		attrs: {
-
-		},
-
-		create: function () {
-
+			welcomemessage : 'Welcome',
+			brandname : 'Doodads',
+			slogan : 'Simplify your life',
+			signin : "Signin",
+			register : "Register"
 		},
 
 		functions: {

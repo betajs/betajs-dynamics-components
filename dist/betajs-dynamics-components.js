@@ -555,7 +555,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '24.1436278878855'
+		version: '25.1436288516386'
 	};
 });
 
@@ -563,11 +563,11 @@ BetaJS.Dynamics.Dynamic.Components = {};
 BetaJS.Dynamics.Dynamic.Components.Templates = BetaJS.Dynamics.Dynamic.Components.Templates || {};
 BetaJS.Dynamics.Dynamic.Components.Templates['signin'] = ' <logoarea>     <welcome>         <span>{{welcomemessage}}</span>     </welcome>     <name>         <h1>{{brandname}}</h1>     </name>     <div>         <img src="assets/assets/Zipper.png" />     </div>     <slogan>         <span>{{slogan}}</span>     </slogan>     <version>         <h6>Version {{version}}</h6>     </version> </logoarea>  <signuparea>      <input             placeholder="Email"             type="text"             ba-value="email">     <input             placeholder="Password"             type="password"             ba-value="password">     <button ba-click="signin()">         {{signin}}     </button>     <a ba-click="register()">{{register}}</a>  </signuparea> ';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['signingoogle'] = '  <logoarea>     <welcome>         <span>{{welcomemessage}}</span>     </welcome>     <name>         <h1>{{brandname}}</h1>     </name>     <div>         <img src="assets/assets/Zipper.png" />     </div>     <slogan>         <span>{{slogan}}</span>     </slogan>     <version>         <h6>Version {{version}}</h6>     </version> </logoarea>  <signuparea>      <div>         <h6>For this Version we only support Google Accounts,             we will add support for other services soon</h6>     </div>     <button ba-click="signin()">         Sign in via Google     </button>     <a ng-click="startmessage.show = true">{{register}}</a>  </signuparea>  <ba-overlaycontainer         show="startmessage"         input="My Message"         overlay="ba-messageoverlay"> </ba-overlaycontainer> ';
+BetaJS.Dynamics.Dynamic.Components.Templates['signingoogle'] = '  <logoarea>     <welcome>         <span>{{welcomemessage}}</span>     </welcome>     <name>         <h1>{{brandname}}</h1>     </name>     <div>         <img src="assets/assets/Zipper.png" />     </div>     <slogan>         <span>{{slogan}}</span>     </slogan>     <version>         <h6>Version {{version}}</h6>     </version> </logoarea>  <signuparea>      <div>         <h6>For this Version we only support Google Accounts,             we will add support for other services soon</h6>     </div>     <button ba-click="signin()">         Sign in via Google     </button>     <a ng-click="startmessage.show = true">{{register}}</a>  </signuparea>  <ba-overlaycontainer         ba-show="startmessage"         input="My Message"         ba-overlay="messageoverlay"> </ba-overlaycontainer> ';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['overlaycontainer'] = '<overlaycontainer     ba-click="showoverlay = false"     ba-if="{{showoverlay}}">      <overlayinner>          <ba-{{overlay}} ba-value=\'{{=value}}\'>             <message>This is an overlay</message>         </ba-{{overlay}}>      </overlayinner>  </overlaycontainer>';
+BetaJS.Dynamics.Dynamic.Components.Templates['overlaycontainer'] = '<overlaycontainer     ba-click="showoverlay = false"     ba-if="{{showoverlay}}">      <overlayinner>          <ba-{{overlay}} ba-value=\'{{=value}}\'>             <message>{{message}}</message>         </ba-{{overlay}}>      </overlayinner>  </overlaycontainer>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['testoverlaycontainer'] = ' <button ba-click="showoverlay = !showoverlay">Show Overlaycontainer</button>  <ba-overlaycontainer         ba-overlay="{{=overlay}}"         ba-showoverlay="{{=showoverlay}}">          </ba-overlaycontainer>';
+BetaJS.Dynamics.Dynamic.Components.Templates['overlaycontainertest'] = ' <button ba-click="showoverlay = !showoverlay">Show Overlaycontainer</button>  <ba-overlaycontainer         ba-overlay="{{=overlay}}"         ba-showoverlay="{{=showoverlay}}">          </ba-overlaycontainer>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['scrollpicker'] = '<element ba-repeat-element="{{element_value :: value_array}}" data-id="{{element_value}}">         {{element_value}} </element>';
 
@@ -627,6 +627,8 @@ BetaJS.Dynamics.Dynamic.Components.Templates['index'] = '<!DOCTYPE html> <html> 
 window.components = new BetaJS.Collections.Collection({objects: [
     {title:'signin'},
     {title:'signingoogle'},
+    {title:'overlaycontainer'},
+    {title:'overlaycontainertest'},
     {title:'emaillist'},
     {title:'tasklist'},
     {title:'aa_template'},
@@ -754,11 +756,11 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Pages.XXX", {
 	initial: {
 
 		attrs: {
-
-		},
-
-		create: function () {
-
+			welcomemessage : 'Welcome',
+			brandname : 'Doodads',
+			slogan : 'Simplify your life',
+			signin : "Signin",
+			register : "Register"
 		},
 
 		functions: {
@@ -821,6 +823,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Overlaycontai
 
         attrs : {
             overlay : "",
+            message : "This is a message",
             value : null,
             showoverlay : true
         }
@@ -831,9 +834,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Overlaycontai
 
 
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Testoverlaycontainer", {
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Overlaycontainertest", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.testoverlaycontainer,
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.overlaycontainertest,
 
     initial : {
 
