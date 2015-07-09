@@ -20,7 +20,7 @@ module.exports = function(grunt) {
 					src : [
 						'src/fragments/begin.js-fragment',
 						'dist/betajs-dynamics-components-templates.js',
-						'src/environment/config/components.js',
+						//'src/environment/config/components.js',
 						'src/components/**/*.js',
 						'src/environment/environment/**/*.js',
 						'src/fragments/end.js-fragment'
