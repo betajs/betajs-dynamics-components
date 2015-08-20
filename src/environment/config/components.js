@@ -1,21 +1,14 @@
 
 window.components = new BetaJS.Collections.Collection({objects: [
-    {title:'signingoogle'},
     {title:'overlaycontainer'},
     {title:'overlaycontainertest'},
-    {title:'emaillist'},
-    {title:'tasklist'},
-    {title:'aa_template'},
-    {title:'emailitem'},
-    {title:'clickitem'},
-    {title:'swipecontainer'},
-    {title:'list'},
-    {title:'titledlist'},
-    {title:'simplelist'},
-    {title:'timesetting'},
-    {title:'generalsetting'},
     {title:'scrollpicker'},
-    {title:'timepicker'},
+    {title:'swipecontainer'},
+    {title:'clickitem'},
+    {title:'selectableitem'},
+    {title:'list'},
+    {title:'searchlist'},
+    {title:'titledlist'}
 ]});
 
 window.componentsBytitle = function (title) {
