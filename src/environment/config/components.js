@@ -1,6 +1,5 @@
 
 window.components = new BetaJS.Collections.Collection({objects: [
-    {title:'signin'},
     {title:'signingoogle'},
     {title:'overlaycontainer'},
     {title:'overlaycontainertest'},

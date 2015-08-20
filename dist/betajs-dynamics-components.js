@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.1 - 2015-07-09
+betajs-dynamics-components - v0.0.1 - 2015-08-20
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -537,7 +537,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.0.1 - 2015-07-09
+betajs-dynamics-components - v0.0.1 - 2015-08-20
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -555,14 +555,12 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '26.1436460713744'
+		version: '27.1440091379586'
 	};
 });
 
 BetaJS.Dynamics.Dynamic.Components = {};
 BetaJS.Dynamics.Dynamic.Components.Templates = BetaJS.Dynamics.Dynamic.Components.Templates || {};
-BetaJS.Dynamics.Dynamic.Components.Templates['signin'] = ' <logoarea>     <welcome>         <span>{{welcomemessage}}</span>     </welcome>     <name>         <h1>{{brandname}}</h1>     </name>     <div>         <img src="assets/assets/Zipper.png" />     </div>     <slogan>         <span>{{slogan}}</span>     </slogan>     <version>         <h6>Version {{version}}</h6>     </version> </logoarea>  <signuparea>      <input             placeholder="Email"             type="text"             ba-value="email">     <input             placeholder="Password"             type="password"             ba-value="password">     <button ba-click="signin()">         {{signin}}     </button>     <a ba-click="register()">{{register}}</a>  </signuparea> ';
-
 BetaJS.Dynamics.Dynamic.Components.Templates['signingoogle'] = '  <logoarea>     <welcome>         <span>{{welcomemessage}}</span>     </welcome>     <name>         <h1>{{brandname}}</h1>     </name>     <div>         <img src="assets/assets/Zipper.png" />     </div>     <slogan>         <span>{{slogan}}</span>     </slogan>     <version>         <h6>Version {{version}}</h6>     </version> </logoarea>  <signuparea>      <div>         <h6>For this Version we only support Google Accounts,             we will add support for other services soon</h6>     </div>     <button ba-click="signin()">         Sign in via Google     </button>     <a ng-click="startmessage.show = true">{{register}}</a>  </signuparea>  <ba-overlaycontainer         ba-show="startmessage"         input="My Message"         ba-overlay="messageoverlay"> </ba-overlaycontainer> ';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['overlaycontainer'] = '<overlaycontainer     ba-click="showoverlay = false"     ba-if="{{showoverlay}}">      <overlayinner>          <ba-{{overlay}} ba-value=\'{{=value}}\'>             <message>{{message}}</message>         </ba-{{overlay}}>      </overlayinner>  </overlaycontainer>';
@@ -622,102 +620,6 @@ BetaJS.Dynamics.Dynamic.Components.Templates['environment'] = ' <ba-controls></b
 BetaJS.Dynamics.Dynamic.Components.Templates['simulator'] = '  <appframe         class="             {{current_system.title}}             {{current_device.title}}         ">      <ba-{{current_component.title}}></ba-{{current_component.title}}>  </appframe> ';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['index'] = '<!DOCTYPE html> <html> <head lang="en">     <meta charset="UTF-8">      <!--<script src="../../vendors/jquery-1.9.closure-extern.js"></script>-->     <script src="../../vendors/jquery-2.1.4.js"></script>     <script src="../../vendors/scoped.js"></script>     <script src="../../vendors/beta.js"></script>      <script src="config/components.js"></script>      <script src="../../vendors/beta-browser-noscoped.js"></script>     <script src="../../vendors/betajs-ui.js"></script>     <script src="../../vendors/betajs-dynamics-noscoped.js"></script>      <link rel="stylesheet" href="../../vendors/icomoon/style.css" />      <link rel="stylesheet" href="../../dist/betajs-dynamics-components.css" />     <script src="../../dist/betajs-dynamics-components.js"></script>      <script src="//localhost:1337/livereload.js"></script>      <title></title>  </head> <body>      <ba-environment></ba-environment>      <script src="config/config.js"></script>     <script src="config/router.js"></script>  </body> </html>';
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Pages.Signin", {
-
-	template: BetaJS.Dynamics.Dynamic.Components.Templates.signin,
-
-	initial: {
-
-		attrs: {
-			welcomemessage : 'Welcome',
-			brandname : 'Doodads',
-			slogan : 'Simplify your life',
-			signin : "Signin",
-			register : "Register"
-		},
-
-		create: function () {
-
-		},
-
-		functions: {
-
-			signin : function () {
-				//if (App.Config.tags.server) {
-				//	BetaJS.$.ajax({
-				//		type : "POST",
-				//		async : true,
-				//		url : "/api/v1/auth",
-				//		data : {
-				//			gmail_user : $scope.email,
-				//			gmail_password : $scope.password
-				//		},
-				//		success : function() {
-				//			App.Config.email = $scope.email;
-				//			App.Config.signed_in = true;
-				//			//Remotely.user($scope.email);
-				//			//$state.go("list.mix");
-				//		},
-				//		error : function() {
-				//			alert("Password not recognised");
-				//		}
-				//	});
-				//} else {
-				//	App.Config.email = $scope.email;
-				//	App.Config.signed_in = true;
-				//	//$state.go("list.mix");
-				//}
-			}
-
-		}
-	}
-
-}).register();
-
-//
-//appControllers.controller('startscreenController', ['$scope', '$state', '$routeParams', '$http', '$location',
-//function($scope, $state, $http, $location) {
-//
-//	BetaJS.Angular.Scope.linkKeyValue($scope, App.Settings, "email", "email", true);
-//
-//	$scope.version = App.Config.app.version;
-//	$scope._ = function(s) {
-//		return BetaJS.Locales.get("doodadsapp.account." + s);
-//	};
-//	$scope.signin = function() {
-//		if (App.Config.tags.server) {
-//			BetaJS.$.ajax({
-//				type : "POST",
-//				async : true,
-//				url : "/api/v1/auth",
-//				data : {
-//					gmail_user : $scope.email,
-//					gmail_password : $scope.password
-//				},
-//				success : function() {
-//					App.Config.email = $scope.email;
-//					App.Config.signed_in = true;
-//					//Remotely.user($scope.email);
-//                    //$state.go("list.mix");
-//				},
-//				error : function() {
-//					alert("Password not recognised");
-//				}
-//			});
-//		} else {
-//			App.Config.email = $scope.email;
-//			App.Config.signed_in = true;
-//            //$state.go("list.mix");
-//		}
-//	};
-//	$scope.more = function() {
-//		// Nothing here for you.
-//	};
-//	//if (App.Config.signed_in)
-//	//	$state.go("list.mix");
-//}]);
 
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Pages.XXX", {
