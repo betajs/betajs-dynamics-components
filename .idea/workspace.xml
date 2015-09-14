@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="72d0b85e-2146-4f66-96cd-41ba7c2a2eae" name="Default" comment="">
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/fragments/begin.js-fragment" afterPath="$PROJECT_DIR$/src/environment/fragments/begin.js-fragment" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/fragments/closure.js-fragment" afterPath="$PROJECT_DIR$/src/environment/fragments/closure.js-fragment" />
-      <change type="MOVED" beforePath="$PROJECT_DIR$/src/fragments/end.js-fragment" afterPath="$PROJECT_DIR$/src/environment/fragments/end.js-fragment" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.sass-cache/141b1d2d07e3b6f7e527f55c5ae7e5b45a0bad79/betajs-dynamics-components.scssc" afterPath="$PROJECT_DIR$/.sass-cache/141b1d2d07e3b6f7e527f55c5ae7e5b45a0bad79/betajs-dynamics-components.scssc" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Gruntfile.js" afterPath="$PROJECT_DIR$/Gruntfile.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components-noscoped.js" afterPath="$PROJECT_DIR$/dist/betajs-dynamics-components-noscoped.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components.css" afterPath="$PROJECT_DIR$/dist/betajs-dynamics-components.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components.js" afterPath="$PROJECT_DIR$/dist/betajs-dynamics-components.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/dist/betajs-dynamics-components.scss" afterPath="$PROJECT_DIR$/dist/betajs-dynamics-components.scss" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/general/derivatives/list/lists/searchlist/searchlist.html" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/lists/searchlist/searchlist.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/components/general/derivatives/list/lists/searchlist/searchlist.js" afterPath="$PROJECT_DIR$/src/components/general/derivatives/list/lists/searchlist/searchlist.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/package.json" afterPath="$PROJECT_DIR$/package.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="betajs-dynamics-components.iws" />
@@ -62,8 +52,8 @@
       <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.64748204" vertical-offset="0" max-vertical-offset="1020">
-              <caret line="24" column="29" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
+            <state vertical-scroll-proportion="0.080935255" vertical-offset="0" max-vertical-offset="1020">
+              <caret line="3" column="111" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="111" />
               <folding />
             </state>
           </provider>
@@ -306,6 +296,30 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="betajs-dynamics-components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="betajs-dynamics-components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="betajs-dynamics-components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="betajs-dynamics-components" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vendors" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
     </panes>
@@ -389,7 +403,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="380" y="23" width="1060" height="877" extended-state="0" />
-    <editor active="false" />
+    <editor active="true" />
     <layout>
       <window_info id="Grunt" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3293011" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32909784" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -397,7 +411,7 @@
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24867162" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3012512" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3012512" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32258064" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -561,13 +575,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.gitignore">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.17291066" vertical-offset="0" max-vertical-offset="347">
-          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vendors/scoped.js">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="8070">
@@ -675,14 +682,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/.project">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="580">
-          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/dist/betajs-dynamics-components.css">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="7245">
@@ -691,10 +690,26 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/.gitignore">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.10810811" vertical-offset="0" max-vertical-offset="555">
+          <caret line="4" column="12" selection-start-line="4" selection-start-column="12" selection-end-line="4" selection-end-column="12" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.project">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="580">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.64748204" vertical-offset="0" max-vertical-offset="1020">
-          <caret line="24" column="29" selection-start-line="24" selection-start-column="29" selection-end-line="24" selection-end-column="29" />
+        <state vertical-scroll-proportion="0.080935255" vertical-offset="0" max-vertical-offset="1020">
+          <caret line="3" column="111" selection-start-line="3" selection-start-column="20" selection-end-line="3" selection-end-column="111" />
           <folding />
         </state>
       </provider>

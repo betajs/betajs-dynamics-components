@@ -28,7 +28,7 @@
 	},
 	"repository": {
 		"type": "git",
-		"url": "git://github.com/betajs/betajs-dynamics.git"
+		"url": "git://github.com/betajs/betajs-dynamics-components.git"
 	},
 	"meta": {
 		"status": "Active, In Development",
@@ -38,7 +38,7 @@
 		"dependencies": {
 			"betajs": "https://github.com/betajs/betajs",
 			"betajs-browser": "https://github.com/betajs/betajs-browser",
-			"betajs-dynamics-components": "https://github.com/betajs/betajs-dyanmics-components"
+			"betajs-dynamics": "https://github.com/betajs/betajs-dyanmics"
 		},
 		"compatability": {
 			"Firefox": "4 - Latest",
