@@ -1,9 +1,9 @@
 {
 	"name": "betajs-dynamics-components",
-	"version": "0.0.2",
+	"version": "0.0.3",
 	"description": "BetaJS-Dynamics-Components is a Library of DOM Components that are built in BetaJS-Dynamics",
 	"homepage": "http://betajs.com",
-	"contributors": ["Oliver Friedmann", "Victor Lingenthal"],
+	"contributors": ["Oliver Friedmann"],
 	"license": "MIT",
 	"devDependencies": {
 		"grunt": "",
@@ -39,18 +39,6 @@
 			"betajs": "https://github.com/betajs/betajs",
 			"betajs-browser": "https://github.com/betajs/betajs-browser",
 			"betajs-dynamics": "https://github.com/betajs/betajs-dyanmics"
-		},
-		"compatability": {
-			"Firefox": "4 - Latest",
-			"Chrome": "14 - Latest",
-			"Safari": "4 - Latest",
-			"Opera": "12 - Latest",
-			"Internet Explorer": "9 - Latest",
-			"iOS": "7.0 - Latest",
-			"Android": "4.0 - Latest"
-		},
-		"tests": {
-			"Test Suite": "http://rawgit.com/betajs/betajs-dynamics-components/master/tests/tests.html"
 		},
 		"cdn": {
 			"betajs-dynamics-components.js": "http://cdn.rawgit.com/betajs/betajs-dynamics-components/master/dist/betajs-dynamics-components.js",
