@@ -8,7 +8,8 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Searchlist", {
         attrs: {
             placeholder : "Search for",
             searchvalue : "",
-            listitem : "clickitem"
+            listitem : "clickitem",
+            showsearch : true
         },
 
         collections : {

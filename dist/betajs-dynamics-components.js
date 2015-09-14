@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.1 - 2015-08-20
+betajs-dynamics-components - v0.0.2 - 2015-09-12
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -537,7 +537,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.0.1 - 2015-08-20
+betajs-dynamics-components - v0.0.2 - 2015-09-12
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -555,7 +555,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '28.1440106898818'
+		version: '31.1442043455182'
 	};
 });
 
@@ -575,7 +575,7 @@ BetaJS.Dynamics.Dynamic.Components.Templates['selectableitem'] = ' <selectableit
 
 BetaJS.Dynamics.Dynamic.Components.Templates['list'] = ' <list ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{listitem}}         ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{listitem}}>  </list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['searchlist'] = '<searchbox>     <icon class="icon-search"></icon>     <input placeholder="{{placeholder}}" value="{{=searchvalue}}"> </searchbox> <ba-list         ba-listitem="{{listitem}}"         ba-listcollection="{{listcollection}}">  </ba-list>';
+BetaJS.Dynamics.Dynamic.Components.Templates['searchlist'] = '<searchbox ba-if="{{showsearch}}">     <icon class="icon-search"></icon>     <input placeholder="{{placeholder}}" value="{{=searchvalue}}"> </searchbox> <ba-list         ba-listitem="{{listitem}}"         ba-listcollection="{{listcollection}}">  </ba-list>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['titledlist'] = '<title ba-click="collapsed = !collapsed">{{title}}</title>  <list ba-if="{{!collapsed && collapsible}}" ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{type}} ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{type}}>  </list>';
 
@@ -939,7 +939,8 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Searchlist", {
         attrs: {
             placeholder : "Search for",
             searchvalue : "",
-            listitem : "clickitem"
+            listitem : "clickitem",
+            showsearch : false
         },
 
         collections : {
