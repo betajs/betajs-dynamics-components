@@ -1,25 +1,39 @@
 /*
-Error: Undefined mixin 'flex'.
-        on line 3 of titledlist.scss, in `flex'
-        from line 3 of titledlist.scss
+Error: Undefined mixin 'display-flex'.
+        on line 9 of additem.scss, in `display-flex'
+        from line 9 of additem.scss
 
-1: 
-2: ba-titledlist {
-3:   @include flex(1 1 0);
-4:   @include display-flex;
-5:   @include flex-direction(column);
-6: 
-7:   ba-title {
-8:     @include flex(0 0);
+4: ba-addtitle {
+5:   background: white;
+6:   border-bottom: 1px solid grey;
+7: 
+8:   addtitle {
+9:     @include display-flex;
+10:     height: $clickitemheigth;
+11:     line-height: $clickitemheigth;
+12: 
+13:     title {
+14:       @include flex(1 1 0);
 
 Backtrace:
-titledlist.scss:3:in `flex'
-titledlist.scss:3
+additem.scss:9:in `display-flex'
+additem.scss:9
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:338:in `block in visit_mixin'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/stack.rb:98:in `block in with_mixin'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/stack.rb:115:in `with_frame'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/stack.rb:98:in `with_mixin'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:336:in `visit_mixin'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/stack.rb:79:in `block in with_base'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/stack.rb:115:in `with_frame'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/stack.rb:79:in `with_base'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:158:in `visit'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:420:in `block (2 levels) in visit_rule'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:420:in `map'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:420:in `block in visit_rule'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:179:in `with_environment'
+/Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:418:in `visit_rule'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/tree/visitors/base.rb:36:in `visit'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/tree/visitors/perform.rb:158:in `block in visit'
 /Library/Ruby/Gems/2.0.0/gems/sass-3.4.9/lib/sass/stack.rb:79:in `block in with_base'
@@ -68,4 +82,4 @@ titledlist.scss:3
 body:before {
   white-space: pre;
   font-family: monospace;
-  content: "Error: Undefined mixin 'flex'.\A         on line 3 of titledlist.scss, in `flex'\A         from line 3 of titledlist.scss\A \A 1: \A 2: ba-titledlist {\A 3:   @include flex(1 1 0);\A 4:   @include display-flex;\A 5:   @include flex-direction(column);\A 6: \A 7:   ba-title {\A 8:     @include flex(0 0);"; }
+  content: "Error: Undefined mixin 'display-flex'.\A         on line 9 of additem.scss, in `display-flex'\A         from line 9 of additem.scss\A \A 4: ba-addtitle {\A 5:   background: white;\A 6:   border-bottom: 1px solid grey;\A 7: \A 8:   addtitle {\A 9:     @include display-flex;\A 10:     height: $clickitemheigth;\A 11:     line-height: $clickitemheigth;\A 12: \A 13:     title {\A 14:       @include flex(1 1 0);"; }

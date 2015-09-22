@@ -1,6 +1,6 @@
 /*!
-betajs-dynamics-components - v0.0.2 - 2015-09-12
-Copyright (c) Oliver Friedmann,Victor Lingenthal
+betajs-dynamics-components - v0.0.3 - 2015-09-22
+Copyright (c) Oliver Friedmann
 MIT Software License.
 */
 
@@ -326,6 +326,7 @@ ba-selectableitem {
 
   selectableitem {
     display: block;
+    background: white;
   }
 
   .selected {
@@ -373,7 +374,7 @@ ba-titledlist {
   @include display-flex;
   @include flex-direction(column);
 
-  title {
+  ba-title {
     @include flex(0 0);
     display: block
   }
@@ -382,6 +383,29 @@ ba-titledlist {
     overflow: scroll;
     ba-listitem {display: block}
   }
+}
+
+$clickitemheigth : 44px;
+
+ba-addtitle {
+  background: white;
+  border-bottom: 1px solid grey;
+
+  addtitle {
+    @include display-flex;
+    height: $clickitemheigth;
+    line-height: $clickitemheigth;
+
+    title {
+      @include flex(1 1 0);
+      display: block;
+      padding: 0 $clickitemheigth/2;
+    }
+    button {
+      @include flex(0 0 $clickitemheigth);
+    }
+  }
+
 }
 
 ba-components {

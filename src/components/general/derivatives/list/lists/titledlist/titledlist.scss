@@ -4,7 +4,7 @@ ba-titledlist {
   @include display-flex;
   @include flex-direction(column);
 
-  title {
+  ba-title {
     @include flex(0 0);
     display: block
   }

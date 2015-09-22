@@ -7,7 +7,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Swipecontaine
 
 		attrs : {
 			type : "clickitem",
-			title : "Swipeitem",
+			model : {title : "Swipeitem"},
 			lefticon : 'icon-ok',
 			righticon : 'icon-time',
 			actions : {
@@ -39,20 +39,16 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Swipecontaine
 		},
 
 		create : function () {
-			console.log("Swipeitem 1 : ");
-			console.log(this.get('model'));
 
 			if (this.get("model")) {
-				BetaJS.Objs.iter(this.get("model").data(), function (modelValue, attrKey) {
+				BetaJS.Objs.iter(this.get("model"), function (modelValue, attrKey) {
 					var attrValue = this.isArgumentAttr(attrKey) ? this.get(attrKey) : modelValue;
 					this.set(attrKey, attrValue);
-					this.get("model").set(attrKey, attrValue);
-					this.properties().bind(attrKey, this.get("model"));
+					//this.get("model").set(attrKey, attrValue);
+					//this.properties().bind(attrKey, this.get("model"));
 				}, this);
 			}
 
-			console.log("Swipeitem 2 : ");
-			console.log(this.get('model'));
 		},
 
 		functions : {

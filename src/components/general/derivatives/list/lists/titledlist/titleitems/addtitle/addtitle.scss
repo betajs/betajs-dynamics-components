@@ -1,0 +1,23 @@
+
+$clickitemheigth : 44px;
+
+ba-addtitle {
+  background: white;
+  border-bottom: 1px solid grey;
+
+  addtitle {
+    @include display-flex;
+    height: $clickitemheigth;
+    line-height: $clickitemheigth;
+
+    title {
+      @include flex(1 1 0);
+      display: block;
+      padding: 0 $clickitemheigth/2;
+    }
+    button {
+      @include flex(0 0 $clickitemheigth);
+    }
+  }
+
+}

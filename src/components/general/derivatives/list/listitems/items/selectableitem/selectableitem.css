@@ -1,5 +1,6 @@
 ba-selectableitem selectableitem {
-  display: block; }
+  display: block;
+  background: white; }
 ba-selectableitem .selected {
   background: lightgrey; }
 
