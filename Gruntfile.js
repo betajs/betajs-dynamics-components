@@ -18,12 +18,12 @@ module.exports = function(grunt) {
 				dist_raw : {
 					dest : 'dist/betajs-dynamics-components-raw.js',
 					src : [
-						'src/environment/fragments/begin.js-fragment',
+						'src/fragments/begin.js-fragment',
 						'dist/betajs-dynamics-components-templates.js',
 						//'src/environment/config/components.js',
 						'src/components/**/*.js',
 						'src/environment/environment/**/*.js',
-						'src/environment/fragments/end.js-fragment'
+						'src/fragments/end.js-fragment'
 					]
 				},
 				dist_scoped : {

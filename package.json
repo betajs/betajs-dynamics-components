@@ -24,7 +24,7 @@
 		"grunt-shell": "",
 		"grunt-template": "",
 	    "grunt-contrib-watch": "",
-	    "grunt-betajs-templates": ""
+	    "grunt-betajs-templates": "git://github.com/betajs/grunt-betajs-templates.git"
 	},
 	"repository": {
 		"type": "git",
