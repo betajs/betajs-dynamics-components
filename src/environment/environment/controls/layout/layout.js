@@ -5,10 +5,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Layout", {
     
     initial : {
 
-        attrs : {
-          current_system : null
-        },
-
         collections : {
             systems : [
                 {title: 'mobile'},
@@ -21,18 +17,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Layout", {
             web:[
                 {title: 'notebook'}
             ]
-        },
-
-        create : function () {
-            console.log('Layout Selector Loaded');
-
-            window.anton = this.get('current_system');
-            console.log('current_system');
-            console.log(this.get('current_system'));
-
-            //this.set('current_system', this.get('systems').getByIndex(1).data());
-
-            //this.set('current_device', this.get('current_device').getByIndex(0));
         }
 
     }

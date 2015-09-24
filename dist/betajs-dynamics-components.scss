@@ -335,7 +335,12 @@ ba-selectableitem {
 }
 
 ba-list {
+  @include display-flex;
+  @include flex-settings(1 1 auto);
+
   list {
+    @include flex-settings(1 1 0);
+
     overflow-y: scroll;
 
     ba-item {display: block}

@@ -225,10 +225,26 @@ ba-selectableitem selectableitem {
 ba-selectableitem .selected {
   background: lightgrey; }
 
-ba-list list {
-  overflow-y: scroll; }
-  ba-list list ba-item {
-    display: block; }
+ba-list {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-flex: 1 1 auto;
+  -moz-box-flex: 1 1 auto;
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto; }
+  ba-list list {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    overflow-y: scroll; }
+    ba-list list ba-item {
+      display: block; }
 
 ba-searchlist {
   -webkit-box-flex: 1 1 0;

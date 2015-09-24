@@ -32,18 +32,14 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
 
             }
 
-            //var parentlistcollection = this.get('parentlistcollection') ? this.get('parentlistcollection') : this.scopes.parent_list.get('listcollection');
             var parentlist = this.scopes.parent_list;
-
-            console.log('Parent List');
-            console.log(parentlist);
+            if (!parentlist)
+                console.log('There is no parent list the selector can attach to, this currently only works  with ba-list');
 
             if (parentlist.get('listcollection')) {
                 var index = parentlist.get('listcollection').getIndex(this.get('model'));
                 if (index == 0 && !parentlist.get('selected_item')) {
                     parentlist.set('selected_item', this.get('model'));
-                    console.log('Selected Item');
-                    console.log(parentlist.get('selected_item'));
                 }
             }
         },
@@ -51,8 +47,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
         functions : {
             select : function () {
                 this.scopes.parent_list.set('selected_item',this.get('model'));
-                console.log('Model');
-                console.log(this.get('model'));
             }
         }
 

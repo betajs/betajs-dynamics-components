@@ -19,15 +19,14 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
 
         create : function () {
             if (this.get("model")) {
-                window.list = this.get('model');
-                window.listcollection = this.get('listcollection');
+
                 BetaJS.Objs.iter(this.get("model"), function (modelValue, attrKey) {
                     var attrValue = this.isArgumentAttr(attrKey) ? this.get(attrKey) : modelValue;
                     this.set(attrKey, attrValue);
                     //this.get("model").set(attrKey, attrValue);
                     //this.properties().bind(attrKey, this.get("model"));
                 }, this);
-                window.newlistcollection = this.get('listcollection');
+
             }
         }
 
