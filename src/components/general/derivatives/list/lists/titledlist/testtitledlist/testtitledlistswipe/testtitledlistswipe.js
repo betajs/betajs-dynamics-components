@@ -17,11 +17,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testtitledlistswipe",
                 listitem: 'swipecontainer',
                 type: 'selectableitem',
                 listcollection : new BetaJS.Collections.Collection({objects: [
-                    {title: "Item 1"},
-                    {title: "Item 2"},
-                    {title: "Item 3"},
-                    {title: "Item 4"},
-                    {title: "Item 5"}
+                    {title: "Testtitledlistswipe Item 1"},
+                    {title: "Testtitledlistswipe Item 2"},
+                    {title: "Testtitledlistswipe Item 3"}
                 ]})
             }
         },

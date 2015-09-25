@@ -19,8 +19,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
 
         collections : {
             listcollection : [
-                {title: "Item 1"},
-                {title: "Item 2"}
+                {title: "Titledlist Item 1"},
+                {title: "Titledlist Item 2"},
+                {title: "Titledlist Item 3"}
             ]
         },
 

@@ -14,13 +14,11 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testtitledlist", {
                     titlefunc : 'togglelist',
                     addfunc : 'additem'
                 },
-                listitem : 'clickitem',
+                type : 'clickitem',
                 listcollection : new BetaJS.Collections.Collection({objects: [
-                    {title: "Item 1"},
-                    {title: "Item 2"},
-                    {title: "Item 3"},
-                    {title: "Item 4"},
-                    {title: "Item 5"}
+                    {title: "Testtitledlist Item 1"},
+                    {title: "Testtitledlist Item 2"},
+                    {title: "Testtitledlist Item 3"}
                 ]})
             }
         },

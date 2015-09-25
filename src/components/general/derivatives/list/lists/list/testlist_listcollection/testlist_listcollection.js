@@ -1,36 +1,35 @@
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testlist_listcollection", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.list,
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.testlist_listcollection,
 
     initial: {
 
-        attrs: {
-            listitem : "clickitem"
-        },
 
         collections : {
             listcollection : [
                 {title: "Item 1"},
                 {title: "Item 2"},
-                {title: "Item 3"}
+                {title: "Item 3"},
+                {title: "Item 4"},
+                {title: "Item 5"}
+        //        //{model : {title: "Item 1"}},
+        //        //{model : {title: "Item 2"}},
+        //        //{model : {title: "Item 3"}},
+        //        //{model : {title: "Item 4"}},
+        //        //{model : {title: "Item 5"}}
             ]
         },
 
         create : function () {
-
-            console.log('List model');
-            console.log(this.get('model'));
-
             if (this.get("model")) {
-
+                window.list = this.get('model');
                 BetaJS.Objs.iter(this.get("model"), function (modelValue, attrKey) {
                     var attrValue = this.isArgumentAttr(attrKey) ? this.get(attrKey) : modelValue;
                     this.set(attrKey, attrValue);
                     //this.get("model").set(attrKey, attrValue);
                     //this.properties().bind(attrKey, this.get("model"));
                 }, this);
-
             }
         }
 

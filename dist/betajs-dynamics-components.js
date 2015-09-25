@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.3 - 2015-09-24
+betajs-dynamics-components - v0.0.3 - 2015-09-25
 Copyright (c) Oliver Friedmann
 MIT Software License.
 */
@@ -560,7 +560,7 @@ Public.exports();
 }).call(this);
 
 /*!
-betajs-dynamics-components - v0.0.3 - 2015-09-24
+betajs-dynamics-components - v0.0.3 - 2015-09-25
 Copyright (c) Oliver Friedmann
 MIT Software License.
 */
@@ -578,7 +578,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '37.1443130576656'
+		version: '39.1443198529192'
 	};
 });
 
@@ -599,6 +599,10 @@ BetaJS.Dynamics.Dynamic.Components.Templates['selectableitem'] = ' <selectableit
 BetaJS.Dynamics.Dynamic.Components.Templates['list'] = ' <list ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{listitem}}         ba-type="{{type}}"         ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{listitem}}>  </list>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['testlist_clickitem'] = ' <ba-list ba-model="{{testmodel}}"> </ba-list>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['testlist_listcollection'] = ' <ba-list ba-listcollection="{{listcollection}}"> </ba-list>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates['testlist_listoflist'] = ' <ba-list         ba-listitem="list"         ba-listcollection="{{listcollection}}"> </ba-list>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates['testlist_swipecontainer'] = ' <ba-list ba-model="{{testmodel}}">  </ba-list>';
 
@@ -977,6 +981,10 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
         },
 
         create : function () {
+
+            console.log('List model');
+            console.log(this.get('model'));
+
             if (this.get("model")) {
 
                 BetaJS.Objs.iter(this.get("model"), function (modelValue, attrKey) {
@@ -1027,6 +1035,84 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testlist_clickitem", 
         //        //{model : {title: "Item 5"}}
         //    ]
         //},
+
+        create : function () {
+            if (this.get("model")) {
+                window.list = this.get('model');
+                BetaJS.Objs.iter(this.get("model"), function (modelValue, attrKey) {
+                    var attrValue = this.isArgumentAttr(attrKey) ? this.get(attrKey) : modelValue;
+                    this.set(attrKey, attrValue);
+                    //this.get("model").set(attrKey, attrValue);
+                    //this.properties().bind(attrKey, this.get("model"));
+                }, this);
+            }
+        }
+
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testlist_listcollection", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.testlist_listcollection,
+
+    initial: {
+
+
+        collections : {
+            listcollection : [
+                {title: "Item 1"},
+                {title: "Item 2"},
+                {title: "Item 3"},
+                {title: "Item 4"},
+                {title: "Item 5"}
+        //        //{model : {title: "Item 1"}},
+        //        //{model : {title: "Item 2"}},
+        //        //{model : {title: "Item 3"}},
+        //        //{model : {title: "Item 4"}},
+        //        //{model : {title: "Item 5"}}
+            ]
+        },
+
+        create : function () {
+            if (this.get("model")) {
+                window.list = this.get('model');
+                BetaJS.Objs.iter(this.get("model"), function (modelValue, attrKey) {
+                    var attrValue = this.isArgumentAttr(attrKey) ? this.get(attrKey) : modelValue;
+                    this.set(attrKey, attrValue);
+                    //this.get("model").set(attrKey, attrValue);
+                    //this.properties().bind(attrKey, this.get("model"));
+                }, this);
+            }
+        }
+
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testlist_listoflist", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.testlist_listoflist,
+
+    initial: {
+
+
+        collections : {
+            listcollection : [
+        //        {title: "List of lists Item 1"},
+        //        {title: "Item 2"},
+        //        {title: "Item 3"},
+        //        {title: "Item 4"},
+        //        {title: "Item 5"}
+                {model : {title: "Test - list of list - Item 1"}},
+                {model : {title: "Test - list of list - Item 2"}}
+                //{model : {title: "Item 3"}},
+        //        //{model : {title: "Item 4"}},
+        //        //{model : {title: "Item 5"}}
+            ]
+        },
 
         create : function () {
             if (this.get("model")) {
@@ -1144,13 +1230,11 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testtitledlist", {
                     titlefunc : 'togglelist',
                     addfunc : 'additem'
                 },
-                listitem : 'clickitem',
+                type : 'clickitem',
                 listcollection : new BetaJS.Collections.Collection({objects: [
-                    {title: "Item 1"},
-                    {title: "Item 2"},
-                    {title: "Item 3"},
-                    {title: "Item 4"},
-                    {title: "Item 5"}
+                    {title: "Testtitledlist Item 1"},
+                    {title: "Testtitledlist Item 2"},
+                    {title: "Testtitledlist Item 3"}
                 ]})
             }
         },
@@ -1181,11 +1265,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testtitledlistswipe",
                 listitem: 'swipecontainer',
                 type: 'selectableitem',
                 listcollection : new BetaJS.Collections.Collection({objects: [
-                    {title: "Item 1"},
-                    {title: "Item 2"},
-                    {title: "Item 3"},
-                    {title: "Item 4"},
-                    {title: "Item 5"}
+                    {title: "Testtitledlistswipe Item 1"},
+                    {title: "Testtitledlistswipe Item 2"},
+                    {title: "Testtitledlistswipe Item 3"}
                 ]})
             }
         },
@@ -1219,8 +1301,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
 
         collections : {
             listcollection : [
-                {title: "Item 1"},
-                {title: "Item 2"}
+                {title: "Titledlist Item 1"},
+                {title: "Titledlist Item 2"},
+                {title: "Titledlist Item 3"}
             ]
         },
 
