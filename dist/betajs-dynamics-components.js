@@ -578,17 +578,20 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '40.1444064449462'
+		version: '41.1444068056215'
 	};
 });
 
 BetaJS.Dynamics.Dynamic.Components = {};
 
 window.iterateModel = function (scope) {
+
+    var data = null;
+
     //console.log("Model : " + scope._tagName);
     if (scope.get('model')) {
         //console.log(scope.get('model'));
-        var data = "data" in scope.get("model") ? scope.get("model").data() : scope.get("model");
+        data = "data" in scope.get("model") ? scope.get("model").data() : scope.get("model");
         //console.log(data);
     }
     if (data) {
@@ -601,45 +604,45 @@ window.iterateModel = function (scope) {
     }
 };
 BetaJS.Dynamics.Dynamic.Components.Templates = BetaJS.Dynamics.Dynamic.Components.Templates || {};
-BetaJS.Dynamics.Dynamic.Components.Templates['overlaycontainer'] = '<overlaycontainer     ba-click="showoverlay = false"     ba-if="{{showoverlay}}">      <overlayinner>          <ba-{{overlay}} ba-value=\'{{=value}}\'>             <message>{{message}}</message>         </ba-{{overlay}}>      </overlayinner>  </overlaycontainer>';
+BetaJS.Dynamics.Dynamic.Components.Templates.overlaycontainer = '<overlaycontainer     ba-click="showoverlay = false"     ba-if="{{showoverlay}}">      <overlayinner>          <ba-{{overlay}} ba-value=\'{{=value}}\'>             <message>{{message}}</message>         </ba-{{overlay}}>      </overlayinner>  </overlaycontainer>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['overlaycontainertest'] = ' <button ba-click="showoverlay = !showoverlay">Show Overlaycontainer</button>  <ba-overlaycontainer         ba-overlay="{{=overlay}}"         ba-showoverlay="{{=showoverlay}}">          </ba-overlaycontainer>';
+BetaJS.Dynamics.Dynamic.Components.Templates.overlaycontainertest = ' <button ba-click="showoverlay = !showoverlay">Show Overlaycontainer</button>  <ba-overlaycontainer         ba-overlay="{{=overlay}}"         ba-showoverlay="{{=showoverlay}}">          </ba-overlaycontainer>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['scrollpicker'] = '<element ba-repeat-element="{{element_value :: value_array}}" data-id="{{element_value}}">         {{element_value}} </element>';
+BetaJS.Dynamics.Dynamic.Components.Templates.scrollpicker = '<element ba-repeat-element="{{element_value :: value_array}}" data-id="{{element_value}}">         {{element_value}} </element>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['swipecontainer'] = ' <behind>     <icon class=\'{{lefticon}}\'></icon>     <div></div>     <icon class=\'{{righticon}}\'></icon> </behind>  <swipe>      <ba-{{type}}         ba-model=\'{{model}}\'>         {{model.title}}     </ba-{{type}}>      <swipeleft>         <div></div>         <icon class=\'{{lefticon}}\'></icon>     </swipeleft>      <swiperight>         <icon class=\'{{righticon}}\'></icon>         <div></div>     </swiperight>  </swipe> ';
+BetaJS.Dynamics.Dynamic.Components.Templates.swipecontainer = ' <behind>     <icon class=\'{{lefticon}}\'></icon>     <div></div>     <icon class=\'{{righticon}}\'></icon> </behind>  <swipe>      <ba-{{type}}         ba-model=\'{{model}}\'>         {{model.title}}     </ba-{{type}}>      <swipeleft>         <div></div>         <icon class=\'{{lefticon}}\'></icon>     </swipeleft>      <swiperight>         <icon class=\'{{righticon}}\'></icon>         <div></div>     </swiperight>  </swipe> ';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['clickitem'] = ' <clickitem         ba-click="click(model)">     {{model.title}} </clickitem>';
+BetaJS.Dynamics.Dynamic.Components.Templates.clickitem = ' <clickitem         ba-click="click(model)">     {{model.title}} </clickitem>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['selectableitem'] = ' <selectableitem         ba-class="{{{selected : selected == model}}}"         ba-click="select(model)">     {{model.title}} </selectableitem>';
+BetaJS.Dynamics.Dynamic.Components.Templates.selectableitem = ' <selectableitem         ba-class="{{{selected : selected == model}}}"         ba-click="select(model)">     {{model.title}} </selectableitem>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['test_selectableitem'] = ' <ba-list ba-model="{{testmodel}}"> </ba-list>';
+BetaJS.Dynamics.Dynamic.Components.Templates.test_selectableitem = ' <ba-list ba-model="{{testmodel}}"> </ba-list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['list'] = ' <list ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{listitem}}         ba-type="{{type}}"         ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{listitem}}>  </list>';
+BetaJS.Dynamics.Dynamic.Components.Templates.list = ' <list ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{listitem}}         ba-type="{{type}}"         ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{listitem}}>  </list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['testlist_clickitem'] = ' <ba-list ba-model="{{testmodel}}"> </ba-list>';
+BetaJS.Dynamics.Dynamic.Components.Templates.testlist_clickitem = ' <ba-list ba-model="{{testmodel}}"> </ba-list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['testlist_listcollection'] = ' <ba-list ba-listcollection="{{listcollection}}"> </ba-list>';
+BetaJS.Dynamics.Dynamic.Components.Templates.testlist_listcollection = ' <ba-list ba-listcollection="{{listcollection}}"> </ba-list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['testlist_listoflist'] = ' <ba-list         ba-listitem="list"         ba-listcollection="{{listcollection}}"> </ba-list>';
+BetaJS.Dynamics.Dynamic.Components.Templates.testlist_listoflist = ' <ba-list         ba-listitem="list"         ba-listcollection="{{listcollection}}"> </ba-list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['testlist_swipecontainer'] = ' <ba-list ba-model="{{testmodel}}">  </ba-list>';
+BetaJS.Dynamics.Dynamic.Components.Templates.testlist_swipecontainer = ' <ba-list ba-model="{{testmodel}}">  </ba-list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['searchlist'] = '<searchbox ba-if="{{showsearch}}">     <icon class="icon-search"></icon>     <input placeholder="{{placeholder}}" value="{{=searchvalue}}"> </searchbox>  <ba-list         ba-sharescope         ba-model="{{model}}"         ba-listcollection="{{listcollection}}">  </ba-list> ';
+BetaJS.Dynamics.Dynamic.Components.Templates.searchlist = '<searchbox ba-if="{{showsearch}}">     <icon class="icon-search"></icon>     <input placeholder="{{placeholder}}" value="{{=searchvalue}}"> </searchbox>  <ba-list         ba-sharescope         ba-model="{{model}}"         ba-listcollection="{{listcollection}}">  </ba-list> ';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['test_searchlist'] = ' <ba-searchlist         ba-model="{{model}}">  </ba-searchlist>';
+BetaJS.Dynamics.Dynamic.Components.Templates.test_searchlist = ' <ba-searchlist         ba-model="{{model}}">  </ba-searchlist>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['testtitledlist'] = ' <ba-titledlist         ba-model="{{model}}">  </ba-titledlist>';
+BetaJS.Dynamics.Dynamic.Components.Templates.testtitledlist = ' <ba-titledlist         ba-model="{{model}}">  </ba-titledlist>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['testtitledlistswipe'] = ' <ba-titledlist         ba-model="{{model}}">  </ba-titledlist>';
+BetaJS.Dynamics.Dynamic.Components.Templates.testtitledlistswipe = ' <ba-titledlist         ba-model="{{model}}">  </ba-titledlist>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['titledlist'] = '<ba-{{titleitem}}     ba-model={{titleitem_model}}>{{title}}</ba-{{titleitem}}>  <ba-list         ba-sharescope         ba-if="{{!collapsed && collapsible}}"         ba-model="{{model}}"         ba-listcollection="{{listcollection}}">  </ba-list> ';
+BetaJS.Dynamics.Dynamic.Components.Templates.titledlist = '<ba-{{titleitem}}     ba-model={{titleitem_model}}>{{title}}</ba-{{titleitem}}>  <ba-list         ba-sharescope         ba-if="{{!collapsed && collapsible}}"         ba-model="{{model}}"         ba-listcollection="{{listcollection}}">  </ba-list> ';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['addtitle'] = ' <addtitle>     <title ba-click="clicktitle()">{{title}}</title>     <button ba-click="addbutton()">         <span class="icon-plus"></span>     </button> </addtitle>';
+BetaJS.Dynamics.Dynamic.Components.Templates.addtitle = ' <addtitle>     <title ba-click="clicktitle()">{{title}}</title>     <button ba-click="addbutton()">         <span class="icon-plus"></span>     </button> </addtitle>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['testaddtitle'] = ' <ba-addtitle         ba-model="{{testmodel}}"> </ba-addtitle>';
+BetaJS.Dynamics.Dynamic.Components.Templates.testaddtitle = ' <ba-addtitle         ba-model="{{testmodel}}"> </ba-addtitle>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['index'] = '<!DOCTYPE html> <html> <head lang="en">     <meta charset="UTF-8">      <!--<script src="../vendors/jquery-1.9.closure-extern.js"></script>-->     <script src="../vendors/jquery-2.1.4.js"></script>      <script src="../vendors/scoped.js"></script>     <script src="../vendors/beta.js"></script>     <script src="../vendors/beta-browser-noscoped.js"></script>     <script src="../vendors/betajs-ui.js"></script>     <script src="../vendors/betajs-dynamics-noscoped.js"></script>      <script src="components.js"></script>      <script src="../vendors/betajs-simulator.js"></script>     <link rel="stylesheet" href="../vendors/betajs-simulator.css" />      <script src="../dist/betajs-dynamics-components-noscoped.js"></script>     <link rel="stylesheet" href="../dist/betajs-dynamics-components.css" />     <link rel="stylesheet" href="../vendors/icomoon/style.css" />      <script src="//localhost:1337/livereload.js"></script>      <title>BetaJS Simulator</title>  </head> <body>      <ba-simulator></ba-simulator>  </body> </html>';
+BetaJS.Dynamics.Dynamic.Components.Templates.index = '<!DOCTYPE html> <html> <head lang="en">     <meta charset="UTF-8">      <!--<script src="../vendors/jquery-1.9.closure-extern.js"></script>-->     <script src="../vendors/jquery-2.1.4.js"></script>      <script src="../vendors/scoped.js"></script>     <script src="../vendors/beta.js"></script>     <script src="../vendors/beta-browser-noscoped.js"></script>     <script src="../vendors/betajs-ui.js"></script>     <script src="../vendors/betajs-dynamics-noscoped.js"></script>      <script src="components.js"></script>      <script src="../vendors/betajs-simulator.js"></script>     <link rel="stylesheet" href="../vendors/betajs-simulator.css" />      <script src="../dist/betajs-dynamics-components-noscoped.js"></script>     <link rel="stylesheet" href="../dist/betajs-dynamics-components.css" />     <link rel="stylesheet" href="../vendors/icomoon/style.css" />      <script src="//localhost:1337/livereload.js"></script>      <title>BetaJS Simulator</title>  </head> <body>      <ba-simulator></ba-simulator>  </body> </html>';
 
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Overlaycontainer", {
@@ -785,8 +788,8 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Swipecontaine
 					execute: function () {
 						//alert("other?");
 						console.log(this.get("model"));
-						var m = this.get("model");
-						m ? m.set("archived", true) : {};
+						if (this.get("model"))
+							this.get("model").set("archived", true);
 					}
 				},
 				"archive": {
@@ -809,14 +812,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Swipecontaine
 
 		create : function () {
 
-			if (this.get("model")) {
-				BetaJS.Objs.iter(this.get("model"), function (modelValue, attrKey) {
-					var attrValue = this.isArgumentAttr(attrKey) ? this.get(attrKey) : modelValue;
-					this.set(attrKey, attrValue);
-					//this.get("model").set(attrKey, attrValue);
-					//this.properties().bind(attrKey, this.get("model"));
-				}, this);
-			}
+			window.iterateModel(this);
 
 		},
 
@@ -893,7 +889,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Clickitem", {
         functions : {
             click : function () {
                 var itemtitle = this.get('model').data() ? this.get('model').data().title : this.get('model').title;
-                console.log("You Clicked item : " + itemtitle)
+                console.log("You Clicked item : " + itemtitle);
             }
         }
 
@@ -933,7 +929,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
             else {
                 if (parentlist.get('listcollection')) {
                     var index = parentlist.get('listcollection').getIndex(this.get('model'));
-                    if (index == 0 && !parentlist.get('selected_item')) {
+                    if (index === 0 && !parentlist.get('selected_item')) {
                         parentlist.set('selected_item', this.get('model'));
                     }
                 }
@@ -1278,12 +1274,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Addtitle", {
 
         create : function () {
 
-            BetaJS.Objs.iter(this.get("model"), function (modelValue, attrKey) {
-                var attrValue = this.isArgumentAttr(attrKey) ? this.get(attrKey) : modelValue;
-                this.set(attrKey, attrValue);
-                //    this.get("model").set(attrKey, attrValue);
-                //    this.properties().bind(attrKey, this.get("model"));
-            }, this);
+            window.iterateModel(this);
 
         },
 
@@ -1293,13 +1284,13 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Addtitle", {
                 if (this.get('titlefunc')) {
                     this.parent().call(this.get('titlefunc'), params);
                 } else
-                    console.log("You clicked the Title, no titlefunc given")
+                    console.log("You clicked the Title, no titlefunc given");
             },
             addbutton : function (params) {
                 if (this.get('addfunc')) {
                     this.parent().call(this.get('addfunc'), params);
                 } else
-                    console.log("You clicked the addbuton, no addfunc given")
+                    console.log("You clicked the addbuton, no addfunc given");
             }
         }
 

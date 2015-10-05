@@ -31,7 +31,7 @@ module.exports = function(grunt) {
 				dist_scoped : {
 					dest : 'dist/betajs-dynamics-components.js',
 					src : [ 'vendors/scoped.js',
-						'dist/betajs-dynamics-components-noscoped.js',
+						'dist/betajs-dynamics-components-noscoped.js'
 					]
 				},
 				dist_scss: {

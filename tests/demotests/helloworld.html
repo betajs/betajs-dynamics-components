@@ -5,6 +5,7 @@
     <script src="../../vendors/beta-browser-noscoped.js"></script>
     <script src="../../vendors/betajs-dynamics-noscoped.js"></script>
     <script src="../../dist/betajs-dynamics-components.js"></script>
+    <link rel="stylesheet" href="../../dist/betajs-dynamics-components.css">
 </head>
 <body>
 
@@ -21,12 +22,13 @@
 
 <test>
     <div id="helloworld">{{replaced_value}}</div>
+    <ba-overlaycontainer></ba-overlaycontainer>
 </test>
 <script>
     var root = $("test");
 
     var dynamic = new BetaJS.Dynamics.Dynamic({
-        element: $("#helloworld")
+        element: root
     });
 
     dynamic.set("replaced_value", "Hello World");
@@ -35,6 +37,7 @@
     function test() {
 
         QUnit.equal(dynamic.get("replaced_value"), $('#helloworld').html().trim());
+        QUnit.equal("This is a message", $('overlayinner').find('message').html().trim());
 
     }
 </script>

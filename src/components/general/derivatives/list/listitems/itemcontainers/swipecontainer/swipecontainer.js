@@ -16,8 +16,8 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Swipecontaine
 					execute: function () {
 						//alert("other?");
 						console.log(this.get("model"));
-						var m = this.get("model");
-						m ? m.set("archived", true) : {};
+						if (this.get("model"))
+							this.get("model").set("archived", true);
 					}
 				},
 				"archive": {
@@ -40,14 +40,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Swipecontaine
 
 		create : function () {
 
-			if (this.get("model")) {
-				BetaJS.Objs.iter(this.get("model"), function (modelValue, attrKey) {
-					var attrValue = this.isArgumentAttr(attrKey) ? this.get(attrKey) : modelValue;
-					this.set(attrKey, attrValue);
-					//this.get("model").set(attrKey, attrValue);
-					//this.properties().bind(attrKey, this.get("model"));
-				}, this);
-			}
+			window.iterateModel(this);
 
 		},
 

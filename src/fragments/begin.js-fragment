@@ -19,10 +19,13 @@ Scoped.define("module:", function () {
 BetaJS.Dynamics.Dynamic.Components = {};
 
 window.iterateModel = function (scope) {
+
+    var data = null;
+
     //console.log("Model : " + scope._tagName);
     if (scope.get('model')) {
         //console.log(scope.get('model'));
-        var data = "data" in scope.get("model") ? scope.get("model").data() : scope.get("model");
+        data = "data" in scope.get("model") ? scope.get("model").data() : scope.get("model");
         //console.log(data);
     }
     if (data) {

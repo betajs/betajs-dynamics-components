@@ -30,7 +30,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
             else {
                 if (parentlist.get('listcollection')) {
                     var index = parentlist.get('listcollection').getIndex(this.get('model'));
-                    if (index == 0 && !parentlist.get('selected_item')) {
+                    if (index === 0 && !parentlist.get('selected_item')) {
                         parentlist.set('selected_item', this.get('model'));
                     }
                 }
