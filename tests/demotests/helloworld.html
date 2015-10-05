@@ -1,0 +1,43 @@
+<html>
+<head>
+    <script src="../assets/jquery.js"></script>
+    <script src="../../vendors/beta.js"></script>
+    <script src="../../vendors/beta-browser-noscoped.js"></script>
+    <script src="../../vendors/betajs-dynamics-noscoped.js"></script>
+    <script src="../../dist/betajs-dynamics-components.js"></script>
+</head>
+<body>
+
+<script>
+
+    dynamic = new BetaJS.Dynamics.Dynamic({
+        element: $("#helloworld")
+    });
+
+    dynamic.set("replaced_value", "Hello World");
+    dynamic.activate();
+
+</script>
+
+<test>
+    <div id="helloworld">{{replaced_value}}</div>
+</test>
+<script>
+    var root = $("test");
+
+    var dynamic = new BetaJS.Dynamics.Dynamic({
+        element: $("#helloworld")
+    });
+
+    dynamic.set("replaced_value", "Hello World");
+    dynamic.activate();
+
+    function test() {
+
+        QUnit.equal(dynamic.get("replaced_value"), $('#helloworld').html().trim());
+
+    }
+</script>
+
+</body>
+</html>

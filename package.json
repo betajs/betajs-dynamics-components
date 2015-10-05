@@ -3,7 +3,7 @@
 	"version": "0.0.3",
 	"description": "BetaJS-Dynamics-Components is a Library of DOM Components that are built in BetaJS-Dynamics",
 	"homepage": "http://betajs.com",
-	"contributors": ["Oliver Friedmann"],
+	"contributors": ["Oliver Friedmann, Victor Lingenthal"],
 	"license": "MIT",
 	"devDependencies": {
 		"grunt": "",
@@ -13,6 +13,7 @@
 		"grunt-contrib-uglify": "",
 		"grunt-contrib-clean": "",
 	    "grunt-contrib-sass": "",
+	  	"grunt-contrib-connect": "",
 		"grunt-preprocess": "",
 		"grunt-git-revision-count": "",
 		"grunt-closure-tools": "",

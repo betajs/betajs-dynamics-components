@@ -21,9 +21,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testtitledlist", {
                     {title: "Testtitledlist Item 3"}
                 ]})
             }
-        },
-
-        create :  function () {
         }
 
     }

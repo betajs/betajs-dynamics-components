@@ -1,5 +1,9 @@
 module.banner = '/*!\n<%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\nCopyright (c) <%= pkg.contributors %>\n<%= pkg.license %> Software License.\n*/\n';
 
+
+var Routes = {};
+Routes.port = '8711';
+
 module.exports = function(grunt) {
 
 	grunt
@@ -20,9 +24,7 @@ module.exports = function(grunt) {
 					src : [
 						'src/fragments/begin.js-fragment',
 						'dist/betajs-dynamics-components-templates.js',
-						//'src/environment/config/components.js',
 						'src/components/**/*.js',
-						'src/environment/environment/**/*.js',
 						'src/fragments/end.js-fragment'
 					]
 				},
@@ -96,6 +98,8 @@ module.exports = function(grunt) {
 						"./vendors/betajs-ui.js" : "https://raw.githubusercontent.com/betajs/betajs-ui/master/dist/beta-ui.js",
 						"./vendors/beta-browser-noscoped.js" : "https://raw.githubusercontent.com/betajs/betajs-browser/master/dist/beta-browser-noscoped.js",
 						"./vendors/betajs-dynamics-noscoped.js" : "https://raw.githubusercontent.com/betajs/betajs-dynamics/master/dist/betajs-dynamics-noscoped.js",
+						"./vendors/betajs-simulator.js" : "https://raw.githubusercontent.com/betajs/betajs-simulator/master/dist/betajs-simulator.js",
+						"./vendors/betajs-simulator.css" : "https://raw.githubusercontent.com/betajs/betajs-simulator/master/dist/betajs-simulator.css",
 						"./vendors/jquery-1.9.closure-extern.js" : "https://raw.githubusercontent.com/google/closure-compiler/master/contrib/externs/jquery-1.9.js"
 					}
 				}
@@ -121,6 +125,18 @@ module.exports = function(grunt) {
 						configure : "./jsdoc.conf.json",
 						tutorials: "./docsrc/tutorials",
 						recurse: true
+					}
+				}
+			},
+			connect: {
+				server: {
+					options: {
+						port: Routes.port,
+						base: '.',
+						keepalive: true,
+						open: {
+							target: 'http://localhost:' + Routes.port + '/tests/tests.html'
+						}
 					}
 				}
 			},
@@ -170,6 +186,7 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-closure-tools');
 	grunt.loadNpmTasks('grunt-contrib-jshint');
 	grunt.loadNpmTasks('grunt-node-qunit');
+	grunt.loadNpmTasks('grunt-contrib-connect');
 	grunt.loadNpmTasks('grunt-jsdoc');
 	grunt.loadNpmTasks('grunt-shell');
 	grunt.loadNpmTasks('grunt-template');
@@ -180,7 +197,7 @@ module.exports = function(grunt) {
 
 	grunt.registerTask('default', [ 'revision-count', "betajs_templates", 'concat:dist_raw', 'concat:dist_scss', 'sass:dist',
 		'preprocess', 'clean:raw', 'clean:templates', /*"cssmin",*/ 'concat:dist_scoped'/*, 'uglify'*/ ]);
-	grunt.registerTask('qunit', [ 'shell:tests' ]);
+	grunt.registerTask('qunit', [ 'connect' ]);
 	grunt.registerTask('lint', [ 'jshint:source', 'jshint:dist',
 		'jshint:gruntfile', "jshint:tests" ]);
 	grunt.registerTask('check', [ 'lint', 'qunit' ]);

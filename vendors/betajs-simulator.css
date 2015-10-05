@@ -1,0 +1,228 @@
+/*!
+betajs-simulator - v0.0.1 - 2015-10-05
+Copyright (c) Oliver Friedmann,Victor Lingenthal
+MIT Software License.
+*/
+component {
+  margin: 10px; }
+
+/*******************************
+ **           Timer           **
+ *******************************/
+/*******************************
+ **          Layout           **
+ *******************************/
+/*******************************
+ **           Style           **
+ *******************************/
+a {
+  color: dodgerblue; }
+
+.icon-star {
+  color: #428bca; }
+
+.icon-star-empty {
+  color: #ddd; }
+
+.icon-search {
+  color: #777; }
+
+/*
+ * Mixins
+ */
+li {
+  list-style: none; }
+
+ul {
+  margin: 0;
+  padding: 0; }
+
+ba-components {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; }
+
+ba-controls {
+  padding: 10px;
+  overflow: hidden;
+  border-bottom: 1px solid black;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+  ba-controls controls {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex; }
+    ba-controls controls > * {
+      -webkit-box-flex: 1 1 0;
+      -moz-box-flex: 1 1 0;
+      -webkit-flex: 1 1 0;
+      -ms-flex: 1 1 0;
+      flex: 1 1 0; }
+    ba-controls controls ba-layout {
+      -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+      flex-direction: column; }
+    ba-controls controls ba-titledlist {
+      border: 1px solid grey; }
+      ba-controls controls ba-titledlist title {
+        border-bottom: 1px solid grey; }
+
+ba-layout {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+  ba-layout ba-list {
+    border: 1px solid grey; }
+
+ba-simulator {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+  ba-simulator ba-controls {
+    -webkit-box-flex: 0 0 150px;
+    -moz-box-flex: 0 0 150px;
+    -webkit-flex: 0 0 150px;
+    -ms-flex: 0 0 150px;
+    flex: 0 0 150px; }
+  ba-simulator ba-viewport {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    overflow-y: scroll; }
+
+ba-viewport appframe {
+  position: relative;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  overflow: hidden; }
+ba-viewport .mobile {
+  margin: 10px;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  border: 1px solid black; }
+ba-viewport .web {
+  margin: 0; }
+ba-viewport .iphone5 {
+  height: 667px;
+  width: 375px; }
+ba-viewport .iphone4 {
+  height: 480px;
+  width: 320px; }
+
+/*******************************
+ **           Style           **
+ *******************************/
+a {
+  color: dodgerblue; }
+
+.icon-star {
+  color: #428bca; }
+
+.icon-star-empty {
+  color: #ddd; }
+
+.icon-search {
+  color: #777; }
+
+/*
+ * Mixins
+ */
+/*
+ * Mixins
+ */
+/*******************************
+ **           Reset           **
+ *******************************/
+* {
+  box-sizing: border-box;
+  margin: 0px;
+  padding: 0px; }
+
+body {
+  font-family: "Helvetica Neue",Helvetica,Arial,sans-serif; }
+
+a {
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  text-decoration: none; }
+
+button, input {
+  border: none;
+  background: transparent; }
+
+input, textarea {
+  border: none;
+  -webkit-appearance: none; }
+
+textarea {
+  resize: none; }
+
+button:focus, input:focus, textarea:focus {
+  outline: none; }
+
+ul {
+  list-style-type: none; }
+
+* {
+  -webkit-tap-highlight-color: transparent; }
+
+/*******************************
+ **           Timer           **
+ *******************************/
+/*******************************
+ **          Layout           **
+ *******************************/
+a:hover {
+  cursor: pointer; }
+
+ba-helloworld {
+  background: white;
+  border-bottom: 1px solid grey; }
+  ba-helloworld helloworld {
+    padding: 0 22px;
+    height: 44px;
+    line-height: 44px;
+    display: block; }
+
+/*# sourceMappingURL=betajs-simulator.css.map */

@@ -6,8 +6,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
     initial: {
 
         bind : {
-            selected : "<:selected_item",
-            parentlistcollection : "<:listcollection"
+            selected : "<+[tagname='ba-list']:selected_item"
         },
 
         attrs : {
@@ -22,24 +21,18 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
         },
 
         create : function () {
-
-            if (this.get("model")) {
-
-                BetaJS.Objs.iter(this.get("model"), function (modelValue, attrKey) {
-                    var attrValue = this.isArgumentAttr(attrKey) ? this.get(attrKey) : modelValue;
-                    this.set(attrKey, attrValue);
-                }, this);
-
-            }
+            window.iterateModel(this);
 
             var parentlist = this.scopes.parent_list;
+
             if (!parentlist)
                 console.log('There is no parent list the selector can attach to, this currently only works  with ba-list');
-
-            if (parentlist.get('listcollection')) {
-                var index = parentlist.get('listcollection').getIndex(this.get('model'));
-                if (index == 0 && !parentlist.get('selected_item')) {
-                    parentlist.set('selected_item', this.get('model'));
+            else {
+                if (parentlist.get('listcollection')) {
+                    var index = parentlist.get('listcollection').getIndex(this.get('model'));
+                    if (index == 0 && !parentlist.get('selected_item')) {
+                        parentlist.set('selected_item', this.get('model'));
+                    }
                 }
             }
         },

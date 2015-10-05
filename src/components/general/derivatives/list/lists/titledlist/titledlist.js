@@ -26,18 +26,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
         },
 
         create : function () {
-
-            if (this.get("model")) {
-
-                BetaJS.Objs.iter(this.get("model"), function (modelValue, attrKey) {
-                    var attrValue = this.isArgumentAttr(attrKey) ? this.get(attrKey) : modelValue;
-                    this.set(attrKey, attrValue);
-                        //this.get("model").set(attrKey, attrValue);
-                        //this.properties().bind(attrKey, this.get("model"));
-                }, this);
-
-            }
-
+            window.iterateModel(this);
         },
 
         functions : {
