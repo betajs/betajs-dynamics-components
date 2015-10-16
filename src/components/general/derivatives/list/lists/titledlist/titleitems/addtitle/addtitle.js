@@ -8,7 +8,19 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Addtitle", {
         attrs: {
             title : 'Title',
             titlefunc : false,
-            addfunc : false
+            addfunc : false,
+            titlescope : '<',
+            addbuttonscope : '<',
+            add_func : function () {
+
+                var params = this.get('addbuttonparams') ? this.get('addbuttonparams') : null;
+
+                if (this.get('addfunc')) {
+                    this.scope(this.get('addbuttonscope')).call(this.get('addfunc'), params);
+                } else
+                    console.log("You clicked the addbuton, no addfunc given");
+
+            }
         },
 
         create : function () {
@@ -19,18 +31,22 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Addtitle", {
 
         functions : {
 
-            clicktitle : function (params) {
+            clicktitle : function () {
+
+                var params = this.get('titleparams') ? this.get('titleparams') : null;
+
                 if (this.get('titlefunc')) {
-                    this.parent().call(this.get('titlefunc'), params);
+                    this.scope(this.get('titlescope')).call(this.get('titlefunc'),params);
                 } else
                     console.log("You clicked the Title, no titlefunc given");
+
             },
-            addbutton : function (params) {
-                if (this.get('addfunc')) {
-                    this.parent().call(this.get('addfunc'), params);
-                } else
-                    console.log("You clicked the addbuton, no addfunc given");
+            addbutton : function () {
+
+                this.get('add_func').call(this,null);
+
             }
+
         }
 
     }

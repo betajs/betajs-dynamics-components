@@ -2,6 +2,7 @@
 <list ba-repeat="{{collectionitem :: listcollection}}">
 
     <ba-{{listitem}}
+        id="{{collectionitem.cid()}}"
         ba-type="{{type}}"
         ba-model="{{collectionitem}}">
         {{collectionitem.title}}

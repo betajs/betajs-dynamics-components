@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.3 - 2015-10-05
+betajs-dynamics-components - v0.0.3 - 2015-10-16
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -17,7 +17,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '41.1444068056215'
+		version: '42.1444730780357'
 	};
 });
 
@@ -57,7 +57,7 @@ BetaJS.Dynamics.Dynamic.Components.Templates.selectableitem = ' <selectableitem 
 
 BetaJS.Dynamics.Dynamic.Components.Templates.test_selectableitem = ' <ba-list ba-model="{{testmodel}}"> </ba-list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.list = ' <list ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{listitem}}         ba-type="{{type}}"         ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{listitem}}>  </list>';
+BetaJS.Dynamics.Dynamic.Components.Templates.list = ' <list ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{listitem}}         id="{{collectionitem.cid()}}"         ba-type="{{type}}"         ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{listitem}}>  </list>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates.testlist_clickitem = ' <ba-list ba-model="{{testmodel}}"> </ba-list>';
 
@@ -65,13 +65,15 @@ BetaJS.Dynamics.Dynamic.Components.Templates.testlist_listcollection = ' <ba-lis
 
 BetaJS.Dynamics.Dynamic.Components.Templates.testlist_listoflist = ' <ba-list         ba-listitem="list"         ba-listcollection="{{listcollection}}"> </ba-list>';
 
+BetaJS.Dynamics.Dynamic.Components.Templates.testlist_pushfunc = '<button ba-click="test(input_value)">Test func</button> <input ba-return="test(input_value)" placeholder="Push item to list" value="{{=input_value}}"> <ba-list ba-model="{{testmodel}}"> </ba-list>';
+
 BetaJS.Dynamics.Dynamic.Components.Templates.testlist_swipecontainer = ' <ba-list ba-model="{{testmodel}}">  </ba-list>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates.searchlist = '<searchbox ba-if="{{showsearch}}">     <icon class="icon-search"></icon>     <input placeholder="{{placeholder}}" value="{{=searchvalue}}"> </searchbox>  <ba-list         ba-sharescope         ba-model="{{model}}"         ba-listcollection="{{listcollection}}">  </ba-list> ';
 
 BetaJS.Dynamics.Dynamic.Components.Templates.test_searchlist = ' <ba-searchlist         ba-model="{{model}}">  </ba-searchlist>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.testtitledlist = ' <ba-titledlist         ba-model="{{model}}">  </ba-titledlist>';
+BetaJS.Dynamics.Dynamic.Components.Templates.test_titledlist = ' <ba-titledlist         ba-model="{{model}}">  </ba-titledlist>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates.testtitledlistswipe = ' <ba-titledlist         ba-model="{{model}}">  </ba-titledlist>';
 
@@ -79,9 +81,13 @@ BetaJS.Dynamics.Dynamic.Components.Templates.titledlist = '<ba-{{titleitem}}    
 
 BetaJS.Dynamics.Dynamic.Components.Templates.addtitle = ' <addtitle>     <title ba-click="clicktitle()">{{title}}</title>     <button ba-click="addbutton()">         <span class="icon-plus"></span>     </button> </addtitle>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.testaddtitle = ' <ba-addtitle         ba-model="{{testmodel}}"> </ba-addtitle>';
+BetaJS.Dynamics.Dynamic.Components.Templates.test_addtitle = ' <ba-addtitle         ba-model="{{testmodel}}"> </ba-addtitle> ';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.index = '<!DOCTYPE html> <html> <head lang="en">     <meta charset="UTF-8">      <!--<script src="../vendors/jquery-1.9.closure-extern.js"></script>-->     <script src="../vendors/jquery-2.1.4.js"></script>      <script src="../vendors/scoped.js"></script>     <script src="../vendors/beta.js"></script>     <script src="../vendors/beta-browser-noscoped.js"></script>     <script src="../vendors/betajs-ui.js"></script>     <script src="../vendors/betajs-dynamics-noscoped.js"></script>      <script src="components.js"></script>      <script src="../vendors/betajs-simulator.js"></script>     <link rel="stylesheet" href="../vendors/betajs-simulator.css" />      <script src="../dist/betajs-dynamics-components-noscoped.js"></script>     <link rel="stylesheet" href="../dist/betajs-dynamics-components.css" />     <link rel="stylesheet" href="../vendors/icomoon/style.css" />      <script src="//localhost:1337/livereload.js"></script>      <title>BetaJS Simulator</title>  </head> <body>      <ba-simulator></ba-simulator>  </body> </html>';
+BetaJS.Dynamics.Dynamic.Components.Templates.pushfunc = ' <pushfunc         ba-click="log()">     {{model.title}} </pushfunc>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates.test_pushfunc = ' <ba-pushfunc         ba-model="{{testmodel}}"> </ba-pushfunc>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates.index = '<!DOCTYPE html> <html> <head lang="en">     <meta charset="UTF-8">      <!--<script src="../vendors/jquery-1.9.closure-extern.js"></script>-->     <script src="../vendors/jquery-2.1.4.js"></script>      <script src="../vendors/scoped.js"></script>     <script src="../vendors/beta.js"></script>     <script src="../vendors/beta-browser-noscoped.js"></script>     <script src="../vendors/betajs-ui.js"></script>     <script src="../vendors/betajs-dynamics-noscoped.js"></script>      <script src="components.js"></script>      <script src="../vendors/betajs-simulator.js"></script>     <link rel="stylesheet" href="../vendors/betajs-simulator.css" />      <script src="../dist/betajs-dynamics-components-noscoped.js"></script>     <link rel="stylesheet" href="../dist/betajs-dynamics-components.css" />     <link rel="stylesheet" href="../vendors/icomoon/style.css" />      <script src="//localhost:1337/livereload.js"></script>      <title>BetaJS Simulator</title>  </head> <body>  <ba-simulator></ba-simulator>  </body> </html>';
 
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Overlaycontainer", {
@@ -506,6 +512,48 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testlist_listoflist",
 }).register();
 
 
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testlist_pushfunc", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.testlist_pushfunc,
+
+    initial: {
+
+        attrs: {
+            //input_value : "Test",
+            testmodel : {
+                listitem : 'clickitem',
+                functions : {
+                    testfunc : function (argument) {
+                        console.log('This is a testfunction');
+                        console.log('This is the argument : ' + argument);
+                        console.log(this.get('listcollection'));
+                        this.get('listcollection').add(
+                            {title : argument}
+                        );
+                    }
+                },
+                listcollection : new BetaJS.Collections.Collection({objects: [
+                    {title: "Item 1"},
+                    {title: "Item 2"},
+                    {title: "Item 3"},
+                    {title: "Item 4"},
+                    {title: "Item 5"}
+                ]})
+            }
+        },
+
+        functions : {
+            test : function (argument) {
+                argument = argument ? argument : "no arg given";
+                this.scope('>').get('model').functions.testfunc.call(this.scope('>'), argument);
+            }
+        }
+
+    }
+
+}).register();
+
+
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testlist_swipecontainer", {
 
     template: BetaJS.Dynamics.Dynamic.Components.Templates.testlist_swipecontainer,
@@ -585,9 +633,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_searchlist", {
 }).register();
 
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testtitledlist", {
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist", {
 
-    template : BetaJS.Dynamics.Dynamic.Components.Templates.testtitledlist,
+    template : BetaJS.Dynamics.Dynamic.Components.Templates.test_titledlist,
 
     initial : {
 
@@ -598,7 +646,13 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testtitledlist", {
                 titleitem_model : {
                     title : 'Titledlist - Testtitle',
                     titlefunc : 'togglelist',
-                    addfunc : 'additem'
+                    addfunc : 'additem',
+                    addbuttonscope :'<<'
+                },
+                functions : {
+                    placeholder_func : function () {
+                        console.log('This is a testfunction from the test_titledlist');
+                    }
                 },
                 type : 'clickitem',
                 listcollection : new BetaJS.Collections.Collection({objects: [
@@ -607,6 +661,19 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testtitledlist", {
                     {title: "Testtitledlist Item 3"}
                 ]})
             }
+        },
+
+        functions : {
+
+            additem : function () {
+
+                console.log('This comes from the Test Titledlist : ');
+                console.log(this.scope('>').call('additem', {title  : "title"}));
+
+                this.get('test_function').call(this, null);
+
+            }
+
         }
 
     }
@@ -658,6 +725,11 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
             title : 'Title',
 
             model : {
+                functions : {
+                    placeholder_func : function () {
+                        console.log('The placeholder function was called')
+                    }
+                },
                 listitem : 'selectableitem',
                 titleitem : 'title'
             }
@@ -679,17 +751,20 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
         functions : {
 
             togglelist : function () {
+
                 this.set('collapsed', !this.get('collapsed'));
+
             },
 
             additem : function (item) {
-                console.log('You called Additem');
-                console.log(item);
+
                 item = item ? item : {title : "New Item"};
-                console.log(item);
-                window.test = this;
-                console.log(this.get('listcollection'));
-                this.get('listcollection').add(item);
+                var index = this.get('listcollection').add(item);
+
+                this.get('functions').placeholder_func.call(this,null);
+
+                return this.get('listcollection').getByIndex(index).cid();
+
             }
 
         }
@@ -708,7 +783,19 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Addtitle", {
         attrs: {
             title : 'Title',
             titlefunc : false,
-            addfunc : false
+            addfunc : false,
+            titlescope : '<',
+            addbuttonscope : '<',
+            add_func : function () {
+
+                var params = this.get('addbuttonparams') ? this.get('addbuttonparams') : null;
+
+                if (this.get('addfunc')) {
+                    this.scope(this.get('addbuttonscope')).call(this.get('addfunc'), params);
+                } else
+                    console.log("You clicked the addbuton, no addfunc given");
+
+            }
         },
 
         create : function () {
@@ -719,17 +806,53 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Addtitle", {
 
         functions : {
 
-            clicktitle : function (params) {
+            clicktitle : function () {
+
+                var params = this.get('titleparams') ? this.get('titleparams') : null;
+
                 if (this.get('titlefunc')) {
-                    this.parent().call(this.get('titlefunc'), params);
+                    this.scope(this.get('titlescope')).call(this.get('titlefunc'),params);
                 } else
                     console.log("You clicked the Title, no titlefunc given");
+
             },
-            addbutton : function (params) {
-                if (this.get('addfunc')) {
-                    this.parent().call(this.get('addfunc'), params);
-                } else
-                    console.log("You clicked the addbuton, no addfunc given");
+            addbutton : function () {
+
+                this.get('add_func').call(this,null);
+
+            }
+
+        }
+
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_addtitle", {
+
+    template : BetaJS.Dynamics.Dynamic.Components.Templates.test_addtitle,
+
+    initial : {
+
+        attrs : {
+            testmodel : {
+                title : 'Test - Addtitle',
+                titlefunc : 'showlist',
+                addfunc : 'additem',
+                add_func : function () {
+                    console.log('This is the add_func');
+                }
+            }
+        },
+
+        functions : {
+            additem : function () {
+                this.get('testmodel').add_func.call(this, null);
+                console.log("Add Item to List");
+            },
+            showlist : function () {
+                console.log("You clicked the title");
             }
         }
 
@@ -738,26 +861,57 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Addtitle", {
 }).register();
 
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testaddtitle", {
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Pushfunc", {
 
-    template : BetaJS.Dynamics.Dynamic.Components.Templates.testaddtitle,
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.pushfunc,
 
-    initial : {
+    initial: {
 
         attrs : {
-            testmodel : {
-                title : 'Testaddtitle',
-                titlefunc : 'showlist',
-                addfunc : 'additem'
+            model : {
+                title :'Pushfunc'
             }
         },
 
+        create : function () {
+            window.iterateModel(this);
+        },
+
         functions : {
-            additem : function () {
-                console.log("Add Item to List");
-            },
-            showlist : function () {
-                console.log("You clicked the title");
+            log : function () {
+                console.log('Model');
+                console.log(this.get('model'));
+                console.log('Testfunc');
+                console.log(this.get('model').testfunc);
+                console.log('Testfunc Func');
+                this.get('model').testfunc.func.call(this, "This is an argument");
+            }
+        }
+
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_pushfunc", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.test_pushfunc,
+
+    initial: {
+
+        attrs: {
+            testfunc : {func: function () {
+                console.log('This is a testfunction');
+            }},
+            testmodel : {
+                title : 'This is the Test',
+                testfunc : {
+                    func : function (argument) {
+                        console.log('This is a testfunction');
+                        console.log(argument);
+                    },
+                    args : "Hello"
+                }
             }
         }
 

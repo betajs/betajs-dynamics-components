@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.3 - 2015-10-05
+betajs-dynamics-components - v0.0.3 - 2015-10-16
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -298,7 +298,7 @@ ba-test_searchlist {
   -ms-flex: 1 1 0;
   flex: 1 1 0; }
 
-ba-testtitledlist {
+ba-test_titledlist {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -361,5 +361,11 @@ ba-addtitle {
       -webkit-flex: 0 0 44px;
       -ms-flex: 0 0 44px;
       flex: 0 0 44px; }
+
+ba-selectableitem selectableitem {
+  display: block;
+  background: white; }
+ba-selectableitem .selected {
+  background: lightgrey; }
 
 /*# sourceMappingURL=betajs-dynamics-components.css.map */

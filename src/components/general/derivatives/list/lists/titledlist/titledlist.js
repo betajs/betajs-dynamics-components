@@ -11,6 +11,11 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
             title : 'Title',
 
             model : {
+                functions : {
+                    placeholder_func : function () {
+                        console.log('The placeholder function was called')
+                    }
+                },
                 listitem : 'selectableitem',
                 titleitem : 'title'
             }
@@ -32,17 +37,20 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
         functions : {
 
             togglelist : function () {
+
                 this.set('collapsed', !this.get('collapsed'));
+
             },
 
             additem : function (item) {
-                console.log('You called Additem');
-                console.log(item);
+
                 item = item ? item : {title : "New Item"};
-                console.log(item);
-                window.test = this;
-                console.log(this.get('listcollection'));
-                this.get('listcollection').add(item);
+                var index = this.get('listcollection').add(item);
+
+                this.get('functions').placeholder_func.call(this,null);
+
+                return this.get('listcollection').getByIndex(index).cid();
+
             }
 
         }
