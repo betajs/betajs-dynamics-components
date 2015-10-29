@@ -20,6 +20,10 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
 
         create : function () {
             window.iterateModel(this);
+            console.log('List - Callbacks');
+            console.log(this.get('callbacks'));
+            if (this.get('callbacks') && this.get('callbacks').additem)
+                console.log(this.get('callbacks').additem.toString());
         }
 
     }

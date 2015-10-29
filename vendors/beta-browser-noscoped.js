@@ -1,5 +1,5 @@
 /*!
-betajs-browser - v1.0.0 - 2015-08-15
+betajs-browser - v1.0.3 - 2015-10-25
 Copyright (c) Oliver Friedmann
 MIT Software License.
 */
@@ -21,7 +21,7 @@ Scoped.define("base:$", ["jquery:"], function (jquery) {
 Scoped.define("module:", function () {
 	return {
 		guid: "02450b15-9bbf-4be2-b8f6-b483bc015d06",
-		version: '36.1439654432184'
+		version: '39.1445788723813'
 	};
 });
 
@@ -378,6 +378,118 @@ Scoped.define("module:Dom", ["base:Objs", "jquery:"], function (Objs, $) {
 				
 	};
 });
+Scoped.define("module:DomExtend.DomExtension", [
+    "base:Class", "jquery:", "base:Objs", "base:Functions", "base:Async"                                                   
+], function (Class, jquery, Objs, Functions, Async, scoped) {
+	return Class.extend({scoped: scoped}, function (inherited) {
+		return {
+			
+			_domMethods: [],
+			_domAttrs: {},
+			
+			constructor: function (element) {
+				inherited.constructor.call(this);
+				this._element = element;
+				this._$element = $(element);
+				element.domExtension = this;
+				this._actualBB = null;
+				this._idealBB = null;
+				Objs.iter(this._domMethods, function (method) {
+					this._element[method] = Functions.as_method(this[method], this);
+				}, this);
+				Objs.iter(['get', 'set'], function (method) {
+					this._element[method] = Functions.as_method(this[method], this);
+				}, this);
+				Async.eventually(function () {
+					var self = this;
+					$(document).on("DOMNodeRemoved." + this.cid(), function (event) {
+						if (event.target === element) {
+							self.weakDestroy();
+						}
+					});
+					$(window).on("resize." + this.cid(), function () {
+						self.recomputeBB();
+						self._notify("resized");
+					});
+				}, this);
+				if (!this._$element.css("display") || this._$element.css("display") == "inline")
+					this._$element.css("display", "inline-block");
+			},
+			
+			destroy: function () {
+				$(window).off("." + this.cid());
+				$(document).off("." + this.cid());
+				inherited.destroy.call(this);
+			},
+			
+			domEvent: function (eventName) {
+				this._$element.trigger(eventName);
+			},
+			
+			readAttr: function (key) {
+				return this._element.attributes[key] ? this._element.attributes[key].value : this._element[key];
+			},
+			
+			writeAttr: function (key, value) {
+				if (this._element.attributes[key])
+					this._element.attributes[key].value = value;
+				this._element[key] = value;
+			},
+			
+			unsetAttr: function (key) {
+				delete this._element[key];
+				this._element.removeAttribute(key);
+			},
+			
+			get: function (key) {
+				var meta = this._domAttrs[key] || {};
+				if (!(meta.get))
+					return this.readAttr(key);
+				var value = Functions.callWithin(this, meta.get);
+				this.writeAttr(key, value);
+				return value;
+			},
+			
+			set: function (key, value) {
+				this.writeAttr(key, value);
+				var meta = this._domAttrs[key] || {};
+				if (meta.set)
+					Functions.callWithin(this, meta.set, value);
+			},
+			
+			computeActualBB: function (idealBB) {
+				var width = this._$element.width();
+				if (this._$element.width() < idealBB.width && !this._element.style.width) {
+					this._element.style.width = idealBB.width + "px";
+					width = this._$element.width();
+					delete this._element.style.width;
+				}
+				return {
+					width: width,
+					height: Math.round(width * idealBB.height / idealBB.width)
+				};
+			},
+			
+			idealBB: function () {
+				return null;
+			},
+			
+			recomputeBB: function () {
+				var idealBB = this.idealBB();
+				if (!idealBB)
+					return;
+				var actualBB = this.computeActualBB(idealBB);
+				this._idealBB = idealBB;
+				this._actualBB = actualBB;
+				this.setActualBB(actualBB);
+			},
+			
+			setActualBB: function (actualBB) {}
+			
+		};
+	});
+});
+
 /*
 Copyright (c) Copyright (c) 2007, Carl S. Yestrau All rights reserved.
 Code licensed under the BSD License: http://www.featureblend.com/license.txt
@@ -396,7 +508,7 @@ Scoped.define("module:FlashDetect", ["base:Class"], function (Class, scoped) {
 		            var mimeTypes = navigator.mimeTypes;
 		            if (mimeTypes && mimeTypes[type] && mimeTypes[type].enabledPlugin && mimeTypes[type].enabledPlugin.description)
 		                this.__version = this.parseVersion(mimeTypes[type].enabledPlugin.description);
-		        } else if (navigator.appVersion.indexOf("Mac") == -1 && window.execScript) {
+		        } else if (navigator.appVersion.indexOf("Mac") == -1 && "execScript" in window) {
 		            for (var i = 0; i < this.__activeXDetectRules.length; i++) {
 				        try {
 				            var obj = new ActiveXObject(this.__activeXDetectRules[i].name);
@@ -511,8 +623,8 @@ Scoped.define("module:FlashDetect", ["base:Class"], function (Class, scoped) {
 
 
 Scoped.define("module:FlashHelper", [
-    "base:Time", "base:Objs", "base:Types", "base:Net.Uri", "module:Info", "jquery:"
-], function (Time, Objs, Types, Uri, Info, $) {
+    "base:Time", "base:Objs", "base:Types", "base:Net.Uri", "base:Ids", "module:Info", "jquery:"
+], function (Time, Objs, Types, Uri, Ids, Info, $) {
 	return {
 		
 		getFlashObject: function (container) {
@@ -610,12 +722,10 @@ Scoped.define("module:FlashHelper", [
 					"value": Types.is_object(options.FlashVars) ? Uri.encodeUriParams(options.FlashVars) : options.FlashVars
 				});
 			}
-			if (options.objectId) {
-				params.push({
-					"objectKey": "id",
-					"value": options.objectId
-				});
-			}
+			params.push({
+				"objectKey": "id",
+				"value": options.objectId || Ids.uniqueId("flash")
+			});
 			var objectKeys = [];
 			var objectParams = [];
 			var embedKeys = [];
@@ -631,9 +741,11 @@ Scoped.define("module:FlashHelper", [
 		},
 		
 		embedFlashObject: function (container, options) {
-			if (options && options.parentBgcolor) {
+			options = options || {};
+			var $container = $(container);
+			if (options.parentBgcolor) {
 				try {
-					var hex = $(container).css("background-color");
+					var hex = $container.css("background-color");
 					if (hex.indexOf("rgb") >= 0) {
 						var rgb = hex.match(/^rgb\((\d+),\s*(\d+),\s*(\d+)\)$/);
 					    var convert = function (x) {
@@ -645,7 +757,16 @@ Scoped.define("module:FlashHelper", [
 					options.bgcolor = hex;
 				} catch (e) {}
 			}
-			$(container).html(this.embedTemplate(options));
+			if (options.fixHalfPixels) {
+				try {
+					var offset = $container.offset();
+					if (offset.top % 1 !== 0)
+						$container.css("margin-top", (Math.round(offset.top) - offset.top) + "px");
+					if (offset.left % 1 !== 0)
+						$container.css("margin-left", (Math.round(offset.left) - offset.left) + "px");
+				} catch (e) {}
+			}
+			$container.html(this.embedTemplate(options));
 			return this.getFlashObject(container);
 		}
 		
@@ -979,12 +1100,12 @@ Scoped.define("module:Info", [
 		internetExplorerVersion: function () {
 			return this.__cached("internetExplorerVersion", function (nav, ua) {
 				if (nav.appName == 'Microsoft Internet Explorer') {
-				    var re = new RegExp("MSIE ([0-9]{1,}[\.0-9]{0,})");
+				    var re = new RegExp("MSIE ([0-9]+)");
 				    var ma = re.exec(ua);
 				    if (ma)
 				    	return ma[1];
 				} else if (nav.appName == 'Netscape') {
-				    var re2 = new RegExp("Trident/.*rv:([0-9]{1,}[\.0-9]{0,})");
+				    var re2 = new RegExp("Trident/.*rv:([0-9]+)");
 				    var ma2 = re2.exec(nav.userAgent); 
 				    if (ma2)
 				    	return parseFloat(ma2[1]);
@@ -1332,9 +1453,11 @@ Scoped.define("module:Upload.FileUploader", [
 			
 			_errorCallback: function (data) {
 				this._uploading = false;
-				this.trigger("error", data);
-				if (this._options.resilience > 0)
+				if (this._options.resilience > 0) {
 					this.upload();
+					return;
+				}
+				this.trigger("error", data);
 			}
 			
 		};

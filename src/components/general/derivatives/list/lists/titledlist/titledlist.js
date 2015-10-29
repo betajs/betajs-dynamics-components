@@ -13,7 +13,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
             model : {
                 functions : {
                     placeholder_func : function () {
-                        console.log('The placeholder function was called')
+                        console.log('The placeholder function was called');
                     }
                 },
                 listitem : 'selectableitem',
@@ -32,6 +32,13 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
 
         create : function () {
             window.iterateModel(this);
+            console.log('Titledlist - Callbacks');
+            console.log(this.get('callbacks'));
+            console.log(this);
+            console.log('Titledlist - Functions');
+            console.log(this.functions);
+            if (this.functions && this.functions.additem)
+                console.log(this.functions.additem.toString());
         },
 
         functions : {
@@ -47,10 +54,19 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
                 item = item ? item : {title : "New Item"};
                 var index = this.get('listcollection').add(item);
 
-                this.get('functions').placeholder_func.call(this,null);
+                console.log('The Additem Function from the Titledlist');
+                console.log(this.get('callbacks'));
+                if (this.get('callbacks') && this.get('callbacks').additem)
+                    console.log(this.get('callbacks').additem.toString());
+                //this.get('functions').placeholder_func.call(this,null);
 
                 return this.get('listcollection').getByIndex(index).cid();
 
+            },
+
+            title_click : function () {
+                console.log('You clicked the title');
+                this.call('togglelist');
             }
 
         }

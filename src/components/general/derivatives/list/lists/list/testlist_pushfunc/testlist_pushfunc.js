@@ -6,7 +6,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testlist_pushfunc", {
     initial: {
 
         attrs: {
-            //input_value : "Test",
             testmodel : {
                 listitem : 'clickitem',
                 functions : {
