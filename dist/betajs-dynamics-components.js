@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.3 - 2015-10-31
+betajs-dynamics-components - v0.0.4 - 2015-11-02
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -560,7 +560,7 @@ Public.exports();
 }).call(this);
 
 /*!
-betajs-dynamics-components - v0.0.3 - 2015-10-31
+betajs-dynamics-components - v0.0.4 - 2015-11-02
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -578,7 +578,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '44.1446293071549'
+		version: '46.1446483780136'
 	};
 });
 
@@ -653,6 +653,8 @@ BetaJS.Dynamics.Dynamic.Components.Templates.test_addtitle = ' <ba-addtitle     
 BetaJS.Dynamics.Dynamic.Components.Templates.pushfunc = ' <pushfunc         ba-click="log()">     {{model.title}} </pushfunc>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates.test_pushfunc = ' <ba-pushfunc         ba-model="{{testmodel}}"> </ba-pushfunc>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates.test_attrs = ' <ba-titledlist         ba-attrs="{{model}}">  </ba-titledlist>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates.index = '<!DOCTYPE html> <html> <head lang="en">     <meta charset="UTF-8">      <!--<script src="../vendors/jquery-1.9.closure-extern.js"></script>-->     <script src="../vendors/jquery-2.1.4.js"></script>      <script src="../vendors/scoped.js"></script>     <script src="../vendors/beta.js"></script>     <script src="../vendors/beta-browser-noscoped.js"></script>     <script src="../vendors/betajs-ui.js"></script>     <script src="../vendors/betajs-dynamics-noscoped.js"></script>      <script src="components.js"></script>      <script src="../vendors/betajs-simulator.js"></script>     <link rel="stylesheet" href="../vendors/betajs-simulator.css" />      <script src="../dist/betajs-dynamics-components-noscoped.js"></script>     <link rel="stylesheet" href="../dist/betajs-dynamics-components.css" />     <link rel="stylesheet" href="../vendors/icomoon/style.css" />      <script src="//localhost:1337/livereload.js"></script>      <title>BetaJS Simulator</title>  </head> <body>  <ba-simulator></ba-simulator>  </body> </html>';
 
@@ -1650,6 +1652,54 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_pushfunc", {
                     args : "Hello"
                 }
             }
+        }
+
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_attrs", {
+
+    template : BetaJS.Dynamics.Dynamic.Components.Templates.test_attrs,
+
+    initial : {
+
+        attrs : {
+            model : {
+                title : "TestAttrs",
+                titleitem : 'addtitle',
+                titleitem_model : {
+                    title : 'Titledlist - TestAttrs',
+                    titlefunc : 'togglelist',
+                    addfunc : 'additem',
+                    addbuttonscope :'<<'
+                },
+                functions : {
+                    placeholder_func : function () {
+                        console.log('This is a testfunction from the test_titledlist');
+                    }
+                },
+                type : 'clickitem',
+                listcollection : new BetaJS.Collections.Collection({objects: [
+                    {title: "Test - Attrs Item 1"},
+                    {title: "Test - Attrs Item 2"},
+                    {title: "Test - Attrs Item 3"}
+                ]})
+            }
+        },
+
+        functions : {
+
+            additem : function () {
+
+                console.log('This comes from the Test Titledlist : ');
+                console.log(this.scope('>').call('additem', {title  : "title"}));
+
+                //this.get('test_function').call(this, null);
+
+            }
+
         }
 
     }

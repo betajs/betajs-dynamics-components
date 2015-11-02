@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.3 - 2015-10-31
+betajs-dynamics-components - v0.0.4 - 2015-11-02
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -428,4 +428,8 @@ ba-selectableitem {
   .selected {
     background: lightgrey;
   }
+}
+ba-test_titledlist {
+  @include display-flex;
+  @include flex(1 1 0)
 }

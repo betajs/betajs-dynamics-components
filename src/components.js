@@ -1,5 +1,6 @@
 
 window.components = new BetaJS.Collections.Collection({objects: [
+    {title  : 'test_attrs'},
     {title  : 'test_pushinto_childlist'},
     {title  : 'test_pushinto_child'},
     {title  : 'test_titledlist_pushfunc'},
