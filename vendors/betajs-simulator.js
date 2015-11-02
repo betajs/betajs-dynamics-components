@@ -1,5 +1,5 @@
 /*!
-betajs-simulator - v0.0.1 - 2015-10-05
+betajs-simulator - v0.0.1 - 2015-10-30
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -560,7 +560,7 @@ Public.exports();
 }).call(this);
 
 /*!
-betajs-simulator - v0.0.1 - 2015-10-05
+betajs-simulator - v0.0.1 - 2015-10-30
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -568,7 +568,7 @@ MIT Software License.
 
 var Scoped = this.subScope();
 
-Scoped.binding("module", "global:BetaJS.Dynamics.Components");
+Scoped.binding("module", "global:BetaJS.Simulator.Dynamics");
 Scoped.binding("dynamics", "global:BetaJS.Dynamics");
 Scoped.binding("base", "global:BetaJS");
 Scoped.binding("browser", "global:BetaJS.Browser");
@@ -578,7 +578,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '2.1444063575965'
+		version: '3.1446211398889'
 	};
 });
 
@@ -600,25 +600,25 @@ window.iterateModel = function (scope) {
         }, scope);
     }
 };
-BetaJS.Dynamics.Dynamic.Components.Templates = BetaJS.Dynamics.Dynamic.Components.Templates || {};
-BetaJS.Dynamics.Dynamic.Components.Templates['components'] = '<ba-titledlist         ba-title="Components"         ba-selected_item="{{=current_component}}"         ba-listcollection="{{components}}"></ba-titledlist> ';
+BetaJS.Simulator.Dynamics.Templates = BetaJS.Simulator.Dynamics.Templates || {};
+BetaJS.Simulator.Dynamics.Templates.components = '<ba-titledlist         ba-title="Components"         ba-selected_item="{{=current_component}}"         ba-listcollection="{{components}}"></ba-titledlist> ';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['controls'] = ' <h4>Controls </h4>  <controls>      <ba-layout></ba-layout>      <ba-components></ba-components>  </controls>';
+BetaJS.Simulator.Dynamics.Templates.controls = ' <h4>Controls </h4>  <controls>      <ba-layout></ba-layout>      <ba-components></ba-components>  </controls>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['layout'] = '<ba-titledlist         ba-title="System"         ba-listcollection="{{systems}}"         ba-selected_item="{{=current_system}}">  </ba-titledlist>   <ba-titledlist         ba-title="Device"         ba-listcollection="{{mobile}}"         ba-selected_item="{{=current_device}}">           </ba-titledlist> ';
+BetaJS.Simulator.Dynamics.Templates.layout = '<ba-titledlist         ba-title="System"         ba-listcollection="{{systems}}"         ba-selected_item="{{=current_system}}">  </ba-titledlist>   <ba-titledlist         ba-title="Device"         ba-listcollection="{{mobile}}"         ba-selected_item="{{=current_device}}">           </ba-titledlist> ';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['simulator'] = ' <ba-controls></ba-controls>  <ba-viewport></ba-viewport> ';
+BetaJS.Simulator.Dynamics.Templates.simulator = ' <ba-controls></ba-controls>  <ba-viewport></ba-viewport> ';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['viewport'] = '  <appframe         class="             {{current_system.title}}             {{current_device.title}}         ">      <ba-{{current_component.title}}></ba-{{current_component.title}}>  </appframe> ';
+BetaJS.Simulator.Dynamics.Templates.viewport = '  <appframe         class="             {{current_system.title}}             {{current_device.title}}         ">      <ba-{{current_component.title}}></ba-{{current_component.title}}>  </appframe> ';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['helloworld'] = ' <helloworld         ba-click="click(model)">     {{model.title}} </helloworld>';
+BetaJS.Simulator.Dynamics.Templates.helloworld = ' <helloworld         ba-click="click(model)">     {{model.title}} </helloworld>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates['index'] = '<!DOCTYPE html> <html> <head lang="en">     <meta charset="UTF-8">      <!--<script src="../vendors/jquery-1.9.closure-extern.js"></script>-->     <script src="../vendors/jquery-2.1.4.js"></script>      <script src="../vendors/scoped.js"></script>     <script src="../vendors/beta.js"></script>     <script src="../vendors/beta-browser-noscoped.js"></script>     <script src="../vendors/betajs-ui.js"></script>     <script src="../vendors/betajs-dynamics-noscoped.js"></script>      <script src="../vendors/betajs-dynamics-components-noscoped.js"></script>     <link rel="stylesheet" href="../vendors/betajs-dynamics-components.css" />      <script src="components.js"></script>     <script src="../dist/betajs-simulator.js"></script>     <link rel="stylesheet" href="../dist/betajs-simulator.css" />      <script src="//localhost:1337/livereload.js"></script>      <title>Simulator</title>  </head> <body>      <ba-simulator></ba-simulator>  </body> </html>';
+BetaJS.Simulator.Dynamics.Templates.index = '<!DOCTYPE html> <html> <head lang="en">     <meta charset="UTF-8">      <!--<script src="../vendors/jquery-1.9.closure-extern.js"></script>-->     <script src="../vendors/jquery-2.1.4.js"></script>      <script src="../vendors/scoped.js"></script>     <script src="../vendors/beta.js"></script>     <script src="components.js"></script>     <script src="../vendors/beta-browser-noscoped.js"></script>     <script src="../vendors/betajs-ui.js"></script>     <script src="../vendors/betajs-dynamics-noscoped.js"></script>      <script src="../vendors/betajs-dynamics-components-noscoped.js"></script>     <link rel="stylesheet" href="../vendors/betajs-dynamics-components.css" />      <script src="../dist/betajs-simulator.js"></script>     <link rel="stylesheet" href="../dist/betajs-simulator.css" />      <script src="//localhost:1337/livereload.js"></script>      <title>Simulator</title>  </head> <body>      <ba-simulator></ba-simulator>  </body> </html>';
 
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Helloworld", {
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Simulator.Components.Helloworld", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.helloworld,
+    template: BetaJS.Simulator.Dynamics.Templates.helloworld,
 
     initial: {
 
@@ -640,9 +640,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Helloworld", {
 }).register();
 
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Components", {
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Simulator.Dynamics.Components", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.components,
+    template: BetaJS.Simulator.Dynamics.Templates.components,
 
     initial: {
 
@@ -655,16 +655,16 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Components", {
 }).register();
 
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Controls", {
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Simulator.Dynamics.Controls", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.controls
+    template: BetaJS.Simulator.Dynamics.Templates.controls
 
 }).register();
 
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Layout", {
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Simulator.Dynamics.Layout", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.layout,
+    template: BetaJS.Simulator.Dynamics.Templates.layout,
     
     initial : {
 
@@ -688,9 +688,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Layout", {
 
 
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Simulator", {
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Simulator.Dynamics.Simulator", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.simulator,
+    template: BetaJS.Simulator.Dynamics.Templates.simulator,
 
     initial: {
 
@@ -703,9 +703,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Simulator", {
 }).register();
 
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Viewport", {
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Simulator.Dynamics.Viewport", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.viewport,
+    template: BetaJS.Simulator.Dynamics.Templates.viewport,
 
     initial: {
 

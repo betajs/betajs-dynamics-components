@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.3 - 2015-10-29
+betajs-dynamics-components - v0.0.3 - 2015-10-31
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -560,7 +560,7 @@ Public.exports();
 }).call(this);
 
 /*!
-betajs-dynamics-components - v0.0.3 - 2015-10-29
+betajs-dynamics-components - v0.0.3 - 2015-10-31
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -578,7 +578,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '43.1446149678652'
+		version: '44.1446293071549'
 	};
 });
 
@@ -618,7 +618,7 @@ BetaJS.Dynamics.Dynamic.Components.Templates.selectableitem = ' <selectableitem 
 
 BetaJS.Dynamics.Dynamic.Components.Templates.test_selectableitem = ' <ba-list ba-model="{{testmodel}}"> </ba-list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.list = ' <list ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{listitem}}         id="{{collectionitem.cid()}}"         ba-callbacks="{{callbacks}}"         ba-functions="{{callbacks}}"         ba-type="{{type}}"         ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{listitem}}>  </list>';
+BetaJS.Dynamics.Dynamic.Components.Templates.list = ' <list ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{listitem}}         id="{{collectionitem.cid()}}"         ba-functions="{{callbacks}}"         ba-type="{{type}}"         ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{listitem}}>  </list>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates.testlist_clickitem = ' <ba-list ba-model="{{testmodel}}"> </ba-list>';
 
@@ -638,9 +638,9 @@ BetaJS.Dynamics.Dynamic.Components.Templates.test_titledlist = ' <ba-titledlist 
 
 BetaJS.Dynamics.Dynamic.Components.Templates.testtitledlistswipe = ' <ba-titledlist         ba-model="{{model}}">  </ba-titledlist>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.test_pushinto_child = ' <ba-test_titledlist_pushfunc         ba-callbacks="{{callbacks}}"         ba-model="{{model}}">  </ba-test_titledlist_pushfunc>';
+BetaJS.Dynamics.Dynamic.Components.Templates.test_pushinto_child = ' <ba-test_titledlist_pushfunc         ba-callbacks="{{callbacks}}"         ba-attrs="{{model}}">  </ba-test_titledlist_pushfunc>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.test_pushinto_childlist = ' <ba-list         ba-callbacks="{{callbacks}}"         ba-listcollection="{{outer_collection}}"         ba-listitem="test_titledlist_pushfunc">  </ba-list>  ';
+BetaJS.Dynamics.Dynamic.Components.Templates.test_pushinto_childlist = ' <ba-list         ba-callbacks="{{callbacks}}"         ba-listcollection="{{outer_collection}}"         ba-listitem="titledlist">  </ba-list>  ';
 
 BetaJS.Dynamics.Dynamic.Components.Templates.test_titledlist_pushfunc = ' <button ba-click="test(input_value)">Test func</button> <input ba-return="test(input_value)" placeholder="Push item to list" value="{{=input_value}}"> <ba-titledlist ba-functions="{{callbacks}}" ba-model="{{model}}"> </ba-titledlist> ';
 
@@ -1003,10 +1003,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
 
         create : function () {
             window.iterateModel(this);
-            console.log('List - Callbacks');
-            console.log(this.get('callbacks'));
-            if (this.get('callbacks') && this.get('callbacks').additem)
-                console.log(this.get('callbacks').additem.toString());
         }
 
     }
@@ -1380,6 +1376,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_pushinto_childli
                         {title : "Task 2"}
                     ]})
                 }
+                //test
             ]
         }
 
@@ -1467,11 +1464,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
             title : 'Title',
 
             model : {
-                functions : {
-                    placeholder_func : function () {
-                        console.log('The placeholder function was called');
-                    }
-                },
                 listitem : 'selectableitem',
                 titleitem : 'title'
             }
@@ -1488,13 +1480,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
 
         create : function () {
             window.iterateModel(this);
-            console.log('Titledlist - Callbacks');
-            console.log(this.get('callbacks'));
-            console.log(this);
-            console.log('Titledlist - Functions');
-            console.log(this.functions);
-            if (this.functions && this.functions.additem)
-                console.log(this.functions.additem.toString());
         },
 
         functions : {
@@ -1509,12 +1494,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
 
                 item = item ? item : {title : "New Item"};
                 var index = this.get('listcollection').add(item);
-
-                console.log('The Additem Function from the Titledlist');
-                console.log(this.get('callbacks'));
-                if (this.get('callbacks') && this.get('callbacks').additem)
-                    console.log(this.get('callbacks').additem.toString());
-                //this.get('functions').placeholder_func.call(this,null);
 
                 return this.get('listcollection').getByIndex(index).cid();
 

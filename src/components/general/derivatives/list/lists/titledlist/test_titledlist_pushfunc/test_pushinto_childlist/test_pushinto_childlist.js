@@ -47,6 +47,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_pushinto_childli
                         {title : "Task 2"}
                     ]})
                 }
+                //test
             ]
         }
 

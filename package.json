@@ -7,7 +7,6 @@
 	"license": "MIT",
 	"devDependencies": {
 		"grunt": "",
-		"grunt-contrib-jshint": "",
 		"grunt-contrib-nodeunit": "",
 		"grunt-contrib-concat": "",
 		"grunt-contrib-uglify": "",
