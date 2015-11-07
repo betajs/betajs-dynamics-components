@@ -19,8 +19,10 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_pushinto_childli
 
             outer_collection : [
                 {
-                    listitem : "swipecontainer",
-                    titleitem : 'addtitle',
+                    model : {
+                        listitem : "swipecontainer",
+                        titleitem : 'addtitle'
+                    },
                     titleitem_model : {
                         title : 'Today',
                         titlefunc : 'togglelist',
@@ -33,8 +35,10 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_pushinto_childli
                         {title : "Task 2"}
                     ]})
                 }, {
-                    listitem : "swipecontainer",
-                    titleitem : 'addtitle',
+                    model : {
+                        listitem : "swipecontainer",
+                        titleitem : 'addtitle'
+                    },
                     titleitem_model : {
                         title : 'Today',
                         titlefunc : 'togglelist',

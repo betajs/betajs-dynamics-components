@@ -1,11 +1,4 @@
 
-// Expected behavior:
-// The Listitems should be of type 'clickitem' (<clickitem>) as specified in the model below'
-// Actual behavior:
-// The Listitems are of type 'selectableitem' which is the default behaviour of the titledlist
-// Note:
-// This only happens when using ba-attrs and not when using ba-model in the template of this dynamic
-
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_attrs", {
 
     template : BetaJS.Dynamics.Dynamic.Components.Templates.test_attrs,
@@ -14,7 +7,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_attrs", {
 
         attrs : {
             model : {
-                title : "TestAttrs",
                 titleitem : 'addtitle',
                 titleitem_model : {
                     title : 'Titledlist - TestAttrs',
@@ -27,9 +19,11 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_attrs", {
                         console.log('This is a testfunction from the test_titledlist');
                     }
                 },
-                listitem : 'clickitem',
-                //listitem : 'swipecontainer',
-                //type : 'clickitem',
+                model : {
+                    listitem : 'clickitem'
+                    //listitem : 'swipecontainer',
+                    //type : 'clickitem',
+                },
                 listcollection : new BetaJS.Collections.Collection({objects: [
                     {title: "Test - Attrs Item 1"},
                     {title: "Test - Attrs Item 2"},

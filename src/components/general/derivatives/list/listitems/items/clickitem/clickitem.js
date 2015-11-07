@@ -6,15 +6,12 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Clickitem", {
     initial: {
 
         attrs: {
-            model: {
-                title : 'Clickitem - Title'
-            }
+            title : 'Clickitem - Title'
         },
 
         functions : {
             click : function () {
-                var itemtitle = this.get('model').data() ? this.get('model').data().title : this.get('model').title;
-                console.log("You Clicked item : " + itemtitle);
+                console.log("You Clicked item : " + this.get('title'));
             }
         }
 

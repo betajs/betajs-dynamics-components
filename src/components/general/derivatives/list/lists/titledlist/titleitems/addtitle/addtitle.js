@@ -23,12 +23,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Addtitle", {
             }
         },
 
-        create : function () {
-
-            window.iterateModel(this);
-
-        },
-
         functions : {
 
             clicktitle : function () {

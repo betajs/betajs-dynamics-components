@@ -18,10 +18,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Searchlist", {
                 {title: "Item 2"},
                 {title: "Item 3"}
             ]
-        },
-
-        create : function () {
-            window.iterateModel(this);
         }
 
     }

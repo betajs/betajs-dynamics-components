@@ -2,7 +2,6 @@
 window.components = new BetaJS.Collections.Collection({objects: [
     {title  : 'selectableitem'},
     {title  : 'test_selectableitem'},
-    {title  : 'list_new'},
     {title  : 'test_attrs'},
     {title  : 'test_pushinto_childlist'},
     {title  : 'test_pushinto_child'},

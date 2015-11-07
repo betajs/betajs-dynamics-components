@@ -7,17 +7,14 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Swipecontaine
 
 		attrs : {
 			type : "clickitem",
-			model : {title : "Swipeitem"},
+			model : {title : "Swipeitem - Title"},
 			lefticon : 'icon-ok',
 			righticon : 'icon-time',
 			actions : {
 				"other": {
 					less: -1/4,
 					execute: function () {
-						//alert("other?");
-						console.log(this.get("model"));
-						if (this.get("model"))
-							this.get("model").set("archived", true);
+						//this.get("model").set("archived", true);
 					}
 				},
 				"archive": {
@@ -36,16 +33,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Swipecontaine
 					}
 				}
 			}
-		},
-
-		create : function () {
-
-			window.iterateModel(this);
-
-		},
-
-		functions : {
-
 		}
 
 	},

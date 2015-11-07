@@ -7,7 +7,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testlist_pushfunc", {
 
         attrs: {
             testmodel : {
-                listitem : 'clickitem',
+                model : {
+                    listitem : 'clickitem'
+                },
                 functions : {
                     testfunc : function (argument) {
                         console.log('This is a testfunction');
