@@ -7,7 +7,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Clickitem", {
 
         attrs: {
             model: {
-                title :'Title'
+                title : 'Clickitem - Title'
             }
         },
 

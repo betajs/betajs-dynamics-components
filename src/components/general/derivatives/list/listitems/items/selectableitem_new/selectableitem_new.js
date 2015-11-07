@@ -1,20 +1,20 @@
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem_new", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.selectableitem,
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.selectableitem_new,
 
     initial: {
 
         bind : {
-            selected : "<+[tagname='ba-list']:selected_item"
+            selected : "<+[tagname='ba-list_new']:selected_item"
         },
 
         attrs : {
-                title :'Selectableitem - Title'
+            title :'Selectableitem_new - Title'
         },
 
         scopes : {
-            parent_list: "<+[tagname='ba-list']"
+            parent_list: "<+[tagname='ba-list_new']"
         },
 
         create : function () {

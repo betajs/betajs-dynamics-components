@@ -1,5 +1,10 @@
 
 window.components = new BetaJS.Collections.Collection({objects: [
+    {title  : 'titledlist_new'},
+    {title  : 'selectableitem_new'},
+    {title  : 'test_selectableitem_new'},
+    {title  : 'selectableitem'},
+    {title  : 'test_selectableitem'},
     {title  : 'clickitem_new'},
     {title  : 'list_new'},
     {title  : 'test_attrs'},
@@ -18,7 +23,6 @@ window.components = new BetaJS.Collections.Collection({objects: [
     {title  : 'test_titledlistswipe'},
     {title  : 'testlist_listoflist'},
     {title  : 'testlist_listcollection'},
-    {title  : 'test_selectableitem'},
     {title  : 'testlist_clickitem'},
     {title  : 'testlist_swipecontainer'},
     //{title  : 'addtitle'},
@@ -27,7 +31,6 @@ window.components = new BetaJS.Collections.Collection({objects: [
     {title  : 'scrollpicker'},
     {title  : 'swipecontainer'},
     {title  : 'clickitem'},
-    {title  : 'selectableitem'},
     {title  : 'list'}
 ]});
 

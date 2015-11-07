@@ -11,15 +11,10 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
 
         collections : {
             listcollection : [
-                {title: "Item 1"},
-                {title: "Item 2"},
-                {title: "Item 3"},
-                {title: "Item 4"}
+                {title: "List - Item 1"},
+                {title: "List - Item 2"},
+                {title: "List - Item 3"}
             ]
-        },
-
-        create : function () {
-            window.iterateModel(this);
         }
 
     }

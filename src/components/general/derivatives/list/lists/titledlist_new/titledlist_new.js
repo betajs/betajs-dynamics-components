@@ -1,7 +1,7 @@
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist_new", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.titledlist,
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.titledlist_new,
 
     initial: {
 
@@ -11,7 +11,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
             title : 'Titledlist - Title',
 
             model : {
-                listitem : 'selectableitem',
+                listitem : 'selectableitem_new',
                 titleitem : 'title'
             }
 
@@ -19,9 +19,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
 
         collections : {
             listcollection : [
-                {title: "Titledlist - Item 1"},
-                {title: "Titledlist - Item 2"},
-                {title: "Titledlist - Item 3"}
+                {title: "Titledlist Item 1"},
+                {title: "Titledlist Item 2"},
+                {title: "Titledlist Item 3"}
             ]
         },
 

@@ -348,6 +348,17 @@ ba-selectableitem {
     background: lightgrey;
   }
 }
+ba-selectableitem_new {
+
+  selectableitem_new {
+    display: block;
+    background: white;
+  }
+
+  .selected {
+    background: lightgrey;
+  }
+}
 
 ba-list {
   @include display-flex;
@@ -444,6 +455,26 @@ ba-addtitle {
     }
   }
 
+}
+ba-test_titledlist {
+  @include display-flex;
+  @include flex(1 1 0)
+}
+
+ba-titledlist_new {
+  @include display-flex;
+  @include flex(1 1 0);
+  @include flex-direction(column);
+
+  ba-title {
+    @include flex(0 0);
+    display: block
+  }
+
+  list_new {
+    overflow: scroll;
+    ba-listitem {display: block}
+  }
 }
 ba-selectableitem {
 
