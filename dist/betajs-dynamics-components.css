@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-11-02
+betajs-dynamics-components - v0.0.4 - 2015-11-07
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -219,6 +219,15 @@ ba-clickitem {
     line-height: 44px;
     display: block; }
 
+ba-clickitem_new {
+  background: white;
+  border-bottom: 1px solid grey; }
+  ba-clickitem_new clickitem_new {
+    padding: 0 22px;
+    height: 44px;
+    line-height: 44px;
+    display: block; }
+
 ba-selectableitem selectableitem {
   display: block;
   background: white; }
@@ -239,6 +248,22 @@ ba-list {
     -ms-flex: 1 1 0;
     flex: 1 1 0; }
     ba-list list ba-item {
+      display: block; }
+
+ba-list_new {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  overflow-y: scroll; }
+  ba-list_new list_new {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0; }
+    ba-list_new list_new ba-item {
       display: block; }
 
 ba-searchlist {

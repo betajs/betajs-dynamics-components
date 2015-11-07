@@ -1,0 +1,12 @@
+
+ba-list_new {
+  @include display-flex;
+  overflow-y: scroll;
+
+  list_new
+  {
+    @include flex-settings(1 1 0);
+
+    ba-item {display: block}
+  }
+}

@@ -1,13 +1,13 @@
 
-<list ba-repeat="{{collectionitem :: listcollection}}">
+<list_new ba-repeat="{{collectionitem :: listcollection}}">
 
     <ba-{{listitem}}
+        ba-click="console.log('jojojo')"
         id="{{collectionitem.cid()}}"
         ba-functions="{{callbacks}}"
         ba-type="{{type}}"
-        ba-model="{{collectionitem}}"
         ba-attrs="{{collectionitem.data()}}">
         {{collectionitem.title}}
     </ba-{{listitem}}>
 
-</list>
+</list_new>
