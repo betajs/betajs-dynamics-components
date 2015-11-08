@@ -3,50 +3,44 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
 
     template: BetaJS.Dynamics.Dynamic.Components.Templates.titledlist,
 
-    initial: {
+    attrs: {
+        collapsed : false,
+        collapsible : true,
+        title : 'Titledlist - Title',
+        model : {
+            listitem : 'selectableitem',
+            titleitem : 'title'
+        }
+    },
 
-        attrs: {
-            collapsed : false,
-            collapsible : true,
-            title : 'Titledlist - Title',
+    collections : {
+        listcollection : [
+            {title: "Titledlist - Item 1"},
+            {title: "Titledlist - Item 2"},
+            {title: "Titledlist - Item 3"}
+        ]
+    },
 
-            model : {
-                listitem : 'selectableitem',
-                titleitem : 'title'
-            }
+    functions : {
+
+        togglelist : function () {
+
+            this.set('collapsed', !this.get('collapsed'));
 
         },
 
-        collections : {
-            listcollection : [
-                {title: "Titledlist - Item 1"},
-                {title: "Titledlist - Item 2"},
-                {title: "Titledlist - Item 3"}
-            ]
+        additem : function (item) {
+
+            item = item ? item : {title : "New Item"};
+            var index = this.get('listcollection').add(item);
+
+            return this.get('listcollection').getByIndex(index).cid();
+
         },
 
-        functions : {
-
-            togglelist : function () {
-
-                this.set('collapsed', !this.get('collapsed'));
-
-            },
-
-            additem : function (item) {
-
-                item = item ? item : {title : "New Item"};
-                var index = this.get('listcollection').add(item);
-
-                return this.get('listcollection').getByIndex(index).cid();
-
-            },
-
-            title_click : function () {
-                console.log('You clicked the title');
-                this.call('togglelist');
-            }
-
+        title_click : function () {
+            console.log('You clicked the title');
+            this.call('togglelist');
         }
 
     }

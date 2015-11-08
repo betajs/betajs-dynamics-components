@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAGE,mBAAM;EAAC,OAAO,EAAE,KAAK;AACrB,yBAAY;EAAC,OAAO,EAAE,KAAK",
-"sources": ["titledlist.scss"],
-"names": [],
-"file": "titledlist.css"
-}

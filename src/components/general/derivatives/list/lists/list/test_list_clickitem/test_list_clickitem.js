@@ -1,7 +1,7 @@
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testlist_clickitem", {
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_list_clickitem", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.testlist_clickitem,
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.test_list_clickitem,
 
     initial: {
 

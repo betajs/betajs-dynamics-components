@@ -7,8 +7,8 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_selectableitem",
 
         attrs: {
             testmodel : {
-                listitem : 'swipecontainer',
-                type : 'selectableitem',
+                listitem: 'swipecontainer',
+                type: 'selectableitem',
                 listcollection : new BetaJS.Collections.Collection({objects: [
                     {title: "Test - Selectableitem 1"},
                     {title: "Test - Selectableitem 2"},

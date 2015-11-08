@@ -5,39 +5,39 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
 
     initial: {
 
-        bind : {
-            selected : "<+[tagname='ba-list']:selected_item"
+        bind: {
+            selected: "<+[tagname='ba-list']:selected_item"
         },
 
-        attrs : {
-                title :'Selectableitem - Title'
-        },
-
-        scopes : {
+        scopes: {
             parent_list: "<+[tagname='ba-list']"
-        },
+        }
 
-        create : function () {
+    },
 
-            var parentlist = this.scopes.parent_list;
+    attrs : {
+        title :'Selectableitem - Title'
+    },
 
-            if (!parentlist)
-                console.log('There is no parent list the selector can attach to, this currently only works  with ba-list');
-            else if (parentlist.get('listcollection'))
-                if (!this.scopes.parent_list.get('selected_item'))
-                    this.call('select')
+    create : function () {
 
-        },
+        var parentlist = this.scopes.parent_list;
 
-        functions : {
+        if (!parentlist)
+            console.log('There is no parent list the selector can attach to, this currently only works  with ba-list');
+        else if (parentlist.get('listcollection'))
+            if (!this.scopes.parent_list.get('selected_item'))
+                this.call('select')
 
-            select : function () {
-                this.scopes.parent_list.set('selected_item',{
-                    cid : this.cid(),
-                    title : this.get('title')
-                });
-            }
+    },
 
+    functions : {
+
+        select : function () {
+            this.scopes.parent_list.set('selected_item',{
+                cid : this.cid(),
+                title : this.get('title')
+            });
         }
 
     }
