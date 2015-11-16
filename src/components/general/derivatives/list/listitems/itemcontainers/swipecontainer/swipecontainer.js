@@ -5,7 +5,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Swipecontaine
 
 	attrs : {
 		type : "clickitem",
-		model : {title : "Swipeitem - Title"},
+		title : "Swipeitem - Title",
 		lefticon : 'icon-ok',
 		righticon : 'icon-time',
 		actions : {

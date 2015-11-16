@@ -14,9 +14,6 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Testtitledlistswipe",
                     addfunc : 'additem'
                 },
                 listitem: 'swipecontainer',
-                model : {
-                    type: 'clickitem'
-                },
                 type: 'clickitem',
                 listcollection : new BetaJS.Collections.Collection({objects: [
                     {title: "Test - Titledlist - Swipe - Item 1"},

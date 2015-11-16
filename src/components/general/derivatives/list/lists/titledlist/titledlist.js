@@ -7,10 +7,8 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
         collapsed : false,
         collapsible : true,
         title : 'Titledlist - Title',
-        model : {
-            listitem : 'selectableitem',
-            titleitem : 'title'
-        }
+        listitem : 'selectableitem',
+        titleitem : 'title'
     },
 
     collections : {
