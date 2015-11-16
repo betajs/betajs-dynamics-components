@@ -1,38 +1,38 @@
 
 window.components = new BetaJS.Collections.Collection({objects: [
-    {title  : 'scrollpicker'},
-    {title  : 'test_searchlist'},
-    {title  : 'searchlist'},
-    {title  : 'test_titledlist_childlist'},
-    {title  : 'test_titledlist'},
-    {title  : 'test_titledlist_pushfunc'},
-    {title  : 'test_titledlist_pushintochild'},
-    {title  : 'selectableitem'},
-    {title  : 'test_selectableitem'},
-    {title  : 'test_attrs'},
-    {title  : 'testlist_pushfunc_new'},
-    {title  : 'titledlist'},
-    {title  : 'test_addtitle'},
-    {title  : 'test_list_pushfunc'},
-    {title  : 'test_pushfunc'},
-    {title  : 'pushfunc'},
-    {title  : 'test_titledlistswipe'},
-    {title  : 'test_list_listoflist'},
-    {title  : 'test_list_listcollection'},
-    {title  : 'test_list_clickitem'},
-    {title  : 'test_list_swipecontainer'},
-    //{title  : 'addtitle'},
-    {title  : 'overlaycontainer'},
-    {title  : 'overlaycontainertest'},
-    {title  : 'swipecontainer'},
-    {title  : 'clickitem'},
-    {title  : 'list'}
+    {value  : 'scrollpicker'},
+    {value  : 'test_searchlist'},
+    {value  : 'searchlist'},
+    {value  : 'test_valuedlist_childlist'},
+    {value  : 'test_valuedlist'},
+    {value  : 'test_valuedlist_pushfunc'},
+    {value  : 'test_valuedlist_pushintochild'},
+    {value  : 'selectableitem'},
+    {value  : 'test_selectableitem'},
+    {value  : 'test_attrs'},
+    {value  : 'testlist_pushfunc_new'},
+    {value  : 'valuedlist'},
+    {value  : 'test_addvalue'},
+    {value  : 'test_list_pushfunc'},
+    {value  : 'test_pushfunc'},
+    {value  : 'pushfunc'},
+    {value  : 'test_valuedlistswipe'},
+    {value  : 'test_list_listoflist'},
+    {value  : 'test_list_listcollection'},
+    {value  : 'test_list_clickitem'},
+    {value  : 'test_list_swipecontainer'},
+    //{value  : 'addvalue'},
+    {value  : 'overlaycontainer'},
+    {value  : 'overlaycontainertest'},
+    {value  : 'swipecontainer'},
+    {value  : 'clickitem'},
+    {value  : 'list'}
 ]});
 
-window.componentsBytitle = function (title) {
+window.componentsByvalue = function (value) {
     var comp = window.components;
     for (var i = 0; i < comp.count(); ++i)
-        if (comp.getByIndex(i).get("title") == title)
+        if (comp.getByIndex(i).get("value") == value)
             return comp.getByIndex(i);
     return null;
 };
