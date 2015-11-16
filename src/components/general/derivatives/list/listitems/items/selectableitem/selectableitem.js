@@ -16,7 +16,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
     },
 
     attrs : {
-        title :'Selectableitem - Title'
+        model : {
+            title :'Selectableitem - Title'
+        }
     },
 
     create : function () {
@@ -36,7 +38,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
         select : function () {
             this.scopes.parent_list.set('selected_item',{
                 cid : this.cid(),
-                title : this.get('title')
+                title : this.get('model.title')
             });
         }
 
