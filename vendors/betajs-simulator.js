@@ -1,5 +1,5 @@
 /*!
-betajs-simulator - v0.0.1 - 2015-10-30
+betajs-simulator - v0.0.2 - 2015-11-16
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -560,7 +560,7 @@ Public.exports();
 }).call(this);
 
 /*!
-betajs-simulator - v0.0.1 - 2015-10-30
+betajs-simulator - v0.0.2 - 2015-11-16
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -578,11 +578,11 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '3.1446211398889'
+		version: '5.1447692935062'
 	};
 });
 
-BetaJS.Dynamics.Dynamic.Components = {};
+BetaJS.Simulator.Dynamics = {};
 
 window.iterateModel = function (scope) {
     //console.log("Model : " + scope._tagName);
@@ -605,7 +605,7 @@ BetaJS.Simulator.Dynamics.Templates.components = '<ba-titledlist         ba-titl
 
 BetaJS.Simulator.Dynamics.Templates.controls = ' <h4>Controls </h4>  <controls>      <ba-layout></ba-layout>      <ba-components></ba-components>  </controls>';
 
-BetaJS.Simulator.Dynamics.Templates.layout = '<ba-titledlist         ba-title="System"         ba-listcollection="{{systems}}"         ba-selected_item="{{=current_system}}">  </ba-titledlist>   <ba-titledlist         ba-title="Device"         ba-listcollection="{{mobile}}"         ba-selected_item="{{=current_device}}">           </ba-titledlist> ';
+BetaJS.Simulator.Dynamics.Templates.layout = '<ba-titledlist         ba-title="System"         ba-listcollection="{{systems}}"         ba-selected_item="{{=current_system}}">  </ba-titledlist>   <ba-titledlist         ba-title="Device"         ba-listcollection="{{mobile}}"         ba-selected_item="{{=current_device}}">           </ba-titledlist>';
 
 BetaJS.Simulator.Dynamics.Templates.simulator = ' <ba-controls></ba-controls>  <ba-viewport></ba-viewport> ';
 
@@ -644,12 +644,8 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Simulator.Dynamics.Components", {
 
     template: BetaJS.Simulator.Dynamics.Templates.components,
 
-    initial: {
-
-        attrs : {
-            components : components
-        }
-
+    attrs : {
+        components : components
     }
 
 }).register();
@@ -666,22 +662,18 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Simulator.Dynamics.Layout", {
 
     template: BetaJS.Simulator.Dynamics.Templates.layout,
     
-    initial : {
-
-        collections : {
-            systems : [
-                {title: 'mobile'},
-                {title: 'web'}
-            ],
-            mobile : [
-                {title: 'iphone4'},
-                {title: 'iphone5'}
-            ],
-            web:[
-                {title: 'notebook'}
-            ]
-        }
-
+    collections : {
+        systems : [
+            {title: 'mobile'},
+            {title: 'web'}
+        ],
+        mobile : [
+            {title: 'iphone4'},
+            {title: 'iphone5'}
+        ],
+        web:[
+            {title: 'notebook'}
+        ]
     }
 
 }).register();
@@ -707,14 +699,12 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Simulator.Dynamics.Viewport", {
 
     template: BetaJS.Simulator.Dynamics.Templates.viewport,
 
-    initial: {
-
+    initial : {
         bind : {
             current_component: "<>+[tagname='ba-components']:current_component",
             current_system: "<>+[tagname='ba-layout']:current_system",
             current_device: "<>+[tagname='ba-layout']:current_device"
         }
-
     }
 
 }).register();
