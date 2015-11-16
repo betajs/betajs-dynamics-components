@@ -578,7 +578,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '54.1447690737387'
+		version: '55.1447692157779'
 	};
 });
 
@@ -929,7 +929,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
         select : function () {
             this.scopes.parent_list.set('selected_item',{
                 cid : this.cid(),
-                title : this.get('model.title')
+                title : this.get('model').get('title')
             });
         }
 
