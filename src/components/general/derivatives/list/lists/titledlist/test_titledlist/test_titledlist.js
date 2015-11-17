@@ -6,6 +6,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist", {
     initial : {
 
         attrs : {
+            view : {
+
+            },
             model : {
                 title : "Testtitle",
                 titleitem : 'addtitle',

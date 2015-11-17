@@ -68,8 +68,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Scrollpicker", {
         });
 
         scroll.on("scrollend", function () {
+            console.log(this);
             this.set('value', scroll.currentElement().data( "id" ));
-        },this);
+        }, this);
 
         scroll.on("scroll", function () {
             element.children().css({

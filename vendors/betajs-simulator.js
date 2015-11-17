@@ -578,7 +578,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '5.1447692935062'
+		version: '6.1447693341362'
 	};
 });
 
@@ -609,7 +609,7 @@ BetaJS.Simulator.Dynamics.Templates.layout = '<ba-titledlist         ba-title="S
 
 BetaJS.Simulator.Dynamics.Templates.simulator = ' <ba-controls></ba-controls>  <ba-viewport></ba-viewport> ';
 
-BetaJS.Simulator.Dynamics.Templates.viewport = '  <appframe         class="             {{current_system.title}}             {{current_device.title}}         ">      <ba-{{current_component.title}}></ba-{{current_component.title}}>  </appframe> ';
+BetaJS.Simulator.Dynamics.Templates.viewport = '  <appframe         class="             {{current_system.value}}             {{current_device.value}}         ">      <ba-{{current_component.value}}></ba-{{current_component.value}}>  </appframe> ';
 
 BetaJS.Simulator.Dynamics.Templates.helloworld = ' <helloworld         ba-click="click(model)">     {{model.title}} </helloworld>';
 
@@ -664,15 +664,15 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Simulator.Dynamics.Layout", {
     
     collections : {
         systems : [
-            {title: 'mobile'},
-            {title: 'web'}
+            {value: 'mobile'},
+            {value: 'web'}
         ],
         mobile : [
-            {title: 'iphone4'},
-            {title: 'iphone5'}
+            {value: 'iphone4'},
+            {value: 'iphone5'}
         ],
         web:[
-            {title: 'notebook'}
+            {value: 'notebook'}
         ]
     }
 

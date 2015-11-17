@@ -9,9 +9,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
 
     collections : {
         listcollection : [
-            {title: "List - Item 1"},
-            {title: "List - Item 2"},
-            {title: "List - Item 3"}
+            {value: "List - Item 1"},
+            {value: "List - Item 2"},
+            {value: "List - Item 3"}
         ]
     }
 

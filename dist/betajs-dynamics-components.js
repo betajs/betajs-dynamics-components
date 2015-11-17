@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-11-16
+betajs-dynamics-components - v0.0.4 - 2015-11-17
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -560,7 +560,7 @@ Public.exports();
 }).call(this);
 
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-11-16
+betajs-dynamics-components - v0.0.4 - 2015-11-17
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -578,7 +578,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '57.1447693427390'
+		version: '58.1447772908176'
 	};
 });
 
@@ -616,7 +616,7 @@ BetaJS.Dynamics.Dynamic.Components.Templates.scrollpicker = '<element ba-repeat-
 
 BetaJS.Dynamics.Dynamic.Components.Templates.swipecontainer = ' <behind>     <icon class=\'{{lefticon}}\'></icon>     <div></div>     <icon class=\'{{righticon}}\'></icon> </behind>  <swipe>      <ba-{{type}} ba-sharescope>         {{title}}     </ba-{{type}}>      <swipeleft>         <div></div>         <icon class=\'{{lefticon}}\'></icon>     </swipeleft>      <swiperight>         <icon class=\'{{righticon}}\'></icon>         <div></div>     </swiperight>  </swipe> ';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.clickitem = ' <clickitem         ba-click="click()">     {{title}} </clickitem>';
+BetaJS.Dynamics.Dynamic.Components.Templates.clickitem = ' <clickitem         ba-click="click()">     {{model.value}} </clickitem>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates.selectableitem = ' <selectableitem         ba-class="{{{selected : selected.cid == this.cid()}}}"         ba-click="select()">     {{model.value}} </selectableitem>';
 
@@ -638,7 +638,7 @@ BetaJS.Dynamics.Dynamic.Components.Templates.searchlist = '<searchbox ba-if="{{s
 
 BetaJS.Dynamics.Dynamic.Components.Templates.test_searchlist = ' <ba-searchlist         ba-attrs="{{model}}">  </ba-searchlist>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.test_titledlist = ' <ba-titledlist         ba-attrs="{{model}}">  </ba-titledlist>';
+BetaJS.Dynamics.Dynamic.Components.Templates.test_titledlist = ' <ba-titledlist         ba-model="{{model}}">  </ba-titledlist>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates.testtitledlistswipe = ' <ba-titledlist         ba-attrs="{{model}}">  </ba-titledlist>';
 
@@ -767,9 +767,10 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Scrollpicker", {
             "background" : "white"
         });
 
-        scroll.on("scrollend", function () {
-            this.set('value', scroll.currentElement().data( "id" ));
-        },this);
+        //scroll.on("scrollend", function () {
+        //    console.log(this);
+        //    this.set('value', scroll.currentElement().data( "id" ));
+        //}, this);
 
         scroll.on("scroll", function () {
             element.children().css({
@@ -878,12 +879,16 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Clickitem", {
     template: BetaJS.Dynamics.Dynamic.Components.Templates.clickitem,
 
     attrs: {
-        title : 'Clickitem - Title'
+        model : {
+            value : 'Clickitem - Title'
+        }
     },
 
     functions : {
         click : function () {
-            console.log("You Clicked item : " + this.get('title'));
+            //console.log("You Clicked item : " + this.properties().getProp('model.value'));
+            console.log("You Clicked item : " + this.get('model'));
+            console.log("You Clicked item : " + this.get('model').value);
         }
     }
 
@@ -908,7 +913,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
 
     attrs : {
         model : {
-            value :'Selectableitem - Title'
+            value :'Selectableitem - Value'
         }
     },
 
@@ -929,7 +934,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
         select : function () {
             this.scopes.parent_list.set('selected_item',{
                 cid : this.cid(),
-                value : this.get('model').get('value')
+                value : this.properties().getProp('model.value')
             });
         }
 
@@ -971,9 +976,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
 
     collections : {
         listcollection : [
-            {title: "List - Item 1"},
-            {title: "List - Item 2"},
-            {title: "List - Item 3"}
+            {value: "List - Item 1"},
+            {value: "List - Item 2"},
+            {value: "List - Item 3"}
         ]
     }
 
@@ -1169,6 +1174,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist", {
     initial : {
 
         attrs : {
+            view : {
+
+            },
             model : {
                 title : "Testtitle",
                 titleitem : 'addtitle',
@@ -1406,18 +1414,18 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
     template: BetaJS.Dynamics.Dynamic.Components.Templates.titledlist,
 
     attrs: {
+        title : 'Titledlist - Title',
         collapsed : false,
         collapsible : true,
-        title : 'Titledlist - Title',
         listitem : 'selectableitem',
         titleitem : 'title'
     },
 
     collections : {
         listcollection : [
-            {title: "Titledlist - Item 1"},
-            {title: "Titledlist - Item 2"},
-            {title: "Titledlist - Item 3"}
+            {value: "Titledlist - Item 1"},
+            {value: "Titledlist - Item 2"},
+            {value: "Titledlist - Item 3"}
         ]
     },
 

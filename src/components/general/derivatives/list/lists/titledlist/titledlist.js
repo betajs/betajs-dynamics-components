@@ -4,18 +4,18 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
     template: BetaJS.Dynamics.Dynamic.Components.Templates.titledlist,
 
     attrs: {
+        title : 'Titledlist - Title',
         collapsed : false,
         collapsible : true,
-        title : 'Titledlist - Title',
         listitem : 'selectableitem',
         titleitem : 'title'
     },
 
     collections : {
         listcollection : [
-            {title: "Titledlist - Item 1"},
-            {title: "Titledlist - Item 2"},
-            {title: "Titledlist - Item 3"}
+            {value: "Titledlist - Item 1"},
+            {value: "Titledlist - Item 2"},
+            {value: "Titledlist - Item 3"}
         ]
     },
 
