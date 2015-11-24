@@ -1,0 +1,32 @@
+ba-layout_web {
+  background: lightcoral;
+  @include flex(1 1 0);
+
+  @include display-flex;
+  @include flex-direction(column);
+
+  header {
+    background : lightsteelblue;
+    @include flex(0 0 50px);
+
+    @include display-flex;
+  }
+
+  main {
+    background: darkviolet;
+    @include flex(1 1 0);
+
+    @include display-flex;
+
+    menu {
+      background: lightgreen;
+      @include flex(0 0 200px);
+
+    }
+    content {
+      background: lightcyan;
+      @include flex(1 1 0);
+
+    }
+  }
+}

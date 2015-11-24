@@ -17,23 +17,3 @@ Scoped.define("module:", function () {
 });
 
 BetaJS.Dynamics.Dynamic.Components = {};
-
-window.iterateModel = function (scope) {
-
-    var data = null;
-
-    //console.log("Model : " + scope._tagName);
-    if (scope.get('model')) {
-        //console.log(scope.get('model'));
-        data = "data" in scope.get("model") ? scope.get("model").data() : scope.get("model");
-        //console.log(data);
-    }
-    if (data) {
-        BetaJS.Objs.iter(data, function (modelValue, attrKey) {
-            var attrValue = this.isArgumentAttr(attrKey) ? scope.get(attrKey) : modelValue;
-            scope.set(attrKey, attrValue);
-            //this.get("model").set(attrKey, attrValue);
-            //this.properties().bind(attrKey, this.get("model"));
-        }, scope);
-    }
-};

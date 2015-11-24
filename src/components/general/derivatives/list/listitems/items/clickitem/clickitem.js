@@ -5,16 +5,22 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Clickitem", {
 
     attrs: {
         model : {
-            value : 'Clickitem - Title'
+            value : 'Clickitem - Value'
         }
     },
 
     functions : {
         click : function () {
-            //console.log("You Clicked item : " + this.properties().getProp('model.value'));
-            console.log("You Clicked item : " + this.get('model'));
-            console.log("You Clicked item : " + this.get('model').value);
+            console.log("You Clicked item : " + this.properties().getProp('model.value'));
+            console.log(this.cid());
+            this.trigger('event', this.cid());
         }
+    },
+
+    create : function () {
+        this.on("event", function (cid) {
+            console.log('event from item: ' + cid);
+        }, this);
     }
 
 }).register();

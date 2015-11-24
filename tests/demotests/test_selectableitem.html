@@ -1,0 +1,63 @@
+<html>
+<head>
+    <script src="../assets/jquery.js"></script>
+    <script src="../../vendors/beta.js"></script>
+    <script src="../../vendors/beta-browser-noscoped.js"></script>
+    <script src="../../vendors/betajs-dynamics-noscoped.js"></script>
+    <script src="../../dist/betajs-dynamics-components.js"></script>
+    <link rel="stylesheet" href="../../dist/betajs-dynamics-components.css">
+</head>
+<body>
+
+<test>
+    <h1>Tests for Selectableitem</h1>
+
+    <h3>Test Dynamics</h3>
+    <div id="dynamicsworking">{{test_dynamics}}</div>
+
+    <h3>Test with inject data</h3>
+    <ba-list ba-attrs="{{view}}" ba-listcollection="{{listcollection}}"></ba-list>
+
+    <h3>Test with ba-sharescope</h3>
+    <ba-list ba-sharescope></ba-list>
+
+</test>
+
+<script>
+    var root = $("test");
+
+    var dynamic = new BetaJS.Dynamics.Dynamic({
+        element: root,
+        attrs : {
+            test_dynamics: "Dynamics Working?",
+            view : {listitem: 'selectableitem'},
+            listitem: 'selectableitem'
+        },
+        collections : {
+            listcollection : [
+                {value: "Test - Selectableitem 1"},
+                {value: "Test - Selectableitem 2"},
+                {value: "Test - Selectableitem 3"}
+            ]
+        }
+    });
+
+    dynamic.activate();
+
+    function test() {
+
+        //0. Dynamics working?
+        QUnit.equal(dynamic.get("test_dynamics"), $('#dynamicsworking').html().trim());
+
+        //1. Test Selectableitem
+//        QUnit.equal(dynamic.get('event_notifier'), $('#event_notifier').html().trim());
+//        $('#test_event').find('clickitem').click();
+//        QUnit.equal(dynamic.get('event_notifier_after'), $('#event_notifier').html().trim());
+
+
+    }
+
+</script>
+
+</body>
+</html>

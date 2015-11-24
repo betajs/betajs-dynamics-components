@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-11-17
+betajs-dynamics-components - v0.0.4 - 2015-11-24
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -311,14 +311,16 @@ ba-swipecontainer {
 $clickitemheigth : 44px;
 
 ba-clickitem {
-  background: white;
-  border-bottom: 1px solid grey;
+  @include display-flex;
+  @include flex-direction(column);
 
-  clickitem {
+  button {
+    @include flex(1 1 0);
     padding: 0 $clickitemheigth/2;
-    height: $clickitemheigth;
-    line-height: $clickitemheigth;
+    min-height: 44px;
+    text-align: center;
     display: block;
+    color : inherit;
   }
 
 }
@@ -432,4 +434,72 @@ ba-selectableitem {
 ba-test_titledlist {
   @include display-flex;
   @include flex(1 1 0)
+}
+ba-header {
+  background: lightsteelblue;
+  color : white;
+  height: 50px;
+
+  ba-list {
+    height: 100%;
+
+    list {
+      @include display-flex;
+      @include flex-direction(row);
+
+      button:hover {
+        background: lightsalmon;
+      }
+    }
+  }
+}
+ba-header {
+  background: lightsteelblue;
+  color : white;
+  height: 50px;
+
+  ba-list {
+    height: 100%;
+
+    list {
+      @include display-flex;
+      @include flex-direction(row);
+
+      button:hover {
+        background: lightsalmon;
+      }
+    }
+  }
+}
+ba-layout_web {
+  background: lightcoral;
+  @include flex(1 1 0);
+
+  @include display-flex;
+  @include flex-direction(column);
+
+  header {
+    background : lightsteelblue;
+    @include flex(0 0 50px);
+
+    @include display-flex;
+  }
+
+  main {
+    background: darkviolet;
+    @include flex(1 1 0);
+
+    @include display-flex;
+
+    menu {
+      background: lightgreen;
+      @include flex(0 0 200px);
+
+    }
+    content {
+      background: lightcyan;
+      @include flex(1 1 0);
+
+    }
+  }
 }

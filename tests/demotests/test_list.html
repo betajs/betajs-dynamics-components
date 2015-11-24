@@ -1,0 +1,52 @@
+<html>
+<head>
+    <script src="../assets/jquery.js"></script>
+    <script src="../../vendors/beta.js"></script>
+    <script src="../../vendors/beta-browser-noscoped.js"></script>
+    <script src="../../vendors/betajs-dynamics-noscoped.js"></script>
+    <script src="../../dist/betajs-dynamics-components.js"></script>
+    <link rel="stylesheet" href="../../dist/betajs-dynamics-components.css">
+</head>
+<body>
+
+<test>
+    <h1>Tests for Selectableitem</h1>
+
+    <h3>Test Dynamics</h3>
+    <div id="dynamicsworking">{{test_dynamics}}</div>
+
+    <h3>Basic Test</h3>
+    <ba-list></ba-list>
+
+
+</test>
+
+<script>
+    var root = $("test");
+
+    var dynamic = new BetaJS.Dynamics.Dynamic({
+        element: root,
+        attrs : {
+            test_dynamics: "Dynamics Working?"
+        }
+    });
+
+    dynamic.activate();
+
+    function test() {
+
+        //0. Dynamics working?
+        QUnit.equal(dynamic.get("test_dynamics"), $('#dynamicsworking').html().trim());
+
+        //1. Test List
+//        QUnit.equal(dynamic.get('event_notifier'), $('#event_notifier').html().trim());
+//        $('#test_event').find('clickitem').click();
+//        QUnit.equal(dynamic.get('event_notifier_after'), $('#event_notifier').html().trim());
+
+
+    }
+
+</script>
+
+</body>
+</html>

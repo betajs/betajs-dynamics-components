@@ -1,0 +1,18 @@
+ba-header {
+  background: lightsteelblue;
+  color : white;
+  height: 50px;
+
+  ba-list {
+    height: 100%;
+
+    list {
+      @include display-flex;
+      @include flex-direction(row);
+
+      button:hover {
+        background: lightsalmon;
+      }
+    }
+  }
+}

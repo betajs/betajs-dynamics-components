@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-11-17
+betajs-dynamics-components - v0.0.4 - 2015-11-24
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -211,13 +211,25 @@ ba-swipecontainer {
       opacity: 1 !important; }
 
 ba-clickitem {
-  background: white;
-  border-bottom: 1px solid grey; }
-  ba-clickitem clickitem {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+  ba-clickitem button {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
     padding: 0 22px;
-    height: 44px;
-    line-height: 44px;
-    display: block; }
+    min-height: 44px;
+    text-align: center;
+    display: block;
+    color: inherit; }
 
 ba-selectableitem selectableitem {
   display: block;
@@ -379,5 +391,95 @@ ba-test_titledlist {
   -webkit-flex: 1 1 0;
   -ms-flex: 1 1 0;
   flex: 1 1 0; }
+
+ba-header {
+  background: lightsteelblue;
+  color: white;
+  height: 50px; }
+  ba-header ba-list {
+    height: 100%; }
+    ba-header ba-list list {
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+      flex-direction: row; }
+      ba-header ba-list list button:hover {
+        background: lightsalmon; }
+
+ba-header {
+  background: lightsteelblue;
+  color: white;
+  height: 50px; }
+  ba-header ba-list {
+    height: 100%; }
+    ba-header ba-list list {
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+      flex-direction: row; }
+      ba-header ba-list list button:hover {
+        background: lightsalmon; }
+
+ba-layout_web {
+  background: lightcoral;
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+  ba-layout_web header {
+    background: lightsteelblue;
+    -webkit-box-flex: 0 0 50px;
+    -moz-box-flex: 0 0 50px;
+    -webkit-flex: 0 0 50px;
+    -ms-flex: 0 0 50px;
+    flex: 0 0 50px;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex; }
+  ba-layout_web main {
+    background: darkviolet;
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex; }
+    ba-layout_web main menu {
+      background: lightgreen;
+      -webkit-box-flex: 0 0 200px;
+      -moz-box-flex: 0 0 200px;
+      -webkit-flex: 0 0 200px;
+      -ms-flex: 0 0 200px;
+      flex: 0 0 200px; }
+    ba-layout_web main content {
+      background: lightcyan;
+      -webkit-box-flex: 1 1 0;
+      -moz-box-flex: 1 1 0;
+      -webkit-flex: 1 1 0;
+      -ms-flex: 1 1 0;
+      flex: 1 1 0; }
 
 /*# sourceMappingURL=betajs-dynamics-components.css.map */
