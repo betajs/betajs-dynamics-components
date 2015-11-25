@@ -13,8 +13,14 @@ ba-layout_web {
     @include flex(1 1 0);
     @include display-flex;
 
-    menu {min-width: 10px}
-    content {@include flex(1 1 0)}
+    menu {
+      @include display-flex;
+      min-width: 10px;
+    }
+    content {
+      @include flex(1 1 0);
+      @include display-flex;
+    }
   }
 }
 

@@ -1,5 +1,5 @@
 /*!
-betajs-simulator - v0.0.2 - 2015-11-16
+betajs-simulator - v0.0.2 - 2015-11-25
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -127,28 +127,47 @@ ba-simulator {
     flex: 1 1 0;
     overflow-y: scroll; }
 
-ba-viewport appframe {
-  position: relative;
+ba-viewport {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  overflow: hidden; }
-ba-viewport .mobile {
-  margin: 10px;
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
-  flex-direction: column;
-  border: 1px solid black; }
-ba-viewport .web {
-  margin: 0; }
-ba-viewport .iphone5 {
-  height: 667px;
-  width: 375px; }
-ba-viewport .iphone4 {
-  height: 480px;
-  width: 320px; }
+  flex-direction: column; }
+  ba-viewport appframe {
+    position: relative;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    overflow: hidden; }
+  ba-viewport .mobile {
+    margin: 10px;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    border: 1px solid black; }
+  ba-viewport .web {
+    margin: 0;
+    height: 100% !important;
+    width: 100% !important; }
+  ba-viewport .iphone5 {
+    height: 667px;
+    width: 375px; }
+  ba-viewport .iphone4 {
+    height: 480px;
+    width: 320px; }
 
 /*******************************
  **           Style           **
@@ -224,5 +243,21 @@ ba-helloworld {
     height: 44px;
     line-height: 44px;
     display: block; }
+
+ba-webtest {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  background: lightgreen; }
+  ba-webtest webtest {
+    background: white;
+    border-bottom: 1px solid grey; }
+    ba-webtest webtest helloworld {
+      padding: 0 22px;
+      height: 44px;
+      line-height: 44px;
+      display: block; }
 
 /*# sourceMappingURL=betajs-simulator.css.map */

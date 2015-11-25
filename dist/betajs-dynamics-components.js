@@ -578,7 +578,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '60.1448472775485'
+		version: '61.1448488461126'
 	};
 });
 
@@ -631,7 +631,7 @@ BetaJS.Dynamics.Dynamic.Components.Templates.test_titledlist_pushintochild = ' <
 
 BetaJS.Dynamics.Dynamic.Components.Templates.test_titledlist_swipe = ' <ba-titledlist         ba-listcollection="{{listcollection}}"         ba-attrs="{{model}}">  </ba-titledlist>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.titledlist = '<ba-{{titleitem}}     ba-click="click_title()"     ba-attrs={{titleitem_model}}>{{title}}</ba-{{titleitem}}>  <ba-list         ba-sharescope         ba-show="{{!collapsed}}"         ba-functions="{{callbacks}}"         ba-listcollection="{{listcollection}}">  </ba-list> ';
+BetaJS.Dynamics.Dynamic.Components.Templates.titledlist = '<ba-{{titleitem}}     ba-click="click_title()"     ba-model={{title_model}}>{{model.title_model.value}}</ba-{{titleitem}}>  <ba-list         ba-sharescope         ba-show="{{!collapsed}}"         ba-functions="{{callbacks}}">  </ba-list> ';
 
 BetaJS.Dynamics.Dynamic.Components.Templates.addtitle = ' <addtitle>     <title ba-click="clicktitle()">{{title}}</title>     <button ba-click="addbutton()">         <span class="icon-plus"></span>     </button> </addtitle>';
 
@@ -645,7 +645,9 @@ BetaJS.Dynamics.Dynamic.Components.Templates.test_attrs = ' <ba-titledlist      
 
 BetaJS.Dynamics.Dynamic.Components.Templates.header = ' <ba-list ba-listcollection="{{left_collection}}"></ba-list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.menu = ' <ba-titledlist         ba-attrs="{{view}}"         ba-listcollection="{{menu_collection}}">  </ba-titledlist>';
+BetaJS.Dynamics.Dynamic.Components.Templates.toggle_menu = '<button ba-click="toggle_menu()" class="icon-reorder"></button>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates.menu = ' <ba-titledlist         ba-collapsible="{{false}}"         ba-model="{{model}}"         ba-listcollection="{{menu_collection}}">  </ba-titledlist>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates.layout_web = '<header>     <ba-{{components.header}}>Header</ba-{{components.header}}> </header> <main>     <menu ba-show="{{model.display_menu}}">         <ba-{{components.menu}}>Menu</ba-{{components.menu}}>     </menu>     <content>         <ba-{{components.content}}>Content</ba-{{components.content}}>     </content> </main>';
 
@@ -1424,7 +1426,11 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
     template: BetaJS.Dynamics.Dynamic.Components.Templates.titledlist,
 
     attrs: {
-        title : 'Titledlist - Title',
+        model : {
+            title_model : {
+                value : 'Titledlist - Title'
+            }
+        },
         collapsed : false,
         collapsible : true,
         listitem : 'selectableitem',
@@ -1658,15 +1664,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Header", {
 
     collections : {
         left_collection : [
-            {
-                value : '',
-                class : 'icon-reorder',
-                callbacks : {
-                    click : function () {
-                        this.scope("<+[tagname='ba-layout_web']").call('toggle_menu');
-                    }
-                }
-            },
+            {listitem : 'toggle_menu'},
             {
                 value : '',
                 class : 'icon-home'
@@ -1683,20 +1681,46 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Header", {
 }).register();
 
 
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Toggle_menu", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.toggle_menu,
+
+    functions : {
+        toggle_menu : function () {
+            this.scope("<+[tagname='ba-layout_web']").call('toggle_menu');
+        }
+    }
+
+}).register();
+
+
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Menu", {
 
     template: BetaJS.Dynamics.Dynamic.Components.Templates.menu,
 
     attrs : {
-        view : {
-            title : "Menu"
+        model : {
+            title_model: {
+                value: "Menu Title"
+            }
         }
     },
 
     collections : {
         menu_collection : [
-            {value : 'Menu 1'},
-            {value : 'Menu 2'}
+            {value : 'Item 1'},
+            {value : 'Item 2'},
+            {
+                listitem : 'titledlist',
+                title_model : {
+                    value: 'Item 3'
+                },
+                listcollection : new BetaJS.Collections.Collection([
+                    {value : "Subitem 1"},
+                    {value : "Subitem 2"}
+                ])
+            },
+            {value : 'Item 4'}
         ]
     }
 

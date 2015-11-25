@@ -416,23 +416,46 @@ ba-header {
     ba-header ba-list list button :hover {
       background: lightsalmon; }
 
-ba-header {
-  background: lightsteelblue;
-  color: white;
-  height: 50px; }
-  ba-header ba-list {
-    height: 100%; }
-    ba-header ba-list list {
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-flex-direction: row;
-      -ms-flex-direction: row;
-      flex-direction: row; }
-      ba-header ba-list list button:hover {
-        background: lightsalmon; }
+ba-toggle_menu {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; }
+  ba-toggle_menu button {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    color: inherit; }
+
+ba-toggle_menu button {
+  padding: 0 22px; }
+
+ba-menu {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0; }
+
+ba-menu {
+  padding: 0 0 0 20px;
+  background: white;
+  color: #2fa4e7;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-size: 14px; }
+  ba-menu > ba-titledlist > ba-title {
+    padding: 10px 0 5px 0;
+    font-weight: bold; }
+  ba-menu ba-list ba-list {
+    padding: 0 0 0 10px; }
 
 ba-layout_web {
   -webkit-box-flex: 1 1 0;
@@ -467,13 +490,23 @@ ba-layout_web {
     display: -webkit-flex;
     display: flex; }
     ba-layout_web main menu {
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
       min-width: 10px; }
     ba-layout_web main content {
       -webkit-box-flex: 1 1 0;
       -moz-box-flex: 1 1 0;
       -webkit-flex: 1 1 0;
       -ms-flex: 1 1 0;
-      flex: 1 1 0; }
+      flex: 1 1 0;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex; }
 
 ba-layout_web {
   background: lightcoral; }
