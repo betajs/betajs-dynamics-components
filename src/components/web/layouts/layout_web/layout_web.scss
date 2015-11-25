@@ -1,32 +1,39 @@
+//Layout
 ba-layout_web {
-  background: lightcoral;
   @include flex(1 1 0);
-
   @include display-flex;
   @include flex-direction(column);
 
   header {
-    background : lightsteelblue;
-    @include flex(0 0 50px);
-
     @include display-flex;
+    min-height: 10px;
   }
 
   main {
-    background: darkviolet;
     @include flex(1 1 0);
-
     @include display-flex;
 
+    menu {min-width: 10px}
+    content {@include flex(1 1 0)}
+  }
+}
+
+//Style
+$header_height : 50px;
+$menu_width : 200px;
+ba-layout_web {
+  background: lightcoral;
+
+  header {
+    @include flex(0 0 $header_height);
+    background : lightsteelblue;
+  }
+  main {
+    background: darkviolet;
     menu {
-      background: lightgreen;
-      @include flex(0 0 200px);
-
+      @include flex(0 0 $menu_width);
+      background: lightgreen
     }
-    content {
-      background: lightcyan;
-      @include flex(1 1 0);
-
-    }
+    content {background: lightcyan}
   }
 }

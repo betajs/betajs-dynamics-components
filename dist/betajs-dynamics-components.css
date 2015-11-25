@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-11-24
+betajs-dynamics-components - v0.0.4 - 2015-11-25
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -392,23 +392,29 @@ ba-test_titledlist {
   -ms-flex: 1 1 0;
   flex: 1 1 0; }
 
+ba-header ba-list {
+  height: 100%; }
+  ba-header ba-list list {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: row;
+    -ms-flex-direction: row;
+    flex-direction: row; }
+
 ba-header {
   background: lightsteelblue;
   color: white;
   height: 50px; }
-  ba-header ba-list {
-    height: 100%; }
-    ba-header ba-list list {
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-flex-direction: row;
-      -ms-flex-direction: row;
-      flex-direction: row; }
-      ba-header ba-list list button:hover {
-        background: lightsalmon; }
+  ba-header ba-list list button {
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    white-space: nowrap;
+    max-width: 1/3%; }
+    ba-header ba-list list button :hover {
+      background: lightsalmon; }
 
 ba-header {
   background: lightsteelblue;
@@ -429,7 +435,6 @@ ba-header {
         background: lightsalmon; }
 
 ba-layout_web {
-  background: lightcoral;
   -webkit-box-flex: 1 1 0;
   -moz-box-flex: 1 1 0;
   -webkit-flex: 1 1 0;
@@ -444,19 +449,13 @@ ba-layout_web {
   -ms-flex-direction: column;
   flex-direction: column; }
   ba-layout_web header {
-    background: lightsteelblue;
-    -webkit-box-flex: 0 0 50px;
-    -moz-box-flex: 0 0 50px;
-    -webkit-flex: 0 0 50px;
-    -ms-flex: 0 0 50px;
-    flex: 0 0 50px;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
     display: -webkit-flex;
-    display: flex; }
+    display: flex;
+    min-height: 10px; }
   ba-layout_web main {
-    background: darkviolet;
     -webkit-box-flex: 1 1 0;
     -moz-box-flex: 1 1 0;
     -webkit-flex: 1 1 0;
@@ -468,18 +467,33 @@ ba-layout_web {
     display: -webkit-flex;
     display: flex; }
     ba-layout_web main menu {
-      background: lightgreen;
-      -webkit-box-flex: 0 0 200px;
-      -moz-box-flex: 0 0 200px;
-      -webkit-flex: 0 0 200px;
-      -ms-flex: 0 0 200px;
-      flex: 0 0 200px; }
+      min-width: 10px; }
     ba-layout_web main content {
-      background: lightcyan;
       -webkit-box-flex: 1 1 0;
       -moz-box-flex: 1 1 0;
       -webkit-flex: 1 1 0;
       -ms-flex: 1 1 0;
       flex: 1 1 0; }
+
+ba-layout_web {
+  background: lightcoral; }
+  ba-layout_web header {
+    -webkit-box-flex: 0 0 50px;
+    -moz-box-flex: 0 0 50px;
+    -webkit-flex: 0 0 50px;
+    -ms-flex: 0 0 50px;
+    flex: 0 0 50px;
+    background: lightsteelblue; }
+  ba-layout_web main {
+    background: darkviolet; }
+    ba-layout_web main menu {
+      -webkit-box-flex: 0 0 200px;
+      -moz-box-flex: 0 0 200px;
+      -webkit-flex: 0 0 200px;
+      -ms-flex: 0 0 200px;
+      flex: 0 0 200px;
+      background: lightgreen; }
+    ba-layout_web main content {
+      background: lightcyan; }
 
 /*# sourceMappingURL=betajs-dynamics-components.css.map */

@@ -6,15 +6,22 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Layout_web", {
     attrs : {
         components : {
             header : "header",
-            menu : "menu",
             //header : null,
+            menu : "menu",
             //menu : null,
             main : null
         },
         model : {
             header : 'Header',
             menu : 'Menu',
-            main : 'Main'
+            main : 'Main',
+            display_menu : true
+        }
+    },
+
+    functions : {
+        toggle_menu : function () {
+            this.setProp('model.display_menu', !this.getProp('model.display_menu'));
         }
     }
 

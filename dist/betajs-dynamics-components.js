@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-11-24
+betajs-dynamics-components - v0.0.4 - 2015-11-25
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -560,7 +560,7 @@ Public.exports();
 }).call(this);
 
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-11-24
+betajs-dynamics-components - v0.0.4 - 2015-11-25
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -578,7 +578,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '59.1448371873281'
+		version: '60.1448472775485'
 	};
 });
 
@@ -597,15 +597,17 @@ BetaJS.Dynamics.Dynamic.Components.Templates.scrollpicker = '<element ba-repeat-
 
 BetaJS.Dynamics.Dynamic.Components.Templates.swipecontainer = ' <behind>     <icon class=\'{{lefticon}}\'></icon>     <div></div>     <icon class=\'{{righticon}}\'></icon> </behind>  <swipe>      <ba-{{type}} ba-sharescope>         {{title}}     </ba-{{type}}>      <swipeleft>         <div></div>         <icon class=\'{{lefticon}}\'></icon>     </swipeleft>      <swiperight>         <icon class=\'{{righticon}}\'></icon>         <div></div>     </swiperight>  </swipe> ';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.clickitem = ' <button         ba-click="click()">     {{model.value}} </button>';
+BetaJS.Dynamics.Dynamic.Components.Templates.clickitem = ' <button         class="{{model.class}}"         ba-click="click()">     {{model.value}} </button>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates.selectableitem = ' <selectableitem         ba-class="{{{selected : selected.cid == this.cid()}}}"         ba-click="select()">     {{model.value}} </selectableitem>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates.test_selectableitem = ' <ba-list ba-attrs="{{view}}" ba-listcollection="{{listcollection}}"> </ba-list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.list = ' <list ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{listitem}}         ba-data:id="{{collectionitem.cid()}}"         ba-functions="{{callbacks}}"         ba-type="{{type}}"         ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{listitem}}>  </list>';
+BetaJS.Dynamics.Dynamic.Components.Templates.list = ' <list ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{collectionitem.listitem||listitem}}         ba-data:id="{{collectionitem.cid()}}"         ba-functions="{{collectionitem.callbacks}}"         ba-type="{{type}}"         ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{collectionitem.listitem||listitem}}>  </list>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates.test_list_clickitem = ' <ba-list ba-attrs="{{testmodel}}"> </ba-list>';
+
+BetaJS.Dynamics.Dynamic.Components.Templates.test_list_different_listitems = ' <ba-list         ba-attrs="{{testmodel}}"         ba-listcollection="{{listcollection}}"> </ba-list>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates.test_list_listcollection = ' <ba-list ba-listcollection="{{listcollection}}"> </ba-list>';
 
@@ -629,7 +631,7 @@ BetaJS.Dynamics.Dynamic.Components.Templates.test_titledlist_pushintochild = ' <
 
 BetaJS.Dynamics.Dynamic.Components.Templates.test_titledlist_swipe = ' <ba-titledlist         ba-listcollection="{{listcollection}}"         ba-attrs="{{model}}">  </ba-titledlist>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.titledlist = '<ba-{{titleitem}}     ba-click="title_click()"     ba-attrs={{titleitem_model}}>{{title}}</ba-{{titleitem}}>  <ba-list         ba-sharescope         ba-if="{{!collapsed && collapsible}}"         ba-functions="{{callbacks}}"         ba-listcollection="{{listcollection}}">  </ba-list> ';
+BetaJS.Dynamics.Dynamic.Components.Templates.titledlist = '<ba-{{titleitem}}     ba-click="click_title()"     ba-attrs={{titleitem_model}}>{{title}}</ba-{{titleitem}}>  <ba-list         ba-sharescope         ba-show="{{!collapsed}}"         ba-functions="{{callbacks}}"         ba-listcollection="{{listcollection}}">  </ba-list> ';
 
 BetaJS.Dynamics.Dynamic.Components.Templates.addtitle = ' <addtitle>     <title ba-click="clicktitle()">{{title}}</title>     <button ba-click="addbutton()">         <span class="icon-plus"></span>     </button> </addtitle>';
 
@@ -645,7 +647,7 @@ BetaJS.Dynamics.Dynamic.Components.Templates.header = ' <ba-list ba-listcollecti
 
 BetaJS.Dynamics.Dynamic.Components.Templates.menu = ' <ba-titledlist         ba-attrs="{{view}}"         ba-listcollection="{{menu_collection}}">  </ba-titledlist>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.layout_web = '<header>     <ba-{{components.header}}>Header</ba-{{components.header}}> </header> <main>     <menu>         <ba-{{components.menu}}>Menu</ba-{{components.menu}}>     </menu>     <content>         <ba-{{components.content}}>Content</ba-{{components.content}}>     </content> </main>';
+BetaJS.Dynamics.Dynamic.Components.Templates.layout_web = '<header>     <ba-{{components.header}}>Header</ba-{{components.header}}> </header> <main>     <menu ba-show="{{model.display_menu}}">         <ba-{{components.menu}}>Menu</ba-{{components.menu}}>     </menu>     <content>         <ba-{{components.content}}>Content</ba-{{components.content}}>     </content> </main>';
 
 BetaJS.Dynamics.Dynamic.Components.Templates.index = '<!DOCTYPE html> <html> <head lang="en">     <meta charset="UTF-8">      <!--<script src="../vendors/jquery-1.9.closure-extern.js"></script>-->     <script src="../vendors/jquery-2.1.4.js"></script>      <script src="../vendors/scoped.js"></script>     <script src="../vendors/beta.js"></script>     <script src="../vendors/beta-browser-noscoped.js"></script>     <script src="../vendors/betajs-ui.js"></script>     <script src="../vendors/betajs-dynamics-noscoped.js"></script>      <script src="components.js"></script>      <!--<script src="../vendors/betajs-simulator.js"></script>-->     <script src="../../../betajs/betajs-simulator/dist/betajs-simulator.js"></script>     <link rel="stylesheet" href="../../../betajs/betajs-simulator/dist/betajs-simulator.css" />      <script src="../dist/betajs-dynamics-components-noscoped.js"></script>     <link rel="stylesheet" href="../dist/betajs-dynamics-components.css" />     <link rel="stylesheet" href="../vendors/icomoon/style.css" />      <script src="//localhost:1337/livereload.js"></script>      <title>BetaJS Simulator</title>  </head> <body>  <ba-simulator></ba-simulator>  </body> </html>';
 
@@ -996,6 +998,32 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_list_clickitem",
             }
         }
 
+    }
+
+}).register();
+
+
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_list_different_listitems", {
+
+    template: BetaJS.Dynamics.Dynamic.Components.Templates.test_list_different_listitems,
+    
+    attrs: {
+        testmodel : {
+            listitem : 'selectableitem'
+        }
+    },
+
+    collections : {
+        listcollection : new BetaJS.Collections.Collection({objects: [
+            {value: "Item 1"},
+            {
+                listitem : 'clickitem',
+                value: "Item 2"
+            },
+            {value: "Item 3"},
+            {value: "Item 4"},
+            {value: "Item 5"}
+        ]})
     }
 
 }).register();
@@ -1415,7 +1443,8 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
 
         togglelist : function () {
 
-            this.set('collapsed', !this.get('collapsed'));
+            if (this.get('collapsible'))
+                this.set('collapsed', !this.get('collapsed'));
 
         },
 
@@ -1428,7 +1457,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
 
         },
 
-        title_click : function () {
+        click_title : function () {
             console.log('You clicked the title');
             this.call('togglelist');
         }
@@ -1627,23 +1656,28 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Header", {
 
     template: BetaJS.Dynamics.Dynamic.Components.Templates.header,
 
-    attrs : {
-        model : {
-            title :'Pushfunc'
-        }
-    },
-
     collections : {
         left_collection : [
+            {
+                value : '',
+                class : 'icon-reorder',
+                callbacks : {
+                    click : function () {
+                        this.scope("<+[tagname='ba-layout_web']").call('toggle_menu');
+                    }
+                }
+            },
+            {
+                value : '',
+                class : 'icon-home'
+            },
+            {
+                value : 'Big Brother',
+                class : 'icon-eye-open'
+            },
             {value : 'Header 1'},
             {value : 'Header 2'}
         ]
-    },
-
-    functions : {
-        log : function () {
-
-        }
     }
 
 }).register();
@@ -1676,15 +1710,22 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Layout_web", {
     attrs : {
         components : {
             header : "header",
-            menu : "menu",
             //header : null,
+            menu : "menu",
             //menu : null,
             main : null
         },
         model : {
             header : 'Header',
             menu : 'Menu',
-            main : 'Main'
+            main : 'Main',
+            display_menu : true
+        }
+    },
+
+    functions : {
+        toggle_menu : function () {
+            this.setProp('model.display_menu', !this.getProp('model.display_menu'));
         }
     }
 

@@ -23,7 +23,8 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
 
         togglelist : function () {
 
-            this.set('collapsed', !this.get('collapsed'));
+            if (this.get('collapsible'))
+                this.set('collapsed', !this.get('collapsed'));
 
         },
 
@@ -36,7 +37,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
 
         },
 
-        title_click : function () {
+        click_title : function () {
             console.log('You clicked the title');
             this.call('togglelist');
         }

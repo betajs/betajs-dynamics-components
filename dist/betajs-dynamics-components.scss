@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-11-24
+betajs-dynamics-components - v0.0.4 - 2015-11-25
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -435,20 +435,32 @@ ba-test_titledlist {
   @include display-flex;
   @include flex(1 1 0)
 }
+// Layout
 ba-header {
-  background: lightsteelblue;
-  color : white;
-  height: 50px;
-
   ba-list {
     height: 100%;
 
     list {
       @include display-flex;
       @include flex-direction(row);
+    }
+  }
+}
 
-      button:hover {
-        background: lightsalmon;
+// Style
+ba-header {
+  background: lightsteelblue;
+  color : white;
+  height: 50px;
+
+  ba-list {
+    list {
+      button {
+        font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        font-size: 14px;
+        white-space: nowrap;
+        max-width: 1/3%;
+        :hover {background: lightsalmon}
       }
     }
   }
@@ -471,35 +483,42 @@ ba-header {
     }
   }
 }
+//Layout
 ba-layout_web {
-  background: lightcoral;
   @include flex(1 1 0);
-
   @include display-flex;
   @include flex-direction(column);
 
   header {
-    background : lightsteelblue;
-    @include flex(0 0 50px);
-
     @include display-flex;
+    min-height: 10px;
   }
 
   main {
-    background: darkviolet;
     @include flex(1 1 0);
-
     @include display-flex;
 
+    menu {min-width: 10px}
+    content {@include flex(1 1 0)}
+  }
+}
+
+//Style
+$header_height : 50px;
+$menu_width : 200px;
+ba-layout_web {
+  background: lightcoral;
+
+  header {
+    @include flex(0 0 $header_height);
+    background : lightsteelblue;
+  }
+  main {
+    background: darkviolet;
     menu {
-      background: lightgreen;
-      @include flex(0 0 200px);
-
+      @include flex(0 0 $menu_width);
+      background: lightgreen
     }
-    content {
-      background: lightcyan;
-      @include flex(1 1 0);
-
-    }
+    content {background: lightcyan}
   }
 }

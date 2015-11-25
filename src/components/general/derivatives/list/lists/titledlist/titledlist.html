@@ -1,10 +1,10 @@
 <ba-{{titleitem}}
-    ba-click="title_click()"
+    ba-click="click_title()"
     ba-attrs={{titleitem_model}}>{{title}}</ba-{{titleitem}}>
 
 <ba-list
         ba-sharescope
-        ba-if="{{!collapsed && collapsible}}"
+        ba-show="{{!collapsed}}"
         ba-functions="{{callbacks}}"
         ba-listcollection="{{listcollection}}">
 

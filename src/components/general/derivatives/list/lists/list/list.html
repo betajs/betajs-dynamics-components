@@ -1,12 +1,12 @@
 
 <list ba-repeat="{{collectionitem :: listcollection}}">
 
-    <ba-{{listitem}}
+    <ba-{{collectionitem.listitem||listitem}}
         ba-data:id="{{collectionitem.cid()}}"
-        ba-functions="{{callbacks}}"
+        ba-functions="{{collectionitem.callbacks}}"
         ba-type="{{type}}"
         ba-model="{{collectionitem}}">
         {{collectionitem.title}}
-    </ba-{{listitem}}>
+    </ba-{{collectionitem.listitem||listitem}}>
 
 </list>
