@@ -1,7 +1,7 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Toggle_menu", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.toggle_menu,
+    template: BetaJS.Dynamics.Components.Templates.toggle_menu,
 
     functions : {
         toggle_menu : function () {

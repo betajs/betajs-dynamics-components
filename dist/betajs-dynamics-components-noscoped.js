@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-11-25
+betajs-dynamics-components - v0.0.4 - 2015-11-26
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -17,7 +17,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '64.1448505452883'
+		version: '65.1448558162691'
 	};
 });
 
@@ -1138,7 +1138,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Header", {
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Toggle_menu", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.toggle_menu,
+    template: BetaJS.Dynamics.Components.Templates.toggle_menu,
 
     functions : {
         toggle_menu : function () {
