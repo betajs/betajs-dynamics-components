@@ -1,7 +1,7 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Pushfunc", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.pushfunc,
+    template: BetaJS.Dynamics.Components.Templates.pushfunc,
 
     initial: {
 

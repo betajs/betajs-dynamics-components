@@ -1,7 +1,7 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Clickitem", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.clickitem,
+    template: BetaJS.Dynamics.Components.Templates.clickitem,
 
     attrs: {
         model : {

@@ -1,7 +1,7 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Menu", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.menu,
+    template: BetaJS.Dynamics.Components.Templates.menu,
 
     attrs : {
         view : {

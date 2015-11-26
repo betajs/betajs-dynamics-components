@@ -1,7 +1,7 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist_swipe", {
 
-    template : BetaJS.Dynamics.Dynamic.Components.Templates.test_titledlist_swipe,
+    template : BetaJS.Dynamics.Components.Templates.test_titledlist_swipe,
 
     attrs : {
         model : {

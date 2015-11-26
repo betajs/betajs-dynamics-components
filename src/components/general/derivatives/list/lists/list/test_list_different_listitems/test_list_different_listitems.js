@@ -1,7 +1,7 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_list_different_listitems", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.test_list_different_listitems,
+    template: BetaJS.Dynamics.Components.Templates.test_list_different_listitems,
     
     attrs: {
         testmodel : {

@@ -1,7 +1,7 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Header", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.header,
+    template: BetaJS.Dynamics.Components.Templates.header,
 
     collections : {
         left_collection : [

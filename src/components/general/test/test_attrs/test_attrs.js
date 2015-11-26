@@ -1,7 +1,7 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_attrs", {
 
-    template : BetaJS.Dynamics.Dynamic.Components.Templates.test_attrs,
+    template : BetaJS.Dynamics.Components.Templates.test_attrs,
 
     attrs : {
         model : {

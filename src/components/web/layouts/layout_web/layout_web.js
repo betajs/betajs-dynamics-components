@@ -1,7 +1,7 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Layout_web", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.layout_web,
+    template: BetaJS.Dynamics.Components.Templates.layout_web,
 
     attrs : {
         components : {
