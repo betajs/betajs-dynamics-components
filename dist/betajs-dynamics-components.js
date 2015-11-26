@@ -578,85 +578,101 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '61.1448488461126'
+		version: '64.1448505452883'
 	};
 });
 
-BetaJS.Dynamics.Dynamic.Components = {};
-
 BetaJS = BetaJS || {};
 BetaJS.Dynamics = BetaJS.Dynamics || {};
-BetaJS.Dynamics.Dynamic = BetaJS.Dynamics.Dynamic || {};
-BetaJS.Dynamics.Dynamic.Components = BetaJS.Dynamics.Dynamic.Components || {};
-BetaJS.Dynamics.Dynamic.Components.Templates = BetaJS.Dynamics.Dynamic.Components.Templates || {};
-BetaJS.Dynamics.Dynamic.Components.Templates.overlaycontainer = '<overlaycontainer     ba-click="showoverlay = false"     ba-if="{{showoverlay}}">      <overlayinner>          <ba-{{overlay}} ba-value=\'{{=value}}\'>             <message>{{message}}</message>         </ba-{{overlay}}>      </overlayinner>  </overlaycontainer>';
+BetaJS.Dynamics.Components = BetaJS.Dynamics.Components || {};
+BetaJS.Dynamics.Components.Templates = BetaJS.Dynamics.Components.Templates || {};
+BetaJS.Dynamics.Components.Templates.overlaycontainer = '<overlaycontainer     ba-click="showoverlay = false"     ba-if="{{showoverlay}}">      <overlayinner>          <ba-{{overlay}} ba-value=\'{{=value}}\'>             <message>{{message}}</message>         </ba-{{overlay}}>      </overlayinner>  </overlaycontainer>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.overlaycontainertest = ' <button ba-click="showoverlay = !showoverlay">Show Overlaycontainer</button>  <ba-overlaycontainer         ba-overlay="{{=overlay}}"         ba-showoverlay="{{=showoverlay}}">          </ba-overlaycontainer>';
+BetaJS.Dynamics.Components.Templates.overlaycontainertest = ' <button ba-click="showoverlay = !showoverlay">Show Overlaycontainer</button>  <ba-overlaycontainer         ba-overlay="{{=overlay}}"         ba-showoverlay="{{=showoverlay}}">          </ba-overlaycontainer>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.scrollpicker = '<element ba-repeat-element="{{element_value :: value_array}}" data-id="{{element_value}}">         {{element_value}} </element>';
+BetaJS.Dynamics.Components.Templates.scrollpicker = '<element ba-repeat-element="{{element_value :: value_array}}" data-id="{{element_value}}">         {{element_value}} </element>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.swipecontainer = ' <behind>     <icon class=\'{{lefticon}}\'></icon>     <div></div>     <icon class=\'{{righticon}}\'></icon> </behind>  <swipe>      <ba-{{type}} ba-sharescope>         {{title}}     </ba-{{type}}>      <swipeleft>         <div></div>         <icon class=\'{{lefticon}}\'></icon>     </swipeleft>      <swiperight>         <icon class=\'{{righticon}}\'></icon>         <div></div>     </swiperight>  </swipe> ';
+BetaJS.Dynamics.Components.Templates.swipecontainer = ' <behind>     <icon class=\'{{lefticon}}\'></icon>     <div></div>     <icon class=\'{{righticon}}\'></icon> </behind>  <swipe>      <ba-{{type}} ba-sharescope>         {{title}}     </ba-{{type}}>      <swipeleft>         <div></div>         <icon class=\'{{lefticon}}\'></icon>     </swipeleft>      <swiperight>         <icon class=\'{{righticon}}\'></icon>         <div></div>     </swiperight>  </swipe> ';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.clickitem = ' <button         class="{{model.class}}"         ba-click="click()">     {{model.value}} </button>';
+BetaJS.Dynamics.Components.Templates.clickitem = ' <button         class="{{model.class}}"         ba-click="click()">     {{model.value}} </button>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.selectableitem = ' <selectableitem         ba-class="{{{selected : selected.cid == this.cid()}}}"         ba-click="select()">     {{model.value}} </selectableitem>';
+BetaJS.Dynamics.Components.Templates.selectableitem = ' <selectableitem         ba-class="{{{selected : selected.cid == this.cid()}}}"         ba-click="select()">     {{model.value}} </selectableitem>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.test_selectableitem = ' <ba-list ba-attrs="{{view}}" ba-listcollection="{{listcollection}}"> </ba-list>';
+BetaJS.Dynamics.Components.Templates.test_selectableitem = ' <ba-list ba-attrs="{{view}}" ba-listcollection="{{listcollection}}"> </ba-list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.list = ' <list ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{collectionitem.listitem||listitem}}         ba-data:id="{{collectionitem.cid()}}"         ba-functions="{{collectionitem.callbacks}}"         ba-type="{{type}}"         ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{collectionitem.listitem||listitem}}>  </list>';
+BetaJS.Dynamics.Components.Templates.list = ' <list ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{collectionitem.listitem||listitem}}         ba-data:id="{{collectionitem.cid()}}"         ba-functions="{{collectionitem.callbacks}}"         ba-type="{{type}}"         ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{collectionitem.listitem||listitem}}>  </list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.test_list_clickitem = ' <ba-list ba-attrs="{{testmodel}}"> </ba-list>';
+BetaJS.Dynamics.Components.Templates.test_list_clickitem = ' <ba-list ba-attrs="{{testmodel}}"> </ba-list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.test_list_different_listitems = ' <ba-list         ba-attrs="{{testmodel}}"         ba-listcollection="{{listcollection}}"> </ba-list>';
+BetaJS.Dynamics.Components.Templates.test_list_different_listitems = ' <ba-list         ba-attrs="{{testmodel}}"         ba-listcollection="{{listcollection}}"> </ba-list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.test_list_listcollection = ' <ba-list ba-listcollection="{{listcollection}}"> </ba-list>';
+BetaJS.Dynamics.Components.Templates.test_list_listcollection = ' <ba-list ba-listcollection="{{listcollection}}"> </ba-list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.test_list_listoflist = ' <ba-list         ba-listitem="list"         ba-listcollection="{{listcollection}}"> </ba-list>';
+BetaJS.Dynamics.Components.Templates.test_list_listoflist = ' <ba-list         ba-listitem="list"         ba-listcollection="{{listcollection}}"> </ba-list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.test_list_pushfunc = '<button ba-click="test(input_value)">Test func</button> <input ba-return="test(input_value)" placeholder="Push item to list" value="{{=input_value}}"> <ba-titledlist ba-attrs="{{testmodel}}"> </ba-titledlist>';
+BetaJS.Dynamics.Components.Templates.test_list_pushfunc = '<button ba-click="test(input_value)">Test func</button> <input ba-return="test(input_value)" placeholder="Push item to list" value="{{=input_value}}"> <ba-titledlist ba-attrs="{{testmodel}}"> </ba-titledlist>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.test_list_swipecontainer = ' <ba-list ba-attrs="{{testmodel}}">  </ba-list>';
+BetaJS.Dynamics.Components.Templates.test_list_swipecontainer = ' <ba-list ba-attrs="{{testmodel}}">  </ba-list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.searchlist = '<searchbox ba-if="{{showsearch}}">     <icon class="icon-search"></icon>     <input placeholder="{{placeholder}}" value="{{=searchvalue}}"> </searchbox>  <ba-list         ba-sharescope         ba-attrs="{{model}}"         ba-listcollection="{{listcollection}}">  </ba-list> ';
+BetaJS.Dynamics.Components.Templates.searchlist = '<searchbox ba-if="{{showsearch}}">     <icon class="icon-search"></icon>     <input placeholder="{{placeholder}}" value="{{=searchvalue}}"> </searchbox>  <ba-list         ba-sharescope         ba-attrs="{{model}}"         ba-listcollection="{{listcollection}}">  </ba-list> ';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.test_searchlist = ' <ba-searchlist         ba-attrs="{{model}}">  </ba-searchlist>';
+BetaJS.Dynamics.Components.Templates.test_searchlist = ' <ba-searchlist         ba-attrs="{{model}}">  </ba-searchlist>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.test_titledlist = ' <ba-titledlist         ba-titleitem_model="{{titleitem_model}}"         ba-attrs="{{view}}"         ba-listcollection="{{listcollection}}">  </ba-titledlist>';
+BetaJS.Dynamics.Components.Templates.test_titledlist = ' <ba-titledlist         ba-titleitem_model="{{titleitem_model}}"         ba-attrs="{{view}}"         ba-listcollection="{{listcollection}}">  </ba-titledlist>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.test_titledlist_childlist = ' <ba-list         ba-callbacks="{{callbacks}}"         ba-listcollection="{{outer_collection}}"         ba-listitem="titledlist">  </ba-list>  ';
+BetaJS.Dynamics.Components.Templates.test_titledlist_childlist = ' <ba-list         ba-callbacks="{{callbacks}}"         ba-listcollection="{{outer_collection}}"         ba-listitem="titledlist">  </ba-list>  ';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.test_titledlist_pushfunc = ' <button ba-click="test(input_value)">Test func</button> <input ba-return="test(input_value)" placeholder="Push item to list" value="{{=input_value}}"> <ba-titledlist ba-functions="{{callbacks}}" ba-model="{{model}}"> </ba-titledlist> ';
+BetaJS.Dynamics.Components.Templates.test_titledlist_pushfunc = ' <button ba-click="test(input_value)">Test func</button> <input ba-return="test(input_value)" placeholder="Push item to list" value="{{=input_value}}"> <ba-titledlist ba-functions="{{callbacks}}" ba-model="{{model}}"> </ba-titledlist> ';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.test_titledlist_pushintochild = ' <ba-titledlist         ba-callbacks="{{callbacks}}"         ba-attrs="{{model}}">  </ba-titledlist>';
+BetaJS.Dynamics.Components.Templates.test_titledlist_pushintochild = ' <ba-titledlist         ba-callbacks="{{callbacks}}"         ba-attrs="{{model}}">  </ba-titledlist>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.test_titledlist_swipe = ' <ba-titledlist         ba-listcollection="{{listcollection}}"         ba-attrs="{{model}}">  </ba-titledlist>';
+BetaJS.Dynamics.Components.Templates.test_titledlist_swipe = ' <ba-titledlist         ba-listcollection="{{listcollection}}"         ba-attrs="{{model}}">  </ba-titledlist>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.titledlist = '<ba-{{titleitem}}     ba-click="click_title()"     ba-model={{title_model}}>{{model.title_model.value}}</ba-{{titleitem}}>  <ba-list         ba-sharescope         ba-show="{{!collapsed}}"         ba-functions="{{callbacks}}">  </ba-list> ';
+BetaJS.Dynamics.Components.Templates.titledlist = '<ba-{{titleitem}}     ba-click="click_title()"     ba-model={{title_model}}>{{model.title_model.value}}</ba-{{titleitem}}>  <ba-list         ba-sharescope         ba-show="{{!collapsed}}"         ba-functions="{{callbacks}}">  </ba-list> ';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.addtitle = ' <addtitle>     <title ba-click="clicktitle()">{{title}}</title>     <button ba-click="addbutton()">         <span class="icon-plus"></span>     </button> </addtitle>';
+BetaJS.Dynamics.Components.Templates.addtitle = ' <addtitle>     <title ba-click="clicktitle()">{{title}}</title>     <button ba-click="addbutton()">         <span class="icon-plus"></span>     </button> </addtitle>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.test_addtitle = ' <ba-addtitle         ba-attrs="{{testmodel}}"> </ba-addtitle> ';
+BetaJS.Dynamics.Components.Templates.test_addtitle = ' <ba-addtitle         ba-attrs="{{testmodel}}"> </ba-addtitle> ';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.pushfunc = ' <pushfunc         ba-click="log()">     {{model.title}} </pushfunc>';
+BetaJS.Dynamics.Components.Templates.pushfunc = ' <pushfunc         ba-click="log()">     {{model.title}} </pushfunc>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.test_pushfunc = ' <ba-pushfunc         ba-model="{{testmodel}}"> </ba-pushfunc>';
+BetaJS.Dynamics.Components.Templates.test_pushfunc = ' <ba-pushfunc         ba-model="{{testmodel}}"> </ba-pushfunc>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.test_attrs = ' <ba-titledlist         ba-attrs="{{model}}">  </ba-titledlist>';
+BetaJS.Dynamics.Components.Templates.test_attrs = ' <ba-titledlist         ba-attrs="{{model}}">  </ba-titledlist>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.header = ' <ba-list ba-listcollection="{{left_collection}}"></ba-list>';
+BetaJS.Dynamics.Components.Templates.header = ' <ba-list ba-listcollection="{{left_collection}}"></ba-list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.toggle_menu = '<button ba-click="toggle_menu()" class="icon-reorder"></button>';
+BetaJS.Dynamics.Components.Templates.toggle_menu = '<button ba-click="toggle_menu()" class="icon-reorder"></button>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.menu = ' <ba-titledlist         ba-collapsible="{{false}}"         ba-model="{{model}}"         ba-listcollection="{{menu_collection}}">  </ba-titledlist>';
+BetaJS.Dynamics.Components.Templates.menu = ' <ba-titledlist         ba-collapsible="{{false}}"         ba-model="{{model}}"         ba-listcollection="{{menu_collection}}">  </ba-titledlist>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.layout_web = '<header>     <ba-{{components.header}}>Header</ba-{{components.header}}> </header> <main>     <menu ba-show="{{model.display_menu}}">         <ba-{{components.menu}}>Menu</ba-{{components.menu}}>     </menu>     <content>         <ba-{{components.content}}>Content</ba-{{components.content}}>     </content> </main>';
+BetaJS.Dynamics.Components.Templates.layout_web = '<header>     <ba-{{components.header}}>Header</ba-{{components.header}}> </header> <main>     <menu ba-show="{{model.display_menu}}">         <ba-{{components.menu}}>Menu</ba-{{components.menu}}>     </menu>     <content>         <ba-{{components.content}}>Content</ba-{{components.content}}>     </content> </main>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.index = '<!DOCTYPE html> <html> <head lang="en">     <meta charset="UTF-8">      <!--<script src="../vendors/jquery-1.9.closure-extern.js"></script>-->     <script src="../vendors/jquery-2.1.4.js"></script>      <script src="../vendors/scoped.js"></script>     <script src="../vendors/beta.js"></script>     <script src="../vendors/beta-browser-noscoped.js"></script>     <script src="../vendors/betajs-ui.js"></script>     <script src="../vendors/betajs-dynamics-noscoped.js"></script>      <script src="components.js"></script>      <!--<script src="../vendors/betajs-simulator.js"></script>-->     <script src="../../../betajs/betajs-simulator/dist/betajs-simulator.js"></script>     <link rel="stylesheet" href="../../../betajs/betajs-simulator/dist/betajs-simulator.css" />      <script src="../dist/betajs-dynamics-components-noscoped.js"></script>     <link rel="stylesheet" href="../dist/betajs-dynamics-components.css" />     <link rel="stylesheet" href="../vendors/icomoon/style.css" />      <script src="//localhost:1337/livereload.js"></script>      <title>BetaJS Simulator</title>  </head> <body>  <ba-simulator></ba-simulator>  </body> </html>';
+BetaJS.Dynamics.Components.Templates.index = '<!DOCTYPE html> <html> <head lang="en">     <meta charset="UTF-8">      <!--<script src="../vendors/jquery-1.9.closure-extern.js"></script>-->     <script src="../vendors/jquery-2.1.4.js"></script>      <script src="../vendors/scoped.js"></script>     <script src="../vendors/beta.js"></script>     <script src="../vendors/beta-browser-noscoped.js"></script>     <script src="../vendors/betajs-ui.js"></script>     <script src="../vendors/betajs-dynamics-noscoped.js"></script>      <script src="components.js"></script>      <!--<script src="../vendors/betajs-simulator.js"></script>-->     <script src="../../betajs-simulator/dist/betajs-simulator.js"></script>     <link rel="stylesheet" href="../..//betajs-simulator/dist/betajs-simulator.css" />      <script src="../dist/betajs-dynamics-components-noscoped.js"></script>     <link rel="stylesheet" href="../dist/betajs-dynamics-components.css" />     <link rel="stylesheet" href="../vendors/icomoon/style.css" />      <script src="//localhost:1337/livereload.js"></script>      <title>BetaJS Simulator</title>  </head> <body>  <ba-simulator></ba-simulator>  </body> </html>';
+
+Scoped.define("module:Overlaycontainer", [
+    "dynamics:Dynamic",
+    "module:Templates"
+], function (Dynamic, Templates, scoped) {
+	return Dynamic.extend({scoped: scoped}, {
+		
+		template: Templates.overlaycontainer,
+		
+		attrs : {
+            overlay : "",
+            message : "This is a message",
+            value : null,
+            showoverlay : true
+        }
+	
+	}).register();
+});
 
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Overlaycontainer", {
+/*
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Overlaycontainer", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.overlaycontainer,
+    template: BetaJS.Dynamics.Components.Templates.overlaycontainer,
 
     initial : {
 
@@ -671,11 +687,11 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Overlaycontai
 
 }).register();
 
+*/
 
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Overlaycontainertest", {
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Overlaycontainertest", {
-
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.overlaycontainertest,
+    template: BetaJS.Dynamics.Components.Templates.overlaycontainertest,
 
     initial : {
 
@@ -692,7 +708,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Overlaycontai
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Scrollpicker", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.scrollpicker,
+    template: BetaJS.Dynamics.Components.Templates.scrollpicker,
 
     attrs : {
         initial_value : 22,
@@ -779,9 +795,9 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Scrollpicker", {
 }).register();
 
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Swipecontainer", {
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Swipecontainer", {
 
-	template: BetaJS.Dynamics.Dynamic.Components.Templates.swipecontainer,
+	template: BetaJS.Dynamics.Components.Templates.swipecontainer,
 
 	attrs : {
 		type : "clickitem",
@@ -867,7 +883,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Swipecontaine
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Clickitem", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.clickitem,
+    template: BetaJS.Dynamics.Components.Templates.clickitem,
 
     attrs: {
         model : {
@@ -894,7 +910,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Clickitem", {
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.selectableitem,
+    template: BetaJS.Dynamics.Components.Templates.selectableitem,
 
     initial: {
 
@@ -942,7 +958,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_selectableitem", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.test_selectableitem,
+    template: BetaJS.Dynamics.Components.Templates.test_selectableitem,
 
     attrs: {
         view : {
@@ -964,7 +980,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_selectableitem",
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.list,
+    template: BetaJS.Dynamics.Components.Templates.list,
 
     attrs: {
         listitem : "clickitem"
@@ -983,7 +999,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_list_clickitem", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.test_list_clickitem,
+    template: BetaJS.Dynamics.Components.Templates.test_list_clickitem,
 
     initial: {
 
@@ -1007,7 +1023,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_list_clickitem",
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_list_different_listitems", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.test_list_different_listitems,
+    template: BetaJS.Dynamics.Components.Templates.test_list_different_listitems,
     
     attrs: {
         testmodel : {
@@ -1033,7 +1049,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_list_different_l
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_list_listcollection", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.test_list_listcollection,
+    template: BetaJS.Dynamics.Components.Templates.test_list_listcollection,
 
     initial: {
 
@@ -1053,7 +1069,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_list_listcollect
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_list_listoflist", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.test_list_listoflist,
+    template: BetaJS.Dynamics.Components.Templates.test_list_listoflist,
 
     initial: {
 
@@ -1077,7 +1093,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_list_listoflist"
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_list_pushfunc", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.test_list_pushfunc,
+    template: BetaJS.Dynamics.Components.Templates.test_list_pushfunc,
 
     initial: {
 
@@ -1120,7 +1136,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_list_pushfunc", 
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_list_swipecontainer", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.test_list_swipecontainer,
+    template: BetaJS.Dynamics.Components.Templates.test_list_swipecontainer,
 
     initial: {
 
@@ -1145,7 +1161,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_list_swipecontai
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Searchlist", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.searchlist,
+    template: BetaJS.Dynamics.Components.Templates.searchlist,
 
     attrs: {
         placeholder : "Search for",
@@ -1167,7 +1183,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Searchlist", {
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_searchlist", {
 
-    template : BetaJS.Dynamics.Dynamic.Components.Templates.test_searchlist,
+    template : BetaJS.Dynamics.Components.Templates.test_searchlist,
 
     initial : {
 
@@ -1191,7 +1207,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_searchlist", {
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist", {
 
-    template : BetaJS.Dynamics.Dynamic.Components.Templates.test_titledlist,
+    template : BetaJS.Dynamics.Components.Templates.test_titledlist,
 
     attrs : {
         view : {
@@ -1233,7 +1249,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist", {
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist_childlist", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.test_titledlist_childlist,
+    template: BetaJS.Dynamics.Components.Templates.test_titledlist_childlist,
 
     attrs : {
         callbacks: {
@@ -1283,7 +1299,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist_child
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist_pushfunc", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.test_titledlist_pushfunc,
+    template: BetaJS.Dynamics.Components.Templates.test_titledlist_pushfunc,
 
     initial: {
 
@@ -1350,7 +1366,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist_pushf
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist_pushintochild", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.test_titledlist_pushintochild,
+    template: BetaJS.Dynamics.Components.Templates.test_titledlist_pushintochild,
 
     attrs: {
         callbacks : {
@@ -1395,7 +1411,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist_pushi
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist_swipe", {
 
-    template : BetaJS.Dynamics.Dynamic.Components.Templates.test_titledlist_swipe,
+    template : BetaJS.Dynamics.Components.Templates.test_titledlist_swipe,
 
     attrs : {
         model : {
@@ -1423,7 +1439,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist_swipe
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.titledlist,
+    template: BetaJS.Dynamics.Components.Templates.titledlist,
 
     attrs: {
         model : {
@@ -1475,7 +1491,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Addtitle", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.addtitle,
+    template: BetaJS.Dynamics.Components.Templates.addtitle,
 
     initial: {
 
@@ -1524,7 +1540,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Addtitle", {
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_addtitle", {
 
-    template : BetaJS.Dynamics.Dynamic.Components.Templates.test_addtitle,
+    template : BetaJS.Dynamics.Components.Templates.test_addtitle,
 
     initial : {
 
@@ -1556,7 +1572,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_addtitle", {
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Pushfunc", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.pushfunc,
+    template: BetaJS.Dynamics.Components.Templates.pushfunc,
 
     initial: {
 
@@ -1588,7 +1604,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Pushfunc", {
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_pushfunc", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.test_pushfunc,
+    template: BetaJS.Dynamics.Components.Templates.test_pushfunc,
 
     initial: {
 
@@ -1615,7 +1631,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_pushfunc", {
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_attrs", {
 
-    template : BetaJS.Dynamics.Dynamic.Components.Templates.test_attrs,
+    template : BetaJS.Dynamics.Components.Templates.test_attrs,
 
     attrs : {
         model : {
@@ -1660,7 +1676,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_attrs", {
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Header", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.header,
+    template: BetaJS.Dynamics.Components.Templates.header,
 
     collections : {
         left_collection : [
@@ -1696,7 +1712,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Toggle_menu", {
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Menu", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.menu,
+    template: BetaJS.Dynamics.Components.Templates.menu,
 
     attrs : {
         model : {
@@ -1729,7 +1745,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Menu", {
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Layout_web", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.layout_web,
+    template: BetaJS.Dynamics.Components.Templates.layout_web,
 
     attrs : {
         components : {
