@@ -5,15 +5,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Header", {
 
     collections : {
         left_collection : [
-            {
-                value : '',
-                class : 'icon-reorder',
-                callbacks : {
-                    click : function () {
-                        this.scope("<+[tagname='ba-layout_web']").call('toggle_menu');
-                    }
-                }
-            },
+            {listitem : 'toggle_menu'},
             {
                 value : '',
                 class : 'icon-home'

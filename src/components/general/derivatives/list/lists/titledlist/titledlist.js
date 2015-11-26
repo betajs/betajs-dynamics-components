@@ -4,7 +4,11 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
     template: BetaJS.Dynamics.Components.Templates.titledlist,
 
     attrs: {
-        title : 'Titledlist - Title',
+        model : {
+            title_model : {
+                value : 'Titledlist - Title'
+            }
+        },
         collapsed : false,
         collapsible : true,
         listitem : 'selectableitem',
