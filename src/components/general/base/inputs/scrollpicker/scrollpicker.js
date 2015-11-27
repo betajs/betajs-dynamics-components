@@ -1,7 +1,7 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Scrollpicker", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.scrollpicker,
+    template: BetaJS.Dynamics.Components.Templates.scrollpicker,
 
     attrs : {
         initial_value : 22,

@@ -1,7 +1,7 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Searchlist", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.searchlist,
+    template: BetaJS.Dynamics.Components.Templates.searchlist,
 
     attrs: {
         placeholder : "Search for",

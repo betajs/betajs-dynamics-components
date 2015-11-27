@@ -1,7 +1,7 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Addtitle", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.addtitle,
+    template: BetaJS.Dynamics.Components.Templates.addtitle,
 
     initial: {
 

@@ -1,7 +1,7 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.titledlist,
+    template: BetaJS.Dynamics.Components.Templates.titledlist,
 
     attrs: {
         model : {

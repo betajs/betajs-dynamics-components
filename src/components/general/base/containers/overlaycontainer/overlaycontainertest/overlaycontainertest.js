@@ -1,7 +1,7 @@
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Overlaycontainertest", {
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Overlaycontainertest", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.overlaycontainertest,
+    template: BetaJS.Dynamics.Components.Templates.overlaycontainertest,
 
     initial : {
 

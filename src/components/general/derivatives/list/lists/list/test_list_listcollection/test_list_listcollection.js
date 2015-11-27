@@ -1,7 +1,7 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_list_listcollection", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.test_list_listcollection,
+    template: BetaJS.Dynamics.Components.Templates.test_list_listcollection,
 
     initial: {
 

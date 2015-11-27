@@ -1,7 +1,7 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.selectableitem,
+    template: BetaJS.Dynamics.Components.Templates.selectableitem,
 
     initial: {
 

@@ -1,7 +1,7 @@
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist_pushintochild", {
 
-    template: BetaJS.Dynamics.Dynamic.Components.Templates.test_titledlist_pushintochild,
+    template: BetaJS.Dynamics.Components.Templates.test_titledlist_pushintochild,
 
     attrs: {
         callbacks : {
