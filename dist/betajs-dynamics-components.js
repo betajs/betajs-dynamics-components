@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-11-25
+betajs-dynamics-components - v0.0.4 - 2015-11-27
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -560,7 +560,7 @@ Public.exports();
 }).call(this);
 
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-11-25
+betajs-dynamics-components - v0.0.4 - 2015-11-27
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -578,7 +578,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '61.1448488461126'
+		version: '62.1448628364185'
 	};
 });
 
@@ -603,7 +603,7 @@ BetaJS.Dynamics.Dynamic.Components.Templates.selectableitem = ' <selectableitem 
 
 BetaJS.Dynamics.Dynamic.Components.Templates.test_selectableitem = ' <ba-list ba-attrs="{{view}}" ba-listcollection="{{listcollection}}"> </ba-list>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.list = ' <list ba-repeat="{{collectionitem :: listcollection}}">      <ba-{{collectionitem.listitem||listitem}}         ba-data:id="{{collectionitem.cid()}}"         ba-functions="{{collectionitem.callbacks}}"         ba-type="{{type}}"         ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{collectionitem.listitem||listitem}}>  </list>';
+BetaJS.Dynamics.Dynamic.Components.Templates.list = ' <list ba-repeat="{{collectionitem :: (model.listcollection||listcollection)}}">      <ba-{{collectionitem.listitem||listitem}}         ba-data:id="{{collectionitem.cid()}}"         ba-functions="{{collectionitem.callbacks}}"         ba-type="{{type}}"         ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{collectionitem.listitem||listitem}}>  </list> ';
 
 BetaJS.Dynamics.Dynamic.Components.Templates.test_list_clickitem = ' <ba-list ba-attrs="{{testmodel}}"> </ba-list>';
 
@@ -651,7 +651,7 @@ BetaJS.Dynamics.Dynamic.Components.Templates.menu = ' <ba-titledlist         ba-
 
 BetaJS.Dynamics.Dynamic.Components.Templates.layout_web = '<header>     <ba-{{components.header}}>Header</ba-{{components.header}}> </header> <main>     <menu ba-show="{{model.display_menu}}">         <ba-{{components.menu}}>Menu</ba-{{components.menu}}>     </menu>     <content>         <ba-{{components.content}}>Content</ba-{{components.content}}>     </content> </main>';
 
-BetaJS.Dynamics.Dynamic.Components.Templates.index = '<!DOCTYPE html> <html> <head lang="en">     <meta charset="UTF-8">      <!--<script src="../vendors/jquery-1.9.closure-extern.js"></script>-->     <script src="../vendors/jquery-2.1.4.js"></script>      <script src="../vendors/scoped.js"></script>     <script src="../vendors/beta.js"></script>     <script src="../vendors/beta-browser-noscoped.js"></script>     <script src="../vendors/betajs-ui.js"></script>     <script src="../vendors/betajs-dynamics-noscoped.js"></script>      <script src="components.js"></script>      <!--<script src="../vendors/betajs-simulator.js"></script>-->     <script src="../../../betajs/betajs-simulator/dist/betajs-simulator.js"></script>     <link rel="stylesheet" href="../../../betajs/betajs-simulator/dist/betajs-simulator.css" />      <script src="../dist/betajs-dynamics-components-noscoped.js"></script>     <link rel="stylesheet" href="../dist/betajs-dynamics-components.css" />     <link rel="stylesheet" href="../vendors/icomoon/style.css" />      <script src="//localhost:1337/livereload.js"></script>      <title>BetaJS Simulator</title>  </head> <body>  <ba-simulator></ba-simulator>  </body> </html>';
+BetaJS.Dynamics.Dynamic.Components.Templates.index = '<!DOCTYPE html> <html> <head lang="en">     <meta charset="UTF-8">      <!--<script src="../vendors/jquery-1.9.closure-extern.js"></script>-->     <script src="../vendors/jquery-2.1.4.js"></script>      <script src="../vendors/scoped.js"></script>     <script src="../vendors/beta.js"></script>     <script src="../vendors/beta-browser-noscoped.js"></script>     <script src="../vendors/betajs-ui.js"></script>     <script src="../vendors/betajs-dynamics-noscoped.js"></script>      <script src="components.js"></script>      <!--<script src="../vendors/betajs-simulator.js"></script>-->     <script src="../../../betajs/betajs-simulator/dist/betajs-simulator.js"></script>     <link rel="stylesheet" href="../../../betajs/betajs-simulator/dist/betajs-simulator.css" />      <script src="../dist/betajs-dynamics-components-noscoped.js"></script>     <link rel="stylesheet" href="../dist/betajs-dynamics-components.css" />     <link rel="stylesheet" href="../vendors/icomoon/style.css" />      <script src="//localhost:1337/livereload.js"></script>      <title>BetaJS Simulator</title>      <script>      </script>  </head> <body>  <ba-simulator></ba-simulator>  </body> </html>';
 
 
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Dynamic.Components.Overlaycontainer", {
@@ -929,6 +929,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Selectableitem", {
     functions : {
 
         select : function () {
+            console.log(this.scopes.parent_list);
             this.scopes.parent_list.set('selected_item',{
                 cid : this.cid(),
                 value : this.properties().getProp('model.value')
@@ -967,7 +968,8 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
     template: BetaJS.Dynamics.Dynamic.Components.Templates.list,
 
     attrs: {
-        listitem : "clickitem"
+        listitem : "clickitem",
+        model : false
     },
 
     collections : {
@@ -976,6 +978,11 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
             {value: "List - Item 2"},
             {value: "List - Item 3"}
         ]
+    },
+
+    create : function () {
+        console.log('Some List');
+        console.log(this.get('model'));
     }
 
 }).register();
@@ -1429,7 +1436,12 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
         model : {
             title_model : {
                 value : 'Titledlist - Title'
-            }
+            },
+            listcollection : new BetaJS.Collections.Collection([
+                {value: "Titledlist - Item 1"},
+                {value: "Titledlist - Item 2"},
+                {value: "Titledlist - Item 3"}
+            ])
         },
         collapsed : false,
         collapsible : true,
@@ -1437,13 +1449,13 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
         titleitem : 'title'
     },
 
-    collections : {
-        listcollection : [
-            {value: "Titledlist - Item 1"},
-            {value: "Titledlist - Item 2"},
-            {value: "Titledlist - Item 3"}
-        ]
-    },
+    //collections : {
+    //    listcollection : [
+    //        {value: "Titledlist - Item 1"},
+    //        {value: "Titledlist - Item 2"},
+    //        {value: "Titledlist - Item 3"}
+    //    ]
+    //},
 
     functions : {
 

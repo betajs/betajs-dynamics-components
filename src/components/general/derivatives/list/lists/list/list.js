@@ -4,7 +4,8 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
     template: BetaJS.Dynamics.Dynamic.Components.Templates.list,
 
     attrs: {
-        listitem : "clickitem"
+        listitem : "clickitem",
+        model : false
     },
 
     collections : {
@@ -13,6 +14,11 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
             {value: "List - Item 2"},
             {value: "List - Item 3"}
         ]
+    },
+
+    create : function () {
+        console.log('Some List');
+        console.log(this.get('model'));
     }
 
 }).register();

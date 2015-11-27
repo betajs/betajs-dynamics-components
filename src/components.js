@@ -1,12 +1,13 @@
 
 window.components = new BetaJS.Collections.Collection({objects: [
 
+    {value  : 'titledlist'},
     //Itemmizablelist
     //{value  : 'test_list_different_listitems'},
 
     //Web -
-    {value  : 'menu'},
     {value  : 'header'},
+    {value  : 'menu'},
     {value  : 'layout_web'},
 
     // List - Listitems

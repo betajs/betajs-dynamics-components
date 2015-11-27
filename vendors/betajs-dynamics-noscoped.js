@@ -16,7 +16,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "d71ebf84-e555-4e9b-b18a-11d74fdcefe2",
-		version: '163.1448468265971'
+		version: '168.1448505347228'
 	};
 });
 
@@ -882,7 +882,7 @@ Scoped.define("module:Handlers.Attr", [
 	return Cls;
 });
 
-Scoped.define("module:Handlers.HandlerMixin", ["base:Objs", "base:Strings", "jquery:", "browser:Loader", "module:Handlers.Node"], function (Objs, Strings, $, Loader, Node) {
+Scoped.define("module:Handlers.HandlerMixin", ["base:Objs", "base:Strings", "jquery:", "browser:Loader", "module:Handlers.Node", "module:Registries"], function (Objs, Strings, $, Loader, Node, Registries) {
 	return {		
 		
 		_notifications: {
@@ -933,23 +933,8 @@ Scoped.define("module:Handlers.HandlerMixin", ["base:Objs", "base:Strings", "jqu
 			}
 		},
 		
-		_handlerGetTemplate: function (template) {
-			template = Strings.trim(template);
-			this.cls._templateCache = this.cls._templateCache || {};
-			if (!this.cls._templateCache[template]) {
-				var compiled;
-				try {
-					compiled = $(template);
-				} catch (e) {
-					compiled = $(document.createTextNode(template));
-				}
-				this.cls._templateCache[template] = compiled;
-			}
-			return this.cls._templateCache[template].clone();
-		},
-		
 		_handlerInitializeTemplate: function (template, parentElement) {
-			var compiled = this._handlerGetTemplate(template);
+			var compiled = Registries.templates.create(template);
 			if (this.__element) {
 				this.__activeElement = this.__element;
 				this.__element.html("");
@@ -1353,16 +1338,36 @@ Scoped.define("module:Handlers.Node", [
 	}]);
 	return Cls;
 });
-Scoped.define("module:Registries", ["base:Classes.ClassRegistry"], function (ClassRegistry) {
+Scoped.define("module:Registries", ["base:Classes.ClassRegistry", "base:Strings", "jquery:"], function (ClassRegistry, Strings, $) {
 	return {		
 		
 		handler: new ClassRegistry({}, true),
 		partial: new ClassRegistry({}, true),
-		prefixes: {"ba": true}
+		prefixes: {"ba": true},
+		
+		templates: {
+
+			cache: {},
+			
+			create: function (template) {
+				template = Strings.trim(template);
+				var cached = this.cache[template];
+				if (cached)
+					return cached.clone();
+				var compiled;
+				try {
+					compiled = $(template);
+				} catch (e) {
+					compiled = $(document.createTextNode(template));
+				}
+				this.cache[template] = compiled;
+				return compiled.clone();
+			}
+			
+		}
 	
 	};
 });
-
 Scoped.define("module:Partials.AttrsPartial", ["module:Handlers.Partial"], function (Partial, scoped) {
   /**
    * @name ba-attrs
@@ -1685,8 +1690,9 @@ Scoped.define("module:Partials.RepeatPartial", [
         "base:Objs",
         "jquery:",
         "module:Parser",
-        "base:Strings"
-	], function (Partial, Properties, Collection, FilteredCollection, Objs, $, Parser, Strings, scoped) {
+        "base:Strings",
+        "module:Registries"
+	], function (Partial, Properties, Collection, FilteredCollection, Objs, $, Parser, Strings, Registries, scoped) {
 	  /**
 	   * @name ba-repeat
 	   *
@@ -1868,14 +1874,7 @@ Scoped.define("module:Partials.RepeatPartial", [
  			},
  			
  			_newItemElements: function () {
- 				var elements;
- 				var template = Strings.trim(this._node._innerTemplate);
- 				try {
- 					elements = $(template).appendTo(this._node._$element);
- 				} catch (e) {
- 					elements = $(document.createTextNode(template)).appendTo(this._node._$element);
- 				}
- 				return elements;
+ 				return Registries.templates.create(this._node._innerTemplate).appendTo(this._node._$element);
  			}
  			
  		};

@@ -1,5 +1,5 @@
 
-<list ba-repeat="{{collectionitem :: listcollection}}">
+<list ba-repeat="{{collectionitem :: (model.listcollection||listcollection)}}">
 
     <ba-{{collectionitem.listitem||listitem}}
         ba-data:id="{{collectionitem.cid()}}"
