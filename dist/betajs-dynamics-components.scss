@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-11-27
+betajs-dynamics-components - v0.0.4 - 2015-11-30
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -305,8 +305,13 @@ ba-swipecontainer {
     .showdrag {opacity: 1!important}
   }
 }
+// Style
 
-
+ba-swipecontainer {
+  swipe>*:nth-child(1){
+    background: white;
+  }
+}
 
 $clickitemheigth : 44px;
 

@@ -20,10 +20,10 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Menu", {
                 title_model : {
                     value: 'Item 3'
                 },
-                listcollection : new BetaJS.Collections.Collection([
+                listcollection : new BetaJS.Collections.Collection({objects:[
                     {value : "Subitem 1"},
                     {value : "Subitem 2"}
-                ])
+                ]})
             },
             {value : 'Item 4'}
         ]

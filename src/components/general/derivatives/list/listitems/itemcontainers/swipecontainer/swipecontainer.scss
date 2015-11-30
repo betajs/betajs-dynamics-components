@@ -72,4 +72,10 @@ ba-swipecontainer {
     .showdrag {opacity: 1!important}
   }
 }
+// Style
 
+ba-swipecontainer {
+  swipe>*:nth-child(1){
+    background: white;
+  }
+}

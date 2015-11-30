@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics - v0.0.13 - 2015-11-25
+betajs-dynamics - v0.0.15 - 2015-11-30
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -16,7 +16,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "d71ebf84-e555-4e9b-b18a-11d74fdcefe2",
-		version: '168.1448505347228'
+		version: '173.1448881413028'
 	};
 });
 
@@ -132,13 +132,15 @@ Scoped.define("module:Data.Mesh", [
 				watcher.properties = n.properties;
 				var exp = n.head + (n.head && n.tail ? "." : "") + n.tail;
 				watcher.propertiesPrefix = exp;
-				watcher.properties.on("change:" + watcher.propertiesPrefix, function (value) {
+				watcher.properties.on("change:" + watcher.propertiesPrefix, function (value, oldValue, force) {
 					Objs.iter(watcher.children, this.__unbindWatcher, this);
 					Objs.iter(watcher.children, this.__bindWatcher, this);
-					watcher.value = value;
-					Objs.iter(watcher.cbs, function (cb) {
-						cb.callback.apply(cb.context);
-					}, this);
+					if (watcher.value != value || force) {
+						watcher.value = value;
+						Objs.iter(watcher.cbs, function (cb) {
+							cb.callback.apply(cb.context);
+						}, this);
+					}
 				}, this);
 				var value = watcher.properties.get(exp);
 				if (value != watcher.value) {
@@ -748,8 +750,9 @@ Scoped.define("module:Handlers.Attr", [
 	    "jquery:",
 	    "base:Types",
 	    "base:Strings",
-	    "module:Registries"
-	], function (Class, Parser, $, Types, Strings, Registries, scoped) {
+	    "module:Registries",
+	    "browser:Dom"
+	], function (Class, Parser, $, Types, Strings, Registries, Dom, scoped) {
 	var Cls;
 	Cls = Class.extend({scoped: scoped}, function (inherited) {
 		return {
@@ -832,7 +835,7 @@ Scoped.define("module:Handlers.Attr", [
 					var old = this._attrValue;
 					this._attrValue = value;
 					
-					this._attribute.value = value;
+					this._attribute.value = Dom.entitiesToUnicode(value);
 					if (this._partial)
 						this._partial.change(value, old);
 					if (this._attrName === "value" && this._element.value !== value)
@@ -882,7 +885,9 @@ Scoped.define("module:Handlers.Attr", [
 	return Cls;
 });
 
-Scoped.define("module:Handlers.HandlerMixin", ["base:Objs", "base:Strings", "jquery:", "browser:Loader", "module:Handlers.Node", "module:Registries"], function (Objs, Strings, $, Loader, Node, Registries) {
+Scoped.define("module:Handlers.HandlerMixin", [
+    "base:Objs", "base:Strings", "base:Functions", "jquery:", "browser:Loader", "module:Handlers.Node", "module:Registries", "module:Handlers.HandlerNameRegistry"
+], function (Objs, Strings, Functions, $, Loader, Node, Registries, HandlerNameRegistry) {
 	return {		
 		
 		_notifications: {
@@ -891,9 +896,11 @@ Scoped.define("module:Handlers.HandlerMixin", ["base:Objs", "base:Strings", "jqu
 		},
 		
 		__handlerConstruct: function () {
-			
+			this._mesh_extend = {
+				string: Functions.as_method(this.string, this)	
+			};
 		},
-		
+	
 		__handlerDestruct: function () {
 			Objs.iter(this.__rootNodes, function (node) {
 				node.destroy();
@@ -903,8 +910,18 @@ Scoped.define("module:Handlers.HandlerMixin", ["base:Objs", "base:Strings", "jqu
 		template: null,
 		templateUrl: null,
 		
+		string: function (key) {
+			if (this.cls.string)
+				return this.cls.string(key);
+			if (this.parent())
+				return this.parent().string(key);
+			return key;
+		},
+		
 		_handlerInitialize: function (options) {
 			options = options || {};
+			if (options.name_registry)
+				this.__nameRegistry = this.auto_destroy(new HandlerNameRegistry());
 			this._parentHandler = options.parentHandler || null;
 			this._argumentAttrs = {};
 			var template = options.template || this.template;
@@ -948,6 +965,28 @@ Scoped.define("module:Handlers.HandlerMixin", ["base:Objs", "base:Strings", "jqu
 				this.__element = compiled;
 				this.__activeElement = this.__element.parent();
 			}
+		},
+		
+		nameRegistry: function () {
+			return this.__nameRegistry || (this.parent() ? this.parent().nameRegistry() : null);
+		},
+		
+		byName: function (name) {
+			return this.nameRegistry().get(name);
+		},
+		
+		__assocs: {},
+		
+		addAssoc: function (name, registeredName) {
+			this.__assocs[name] = registeredName;
+		},
+		
+		removeAssoc: function (name) {
+			delete this.__assocs[name];
+		},
+		
+		assoc: function (name) {
+			return this.byName(this.__assocs[name] || name);
 		},
 		
 		setArgumentAttr: function (key, value) {
@@ -1002,7 +1041,7 @@ Scoped.define("module:Handlers.Handler", [
 			
 			properties: function () {
 				return this._properties;
-			}	
+			}
 			
 		};
    	}], {
@@ -1081,6 +1120,50 @@ Scoped.define("module:Handlers.Partial", [
 		
 	});
 });
+
+
+
+Scoped.define("module:Handlers.HandlerNameRegistry", [
+    "base:Class", "base:Objs"                                    
+], function (Class, Objs, scoped) {
+	return Class.extend({scoped: scoped}, function (inherited) {
+		return {
+
+			__handlers: {},
+			
+			destroy: function () {
+				Objs.iter(this.__handlers, function (value, name) {
+					this.unregister(name);
+				}, this);
+				inherited.destroy.call(this);
+			},
+			
+			register: function (handler, name) {
+				this.unregister(name);
+				this.__handlers[name] = handler;
+				handler.on("destroy", function () {
+					this.unregister(name);
+				}, this);
+			},
+			
+			unregister: function (name) {
+				if (name in this.__handlers) {
+					var handler = this.__handlers[name];
+					delete this.__handlers[name];
+					if (!handler.destroyed())
+						handler.off(null, null, this);
+				}
+			},
+			
+			get: function (name) {
+				return this.__handlers[name];
+			}
+		
+		};
+			
+	});
+});
+
 Scoped.define("module:Handlers.Node", [
 	    "base:Class",
 	    "base:Events.EventsMixin",
@@ -1125,7 +1208,7 @@ Scoped.define("module:Handlers.Node", [
 				this._expandChildren = true;
 				this._touchedInner = false;
 				
-				this._mesh = new Mesh([window, this.properties(), this._locals, this._handler.functions], this._handler, {
+				this._mesh = new Mesh([window, this.properties(), this._locals, this._handler.functions, this._handler._mesh_extend], this._handler, {
 					read: this.properties(),
 					write: this.properties(),
 					watch: this.properties()
@@ -1290,7 +1373,7 @@ Scoped.define("module:Handlers.Node", [
 				if (force || value != this._dyn.value) {
 					this._dyn.value = value;
 					if ("textContent" in this._element)
-						this._element.textContent = value;
+						this._element.textContent = Dom.entitiesToUnicode(value);
 					else
 						this._$element.replaceWith(value);
 				}
@@ -1368,6 +1451,28 @@ Scoped.define("module:Registries", ["base:Classes.ClassRegistry", "base:Strings"
 	
 	};
 });
+
+Scoped.define("module:Partials.AssocPartial", ["module:Handlers.Partial"], function (Partial, scoped) {
+ 	var Cls = Partial.extend({scoped: scoped}, function (inherited) {
+ 		return {
+			
+ 			constructor: function (node, args, value, postfix) {
+ 				inherited.constructor.apply(this, arguments);
+ 				this.__postfix = postfix;
+ 				this._node._handler.addAssoc(postfix, value); 
+ 			},
+ 			
+ 			destroy: function () {
+ 				this._node._handler.removeAssoc(this.__postfix);
+ 				inherited.destroy.call(this);
+ 			}
+ 			
+ 		};
+ 	});
+ 	Cls.register("ba-assoc");
+	return Cls;
+});
+
 Scoped.define("module:Partials.AttrsPartial", ["module:Handlers.Partial"], function (Partial, scoped) {
   /**
    * @name ba-attrs
@@ -1499,7 +1604,7 @@ Scoped.define("module:Partials.ClickPartial", ["module:Handlers.Partial"], funct
  				inherited.constructor.apply(this, arguments);
  				var self = this;
  				this._node._$element.on("click", function (e) {
-          e.stopPropagation();
+ 					e.stopPropagation();
  					self._execute();
  				});
  			}
@@ -1507,6 +1612,27 @@ Scoped.define("module:Partials.ClickPartial", ["module:Handlers.Partial"], funct
  		};
  	});
  	Cls.register("ba-click");
+	return Cls;
+});
+
+Scoped.define("module:Partials.EventPartial", ["module:Handlers.Partial"], function (Partial, scoped) {
+  	var Cls = Partial.extend({scoped: scoped}, function (inherited) {
+ 		return {
+			
+ 			bindTagHandler: function (handler) {
+ 				handler.on(this.__postfix, function (arg1, arg2, arg3, arg4) {
+ 					this._node._handler.call(this._value, arg1, arg2, arg3, arg4);
+ 				}, this);
+ 			},
+
+ 			constructor: function (node, args, value, postfix) {
+ 				inherited.constructor.apply(this, arguments);
+ 				this.__postfix = postfix;
+ 			}
+ 		
+ 		};
+ 	});
+ 	Cls.register("ba-event");
 	return Cls;
 });
 
@@ -1622,6 +1748,26 @@ Scoped.define("module:Partials.EventPartial", ["module:Handlers.Partial", "base:
  		};
  	});
  	Cls.register("ba-on");
+	return Cls;
+});
+
+
+Scoped.define("module:Partials.RegisterPartial", ["module:Handlers.Partial"], function (Partial, scoped) {
+ 	var Cls = Partial.extend({scoped: scoped}, function (inherited) {
+ 		return {
+			
+ 			bindTagHandler: function (handler) {
+ 				handler.nameRegistry().register(handler, this._value);
+ 			},
+ 			
+ 			unbindTagHandler: function (handler) {
+ 				if (handler)
+ 					handler.nameRegistry().unregister(this._value);
+ 			}
+ 			
+ 		};
+ 	});
+ 	Cls.register("ba-register");
 	return Cls;
 });
 
@@ -2107,18 +2253,35 @@ Scoped.define("module:Dynamic", [
 			return Strings.last_after(this.classname, ".").toLowerCase();
 		},
 		
+		registeredName: function () {
+			return this.__registeredName || ("ba-" + this.canonicName());
+		},
+		
 		register: function (key, registry) {
 			registry = registry || Registries.handler;
-			if (!key)
-				key = "ba-" + this.canonicName();
-			registry.register(key, this);
+			this.__registeredName = key || this.registeredName();
+			registry.register(this.__registeredName, this);
 			return this;
 		},
 		
 		activate: function (options) {
-			var dyn = new this(options || {element: document.body});
+			var dyn = new this(options || {element: document.body, name_registry: true});
 			dyn.activate();
 			return dyn;
+		},
+		
+		attachStringTable: function (stringTable) {
+			this.__stringTable = stringTable;
+			return this;
+		},
+		
+		addStrings: function (strings) {
+			this.__stringTable.register(strings, this.registeredName());
+			return this;
+		},
+		
+		string: function (key) {
+			return this.__stringTable.get(key, this.registeredName());
 		}
 	
 	});

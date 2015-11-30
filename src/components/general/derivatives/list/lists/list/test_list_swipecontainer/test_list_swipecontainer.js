@@ -3,22 +3,18 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_list_swipecontai
 
     template: BetaJS.Dynamics.Components.Templates.test_list_swipecontainer,
 
-    initial: {
-
-        attrs: {
-            testmodel : {
-                listitem : 'swipecontainer',
-                type : 'clickitem',
-                listcollection : new BetaJS.Collections.Collection({objects: [
-                    {title: "Item 1"},
-                    {title: "Item 2"},
-                    {title: "Item 3"},
-                    {title: "Item 4"},
-                    {title: "Item 5"}
-                ]})
-            }
+    attrs: {
+        testmodel : {
+            listitem : 'swipecontainer',
+            type : 'clickitem',
+            listcollection : new BetaJS.Collections.Collection({objects: [
+                {value: "Item 1"},
+                {value: "Item 2"},
+                {value: "Item 3"},
+                {value: "Item 4"},
+                {value: "Item 5"}
+            ]})
         }
-
     }
 
 }).register();

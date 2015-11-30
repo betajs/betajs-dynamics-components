@@ -4,10 +4,12 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Swipecontainer", {
 	template: BetaJS.Dynamics.Components.Templates.swipecontainer,
 
 	attrs : {
-		type : "clickitem",
-		title : "Swipeitem - Title",
-		lefticon : 'icon-ok',
-		righticon : 'icon-time',
+		model : {
+			type : "clickitem",
+			value : "Swipeitem - Title",
+			lefticon : 'icon-ok',
+			righticon : 'icon-time'
+		},
 		actions : {
 			"other": {
 				less: -1/4,

@@ -15,11 +15,12 @@
     <h3>Test Dynamics</h3>
     <div id="dynamicsworking">{{test_dynamics}}</div>
 
-    <h3>Test with inject data</h3>
-    <ba-list ba-attrs="{{view}}" ba-listcollection="{{listcollection}}"></ba-list>
-
-    <h3>Test with ba-sharescope</h3>
-    <ba-list ba-sharescope></ba-list>
+    <h3>Test selectableitem</h3>
+    <ba-list
+            id="test_selectableitem"
+            ba-data:id="test_selectableitem"
+            ba-attrs="{{view}}"
+            ba-listcollection="{{listcollection}}"></ba-list>
 
 </test>
 
@@ -50,10 +51,13 @@
         QUnit.equal(dynamic.get("test_dynamics"), $('#dynamicsworking').html().trim());
 
         //1. Test Selectableitem
-//        QUnit.equal(dynamic.get('event_notifier'), $('#event_notifier').html().trim());
-//        $('#test_event').find('clickitem').click();
-//        QUnit.equal(dynamic.get('event_notifier_after'), $('#event_notifier').html().trim());
-
+        var selected_item = dynamic.scope('>[id="test_selectableitem"]');
+        var list = $('#test_selectableitem');
+        QUnit.equal(selected_item.getProp('selected_item.value'), list.find('.selected').html().trim());
+        QUnit.equal(dynamic.get('listcollection').getByIndex(0).get('value'), list.find('.selected').html().trim());
+        list.find('selectableitem')[1].click();
+        QUnit.equal(selected_item.getProp('selected_item.value'), list.find('.selected').html().trim());
+        QUnit.equal(dynamic.get('listcollection').getByIndex(1).get('value'), list.find('.selected').html().trim());
 
     }
 

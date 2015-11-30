@@ -10,13 +10,16 @@
 <body>
 
 <test>
-    <h1>Tests for Selectableitem</h1>
+    <h1>Tests for List</h1>
 
     <h3>Test Dynamics</h3>
     <div id="dynamicsworking">{{test_dynamics}}</div>
 
     <h3>Basic Test</h3>
-    <ba-list></ba-list>
+    <ba-list
+            id="test_list"
+            ba-data:id="test_list"
+    ></ba-list>
 
 
 </test>
@@ -38,11 +41,12 @@
         //0. Dynamics working?
         QUnit.equal(dynamic.get("test_dynamics"), $('#dynamicsworking').html().trim());
 
-        //1. Test List
-//        QUnit.equal(dynamic.get('event_notifier'), $('#event_notifier').html().trim());
-//        $('#test_event').find('clickitem').click();
-//        QUnit.equal(dynamic.get('event_notifier_after'), $('#event_notifier').html().trim());
-
+        //1. Test List Length & Content
+        var listdynamic = dynamic.scope('>[id="test_list"]');
+        var domlist = $('#test_list').find('list');
+        var length = listdynamic.get('listcollection').count();
+        QUnit.equal(length, domlist.children().length);
+        QUnit.equal(listdynamic.get('listcollection').getByIndex(length-1).get('value'), domlist.find(':last').html().trim());
 
     }
 

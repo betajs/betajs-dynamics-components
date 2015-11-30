@@ -7,12 +7,12 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
         model : {
             title_model : {
                 value : 'Titledlist - Title'
-            },
-            listcollection : new BetaJS.Collections.Collection([
-                {value: "Titledlist - Item 1"},
-                {value: "Titledlist - Item 2"},
-                {value: "Titledlist - Item 3"}
-            ])
+            }
+            //listcollection : new BetaJS.Collections.Collection({objects:[
+            //    {value: "Titledlist - Item 1"},
+            //    {value: "Titledlist - Item 2"},
+            //    {value: "Titledlist - Item 3"}
+            //]})
         },
         collapsed : false,
         collapsible : true,
@@ -20,13 +20,13 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
         titleitem : 'title'
     },
 
-    //collections : {
-    //    listcollection : [
-    //        {value: "Titledlist - Item 1"},
-    //        {value: "Titledlist - Item 2"},
-    //        {value: "Titledlist - Item 3"}
-    //    ]
-    //},
+    collections : {
+        listcollection : [
+            {value: "Titledlist - Item 1"},
+            {value: "Titledlist - Item 2"},
+            {value: "Titledlist - Item 3"}
+        ]
+    },
 
     functions : {
 
@@ -39,7 +39,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Titledlist", {
 
         additem : function (item) {
 
-            item = item ? item : {title : "New Item"};
+            item = item ? item : {value : "Titledlist - New Item"};
             var index = this.get('listcollection').add(item);
 
             return this.get('listcollection').getByIndex(index).cid();
