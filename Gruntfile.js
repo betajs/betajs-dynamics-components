@@ -95,7 +95,7 @@ module.exports = function(grunt) {
 						"./vendors/jquery-hashchange.js" : "http://cdn.rawgit.com/cowboy/jquery-hashchange/master/jquery.ba-hashchange.js",
 						"./vendors/scoped.js" : "https://raw.githubusercontent.com/betajs/betajs-scoped/master/dist/scoped.js",
 						"./vendors/beta.js" : "https://raw.githubusercontent.com/betajs/betajs/master/dist/beta.js",
-						//"./vendors/betajs-ui.js" : "https://raw.githubusercontent.com/betajs/betajs-ui/master/dist/beta-ui.js",
+						"./vendors/betajs-ui.js" : "https://raw.githubusercontent.com/betajs/betajs-ui/master/dist/betajs-ui.js",
 						"./vendors/beta-browser-noscoped.js" : "https://raw.githubusercontent.com/betajs/betajs-browser/master/dist/beta-browser-noscoped.js",
 						"./vendors/betajs-dynamics-noscoped.js" : "https://raw.githubusercontent.com/betajs/betajs-dynamics/master/dist/betajs-dynamics-noscoped.js",
 						"./vendors/betajs-simulator.js" : "https://raw.githubusercontent.com/betajs/betajs-simulator/master/dist/betajs-simulator.js",

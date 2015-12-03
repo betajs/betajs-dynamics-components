@@ -1,11 +1,7 @@
+
 <searchbox ba-if="{{showsearch}}">
     <icon class="icon-search"></icon>
-    <input placeholder="{{placeholder}}" value="{{=searchvalue}}">
+    <input placeholder="{{view.placeholder}}" value="{{=searchvalue}}">
 </searchbox>
 
-<ba-list
-        ba-sharescope
-        ba-attrs="{{model}}"
-        ba-listcollection="{{listcollection}}">
-
-</ba-list>
+<ba-list ba-sharescope></ba-list>

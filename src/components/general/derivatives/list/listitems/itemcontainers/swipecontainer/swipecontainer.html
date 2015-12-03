@@ -1,15 +1,17 @@
 
 <behind>
-    <icon class='{{model.lefticon}}'></icon>
+    <icon class='{{view.lefticon||lefticon}}'></icon>
     <div></div>
-    <icon class='{{model.righticon}}'></icon>
+    <icon class='{{view.righticon||righticon}}'></icon>
 </behind>
 
 <swipe>
+<!--<swipe  ba-gesture:swipe="{{swipe_gesture}}"-->
+        <!--ba-interaction:swipe="{{swipe_interaction}}">-->
 
-    <ba-{{model.type}} ba-sharescope>
-        {{model.value}}
-    </ba-{{model.type}}>
+    <ba-{{view.inner||inner}} ba-sharescope>
+        {{model.value||value}}
+    </ba-{{view.inner||inner}}>
 
     <swipeleft>
         <div></div>

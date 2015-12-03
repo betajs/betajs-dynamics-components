@@ -4,17 +4,19 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Searchlist", {
     template: BetaJS.Dynamics.Components.Templates.searchlist,
 
     attrs: {
-        placeholder : "Search for",
         searchvalue : "",
-        listitem : "clickitem",
-        showsearch : true
+        showsearch : true,
+        view : {
+            placeholder : "Search for",
+            listitem : "clickitem"
+        }
     },
 
     collections : {
         listcollection : [
-            {title: "Item 1"},
-            {title: "Item 2"},
-            {title: "Item 3"}
+            {value: "Searchlist - Item 1"},
+            {value: "Searchlist - Item 2"},
+            {value: "Searchlist - Item 3"}
         ]
     }
 

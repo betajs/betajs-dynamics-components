@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-11-30
+betajs-dynamics-components - v0.0.4 - 2015-12-03
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -560,7 +560,7 @@ Public.exports();
 }).call(this);
 
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-11-30
+betajs-dynamics-components - v0.0.4 - 2015-12-03
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -578,7 +578,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '68.1448903995371'
+		version: '69.1449181614310'
 	};
 });
 
@@ -592,13 +592,13 @@ BetaJS.Dynamics.Components.Templates.overlaycontainertest = ' <button ba-click="
 
 BetaJS.Dynamics.Components.Templates.scrollpicker = '<element ba-repeat-element="{{element_value :: value_array}}" data-id="{{element_value}}">         {{element_value}} </element>';
 
-BetaJS.Dynamics.Components.Templates.swipecontainer = ' <behind>     <icon class=\'{{model.lefticon}}\'></icon>     <div></div>     <icon class=\'{{model.righticon}}\'></icon> </behind>  <swipe>      <ba-{{model.type}} ba-sharescope>         {{model.value}}     </ba-{{model.type}}>      <swipeleft>         <div></div>         <icon class=\'{{model.lefticon}}\'></icon>     </swipeleft>      <swiperight>         <icon class=\'{{model.righticon}}\'></icon>         <div></div>     </swiperight>  </swipe> ';
+BetaJS.Dynamics.Components.Templates.swipecontainer = ' <behind>     <icon class=\'{{view.lefticon||lefticon}}\'></icon>     <div></div>     <icon class=\'{{view.righticon||righticon}}\'></icon> </behind>  <swipe> <!--<swipe  ba-gesture:swipe="{{swipe_gesture}}"-->         <!--ba-interaction:swipe="{{swipe_interaction}}">-->      <ba-{{view.inner||inner}} ba-sharescope>         {{model.value||value}}     </ba-{{view.inner||inner}}>      <swipeleft>         <div></div>         <icon class=\'{{model.lefticon}}\'></icon>     </swipeleft>      <swiperight>         <icon class=\'{{model.righticon}}\'></icon>         <div></div>     </swiperight>  </swipe> ';
 
 BetaJS.Dynamics.Components.Templates.clickitem = ' <button         class="{{model.class}}"         ba-click="click()">     {{model.value}} </button>';
 
 BetaJS.Dynamics.Components.Templates.selectableitem = ' <selectableitem         ba-class="{{{selected : selected.cid == this.cid()}}}"         ba-click="select()">     {{model.value}} </selectableitem>';
 
-BetaJS.Dynamics.Components.Templates.list = ' <list ba-repeat="{{collectionitem :: (model.listcollection||listcollection)}}">      <ba-{{collectionitem.listitem||listitem}}         ba-data:id="{{collectionitem.cid()}}"         ba-functions="{{collectionitem.callbacks}}"         ba-type="{{type}}"         ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{collectionitem.listitem||listitem}}>  </list> ';
+BetaJS.Dynamics.Components.Templates.list = ' <list ba-repeat="{{collectionitem :: (model.listcollection||listcollection)}}">      <ba-{{view.listitem||collectionitem.listitem||listitem}}         ba-data:id="{{collectionitem.cid()}}"         ba-functions="{{collectionitem.callbacks}}"         ba-view="{{collectionitem.view||view.listinner}}"         ba-model="{{collectionitem}}">         {{collectionitem.title}}     </ba-{{view.listitem||collectionitem.listitem||listitem}}>  </list> ';
 
 BetaJS.Dynamics.Components.Templates.test_list_clickitem = ' <ba-list ba-attrs="{{testmodel}}"> </ba-list>';
 
@@ -608,23 +608,17 @@ BetaJS.Dynamics.Components.Templates.test_list_listoflist = ' <ba-list         b
 
 BetaJS.Dynamics.Components.Templates.test_list_pushfunc = '<button ba-click="test(input_value)">Test func</button> <input ba-return="test(input_value)" placeholder="Push item to list" value="{{=input_value}}"> <ba-titledlist ba-attrs="{{testmodel}}"> </ba-titledlist>';
 
-BetaJS.Dynamics.Components.Templates.test_list_swipecontainer = ' <ba-list ba-attrs="{{testmodel}}">  </ba-list>';
+BetaJS.Dynamics.Components.Templates.test_list_swipecontainer = ' <ba-list         ba-model="{{model}}"         ba-view="{{view_model}}"> </ba-list>';
 
-BetaJS.Dynamics.Components.Templates.searchlist = '<searchbox ba-if="{{showsearch}}">     <icon class="icon-search"></icon>     <input placeholder="{{placeholder}}" value="{{=searchvalue}}"> </searchbox>  <ba-list         ba-sharescope         ba-attrs="{{model}}"         ba-listcollection="{{listcollection}}">  </ba-list> ';
+BetaJS.Dynamics.Components.Templates.searchlist = ' <searchbox ba-if="{{showsearch}}">     <icon class="icon-search"></icon>     <input placeholder="{{view.placeholder}}" value="{{=searchvalue}}"> </searchbox>  <ba-list ba-sharescope></ba-list> ';
 
-BetaJS.Dynamics.Components.Templates.test_searchlist = ' <ba-searchlist         ba-attrs="{{model}}">  </ba-searchlist>';
+BetaJS.Dynamics.Components.Templates.test_searchlist = ' <ba-searchlist         ba-view="{{view}}">  </ba-searchlist>';
 
 BetaJS.Dynamics.Components.Templates.test_titledlist = ' <ba-titledlist         ba-model="{{model}}"         ba-attrs="{{view}}"         ba-functions="{{callbacks}}"         ba-listcollection="{{listcollection}}">  </ba-titledlist>';
 
-BetaJS.Dynamics.Components.Templates.test_titledlist_childlist = ' <ba-list         ba-callbacks="{{callbacks}}"         ba-listcollection="{{outer_collection}}"         ba-listitem="titledlist">  </ba-list>  ';
+BetaJS.Dynamics.Components.Templates.test_titledlist_swipe = ' <ba-titledlist         ba-listcollection="{{listcollection}}"         ba-attrs="{{push_attrs}}">  </ba-titledlist>';
 
-BetaJS.Dynamics.Components.Templates.test_titledlist_pushfunc = ' <button ba-click="test(input_value)">Test func</button> <input ba-return="test(input_value)" placeholder="Push item to list" value="{{=input_value}}"> <ba-titledlist ba-functions="{{callbacks}}" ba-model="{{model}}"> </ba-titledlist> ';
-
-BetaJS.Dynamics.Components.Templates.test_titledlist_pushintochild = ' <ba-titledlist         ba-callbacks="{{callbacks}}"         ba-attrs="{{model}}">  </ba-titledlist>';
-
-BetaJS.Dynamics.Components.Templates.test_titledlist_swipe = ' <ba-titledlist         ba-listcollection="{{listcollection}}"         ba-attrs="{{model}}">  </ba-titledlist>';
-
-BetaJS.Dynamics.Components.Templates.titledlist = '<ba-{{model.titleitem}}     ba-click="click_title()"     ba-functions="{{model.title_callbacks}}"     ba-model="{{model.title_model}}">{{model.title_model.value}}</ba-{{model.titleitem}}>  <ba-list         ba-sharescope         ba-show="{{!collapsed}}"         ba-functions="{{callbacks}}">  </ba-list> ';
+BetaJS.Dynamics.Components.Templates.titledlist = ' <ba-{{view.titleitem}}     ba-click="click_title()"     ba-functions="{{model.title_callbacks}}"     ba-model="{{model.title_model}}">{{model.title_model.value}}</ba-{{view.titleitem}}>  <ba-list         ba-sharescope         ba-show="{{!collapsed}}">  </ba-list> ';
 
 BetaJS.Dynamics.Components.Templates.addtitle = ' <addtitle>     <title ba-click="clicktitle()">{{model.value}}</title>     <button ba-click="addbutton()">         <span class="icon-plus"></span>     </button> </addtitle>';
 
@@ -797,12 +791,12 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Swipecontainer", {
 
 	attrs : {
 		model : {
-			type : "clickitem",
-			value : "Swipeitem - Title",
-			lefticon : 'icon-ok',
-			righticon : 'icon-time'
+			value : "Swipeitem - Title"
 		},
-		actions : {
+		lefticon : 'icon-ok',
+		righticon : 'icon-time',
+		inner : "clickitem",
+		swipe_actions : {
 			"other": {
 				less: -1/4,
 				execute: function () {
@@ -825,10 +819,57 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Swipecontainer", {
 				}
 			}
 		}
+		//swipe_gesture : {
+		//	mouse_up_activate: false,
+		//	wait_time: 250,
+		//	wait_activate: false,
+		//	disable_x: -1,
+		//	disable_y: 10,
+		//	enable_x: 10,
+		//	enable_y: -1,
+		//	interaction: "swipe"
+		//},
+		//swipe_interaction : {
+		//	type : "swipe",
+		//	enabled : true,
+		//	draggable_y: false,
+		//	start_event: null,
+		//	events : {
+		//		"move" : function (doodad, event) {
+		//			var element = event.element;
+		//			var parent = element.parent();
+		//			var x = parseInt(element.css("left"), 10);
+		//			var w = parseInt(element.css("width"), 10);
+		//			var a = {};
+		//			var actions = this.get('swipe_actions');
+		//			for (var cls in actions) {
+		//				a = actions[cls];
+		//				if ((!a.less || x <= w * a.less) && (!a.greater || x >= w * a.greater))
+		//					parent.addClass(cls);
+		//				else
+		//					parent.removeClass(cls);
+		//			}
+		//		},
+		//		"release" : function (doodad, event) {
+		//			var element = event.element;
+		//			var x = parseInt(element.css("left"), 10);
+		//			var w = parseInt(element.css("width"), 10);
+		//			var actions = this.get('swipe_actions');
+		//			for (var cls in actions) {
+		//				a = actions[cls];
+		//				if ((!a.less || x <= w * a.less) && (!a.greater || x >= w * a.greater)) {
+		//					event.source.abort();
+		//					if (a.execute)
+		//						a.execute.call(this, element);
+		//				}
+		//			}
+		//		}
+		//	}
+		//}
 	},
 
 	_afterActivate : function (element) {
-		var actions = this.get('actions');
+		var actions = this.get('swipe_actions');
 
 		var swipe_element = element.find("swipe");
 		var drag = new BetaJS.UI.Interactions.Drag(swipe_element, {
@@ -1079,9 +1120,7 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_list_swipecontai
     template: BetaJS.Dynamics.Components.Templates.test_list_swipecontainer,
 
     attrs: {
-        testmodel : {
-            listitem : 'swipecontainer',
-            type : 'clickitem',
+        model : {
             listcollection : new BetaJS.Collections.Collection({objects: [
                 {value: "Item 1"},
                 {value: "Item 2"},
@@ -1089,6 +1128,10 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_list_swipecontai
                 {value: "Item 4"},
                 {value: "Item 5"}
             ]})
+        },
+        view_model : {
+            listitem : 'swipecontainer',
+            inner : 'selectableitem'
         }
     }
 
@@ -1100,17 +1143,19 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Searchlist", {
     template: BetaJS.Dynamics.Components.Templates.searchlist,
 
     attrs: {
-        placeholder : "Search for",
         searchvalue : "",
-        listitem : "clickitem",
-        showsearch : true
+        showsearch : true,
+        view : {
+            placeholder : "Search for",
+            listitem : "clickitem"
+        }
     },
 
     collections : {
         listcollection : [
-            {title: "Item 1"},
-            {title: "Item 2"},
-            {title: "Item 3"}
+            {value: "Searchlist - Item 1"},
+            {value: "Searchlist - Item 2"},
+            {value: "Searchlist - Item 3"}
         ]
     }
 
@@ -1121,21 +1166,22 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_searchlist", {
 
     template : BetaJS.Dynamics.Components.Templates.test_searchlist,
 
-    initial : {
-
-        attrs : {
-            model : {
-                placeholder : "Test Searchlist",
-                listitem : 'swipecontainer',
-                type : 'selectableitem',
-                listcollection : new BetaJS.Collections.Collection({objects: [
-                    {title: "Test searchlist Item 1"},
-                    {title: "Test searchlist Item 2"},
-                    {title: "Test searchlist Item 3"}
-                ]})
+    attrs : {
+        view : {
+            placeholder : "Test Searchlist",
+            listitem : 'swipecontainer',
+            listinner : {
+                inner : 'selectableitem'
             }
         }
+    },
 
+    collections : {
+        listcollection : [
+            {title: "Test searchlist Item 1"},
+            {title: "Test searchlist Item 2"},
+            {title: "Test searchlist Item 3"}
+        ]
     }
 
 }).register();
@@ -1178,182 +1224,17 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist", {
 }).register();
 
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist_childlist", {
-
-    template: BetaJS.Dynamics.Components.Templates.test_titledlist_childlist,
-
-    attrs : {
-        callbacks: {
-            additem: function () {
-                console.log('This is a function pushed into the titledlist from the tasklist : Add Task from here ? ');
-            }
-        }
-    },
-
-    collections : {
-
-        outer_collection : [
-            {
-                titleitem : 'addtitle',
-                titleitem_model : {
-                    title : 'Today',
-                    titlefunc : 'togglelist',
-                    addfunc : 'additem',
-                    addbuttonscope : '<'
-                },
-                listitem : "swipecontainer",
-                type : 'clickitem',
-                listcollection : new BetaJS.Collections.Collection({objects: [
-                    {title : "Titledlist - Childlist - Task 1"},
-                    {title : "Titledlist - Childlist - Task 2"}
-                ]})
-            }, {
-                titleitem : 'addtitle',
-                titleitem_model : {
-                    title : 'Today',
-                    titlefunc : 'togglelist',
-                    addfunc : 'additem',
-                    addbuttonscope : '<'
-                },
-                listitem : "swipecontainer",
-                type : 'selectableitem',
-                listcollection : new BetaJS.Collections.Collection({objects: [
-                    {title : "Titledlist - Childlist - Task 3"},
-                    {title : "Titledlist - Childlist - Task 4"}
-                ]})
-            }
-        ]
-    }
-
-}).register();
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist_pushfunc", {
-
-    template: BetaJS.Dynamics.Components.Templates.test_titledlist_pushfunc,
-
-    initial: {
-
-        attrs: {
-            model : {
-                titleitem : 'addtitle',
-                titleitem_model : {
-                    title : 'Today',
-                    titlefunc : 'togglelist',
-                    addfunc : 'title_click',
-                    addbuttonscope : '<'
-                },
-                callbacks : {
-
-                    title_click : function (item) {
-
-                        console.log('This is a callback function');
-
-                        item = item ? item : {title : "New Item"};
-                        var index = this.get('listcollection').add(item);
-
-                        var item_cid = this.get('listcollection').getByIndex(index).cid();
-
-                        console.log(item_cid);
-                        $('#' + item_cid).find('clickitem').css('background', 'red');
-
-                        return item_cid;
-
-                    }
-
-                },
-                listcollection : new BetaJS.Collections.Collection({objects: [
-                    {title: "Item 1"},
-                    {title: "Item 2"},
-                    {title: "Item 3"},
-                    {title: "Item 4"},
-                    {title: "Item 5"}
-                ]})
-            }
-        },
-
-        functions : {
-
-            title_click : function () {
-                console.log('haha');
-            }
-
-        },
-
-        create : function () {
-            window.iterateModel(this);
-            console.log('test_titled_list_pushfunc - callback : ');
-            console.log(console.log(this.get('callbacks')));
-            if (this.get('callbacks') && this.get('callbacks').title_click) {
-                console.log(console.log(this.get('callbacks').title_click.toString()));
-
-            }
-        }
-
-    }
-
-}).register();
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist_pushintochild", {
-
-    template: BetaJS.Dynamics.Components.Templates.test_titledlist_pushintochild,
-
-    attrs: {
-        callbacks : {
-
-            title_click : function (item) {
-
-                console.log('This is another callback function');
-
-                item = item ? item : {title : "New Item"};
-                var index = this.get('listcollection').add(item);
-
-                var item_cid = this.get('listcollection').getByIndex(index).cid();
-
-                console.log(item_cid);
-                $('#' + item_cid).find('clickitem').css('background', 'red');
-
-                return item_cid;
-
-            }
-
-        },
-        model : {
-            titleitem : 'addtitle',
-            titleitem_model : {
-                title : 'Today',
-                titlefunc : 'togglelist',
-                addfunc : 'title_click',
-                addbuttonscope : '<'
-            },
-            listitem : 'clickitem',
-            listcollection : new BetaJS.Collections.Collection({objects: [
-                {title: "Pushintochild - Item 1"},
-                {title: "Pushintochild - Item 2"},
-                {title: "Pushintochild - Item 3"},
-                {title: "Pushintochild - Item 4"}
-            ]})
-        }
-    }
-
-}).register();
-
-
 BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist_swipe", {
 
     template : BetaJS.Dynamics.Components.Templates.test_titledlist_swipe,
 
     attrs : {
-        model : {
-            titleitem : 'addtitle',
-            titleitem_model : {
-                title : 'Titledlist - Testtitle',
-                titlefunc : 'togglelist',
-                addfunc : 'additem'
+        push_attrs : {
+            title_model : {
+                value : 'Titledlist - Testtitle'
             },
             listitem: 'swipecontainer',
-            type: 'clickitem'
+            inner: 'selectableitem'
         }
     },
 
