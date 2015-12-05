@@ -96,7 +96,7 @@ module.exports = function(grunt) {
 						"./vendors/scoped.js" : "https://raw.githubusercontent.com/betajs/betajs-scoped/master/dist/scoped.js",
 						"./vendors/beta.js" : "https://raw.githubusercontent.com/betajs/betajs/master/dist/beta.js",
 						//"./vendors/betajs-ui.js" : "https://raw.githubusercontent.com/betajs/betajs-ui/master/dist/beta-ui.js",
-						"./vendors/beta-browser-noscoped.js" : "https://raw.githubusercontent.com/betajs/betajs-browser/master/dist/beta-browser-noscoped.js",
+						"./vendors/betajs-browser-noscoped.js" : "https://raw.githubusercontent.com/betajs/betajs-browser/master/dist/betajs-browser-noscoped.js",
 						"./vendors/betajs-dynamics-noscoped.js" : "https://raw.githubusercontent.com/betajs/betajs-dynamics/master/dist/betajs-dynamics-noscoped.js",
 						"./vendors/betajs-simulator.js" : "https://raw.githubusercontent.com/betajs/betajs-simulator/master/dist/betajs-simulator.js",
 						"./vendors/betajs-simulator.css" : "https://raw.githubusercontent.com/betajs/betajs-simulator/master/dist/betajs-simulator.css",
