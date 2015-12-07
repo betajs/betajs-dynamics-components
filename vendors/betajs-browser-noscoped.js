@@ -1,5 +1,9 @@
 /*!
+<<<<<<< HEAD:vendors/beta-browser-noscoped.js
 betajs-browser - v1.0.7 - 2015-12-02
+=======
+betajs-browser - v1.0.7 - 2015-12-05
+>>>>>>> c1e8fe733c9687ece63b42d5ff6eaa3906a4ce23:vendors/betajs-browser-noscoped.js
 Copyright (c) Oliver Friedmann
 MIT Software License.
 */
@@ -21,7 +25,11 @@ Scoped.define("base:$", ["jquery:"], function (jquery) {
 Scoped.define("module:", function () {
 	return {
 		guid: "02450b15-9bbf-4be2-b8f6-b483bc015d06",
+<<<<<<< HEAD:vendors/beta-browser-noscoped.js
 		version: '50.1449100162519'
+=======
+		version: '52.1449326659387'
+>>>>>>> c1e8fe733c9687ece63b42d5ff6eaa3906a4ce23:vendors/betajs-browser-noscoped.js
 	};
 });
 
@@ -509,7 +517,8 @@ Scoped.define("module:Dom", [
 			var temp = document.createElement("span");
 			temp.innerHTML = s;
 			s = temp.innerText;
-			temp.remove();
+			if (temp.remove)
+				temp.remove();
 			return s;
 		}
 				

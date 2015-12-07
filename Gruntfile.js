@@ -95,8 +95,13 @@ module.exports = function(grunt) {
 						"./vendors/jquery-hashchange.js" : "http://cdn.rawgit.com/cowboy/jquery-hashchange/master/jquery.ba-hashchange.js",
 						"./vendors/scoped.js" : "https://raw.githubusercontent.com/betajs/betajs-scoped/master/dist/scoped.js",
 						"./vendors/beta.js" : "https://raw.githubusercontent.com/betajs/betajs/master/dist/beta.js",
+<<<<<<< HEAD
 						"./vendors/betajs-ui.js" : "https://raw.githubusercontent.com/betajs/betajs-ui/master/dist/betajs-ui.js",
 						"./vendors/beta-browser-noscoped.js" : "https://raw.githubusercontent.com/betajs/betajs-browser/master/dist/beta-browser-noscoped.js",
+=======
+						//"./vendors/betajs-ui.js" : "https://raw.githubusercontent.com/betajs/betajs-ui/master/dist/beta-ui.js",
+						"./vendors/betajs-browser-noscoped.js" : "https://raw.githubusercontent.com/betajs/betajs-browser/master/dist/betajs-browser-noscoped.js",
+>>>>>>> c1e8fe733c9687ece63b42d5ff6eaa3906a4ce23
 						"./vendors/betajs-dynamics-noscoped.js" : "https://raw.githubusercontent.com/betajs/betajs-dynamics/master/dist/betajs-dynamics-noscoped.js",
 						"./vendors/betajs-simulator.js" : "https://raw.githubusercontent.com/betajs/betajs-simulator/master/dist/betajs-simulator.js",
 						"./vendors/betajs-simulator.css" : "https://raw.githubusercontent.com/betajs/betajs-simulator/master/dist/betajs-simulator.css",

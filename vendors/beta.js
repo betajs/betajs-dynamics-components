@@ -1,5 +1,9 @@
 /*!
+<<<<<<< HEAD
 betajs - v1.0.16 - 2015-12-02
+=======
+betajs - v1.0.16 - 2015-12-05
+>>>>>>> c1e8fe733c9687ece63b42d5ff6eaa3906a4ce23
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -557,7 +561,11 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
+<<<<<<< HEAD
 betajs - v1.0.16 - 2015-12-02
+=======
+betajs - v1.0.16 - 2015-12-05
+>>>>>>> c1e8fe733c9687ece63b42d5ff6eaa3906a4ce23
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -570,7 +578,11 @@ Scoped.binding("module", "global:BetaJS");
 Scoped.define("module:", function () {
 	return {
 		guid: "71366f7a-7da3-4e55-9a0b-ea0e4e2a9e79",
+<<<<<<< HEAD
 		version: '437.1449100126572'
+=======
+		version: '438.1449321794497'
+>>>>>>> c1e8fe733c9687ece63b42d5ff6eaa3906a4ce23
 	};
 });
 
@@ -4386,6 +4398,16 @@ Scoped.define("module:Properties.PropertiesMixin", [
 			resolved.props.set(resolved.key, value);
 		},
 		
+		uncomputeProp: function (key) {
+			var resolved = this._resolveProps(key);
+			return resolved.props.uncompute(resolved.key);
+		},
+		
+		computeProp: function (key, func) {
+			var resolved = this._resolveProps(key);
+			return resolved.props.compute(resolved.key, func);
+		},
+
 		get: function (key) {
 			return Scopes.get(key, this.__properties.data);
 		},
