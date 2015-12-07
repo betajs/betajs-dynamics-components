@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-12-03
+betajs-dynamics-components - v0.0.4 - 2015-12-07
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -17,7 +17,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '69.1449181614310'
+		version: '73.1449512676820'
 	};
 });
 
@@ -31,7 +31,7 @@ BetaJS.Dynamics.Components.Templates.overlaycontainertest = ' <button ba-click="
 
 BetaJS.Dynamics.Components.Templates.scrollpicker = '<element ba-repeat-element="{{element_value :: value_array}}" data-id="{{element_value}}">         {{element_value}} </element>';
 
-BetaJS.Dynamics.Components.Templates.swipecontainer = ' <behind>     <icon class=\'{{view.lefticon||lefticon}}\'></icon>     <div></div>     <icon class=\'{{view.righticon||righticon}}\'></icon> </behind>  <swipe> <!--<swipe  ba-gesture:swipe="{{swipe_gesture}}"-->         <!--ba-interaction:swipe="{{swipe_interaction}}">-->      <ba-{{view.inner||inner}} ba-sharescope>         {{model.value||value}}     </ba-{{view.inner||inner}}>      <swipeleft>         <div></div>         <icon class=\'{{model.lefticon}}\'></icon>     </swipeleft>      <swiperight>         <icon class=\'{{model.righticon}}\'></icon>         <div></div>     </swiperight>  </swipe> ';
+BetaJS.Dynamics.Components.Templates.swipecontainer = ' <behind>     <icon class=\'{{view.lefticon||lefticon}}\'></icon>     <div></div>     <icon class=\'{{view.righticon||righticon}}\'></icon> </behind>  <swipe  ba-gesture:swipe="{{swipe_gesture}}"         ba-interaction:swipe="{{swipe_interaction}}">      <ba-{{view.inner||inner}} ba-sharescope>         {{model.value||value}}     </ba-{{view.inner||inner}}>      <swipeleft>         <div></div>         <icon class=\'{{model.lefticon}}\'></icon>     </swipeleft>      <swiperight>         <icon class=\'{{model.righticon}}\'></icon>         <div></div>     </swiperight>  </swipe> ';
 
 BetaJS.Dynamics.Components.Templates.clickitem = ' <button         class="{{model.class}}"         ba-click="click()">     {{model.value}} </button>';
 
@@ -49,7 +49,7 @@ BetaJS.Dynamics.Components.Templates.test_list_pushfunc = '<button ba-click="tes
 
 BetaJS.Dynamics.Components.Templates.test_list_swipecontainer = ' <ba-list         ba-model="{{model}}"         ba-view="{{view_model}}"> </ba-list>';
 
-BetaJS.Dynamics.Components.Templates.searchlist = ' <searchbox ba-if="{{showsearch}}">     <icon class="icon-search"></icon>     <input placeholder="{{view.placeholder}}" value="{{=searchvalue}}"> </searchbox>  <ba-list ba-sharescope></ba-list> ';
+BetaJS.Dynamics.Components.Templates.searchlist = ' <searchbox ba-if="{{view.showsearch}}">     <icon class="icon-search"></icon>     <input placeholder="{{view.placeholder}}" value="{{=searchvalue}}"> </searchbox>  <ba-list ba-sharescope></ba-list> ';
 
 BetaJS.Dynamics.Components.Templates.test_searchlist = ' <ba-searchlist         ba-view="{{view}}">  </ba-searchlist>';
 
@@ -77,7 +77,7 @@ BetaJS.Dynamics.Components.Templates.menu = ' <ba-titledlist         ba-collapsi
 
 BetaJS.Dynamics.Components.Templates.layout_web = '<header>     <ba-{{components.header}}>Header</ba-{{components.header}}> </header> <main>     <menu ba-show="{{model.display_menu}}">         <ba-{{components.menu}}>Menu</ba-{{components.menu}}>     </menu>     <content>         <ba-{{components.content}}>Content</ba-{{components.content}}>     </content> </main>';
 
-BetaJS.Dynamics.Components.Templates.index = '<!DOCTYPE html> <html> <head lang="en">     <meta charset="UTF-8">      <!--<script src="../vendors/jquery-1.9.closure-extern.js"></script>-->     <script src="../vendors/jquery-2.1.4.js"></script>      <script src="../vendors/scoped.js"></script>     <script src="../vendors/beta.js"></script>     <script src="../vendors/beta-browser-noscoped.js"></script>     <script src="../vendors/betajs-ui.js"></script>     <script src="../vendors/betajs-dynamics-noscoped.js"></script>      <script src="components.js"></script>      <!--<script src="../vendors/betajs-simulator.js"></script>-->     <script src="../../betajs-simulator/dist/betajs-simulator.js"></script>     <link rel="stylesheet" href="../..//betajs-simulator/dist/betajs-simulator.css" />      <script src="../dist/betajs-dynamics-components-noscoped.js"></script>     <link rel="stylesheet" href="../dist/betajs-dynamics-components.css" />     <link rel="stylesheet" href="../vendors/icomoon/style.css" />      <script src="//localhost:1337/livereload.js"></script>      <title>BetaJS Simulator</title>      <script>      </script>  </head> <body>  <ba-simulator></ba-simulator>  </body> </html>';
+BetaJS.Dynamics.Components.Templates.index = '<!DOCTYPE html> <html> <head lang="en">     <meta charset="UTF-8">      <!--<script src="../vendors/jquery-1.9.closure-extern.js"></script>-->     <script src="../vendors/jquery-2.1.4.js"></script>      <script src="../vendors/scoped.js"></script>     <script src="../vendors/beta.js"></script>     <script src="../vendors/betajs-browser-noscoped.js"></script>     <script src="../vendors/betajs-ui.js"></script>     <script src="../vendors/betajs-dynamics-noscoped.js"></script>      <script src="components.js"></script>      <!--<script src="../vendors/betajs-simulator.js"></script>-->     <script src="../../betajs-simulator/dist/betajs-simulator.js"></script>     <link rel="stylesheet" href="../..//betajs-simulator/dist/betajs-simulator.css" />      <script src="../dist/betajs-dynamics-components-noscoped.js"></script>     <link rel="stylesheet" href="../dist/betajs-dynamics-components.css" />     <link rel="stylesheet" href="../vendors/icomoon/style.css" />      <script src="//localhost:1337/livereload.js"></script>      <title>BetaJS Simulator</title>      <script>      </script>  </head> <body>  <ba-simulator></ba-simulator>  </body> </html>';
 
 Scoped.define("module:Overlaycontainer", [
     "dynamics:Dynamic",
@@ -257,104 +257,54 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Swipecontainer", {
 					//scope.doodad_properties.remove();
 				}
 			}
-		}
-		//swipe_gesture : {
-		//	mouse_up_activate: false,
-		//	wait_time: 250,
-		//	wait_activate: false,
-		//	disable_x: -1,
-		//	disable_y: 10,
-		//	enable_x: 10,
-		//	enable_y: -1,
-		//	interaction: "swipe"
-		//},
-		//swipe_interaction : {
-		//	type : "swipe",
-		//	enabled : true,
-		//	draggable_y: false,
-		//	start_event: null,
-		//	events : {
-		//		"move" : function (doodad, event) {
-		//			var element = event.element;
-		//			var parent = element.parent();
-		//			var x = parseInt(element.css("left"), 10);
-		//			var w = parseInt(element.css("width"), 10);
-		//			var a = {};
-		//			var actions = this.get('swipe_actions');
-		//			for (var cls in actions) {
-		//				a = actions[cls];
-		//				if ((!a.less || x <= w * a.less) && (!a.greater || x >= w * a.greater))
-		//					parent.addClass(cls);
-		//				else
-		//					parent.removeClass(cls);
-		//			}
-		//		},
-		//		"release" : function (doodad, event) {
-		//			var element = event.element;
-		//			var x = parseInt(element.css("left"), 10);
-		//			var w = parseInt(element.css("width"), 10);
-		//			var actions = this.get('swipe_actions');
-		//			for (var cls in actions) {
-		//				a = actions[cls];
-		//				if ((!a.less || x <= w * a.less) && (!a.greater || x >= w * a.greater)) {
-		//					event.source.abort();
-		//					if (a.execute)
-		//						a.execute.call(this, element);
-		//				}
-		//			}
-		//		}
-		//	}
-		//}
-	},
-
-	_afterActivate : function (element) {
-		var actions = this.get('swipe_actions');
-
-		var swipe_element = element.find("swipe");
-		var drag = new BetaJS.UI.Interactions.Drag(swipe_element, {
-			enabled : true,
-			draggable_y: false,
-			start_event: null
-		});
-		var drag_gesture = new BetaJS.UI.Gestures.Gesture(drag.element(), BetaJS.UI.Gestures.defaultGesture({
+		},
+		swipe_gesture : {
 			mouse_up_activate: false,
 			wait_time: 250,
 			wait_activate: false,
 			disable_x: -1,
 			disable_y: 10,
 			enable_x: 10,
-			enable_y: -1
-		}));
-		drag_gesture.on("activate", drag.start, drag);
-		drag_gesture.on("deactivate", drag.stop, drag);
-		drag.on("move", function (event) {
-			var element = event.element;
-			var parent = element.parent();
-			var x = parseInt(element.css("left"), 10);
-			var w = parseInt(element.css("width"), 10);
-			var a = {};
-			for (var cls in actions) {
-				a = actions[cls];
-				if ((!a.less || x <= w * a.less) && (!a.greater || x >= w * a.greater))
-					parent.addClass(cls);
-				else
-					parent.removeClass(cls);
-			}
-		}, this);
-		drag.on("release", function (event) {
-			var element = event.element;
-			var x = parseInt(element.css("left"), 10);
-			var w = parseInt(element.css("width"), 10);
-			for (var cls in actions) {
-				a = actions[cls];
-				if ((!a.less || x <= w * a.less) && (!a.greater || x >= w * a.greater)) {
-					event.source.abort();
-					if (a.execute)
-						a.execute.call(this, element);
+			enable_y: -1,
+			interaction: "swipe"
+		},
+		swipe_interaction : {
+			type : "drag",
+			enabled : true,
+			draggable_y: false,
+			start_event: null,
+			events : {
+				"move" : function (doodad, event) {
+					var element = event.element;
+					var parent = element.parent();
+					var x = parseInt(element.css("left"), 10);
+					var w = parseInt(element.css("width"), 10);
+					var a = {};
+					var actions = this.get('swipe_actions');
+					for (var cls in actions) {
+						a = actions[cls];
+						if ((!a.less || x <= w * a.less) && (!a.greater || x >= w * a.greater))
+							parent.addClass(cls);
+						else
+							parent.removeClass(cls);
+					}
+				},
+				"release" : function (doodad, event) {
+					var element = event.element;
+					var x = parseInt(element.css("left"), 10);
+					var w = parseInt(element.css("width"), 10);
+					var actions = this.get('swipe_actions');
+					for (var cls in actions) {
+						a = actions[cls];
+						if ((!a.less || x <= w * a.less) && (!a.greater || x >= w * a.greater)) {
+							event.source.abort();
+							if (a.execute)
+								a.execute.call(this, element);
+						}
+					}
 				}
 			}
-		}, this);
-
+		}
 	}
 
 }).register();
@@ -583,10 +533,10 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Searchlist", {
 
     attrs: {
         searchvalue : "",
-        showsearch : true,
         view : {
             placeholder : "Search for",
-            listitem : "clickitem"
+            listitem : "clickitem",
+            showsearch : true
         }
     },
 

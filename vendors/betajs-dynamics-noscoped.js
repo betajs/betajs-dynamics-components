@@ -1,9 +1,5 @@
 /*!
-<<<<<<< HEAD
-betajs-dynamics - v0.0.16 - 2015-12-01
-=======
 betajs-dynamics - v0.0.18 - 2015-12-05
->>>>>>> c1e8fe733c9687ece63b42d5ff6eaa3906a4ce23
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 MIT Software License.
 */
@@ -20,11 +16,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "d71ebf84-e555-4e9b-b18a-11d74fdcefe2",
-<<<<<<< HEAD
-		version: '182.1449002414631'
-=======
 		version: '183.1449325286878'
->>>>>>> c1e8fe733c9687ece63b42d5ff6eaa3906a4ce23
 	};
 });
 
