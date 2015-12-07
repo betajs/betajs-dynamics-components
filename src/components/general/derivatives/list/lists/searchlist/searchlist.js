@@ -5,10 +5,10 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Searchlist", {
 
     attrs: {
         searchvalue : "",
-        showsearch : true,
         view : {
             placeholder : "Search for",
-            listitem : "clickitem"
+            listitem : "clickitem",
+            showsearch : true
         }
     },
 
