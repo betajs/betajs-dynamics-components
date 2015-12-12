@@ -1,26 +1,33 @@
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Clickitem", {
+Scoped.define("module:Clickitem", [
+    "dynamics:Dynamic",
+    "module:Templates"
+], function (Dynamic, Templates, scoped) {
 
-    template: BetaJS.Dynamics.Components.Templates.clickitem,
+    return Dynamic.extend({scoped : scoped}, {
 
-    attrs: {
-        model : {
-            value : 'Clickitem - Value'
+        template: Templates.clickitem,
+
+        attrs: {
+            model : {
+                value : 'Clickitem - Value'
+            }
+        },
+
+        functions : {
+            click : function () {
+                console.log("You Clicked item : " + this.properties().getProp('model.value'));
+                console.log(this.cid());
+                this.trigger('event', this.cid());
+            }
+        },
+
+        create : function () {
+            this.on("event", function (cid) {
+                console.log('event from item: ' + cid);
+            }, this);
         }
-    },
 
-    functions : {
-        click : function () {
-            console.log("You Clicked item : " + this.properties().getProp('model.value'));
-            console.log(this.cid());
-            this.trigger('event', this.cid());
-        }
-    },
+    }).register();
 
-    create : function () {
-        this.on("event", function (cid) {
-            console.log('event from item: ' + cid);
-        }, this);
-    }
-
-}).register();
+});

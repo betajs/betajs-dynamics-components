@@ -1,3 +1,4 @@
+
 Scoped.define("module:Overlaycontainer", [
     "dynamics:Dynamic",
     "module:Templates"
@@ -15,24 +16,3 @@ Scoped.define("module:Overlaycontainer", [
 	
 	}).register();
 });
-
-
-/*
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Overlaycontainer", {
-
-    template: BetaJS.Dynamics.Components.Templates.overlaycontainer,
-
-    initial : {
-
-        attrs : {
-            overlay : "",
-            message : "This is a message",
-            value : null,
-            showoverlay : true
-        }
-
-    }
-
-}).register();
-
-*/

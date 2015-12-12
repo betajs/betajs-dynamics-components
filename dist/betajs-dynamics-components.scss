@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-12-07
+betajs-dynamics-components - v0.0.4 - 2015-12-12
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -344,6 +344,7 @@ ba-selectableitem {
 ba-list {
   @include display-flex;
   overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
 
   list {
     @include flex-settings(1 1 0);

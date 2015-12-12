@@ -1,19 +1,26 @@
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.List", {
+Scoped.define("module:List", [
+    "dynamics:Dynamic",
+    "module:Templates"
+], function (Dynamic, Templates, scoped) {
 
-    template: BetaJS.Dynamics.Components.Templates.list,
+    return Dynamic.extend({scoped: scoped}, {
 
-    attrs: {
-        listitem : "clickitem",
-        model : false
-    },
+        template: Templates.list,
 
-    collections : {
-        listcollection : [
-            {value: "List - Item 1"},
-            {value: "List - Item 2"},
-            {value: "List - Item 3"}
-        ]
-    }
+        attrs: {
+            listitem: "clickitem",
+            model: false
+        },
 
-}).register();
+        collections: {
+            listcollection: [
+                {value: "List - Item 1"},
+                {value: "List - Item 2"},
+                {value: "List - Item 3"}
+            ]
+        }
+
+    }).register();
+
+});

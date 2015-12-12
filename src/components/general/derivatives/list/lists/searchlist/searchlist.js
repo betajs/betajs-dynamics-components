@@ -1,23 +1,32 @@
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Searchlist", {
+Scoped.define("module:Searchlist", [
+    "dynamics:Dynamic",
+    "module:Templates"
+],[
+    "module:List"
+],function (Dynamic, Templates, scoped) {
 
-    template: BetaJS.Dynamics.Components.Templates.searchlist,
+    return Dynamic.extend({scoped: scoped}, {
 
-    attrs: {
-        searchvalue : "",
-        view : {
-            placeholder : "Search for",
-            listitem : "clickitem",
-            showsearch : true
+        template: Templates.searchlist,
+
+        attrs: {
+            searchvalue : "",
+            view : {
+                placeholder : "Search for",
+                listitem : "clickitem",
+                showsearch : true
+            }
+        },
+
+        collections : {
+            listcollection : [
+                {value: "Searchlist - Item 1"},
+                {value: "Searchlist - Item 2"},
+                {value: "Searchlist - Item 3"}
+            ]
         }
-    },
 
-    collections : {
-        listcollection : [
-            {value: "Searchlist - Item 1"},
-            {value: "Searchlist - Item 2"},
-            {value: "Searchlist - Item 3"}
-        ]
-    }
+    }).register();
 
-}).register();
+});
