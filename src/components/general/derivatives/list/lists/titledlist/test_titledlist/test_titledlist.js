@@ -5,10 +5,10 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist", {
 
     attrs : {
         view : {
-            type : 'clickitem'
+            titleitem : 'addtitle',
+            listitem : 'clickitem'
         },
         model : {
-            titleitem : 'addtitle',
             title_model : {
                 value : 'Titledlist - Testtitle'
             },
@@ -16,11 +16,11 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist", {
                 addbutton : function () {
                     console.log('This comes from the Test Titledlist : ');
                     this.scope('<').call('additem', {value  : "Testtitledlist Item New"});
-                },
-                clicktitle : function () {
-                    console.log('This comes from the Test Titledlist : ');
-                    this.scope('<').call('togglelist');
                 }
+                //clicktitle : function () {
+                //    console.log('This comes from the Test Titledlist : ');
+                //    this.scope('<').call('togglelist');
+                //}
             }
         }
     },

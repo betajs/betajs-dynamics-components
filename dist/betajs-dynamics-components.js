@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-12-12
+betajs-dynamics-components - v0.0.4 - 2015-12-15
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -560,7 +560,7 @@ Public.exports();
 }).call(this);
 
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-12-12
+betajs-dynamics-components - v0.0.4 - 2015-12-15
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -579,7 +579,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '74.1449934046688'
+		version: '75.1450179561218'
 	};
 });
 
@@ -587,7 +587,9 @@ BetaJS = BetaJS || {};
 BetaJS.Dynamics = BetaJS.Dynamics || {};
 BetaJS.Dynamics.Components = BetaJS.Dynamics.Components || {};
 BetaJS.Dynamics.Components.Templates = BetaJS.Dynamics.Components.Templates || {};
-BetaJS.Dynamics.Components.Templates.overlaycontainer = '<overlaycontainer     ba-click="showoverlay = false"     ba-if="{{showoverlay}}">      <overlayinner>          <ba-{{overlay}} ba-value=\'{{=value}}\'>             <message>{{message}}</message>         </ba-{{overlay}}>      </overlayinner>  </overlaycontainer>';
+BetaJS.Dynamics.Components.Templates.input = '<input autofocus>';
+
+BetaJS.Dynamics.Components.Templates.overlaycontainer = '<overlaycontainer     ba-tap="showoverlay = false"     ba-if="{{showoverlay}}">      <overlayinner>          <ba-{{overlay}} ba-value=\'{{=value}}\'>             <message>{{message}}</message>         </ba-{{overlay}}>      </overlayinner>  </overlaycontainer>';
 
 BetaJS.Dynamics.Components.Templates.overlaycontainertest = ' <button ba-click="showoverlay = !showoverlay">Show Overlaycontainer</button>  <ba-overlaycontainer         ba-overlay="{{=overlay}}"         ba-showoverlay="{{=showoverlay}}">          </ba-overlaycontainer>';
 
@@ -615,7 +617,7 @@ BetaJS.Dynamics.Components.Templates.searchlist = ' <searchbox ba-if="{{view.sho
 
 BetaJS.Dynamics.Components.Templates.test_searchlist = ' <ba-searchlist         ba-view="{{view}}">  </ba-searchlist>';
 
-BetaJS.Dynamics.Components.Templates.test_titledlist = ' <ba-titledlist         ba-model="{{model}}"         ba-attrs="{{view}}"         ba-functions="{{callbacks}}"         ba-listcollection="{{listcollection}}">  </ba-titledlist>';
+BetaJS.Dynamics.Components.Templates.test_titledlist = ' <ba-titledlist         ba-model="{{model}}"         ba-view="{{view}}"         ba-functions="{{callbacks}}"         ba-listcollection="{{listcollection}}">  </ba-titledlist>';
 
 BetaJS.Dynamics.Components.Templates.test_titledlist_swipe = ' <ba-titledlist         ba-listcollection="{{listcollection}}"         ba-attrs="{{push_attrs}}">  </ba-titledlist>';
 
@@ -641,6 +643,29 @@ BetaJS.Dynamics.Components.Templates.layout_web = '<header>     <ba-{{components
 
 BetaJS.Dynamics.Components.Templates.index = '<!DOCTYPE html> <html> <head lang="en">     <meta charset="UTF-8">      <!--<script src="../vendors/jquery-1.9.closure-extern.js"></script>-->     <script src="../vendors/jquery-2.1.4.js"></script>      <script src="../vendors/scoped.js"></script>     <script src="../vendors/beta.js"></script>     <script src="../vendors/betajs-browser-noscoped.js"></script>     <script src="../vendors/betajs-ui.js"></script>     <script src="../vendors/betajs-dynamics-noscoped.js"></script>      <script src="components.js"></script>      <!--<script src="../vendors/betajs-simulator.js"></script>-->     <script src="../../betajs-simulator/dist/betajs-simulator.js"></script>     <link rel="stylesheet" href="../..//betajs-simulator/dist/betajs-simulator.css" />      <script src="../dist/betajs-dynamics-components-noscoped.js"></script>     <link rel="stylesheet" href="../dist/betajs-dynamics-components.css" />     <link rel="stylesheet" href="../vendors/icomoon/style.css" />      <script src="//localhost:1337/livereload.js"></script>      <title>BetaJS Simulator</title>      <script>      </script>  </head> <body>  <ba-simulator></ba-simulator>  <script>     console.log(\'Unresolved Dependencies : \');     console.log(Scoped.unresolved(\'global:\')); </script>  </body> </html>';
 
+
+Scoped.define("module:Input", [
+    "dynamics:Dynamic",
+    "module:Templates"
+], function (Dynamic, Templates, scoped) {
+    return Dynamic.extend({scoped: scoped}, {
+
+        template: Templates.input,
+
+        attrs: {
+            model : {
+                value : ""
+            },
+            view : {
+                placeholder : "",
+                autofocus : true
+            }
+
+        }
+
+    }).register();
+
+});
 
 Scoped.define("module:Overlaycontainer", [
     "dynamics:Dynamic",
@@ -1158,10 +1183,10 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist", {
 
     attrs : {
         view : {
-            type : 'clickitem'
+            titleitem : 'addtitle',
+            listitem : 'clickitem'
         },
         model : {
-            titleitem : 'addtitle',
             title_model : {
                 value : 'Titledlist - Testtitle'
             },
@@ -1169,11 +1194,11 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist", {
                 addbutton : function () {
                     console.log('This comes from the Test Titledlist : ');
                     this.scope('<').call('additem', {value  : "Testtitledlist Item New"});
-                },
-                clicktitle : function () {
-                    console.log('This comes from the Test Titledlist : ');
-                    this.scope('<').call('togglelist');
                 }
+                //clicktitle : function () {
+                //    console.log('This comes from the Test Titledlist : ');
+                //    this.scope('<').call('togglelist');
+                //}
             }
         }
     },
@@ -1290,7 +1315,8 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Addtitle", {
 
         clicktitle : function () {
 
-            console.log("You clicked the Title, no clicktitle() given");
+            console.log("You clicked the Title, no clicktitle() given, toggle");
+            this.scope('<').call('togglelist');
 
         },
         addbutton : function () {

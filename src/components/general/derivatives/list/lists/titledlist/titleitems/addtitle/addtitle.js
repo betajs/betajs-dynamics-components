@@ -11,7 +11,8 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Addtitle", {
 
         clicktitle : function () {
 
-            console.log("You clicked the Title, no clicktitle() given");
+            console.log("You clicked the Title, no clicktitle() given, toggle");
+            this.scope('<').call('togglelist');
 
         },
         addbutton : function () {
