@@ -23,21 +23,20 @@ Scoped.define("module:Swipecontainer", [
 					less: -1 / 4,
 					execute: function () {
 						//this.get("model").set("archived", true);
+						console.log("Swipe: other");
 					}
 				},
 				"archive": {
 					less: 1 / 3,
 					execute: function () {
-						//alert("archive?");
+						console.log("Swipe: archive");
 					}
 				},
 				"delete": {
 					greater: 1 / 3,
 					execute: function (element) {
-
-						//alert("yes");
+						console.log("Swipe: delete");
 						element.parent().parent().slideUp();
-						//scope.doodad_properties.remove();
 					}
 				}
 			},
@@ -46,7 +45,7 @@ Scoped.define("module:Swipecontainer", [
 				wait_time: 250,
 				wait_activate: false,
 				disable_x: -1,
-				disable_y: 10,
+				disable_y: -1,
 				enable_x: 10,
 				enable_y: -1,
 				interaction: "swipe"

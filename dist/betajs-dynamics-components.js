@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-12-15
+betajs-dynamics-components - v0.0.4 - 2015-12-18
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -560,7 +560,7 @@ Public.exports();
 }).call(this);
 
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-12-15
+betajs-dynamics-components - v0.0.4 - 2015-12-18
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -579,7 +579,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '75.1450179561218'
+		version: '76.1450477903369'
 	};
 });
 
@@ -816,21 +816,20 @@ Scoped.define("module:Swipecontainer", [
 					less: -1 / 4,
 					execute: function () {
 						//this.get("model").set("archived", true);
+						console.log("Swipe: other");
 					}
 				},
 				"archive": {
 					less: 1 / 3,
 					execute: function () {
-						//alert("archive?");
+						console.log("Swipe: archive");
 					}
 				},
 				"delete": {
 					greater: 1 / 3,
 					execute: function (element) {
-
-						//alert("yes");
+						console.log("Swipe: delete");
 						element.parent().parent().slideUp();
-						//scope.doodad_properties.remove();
 					}
 				}
 			},
@@ -839,7 +838,7 @@ Scoped.define("module:Swipecontainer", [
 				wait_time: 250,
 				wait_activate: false,
 				disable_x: -1,
-				disable_y: 10,
+				disable_y: -1,
 				enable_x: 10,
 				enable_y: -1,
 				interaction: "swipe"
