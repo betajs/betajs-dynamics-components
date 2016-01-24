@@ -11,6 +11,10 @@ Scoped.define("module:Swipeclickcontainer", [
 
 		template: Templates.swipeclickcontainer,
 
+		scopes : {
+			child_dynamic: ">"
+		},
+
 		attrs: {
 			model: {
 				value: "Swipeclickitem - Title"
@@ -123,9 +127,7 @@ Scoped.define("module:Swipeclickcontainer", [
 						}
 					}
 				}
-			},
-
-
+			}
 
 		},
 
@@ -133,6 +135,9 @@ Scoped.define("module:Swipeclickcontainer", [
 			click: function (doodad) {
 				//this.set('click_counter',this.get('click_counter') + 1);
 				console.log("Click ");
+				console.log(this.scopes.child_dynamic);
+				console.log(this.scopes.child_dynamic.get('counter'));
+				this.scopes.child_dynamic.call('click');
 			}
 		}
 

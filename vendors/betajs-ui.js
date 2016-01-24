@@ -1123,8 +1123,6 @@ Scoped.define("module:Interactions.DragStates.Dragging", [
 				};
 				var zindex = this.element().css("z-index");
 				var width = this.element().width();
-				console.log(this.element());
-				window.test= this.element();
 				var height = this.element().height();
 				if (opts.drag_original_element) {
 					this._placeholder_cloned_element = this.element().clone();

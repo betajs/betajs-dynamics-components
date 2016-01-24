@@ -18,7 +18,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '77.1453613524855'
+		version: '80.1453646013549'
 	};
 });
 
@@ -289,6 +289,10 @@ Scoped.define("module:Swipeclickcontainer", [
 
 		template: Templates.swipeclickcontainer,
 
+		scopes : {
+			child_dynamic: ">"
+		},
+
 		attrs: {
 			model: {
 				value: "Swipeclickitem - Title"
@@ -401,9 +405,7 @@ Scoped.define("module:Swipeclickcontainer", [
 						}
 					}
 				}
-			},
-
-
+			}
 
 		},
 
@@ -411,6 +413,9 @@ Scoped.define("module:Swipeclickcontainer", [
 			click: function (doodad) {
 				//this.set('click_counter',this.get('click_counter') + 1);
 				console.log("Click ");
+				console.log(this.scopes.child_dynamic);
+				console.log(this.scopes.child_dynamic.get('counter'));
+				this.scopes.child_dynamic.call('click');
 			}
 		}
 
