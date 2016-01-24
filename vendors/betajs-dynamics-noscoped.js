@@ -839,7 +839,22 @@ Scoped.define("module:Handlers.Attr", [
 					var old = this._attrValue;
 					this._attrValue = value;
 					
-					this._attribute.value = Dom.entitiesToUnicode(value);
+					var result = Dom.entitiesToUnicode(value);
+
+					
+					/*
+					 *  Fixing a Safari bug. These three lines will cause Safari to crash: 
+					 *     
+					 *     <style> [class^="randomstring"] { background: white; } </style>
+					 *	   <div class="" id="test"></div>
+					 *	   <script> document.getElementById("test").attributes.class.value = null; </script>
+                     *
+					 */
+					if (result === null && this._attrName === "class")
+						result = "";
+
+					
+					this._attribute.value = result;
 					if (this._partial)
 						this._partial.change(value, old);
 					if (this._attrName === "value" && this._element.value !== value)
