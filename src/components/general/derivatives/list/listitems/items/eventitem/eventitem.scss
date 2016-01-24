@@ -1,0 +1,17 @@
+
+$clickitemheigth : 44px;
+
+ba-eventitem {
+  @include display-flex;
+  @include flex-direction(column);
+
+  button {
+    @include flex(1 1 0);
+    @include user-select-none;
+    padding: 0 $clickitemheigth/2;
+    min-height: 44px;
+    text-align: center;
+    display: block;
+    color : inherit;
+  }
+}

@@ -1,5 +1,5 @@
 
-Scoped.define("module:Swipecontainer", [
+Scoped.define("module:Swipeclickcontainer", [
 	"dynamics:Dynamic",
 	"module:Templates"
 ],[
@@ -9,15 +9,15 @@ Scoped.define("module:Swipecontainer", [
 
 	return Dynamic.extend({scoped: scoped}, {
 
-		template: Templates.swipecontainer,
+		template: Templates.swipeclickcontainer,
 
 		attrs: {
 			model: {
-				value: "Swipeitem - Title"
+				value: "Swipeclickitem - Title"
 			},
 			lefticon: 'icon-ok',
 			righticon: 'icon-time',
-			inner: "clickitem",
+			inner: "eventitem",
 			swipe_actions: {
 				"other": {
 					less: 0,
@@ -40,6 +40,37 @@ Scoped.define("module:Swipecontainer", [
 					execute: function (element) {
 						console.log("Swipe: delete");
 						element.parent().slideUp();
+					}
+				}
+			},
+			click_gesture: {
+				mouse_up_activate: true,
+				wait_time: 250,
+				wait_activate: false,
+				disable_x: 10,
+				disable_y: 10,
+				enable_x: -1,
+				enable_y: -1,
+				activate_event: "click"
+			},
+			drag_gesture: {
+				mouse_up_activate: false,
+				wait_time: 750,
+				wait_activate: true,
+				disable_x: 10,
+				disable_y: 10,
+				enable_x: -1,
+				enable_y: -1,
+				interaction: "drag"
+			},
+			drag_interaction: {
+				type: "drag",
+				clone_element: true,
+				start_event: null,
+				events: {
+					"move": function (doodad, event) {
+						event.actionable_modifier.csscls("focus", true);
+						event.modifier.csscls("unfocus", true);
 					}
 				}
 			},
@@ -92,6 +123,16 @@ Scoped.define("module:Swipecontainer", [
 						}
 					}
 				}
+			},
+
+
+
+		},
+
+		functions: {
+			click: function (doodad) {
+				//this.set('click_counter',this.get('click_counter') + 1);
+				console.log("Click ");
 			}
 		}
 

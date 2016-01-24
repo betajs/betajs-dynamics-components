@@ -1,0 +1,34 @@
+
+<behind>
+    <icon class='{{view.lefticon||lefticon}}'></icon>
+    <div></div>
+    <icon class='{{view.righticon||righticon}}'></icon>
+</behind>
+
+<swipe
+        ba-gesture:click="{{{data: model, options: click_gesture}}}"
+        ba-gesture:drag="{{drag_gesture}}"
+        ba-interaction:drag="{{drag_interaction}}"
+        ba-gesture:swipe="{{swipe_gesture}}"
+        ba-interaction:swipe="{{swipe_interaction}}">
+
+    <container>
+
+        <ba-{{view.inner||inner}}
+        ba-sharescope>
+        {{model.value||value}}
+        </ba-{{view.inner||inner}}>
+
+        <swipeleft>
+            <div></div>
+            <icon class='{{model.lefticon}}'></icon>
+        </swipeleft>
+
+        <swiperight>
+            <icon class='{{model.righticon}}'></icon>
+            <div></div>
+        </swiperight>
+
+    </container>
+
+</swipe>

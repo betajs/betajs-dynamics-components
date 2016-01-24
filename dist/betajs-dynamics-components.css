@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-12-18
+betajs-dynamics-components - v0.0.4 - 2016-01-24
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -104,6 +104,226 @@ ba-scrollpicker {
     text-align: center; }
   ba-scrollpicker .selected {
     color: black; }
+
+ba-clicktestcontainer {
+  position: relative;
+  display: block;
+  overflow: hidden; }
+  ba-clicktestcontainer icon {
+    -webkit-box-flex: 0 0 44px;
+    -moz-box-flex: 0 0 44px;
+    -webkit-flex: 0 0 44px;
+    -ms-flex: 0 0 44px;
+    flex: 0 0 44px;
+    text-align: center;
+    margin: auto; }
+  ba-clicktestcontainer behind {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    z-index: 0;
+    box-sizing: border-box;
+    background: #ddd; }
+    ba-clicktestcontainer behind div {
+      -webkit-box-flex: 1 0 0;
+      -moz-box-flex: 1 0 0;
+      -webkit-flex: 1 0 0;
+      -ms-flex: 1 0 0;
+      flex: 1 0 0; }
+  ba-clicktestcontainer swipe {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    position: relative;
+    left: -100%;
+    width: 300%; }
+    ba-clicktestcontainer swipe ba-item {
+      border-bottom: 1px solid #d3d3d3;
+      height: 44px;
+      line-height: 44px;
+      vertical-align: middle;
+      background: white; }
+    ba-clicktestcontainer swipe swipeleft {
+      -webkit-box-flex: 1 1 0;
+      -moz-box-flex: 1 1 0;
+      -webkit-flex: 1 1 0;
+      -ms-flex: 1 1 0;
+      flex: 1 1 0;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-order: 1;
+      -ms-flex-order: 1;
+      order: 1;
+      width: 1px;
+      z-index: 1;
+      background: #33CC00;
+      opacity: 0.5; }
+      ba-clicktestcontainer swipe swipeleft div {
+        -webkit-box-flex: 1 0 0;
+        -moz-box-flex: 1 0 0;
+        -webkit-flex: 1 0 0;
+        -ms-flex: 1 0 0;
+        flex: 1 0 0; }
+    ba-clicktestcontainer swipe > *:nth-child(1) {
+      -webkit-box-flex: 1 0 0;
+      -moz-box-flex: 1 0 0;
+      -webkit-flex: 1 0 0;
+      -ms-flex: 1 0 0;
+      flex: 1 0 0;
+      -webkit-order: 2;
+      -ms-flex-order: 2;
+      order: 2; }
+    ba-clicktestcontainer swipe swiperight {
+      -webkit-box-flex: 1 1 0;
+      -moz-box-flex: 1 1 0;
+      -webkit-flex: 1 1 0;
+      -ms-flex: 1 1 0;
+      flex: 1 1 0;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-order: 3;
+      -ms-flex-order: 3;
+      order: 3;
+      z-index: 1;
+      width: 1px;
+      background: yellow;
+      opacity: 0.5; }
+      ba-clicktestcontainer swipe swiperight div {
+        -webkit-box-flex: 1 0 0;
+        -moz-box-flex: 1 0 0;
+        -webkit-flex: 1 0 0;
+        -ms-flex: 1 0 0;
+        flex: 1 0 0; }
+    ba-clicktestcontainer swipe .showdrag {
+      opacity: 1 !important; }
+
+ba-clicktestcontainer swipe > *:nth-child(1) {
+  background: white; }
+
+ba-swipeclickcontainer {
+  position: relative;
+  display: block; }
+  ba-swipeclickcontainer icon {
+    -webkit-box-flex: 0 0 44px;
+    -moz-box-flex: 0 0 44px;
+    -webkit-flex: 0 0 44px;
+    -ms-flex: 0 0 44px;
+    flex: 0 0 44px;
+    text-align: center;
+    margin: auto; }
+  ba-swipeclickcontainer behind {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    z-index: 0;
+    box-sizing: border-box;
+    background: #ddd; }
+    ba-swipeclickcontainer behind div {
+      -webkit-box-flex: 1 0 0;
+      -moz-box-flex: 1 0 0;
+      -webkit-flex: 1 0 0;
+      -ms-flex: 1 0 0;
+      flex: 1 0 0; }
+  ba-swipeclickcontainer swipe {
+    position: relative;
+    display: block; }
+    ba-swipeclickcontainer swipe container {
+      position: relative;
+      width: 300%;
+      left: -100%;
+      height: 100%;
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex; }
+      ba-swipeclickcontainer swipe container swipeleft {
+        -webkit-box-flex: 1 0 0;
+        -moz-box-flex: 1 0 0;
+        -webkit-flex: 1 0 0;
+        -ms-flex: 1 0 0;
+        flex: 1 0 0;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-order: 1;
+        -ms-flex-order: 1;
+        order: 1;
+        left: -100%;
+        z-index: 1;
+        background: #33CC00;
+        opacity: 0.5; }
+        ba-swipeclickcontainer swipe container swipeleft div {
+          -webkit-box-flex: 1 0 0;
+          -moz-box-flex: 1 0 0;
+          -webkit-flex: 1 0 0;
+          -ms-flex: 1 0 0;
+          flex: 1 0 0; }
+      ba-swipeclickcontainer swipe container > *:nth-child(1) {
+        left: -100%;
+        -webkit-box-flex: 1 0 0;
+        -moz-box-flex: 1 0 0;
+        -webkit-flex: 1 0 0;
+        -ms-flex: 1 0 0;
+        flex: 1 0 0;
+        -webkit-order: 2;
+        -ms-flex-order: 2;
+        order: 2; }
+      ba-swipeclickcontainer swipe container swiperight {
+        -webkit-box-flex: 1 0 0;
+        -moz-box-flex: 1 0 0;
+        -webkit-flex: 1 0 0;
+        -ms-flex: 1 0 0;
+        flex: 1 0 0;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        -webkit-order: 3;
+        -ms-flex-order: 3;
+        order: 3;
+        z-index: 1;
+        background: yellow;
+        opacity: 0.5; }
+        ba-swipeclickcontainer swipe container swiperight div {
+          -webkit-box-flex: 1 0 0;
+          -moz-box-flex: 1 0 0;
+          -webkit-flex: 1 0 0;
+          -ms-flex: 1 0 0;
+          flex: 1 0 0; }
+
+ba-swipeclickcontainer swipe > container > *:nth-child(1) {
+  background: white; }
+
+body > swipe {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; }
+  body > swipe container {
+    width: 100%; }
 
 ba-swipecontainer {
   position: relative;
@@ -228,6 +448,34 @@ ba-clickitem {
     -webkit-flex: 1 1 0;
     -ms-flex: 1 1 0;
     flex: 1 1 0;
+    padding: 0 22px;
+    min-height: 44px;
+    text-align: center;
+    display: block;
+    color: inherit; }
+
+ba-eventitem {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+  ba-eventitem button {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
     padding: 0 22px;
     min-height: 44px;
     text-align: center;

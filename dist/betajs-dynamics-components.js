@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-12-18
+betajs-dynamics-components - v0.0.4 - 2016-01-24
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -560,7 +560,7 @@ Public.exports();
 }).call(this);
 
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-12-18
+betajs-dynamics-components - v0.0.4 - 2016-01-24
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -579,7 +579,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '76.1450477903369'
+		version: '77.1453613524855'
 	};
 });
 
@@ -595,9 +595,15 @@ BetaJS.Dynamics.Components.Templates.overlaycontainertest = ' <button ba-click="
 
 BetaJS.Dynamics.Components.Templates.scrollpicker = '<element ba-repeat-element="{{element_value :: value_array}}" data-id="{{element_value}}">         {{element_value}} </element>';
 
+BetaJS.Dynamics.Components.Templates.clicktestcontainer = ' <ba-{{view.inner||inner}}     ba-gesture:click="{{{data: model, options: click_gesture}}})"     ba-sharescope>     {{model.value||value}} </ba-{{view.inner||inner}}> ';
+
+BetaJS.Dynamics.Components.Templates.swipeclickcontainer = ' <behind>     <icon class=\'{{view.lefticon||lefticon}}\'></icon>     <div></div>     <icon class=\'{{view.righticon||righticon}}\'></icon> </behind>  <swipe         ba-gesture:click="{{{data: model, options: click_gesture}}}"         ba-gesture:drag="{{drag_gesture}}"         ba-interaction:drag="{{drag_interaction}}"         ba-gesture:swipe="{{swipe_gesture}}"         ba-interaction:swipe="{{swipe_interaction}}">      <container>          <ba-{{view.inner||inner}}         ba-sharescope>         {{model.value||value}}         </ba-{{view.inner||inner}}>          <swipeleft>             <div></div>             <icon class=\'{{model.lefticon}}\'></icon>         </swipeleft>          <swiperight>             <icon class=\'{{model.righticon}}\'></icon>             <div></div>         </swiperight>      </container>  </swipe> ';
+
 BetaJS.Dynamics.Components.Templates.swipecontainer = ' <behind>     <icon class=\'{{view.lefticon||lefticon}}\'></icon>     <div></div>     <icon class=\'{{view.righticon||righticon}}\'></icon> </behind>  <swipe  ba-gesture:swipe="{{swipe_gesture}}"         ba-interaction:swipe="{{swipe_interaction}}">      <ba-{{view.inner||inner}} ba-sharescope>         {{model.value||value}}     </ba-{{view.inner||inner}}>      <swipeleft>         <div></div>         <icon class=\'{{model.lefticon}}\'></icon>     </swipeleft>      <swiperight>         <icon class=\'{{model.righticon}}\'></icon>         <div></div>     </swiperight>  </swipe> ';
 
 BetaJS.Dynamics.Components.Templates.clickitem = ' <button         class="{{model.class}}"         ba-click="click()">     {{model.value}} </button>';
+
+BetaJS.Dynamics.Components.Templates.eventitem = ' <button         class="{{model.class}}">     {{model.value}} - {{counter}} </button>';
 
 BetaJS.Dynamics.Components.Templates.selectableitem = ' <selectableitem         ba-class="{{{selected : selected.cid == this.cid()}}}"         ba-click="select()">     {{model.value}} </selectableitem>';
 
@@ -792,6 +798,187 @@ BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Scrollpicker", {
 }).register();
 
 
+Scoped.define("module:Clicktestcontainer", [
+	"dynamics:Dynamic",
+	"module:Templates"
+],[
+	"ui:Dynamics.GesturePartial",
+	"ui:Dynamics.InteractionPartial"
+], function (Dynamic, Templates, scoped) {
+
+	return Dynamic.extend({scoped: scoped}, {
+
+		template: Templates.clicktestcontainer,
+
+		attrs: {
+			model: {
+				value: "Cicktestcontainer - Title"
+			},
+			inner: "eventitem",
+
+			click_gesture: {
+				mouse_up_activate: true,
+				wait_time: 250,
+				wait_activate: false,
+				disable_x: 10,
+				disable_y: 10,
+				enable_x: -1,
+				enable_y: -1,
+				activate_event: "click"
+			}
+		},
+
+		functions : {
+			click : function () {
+				//Call Click in Child
+			}
+		}
+
+	}).register();
+
+});
+
+Scoped.define("module:Swipeclickcontainer", [
+	"dynamics:Dynamic",
+	"module:Templates"
+],[
+	"ui:Dynamics.GesturePartial",
+	"ui:Dynamics.InteractionPartial"
+], function (Dynamic, Templates, scoped) {
+
+	return Dynamic.extend({scoped: scoped}, {
+
+		template: Templates.swipeclickcontainer,
+
+		attrs: {
+			model: {
+				value: "Swipeclickitem - Title"
+			},
+			lefticon: 'icon-ok',
+			righticon: 'icon-time',
+			inner: "eventitem",
+			swipe_actions: {
+				"other": {
+					less: 0,
+					greater: -1,
+					execute: function () {
+						//this.get("model").set("archived", true);
+						console.log("Swipe: other");
+					}
+				},
+				"archive": {
+					greater : 0,
+					less: 2 / 5,
+					execute: function (element) {
+						console.log("Swipe: archive");
+						//element.parent().slideUp();
+					}
+				},
+				"delete": {
+					greater: 2 / 5,
+					execute: function (element) {
+						console.log("Swipe: delete");
+						element.parent().slideUp();
+					}
+				}
+			},
+			click_gesture: {
+				mouse_up_activate: true,
+				wait_time: 250,
+				wait_activate: false,
+				disable_x: 10,
+				disable_y: 10,
+				enable_x: -1,
+				enable_y: -1,
+				activate_event: "click"
+			},
+			drag_gesture: {
+				mouse_up_activate: false,
+				wait_time: 750,
+				wait_activate: true,
+				disable_x: 10,
+				disable_y: 10,
+				enable_x: -1,
+				enable_y: -1,
+				interaction: "drag"
+			},
+			drag_interaction: {
+				type: "drag",
+				clone_element: true,
+				start_event: null,
+				events: {
+					"move": function (doodad, event) {
+						event.actionable_modifier.csscls("focus", true);
+						event.modifier.csscls("unfocus", true);
+					}
+				}
+			},
+			swipe_gesture: {
+				mouse_up_activate: false,
+				wait_time: 250,
+				wait_activate: false,
+				disable_x: -1,
+				disable_y: -1,
+				enable_x: 10,
+				enable_y: -1,
+				interaction: "swipe"
+			},
+			swipe_interaction: {
+				type: "drag",
+				enabled: true,
+				draggable_y: false,
+				start_event: null,
+				events: {
+					"move": function (doodad, event) {
+						console.log('move');
+						var element = event.element;
+						var parent = element.parent();
+						var w = parseInt(element.css("width"), 10)/3;
+                        var x = parseInt(element.css("left"), 10) + w;
+                        var a = {};
+						var actions = this.get('swipe_actions');
+						for (var cls in actions) {
+							a = actions[cls];
+							if ((!a.less || x <= w * a.less) && (!a.greater || x >= w * a.greater))
+								parent.addClass(cls);
+							else
+								parent.removeClass(cls);
+						}
+					},
+					"release": function (doodad, event) {
+						var element = event.element;
+						var w = parseInt(element.css("width"), 10)/3;
+						var x = parseInt(element.css("left"), 10) + w;
+						var actions = this.get('swipe_actions');
+
+						for (var cls in actions) {
+							a = actions[cls];
+
+							if ((!('greater' in a) || x <= w * a.less) && (!('less' in a) || x >= w * a.greater)) {
+								event.source.abort();
+								if (a.execute)
+									a.execute.call(this, element);
+							}
+						}
+					}
+				}
+			},
+
+
+
+		},
+
+		functions: {
+			click: function (doodad) {
+				//this.set('click_counter',this.get('click_counter') + 1);
+				console.log("Click ");
+			}
+		}
+
+	}).register();
+
+});
+
 Scoped.define("module:Swipecontainer", [
 	"dynamics:Dynamic",
 	"module:Templates"
@@ -813,23 +1000,26 @@ Scoped.define("module:Swipecontainer", [
 			inner: "clickitem",
 			swipe_actions: {
 				"other": {
-					less: -1 / 4,
+					less: 0,
+					greater: -1,
 					execute: function () {
 						//this.get("model").set("archived", true);
 						console.log("Swipe: other");
 					}
 				},
 				"archive": {
-					less: 1 / 3,
-					execute: function () {
+					greater : 0,
+					less: 2 / 5,
+					execute: function (element) {
 						console.log("Swipe: archive");
+						//element.parent().slideUp();
 					}
 				},
 				"delete": {
-					greater: 1 / 3,
+					greater: 2 / 5,
 					execute: function (element) {
 						console.log("Swipe: delete");
-						element.parent().parent().slideUp();
+						element.parent().slideUp();
 					}
 				}
 			},
@@ -850,11 +1040,12 @@ Scoped.define("module:Swipecontainer", [
 				start_event: null,
 				events: {
 					"move": function (doodad, event) {
+						console.log('move');
 						var element = event.element;
 						var parent = element.parent();
-						var x = parseInt(element.css("left"), 10);
-						var w = parseInt(element.css("width"), 10);
-						var a = {};
+						var w = parseInt(element.css("width"), 10)/3;
+                        var x = parseInt(element.css("left"), 10) + w;
+                        var a = {};
 						var actions = this.get('swipe_actions');
 						for (var cls in actions) {
 							a = actions[cls];
@@ -866,12 +1057,14 @@ Scoped.define("module:Swipecontainer", [
 					},
 					"release": function (doodad, event) {
 						var element = event.element;
-						var x = parseInt(element.css("left"), 10);
-						var w = parseInt(element.css("width"), 10);
+						var w = parseInt(element.css("width"), 10)/3;
+						var x = parseInt(element.css("left"), 10) + w;
 						var actions = this.get('swipe_actions');
+
 						for (var cls in actions) {
 							a = actions[cls];
-							if ((!a.less || x <= w * a.less) && (!a.greater || x >= w * a.greater)) {
+
+							if ((!('greater' in a) || x <= w * a.less) && (!('less' in a) || x >= w * a.greater)) {
 								event.source.abort();
 								if (a.execute)
 									a.execute.call(this, element);
@@ -903,15 +1096,48 @@ Scoped.define("module:Clickitem", [
 
         functions : {
             click : function () {
-                console.log("You Clicked item : " + this.properties().getProp('model.value'));
-                console.log(this.cid());
-                this.trigger('event', this.cid());
+                console.log('Click');
+                //console.log("You Clicked item : " + this.properties().getProp('model.value'));
+                //console.log(this.cid());
+                //this.trigger('event', this.cid());
             }
         },
 
         create : function () {
             this.on("event", function (cid) {
                 console.log('event from item: ' + cid);
+            }, this);
+        }
+
+    }).register();
+
+});
+
+Scoped.define("module:Eventitem", [
+    "dynamics:Dynamic",
+    "module:Templates"
+], function (Dynamic, Templates, scoped) {
+
+    return Dynamic.extend({scoped : scoped}, {
+
+        template: Templates.eventitem,
+
+        attrs: {
+            counter : 0,
+            model : {
+                value : 'Evenitem - Clicked '
+            }
+        },
+
+        functions : {
+            click : function () {
+                this.trigger('event', this.cid());
+            }
+        },
+
+        create : function () {
+            this.on("event", function (cid) {
+                this.set('counter',this.get('counter') + 1);
             }, this);
         }
 

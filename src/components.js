@@ -1,6 +1,11 @@
 
 window.components = new BetaJS.Collections.Collection({objects: [
 
+    {value  : 'swipeclickcontainer'},
+    {value  : 'clicktestcontainer'},
+    {value  : 'eventitem'},
+    {value  : 'swipecontainer'},
+
     //Titledlist
     {value  : 'titledlist'},
     {value  : 'test_titledlist'},
@@ -36,7 +41,7 @@ window.components = new BetaJS.Collections.Collection({objects: [
     //Inputs
     //{value  : 'scrollpicker'},
 
-    //containers
+    //other
     {value  : 'test_searchlist'},
     {value  : 'searchlist'},
     {value  : 'test_valuedlist_childlist'},
@@ -52,8 +57,7 @@ window.components = new BetaJS.Collections.Collection({objects: [
 
     //{value  : 'addvalue'},
     {value  : 'overlaycontainer'},
-    {value  : 'overlaycontainertest'},
-    {value  : 'swipecontainer'}
+    {value  : 'overlaycontainertest'}
 ]});
 
 window.componentsByvalue = function (value) {

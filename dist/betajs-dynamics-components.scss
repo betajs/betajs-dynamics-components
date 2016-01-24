@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.4 - 2015-12-18
+betajs-dynamics-components - v0.0.4 - 2016-01-24
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -74,7 +74,6 @@ a {color: $blue1}
 /*
  * Mixins
  */
-
 @mixin display-flex {
   display: -webkit-box;
   display: -moz-box;
@@ -155,6 +154,15 @@ a {color: $blue1}
   }
 }
 
+@mixin user-select-none {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
 
 li {
   list-style: none;
@@ -236,6 +244,180 @@ ba-scrollpicker {
   .selected {color: black}
 }
 
+$swipeitemheight: 44px;
+$leftrightopacity: 0.5;
+
+ba-clicktestcontainer {
+  position: relative;
+  display: block;
+  overflow: hidden;
+
+  icon {
+    @include flex(0 0 $swipeitemheight);
+    text-align: center;
+    margin: auto;
+  }
+
+  behind {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    @include display-flex;
+    z-index: 0;
+    box-sizing: border-box;
+    background: $grey1;
+
+    div {@include flex(1 0 0)}
+  }
+
+  swipe {
+    @include display-flex;
+    position: relative;
+    left: -100%;
+    width: 300%;
+
+    ba-item {
+      border-bottom: 1px solid #d3d3d3;
+      height: $swipeitemheight;
+      line-height: $swipeitemheight;
+      vertical-align: middle;
+      background: white;
+    }
+
+    swipeleft {
+      @include flex(1 1 0);
+      @include display-flex;
+      @include flex-order(1);
+      width: 1px;
+      z-index: 1;
+
+      background: #33CC00;
+      opacity: $leftrightopacity;
+
+      div {@include flex(1 0 0)}
+    }
+
+    >*:nth-child(1) {
+      @include flex(1 0 0);
+      @include flex-order(2);
+    }
+
+    swiperight {
+      @include flex(1 1 0);
+      @include display-flex;
+      @include flex-order(3);
+      z-index: 1;
+      width: 1px;
+
+      background: yellow;
+      opacity: $leftrightopacity;
+
+      div {@include flex(1 0 0)}
+    }
+
+    .showdrag {opacity: 1!important}
+  }
+}
+// Style
+
+ba-clicktestcontainer {
+  swipe>*:nth-child(1){
+    background: white;
+  }
+}
+
+$swipeitemheight: 44px;
+$leftrightopacity: 0.5;
+
+ba-swipeclickcontainer {
+  position: relative;
+  display: block;
+
+  icon {
+    @include flex(0 0 $swipeitemheight);
+    text-align: center;
+    margin: auto;
+  }
+
+  behind {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    @include display-flex;
+    z-index: 0;
+    box-sizing: border-box;
+    background: $grey1;
+
+    div {
+      @include flex(1 0 0);
+    }
+  }
+
+  swipe {
+    position: relative;
+    display: block;
+
+    container {
+      position: relative;
+      width: 300%;
+      left: -100%;
+      height: 100%;
+      @include display-flex;
+
+      swipeleft {
+        @include flex(1 0 0);
+        @include display-flex;
+        @include flex-order(1);
+        left: -100%;
+        z-index: 1;
+
+        background: #33CC00;
+        opacity: $leftrightopacity;
+
+        div {@include flex(1 0 0)}
+      }
+
+      //ba-item {
+      //  border-bottom: 1px solid #d3d3d3;
+      //  height: $swipeitemheight;
+      //  line-height: $swipeitemheight;
+      //  vertical-align: middle;
+      //  background: white;
+      //}
+
+      >*:nth-child(1) {
+        left: -100%;
+        @include flex(1 0 0);
+        @include flex-order(2);
+      }
+
+      swiperight {
+        @include flex(1 0 0);
+        @include display-flex;
+        @include flex-order(3);
+        z-index: 1;
+
+        background: yellow;
+        opacity: $leftrightopacity;
+
+        div {@include flex(1 0 0)}
+      }
+    }
+  }
+}
+// Style
+ba-swipeclickcontainer {
+  swipe>container>*:nth-child(1){
+    background: white;
+  }
+}
+
+//Drag
+body>swipe {
+  @include display-flex;
+
+  container {width: 100%}
+}
 $swipeitemheight: 44px;
 $leftrightopacity: 0.5;
 
@@ -334,6 +516,24 @@ ba-clickitem {
   }
 
 }
+
+$clickitemheigth : 44px;
+
+ba-eventitem {
+  @include display-flex;
+  @include flex-direction(column);
+
+  button {
+    @include flex(1 1 0);
+    @include user-select-none;
+    padding: 0 $clickitemheigth/2;
+    min-height: 44px;
+    text-align: center;
+    display: block;
+    color : inherit;
+  }
+}
+
 ba-selectableitem {
 
   selectableitem {

@@ -1,31 +1,29 @@
 
-Scoped.define("module:Clickitem", [
+Scoped.define("module:Eventitem", [
     "dynamics:Dynamic",
     "module:Templates"
 ], function (Dynamic, Templates, scoped) {
 
     return Dynamic.extend({scoped : scoped}, {
 
-        template: Templates.clickitem,
+        template: Templates.eventitem,
 
         attrs: {
+            counter : 0,
             model : {
-                value : 'Clickitem - Value'
+                value : 'Evenitem - Clicked '
             }
         },
 
         functions : {
             click : function () {
-                console.log('Click');
-                //console.log("You Clicked item : " + this.properties().getProp('model.value'));
-                //console.log(this.cid());
-                //this.trigger('event', this.cid());
+                this.trigger('event', this.cid());
             }
         },
 
         create : function () {
             this.on("event", function (cid) {
-                console.log('event from item: ' + cid);
+                this.set('counter',this.get('counter') + 1);
             }, this);
         }
 

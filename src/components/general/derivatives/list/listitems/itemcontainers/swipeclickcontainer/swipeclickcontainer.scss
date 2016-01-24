@@ -1,0 +1,93 @@
+
+$swipeitemheight: 44px;
+$leftrightopacity: 0.5;
+
+ba-swipeclickcontainer {
+  position: relative;
+  display: block;
+
+  icon {
+    @include flex(0 0 $swipeitemheight);
+    text-align: center;
+    margin: auto;
+  }
+
+  behind {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    @include display-flex;
+    z-index: 0;
+    box-sizing: border-box;
+    background: $grey1;
+
+    div {
+      @include flex(1 0 0);
+    }
+  }
+
+  swipe {
+    position: relative;
+    display: block;
+
+    container {
+      position: relative;
+      width: 300%;
+      left: -100%;
+      height: 100%;
+      @include display-flex;
+
+      swipeleft {
+        @include flex(1 0 0);
+        @include display-flex;
+        @include flex-order(1);
+        left: -100%;
+        z-index: 1;
+
+        background: #33CC00;
+        opacity: $leftrightopacity;
+
+        div {@include flex(1 0 0)}
+      }
+
+      //ba-item {
+      //  border-bottom: 1px solid #d3d3d3;
+      //  height: $swipeitemheight;
+      //  line-height: $swipeitemheight;
+      //  vertical-align: middle;
+      //  background: white;
+      //}
+
+      >*:nth-child(1) {
+        left: -100%;
+        @include flex(1 0 0);
+        @include flex-order(2);
+      }
+
+      swiperight {
+        @include flex(1 0 0);
+        @include display-flex;
+        @include flex-order(3);
+        z-index: 1;
+
+        background: yellow;
+        opacity: $leftrightopacity;
+
+        div {@include flex(1 0 0)}
+      }
+    }
+  }
+}
+// Style
+ba-swipeclickcontainer {
+  swipe>container>*:nth-child(1){
+    background: white;
+  }
+}
+
+//Drag
+body>swipe {
+  @include display-flex;
+
+  container {width: 100%}
+}
