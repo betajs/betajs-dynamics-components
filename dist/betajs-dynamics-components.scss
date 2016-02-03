@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.4 - 2016-01-24
+betajs-dynamics-components - v0.0.4 - 2016-02-02
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -154,10 +154,9 @@ a {color: $blue1}
   }
 }
 
-@mixin user-select-none {
+@mixin noselect {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
-  -khtml-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
@@ -412,6 +411,17 @@ ba-swipeclickcontainer {
   }
 }
 
+.nothing swipeleft {
+  background: lightgrey;
+}
+
+.delete swipeleft {
+  background: red;
+}
+swiperight {
+
+}
+
 //Drag
 body>swipe {
   @include display-flex;
@@ -525,7 +535,7 @@ ba-eventitem {
 
   button {
     @include flex(1 1 0);
-    @include user-select-none;
+    @include noselect;
     padding: 0 $clickitemheigth/2;
     min-height: 44px;
     text-align: center;
@@ -549,6 +559,7 @@ ba-selectableitem {
 ba-list {
   @include display-flex;
   overflow-y: scroll;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
 
   list {

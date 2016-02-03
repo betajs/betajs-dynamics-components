@@ -29,21 +29,32 @@ Scoped.define("module:Swipeclickcontainer", [
 					execute: function () {
 						//this.get("model").set("archived", true);
 						console.log("Swipe: other");
+						this.trigger('other');
+					}
+				},
+				"nothing": {
+					greater : 0,
+					less: 1/6,
+					execute: function (element) {
+						console.log("Swipe: Nothing will happen");
 					}
 				},
 				"archive": {
-					greater : 0,
-					less: 2 / 5,
+					greater : 1/6,
+					less: 2/3,
 					execute: function (element) {
 						console.log("Swipe: archive");
 						//element.parent().slideUp();
+						this.trigger('archive');
 					}
 				},
 				"delete": {
-					greater: 2 / 5,
+					greater: 2 / 3,
+					less: 1,
 					execute: function (element) {
 						console.log("Swipe: delete");
-						element.parent().slideUp();
+						this.trigger('delete');
+						//element.parent().slideUp();
 					}
 				}
 			},
@@ -95,11 +106,11 @@ Scoped.define("module:Swipeclickcontainer", [
 				start_event: null,
 				events: {
 					"move": function (doodad, event) {
-						console.log('move');
+						//console.log('move');
 						var element = event.element;
 						var parent = element.parent();
-						var w = parseInt(element.css("width"), 10)/3;
-                        var x = parseInt(element.css("left"), 10) + w;
+						var w = parseInt(element.css("width"), 10);
+                        var x = parseInt(element.css("left"), 10);
                         var a = {};
 						var actions = this.get('swipe_actions');
 						for (var cls in actions) {
@@ -112,12 +123,15 @@ Scoped.define("module:Swipeclickcontainer", [
 					},
 					"release": function (doodad, event) {
 						var element = event.element;
-						var w = parseInt(element.css("width"), 10)/3;
-						var x = parseInt(element.css("left"), 10) + w;
+						var w = parseInt(element.css("width"), 10);
+						var x = parseInt(element.css("left"), 10);
 						var actions = this.get('swipe_actions');
+
+						console.log(x);
 
 						for (var cls in actions) {
 							a = actions[cls];
+							console.log(w * a.greater);
 
 							if ((!('greater' in a) || x <= w * a.less) && (!('less' in a) || x >= w * a.greater)) {
 								event.source.abort();

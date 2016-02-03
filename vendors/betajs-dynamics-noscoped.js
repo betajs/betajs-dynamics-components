@@ -1,7 +1,7 @@
 /*!
-betajs-dynamics - v0.0.18 - 2015-12-05
+betajs-dynamics - v0.0.33 - 2016-02-02
 Copyright (c) Oliver Friedmann,Victor Lingenthal
-MIT Software License.
+Apache 2.0 Software License.
 */
 (function () {
 
@@ -16,10 +16,12 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "d71ebf84-e555-4e9b-b18a-11d74fdcefe2",
-		version: '183.1449325286878'
+		version: '218.1454469690945'
 	};
 });
 
+Scoped.assumeVersion("base:version", 444);
+Scoped.assumeVersion("browser:version", 65);
 Scoped.define("module:Data.Mesh", [
 	    "base:Class",
 	    "base:Events.EventsMixin",
@@ -430,13 +432,14 @@ Scoped.define("module:Data.Scope", [
 	    "base:Classes.ObjectIdMixin",
 	    "base:Functions",
 	    "base:Types",
+	    "base:Strings",
 	    "base:Objs",
 	    "base:Ids",
 	    "base:Properties.Properties",
 	    "base:Collections.Collection",
 	    "module:Data.ScopeManager",
 	    "module:Data.MultiScope"
-	], function (Class, EventsMixin, ListenMixin, ObjectIdMixin, Functions, Types, Objs, Ids, Properties, Collection, ScopeManager, MultiScope, scoped) {
+	], function (Class, EventsMixin, ListenMixin, ObjectIdMixin, Functions, Types, Strings, Objs, Ids, Properties, Collection, ScopeManager, MultiScope, scoped) {
 	return Class.extend({scoped: scoped}, [EventsMixin, ListenMixin, ObjectIdMixin, function (inherited) {
 		return {
 				
@@ -449,8 +452,12 @@ Scoped.define("module:Data.Scope", [
 					bind: {},
 					attrs: {},
 					extendables: [],
-					collections: {}
+					collections: {},
+					computed: {},
+					events: {}
 				}, options);
+				if (options.bindings)
+					options.bind = Objs.extend(options.bind, options.bindings);
 				var parent = options.parent;
 				this.__manager = parent ? parent.__manager : this._auto_destroy(new ScopeManager(this));
 				inherited.constructor.call(this);
@@ -479,6 +486,13 @@ Scoped.define("module:Data.Scope", [
 				Objs.iter(options.bind, function (value, key) {
 					var i = value.indexOf(":");
 					this.bind(this.scope(value.substring(0, i)), key, {secondKey: value.substring(i + 1)});
+				}, this);
+				Objs.iter(options.computed, function (value, key) {
+					var splt = Strings.splitFirst(key, ":");
+					this.__properties.compute(splt.head, value, splt.tail.split(","));
+				}, this);
+				Objs.iter(options.events, function (value, key) {
+					this.on(key, value, this);
 				}, this);
 			},
 			
@@ -550,10 +564,18 @@ Scoped.define("module:Data.Scope", [
 				return this;
 			},
 			
+			/* Deprecated */
 			call: function (name) {
+				return this.execute.apply(this, arguments);
+			},
+			
+			execute: function (name) {
 				var args = Functions.getArguments(arguments, 1);
 				try {					
-					return this.__functions[name].apply(this, args);
+					if (Types.is_string(name))
+						return this.__functions[name].apply(this, args);
+					else
+						return name.apply(this, args);
 				} catch (e) {
 					return this.handle_call_exception(name, args, e);
 				}
@@ -753,10 +775,11 @@ Scoped.define("module:Handlers.Attr", [
 	    "module:Parser",
 	    "jquery:",
 	    "base:Types",
+	    "base:Objs",
 	    "base:Strings",
 	    "module:Registries",
 	    "browser:Dom"
-	], function (Class, Parser, $, Types, Strings, Registries, Dom, scoped) {
+	], function (Class, Parser, $, Types, Objs, Strings, Registries, Dom, scoped) {
 	var Cls;
 	Cls = Class.extend({scoped: scoped}, function (inherited) {
 		return {
@@ -805,10 +828,15 @@ Scoped.define("module:Handlers.Attr", [
 				this._attribute = attribute;
 				this.__updateAttr();
 				var splt = this._attrName.split(":");
-				if (this._partial)
+				if (this._partial) {
 					this._partial.destroy();
-				if (Registries.partial.get(splt[0]))
+					this._partial = null;
+				}
+				if (Registries.partial.get(splt[0])) {
 					this._partial = Registries.partial.create(splt[0], this._node, this._dyn ? this._dyn.args : {}, this._attrValue, splt[1]);
+					if (this._partial.cls.meta.value_hidden)
+						this._attribute.value = "";
+				}
 				if (this._dyn) {
 					var self = this;
 					if (this._dyn.bidirectional && this._attrName == "value") {
@@ -839,22 +867,25 @@ Scoped.define("module:Handlers.Attr", [
 					var old = this._attrValue;
 					this._attrValue = value;
 					
-					var result = Dom.entitiesToUnicode(value);
-
+					if (!this._partial || !this._partial.cls.meta.value_hidden) {
+						var result = Dom.entitiesToUnicode(value);
+						
+						
+						/*
+						 *  Fixing a Safari bug. These three lines will cause Safari to crash: 
+						 *     
+						 *     <style> [class^="randomstring"] { background: white; } </style>
+						 *	   <div class="" id="test"></div>
+						 *	   <script> document.getElementById("test").attributes.class.value = null; </script>
+                         *
+						 */
+						if (result === null && this._attrName === "class")
+							result = "";
+						
+						
+						this._attribute.value = result;
+					}
 					
-					/*
-					 *  Fixing a Safari bug. These three lines will cause Safari to crash: 
-					 *     
-					 *     <style> [class^="randomstring"] { background: white; } </style>
-					 *	   <div class="" id="test"></div>
-					 *	   <script> document.getElementById("test").attributes.class.value = null; </script>
-                     *
-					 */
-					if (result === null && this._attrName === "class")
-						result = "";
-
-					
-					this._attribute.value = result;
 					if (this._partial)
 						this._partial.change(value, old);
 					if (this._attrName === "value" && this._element.value !== value)
@@ -869,11 +900,20 @@ Scoped.define("module:Handlers.Attr", [
 				this._tagHandler = handler;
 				if (!this._partial && Registries.prefixes[Strings.splitFirst(this._attrName, "-").head]) {
 					var innerKey = Strings.first_after(this._attrName, "-");					
-					this._tagHandler.setArgumentAttr(innerKey, this._attrValue);
+					this._tagHandler.setArgumentAttr(innerKey, Class.is_pure_json(this._attrValue) ? Objs.clone(this._attrValue, 1) : this._attrValue);
 					if (this._dyn && this._dyn.bidirectional) {
-						this._tagHandler.properties().on("change:" + innerKey, function (value) {
-							this._node.mesh().write(this._dyn.variable, value);
-						}, this);							
+						if (Class.is_pure_json(this._attrValue)) {
+							this._tagHandler.properties().bind(innerKey, this._node._handler.properties(), {
+								deep: true,
+								left: true,
+								right: true,
+								secondKey: this._dyn.variable
+							});
+						} else {
+							this._tagHandler.properties().on("change:" + innerKey, function (value) {
+								this._node.mesh().write(this._dyn.variable, value);
+							}, this);							
+						}
 					}
 				} else if (this._partial) {
 					this._partial.bindTagHandler(handler);
@@ -890,8 +930,13 @@ Scoped.define("module:Handlers.Attr", [
 			},
 			
 			activate: function () {
-				if (this._partial)
+				if (this._partial) {
+					if (this._partial.cls.meta.requires_tag_handler && !this._tagHandler) {
+						Registries.warning(this._partial.cls.classname + " is expecting a tag handler, but no registered tag handler for " + this._node.tag() + " has been found.");
+						return;
+					}
 					this._partial.activate();
+				}
 			},
 			
 			deactivate: function () {
@@ -905,8 +950,17 @@ Scoped.define("module:Handlers.Attr", [
 });
 
 Scoped.define("module:Handlers.HandlerMixin", [
-    "base:Objs", "base:Strings", "base:Functions", "jquery:", "browser:Loader", "module:Handlers.Node", "module:Registries", "module:Handlers.HandlerNameRegistry"
-], function (Objs, Strings, Functions, $, Loader, Node, Registries, HandlerNameRegistry) {
+    "base:Objs",
+    "base:Strings",
+    "base:Functions",
+	"base:Types",
+    "jquery:",
+    "browser:Loader",
+    "module:Handlers.Node",
+    "module:Registries",
+    "module:Handlers.HandlerNameRegistry",
+    "browser:DomMutation.NodeRemoveObserver"
+], function (Objs, Strings, Functions, Types, $, Loader, Node, Registries, HandlerNameRegistry, NodeRemoveObserver) {
 	return {		
 		
 		_notifications: {
@@ -941,32 +995,44 @@ Scoped.define("module:Handlers.HandlerMixin", [
 			options = options || {};
 			if (options.name_registry)
 				this.__nameRegistry = this.auto_destroy(new HandlerNameRegistry());
+			this.__types = options.types || {};
 			this._parentHandler = options.parentHandler || null;
+			this._parentElement = options.parentElement;
 			this._argumentAttrs = {};
-			var template = options.template || this.template;
+			this.template = options.template || this.template;
+			this.templateUrl = options.templateUrl || this.templateUrl;
+			if (this.templateUrl)
+				this.templateUrl = Strings.replaceAll(this.templateUrl, "%", Strings.last_after(this.cls.classname, ".").toLowerCase());
 			this.__element = options.element ? $(options.element) : null;
-			this.initialContent = this.__element ? this.__element.html() : $(options.parentElement).html();
-			this.__activeElement = this.__element ? this.__element : $(options.parentElement);
-			if (template)
-				this._handlerInitializeTemplate(template, options.parentElement);
+			this.initialContent = this.__element ? this.__element.html() : $(this._parentElement).html();
+			this.__activeElement = this.__element ? this.__element : $(this._parentElement);
+			if (options.remove_observe) {
+				this.__removeObserver = this.auto_destroy(NodeRemoveObserver.create(this.__activeElement.get(0)));
+				this.__removeObserver.on("node-removed", function () {
+					this.weakDestroy();
+				}, this);
+			}
+			this.__activeElement.get(0).dynamicshandler = this;
+			
+			/*
+			if (this.template)
+				this._handlerInitializeTemplate(this.template, this._parentElement);
 			else {
-				var templateUrl = options.templateUrl || this.templateUrl;
-				if (templateUrl) {
-					templateUrl = Strings.replaceAll(templateUrl, "%", Strings.last_after(this.cls.classname, ".").toLowerCase());
+				if (this.templateUrl) {
 					this.__deferActivate = true;
 					if (this.__element)
 						this.__element.html("");
-					else if (options.parentElement)
-						$(options.parentElement).html("");
-					Loader.loadHtml(templateUrl, function (template) {
+					else if (this._parentElement)
+						$(this._parentElement).html("");
+					Loader.loadHtml(this.templateUrl, function (template) {
 						this.__deferActivate = false;
-						this._handlerInitializeTemplate(template, options.parentElement);
+						this._handlerInitializeTemplate(template, this._parentElement);
 						if (this.__deferedActivate)
 							this.activate();
 					}, this);
-				} /*else
-					this._handlerInitializeTemplate(template, options.parentElement);*/
+				}
 			}
+			*/
 		},
 		
 		_handlerInitializeTemplate: function (template, parentElement) {
@@ -1011,6 +1077,8 @@ Scoped.define("module:Handlers.HandlerMixin", [
 		setArgumentAttr: function (key, value) {
 			if (key in this.__extendables) 
 				value = Objs.tree_extend(this.properties().get(key) || {}, value);
+			if (this.__types[key])
+				value = Types.parseType(value, this.__types[key]);
 			this.properties().set(key, value);
 			this._argumentAttrs[key] = true;
 		},
@@ -1028,10 +1096,25 @@ Scoped.define("module:Handlers.HandlerMixin", [
 		},
 		
 		activate: function () {
+			/*
 			if (this.__deferActivate) {
 				this.__deferedActivate = true;
 				return;
-			}		
+			}
+			*/
+			if (this.template)
+				this._handlerInitializeTemplate(this.template, this._parentElement);
+			else {
+				if (this.templateUrl) {
+					Loader.loadHtml(this.templateUrl, function (template) {
+						this.templateUrl = null;
+						this.template = template;
+						this.activate();
+					}, this);
+					return;
+				}
+			}
+			
 			this._notify("_activate");
 			this.__rootNodes = [];
 			var self = this;			
@@ -1139,6 +1222,11 @@ Scoped.define("module:Handlers.Partial", [
 		};
  	}, {
 		
+ 		meta: {
+ 			// value_hidden: false
+ 			// requires_tag_handler: false
+ 		},
+ 		
 		register: function (key, registry) {
 			registry = registry || Registries.partial;
 			registry.register(key, this);
@@ -1223,7 +1311,7 @@ Scoped.define("module:Handlers.Node", [
 				this._tagHandler = null;
 				
 				this._$element = $(element);
-				this._template = element.outerHTML;
+				this._template = Dom.outerHTML(element);
 				this._innerTemplate = element.innerHTML;
 				this._locals = locals || {};
 				this._active = true;
@@ -1276,6 +1364,10 @@ Scoped.define("module:Handlers.Node", [
 					this._attrs[attribute.name].updateAttribute(attribute);
 				else
 					this._attrs[attribute.name] = new Attr(this, attribute);
+			},
+			
+			tag: function () {
+				return this._tag;
 			},
 			
 			element: function () {
@@ -1385,7 +1477,7 @@ Scoped.define("module:Handlers.Node", [
 						if (!this._element.childNodes[i]["ba-handled"])
 							this._registerChild(this._element.childNodes[i]);
 				}
-				this._$element.css("display", "");
+				// this._$element.css("display", "");
 				Objs.iter(this._attrs, function (attr) {
 					attr.activate();
 				});
@@ -1400,8 +1492,12 @@ Scoped.define("module:Handlers.Node", [
 					this._dyn.value = value;
 					if ("textContent" in this._element)
 						this._element.textContent = Dom.entitiesToUnicode(value);
-					else
+					else if (Info.isInternetExplorer() && Info.internetExplorerVersion() < 9 && ("data" in this._element))
+						this._element.data = Dom.entitiesToUnicode(value === null ? "" : value);
+					else {
+						// OF: Not clear if this is ever executed and whether it actually does something meaningful.
 						this._$element.replaceWith(value);
+					}
 				}
 			},
 				
@@ -1473,6 +1569,12 @@ Scoped.define("module:Registries", ["base:Classes.ClassRegistry", "base:Strings"
 				return compiled.clone();
 			}
 			
+		},
+		
+		warning: function (s) {
+			try {
+				console.log(s);
+			} catch (e) {}
 		}
 	
 	};
@@ -1515,6 +1617,8 @@ Scoped.define("module:Partials.AttrsPartial", ["module:Handlers.Partial"], funct
  	var Cls = Partial.extend({scoped: scoped}, {
 		
 		_apply: function (value) {
+			if (!this._active)
+				return;
 			var props = this._node._tagHandler ? this._node._tagHandler.properties() : this._node.properties();
 			for (var key in value)
 				props.set(key, value[key]);
@@ -1526,38 +1630,6 @@ Scoped.define("module:Partials.AttrsPartial", ["module:Handlers.Partial"], funct
 
  	});
  	Cls.register("ba-attrs");
-	return Cls;
-});
-
-
-Scoped.define("module:Partials.DataPartial", ["module:Handlers.Partial"], function (Partial, scoped) {
-  	var Cls = Partial.extend({scoped: scoped},  {
-		
-		_apply: function (value) {
-			this._node._tagHandler.data(this._postfix, value);
-		},
-		
-		bindTagHandler: function (handler) {
-			this._apply(this._value);
-		}
-	
- 	});
- 	Cls.register("ba-data");
-	return Cls;
-});
-
-
-Scoped.define("module:Partials.FunctionsPartial", ["module:Handlers.Partial", "browser:Info", "base:Objs"], function (Partial, Info, Objs, scoped) {
- 	var Cls = Partial.extend({scoped: scoped}, function (inherited) {
- 		return {
-			
- 			bindTagHandler: function (handler) { 				
- 				Objs.extend(handler.__functions, this._value); 
- 			}
- 		
- 		};
- 	});
- 	Cls.register("ba-functions");
 	return Cls;
 });
 
@@ -1633,6 +1705,29 @@ Scoped.define("module:Partials.ClickPartial", ["module:Handlers.Partial"], funct
 	return Cls;
 });
 
+
+Scoped.define("module:Partials.DataPartial", ["module:Handlers.Partial"], function (Partial, scoped) {
+  	var Cls = Partial.extend({scoped: scoped},  {
+  		
+		_apply: function (value) {
+			this._node._tagHandler.data(this._postfix, value);
+		},
+		
+		bindTagHandler: function (handler) {
+			this._apply(this._value);
+		}
+	
+ 	}, {
+ 		
+ 		meta: {
+ 			requires_tag_handler: true
+ 		}
+ 		
+ 	});
+ 	Cls.register("ba-data");
+	return Cls;
+});
+
 Scoped.define("module:Partials.EventPartial", ["module:Handlers.Partial"], function (Partial, scoped) {
   	var Cls = Partial.extend({scoped: scoped}, {
 			
@@ -1644,6 +1739,21 @@ Scoped.define("module:Partials.EventPartial", ["module:Handlers.Partial"], funct
  		
  	});
  	Cls.register("ba-event");
+	return Cls;
+});
+
+
+Scoped.define("module:Partials.FunctionsPartial", ["module:Handlers.Partial", "browser:Info", "base:Objs"], function (Partial, Info, Objs, scoped) {
+ 	var Cls = Partial.extend({scoped: scoped}, function (inherited) {
+ 		return {
+			
+ 			bindTagHandler: function (handler) { 				
+ 				Objs.extend(handler.__functions, this._value); 
+ 			}
+ 		
+ 		};
+ 	});
+ 	Cls.register("ba-functions");
 	return Cls;
 });
 
@@ -1719,7 +1829,7 @@ Scoped.define("module:Partials.IgnorePartial", ["module:Handlers.Partial"], func
 });
 
 
-Scoped.define("module:Partials.EventPartial", ["module:Handlers.Partial", "base:Strings"], function (Partial, Strings, scoped) {
+Scoped.define("module:Partials.OnPartial", ["module:Handlers.Partial", "base:Strings"], function (Partial, Strings, scoped) {
   /**
    * @name ba-on
    *
@@ -1789,8 +1899,9 @@ Scoped.define("module:Partials.RepeatElementPartial", [
         "jquery:",
         "module:Parser",
         "base:Properties.Properties",
-        "base:Strings"
-	], function (Partial, Collection, FilteredCollection, Objs, $, Parser, Properties, Strings, scoped) {
+        "base:Strings",
+        "browser:Dom"
+	], function (Partial, Collection, FilteredCollection, Objs, $, Parser, Properties, Strings, Dom, scoped) {
   /**
    * @name ba-repeat-element
    *
@@ -1816,7 +1927,7 @@ Scoped.define("module:Partials.RepeatElementPartial", [
 			
  			constructor: function (node, args, value) {
  				inherited.constructor.apply(this, arguments);
- 				this.__filteredTemplate = $(node._template).removeAttr("ba-repeat-element").get(0).outerHTML;
+ 				this.__filteredTemplate = Dom.outerHTML($(node._template).removeAttr("ba-repeat-element").get(0));
  			},
  			
  			_activate: function () {
@@ -1977,15 +2088,12 @@ Scoped.define("module:Partials.RepeatPartial", [
  				var result = [];
  				var self = this;
  				var elements = this._newItemElements();
- 				var elementArr = [];
  				elements.each(function () {
  					result.push(self._node._registerChild(this, locals));
- 					elementArr.push($(this));
  				});
  				this._collectionChildren[item.cid()] = {
 					item: item,
-					nodes: result,
-					elements: elementArr
+					nodes: result
 				};
  				var idx = this._collection.getIndex(item);
  				if (idx < this._collection.count() - 1)
@@ -2007,23 +2115,34 @@ Scoped.define("module:Partials.RepeatPartial", [
  				return this._collectionChildren[item.cid()];
  			},
  			
- 			_prependItem: function (base, item) {
- 				var baseData = this._itemData(base);
+ 			_itemDataElements: function (item) {
  				var itemData = this._itemData(item);
- 				if (!baseData || !itemData)
+ 				if (!itemData)
+ 					return null;
+ 				var result = [];
+ 				Objs.iter(itemData.nodes, function (node) {
+ 					result.push(node.$element());
+ 				});
+ 				return result;
+ 			},
+ 			
+ 			_prependItem: function (base, item) {
+ 				var baseDataElements = this._itemDataElements(base);
+ 				var itemDataElements = this._itemDataElements(item);
+ 				if (!baseDataElements || !itemDataElements)
  					return;
- 				Objs.iter(itemData.elements, function (element) {
- 					element.insertBefore(baseData.elements[0]);
+ 				Objs.iter(itemDataElements, function (element) {
+ 					element.insertBefore(baseDataElements[0]);
  				});
  			},
  			
  			_appendItem: function (base, item) {
- 				var baseData = this._itemData(base);
- 				var itemData = this._itemData(item);
- 				if (!baseData || !itemData)
+ 				var baseDataElements = this._itemDataElements(base);
+ 				var itemDataElements = this._itemDataElements(item);
+ 				if (!baseDataElements || !itemDataElements)
  					return;
- 				var current = baseData.elements[baseData.elements.length - 1];
- 				Objs.iter(itemData.elements, function (element) {
+ 				var current = baseDataElements[baseDataElements.length - 1];
+ 				Objs.iter(itemDataElements, function (element) {
  					current.after(element);
  					current = element;
  				});
@@ -2160,7 +2279,8 @@ Scoped.define("module:Partials.TapPartial", ["module:Handlers.Partial", "browser
  			constructor: function (node, args, value) {
  				inherited.constructor.apply(this, arguments);
  				var self = this;
- 				this._node._$element.on(Info.isMobile() ? "touchstart" : "click", function () {
+ 				this._node._$element.on(Info.isMobile() ? "touchstart" : "click", function (e) {
+ 					e.stopPropagation();
  					self._execute();
  				});
  			}
@@ -2169,6 +2289,29 @@ Scoped.define("module:Partials.TapPartial", ["module:Handlers.Partial", "browser
  	});
  	Cls.register("ba-tap");
 	return Cls;
+});
+
+Scoped.define("module:Partials.TemplatePartial",
+	["module:Handlers.Partial"], function (Partial, scoped) {
+
+ 	var Cls = Partial.extend({scoped: scoped}, {		
+
+		bindTagHandler: function (handler) {
+			if (this._value)
+				handler.template = this._value;
+		}
+		
+ 	}, {
+ 		
+ 		meta: {
+ 			requires_tag_handler: true,
+ 			value_hidden: true
+ 		}
+ 		
+ 	});
+ 	Cls.register("ba-template");
+	return Cls;
+
 });
 
 
@@ -2208,14 +2351,104 @@ Scoped.define("module:Partials.TemplateUrlPartial",
 
 });
 
+Scoped.define("module:DomObserver", [
+    "base:Class",
+    "base:Objs",
+    "browser:DomMutation.NodeInsertObserver",
+    "module:Registries",
+    "module:Dynamic",
+    "jquery:"
+], function (Class, Objs, NodeInsertObserver, Registries, Dynamic, $, scoped) {
+	return Class.extend({scoped: scoped}, function (inherited) {
+		return {
+			
+			constructor: function (options) {
+				inherited.constructor.call(this);
+				options = options || {};
+				this.__root = options.root || document.body;
+				this.__persistent_dynamics = !!options.persistent_dynamics;
+				this.__allowed_dynamics = options.allowed_dynamics ? Objs.objectify(options.allowed_dynamics) : null;
+				this.__forbidden_dynamics = options.forbidden_dynamics ? Objs.objectify(options.forbidden_dynamics) : null;
+				this.__dynamics = {};
+				if (!options.ignore_existing) {
+					Objs.iter(Registries.handler.classes(), function (cls, key) {
+						if (this.__forbidden_dynamics && this.__forbidden_dynamics[key])
+							return;
+						if (this.__allowed_dynamics && !this.__allowed_dynamics[key])
+							return;
+						var self = this;
+						$(this.__root).find(key).each(function () {
+							if (this.dynamicshandler)
+								return;
+							self.__nodeInserted(this);
+						});
+					}, this);
+				}
+				this.__observer = NodeInsertObserver.create({
+					root: this.__root,
+					filter: this.__observerFilter,
+					context: this
+				});
+				this.__observer.on("node-inserted", this.__nodeInserted, this);
+			},
+			
+			destroy: function () {
+				this.__observer.destroy();
+				Objs.iter(this.__dynamics, function (dynamic) {
+					dynamic.off(null, null, this);
+					if (!this.__persistent_dynamics)
+						dynamic.weakDestroy();
+				}, this);
+				inherited.destroy.call(this);
+			},
+			
+			__observerFilter: function (node) {
+				if (node.dynamicshandler || !node.tagName)
+					return false;
+				var tag = node.tagName.toLowerCase();
+				if (!Registries.handler.get(tag))
+					return false;
+				if (this.__forbidden_dynamics && this.__forbidden_dynamics[tag])
+					return false;
+				if (this.__allowed_dynamics && !this.__allowed_dynamics[tag])
+					return false;
+				return true;
+			},
+			
+			__nodeInserted: function (node) {
+				var dynamic = new Dynamic({
+					element: node,
+					remove_observe: true
+				});
+				this.__dynamics[dynamic.cid()] = dynamic;
+				dynamic.on("destroy", function () {
+					delete this.__dynamics[dynamic.cid()];
+				}, this);
+				dynamic.activate();
+			}
+			
+		};
+	}, {
+		
+		__singleton: null,
+		
+		activate: function (options) {
+			if (!this.__singleton)
+				this.__singleton = new this(options);
+		}		
+		
+	});
+});
 Scoped.define("module:Dynamic", [
    	    "module:Data.Scope",
    	    "module:Handlers.HandlerMixin",
    	    "base:Objs",
    	    "base:Strings",
+   	    "base:Types",
+   	    "base:Functions",
    	    "module:Registries",
    	    "jquery:"
-   	], function (Scope, HandlerMixin, Objs, Strings, Registries, $, scoped) {
+   	], function (Scope, HandlerMixin, Objs, Strings, Types, Functions, Registries, $, scoped) {
 	var Cls;
 	Cls = Scope.extend({scoped: scoped}, [HandlerMixin, function (inherited) {
    		return {
@@ -2230,8 +2463,20 @@ Scoped.define("module:Dynamic", [
 				this.domevents = Objs.extend(this.domevents, options.domevents);
 				this.windowevents = Objs.extend(this.windowevents, options.windowevents);
 				Objs.iter(this.cls.__initialForward, function (key) {
-					if (!(key in options) && (key in this))
+					if (!(key in this))
+						return;
+					if (key in options) {
+						if (Types.is_object(this[key]) && Types.is_object(options[key]))
+							options[key] = Objs.extend(Objs.clone(this[key], 1), options[key]);
+					} else
 						options[key] = this[key];
+				}, this);
+				Objs.iter(this.object_functions, function (key) {
+					this[key] = function () {
+						var args = Functions.getArguments(arguments);
+						args.unshift(key);
+						return this.execute.apply(this, args);
+					};
 				}, this);
 				if (!options.parent && options.parentHandler) {
 					var ph = options.parentHandler;
@@ -2248,15 +2493,15 @@ Scoped.define("module:Dynamic", [
 				this.functions = this.__functions;
 				this._handlerInitialize(options);
 				this.__createActivate = options.create || function () {};
+				this.__registered_dom_events = [];
+				this.dom_events = {};
+				this.window_events = {};
 			},
 			
 			handle_call_exception: function (name, args, e) {
-				console.log("Dynamics Exception in '" + this.cls.classname + "' calling method '" + name + "' : " + e);
+				Registries.warning("Dynamics Exception in '" + this.cls.classname + "' calling method '" + name + "' : " + e);
 				return null;
 			},
-			
-			domevents: {},
-			windowevents: {},
 			
 			_afterActivate: function (activeElement) {
 				this.activeElement().off("." + this.cid() + "-domevents");
@@ -2265,6 +2510,7 @@ Scoped.define("module:Dynamic", [
 				Objs.iter(this.domevents, function (target, event) {
 					var ev = event.split(" ");
 					var source = ev.length === 1 ? this.activeElement() : this.activeElement().find(ev[1]);
+					this.__registered_dom_events.push(source);
 					source.on(ev[0] + "." + this.cid() + "-domevents", function (eventData) {
 						self.call(target, eventData);
 					});
@@ -2277,7 +2523,9 @@ Scoped.define("module:Dynamic", [
 			},
 			
 			destroy: function () {
-				this.activeElement().off("." + this.cid() + "-domevents");
+				Objs.iter(this.__registered_dom_events, function (source) {
+					source.off("." + this.cid() + "-domevents");
+				}, this);
 				$(window).off("." + this.cid() + "-windowevents");
 				inherited.destroy.call(this);
 			}
@@ -2286,7 +2534,7 @@ Scoped.define("module:Dynamic", [
 	}], {
 		
 		__initialForward: [
-		    "functions", "attrs", "extendables", "collections", "template", "create", "bind", "scopes"
+		    "functions", "attrs", "extendables", "collections", "template", "create", "scopes", "bindings", "computed", "types", "events"
         ],
 		
 		canonicName: function () {
@@ -2295,6 +2543,10 @@ Scoped.define("module:Dynamic", [
 		
 		registeredName: function () {
 			return this.__registeredName || ("ba-" + this.canonicName());
+		},
+		
+		findByElement: function (element) {
+			return $(element).get(0).dynamicshandler;
 		},
 		
 		register: function (key, registry) {
@@ -2321,7 +2573,16 @@ Scoped.define("module:Dynamic", [
 		},
 		
 		string: function (key) {
-			return this.__stringTable.get(key, this.registeredName());
+			var result = this.__stringTable.get(key, this.registeredName());
+			if (!result && this.parent.string)
+				result = this.parent.string(key);
+			return result;
+		},
+		
+		_extender: {
+			attrs: function (base, overwrite) {
+				return Objs.extend(Objs.clone(base, 1), overwrite);
+			}
 		}
 	
 	});

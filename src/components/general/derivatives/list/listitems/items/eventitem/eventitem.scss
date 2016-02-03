@@ -7,7 +7,7 @@ ba-eventitem {
 
   button {
     @include flex(1 1 0);
-    @include user-select-none;
+    @include noselect;
     padding: 0 $clickitemheigth/2;
     min-height: 44px;
     text-align: center;

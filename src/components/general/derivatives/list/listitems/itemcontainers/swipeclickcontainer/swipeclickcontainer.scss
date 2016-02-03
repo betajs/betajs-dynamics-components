@@ -85,6 +85,17 @@ ba-swipeclickcontainer {
   }
 }
 
+.nothing swipeleft {
+  background: lightgrey;
+}
+
+.delete swipeleft {
+  background: red;
+}
+swiperight {
+
+}
+
 //Drag
 body>swipe {
   @include display-flex;

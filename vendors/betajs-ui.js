@@ -1,568 +1,616 @@
 /*!
-betajs-ui - v1.0.2 - 2015-12-01
+betajs-ui - v1.0.7 - 2016-02-02
 Copyright (c) Oliver Friedmann,Victor Lingenthal
-MIT Software License.
+Apache 2.0 Software License.
 */
 /*!
-betajs-scoped - v0.0.2 - 2015-07-08
+betajs-scoped - v0.0.6 - 2016-01-25
 Copyright (c) Oliver Friedmann
-MIT Software License.
+Apache 2.0 Software License.
 */
-var Scoped = (function () {
-var Globals = {
+var Scoped = function () {
+	var Globals = {
 
-	get : function(key) {
-		if (typeof window !== "undefined")
-			return window[key];
-		if (typeof global !== "undefined")
-			return global[key];
-		return null;
-	},
+		get: function (key) {
+			if (typeof window !== "undefined") return window[key];
+			if (typeof global !== "undefined") return global[key];
+			return null;
+		},
 
-	set : function(key, value) {
-		if (typeof window !== "undefined")
-			window[key] = value;
-		if (typeof global !== "undefined")
-			global[key] = value;
-		return value;
-	},
-	
-	setPath: function (path, value) {
-		var args = path.split(".");
-		if (args.length == 1)
-			return this.set(path, value);		
-		var current = this.get(args[0]) || this.set(args[0], {});
-		for (var i = 1; i < args.length - 1; ++i) {
-			if (!(args[i] in current))
-				current[args[i]] = {};
-			current = current[args[i]];
+		set: function (key, value) {
+			if (typeof window !== "undefined") window[key] = value;
+			if (typeof global !== "undefined") global[key] = value;
+			return value;
+		},
+
+		setPath: function (path, value) {
+			var args = path.split(".");
+			if (args.length == 1) return this.set(path, value);
+			var current = this.get(args[0]) || this.set(args[0], {});
+			for (var i = 1; i < args.length - 1; ++i) {
+				if (!(args[i] in current)) current[args[i]] = {};
+				current = current[args[i]];
+			}
+			current[args[args.length - 1]] = value;
+			return value;
+		},
+
+		getPath: function (path) {
+			var args = path.split(".");
+			if (args.length == 1) return this.get(path);
+			var current = this.get(args[0]);
+			for (var i = 1; i < args.length; ++i) {
+				if (!current) return current;
+				current = current[args[i]];
+			}
+			return current;
 		}
-		current[args[args.length - 1]] = value;
-		return value;
-	},
-	
-	getPath: function (path) {
-		var args = path.split(".");
-		if (args.length == 1)
-			return this.get(path);		
-		var current = this.get(args[0]);
-		for (var i = 1; i < args.length; ++i) {
-			if (!current)
-				return current;
-			current = current[args[i]];
-		}
-		return current;
-	}
 
-};
-var Helper = {
-		
-	method: function (obj, func) {
-		return function () {
-			return func.apply(obj, arguments);
-		};
-	},
-	
-	extend: function (base, overwrite) {
-		base = base || {};
-		overwrite = overwrite || {};
-		for (var key in overwrite)
-			base[key] = overwrite[key];
-		return base;
-	},
-	
-	typeOf: function (obj) {
-		return Object.prototype.toString.call(obj) === '[object Array]' ? "array" : typeof obj;
-	},
-	
-	isEmpty: function (obj) {
-		if (obj === null || typeof obj === "undefined")
+	};
+
+	var Helper = {
+
+		method: function (obj, func) {
+			return function () {
+				return func.apply(obj, arguments);
+			};
+		},
+
+		extend: function (base, overwrite) {
+			base = base || {};
+			overwrite = overwrite || {};
+			for (var key in overwrite) base[key] = overwrite[key];
+			return base;
+		},
+
+		typeOf: function (obj) {
+			return Object.prototype.toString.call(obj) === '[object Array]' ? "array" : typeof obj;
+		},
+
+		isEmpty: function (obj) {
+			if (obj === null || typeof obj === "undefined") return true;
+			if (this.typeOf(obj) == "array") return obj.length === 0;
+			if (typeof obj !== "object") return false;
+			for (var key in obj) return false;
 			return true;
-		if (this.typeOf(obj) == "array")
-			return obj.length === 0;
-		if (typeof obj !== "object")
-			return false;
-		for (var key in obj)
-			return false;
-		return true;
-	},
-	
-	matchArgs: function (args, pattern) {
-		var i = 0;
-		var result = {};
-		for (var key in pattern) {
-			if (pattern[key] === true || this.typeOf(args[i]) == pattern[key]) {
-				result[key] = args[i];
-				i++;
-			} else if (this.typeOf(args[i]) == "undefined")
-				i++;
-		}
-		return result;
-	},
-	
-	stringify: function (value) {
-		if (this.typeOf(value) == "function")
-			return "" + value;
-		return JSON.stringify(value);
-	}	
+		},
 
-};
-var Attach = {
-		
-	__namespace: "Scoped",
-	
-	upgrade: function (namespace) {
-		var current = Globals.get(namespace || Attach.__namespace);
-		if (current && Helper.typeOf(current) == "object" && current.guid == this.guid && Helper.typeOf(current.version) == "string") {
-			var my_version = this.version.split(".");
-			var current_version = current.version.split(".");
-			var newer = false;
-			for (var i = 0; i < Math.min(my_version.length, current_version.length); ++i) {
-				newer = parseInt(my_version[i], 10) > parseInt(current_version[i], 10);
-				if (my_version[i] != current_version[i]) 
-					break;
+		matchArgs: function (args, pattern) {
+			var i = 0;
+			var result = {};
+			for (var key in pattern) {
+				if (pattern[key] === true || this.typeOf(args[i]) == pattern[key]) {
+					result[key] = args[i];
+					i++;
+				} else if (this.typeOf(args[i]) == "undefined") i++;
 			}
-			return newer ? this.attach(namespace) : current;				
-		} else
-			return this.attach(namespace);		
-	},
+			return result;
+		},
 
-	attach : function(namespace) {
-		if (namespace)
-			Attach.__namespace = namespace;
-		var current = Globals.get(Attach.__namespace);
-		if (current == this)
+		stringify: function (value) {
+			if (this.typeOf(value) == "function") return "" + value;
+			return JSON.stringify(value);
+		}
+
+	};
+	var Attach = {
+
+		__namespace: "Scoped",
+		__revert: null,
+
+		upgrade: function (namespace) {
+			var current = Globals.get(namespace || Attach.__namespace);
+			if (current && Helper.typeOf(current) == "object" && current.guid == this.guid && Helper.typeOf(current.version) == "string") {
+				var my_version = this.version.split(".");
+				var current_version = current.version.split(".");
+				var newer = false;
+				for (var i = 0; i < Math.min(my_version.length, current_version.length); ++i) {
+					newer = parseInt(my_version[i], 10) > parseInt(current_version[i], 10);
+					if (my_version[i] != current_version[i]) break;
+				}
+				return newer ? this.attach(namespace) : current;
+			} else return this.attach(namespace);
+		},
+
+		attach: function (namespace) {
+			if (namespace) Attach.__namespace = namespace;
+			var current = Globals.get(Attach.__namespace);
+			if (current == this) return this;
+			Attach.__revert = current;
+			if (current) {
+				try {
+					var exported = current.__exportScoped();
+					this.__exportBackup = this.__exportScoped();
+					this.__importScoped(exported);
+				} catch (e) {
+					// We cannot upgrade the old version.
+				}
+			}
+			Globals.set(Attach.__namespace, this);
 			return this;
-		Attach.__revert = current;
-		Globals.set(Attach.__namespace, this);
-		return this;
-	},
-	
-	detach: function (forceDetach) {
-		if (forceDetach)
-			Globals.set(Attach.__namespace, null);
-		if (typeof Attach.__revert != "undefined")
-			Globals.set(Attach.__namespace, Attach.__revert);
-		delete Attach.__revert;
-		return this;
-	},
-	
-	exports: function (mod, object, forceExport) {
-		mod = mod || (typeof module != "undefined" ? module : null);
-		if (typeof mod == "object" && mod && "exports" in mod && (forceExport || mod.exports == this || !mod.exports || Helper.isEmpty(mod.exports)))
-			mod.exports = object || this;
-		return this;
-	}	
+		},
 
-};
+		detach: function (forceDetach) {
+			if (forceDetach) Globals.set(Attach.__namespace, null);
+			if (typeof Attach.__revert != "undefined") Globals.set(Attach.__namespace, Attach.__revert);
+			delete Attach.__revert;
+			if (Attach.__exportBackup) this.__importScoped(Attach.__exportBackup);
+			return this;
+		},
 
-function newNamespace (options) {
-	
-	options = Helper.extend({
-		tree: false,
-		global: false,
-		root: {}
-	}, options);
-	
-	function initNode(options) {
-		return Helper.extend({
-			route: null,
-			parent: null,
-			children: {},
-			watchers: [],
-			data: {},
-			ready: false,
-			lazy: []
-		}, options);
-	}
-	
-	var nsRoot = initNode({ready: true});
-	
-	var treeRoot = null;
-	
-	if (options.tree) {
-		if (options.global) {
-			try {
-				if (window)
-					treeRoot = window;
-			} catch (e) { }
-			try {
-				if (global)
-					treeRoot = global;
-			} catch (e) { }
-		} else
-			treeRoot = options.root;
-		nsRoot.data = treeRoot;
-	}
-	
-	function nodeDigest(node) {
-		if (node.ready)
-			return;
-		if (node.parent && !node.parent.ready) {
-			nodeDigest(node.parent);
-			return;
+		exports: function (mod, object, forceExport) {
+			mod = mod || (typeof module != "undefined" ? module : null);
+			if (typeof mod == "object" && mod && "exports" in mod && (forceExport || mod.exports == this || !mod.exports || Helper.isEmpty(mod.exports))) mod.exports = object || this;
+			return this;
 		}
-		if (node.route in node.parent.data) {
-			node.data = node.parent.data[node.route];
+
+	};
+
+	function newNamespace(opts) {
+
+		var options = {
+			tree: typeof opts.tree === "boolean" ? opts.tree : false,
+			global: typeof opts.global === "boolean" ? opts.global : false,
+			root: typeof opts.root === "object" ? opts.root : {}
+		};
+
+		function initNode(options) {
+			return {
+				route: typeof options.route === "string" ? options.route : null,
+				parent: typeof options.parent === "object" ? options.parent : null,
+				ready: typeof options.ready === "boolean" ? options.ready : false,
+				children: {},
+				watchers: [],
+				data: {},
+				lazy: []
+			};
+		}
+
+		var nsRoot = initNode({ ready: true });
+
+		if (options.tree) {
+			if (options.global) {
+				try {
+					if (window) nsRoot.data = window;
+				} catch (e) {}
+				try {
+					if (global) nsRoot.data = global;
+				} catch (e) {}
+			} else nsRoot.data = options.root;
+		}
+
+		function nodeDigest(node) {
+			if (node.ready) return;
+			if (node.parent && !node.parent.ready) {
+				nodeDigest(node.parent);
+				return;
+			}
+			if (node.route && node.parent && node.route in node.parent.data) {
+				node.data = node.parent.data[node.route];
+				node.ready = true;
+				for (var i = 0; i < node.watchers.length; ++i) node.watchers[i].callback.call(node.watchers[i].context || this, node.data);
+				node.watchers = [];
+				for (var key in node.children) nodeDigest(node.children[key]);
+			}
+		}
+
+		function nodeEnforce(node) {
+			if (node.ready) return;
+			if (node.parent && !node.parent.ready) nodeEnforce(node.parent);
 			node.ready = true;
-			for (var i = 0; i < node.watchers.length; ++i)
-				node.watchers[i].callback.call(node.watchers[i].context || this, node.data);
+			if (node.parent) {
+				if (options.tree && typeof node.parent.data == "object") node.parent.data[node.route] = node.data;
+			}
+			for (var i = 0; i < node.watchers.length; ++i) node.watchers[i].callback.call(node.watchers[i].context || this, node.data);
 			node.watchers = [];
-			for (var key in node.children)
-				nodeDigest(node.children[key]);
 		}
-	}
-	
-	function nodeEnforce(node) {
-		if (node.ready)
-			return;
-		if (node.parent && !node.parent.ready)
-			nodeEnforce(node.parent);
-		node.ready = true;
-		if (options.tree && typeof node.parent.data == "object")
-			node.parent.data[node.route] = node.data;
-		for (var i = 0; i < node.watchers.length; ++i)
-			node.watchers[i].callback.call(node.watchers[i].context || this, node.data);
-		node.watchers = [];
-	}
-	
-	function nodeSetData(node, value) {
-		if (typeof value == "object") {
-			for (var key in value) {
-				node.data[key] = value[key];
-				if (node.children[key])
-					node.children[key].data = value[key];
-			}
-		} else
-			node.data = value;
-		nodeEnforce(node);
-		for (var k in node.children)
-			nodeDigest(node.children[k]);
-	}
-	
-	function nodeClearData(node) {
-		if (node.ready && node.data) {
-			for (var key in node.data)
-				delete node.data[key];
-		}
-	}
-	
-	function nodeNavigate(path) {
-		if (!path)
-			return nsRoot;
-		var routes = path.split(".");
-		var current = nsRoot;
-		for (var i = 0; i < routes.length; ++i) {
-			if (routes[i] in current.children)
-				current = current.children[routes[i]];
-			else {
-				current.children[routes[i]] = initNode({
-					parent: current,
-					route: routes[i]
-				});
-				current = current.children[routes[i]];
-				nodeDigest(current);
-			}
-		}
-		return current;
-	}
-	
-	function nodeAddWatcher(node, callback, context) {
-		if (node.ready)
-			callback.call(context || this, node.data);
-		else {
-			node.watchers.push({
-				callback: callback,
-				context: context
-			});
-			if (node.lazy.length > 0) {
-				var f = function (node) {
-					if (node.lazy.length > 0) {
-						var lazy = node.lazy.shift();
-						lazy.callback.call(lazy.context || this, node.data);
-						f(node);
-					}
-				};
-				f(node);
-			}
-		}
-	}
-	
-	function nodeUnresolvedWatchers(node, base, result) {
-		node = node || nsRoot;
-		result = result || [];
-		if (!node.ready)
-			result.push(base);
-		for (var k in node.children) {
-			var c = node.children[k];
-			var r = (base ? base + "." : "") + c.route;
-			result = nodeUnresolvedWatchers(c, r, result);
-		}
-		return result;
-	}
 
-	return {
-		
-		extend: function (path, value) {
-			nodeSetData(nodeNavigate(path), value);
-		},
-		
-		set: function (path, value) {
-			var node = nodeNavigate(path);
-			if (node.data)
-				nodeClearData(node);
-			nodeSetData(node, value);
-		},
-		
-		lazy: function (path, callback, context) {
-			var node = nodeNavigate(path);
-			if (node.ready)
-				callback(context || this, node.data);
-			else {
-				node.lazy.push({
+		function nodeSetData(node, value) {
+			if (typeof value == "object" && node.ready) {
+				for (var key in value) node.data[key] = value[key];
+			} else node.data = value;
+			if (typeof value == "object") {
+				for (var ckey in value) {
+					if (node.children[ckey]) node.children[ckey].data = value[ckey];
+				}
+			}
+			nodeEnforce(node);
+			for (var k in node.children) nodeDigest(node.children[k]);
+		}
+
+		function nodeClearData(node) {
+			if (node.ready && node.data) {
+				for (var key in node.data) delete node.data[key];
+			}
+		}
+
+		function nodeNavigate(path) {
+			if (!path) return nsRoot;
+			var routes = path.split(".");
+			var current = nsRoot;
+			for (var i = 0; i < routes.length; ++i) {
+				if (routes[i] in current.children) current = current.children[routes[i]];else {
+					current.children[routes[i]] = initNode({
+						parent: current,
+						route: routes[i]
+					});
+					current = current.children[routes[i]];
+					nodeDigest(current);
+				}
+			}
+			return current;
+		}
+
+		function nodeAddWatcher(node, callback, context) {
+			if (node.ready) callback.call(context || this, node.data);else {
+				node.watchers.push({
 					callback: callback,
 					context: context
 				});
-			}
-		},
-		
-		digest: function (path) {
-			nodeDigest(nodeNavigate(path));
-		},
-		
-		obtain: function (path, callback, context) {
-			nodeAddWatcher(nodeNavigate(path), callback, context);
-		},
-		
-		unresolvedWatchers: function (path) {
-			return nodeUnresolvedWatchers(nodeNavigate(path), path);
-		}
-		
-	};
-	
-}
-function newScope (parent, parentNamespace, rootNamespace, globalNamespace) {
-	
-	var self = this;
-	var nextScope = null;
-	var childScopes = [];
-	var localNamespace = newNamespace({tree: true});
-	var privateNamespace = newNamespace({tree: false});
-	
-	var bindings = {
-		"global": {
-			namespace: globalNamespace
-		}, "root": {
-			namespace: rootNamespace
-		}, "local": {
-			namespace: localNamespace
-		}, "default": {
-			namespace: privateNamespace
-		}, "parent": {
-			namespace: parentNamespace
-		}, "scope": {
-			namespace: localNamespace,
-			readonly: false
-		}
-	};
-	
-	var custom = function (argmts, name, callback) {
-		var args = Helper.matchArgs(argmts, {
-			options: "object",
-			namespaceLocator: true,
-			dependencies: "array",
-			hiddenDependencies: "array",
-			callback: true,
-			context: "object"
-		});
-		
-		var options = Helper.extend({
-			lazy: this.options.lazy
-		}, args.options || {});
-		
-		var ns = this.resolve(args.namespaceLocator);
-		
-		var execute = function () {
-			this.require(args.dependencies, args.hiddenDependencies, function () {
-				arguments[arguments.length - 1].ns = ns;
-				if (this.options.compile) {
-					var params = [];
-					for (var i = 0; i < argmts.length; ++i)
-						params.push(Helper.stringify(argmts[i]));
-					this.compiled += this.options.ident + "." + name + "(" + params.join(", ") + ");\n\n";
-				}
-				var result = args.callback.apply(args.context || this, arguments);
-				callback.call(this, ns, result);
-			}, this);
-		};
-		
-		if (options.lazy)
-			ns.namespace.lazy(ns.path, execute, this);
-		else
-			execute.apply(this);
-
-		return this;
-	};
-	
-	return {
-		
-		getGlobal: Helper.method(Globals, Globals.getPath),
-		setGlobal: Helper.method(Globals, Globals.setPath),
-		
-		options: {
-			lazy: false,
-			ident: "Scoped",
-			compile: false			
-		},
-		
-		compiled: "",
-		
-		nextScope: function () {
-			if (!nextScope)
-				nextScope = newScope(this, localNamespace, rootNamespace, globalNamespace);
-			return nextScope;
-		},
-		
-		subScope: function () {
-			var sub = this.nextScope();
-			childScopes.push(sub);
-			nextScope = null;
-			return sub;
-		},
-		
-		binding: function (alias, namespaceLocator, options) {
-			if (!bindings[alias] || !bindings[alias].readonly) {
-				var ns;
-				if (Helper.typeOf(namespaceLocator) != "string") {
-					ns = {
-						namespace: newNamespace({
-							tree: true,
-							root: namespaceLocator
-						}),
-						path: null	
+				if (node.lazy.length > 0) {
+					var f = function (node) {
+						if (node.lazy.length > 0) {
+							var lazy = node.lazy.shift();
+							lazy.callback.call(lazy.context || this, node.data);
+							f(node);
+						}
 					};
-				} else
-					ns = this.resolve(namespaceLocator);
-				bindings[alias] = Helper.extend(options, ns);
+					f(node);
+				}
 			}
-			return this;
-		},
-		
-		resolve: function (namespaceLocator) {
-			var parts = namespaceLocator.split(":");
-			if (parts.length == 1) {
-				return {
-					namespace: privateNamespace,
-					path: parts[0]
-				};
-			} else {
-				var binding = bindings[parts[0]];
-				if (!binding)
-					throw ("The namespace '" + parts[0] + "' has not been defined (yet).");
-				return {
-					namespace: binding.namespace,
-					path : binding.path && parts[1] ? binding.path + "." + parts[1] : (binding.path || parts[1])
-				};
+		}
+
+		function nodeUnresolvedWatchers(node, base, result) {
+			node = node || nsRoot;
+			result = result || [];
+			if (!node.ready) result.push(base);
+			for (var k in node.children) {
+				var c = node.children[k];
+				var r = (base ? base + "." : "") + c.route;
+				result = nodeUnresolvedWatchers(c, r, result);
 			}
-		},
-		
-		define: function () {
-			return custom.call(this, arguments, "define", function (ns, result) {
-				ns.namespace.set(ns.path, result);
-			});
-		},
-		
-		extend: function () {
-			return custom.call(this, arguments, "extend", function (ns, result) {
-				ns.namespace.extend(ns.path, result);
-			});
-		},
-		
-		condition: function () {
-			return custom.call(this, arguments, "condition", function (ns, result) {
-				if (result)
-					ns.namespace.set(ns.path, result);
-			});
-		},
-		
-		require: function () {
-			var args = Helper.matchArgs(arguments, {
-				dependencies: "array",
-				hiddenDependencies: "array",
-				callback: "function",
-				context: "object"
-			});
-			args.callback = args.callback || function () {};
-			var dependencies = args.dependencies || [];
-			var allDependencies = dependencies.concat(args.hiddenDependencies || []);
-			var count = allDependencies.length;
-			var deps = [];
-			var environment = {};
-			if (count) {
-				var f = function (value) {
-					if (this.i < deps.length)
-						deps[this.i] = value;
-					count--;
-					if (count === 0) {
-						deps.push(environment);
-						args.callback.apply(args.context || this.ctx, deps);
-					}
-				};
-				for (var i = 0; i < allDependencies.length; ++i) {
-					var ns = this.resolve(allDependencies[i]);
-					if (i < dependencies.length)
-						deps.push(null);
-					ns.namespace.obtain(ns.path, f, {
-						ctx: this,
-						i: i
+			return result;
+		}
+
+		return {
+
+			extend: function (path, value) {
+				nodeSetData(nodeNavigate(path), value);
+			},
+
+			set: function (path, value) {
+				var node = nodeNavigate(path);
+				if (node.data) nodeClearData(node);
+				nodeSetData(node, value);
+			},
+
+			get: function (path) {
+				var node = nodeNavigate(path);
+				return node.ready ? node.data : null;
+			},
+
+			lazy: function (path, callback, context) {
+				var node = nodeNavigate(path);
+				if (node.ready) callback(context || this, node.data);else {
+					node.lazy.push({
+						callback: callback,
+						context: context
 					});
 				}
-			} else {
-				deps.push(environment);
-				args.callback.apply(args.context || this, deps);
+			},
+
+			digest: function (path) {
+				nodeDigest(nodeNavigate(path));
+			},
+
+			obtain: function (path, callback, context) {
+				nodeAddWatcher(nodeNavigate(path), callback, context);
+			},
+
+			unresolvedWatchers: function (path) {
+				return nodeUnresolvedWatchers(nodeNavigate(path), path);
+			},
+
+			__export: function () {
+				return {
+					options: options,
+					nsRoot: nsRoot
+				};
+			},
+
+			__import: function (data) {
+				options = data.options;
+				nsRoot = data.nsRoot;
 			}
+
+		};
+	}
+	function newScope(parent, parentNS, rootNS, globalNS) {
+
+		var self = this;
+		var nextScope = null;
+		var childScopes = [];
+		var parentNamespace = parentNS;
+		var rootNamespace = rootNS;
+		var globalNamespace = globalNS;
+		var localNamespace = newNamespace({ tree: true });
+		var privateNamespace = newNamespace({ tree: false });
+
+		var bindings = {
+			"global": {
+				namespace: globalNamespace
+			}, "root": {
+				namespace: rootNamespace
+			}, "local": {
+				namespace: localNamespace
+			}, "default": {
+				namespace: privateNamespace
+			}, "parent": {
+				namespace: parentNamespace
+			}, "scope": {
+				namespace: localNamespace,
+				readonly: false
+			}
+		};
+
+		var custom = function (argmts, name, callback) {
+			var args = Helper.matchArgs(argmts, {
+				options: "object",
+				namespaceLocator: true,
+				dependencies: "array",
+				hiddenDependencies: "array",
+				callback: true,
+				context: "object"
+			});
+
+			var options = Helper.extend({
+				lazy: this.options.lazy
+			}, args.options || {});
+
+			var ns = this.resolve(args.namespaceLocator);
+
+			var execute = function () {
+				this.require(args.dependencies, args.hiddenDependencies, function () {
+					arguments[arguments.length - 1].ns = ns;
+					if (this.options.compile) {
+						var params = [];
+						for (var i = 0; i < argmts.length; ++i) params.push(Helper.stringify(argmts[i]));
+						this.compiled += this.options.ident + "." + name + "(" + params.join(", ") + ");\n\n";
+					}
+					var result = this.options.compile ? {} : args.callback.apply(args.context || this, arguments);
+					callback.call(this, ns, result);
+				}, this);
+			};
+
+			if (options.lazy) ns.namespace.lazy(ns.path, execute, this);else execute.apply(this);
+
 			return this;
+		};
+
+		return {
+
+			getGlobal: Helper.method(Globals, Globals.getPath),
+			setGlobal: Helper.method(Globals, Globals.setPath),
+
+			options: {
+				lazy: false,
+				ident: "Scoped",
+				compile: false
+			},
+
+			compiled: "",
+
+			nextScope: function () {
+				if (!nextScope) nextScope = newScope(this, localNamespace, rootNamespace, globalNamespace);
+				return nextScope;
+			},
+
+			subScope: function () {
+				var sub = this.nextScope();
+				childScopes.push(sub);
+				nextScope = null;
+				return sub;
+			},
+
+			binding: function (alias, namespaceLocator, options) {
+				if (!bindings[alias] || !bindings[alias].readonly) {
+					var ns;
+					if (Helper.typeOf(namespaceLocator) != "string") {
+						ns = {
+							namespace: newNamespace({
+								tree: true,
+								root: namespaceLocator
+							}),
+							path: null
+						};
+					} else ns = this.resolve(namespaceLocator);
+					bindings[alias] = Helper.extend(options, ns);
+				}
+				return this;
+			},
+
+			resolve: function (namespaceLocator) {
+				var parts = namespaceLocator.split(":");
+				if (parts.length == 1) {
+					return {
+						namespace: privateNamespace,
+						path: parts[0]
+					};
+				} else {
+					var binding = bindings[parts[0]];
+					if (!binding) throw "The namespace '" + parts[0] + "' has not been defined (yet).";
+					return {
+						namespace: binding.namespace,
+						path: binding.path && parts[1] ? binding.path + "." + parts[1] : binding.path || parts[1]
+					};
+				}
+			},
+
+			define: function () {
+				return custom.call(this, arguments, "define", function (ns, result) {
+					if (ns.namespace.get(ns.path)) throw "Scoped namespace " + ns.path + " has already been defined. Use extend to extend an existing namespace instead";
+					ns.namespace.set(ns.path, result);
+				});
+			},
+
+			assume: function () {
+				var args = Helper.matchArgs(arguments, {
+					assumption: true,
+					dependencies: "array",
+					callback: true,
+					context: "object",
+					error: "string"
+				});
+				var dependencies = args.dependencies || [];
+				dependencies.unshift(args.assumption);
+				this.require(dependencies, function (assumptionValue) {
+					if (!args.callback.apply(args.context || this, arguments)) throw "Scoped Assumption '" + args.assumption + "' failed, value is " + assumptionValue + (args.error ? ", but assuming " + args.error : "");
+				});
+			},
+
+			assumeVersion: function () {
+				var args = Helper.matchArgs(arguments, {
+					assumption: true,
+					dependencies: "array",
+					callback: true,
+					context: "object",
+					error: "string"
+				});
+				var dependencies = args.dependencies || [];
+				dependencies.unshift(args.assumption);
+				this.require(dependencies, function () {
+					var argv = arguments;
+					var assumptionValue = argv[0];
+					argv[0] = assumptionValue.split(".");
+					for (var i = 0; i < argv[0].length; ++i) argv[0][i] = parseInt(argv[0][i], 10);
+					if (Helper.typeOf(args.callback) === "function") {
+						if (!args.callback.apply(args.context || this, args)) throw "Scoped Assumption '" + args.assumption + "' failed, value is " + assumptionValue + (args.error ? ", but assuming " + args.error : "");
+					} else {
+						var version = (args.callback + "").split(".");
+						for (var j = 0; j < Math.min(argv[0].length, version.length); ++j) if (parseInt(version[j], 10) > argv[0][j]) throw "Scoped Version Assumption '" + args.assumption + "' failed, value is " + assumptionValue + ", but assuming at least " + args.callback;
+					}
+				});
+			},
+
+			extend: function () {
+				return custom.call(this, arguments, "extend", function (ns, result) {
+					ns.namespace.extend(ns.path, result);
+				});
+			},
+
+			condition: function () {
+				return custom.call(this, arguments, "condition", function (ns, result) {
+					if (result) ns.namespace.set(ns.path, result);
+				});
+			},
+
+			require: function () {
+				var args = Helper.matchArgs(arguments, {
+					dependencies: "array",
+					hiddenDependencies: "array",
+					callback: "function",
+					context: "object"
+				});
+				args.callback = args.callback || function () {};
+				var dependencies = args.dependencies || [];
+				var allDependencies = dependencies.concat(args.hiddenDependencies || []);
+				var count = allDependencies.length;
+				var deps = [];
+				var environment = {};
+				if (count) {
+					var f = function (value) {
+						if (this.i < deps.length) deps[this.i] = value;
+						count--;
+						if (count === 0) {
+							deps.push(environment);
+							args.callback.apply(args.context || this.ctx, deps);
+						}
+					};
+					for (var i = 0; i < allDependencies.length; ++i) {
+						var ns = this.resolve(allDependencies[i]);
+						if (i < dependencies.length) deps.push(null);
+						ns.namespace.obtain(ns.path, f, {
+							ctx: this,
+							i: i
+						});
+					}
+				} else {
+					deps.push(environment);
+					args.callback.apply(args.context || this, deps);
+				}
+				return this;
+			},
+
+			digest: function (namespaceLocator) {
+				var ns = this.resolve(namespaceLocator);
+				ns.namespace.digest(ns.path);
+				return this;
+			},
+
+			unresolved: function (namespaceLocator) {
+				var ns = this.resolve(namespaceLocator);
+				return ns.namespace.unresolvedWatchers(ns.path);
+			},
+
+			__export: function () {
+				return {
+					parentNamespace: parentNamespace.__export(),
+					rootNamespace: rootNamespace.__export(),
+					globalNamespace: globalNamespace.__export(),
+					localNamespace: localNamespace.__export(),
+					privateNamespace: privateNamespace.__export()
+				};
+			},
+
+			__import: function (data) {
+				parentNamespace.__import(data.parentNamespace);
+				rootNamespace.__import(data.rootNamespace);
+				globalNamespace.__import(data.globalNamespace);
+				localNamespace.__import(data.localNamespace);
+				privateNamespace.__import(data.privateNamespace);
+			}
+
+		};
+	}
+	var globalNamespace = newNamespace({ tree: true, global: true });
+	var rootNamespace = newNamespace({ tree: true });
+	var rootScope = newScope(null, rootNamespace, rootNamespace, globalNamespace);
+
+	var Public = Helper.extend(rootScope, {
+
+		guid: "4b6878ee-cb6a-46b3-94ac-27d91f58d666",
+		version: '32.1453754118896',
+
+		upgrade: Attach.upgrade,
+		attach: Attach.attach,
+		detach: Attach.detach,
+		exports: Attach.exports,
+
+		__exportScoped: function () {
+			return {
+				globalNamespace: globalNamespace.__export(),
+				rootNamespace: rootNamespace.__export(),
+				rootScope: rootScope.__export()
+			};
 		},
-		
-		digest: function (namespaceLocator) {
-			var ns = this.resolve(namespaceLocator);
-			ns.namespace.digest(ns.path);
-			return this;
-		},
-		
-		unresolved: function (namespaceLocator) {
-			var ns = this.resolve(namespaceLocator);
-			return ns.namespace.unresolvedWatchers(ns.path);
+
+		__importScoped: function (data) {
+			globalNamespace.__import(data.globalNamespace);
+			rootNamespace.__import(data.rootNamespace);
+			rootScope.__import(data.rootScope);
 		}
-		
-	};
-	
-}
-var globalNamespace = newNamespace({tree: true, global: true});
-var rootNamespace = newNamespace({tree: true});
-var rootScope = newScope(null, rootNamespace, rootNamespace, globalNamespace);
 
-var Public = Helper.extend(rootScope, {
-		
-	guid: "4b6878ee-cb6a-46b3-94ac-27d91f58d666",
-	version: '9.9436392609879',
-		
-	upgrade: Attach.upgrade,
-	attach: Attach.attach,
-	detach: Attach.detach,
-	exports: Attach.exports
-	
-});
+	});
 
-Public = Public.upgrade();
-Public.exports();
+	Public = Public.upgrade();
+	Public.exports();
 	return Public;
-}).call(this);
+}.call(this);
 
 /*!
-betajs-ui - v1.0.2 - 2015-12-01
+betajs-ui - v1.0.7 - 2016-02-02
 Copyright (c) Oliver Friedmann,Victor Lingenthal
-MIT Software License.
+Apache 2.0 Software License.
 */
 (function () {
 
@@ -580,10 +628,12 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "ff8d5222-1ae4-4719-b842-1dedb9162bc0",
-		version: '42.1449031861036'
+		version: '51.1454466888664'
 	};
 });
 
+Scoped.assumeVersion("base:version", 444);
+Scoped.assumeVersion("browser:version", 58);
 Scoped.define("module:Elements.Animators", [
 	    "base:Class",
 	    "base:Objs"
@@ -815,10 +865,21 @@ Scoped.define("module:Elements.ElementSupport", ["base:Types", "jquery:"], funct
 Scoped.define("module:Events.Mouse", ["browser:Info"], function (Info) {
 	return {		
 			
-		downEvent: Info.isMobile() ? "touchstart" : "mousedown",	
-		moveEvent: Info.isMobile() ? "touchmove" : "mousemove",	
-		upEvent: Info.isMobile() ? "touchend" : "mouseup",
-		clickEvent: Info.isMobile() ? "touchstart" : "click",
+		downEvent: function () {
+			return Info.isMobile() ? "touchstart" : "mousedown";	
+		},
+		
+		moveEvent: function () {
+			return Info.isMobile() ? "touchmove" : "mousemove";	
+		},	
+		
+		upEvent: function () {
+			return Info.isMobile() ? "touchend" : "mouseup";	
+		},
+		
+		clickEvent: function () {
+			return Info.isMobile() ? "touchstart" : "click";	
+		},
 				
 		customCoords: function (event, type, multi) {
 			if (event.originalEvent.touches && event.originalEvent.touches.length) {
@@ -923,7 +984,7 @@ Scoped.define("module:Hardware.MouseCoords", [
 		require: function () {
 			if (this.__required === 0) {
 				var self = this;
-				var events = [MouseEvents.moveEvent, MouseEvents.upEvent, MouseEvents.downEvent];
+				var events = [MouseEvents.moveEvent(), MouseEvents.upEvent(), MouseEvents.downEvent()];
 				Objs.iter(events, function (eventName) {
 					$("body").on(eventName + "." + Ids.objectId(this), function (event) {
 						var result = MouseEvents.pageCoords(event);
@@ -960,8 +1021,8 @@ Scoped.define("module:Interactions.Drag", [
 
 		    constructor: function (element, options, data) {
 				options = Objs.extend({
-					start_event: MouseEvents.downEvent,
-					stop_event: MouseEvents.upEvent,
+					start_event: MouseEvents.downEvent(),
+					stop_event: MouseEvents.upEvent(),
 					draggable_x: true,
 					draggable_y: true,
 					clone_element: false,
@@ -1156,7 +1217,7 @@ Scoped.define("module:Interactions.DragStates.Dragging", [
 				}
 			}
 			this.trigger("start");
-			this.on("body", MouseEvents.moveEvent, this.__dragging);
+			this.on("body", MouseEvents.moveEvent(), this.__dragging);
 			if (opts.stop_event) {
 				this.on("body", opts.stop_event, function () {
 					if (opts.droppable)
@@ -1181,6 +1242,10 @@ Scoped.define("module:Interactions.DragStates.Dragging", [
 			if (this.options().draggable_y)
 				base.css("top", (parseInt(base.css("top"), 10) + delta_coords.y) + "px");
 			this.trigger("move");
+			if (this.options().classes && this.options().classes["move.actionable_modifier"])
+				this.parent().actionable_modifier().csscls(this.options().classes["move.actionable_modifier"], true);
+			if (this.options().classes && this.options().classes["move.modifier"])
+				this.parent().modifier().csscls(this.options().classes["move.modifier"], true);
 			this.triggerDomMove();
 		}
 		
@@ -1367,6 +1432,8 @@ Scoped.define("module:Interactions.DropStates.Hover", ["module:Interactions.Drop
 		
 			_start: function () {
 				this.trigger("hover");
+				if (this.options().classes && this.options().classes["hover.modifier"])
+					this.parent().modifier().csscls(this.options().classes["hover.modifier"], true);
 				this.on(this.element(), "drag-hover", function (event) {
 					this._drag_source = event.originalEvent.detail;
 					if (!this.parent()._is_hovering(this._drag_source))
@@ -1439,7 +1506,7 @@ Scoped.define("module:Interactions.DropStates.Dropping", ["module:Interactions.D
 	});
 });	
 
-Scoped.define("module:Interactions.DropList", [
+Scoped.define("module:Interactions.Droplist", [
         "module:Interactions.ElementInteraction",
         "module:Elements.ElementSupport",
 	    "base:Objs",
@@ -1534,7 +1601,7 @@ Scoped.define("module:Interactions.DropList", [
 
 
 
-Scoped.define("module:Interactions.DropListStates.Disabled", ["module:Interactions.State"], function (State, scoped) {
+Scoped.define("module:Interactions.DroplistStates.Disabled", ["module:Interactions.State"], function (State, scoped) {
    	return State.extend({scoped: scoped}, {
 		
 		_white_list: ["Idle"],
@@ -1547,7 +1614,7 @@ Scoped.define("module:Interactions.DropListStates.Disabled", ["module:Interactio
 });
 
 
-Scoped.define("module:Interactions.DropListStates.Idle", ["module:Interactions.DropListStates.Disabled"], function (State, scoped) {
+Scoped.define("module:Interactions.DroplistStates.Idle", ["module:Interactions.DroplistStates.Disabled"], function (State, scoped) {
    	return State.extend({scoped: scoped}, {
 		
    		_white_list: ["Hover", "Disabled"],
@@ -1564,7 +1631,7 @@ Scoped.define("module:Interactions.DropListStates.Idle", ["module:Interactions.D
 });
 
 
-Scoped.define("module:Interactions.DropListStates.Hover", ["module:Interactions.DropListStates.Disabled"], function (State, scoped) {
+Scoped.define("module:Interactions.DroplistStates.Hover", ["module:Interactions.DroplistStates.Disabled"], function (State, scoped) {
    	return State.extend({scoped: scoped}, function (inherited) {
 		return {
 			
@@ -1599,7 +1666,7 @@ Scoped.define("module:Interactions.DropListStates.Hover", ["module:Interactions.
 });
 
 
-Scoped.define("module:Interactions.DropListStates.Dropping", ["module:Interactions.DropListStates.Disabled"], function (State, scoped) {
+Scoped.define("module:Interactions.DroplistStates.Dropping", ["module:Interactions.DroplistStates.Disabled"], function (State, scoped) {
    	return State.extend({scoped: scoped}, {
 	
 		_white_list: ["Idle", "Disabled"],
@@ -1614,7 +1681,7 @@ Scoped.define("module:Interactions.DropListStates.Dropping", ["module:Interactio
 	});
 });
 
-Scoped.define("module:Interactions.InfiniteScroll", [
+Scoped.define("module:Interactions.Infinitescroll", [
         "module:Interactions.Scroll",
 	    "base:Objs"
 	], function (Scroll, Objs, scoped) {
@@ -1681,7 +1748,7 @@ Scoped.define("module:Interactions.InfiniteScroll", [
 		    	if (this._can_prepend) {
 		    		this._extending = true;
 		    		var self = this;
-		    		opts.prepend(opts.context, count || opts.prepend_count, function (added, done) {
+		    		opts.prepend.call(opts.context, count || opts.prepend_count, function (added, done) {
 		    			if (self.__top_white_space)
 		    				self.itemsElement().prepend(self.__top_white_space);
 		    			self._extending = false;
@@ -1736,12 +1803,12 @@ Scoped.define("module:Interactions.InfiniteScroll", [
 });
 
 
-Scoped.define("module:Interactions.InfiniteScrollStates.Idle", ["module:Interactions.ScrollStates.Idle"], function (State, scoped) {
+Scoped.define("module:Interactions.InfinitescrollStates.Idle", ["module:Interactions.ScrollStates.Idle"], function (State, scoped) {
    	return State.extend({scoped: scoped}, {});
 });
 
 
-Scoped.define("module:Interactions.InfiniteScrollStates.Scrolling", ["module:Interactions.ScrollStates.Scrolling"], function (State, scoped) {
+Scoped.define("module:Interactions.InfinitescrollStates.Scrolling", ["module:Interactions.ScrollStates.Scrolling"], function (State, scoped) {
    	return State.extend({scoped: scoped}, {
 
    		_scroll: function () {
@@ -1756,7 +1823,7 @@ Scoped.define("module:Interactions.InfiniteScrollStates.Scrolling", ["module:Int
 });
 
 
-Scoped.define("module:Interactions.InfiniteScrollStates.ScrollingTo", ["module:Interactions.ScrollStates.ScrollingTo"], function (State, scoped) {
+Scoped.define("module:Interactions.InfinitescrollStates.ScrollingTo", ["module:Interactions.ScrollStates.ScrollingTo"], function (State, scoped) {
    	return State.extend({scoped: scoped}, {
 
    		_scroll: function () {
@@ -1898,7 +1965,7 @@ Scoped.define("module:Interactions.State", [
  	});
 });
 
-Scoped.define("module:Interactions.LoopScroll", ["module:Interactions.Scroll"], function (Scroll, scoped) {
+Scoped.define("module:Interactions.Loopscroll", ["module:Interactions.Scroll"], function (Scroll, scoped) {
 	return Scroll.extend({scoped: scoped}, function (inherited) {
 		return {
 
@@ -1966,12 +2033,12 @@ Scoped.define("module:Interactions.LoopScroll", ["module:Interactions.Scroll"], 
 });
 
 
-Scoped.define("module:Interactions.LoopScrollStates.Idle", ["module:Interactions.ScrollStates.Idle"], function (State, scoped) {
+Scoped.define("module:Interactions.LoopscrollStates.Idle", ["module:Interactions.ScrollStates.Idle"], function (State, scoped) {
    	return State.extend({scoped: scoped}, {});
 });
 
 
-Scoped.define("module:Interactions.LoopScrollStates.Scrolling", ["module:Interactions.ScrollStates.Scrolling"], function (State, scoped) {
+Scoped.define("module:Interactions.LoopscrollStates.Scrolling", ["module:Interactions.ScrollStates.Scrolling"], function (State, scoped) {
    	return State.extend({scoped: scoped}, {
 
    		_scroll: function () {
@@ -1986,7 +2053,7 @@ Scoped.define("module:Interactions.LoopScrollStates.Scrolling", ["module:Interac
 });
 
 
-Scoped.define("module:Interactions.LoopScrollStates.ScrollingTo", ["module:Interactions.ScrollStates.ScrollingTo"], function (State, scoped) {
+Scoped.define("module:Interactions.LoopscrollStates.ScrollingTo", ["module:Interactions.ScrollStates.ScrollingTo"], function (State, scoped) {
    	return State.extend({scoped: scoped}, {
 
    		_scroll: function () {
@@ -2423,10 +2490,9 @@ Scoped.define("module:Gestures.ElementStateHost", ["base:States.CompetingHost"],
 
 Scoped.define("module:Gestures.Gesture", [
 	    "module:Gestures.ElementStateHost",
-	    "module:Hardware.MouseCoords",
 	    "base:States.CompetingComposite",
 	    "base:Objs"
-	], function (ElementStateHost, MouseCoords, CompetingComposite, Objs, scoped) {
+	], function (ElementStateHost, CompetingComposite, Objs, scoped) {
 	return ElementStateHost.extend({scoped: scoped}, function (inherited) {
 		return {
 			
@@ -2437,7 +2503,6 @@ Scoped.define("module:Gestures.Gesture", [
 		            element.data("gestures", composite);
 		        }
 		        inherited.constructor.call(this, element, composite);
-		        MouseCoords.require();
 		        for (var key in machine) {
 		        	machine[key] = Objs.extend({
 		        		priority: 1,
@@ -2449,11 +2514,6 @@ Scoped.define("module:Gestures.Gesture", [
 		            state_descriptor: machine,
 		            current_state: "Initial"
 		        });
-			},
-			
-			destroy: function () {
-		        MouseCoords.unrequire();
-		        inherited.destroy.call(this);
 			}
 	
 		};
@@ -2461,7 +2521,7 @@ Scoped.define("module:Gestures.Gesture", [
 });
 
 
-Scoped.define("module:Gestures.Gesture.ElementState", [
+Scoped.define("module:Gestures.ElementState", [
   	    "base:States.CompetingState",
   	    "base:Ids",
   	    "base:Objs"
@@ -2612,26 +2672,84 @@ Scoped.define("module:Gestures.ElementTimerEvent", ["module:Gestures.ElementEven
 });
 
 
+Scoped.define("module:Gestures.ElementScrollEvent", ["module:Gestures.ElementEvent", "base:Time"], function (ElementEvent, Time, scoped) {
+	return ElementEvent.extend({scoped: scoped}, function (inherited) {
+		return {
+
+		    constructor: function (options, element, callback, context) {
+		        inherited.constructor.call(this, element, callback, context);
+		        this.last_scroll_event = null;
+		        this.scroll_start_event = null;
+		        this.scroll_threshold = options.threshold;
+		        this.on("scroll", this.__scroll, this, options.element);
+		    },
+		    
+		    __scroll: function () {
+		    	if (this.destroyed())
+		    		return;
+		    	var now = Time.now();
+		    	if (this.scroll_start_event === null || (this.last_scroll_event && now - this.last_scroll_event > 50)) {
+		    		this.scroll_start_event = now;
+		    		this.last_scroll_event = now;
+		    		return;
+		    	}
+	    		this.last_scroll_event = now;
+	    		var delta = now - this.scroll_start_event;
+	    		if (delta > this.scroll_threshold)
+	    			this.callback();
+		    }
+		
+		};
+	});	
+});
+
+
+Scoped.define("module:Gestures.ElementScrollEndEvent", ["module:Gestures.ElementEvent", "base:Time"], function (ElementEvent, Time, scoped) {
+	return ElementEvent.extend({scoped: scoped}, function (inherited) {
+		return {
+
+		    constructor: function (options, element, callback, context) {
+		        inherited.constructor.call(this, element, callback, context);
+		        this.__fire();
+		        this.on("scroll", this.__fire, this, options.element);
+		    },
+		    
+		    __fire: function () {
+		    	if (this.destroyed())
+		    		return;
+		    	if (this.timer)
+		    		clearTimeout(this.timer);
+		    	var self = this;
+		    	this.timer = setTimeout(function () {
+		    		self.callback();
+		    	}, 50);
+		    }
+		
+		};
+	});	
+});
+
+
 
 Scoped.define("module:Gestures.ElementMouseMoveOutEvent", [
         "module:Gestures.ElementEvent",
-        "module:Hardware.MouseCoords",
         "module:Events.Mouse"
-    ], function (ElementEvent, MouseCoords, MouseEvents, scoped) {
+    ], function (ElementEvent, MouseEvents, scoped) {
 	return ElementEvent.extend({scoped: scoped}, function (inherited) {
 		return {
 		
 		    constructor: function (box, element, callback, context) {
 		    	inherited.constructor.call(this, element, callback, context);
-		        var position = MouseCoords.coords;
+		        var position = {};
 		        var delta = {x: 0, y: 0};
-		        this.on(MouseEvents.moveEvent, function (event) {
+		        this.on(MouseEvents.moveEvent(), function (event) {
 		        	if (!position.x && !position.y)
 		        		position = MouseEvents.pageCoords(event);
 		            var current = MouseEvents.pageCoords(event);
 		            delta.x = Math.max(delta.x, Math.abs(position.x - current.x));
 		            delta.y = Math.max(delta.y, Math.abs(position.y - current.y));
 		            if (("x" in box && box.x >= 0 && delta.x >= box.x) || ("y" in box && box.y >= 0 && delta.y >= box.y)) {
+						//console.log(box, delta, position, current);
 		                this.callback();
 		            }
 		        });
@@ -2643,7 +2761,7 @@ Scoped.define("module:Gestures.ElementMouseMoveOutEvent", [
 
 
 Scoped.define("module:Gestures.GestureStates.EventDrivenState", [
-       "module:Gestures.Gesture.ElementState",
+       "module:Gestures.ElementState",
        "module:Gestures"
    ], function (ElementState, Gestures, scoped) {
 	return ElementState.extend({scoped: scoped}, function (inherited) {
@@ -2721,14 +2839,27 @@ Scoped.define("module:Gestures.defaultGesture", [
 	        disable_y: 10,
 	        enable_x: -1,
 	        enable_y: -1,
-	        active_priority: 2
+	        active_priority: 2,
+	        disable_scroll_element: null,
+	        disable_scroll_time: 500
 	    }, options);
 	    return {
 	        "Initial": {
-	            events: [{
+	            events: Objs.filter([{
 	                event: "ElementTriggerEvent",
-	                args: MouseEvents.downEvent,
+	                args: MouseEvents.downEvent(),
 	                target: "DownState"
+	            }, options.disable_scroll_element === null ? null : {
+	            	event: "ElementScrollEvent",
+	            	args: {element: options.disable_scroll_element, threshold: options.disable_scroll_time},
+	            	target: "DisableScroll"
+	            }], function (ev) { return !!ev; })
+	        },
+	        "DisableScroll": {
+	            events: [{
+	                event: "ElementScrollEndEvent",
+	                args: {element: options.disable_scroll_element},
+	                target: "Initial"
 	            }]
 	        },
 	        "Retreat": {
@@ -2738,9 +2869,9 @@ Scoped.define("module:Gestures.defaultGesture", [
 	            }
 	        },
 	        "DownState": {
-	            events: [{
+	            events: Objs.filter([options.mouse_up_activate === null ? null : {
 	                event: "BodyTriggerEvent",
-	                args: MouseEvents.upEvent,
+	                args: MouseEvents.upEvent(),
 	                target: options.mouse_up_activate ? "ActiveState" : "Initial"
 	            }, {
 	                event: "ElementMouseMoveOutEvent",
@@ -2750,11 +2881,15 @@ Scoped.define("module:Gestures.defaultGesture", [
 	                event: "ElementMouseMoveOutEvent",
 	                args: {x: options.enable_x, y: options.enable_y},
 	                target: "ActiveState"
-	            }, {
+	            }, options.wait_activate === null ? null : {
 	                event: "ElementTimerEvent",
 	                args: options.wait_time,
 	                target: options.wait_activate ? "ActiveState" : "Initial"
-	            }]
+	            }, options.disable_scroll_element === null ? null : {
+	            	event: "ElementScrollEvent",
+	            	args: {element: options.disable_scroll_element, threshold: options.disable_scroll_time},
+	            	target: "DisableScroll"
+	            }], function (ev) { return !!ev; })
 	        },
 	        "ActiveState": {
 	            priority: options.active_priority,
@@ -2795,7 +2930,12 @@ Scoped.define("module:Dynamics.GesturePartial", [
 					handler.call(value.deactivate_event, value.data, this._node, gesture);
 				if (value.interaction && node.interactions && node.interactions[value.interaction] && node.interactions[value.interaction].stop)
 					node.interactions[value.interaction].stop();
-			}, this);			
+			}, this);		
+			if (value.transition_event) {
+				gesture.on("start", function () {
+					handler.call(value.transition_event, this._node._$element, gesture);
+				}, this);
+			}
 		},
 		
 		_deactivate: function () {
@@ -2828,7 +2968,7 @@ Scoped.define("module:Dynamics.InteractionPartial", [
 			var InteractionClass = Interactions[Strings.capitalize(value.type)];
 			var interaction = new InteractionClass(value.sub ? this._node._$element.find(value.sub) : this._node._$element, Objs.extend({
 				enabled: true
-			}, value));
+			}, value), value.data);
 			node.interactions[this._postfix] = interaction;
 			Objs.iter(value.events, function (callee, event) {
 				interaction.on(event, function (arg1, arg2, arg3, arg4) {

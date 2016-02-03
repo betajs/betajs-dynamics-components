@@ -2,6 +2,7 @@
 ba-list {
   @include display-flex;
   overflow-y: scroll;
+  overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
 
   list {
