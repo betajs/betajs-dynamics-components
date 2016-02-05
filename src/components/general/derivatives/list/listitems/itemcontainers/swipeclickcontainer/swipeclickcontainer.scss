@@ -85,15 +85,12 @@ ba-swipeclickcontainer {
   }
 }
 
-.nothing swipeleft {
+.nothing swipeleft, .nothing swiperight {
   background: lightgrey;
 }
 
 .delete swipeleft {
   background: red;
-}
-swiperight {
-
 }
 
 //Drag

@@ -11,7 +11,7 @@ Scoped.define("module:Eventitem", [
         attrs: {
             counter : 0,
             model : {
-                value : 'Evenitem - Clicked '
+                value : 'Eventitem - Clicked '
             }
         },
 
