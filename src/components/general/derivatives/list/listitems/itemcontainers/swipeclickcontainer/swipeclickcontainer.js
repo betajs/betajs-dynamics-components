@@ -17,38 +17,38 @@ Scoped.define("module:Swipeclickcontainer", [
 		},
 
 		attrs: {
+			view : {
+				slide_finish : false,
+				left: 0
+			},
 			value: "Swipeclickitem - Title",
 			lefticon: 'icon-ok',
 			righticon: 'icon-time',
 			inner: "eventitem",
 			swipe_actions: {
 				"other": {
-					less: -1/6,
+					less: -1/7,
 					greater: -1,
-					execute: function () {
-						//this.get("model").set("archived", true);
-						console.log("Swipe: other");
-						this.trigger('other');
+					execute: function (element,pos) {
+						this.call('slideout',element,pos,'other');
 					}
 				},
 				"nothing": {
-					greater : -1/6,
-					less: 1/6
+					greater : -1/7,
+					less: 1/7
 				},
 				"archive": {
-					greater : 1/6,
+					greater : 1/7,
 					less: 2/3,
 					execute: function (element,pos) {
-						this.trigger('archive');
-						this.call('slideout',element,pos);
+						this.call('slideout',element,pos,'archive');
 					}
 				},
 				"delete": {
 					greater: 2 / 3,
 					less: 1,
-					execute: function (element) {
-						this.trigger('delete');
-						//element.parent().slideUp();
+					execute: function (element,pos) {
+						this.call('slideout',element,pos,'delete');
 					}
 				}
 			},
@@ -109,9 +109,9 @@ Scoped.define("module:Swipeclickcontainer", [
 						for (var cls in actions) {
 							a = actions[cls];
 							if ((!a.less || x <= w * a.less) && (!a.greater || x >= w * a.greater))
-								parent.addClass(cls);
+								element.addClass(cls);
 							else
-								parent.removeClass(cls);
+								element.removeClass(cls);
 						}
 					},
 					"release": function (doodad, event) {
@@ -139,22 +139,29 @@ Scoped.define("module:Swipeclickcontainer", [
 			click : function (doodad) {
 				this.scopes.child_dynamic.call('click');
 			},
-			slideout : function (element,pos) {
-				console.log('Element : ');
-				console.log(pos);
-				console.log(element);
-				console.log(element.width());
+			slideout : function (element,pos,trigger) {
+				var current_left = pos;
+				var max_left = element.width();
+				var sign = Math.sign(current_left);
 
-				//var test = new Timer({
-				//	delay : 100,
-				//	fire : function () {
-				//		console.log('Timer Fired')
-				//	},
-				//	context : this
-				//});
+				var self = this;
 
-				console.log(element.parent());
-				//element.parent().slideUp();
+				var id = setInterval(
+					function () {
+						if (current_left * sign >= max_left) {
+							self.setProp('view.left', sign * max_left);
+							element.find('ba-eventitem').css('visibility','hidden');
+							setTimeout(function(){
+								element.parent().slideUp();
+							}, 100);
+							self.trigger(trigger);
+							clearInterval(id);
+						} else {
+							current_left = current_left + sign * 10;
+							self.setProp('view.left',current_left);
+						}
+
+				}, 10);
 			}
 		}
 

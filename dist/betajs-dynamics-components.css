@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.4 - 2016-02-03
+betajs-dynamics-components - v0.0.5 - 2016-02-09
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -271,8 +271,7 @@ ba-swipeclickcontainer {
         order: 1;
         left: -100%;
         z-index: 1;
-        background: #33CC00;
-        opacity: 0.5; }
+        background: #33CC00; }
         ba-swipeclickcontainer swipe container swipeleft div {
           -webkit-box-flex: 1 0 0;
           -moz-box-flex: 1 0 0;
@@ -304,8 +303,7 @@ ba-swipeclickcontainer {
         -ms-flex-order: 3;
         order: 3;
         z-index: 1;
-        background: yellow;
-        opacity: 0.5; }
+        background: yellow; }
         ba-swipeclickcontainer swipe container swiperight div {
           -webkit-box-flex: 1 0 0;
           -moz-box-flex: 1 0 0;
@@ -315,11 +313,10 @@ ba-swipeclickcontainer {
 
 ba-swipeclickcontainer swipe > container > *:nth-child(1) {
   background: white; }
-
-.nothing swipeleft, .nothing swiperight {
-  background: lightgrey; }
-
-.delete swipeleft {
+ba-swipeclickcontainer .nothing swipeleft, ba-swipeclickcontainer .nothing swiperight {
+  background: lightgrey;
+  opacity: 0; }
+ba-swipeclickcontainer .delete swipeleft {
   background: red; }
 
 body > swipe {
@@ -330,6 +327,8 @@ body > swipe {
   display: flex; }
   body > swipe container {
     width: 100%; }
+    body > swipe container icon {
+      display: none; }
 
 ba-swipecontainer {
   position: relative;
@@ -507,7 +506,8 @@ ba-list {
     -moz-box-flex: 1 1 0;
     -webkit-flex: 1 1 0;
     -ms-flex: 1 1 0;
-    flex: 1 1 0; }
+    flex: 1 1 0;
+    overflow-x: hidden; }
     ba-list list ba-item {
       display: block; }
 

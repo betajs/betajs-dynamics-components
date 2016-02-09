@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.4 - 2016-02-03
+betajs-dynamics-components - v0.0.5 - 2016-02-09
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -326,7 +326,6 @@ ba-clicktestcontainer {
 }
 
 $swipeitemheight: 44px;
-$leftrightopacity: 0.5;
 
 ba-swipeclickcontainer {
   position: relative;
@@ -371,18 +370,9 @@ ba-swipeclickcontainer {
         z-index: 1;
 
         background: #33CC00;
-        opacity: $leftrightopacity;
 
         div {@include flex(1 0 0)}
       }
-
-      //ba-item {
-      //  border-bottom: 1px solid #d3d3d3;
-      //  height: $swipeitemheight;
-      //  line-height: $swipeitemheight;
-      //  vertical-align: middle;
-      //  background: white;
-      //}
 
       >*:nth-child(1) {
         left: -100%;
@@ -397,7 +387,6 @@ ba-swipeclickcontainer {
         z-index: 1;
 
         background: yellow;
-        opacity: $leftrightopacity;
 
         div {@include flex(1 0 0)}
       }
@@ -409,21 +398,27 @@ ba-swipeclickcontainer {
   swipe>container>*:nth-child(1){
     background: white;
   }
-}
 
-.nothing swipeleft, .nothing swiperight {
-  background: lightgrey;
-}
+  .nothing swipeleft, .nothing swiperight {
+    background: lightgrey;
+    opacity: 0;
+  }
 
-.delete swipeleft {
-  background: red;
+  .delete swipeleft {
+    background: red;
+  }
 }
 
 //Drag
 body>swipe {
   @include display-flex;
 
-  container {width: 100%}
+  container {
+    width: 100%;
+    icon {
+      display: none;
+    }
+  }
 }
 $swipeitemheight: 44px;
 $leftrightopacity: 0.5;
@@ -561,6 +556,7 @@ ba-list {
 
   list {
     @include flex-settings(1 1 0);
+    overflow-x: hidden;
 
     ba-item {display: block}
   }

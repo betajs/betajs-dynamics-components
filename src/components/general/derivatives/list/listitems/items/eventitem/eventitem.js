@@ -8,6 +8,10 @@ Scoped.define("module:Eventitem", [
 
         template: Templates.eventitem,
 
+        scopes : {
+            parent : '<'
+        },
+
         attrs: {
             counter : 0,
             model : {
@@ -22,9 +26,15 @@ Scoped.define("module:Eventitem", [
         },
 
         create : function () {
+
             this.on("event", function (cid) {
                 this.set('counter',this.get('counter') + 1);
             }, this);
+
+            this.scopes.parent.on('archive', function () {
+                console.log('archived');
+            }, this);
+
         }
 
     }).register();

@@ -6,6 +6,7 @@
 </behind>
 
 <swipe
+        style="left: {{view.left}}px"
         ba-gesture:click="{{{data: model, options: click_gesture}}}"
         ba-gesture:drag="{{drag_gesture}}"
         ba-interaction:drag="{{drag_interaction}}"
@@ -15,18 +16,17 @@
     <container>
 
         <ba-{{view.inner||inner}}
-        ba-sharescope>
-        {{model.value||value}}
+            ba-sharescope>
+            {{model.value||value}}
         </ba-{{view.inner||inner}}>
 
         <swipeleft>
             <div></div>
-            <icon class='icon-envelope'></icon>
-            <icon class='{{model.lefticon}}'></icon>
+            <icon class='{{view.lefticon||lefticon}}'></icon>
         </swipeleft>
 
         <swiperight>
-            <icon class='{{model.righticon}}'></icon>
+            <icon class='{{view.righticon||righticon}}'></icon>
             <div></div>
         </swiperight>
 
