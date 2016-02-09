@@ -712,7 +712,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '83.1455010237192'
+		version: '85.1455020350133'
 	};
 });
 
@@ -1066,17 +1066,17 @@ Scoped.define("module:Swipeclickcontainer", [
 						if (current_left * sign >= max_left) {
 							self.setProp('view.left', sign * max_left);
 							element.find('ba-eventitem').css('visibility','hidden');
-							setTimeout(function(){
+							setTimeout(function () {
 								element.parent().slideUp();
 							}, 100);
 							self.trigger(trigger);
 							clearInterval(id);
 						} else {
-							current_left = current_left + sign * 10;
+							current_left = current_left + sign * 4;
 							self.setProp('view.left',current_left);
 						}
 
-				}, 10);
+				}, 1);
 			}
 		}
 

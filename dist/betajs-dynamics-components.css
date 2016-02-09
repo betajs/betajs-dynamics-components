@@ -601,10 +601,6 @@ ba-titledlist {
     -ms-flex: 0 0;
     flex: 0 0;
     display: block; }
-  ba-titledlist list {
-    overflow: scroll; }
-    ba-titledlist list ba-listitem {
-      display: block; }
 
 ba-addtitle {
   background: white;

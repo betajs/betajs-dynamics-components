@@ -151,17 +151,17 @@ Scoped.define("module:Swipeclickcontainer", [
 						if (current_left * sign >= max_left) {
 							self.setProp('view.left', sign * max_left);
 							element.find('ba-eventitem').css('visibility','hidden');
-							setTimeout(function(){
+							setTimeout(function () {
 								element.parent().slideUp();
 							}, 100);
 							self.trigger(trigger);
 							clearInterval(id);
 						} else {
-							current_left = current_left + sign * 10;
+							current_left = current_left + sign * 4;
 							self.setProp('view.left',current_left);
 						}
-
-				}, 10);
+					},
+				1);
 			}
 		}
 

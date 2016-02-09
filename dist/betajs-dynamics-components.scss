@@ -606,11 +606,6 @@ ba-titledlist {
     @include flex(0 0);
     display: block
   }
-
-  list {
-    overflow: scroll;
-    ba-listitem {display: block}
-  }
 }
 
 $clickitemheigth : 44px;
