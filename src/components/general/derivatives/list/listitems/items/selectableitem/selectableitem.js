@@ -7,10 +7,8 @@ Scoped.define("module:Selectableitem", [
 
         template: Templates.selectableitem,
 
-        initial : {
-            bind : {
-                selected: "<+[tagname='ba-list']:selected_item"
-            }
+        bindings : {
+            selected: "<+[tagname='ba-list']:selected_item"
         },
 
         scopes: {

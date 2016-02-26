@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics - v0.0.35 - 2016-02-07
+betajs-dynamics - v0.0.36 - 2016-02-18
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 Apache 2.0 Software License.
 */
@@ -16,7 +16,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "d71ebf84-e555-4e9b-b18a-11d74fdcefe2",
-		version: '219.1454870118315'
+		version: '220.1455806852935'
 	};
 });
 
@@ -875,7 +875,7 @@ Scoped.define("module:Dynamic", [
 		   	_notifications: {
 				_activate: "__createActivate"
 			},
-				
+			
 			constructor: function (options) {
 				this.initial = this.initial || {};
 				options = Objs.extend(Objs.clone(this.initial, 1), options);
@@ -1213,8 +1213,11 @@ Scoped.define("module:Handlers.HandlerMixin", [
 	
 		__handlerDestruct: function () {
 			Objs.iter(this.__rootNodes, function (node) {
+				var $element = node.$element();
 				node.destroy();
-			});
+				if (this.remove_on_destroy)
+					$element.html("");
+			}, this);
 		},
 		
 		template: null,
@@ -1227,6 +1230,8 @@ Scoped.define("module:Handlers.HandlerMixin", [
 				return this.parent().string(key);
 			return key;
 		},
+		
+		remove_on_destroy: false,
 		
 		_handlerInitialize: function (options) {
 			options = options || {};

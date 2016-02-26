@@ -73,13 +73,32 @@ Scoped.define("module:Swipeclickcontainer", [
 				interaction: "drag"
 			},
 			drag_interaction: {
+				droppable: true,
 				type: "drag",
 				clone_element: true,
 				start_event: null,
 				events: {
-					"move": function (doodad, event) {
+					"move": function (model, event) {
+						console.log('Swipeclickcontainer:');
+						console.log(model);
 						event.actionable_modifier.csscls("focus", true);
 						event.modifier.csscls("unfocus", true);
+
+					}
+				}
+			},
+			drop_interaction: {
+				enabled: true,
+				type: "drop",
+				classes: {
+					"hover.modifier": "green-style"
+				},
+				events: {
+					"dropped": function (data, event) {
+						console.log('Drop successful');
+						//var source_doodad = event.source.data;
+						//var target_doodad = data;
+						//alert(source_doodad.get("v") + " --> " + target_doodad.get("v"));
 					}
 				}
 			},
