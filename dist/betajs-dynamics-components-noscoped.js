@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.5 - 2016-02-27
+betajs-dynamics-components - v0.0.5 - 2016-03-07
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -18,7 +18,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '86.1456509532746'
+		version: '87.1457403080202'
 	};
 });
 
@@ -281,13 +281,7 @@ Scoped.define("module:Swipeclickcontainer", [
 				disable_y: 10,
 				enable_x: -1,
 				enable_y: -1,
-				activate_event: "click",
-				events : {
-					"click" : function (model,event) {
-						console.log('Click 1');
-						console.log(model);
-					}
-				}
+				activate_event: "click"
 			},
 			drag_gesture: {
 				mouse_up_activate: false,
@@ -334,7 +328,7 @@ Scoped.define("module:Swipeclickcontainer", [
 				wait_time: 250,
 				wait_activate: false,
 				disable_x: -1,
-				disable_y: -1,
+				disable_y: 10,
 				enable_x: 10,
 				enable_y: -1,
 				interaction: "swipe"

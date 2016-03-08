@@ -107,7 +107,7 @@ Scoped.define("module:Swipeclickcontainer", [
 				wait_time: 250,
 				wait_activate: false,
 				disable_x: -1,
-				disable_y: -1,
+				disable_y: 10,
 				enable_x: 10,
 				enable_y: -1,
 				interaction: "swipe"
