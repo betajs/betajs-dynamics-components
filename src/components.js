@@ -1,6 +1,7 @@
 
 window.components = new BetaJS.Collections.Collection({objects: [
 
+    {value  : 'swipeclickcontainer_css'},
     {value  : 'swipeclickcontainer'},
     {value  : 'clicktestcontainer'},
     {value  : 'eventitem'},

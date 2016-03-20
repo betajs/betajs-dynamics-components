@@ -1,5 +1,5 @@
 
-Scoped.define("module:Swipeclickcontainer", [
+Scoped.define("module:Swipeclickcontainer_css", [
 	"dynamics:Dynamic",
 	"module:Templates",
 	"base:Timers.Timer"
@@ -10,13 +10,14 @@ Scoped.define("module:Swipeclickcontainer", [
 
 	return Dynamic.extend({scoped: scoped}, {
 
-		template: Templates.swipeclickcontainer,
+		template: Templates.swipeclickcontainer_css,
 
 		scopes : {
 			child_dynamic: ">"
 		},
 
 		attrs: {
+			start_swipe :'',
 			view : {
 				slide_finish : false,
 				left: 0
@@ -158,41 +159,31 @@ Scoped.define("module:Swipeclickcontainer", [
 			click : function (doodad) {
 				this.scopes.child_dynamic.call('click');
 			},
+			create_style : function (name,left) {
+				var style = document.createElement('style');
+				style.type = 'text/css';
+				style.innerHTML = '.' + name + ' { left: ' + left + 'px; }';
+				document.getElementsByTagName('head')[0].appendChild(style);
+			},
 			slideout : function (element,pos,trigger) {
 				var current_left = pos;
+				this.call('create_style','old_class',current_left);
+				this.set('start_swipe','old_class');
+
+				var self = this;
+				element.on("transitionend",function () {
+					element.find('ba-eventitem').css('visibility','hidden');
+					setTimeout(function () {
+						element.parent().slideUp();
+					}, 10);
+					self.trigger(trigger);
+				});
+
 				var max_left = element.width();
 				var sign = Math.sign(current_left);
 
-				var self = this;
-				var start = BetaJS.Time.now();
-				console.log('Start : ' + start);
-				var i = 0;
-
-				//element.data('gestures').weakDestroy();
-
-				var id = setInterval(
-					function () {
-						if (current_left * sign >= max_left) {
-							var end =  BetaJS.Time.now();
-							console.log('End : ' + end);
-							console.log('Diff : ' + (end - start));
-							console.log('Iterations :' + i);
-
-							self.setProp('view.left', sign * max_left);
-							element.find('ba-eventitem').css('visibility','hidden');
-							setTimeout(function () {
-								element.parent().slideUp();
-							}, 10);
-							self.trigger(trigger);
-							clearInterval(id);
-						} else {
-							i++;
-							current_left = current_left + sign * 4;
-							//self.setProp('view.left',current_left);
-							element.css('left',current_left+'px');
-						}
-					},
-				1);
+				this.call('create_style','new_class',sign*max_left);
+				this.set('start_swipe','swipe new_class');
 			}
 		}
 
