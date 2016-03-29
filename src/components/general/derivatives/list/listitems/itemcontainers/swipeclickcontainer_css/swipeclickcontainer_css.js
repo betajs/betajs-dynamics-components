@@ -167,14 +167,20 @@ Scoped.define("module:Swipeclickcontainer_css", [
 			},
 			slideout : function (element,pos,trigger) {
 				var current_left = pos;
-				this.call('create_style','old_class',current_left);
-				this.set('start_swipe','old_class');
-
+				
+				// I don't think this does anything, as JS is single-threaded and there is no time
+				// for updating anything until it immediately reaches new_class
+				
+				//this.call('create_style','old_class',current_left);
+				//this.set('start_swipe','old_class');				
+				
 				var self = this;
 				element.on("transitionend",function () {
 					element.find('ba-eventitem').css('visibility','hidden');
 					setTimeout(function () {
 						element.parent().slideUp();
+						// Now we should remove the added element from the dom again, otherwise we have a leak.
+						// this.get("temporary_style_element").remove();
 					}, 10);
 					self.trigger(trigger);
 				});
@@ -182,6 +188,13 @@ Scoped.define("module:Swipeclickcontainer_css", [
 				var max_left = element.width();
 				var sign = Math.sign(current_left);
 
+				/*
+				 * Instead of the create_style call, you should be able to user betajs browser (please update first):
+				 */
+				this.set("temporary_style_element", BetaJS.Browser.Loader.inlineStyles(
+					'.new_class { left: ' + sign*max_left + 'px; }'
+				));
+				
 				this.call('create_style','new_class',sign*max_left);
 				this.set('start_swipe','swipe new_class');
 			}
