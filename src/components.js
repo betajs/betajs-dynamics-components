@@ -1,6 +1,16 @@
 
 window.components = new BetaJS.Collections.Collection({objects: [
 
+    //List
+    {value  : 'list'},
+    {value  : 'test_list_loadmore'},
+    {value  : 'test_list_clickitem'},
+    {value  : 'test_list_listoflist'},
+    {value  : 'test_list_swipecontainer'},
+    {value  : 'test_list_listcollection'},
+    {value  : 'test_list_pushfunc'},
+
+    //Swipecontainers
     {value  : 'swipeclickcontainer_css'},
     {value  : 'swipeclickcontainer'},
     {value  : 'clicktestcontainer'},
@@ -16,14 +26,6 @@ window.components = new BetaJS.Collections.Collection({objects: [
     //Titledlist
     {value  : 'searchlist'},
     {value  : 'test_searchlist'},
-
-    //List
-    {value  : 'list'},
-    {value  : 'test_list_clickitem'},
-    {value  : 'test_list_listoflist'},
-    {value  : 'test_list_swipecontainer'},
-    {value  : 'test_list_listcollection'},
-    {value  : 'test_list_pushfunc'},
 
     //Itemmizablelist
     //{value  : 'test_list_different_listitems'},

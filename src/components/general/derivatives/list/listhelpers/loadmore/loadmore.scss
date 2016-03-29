@@ -1,0 +1,15 @@
+
+ba-loadmore{
+  @include flex(auto auto $listitemheight);
+
+  loadmore {
+    height: $listitemheight;
+    display: flex;
+
+    button {
+      flex: 1 1 0;
+    }
+
+  }
+}
+
