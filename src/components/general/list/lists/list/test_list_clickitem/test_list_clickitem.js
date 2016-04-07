@@ -2,6 +2,8 @@
 Scoped.define("tests:Test_list_clickitem", [
     "dynamics:Dynamic",
     "module:Templates"
+], [
+    "module:List"
 ], function (Dynamic, Templates, scoped) {
 
     return Dynamic.extend({scoped : scoped}, {

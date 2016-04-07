@@ -1,10 +1,12 @@
 
 Scoped.define("module:Test_list_pushfunc", [
     "dynamics:Dynamic",
-    "module:Templates"
+    "module:Templates",
+    "base:Collections.Collection"
 ],[
-    "module:Titledlist"
-], function (Dynamic, Templates, scoped) {
+    "module:Titledlist",
+    "module:Clickitem"
+], function (Dynamic, Templates, Collection, scoped) {
 
     return Dynamic.extend({scoped : scoped}, {
 
@@ -25,7 +27,7 @@ Scoped.define("module:Test_list_pushfunc", [
                         );
                     }
                 },
-                listcollection : new BetaJS.Collections.Collection({objects: [
+                listcollection : new Collection({objects: [
                     {value: "Item 1"},
                     {value: "Item 2"},
                     {value: "Item 3"},

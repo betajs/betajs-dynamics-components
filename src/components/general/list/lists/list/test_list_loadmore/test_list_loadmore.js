@@ -1,10 +1,12 @@
 
 Scoped.define("tests:Test_list_loadmore", [
     "dynamics:Dynamic",
-    "module:Templates"
+    "module:Templates",
+    "base:Collections.Collection"
 ],[
-    "module:List"
-], function (Dynamic, Templates, scoped) {
+    "module:List",
+    "module:Loading"
+], function (Dynamic, Templates, Collection, scoped) {
 
     return Dynamic.extend({scoped : scoped}, {
 
@@ -26,7 +28,7 @@ Scoped.define("tests:Test_list_loadmore", [
         },
 
         create : function () {
-            var collection = new BetaJS.Collections.Collection({
+            var collection = new Collection({
                 objects: [
                     {value: "Test - List - Loadmore - Item 0"}
                 ]
