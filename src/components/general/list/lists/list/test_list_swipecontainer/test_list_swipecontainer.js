@@ -1,5 +1,5 @@
 
-Scoped.define("module:Test_list_swipecontainer", [
+Scoped.define("tests:Test_list_swipecontainer", [
         "dynamics:Dynamic",
         "module:Templates",
         "base:Collections.Collection"
@@ -15,7 +15,7 @@ Scoped.define("module:Test_list_swipecontainer", [
 
         attrs: {
             model : {
-                listcollection : Collection({objects: [
+                listcollection : new Collection({objects: [
                     {value: "Item 1"},
                     {value: "Item 2"},
                     {value: "Item 3"},

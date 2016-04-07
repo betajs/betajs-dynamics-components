@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.6 - 2016-04-06
+betajs-dynamics-components - v0.0.6 - 2016-04-07
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -693,7 +693,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.0.6 - 2016-04-06
+betajs-dynamics-components - v0.0.6 - 2016-04-07
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -713,7 +713,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '94.1459954445171'
+		version: '96.1460044498431'
 	};
 });
 
@@ -1214,6 +1214,8 @@ Scoped.define("module:List", [
 Scoped.define("tests:Test_list_clickitem", [
     "dynamics:Dynamic",
     "module:Templates"
+], [
+    "module:List"
 ], function (Dynamic, Templates, scoped) {
 
     return Dynamic.extend({scoped : scoped}, {
@@ -1240,6 +1242,8 @@ Scoped.define("tests:Test_list_clickitem", [
 Scoped.define("tests:Test_list_listcollection", [
     "dynamics:Dynamic",
     "module:Templates"
+], [
+    "module:List"
 ], function (Dynamic, Templates, scoped) {
 
     return Dynamic.extend({scoped : scoped}, {
@@ -1263,6 +1267,8 @@ Scoped.define("tests:Test_list_listcollection", [
 Scoped.define("tests:Test_list_listoflist", [
     "dynamics:Dynamic",
     "module:Templates"
+], [
+    "module:List"
 ], function (Dynamic, Templates, scoped) {
 
     return Dynamic.extend({scoped : scoped}, {
@@ -1288,10 +1294,12 @@ Scoped.define("tests:Test_list_listoflist", [
 
 Scoped.define("tests:Test_list_loadmore", [
     "dynamics:Dynamic",
-    "module:Templates"
+    "module:Templates",
+    "base:Collections.Collection"
 ],[
-    "module:List"
-], function (Dynamic, Templates, scoped) {
+    "module:List",
+    "module:Loading"
+], function (Dynamic, Templates, Collection, scoped) {
 
     return Dynamic.extend({scoped : scoped}, {
 
@@ -1313,7 +1321,7 @@ Scoped.define("tests:Test_list_loadmore", [
         },
 
         create : function () {
-            var collection = new BetaJS.Collections.Collection({
+            var collection = new Collection({
                 objects: [
                     {value: "Test - List - Loadmore - Item 0"}
                 ]
@@ -1332,10 +1340,12 @@ Scoped.define("tests:Test_list_loadmore", [
 
 Scoped.define("module:Test_list_pushfunc", [
     "dynamics:Dynamic",
-    "module:Templates"
+    "module:Templates",
+    "base:Collections.Collection"
 ],[
-    "module:Titledlist"
-], function (Dynamic, Templates, scoped) {
+    "module:Titledlist",
+    "module:Clickitem"
+], function (Dynamic, Templates, Collection, scoped) {
 
     return Dynamic.extend({scoped : scoped}, {
 
@@ -1356,7 +1366,7 @@ Scoped.define("module:Test_list_pushfunc", [
                         );
                     }
                 },
-                listcollection : new BetaJS.Collections.Collection({objects: [
+                listcollection : new Collection({objects: [
                     {value: "Item 1"},
                     {value: "Item 2"},
                     {value: "Item 3"},
@@ -1377,28 +1387,39 @@ Scoped.define("module:Test_list_pushfunc", [
 
 });
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_list_swipecontainer", {
+Scoped.define("tests:Test_list_swipecontainer", [
+        "dynamics:Dynamic",
+        "module:Templates",
+        "base:Collections.Collection"
+    ],[
+        "module:List",
+        "module:Swipecontainer",
+        "module:Selectableitem"
+    ], function (Dynamic, Templates, Collection, scoped) {
 
-    template: BetaJS.Dynamics.Components.Templates.test_list_swipecontainer,
+    return Dynamic.extend({scoped: scoped}, {
 
-    attrs: {
-        model : {
-            listcollection : new BetaJS.Collections.Collection({objects: [
-                {value: "Item 1"},
-                {value: "Item 2"},
-                {value: "Item 3"},
-                {value: "Item 4"},
-                {value: "Item 5"}
-            ]})
-        },
-        view_model : {
-            listitem : 'swipecontainer',
-            inner : 'selectableitem'
+        template: Templates.test_list_swipecontainer,
+
+        attrs: {
+            model : {
+                listcollection : new Collection({objects: [
+                    {value: "Item 1"},
+                    {value: "Item 2"},
+                    {value: "Item 3"},
+                    {value: "Item 4"},
+                    {value: "Item 5"}
+                ]})
+            },
+            view_model : {
+                listitem : 'swipecontainer',
+                inner : 'selectableitem'
+            }
         }
-    }
 
-}).register();
+    }).register();
 
+});
 
 Scoped.define("module:Searchlist", [
     "dynamics:Dynamic",
