@@ -3,6 +3,7 @@
 var Scoped = this.subScope();
 
 Scoped.binding("module", "global:BetaJS.Dynamics.Components");
+Scoped.binding("tests", "global:BetaJS.Dynamics.Components.Tests");
 Scoped.binding("dynamics", "global:BetaJS.Dynamics");
 Scoped.binding("base", "global:BetaJS");
 Scoped.binding("browser", "global:BetaJS.Browser");
