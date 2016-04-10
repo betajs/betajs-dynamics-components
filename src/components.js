@@ -3,8 +3,6 @@ window.components = new BetaJS.Collections.Collection({objects: [
 
 
     //Swipecontainers
-    {value  : 'swipeclickcontainer_css'},
-    {value  : 'swipecontainer'},
     {value  : 'swipeclickcontainer'},
     {value  : 'eventitem'},
 
@@ -36,7 +34,7 @@ window.components = new BetaJS.Collections.Collection({objects: [
 
     //Web -
     {value  : 'header'},
-    {value  : 'menu'},
+    {value  : 'menu_web'},
     {value  : 'layout_web'},
 
     // List - Listitems
@@ -44,8 +42,6 @@ window.components = new BetaJS.Collections.Collection({objects: [
     {value  : 'selectableitem'},
 
     //Check Below!!
-
-
 
     //other
     {value  : 'test_searchlist'},

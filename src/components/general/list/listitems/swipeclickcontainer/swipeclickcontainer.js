@@ -1,5 +1,5 @@
 
-Scoped.define("module:Swipeclickcontainer_css", [
+Scoped.define("module:Swipeclickcontainer", [
 	"dynamics:Dynamic",
 	"module:Templates",
 	"browser:Loader"
@@ -10,7 +10,7 @@ Scoped.define("module:Swipeclickcontainer_css", [
 
 	return Dynamic.extend({scoped: scoped}, {
 
-		template: Templates.swipeclickcontainer_css,
+		template: Templates.swipeclickcontainer,
 
 		scopes : {
 			child_dynamic: ">"

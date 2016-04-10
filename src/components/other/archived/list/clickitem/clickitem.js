@@ -1,6 +1,4 @@
 
-
-
 Scoped.define("module:Clickitem", [
     "dynamics:Dynamic",
     "module:Templates"

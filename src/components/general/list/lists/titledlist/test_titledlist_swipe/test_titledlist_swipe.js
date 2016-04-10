@@ -5,7 +5,6 @@ Scoped.define("module:Test_titledlist_swipe", [
     "module:Templates"
 ],[
     "module:Titledlist",
-    "module:Swipecontainer",
     "module:Selectableitem"
 ], function (Dynamic, Templates, scoped) {
 
@@ -18,7 +17,7 @@ Scoped.define("module:Test_titledlist_swipe", [
                 title_model : {
                     value : 'Titledlist - Testtitle'
                 },
-                listitem: 'swipecontainer',
+                listitem: 'swipeclickcontainer',
                 inner: 'selectableitem'
             }
         },

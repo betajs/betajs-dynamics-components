@@ -5,7 +5,7 @@ Scoped.define("tests:Test_list_swipecontainer", [
         "base:Collections.Collection"
     ],[
         "module:List",
-        "module:Swipecontainer",
+        "module:Swipeclickcontainer",
         "module:Selectableitem"
     ], function (Dynamic, Templates, Collection, scoped) {
 
@@ -24,7 +24,7 @@ Scoped.define("tests:Test_list_swipecontainer", [
                 ]})
             },
             view_model : {
-                listitem : 'swipecontainer',
+                listitem : 'swipeclickcontainer',
                 inner : 'selectableitem'
             }
         }

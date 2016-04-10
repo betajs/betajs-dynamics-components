@@ -28,6 +28,7 @@ ba-swipeclickcontainer {
   swipe {
     position: relative;
     display: block;
+    left:0;
 
     container {
       position: relative;
@@ -52,6 +53,7 @@ ba-swipeclickcontainer {
         left: -100%;
         @include flex(1 0 0);
         @include flex-order(2);
+        background : white;
       }
 
       swiperight {
@@ -93,4 +95,13 @@ body>swipe {
       display: none;
     }
   }
+}
+//Swipe
+ba-swipeclickcontainer .swipe {
+  $timer: .3s;
+  -webkit-transition: all $timer ease;
+  -moz-transition: all $timer ease;
+  -o-transition: all $timer ease;
+  -ms-transition: all $timer ease;
+  transition: all $timer ease;
 }

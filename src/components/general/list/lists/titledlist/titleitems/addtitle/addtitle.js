@@ -16,7 +16,6 @@ Scoped.define("module:Addtitle", [
 
             clicktitle : function () {
 
-                console.log("You clicked the Title, no clicktitle() given, toggle");
                 this.scope('<').call('togglelist');
 
             },

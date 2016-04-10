@@ -1,5 +1,5 @@
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Menu", {
+BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Menu_web", {
 
     template: BetaJS.Dynamics.Components.Templates.menu,
 
