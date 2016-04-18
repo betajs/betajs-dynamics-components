@@ -12,7 +12,9 @@ Scoped.define("module:List", [
             listitem: "clickitem",
             model: false,
             view : {
-                listend : false
+                listend : {
+                    show : false
+                }
             }
         },
 

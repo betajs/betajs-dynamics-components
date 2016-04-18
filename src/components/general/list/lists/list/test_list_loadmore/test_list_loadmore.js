@@ -14,8 +14,10 @@ Scoped.define("tests:Test_list_loadmore", [
 
         attrs : {
           view : {
-              //listend : 'loading'
-              listend : 'loadmore'
+              listend : {
+                  item : 'loadmore',
+                  value : 'Test Value'
+              }
           }
         },
 

@@ -9,8 +9,8 @@ Scoped.define("module:Loadmore", [
         template: Templates.loadmore,
 
         attrs: {
-            model: {
-                doodad: "Placeholder"
+            view: {
+                value: "Placeholder"
             }
         },
 
