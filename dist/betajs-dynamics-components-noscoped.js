@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.6 - 2016-04-08
+betajs-dynamics-components - v0.0.6 - 2016-04-18
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -19,7 +19,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '97.1460115560618'
+		version: '98.1460959583064'
 	};
 });
 
@@ -655,7 +655,8 @@ Scoped.define("tests:Test_list_loadmore", [
 
         attrs : {
           view : {
-              listend : 'loading'
+              //listend : 'loading'
+              listend : 'loadmore'
           }
         },
 
@@ -674,7 +675,7 @@ Scoped.define("tests:Test_list_loadmore", [
                     {value: "Test - List - Loadmore - Item 0"}
                 ]
             });
-            for (var i = 1; i < 25; i++) {
+            for (var i = 1; i < 15; i++) {
                 collection.add(
                     {value: "Test - List - Loadmore - Item " + i}
                 );
@@ -980,7 +981,6 @@ Scoped.define("module:Addtitle", [
 
             clicktitle : function () {
 
-                console.log("You clicked the Additle, no clicktitle() given, default: toggle");
                 this.scope('<').call('togglelist');
 
             },

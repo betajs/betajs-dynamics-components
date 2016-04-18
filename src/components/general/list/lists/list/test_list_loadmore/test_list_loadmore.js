@@ -14,7 +14,8 @@ Scoped.define("tests:Test_list_loadmore", [
 
         attrs : {
           view : {
-              listend : 'loading'
+              //listend : 'loading'
+              listend : 'loadmore'
           }
         },
 
@@ -33,7 +34,7 @@ Scoped.define("tests:Test_list_loadmore", [
                     {value: "Test - List - Loadmore - Item 0"}
                 ]
             });
-            for (var i = 1; i < 25; i++) {
+            for (var i = 1; i < 15; i++) {
                 collection.add(
                     {value: "Test - List - Loadmore - Item " + i}
                 );

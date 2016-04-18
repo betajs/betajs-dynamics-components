@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics - v0.0.41 - 2016-03-06
+betajs-dynamics - v0.0.44 - 2016-04-16
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -16,7 +16,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "d71ebf84-e555-4e9b-b18a-11d74fdcefe2",
-		version: '235.1457307852360'
+		version: '238.1460827567109'
 	};
 });
 
@@ -295,7 +295,9 @@ Scoped.define("module:Data.Mesh", [
 Scoped.define("module:Parser", [
     "base:Types", "base:Objs", "base:JavaScript"
 ], function (Types, Objs, JavaScript) {
-	return {		
+	return {
+		
+		__cache: {},		
 		
 		parseText: function (text) {
 			if (!text)
@@ -342,25 +344,31 @@ Scoped.define("module:Parser", [
 		},
 		
 		parseCode: function (code) {
+			var result = this.__cache[code];
+			if (result)
+				return result;
 			var bidirectional = false;
-			if (code.charAt(0) == "=") {
+			var c = code;
+			if (c.charAt(0) == "=") {
 				bidirectional = true;
-				code = code.substring(1);
+				c = c.substring(1);
 			}
-			var i = code.indexOf("::");
+			var i = c.indexOf("::");
 			var args = null;
 			if (i >= 0) {
-				args = code.substring(0, i).trim();
-				code = code.substring(i + 2);
+				args = c.substring(0, i).trim();
+				c = c.substring(i + 2);
 			}
-			return {
+			result = {
 				bidirectional: bidirectional,
 				args: args,
-				variable: bidirectional ? code : null,
+				variable: bidirectional ? c : null,
 				/*jslint evil: true */
-				func: new Function ("obj", "with (obj) { return " + code + "; }"),
-				dependencies: Object.keys(Objs.objectify(JavaScript.extractIdentifiers(code, true)))
+				func: new Function ("obj", "with (obj) { return " + c + "; }"),
+				dependencies: Object.keys(Objs.objectify(JavaScript.extractIdentifiers(c, true)))
 			};
+			this.__cache[code] = result;
+			return result;
 		}
 	
 	};
@@ -875,6 +883,8 @@ Scoped.define("module:Dynamic", [
 	var Cls;
 	Cls = Scope.extend({scoped: scoped}, [HandlerMixin, function (inherited) {
    		return {
+   			
+   			supportsGc: true,
 
 		   	_notifications: {
 				_activate: "__createActivate"
@@ -1141,7 +1151,7 @@ Scoped.define("module:Handlers.Attr", [
 						this._partial.change(value, old);
 					if (this._attrName === "value" && this._element.value !== value)
 						this.__inputVal(this._element, value);
-					if (this._tagHandler && this._dyn)
+					if (this._tagHandler && this._dyn && !this._partial)
 						this._tagHandler.properties().set(Strings.first_after(this._attrName, "-"), value);
 				}
 			},
@@ -1665,7 +1675,7 @@ Scoped.define("module:Handlers.Node", [
 						attr.unbindTagHandler(this._tagHandler);
 					}, this);
 					this.off(null, null, this._tagHandler);
-					this._tagHandler.destroy();
+					this._tagHandler.weakDestroy();
 					this._tagHandler = null;
 				}
 			},
@@ -2011,6 +2021,21 @@ Scoped.define("module:Partials.FunctionsPartial", ["module:Handlers.Partial", "b
  		};
  	});
  	Cls.register("ba-functions");
+	return Cls;
+});
+
+Scoped.define("module:Partials.GcPartial", ["module:Handlers.Partial"], function (Partial, scoped) {
+ 	var Cls = Partial.extend({scoped: scoped}, function (inherited) {
+ 		return {
+			
+ 			bindTagHandler: function (handler) {
+ 				if (this._value) 
+ 					handler.enableGc(this._value);
+ 			}
+ 		
+ 		};
+ 	});
+ 	Cls.register("ba-gc");
 	return Cls;
 });
 

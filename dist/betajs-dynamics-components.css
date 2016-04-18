@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.6 - 2016-04-08
+betajs-dynamics-components - v0.0.6 - 2016-04-18
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -562,25 +562,10 @@ ba-swipeclickcontainer .swipe {
   transition: all 0.3s ease; }
 
 ba-list {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
+  display: block;
   overflow-y: scroll;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch; }
-  ba-list list {
-    -webkit-box-flex: 1 1 0;
-    -moz-box-flex: 1 1 0;
-    -webkit-flex: 1 1 0;
-    -ms-flex: 1 1 0;
-    flex: 1 1 0; }
-    ba-list list ba-item {
-      display: block; }
 
 ba-test_list_loadmore {
   height: 100%; }
