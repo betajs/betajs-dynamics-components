@@ -1,635 +1,715 @@
 /*!
-betajs - v1.0.49 - 2016-04-16
+betajs - v1.0.52 - 2016-05-09
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 Apache-2.0 Software License.
 */
-/*!
-betajs-scoped - v0.0.6 - 2016-02-03
+/** @flow **//*!
+betajs-scoped - v0.0.10 - 2016-04-07
 Copyright (c) Oliver Friedmann
-Apache 2.0 Software License.
+Apache-2.0 Software License.
 */
-var Scoped = function () {
-	var Globals = {
+var Scoped = (function () {
+var Globals = {
 
-		get: function (key /* : string */) {
-			if (typeof window !== "undefined") return window[key];
-			if (typeof global !== "undefined") return global[key];
-			return null;
-		},
+	get : function(key/* : string */) {
+		if (typeof window !== "undefined")
+			return window[key];
+		if (typeof global !== "undefined")
+			return global[key];
+		return null;
+	},
 
-		set: function (key /* : string */, value) {
-			if (typeof window !== "undefined") window[key] = value;
-			if (typeof global !== "undefined") global[key] = value;
-			return value;
-		},
-
-		setPath: function (path /* : string */, value) {
-			var args = path.split(".");
-			if (args.length == 1) return this.set(path, value);
-			var current = this.get(args[0]) || this.set(args[0], {});
-			for (var i = 1; i < args.length - 1; ++i) {
-				if (!(args[i] in current)) current[args[i]] = {};
-				current = current[args[i]];
-			}
-			current[args[args.length - 1]] = value;
-			return value;
-		},
-
-		getPath: function (path /* : string */) {
-			var args = path.split(".");
-			if (args.length == 1) return this.get(path);
-			var current = this.get(args[0]);
-			for (var i = 1; i < args.length; ++i) {
-				if (!current) return current;
-				current = current[args[i]];
-			}
-			return current;
+	set : function(key/* : string */, value) {
+		if (typeof window !== "undefined")
+			window[key] = value;
+		if (typeof global !== "undefined")
+			global[key] = value;
+		return value;
+	},
+	
+	setPath: function (path/* : string */, value) {
+		var args = path.split(".");
+		if (args.length == 1)
+			return this.set(path, value);		
+		var current = this.get(args[0]) || this.set(args[0], {});
+		for (var i = 1; i < args.length - 1; ++i) {
+			if (!(args[i] in current))
+				current[args[i]] = {};
+			current = current[args[i]];
 		}
-
-	};
-	/*::
- declare module Helper {
- 	declare function extend<A, B>(a: A, b: B): A & B;
- }
- */
-
-	var Helper = {
-
-		method: function (obj, func) {
-			return function () {
-				return func.apply(obj, arguments);
-			};
-		},
-
-		extend: function (base, overwrite) {
-			base = base || {};
-			overwrite = overwrite || {};
-			for (var key in overwrite) base[key] = overwrite[key];
-			return base;
-		},
-
-		typeOf: function (obj) {
-			return Object.prototype.toString.call(obj) === '[object Array]' ? "array" : typeof obj;
-		},
-
-		isEmpty: function (obj) {
-			if (obj === null || typeof obj === "undefined") return true;
-			if (this.typeOf(obj) == "array") return obj.length === 0;
-			if (typeof obj !== "object") return false;
-			for (var key in obj) return false;
-			return true;
-		},
-
-		matchArgs: function (args, pattern) {
-			var i = 0;
-			var result = {};
-			for (var key in pattern) {
-				if (pattern[key] === true || this.typeOf(args[i]) == pattern[key]) {
-					result[key] = args[i];
-					i++;
-				} else if (this.typeOf(args[i]) == "undefined") i++;
-			}
-			return result;
-		},
-
-		stringify: function (value) {
-			if (this.typeOf(value) == "function") return "" + value;
-			return JSON.stringify(value);
+		current[args[args.length - 1]] = value;
+		return value;
+	},
+	
+	getPath: function (path/* : string */) {
+		var args = path.split(".");
+		if (args.length == 1)
+			return this.get(path);		
+		var current = this.get(args[0]);
+		for (var i = 1; i < args.length; ++i) {
+			if (!current)
+				return current;
+			current = current[args[i]];
 		}
+		return current;
+	}
 
-	};
-	var Attach = {
+};
+/*::
+declare module Helper {
+	declare function extend<A, B>(a: A, b: B): A & B;
+}
+*/
 
-		__namespace: "Scoped",
-		__revert: null,
-
-		upgrade: function (namespace /* : ?string */) {
-			var current = Globals.get(namespace || Attach.__namespace);
-			if (current && Helper.typeOf(current) == "object" && current.guid == this.guid && Helper.typeOf(current.version) == "string") {
-				var my_version = this.version.split(".");
-				var current_version = current.version.split(".");
-				var newer = false;
-				for (var i = 0; i < Math.min(my_version.length, current_version.length); ++i) {
-					newer = parseInt(my_version[i], 10) > parseInt(current_version[i], 10);
-					if (my_version[i] != current_version[i]) break;
-				}
-				return newer ? this.attach(namespace) : current;
-			} else return this.attach(namespace);
-		},
-
-		attach: function (namespace /* : ?string */) {
-			if (namespace) Attach.__namespace = namespace;
-			var current = Globals.get(Attach.__namespace);
-			if (current == this) return this;
-			Attach.__revert = current;
-			if (current) {
-				try {
-					var exported = current.__exportScoped();
-					this.__exportBackup = this.__exportScoped();
-					this.__importScoped(exported);
-				} catch (e) {
-					// We cannot upgrade the old version.
-				}
-			}
-			Globals.set(Attach.__namespace, this);
-			return this;
-		},
-
-		detach: function (forceDetach /* : ?boolean */) {
-			if (forceDetach) Globals.set(Attach.__namespace, null);
-			if (typeof Attach.__revert != "undefined") Globals.set(Attach.__namespace, Attach.__revert);
-			delete Attach.__revert;
-			if (Attach.__exportBackup) this.__importScoped(Attach.__exportBackup);
-			return this;
-		},
-
-		exports: function (mod, object, forceExport) {
-			mod = mod || (typeof module != "undefined" ? module : null);
-			if (typeof mod == "object" && mod && "exports" in mod && (forceExport || mod.exports == this || !mod.exports || Helper.isEmpty(mod.exports))) mod.exports = object || this;
-			return this;
-		}
-
-	};
-
-	function newNamespace(opts /* : {tree ?: boolean, global ?: boolean, root ?: Object} */) {
-
-		var options /* : {
-              tree: boolean,
-              global: boolean,
-              root: Object
-              } */ = {
-			tree: typeof opts.tree === "boolean" ? opts.tree : false,
-			global: typeof opts.global === "boolean" ? opts.global : false,
-			root: typeof opts.root === "object" ? opts.root : {}
+var Helper = {
+		
+	method: function (obj, func) {
+		return function () {
+			return func.apply(obj, arguments);
 		};
+	},
 
-		/*::
-  type Node = {
-  	route: ?string,
-  	parent: ?Node,
-  	children: any,
-  	watchers: any,
-  	data: any,
-  	ready: boolean,
-  	lazy: any
-  };
-  */
-
-		function initNode(options) /* : Node */{
-			return {
-				route: typeof options.route === "string" ? options.route : null,
-				parent: typeof options.parent === "object" ? options.parent : null,
-				ready: typeof options.ready === "boolean" ? options.ready : false,
-				children: {},
-				watchers: [],
-				data: {},
-				lazy: []
-			};
+	extend: function (base, overwrite) {
+		base = base || {};
+		overwrite = overwrite || {};
+		for (var key in overwrite)
+			base[key] = overwrite[key];
+		return base;
+	},
+	
+	typeOf: function (obj) {
+		return Object.prototype.toString.call(obj) === '[object Array]' ? "array" : typeof obj;
+	},
+	
+	isEmpty: function (obj) {
+		if (obj === null || typeof obj === "undefined")
+			return true;
+		if (this.typeOf(obj) == "array")
+			return obj.length === 0;
+		if (typeof obj !== "object")
+			return false;
+		for (var key in obj)
+			return false;
+		return true;
+	},
+	
+	matchArgs: function (args, pattern) {
+		var i = 0;
+		var result = {};
+		for (var key in pattern) {
+			if (pattern[key] === true || this.typeOf(args[i]) == pattern[key]) {
+				result[key] = args[i];
+				i++;
+			} else if (this.typeOf(args[i]) == "undefined")
+				i++;
 		}
+		return result;
+	},
+	
+	stringify: function (value) {
+		if (this.typeOf(value) == "function")
+			return "" + value;
+		return JSON.stringify(value);
+	}	
 
-		var nsRoot = initNode({ ready: true });
-
-		if (options.tree) {
-			if (options.global) {
-				try {
-					if (window) nsRoot.data = window;
-				} catch (e) {}
-				try {
-					if (global) nsRoot.data = global;
-				} catch (e) {}
-			} else nsRoot.data = options.root;
-		}
-
-		function nodeDigest(node /* : Node */) {
-			if (node.ready) return;
-			if (node.parent && !node.parent.ready) {
-				nodeDigest(node.parent);
-				return;
+};
+var Attach = {
+		
+	__namespace: "Scoped",
+	__revert: null,
+	
+	upgrade: function (namespace/* : ?string */) {
+		var current = Globals.get(namespace || Attach.__namespace);
+		if (current && Helper.typeOf(current) == "object" && current.guid == this.guid && Helper.typeOf(current.version) == "string") {
+			var my_version = this.version.split(".");
+			var current_version = current.version.split(".");
+			var newer = false;
+			for (var i = 0; i < Math.min(my_version.length, current_version.length); ++i) {
+				newer = parseInt(my_version[i], 10) > parseInt(current_version[i], 10);
+				if (my_version[i] != current_version[i]) 
+					break;
 			}
-			if (node.route && node.parent && node.route in node.parent.data) {
-				node.data = node.parent.data[node.route];
-				node.ready = true;
-				for (var i = 0; i < node.watchers.length; ++i) node.watchers[i].callback.call(node.watchers[i].context || this, node.data);
-				node.watchers = [];
-				for (var key in node.children) nodeDigest(node.children[key]);
+			return newer ? this.attach(namespace) : current;				
+		} else
+			return this.attach(namespace);		
+	},
+
+	attach : function(namespace/* : ?string */) {
+		if (namespace)
+			Attach.__namespace = namespace;
+		var current = Globals.get(Attach.__namespace);
+		if (current == this)
+			return this;
+		Attach.__revert = current;
+		if (current) {
+			try {
+				var exported = current.__exportScoped();
+				this.__exportBackup = this.__exportScoped();
+				this.__importScoped(exported);
+			} catch (e) {
+				// We cannot upgrade the old version.
 			}
 		}
+		Globals.set(Attach.__namespace, this);
+		return this;
+	},
+	
+	detach: function (forceDetach/* : ?boolean */) {
+		if (forceDetach)
+			Globals.set(Attach.__namespace, null);
+		if (typeof Attach.__revert != "undefined")
+			Globals.set(Attach.__namespace, Attach.__revert);
+		delete Attach.__revert;
+		if (Attach.__exportBackup)
+			this.__importScoped(Attach.__exportBackup);
+		return this;
+	},
+	
+	exports: function (mod, object, forceExport) {
+		mod = mod || (typeof module != "undefined" ? module : null);
+		if (typeof mod == "object" && mod && "exports" in mod && (forceExport || mod.exports == this || !mod.exports || Helper.isEmpty(mod.exports)))
+			mod.exports = object || this;
+		return this;
+	}	
 
-		function nodeEnforce(node /* : Node */) {
-			if (node.ready) return;
-			if (node.parent && !node.parent.ready) nodeEnforce(node.parent);
+};
+
+function newNamespace (opts/* : {tree ?: boolean, global ?: boolean, root ?: Object} */) {
+
+	var options/* : {
+		tree: boolean,
+	    global: boolean,
+	    root: Object
+	} */ = {
+		tree: typeof opts.tree === "boolean" ? opts.tree : false,
+		global: typeof opts.global === "boolean" ? opts.global : false,
+		root: typeof opts.root === "object" ? opts.root : {}
+	};
+
+	/*::
+	type Node = {
+		route: ?string,
+		parent: ?Node,
+		children: any,
+		watchers: any,
+		data: any,
+		ready: boolean,
+		lazy: any
+	};
+	*/
+
+	function initNode(options)/* : Node */ {
+		return {
+			route: typeof options.route === "string" ? options.route : null,
+			parent: typeof options.parent === "object" ? options.parent : null,
+			ready: typeof options.ready === "boolean" ? options.ready : false,
+			children: {},
+			watchers: [],
+			data: {},
+			lazy: []
+		};
+	}
+	
+	var nsRoot = initNode({ready: true});
+	
+	if (options.tree) {
+		if (options.global) {
+			try {
+				if (window)
+					nsRoot.data = window;
+			} catch (e) { }
+			try {
+				if (global)
+					nsRoot.data = global;
+			} catch (e) { }
+		} else
+			nsRoot.data = options.root;
+	}
+	
+	function nodeDigest(node/* : Node */) {
+		if (node.ready)
+			return;
+		if (node.parent && !node.parent.ready) {
+			nodeDigest(node.parent);
+			return;
+		}
+		if (node.route && node.parent && (node.route in node.parent.data)) {
+			node.data = node.parent.data[node.route];
 			node.ready = true;
-			if (node.parent) {
-				if (options.tree && typeof node.parent.data == "object") node.parent.data[node.route] = node.data;
-			}
-			for (var i = 0; i < node.watchers.length; ++i) node.watchers[i].callback.call(node.watchers[i].context || this, node.data);
+			for (var i = 0; i < node.watchers.length; ++i)
+				node.watchers[i].callback.call(node.watchers[i].context || this, node.data);
 			node.watchers = [];
+			for (var key in node.children)
+				nodeDigest(node.children[key]);
 		}
-
-		function nodeSetData(node /* : Node */, value) {
-			if (typeof value == "object" && node.ready) {
-				for (var key in value) node.data[key] = value[key];
-			} else node.data = value;
-			if (typeof value == "object") {
-				for (var ckey in value) {
-					if (node.children[ckey]) node.children[ckey].data = value[ckey];
-				}
+	}
+	
+	function nodeEnforce(node/* : Node */) {
+		if (node.ready)
+			return;
+		if (node.parent && !node.parent.ready)
+			nodeEnforce(node.parent);
+		node.ready = true;
+		if (node.parent) {
+			if (options.tree && typeof node.parent.data == "object")
+				node.parent.data[node.route] = node.data;
+		}
+		for (var i = 0; i < node.watchers.length; ++i)
+			node.watchers[i].callback.call(node.watchers[i].context || this, node.data);
+		node.watchers = [];
+	}
+	
+	function nodeSetData(node/* : Node */, value) {
+		if (typeof value == "object" && node.ready) {
+			for (var key in value)
+				node.data[key] = value[key];
+		} else
+			node.data = value;
+		if (typeof value == "object") {
+			for (var ckey in value) {
+				if (node.children[ckey])
+					node.children[ckey].data = value[ckey];
 			}
-			nodeEnforce(node);
-			for (var k in node.children) nodeDigest(node.children[k]);
 		}
-
-		function nodeClearData(node /* : Node */) {
-			if (node.ready && node.data) {
-				for (var key in node.data) delete node.data[key];
+		nodeEnforce(node);
+		for (var k in node.children)
+			nodeDigest(node.children[k]);
+	}
+	
+	function nodeClearData(node/* : Node */) {
+		if (node.ready && node.data) {
+			for (var key in node.data)
+				delete node.data[key];
+		}
+	}
+	
+	function nodeNavigate(path/* : ?String */) {
+		if (!path)
+			return nsRoot;
+		var routes = path.split(".");
+		var current = nsRoot;
+		for (var i = 0; i < routes.length; ++i) {
+			if (routes[i] in current.children)
+				current = current.children[routes[i]];
+			else {
+				current.children[routes[i]] = initNode({
+					parent: current,
+					route: routes[i]
+				});
+				current = current.children[routes[i]];
+				nodeDigest(current);
 			}
 		}
-
-		function nodeNavigate(path /* : ?String */) {
-			if (!path) return nsRoot;
-			var routes = path.split(".");
-			var current = nsRoot;
-			for (var i = 0; i < routes.length; ++i) {
-				if (routes[i] in current.children) current = current.children[routes[i]];else {
-					current.children[routes[i]] = initNode({
-						parent: current,
-						route: routes[i]
-					});
-					current = current.children[routes[i]];
-					nodeDigest(current);
-				}
+		return current;
+	}
+	
+	function nodeAddWatcher(node/* : Node */, callback, context) {
+		if (node.ready)
+			callback.call(context || this, node.data);
+		else {
+			node.watchers.push({
+				callback: callback,
+				context: context
+			});
+			if (node.lazy.length > 0) {
+				var f = function (node) {
+					if (node.lazy.length > 0) {
+						var lazy = node.lazy.shift();
+						lazy.callback.call(lazy.context || this, node.data);
+						f(node);
+					}
+				};
+				f(node);
 			}
-			return current;
 		}
+	}
+	
+	function nodeUnresolvedWatchers(node/* : Node */, base, result) {
+		node = node || nsRoot;
+		result = result || [];
+		if (!node.ready)
+			result.push(base);
+		for (var k in node.children) {
+			var c = node.children[k];
+			var r = (base ? base + "." : "") + c.route;
+			result = nodeUnresolvedWatchers(c, r, result);
+		}
+		return result;
+	}
 
-		function nodeAddWatcher(node /* : Node */, callback, context) {
-			if (node.ready) callback.call(context || this, node.data);else {
-				node.watchers.push({
+	return {
+		
+		extend: function (path, value) {
+			nodeSetData(nodeNavigate(path), value);
+		},
+		
+		set: function (path, value) {
+			var node = nodeNavigate(path);
+			if (node.data)
+				nodeClearData(node);
+			nodeSetData(node, value);
+		},
+		
+		get: function (path) {
+			var node = nodeNavigate(path);
+			return node.ready ? node.data : null;
+		},
+		
+		lazy: function (path, callback, context) {
+			var node = nodeNavigate(path);
+			if (node.ready)
+				callback(context || this, node.data);
+			else {
+				node.lazy.push({
 					callback: callback,
 					context: context
 				});
-				if (node.lazy.length > 0) {
-					var f = function (node) {
-						if (node.lazy.length > 0) {
-							var lazy = node.lazy.shift();
-							lazy.callback.call(lazy.context || this, node.data);
-							f(node);
-						}
-					};
-					f(node);
-				}
 			}
-		}
-
-		function nodeUnresolvedWatchers(node /* : Node */, base, result) {
-			node = node || nsRoot;
-			result = result || [];
-			if (!node.ready) result.push(base);
-			for (var k in node.children) {
-				var c = node.children[k];
-				var r = (base ? base + "." : "") + c.route;
-				result = nodeUnresolvedWatchers(c, r, result);
-			}
-			return result;
-		}
-
-		return {
-
-			extend: function (path, value) {
-				nodeSetData(nodeNavigate(path), value);
-			},
-
-			set: function (path, value) {
-				var node = nodeNavigate(path);
-				if (node.data) nodeClearData(node);
-				nodeSetData(node, value);
-			},
-
-			get: function (path) {
-				var node = nodeNavigate(path);
-				return node.ready ? node.data : null;
-			},
-
-			lazy: function (path, callback, context) {
-				var node = nodeNavigate(path);
-				if (node.ready) callback(context || this, node.data);else {
-					node.lazy.push({
-						callback: callback,
-						context: context
-					});
-				}
-			},
-
-			digest: function (path) {
-				nodeDigest(nodeNavigate(path));
-			},
-
-			obtain: function (path, callback, context) {
-				nodeAddWatcher(nodeNavigate(path), callback, context);
-			},
-
-			unresolvedWatchers: function (path) {
-				return nodeUnresolvedWatchers(nodeNavigate(path), path);
-			},
-
-			__export: function () {
-				return {
-					options: options,
-					nsRoot: nsRoot
-				};
-			},
-
-			__import: function (data) {
-				options = data.options;
-				nsRoot = data.nsRoot;
-			}
-
-		};
-	}
-	function newScope(parent, parentNS, rootNS, globalNS) {
-
-		var self = this;
-		var nextScope = null;
-		var childScopes = [];
-		var parentNamespace = parentNS;
-		var rootNamespace = rootNS;
-		var globalNamespace = globalNS;
-		var localNamespace = newNamespace({ tree: true });
-		var privateNamespace = newNamespace({ tree: false });
-
-		var bindings = {
-			"global": {
-				namespace: globalNamespace
-			}, "root": {
-				namespace: rootNamespace
-			}, "local": {
-				namespace: localNamespace
-			}, "default": {
-				namespace: privateNamespace
-			}, "parent": {
-				namespace: parentNamespace
-			}, "scope": {
-				namespace: localNamespace,
-				readonly: false
-			}
-		};
-
-		var custom = function (argmts, name, callback) {
-			var args = Helper.matchArgs(argmts, {
-				options: "object",
-				namespaceLocator: true,
-				dependencies: "array",
-				hiddenDependencies: "array",
-				callback: true,
-				context: "object"
-			});
-
-			var options = Helper.extend({
-				lazy: this.options.lazy
-			}, args.options || {});
-
-			var ns = this.resolve(args.namespaceLocator);
-
-			var execute = function () {
-				this.require(args.dependencies, args.hiddenDependencies, function () {
-					arguments[arguments.length - 1].ns = ns;
-					if (this.options.compile) {
-						var params = [];
-						for (var i = 0; i < argmts.length; ++i) params.push(Helper.stringify(argmts[i]));
-						this.compiled += this.options.ident + "." + name + "(" + params.join(", ") + ");\n\n";
-					}
-					var result = this.options.compile ? {} : args.callback.apply(args.context || this, arguments);
-					callback.call(this, ns, result);
-				}, this);
-			};
-
-			if (options.lazy) ns.namespace.lazy(ns.path, execute, this);else execute.apply(this);
-
-			return this;
-		};
-
-		return {
-
-			getGlobal: Helper.method(Globals, Globals.getPath),
-			setGlobal: Helper.method(Globals, Globals.setPath),
-
-			options: {
-				lazy: false,
-				ident: "Scoped",
-				compile: false
-			},
-
-			compiled: "",
-
-			nextScope: function () {
-				if (!nextScope) nextScope = newScope(this, localNamespace, rootNamespace, globalNamespace);
-				return nextScope;
-			},
-
-			subScope: function () {
-				var sub = this.nextScope();
-				childScopes.push(sub);
-				nextScope = null;
-				return sub;
-			},
-
-			binding: function (alias, namespaceLocator, options) {
-				if (!bindings[alias] || !bindings[alias].readonly) {
-					var ns;
-					if (Helper.typeOf(namespaceLocator) != "string") {
-						ns = {
-							namespace: newNamespace({
-								tree: true,
-								root: namespaceLocator
-							}),
-							path: null
-						};
-					} else ns = this.resolve(namespaceLocator);
-					bindings[alias] = Helper.extend(options, ns);
-				}
-				return this;
-			},
-
-			resolve: function (namespaceLocator) {
-				var parts = namespaceLocator.split(":");
-				if (parts.length == 1) {
-					return {
-						namespace: privateNamespace,
-						path: parts[0]
-					};
-				} else {
-					var binding = bindings[parts[0]];
-					if (!binding) throw "The namespace '" + parts[0] + "' has not been defined (yet).";
-					return {
-						namespace: binding.namespace,
-						path: binding.path && parts[1] ? binding.path + "." + parts[1] : binding.path || parts[1]
-					};
-				}
-			},
-
-			define: function () {
-				return custom.call(this, arguments, "define", function (ns, result) {
-					if (ns.namespace.get(ns.path)) throw "Scoped namespace " + ns.path + " has already been defined. Use extend to extend an existing namespace instead";
-					ns.namespace.set(ns.path, result);
-				});
-			},
-
-			assume: function () {
-				var args = Helper.matchArgs(arguments, {
-					assumption: true,
-					dependencies: "array",
-					callback: true,
-					context: "object",
-					error: "string"
-				});
-				var dependencies = args.dependencies || [];
-				dependencies.unshift(args.assumption);
-				this.require(dependencies, function (assumptionValue) {
-					if (!args.callback.apply(args.context || this, arguments)) throw "Scoped Assumption '" + args.assumption + "' failed, value is " + assumptionValue + (args.error ? ", but assuming " + args.error : "");
-				});
-			},
-
-			assumeVersion: function () {
-				var args = Helper.matchArgs(arguments, {
-					assumption: true,
-					dependencies: "array",
-					callback: true,
-					context: "object",
-					error: "string"
-				});
-				var dependencies = args.dependencies || [];
-				dependencies.unshift(args.assumption);
-				this.require(dependencies, function () {
-					var argv = arguments;
-					var assumptionValue = argv[0];
-					argv[0] = assumptionValue.split(".");
-					for (var i = 0; i < argv[0].length; ++i) argv[0][i] = parseInt(argv[0][i], 10);
-					if (Helper.typeOf(args.callback) === "function") {
-						if (!args.callback.apply(args.context || this, args)) throw "Scoped Assumption '" + args.assumption + "' failed, value is " + assumptionValue + (args.error ? ", but assuming " + args.error : "");
-					} else {
-						var version = (args.callback + "").split(".");
-						for (var j = 0; j < Math.min(argv[0].length, version.length); ++j) if (parseInt(version[j], 10) > argv[0][j]) throw "Scoped Version Assumption '" + args.assumption + "' failed, value is " + assumptionValue + ", but assuming at least " + args.callback;
-					}
-				});
-			},
-
-			extend: function () {
-				return custom.call(this, arguments, "extend", function (ns, result) {
-					ns.namespace.extend(ns.path, result);
-				});
-			},
-
-			condition: function () {
-				return custom.call(this, arguments, "condition", function (ns, result) {
-					if (result) ns.namespace.set(ns.path, result);
-				});
-			},
-
-			require: function () {
-				var args = Helper.matchArgs(arguments, {
-					dependencies: "array",
-					hiddenDependencies: "array",
-					callback: "function",
-					context: "object"
-				});
-				args.callback = args.callback || function () {};
-				var dependencies = args.dependencies || [];
-				var allDependencies = dependencies.concat(args.hiddenDependencies || []);
-				var count = allDependencies.length;
-				var deps = [];
-				var environment = {};
-				if (count) {
-					var f = function (value) {
-						if (this.i < deps.length) deps[this.i] = value;
-						count--;
-						if (count === 0) {
-							deps.push(environment);
-							args.callback.apply(args.context || this.ctx, deps);
-						}
-					};
-					for (var i = 0; i < allDependencies.length; ++i) {
-						var ns = this.resolve(allDependencies[i]);
-						if (i < dependencies.length) deps.push(null);
-						ns.namespace.obtain(ns.path, f, {
-							ctx: this,
-							i: i
-						});
-					}
-				} else {
-					deps.push(environment);
-					args.callback.apply(args.context || this, deps);
-				}
-				return this;
-			},
-
-			digest: function (namespaceLocator) {
-				var ns = this.resolve(namespaceLocator);
-				ns.namespace.digest(ns.path);
-				return this;
-			},
-
-			unresolved: function (namespaceLocator) {
-				var ns = this.resolve(namespaceLocator);
-				return ns.namespace.unresolvedWatchers(ns.path);
-			},
-
-			__export: function () {
-				return {
-					parentNamespace: parentNamespace.__export(),
-					rootNamespace: rootNamespace.__export(),
-					globalNamespace: globalNamespace.__export(),
-					localNamespace: localNamespace.__export(),
-					privateNamespace: privateNamespace.__export()
-				};
-			},
-
-			__import: function (data) {
-				parentNamespace.__import(data.parentNamespace);
-				rootNamespace.__import(data.rootNamespace);
-				globalNamespace.__import(data.globalNamespace);
-				localNamespace.__import(data.localNamespace);
-				privateNamespace.__import(data.privateNamespace);
-			}
-
-		};
-	}
-	var globalNamespace = newNamespace({ tree: true, global: true });
-	var rootNamespace = newNamespace({ tree: true });
-	var rootScope = newScope(null, rootNamespace, rootNamespace, globalNamespace);
-
-	var Public = Helper.extend(rootScope, {
-
-		guid: "4b6878ee-cb6a-46b3-94ac-27d91f58d666",
-		version: '35.1454518325486',
-
-		upgrade: Attach.upgrade,
-		attach: Attach.attach,
-		detach: Attach.detach,
-		exports: Attach.exports,
-
-		__exportScoped: function () {
+		},
+		
+		digest: function (path) {
+			nodeDigest(nodeNavigate(path));
+		},
+		
+		obtain: function (path, callback, context) {
+			nodeAddWatcher(nodeNavigate(path), callback, context);
+		},
+		
+		unresolvedWatchers: function (path) {
+			return nodeUnresolvedWatchers(nodeNavigate(path), path);
+		},
+		
+		__export: function () {
 			return {
-				globalNamespace: globalNamespace.__export(),
-				rootNamespace: rootNamespace.__export(),
-				rootScope: rootScope.__export()
+				options: options,
+				nsRoot: nsRoot
 			};
 		},
-
-		__importScoped: function (data) {
-			globalNamespace.__import(data.globalNamespace);
-			rootNamespace.__import(data.rootNamespace);
-			rootScope.__import(data.rootScope);
+		
+		__import: function (data) {
+			options = data.options;
+			nsRoot = data.nsRoot;
 		}
+		
+	};
+	
+}
+function newScope (parent, parentNS, rootNS, globalNS) {
+	
+	var self = this;
+	var nextScope = null;
+	var childScopes = [];
+	var parentNamespace = parentNS;
+	var rootNamespace = rootNS;
+	var globalNamespace = globalNS;
+	var localNamespace = newNamespace({tree: true});
+	var privateNamespace = newNamespace({tree: false});
+	
+	var bindings = {
+		"global": {
+			namespace: globalNamespace
+		}, "root": {
+			namespace: rootNamespace
+		}, "local": {
+			namespace: localNamespace
+		}, "default": {
+			namespace: privateNamespace
+		}, "parent": {
+			namespace: parentNamespace
+		}, "scope": {
+			namespace: localNamespace,
+			readonly: false
+		}
+	};
+	
+	var custom = function (argmts, name, callback) {
+		var args = Helper.matchArgs(argmts, {
+			options: "object",
+			namespaceLocator: true,
+			dependencies: "array",
+			hiddenDependencies: "array",
+			callback: true,
+			context: "object"
+		});
+		
+		var options = Helper.extend({
+			lazy: this.options.lazy
+		}, args.options || {});
+		
+		var ns = this.resolve(args.namespaceLocator);
+		
+		var execute = function () {
+			this.require(args.dependencies, args.hiddenDependencies, function () {
+				arguments[arguments.length - 1].ns = ns;
+				if (this.options.compile) {
+					var params = [];
+					for (var i = 0; i < argmts.length; ++i)
+						params.push(Helper.stringify(argmts[i]));
+					this.compiled += this.options.ident + "." + name + "(" + params.join(", ") + ");\n\n";
+				}
+				if (this.options.dependencies) {
+					this.dependencies[ns.path] = this.dependencies[ns.path] || {};
+					if (args.dependencies) {
+						args.dependencies.forEach(function (dep) {
+							this.dependencies[ns.path][this.resolve(dep).path] = true;
+						}, this);
+					}
+					if (args.hiddenDependencies) {
+						args.hiddenDependencies.forEach(function (dep) {
+							this.dependencies[ns.path][this.resolve(dep).path] = true;
+						}, this);
+					}
+				}
+				var result = this.options.compile ? {} : args.callback.apply(args.context || this, arguments);
+				callback.call(this, ns, result);
+			}, this);
+		};
+		
+		if (options.lazy)
+			ns.namespace.lazy(ns.path, execute, this);
+		else
+			execute.apply(this);
 
-	});
+		return this;
+	};
+	
+	return {
+		
+		getGlobal: Helper.method(Globals, Globals.getPath),
+		setGlobal: Helper.method(Globals, Globals.setPath),
+		
+		options: {
+			lazy: false,
+			ident: "Scoped",
+			compile: false,
+			dependencies: false
+		},
+		
+		compiled: "",
+		
+		dependencies: {},
+		
+		nextScope: function () {
+			if (!nextScope)
+				nextScope = newScope(this, localNamespace, rootNamespace, globalNamespace);
+			return nextScope;
+		},
+		
+		subScope: function () {
+			var sub = this.nextScope();
+			childScopes.push(sub);
+			nextScope = null;
+			return sub;
+		},
+		
+		binding: function (alias, namespaceLocator, options) {
+			if (!bindings[alias] || !bindings[alias].readonly) {
+				var ns;
+				if (Helper.typeOf(namespaceLocator) != "string") {
+					ns = {
+						namespace: newNamespace({
+							tree: true,
+							root: namespaceLocator
+						}),
+						path: null	
+					};
+				} else
+					ns = this.resolve(namespaceLocator);
+				bindings[alias] = Helper.extend(options, ns);
+			}
+			return this;
+		},
+		
+		resolve: function (namespaceLocator) {
+			var parts = namespaceLocator.split(":");
+			if (parts.length == 1) {
+				return {
+					namespace: privateNamespace,
+					path: parts[0]
+				};
+			} else {
+				var binding = bindings[parts[0]];
+				if (!binding)
+					throw ("The namespace '" + parts[0] + "' has not been defined (yet).");
+				return {
+					namespace: binding.namespace,
+					path : binding.path && parts[1] ? binding.path + "." + parts[1] : (binding.path || parts[1])
+				};
+			}
+		},
+		
+		define: function () {
+			return custom.call(this, arguments, "define", function (ns, result) {
+				if (ns.namespace.get(ns.path))
+					throw ("Scoped namespace " + ns.path + " has already been defined. Use extend to extend an existing namespace instead");
+				ns.namespace.set(ns.path, result);
+			});
+		},
+		
+		assume: function () {
+			var args = Helper.matchArgs(arguments, {
+				assumption: true,
+				dependencies: "array",
+				callback: true,
+				context: "object",
+				error: "string"
+			});
+			var dependencies = args.dependencies || [];
+			dependencies.unshift(args.assumption);
+			this.require(dependencies, function (assumptionValue) {
+				if (!args.callback.apply(args.context || this, arguments))
+					throw ("Scoped Assumption '" + args.assumption + "' failed, value is " + assumptionValue + (args.error ? ", but assuming " + args.error : "")); 
+			});
+		},
+		
+		assumeVersion: function () {
+			var args = Helper.matchArgs(arguments, {
+				assumption: true,
+				dependencies: "array",
+				callback: true,
+				context: "object",
+				error: "string"
+			});
+			var dependencies = args.dependencies || [];
+			dependencies.unshift(args.assumption);
+			this.require(dependencies, function () {
+				var argv = arguments;
+				var assumptionValue = argv[0];
+				argv[0] = assumptionValue.split(".");
+				for (var i = 0; i < argv[0].length; ++i)
+					argv[0][i] = parseInt(argv[0][i], 10);
+				if (Helper.typeOf(args.callback) === "function") {
+					if (!args.callback.apply(args.context || this, args))
+						throw ("Scoped Assumption '" + args.assumption + "' failed, value is " + assumptionValue + (args.error ? ", but assuming " + args.error : ""));
+				} else {
+					var version = (args.callback + "").split(".");
+					for (var j = 0; j < Math.min(argv[0].length, version.length); ++j)
+						if (parseInt(version[j], 10) > argv[0][j])
+							throw ("Scoped Version Assumption '" + args.assumption + "' failed, value is " + assumptionValue + ", but assuming at least " + args.callback);
+				}
+			});
+		},
+		
+		extend: function () {
+			return custom.call(this, arguments, "extend", function (ns, result) {
+				ns.namespace.extend(ns.path, result);
+			});
+		},
+		
+		condition: function () {
+			return custom.call(this, arguments, "condition", function (ns, result) {
+				if (result)
+					ns.namespace.set(ns.path, result);
+			});
+		},
+		
+		require: function () {
+			var args = Helper.matchArgs(arguments, {
+				dependencies: "array",
+				hiddenDependencies: "array",
+				callback: "function",
+				context: "object"
+			});
+			args.callback = args.callback || function () {};
+			var dependencies = args.dependencies || [];
+			var allDependencies = dependencies.concat(args.hiddenDependencies || []);
+			var count = allDependencies.length;
+			var deps = [];
+			var environment = {};
+			if (count) {
+				var f = function (value) {
+					if (this.i < deps.length)
+						deps[this.i] = value;
+					count--;
+					if (count === 0) {
+						deps.push(environment);
+						args.callback.apply(args.context || this.ctx, deps);
+					}
+				};
+				for (var i = 0; i < allDependencies.length; ++i) {
+					var ns = this.resolve(allDependencies[i]);
+					if (i < dependencies.length)
+						deps.push(null);
+					ns.namespace.obtain(ns.path, f, {
+						ctx: this,
+						i: i
+					});
+				}
+			} else {
+				deps.push(environment);
+				args.callback.apply(args.context || this, deps);
+			}
+			return this;
+		},
+		
+		digest: function (namespaceLocator) {
+			var ns = this.resolve(namespaceLocator);
+			ns.namespace.digest(ns.path);
+			return this;
+		},
+		
+		unresolved: function (namespaceLocator) {
+			var ns = this.resolve(namespaceLocator);
+			return ns.namespace.unresolvedWatchers(ns.path);
+		},
+		
+		__export: function () {
+			return {
+				parentNamespace: parentNamespace.__export(),
+				rootNamespace: rootNamespace.__export(),
+				globalNamespace: globalNamespace.__export(),
+				localNamespace: localNamespace.__export(),
+				privateNamespace: privateNamespace.__export()
+			};
+		},
+		
+		__import: function (data) {
+			parentNamespace.__import(data.parentNamespace);
+			rootNamespace.__import(data.rootNamespace);
+			globalNamespace.__import(data.globalNamespace);
+			localNamespace.__import(data.localNamespace);
+			privateNamespace.__import(data.privateNamespace);
+		}
+		
+	};
+	
+}
+var globalNamespace = newNamespace({tree: true, global: true});
+var rootNamespace = newNamespace({tree: true});
+var rootScope = newScope(null, rootNamespace, rootNamespace, globalNamespace);
 
-	Public = Public.upgrade();
-	Public.exports();
+var Public = Helper.extend(rootScope, {
+		
+	guid: "4b6878ee-cb6a-46b3-94ac-27d91f58d666",
+	version: '43.1460041676769',
+		
+	upgrade: Attach.upgrade,
+	attach: Attach.attach,
+	detach: Attach.detach,
+	exports: Attach.exports,
+	
+	__exportScoped: function () {
+		return {
+			globalNamespace: globalNamespace.__export(),
+			rootNamespace: rootNamespace.__export(),
+			rootScope: rootScope.__export()
+		};
+	},
+	
+	__importScoped: function (data) {
+		globalNamespace.__import(data.globalNamespace);
+		rootNamespace.__import(data.rootNamespace);
+		rootScope.__import(data.rootScope);
+	}
+	
+});
+
+Public = Public.upgrade();
+Public.exports();
 	return Public;
-}.call(this);
-
+}).call(this);
 /*!
-betajs - v1.0.49 - 2016-04-16
+betajs - v1.0.52 - 2016-05-09
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -640,7 +720,7 @@ Scoped.binding('module', 'global:BetaJS');
 Scoped.define("module:", function () {
 	return {
     "guid": "71366f7a-7da3-4e55-9a0b-ea0e4e2a9e79",
-    "version": "487.1460827623866"
+    "version": "498.1462803536527"
 };
 });
 Scoped.require(['module:'], function (mod) {
@@ -739,9 +819,12 @@ Scoped.define("module:Class", ["module:Types", "module:Objs", "module:Functions"
 		
 		// Setup Prototype
 		result.__notifications = {};
+		result.__implements = {};
 		
 		if (parent.__notifications)
 			Objs.extend(result.__notifications, parent.__notifications, 1);		
+		if (parent.__implements)
+			Objs.extend(result.__implements, parent.__implements, 1);		
 	
 		Objs.iter(objects, function (object) {
 			for (var objkey in object)
@@ -759,8 +842,14 @@ Scoped.define("module:Class", ["module:Types", "module:Objs", "module:Functions"
 					result.__notifications[key].push(object._notifications[key]);
 				}
 			}
+			if (object._implements) {
+				Objs.iter(Types.is_string(object._implements) ? [object._implements] : object._implements, function (impl) {
+					result.__implements[impl] = true;
+				});
+			}
 		});	
 		delete result.prototype._notifications;
+		delete result.prototype._implements;
 	
 		if (!has_constructor)
 			result.prototype.constructor = parent.prototype.constructor;
@@ -926,9 +1015,25 @@ Scoped.define("module:Class", ["module:Types", "module:Objs", "module:Functions"
 		}, this);
 	};
 	
+	Class.prototype.impl = function (identifier) {
+		return !!(this.cls.__implements && this.cls.__implements[Types.is_string(identifier) ? identifier : identifier._implements]);
+	};
+	
 	Class.prototype.instance_of = function (cls) {
 		return this.cls.ancestor_of(cls);
 	};
+	
+	Class.prototype.increaseRef = function () {
+		this.__referenceCount = this.__referenceCount || 0;
+		this.__referenceCount++;
+	};
+	
+	Class.prototype.decreaseRef = function () {
+		this.__referenceCount = this.__referenceCount || 0;
+		this.__referenceCount--;
+		if (this.__referenceCount <= 0)
+			this.weakDestroy();
+	};	
 	
 	Class.prototype.inspect = function () {
 		return {
@@ -1193,8 +1298,22 @@ Scoped.define("module:Classes.ObjectIdMixin", ["module:Classes.ObjectIdScope", "
 
 
 Scoped.define("module:Comparators", ["module:Types", "module:Properties.Properties"], function (Types, Properties) {
+
+	/**
+	 * Comparator Functions
+	 * 
+	 * @module BetaJS.Comparators
+	 */
 	return {		
 		
+		
+		/**
+		 * Creates a function that compares two json object w.r.t. a json object, mapping keys to a comparison order,
+		 * e.g. {'last_name': 1, 'first_name': -1, 'age': -1 }  
+		 * 
+		 * @param {json} object comparison object
+		 * @return {function} function for comparing two objects w.r.t. the comparison object
+		 */
 		byObject: function (object) {
 			var self = this;
 			return function (left, right) {
@@ -1210,7 +1329,15 @@ Scoped.define("module:Comparators", ["module:Types", "module:Properties.Properti
 				return 0;
 			};
 		},
+
 		
+		/**
+		 * Compares to variables by the natural order in JS.
+		 * 
+		 * @param a value A
+		 * @param b value B
+		 * @return {int} 1 if a > b, -1 if a < b and 0 otherwise
+		 */
 		byValue: function (a, b) {
 			if (Types.is_string(a))
 				return a.localeCompare(b);
@@ -1221,6 +1348,15 @@ Scoped.define("module:Comparators", ["module:Types", "module:Properties.Properti
 			return 0;
 		},
 		
+
+		/**
+		 * Compares two values a and b recursively.
+		 * 
+		 * @param a value A
+		 * @param b value B
+		 * @param {int} depth depth limit for the recursion, leave blank for infinite recursion
+		 * @return {bool} true if both values are equal
+		 */
 		deepEqual: function (a, b, depth) {
 			if (depth === 0)
 				return true;
@@ -1247,12 +1383,21 @@ Scoped.define("module:Comparators", ["module:Types", "module:Properties.Properti
 				return a === b;
 		},
 		
+		
+		/**
+		 * Determines whether two lists are equal. Two lists are considered equal if their elements are equal.
+		 * 
+		 * @param a list A
+		 * @param b list B
+		 * @return {bool} true if both lists are equal
+		 */
 		listEqual: function (a, b) {
 			return this.deepEqual(a, b, 2);
 		}
 			
 	};
 });
+
 Scoped.define("module:Events.EventsMixin", [
                                             "module:Timers.Timer",
                                             "module:Async",
@@ -1263,6 +1408,8 @@ Scoped.define("module:Events.EventsMixin", [
                                             ], function (Timer, Async, LinkedList, Functions, Types, Objs) {
 
 	return {
+		
+		_implements: "3d63b44f-c9f0-4aa7-b39e-7cbf195122b4",
 
 		_notifications: {
 			"construct": function () {
@@ -1632,15 +1779,20 @@ Scoped.extend("module:Exceptions.Exception", ["module:Exceptions"], ["module:Exc
 });
 
 Scoped.define("module:Functions", ["module:Types"], function (Types) {
-	/** Function and Function Argument Support
+	
+	/**
+	 * Function and Function Argument Support
+	 * 
 	 * @module BetaJS.Functions
 	 */
 	return {
 	
-	    /** Takes a function and an instance and returns the method call as a function
+		
+	    /**
+	     * Takes a function and an instance and returns the method call as a function
 	     * 
-	     * @param func function
-	     * @param instance instance
+	     * @param {function} func function
+	     * @param {object} instance instance
 	     * @return method call 
 	     */
 		as_method: function (func, instance) {
@@ -1649,9 +1801,11 @@ Scoped.define("module:Functions", ["module:Types"], function (Types) {
 			};
 		},
 		
-	    /** Takes a function and returns a function that calls the original function on the first call and returns the return value on all subsequent call. In other words a lazy function cache.
+		
+	    /**
+	     * Takes a function and returns a function that calls the original function on the first call and returns the return value on all subsequent call. In other words a lazy function cache.
 	     * 
-	     * @param func function
+	     * @param {function} func function
 	     * @return cached function 
 	     */
 		once: function (func) {
@@ -1667,21 +1821,26 @@ Scoped.define("module:Functions", ["module:Types"], function (Types) {
 			};
 		},
 		
-	    /** Converts some other function's arguments to an array
+		
+	    /**
+	     * Converts some other function's arguments to an array
 	     * 
 	     * @param args function arguments
-	     * @param slice number of arguments to be omitted (default: 0)
-	     * @return arguments as array 
+	     * @param {integer} slice number of arguments to be omitted (default: 0)
+	     * @return {array} arguments as array 
 	     */	
 		getArguments: function (args, slice) {
 			return Array.prototype.slice.call(args, slice || 0);
 		},
 		
-	    /** Matches functions arguments against some pattern
+		
+	    /**
+	     * Matches functions arguments against some pattern
 	     * 
 	     * @param args function arguments
-	     * @param pattern typed pattern
-	     * @return matched arguments as associative array 
+	     * @param {integer} skip number of arguments to be omitted (default: 0) 
+	     * @param {object} pattern typed pattern
+	     * @return {object} matched arguments as associative array 
 	     */	
 		matchArgs: function (args, skip, pattern) {
 			if (arguments.length < 3) {
@@ -1706,7 +1865,14 @@ Scoped.define("module:Functions", ["module:Types"], function (Types) {
 			return result;
 		},
 		
-		/** @suppress {checkTypes} */
+		
+		/**
+		 * Creates a function for creating new instances of a class.
+		 *  
+		 * @param {object} cls Class
+		 * @return {function} class instantiation function 
+		 * @suppress {checkTypes}
+		 */
 		newClassFunc: function (cls) {
 			return function () {
 				var args = arguments;
@@ -1718,10 +1884,25 @@ Scoped.define("module:Functions", ["module:Types"], function (Types) {
 			};
 		},
 		
+
+		/**
+		 * Creates a new class instance with arguments.
+		 *  
+		 * @param {object} cls Class
+		 * @return {function} class instance 
+		 */
 		newClass: function (cls) {
 			return this.newClassFunc(cls).apply(this, this.getArguments(arguments, 1));
 		},
 		
+
+		/**
+		 * Call an object method.
+		 *  
+		 * @param {object} context object instance
+		 * @param method function or string of method
+		 * @return result of function call 
+		 */
 		callWithin: function (context, method) {
 			if (Types.is_string(method))
 				method = context[method];
@@ -1731,28 +1912,38 @@ Scoped.define("module:Functions", ["module:Types"], function (Types) {
 	};
 });
 
-Scoped.define("module:Ids", function () {
-	/** Id Generation
+Scoped.define("module:Ids", [
+    "module:Types",
+    "module:Objs"
+], function (Types, Objs) {
+	
+	/**
+	 * Id Generation
+	 * 
 	 * @module BetaJS.Ids
 	 */
 	return {
 	
 		__uniqueId: 0,
 		
-	    /** Returns a unique identifier
+		
+	    /**
+	     * Returns a unique identifier
 	     * 
-	     * @param prefix a prefix string for the identifier (optional)
-	     * @return unique identifier
+	     * @param {string} prefix a prefix string for the identifier (optional)
+	     * @return {string} unique identifier
 	     */
 		uniqueId: function (prefix) {
 			return (prefix || "") + (this.__uniqueId++);
 		},
 		
-	    /** Returns the object's unique identifier or sets it
+		
+	    /**
+	     * Returns the object's unique identifier or sets it
 	     * 
-	     * @param object the object
-	     * @param id (optional)
-	     * @return object's unique identifier
+	     * @param {object} object the object
+	     * @param {string} id (optional)
+	     * @return {string} object's unique identifier
 	     */
 		objectId: function (object, id) {
 			if (typeof id != "undefined")
@@ -1760,6 +1951,25 @@ Scoped.define("module:Ids", function () {
 			else if (!object.__cid)
 				object.__cid = this.uniqueId("cid_");
 			return object.__cid;
+		},
+		
+		/**
+		 * Returns a unique key for any given value of any type.
+		 * This is not a hash value.
+		 * 
+		 * @param value a value to generate a unique key
+		 * @param {int} depth optional depth for exploring by value instead of by reference
+		 * @return unique key
+		 */
+		uniqueKey: function (value, depth) {
+			if (depth && depth > 0 && (Types.is_object(value) || Types.is_array(value))) {
+				return JSON.stringify(Objs.map(value, function (x) {
+					return this.uniqueKey(x, depth - 1);
+				}, this));
+			}
+			if (Types.is_object(value) || Types.is_array(value) || Types.is_function(value))
+				return this.objectId(value);
+			return value;
 		}
 	
 	};
@@ -1852,6 +2062,11 @@ Scoped.define("module:IdGenerators.TimedIdGenerator", ["module:IdGenerators.IdGe
 
 
 Scoped.define("module:JavaScript", ["module:Objs"], function (Objs) {
+	/**
+	 * JavaScript Simple Parse Functions
+	 * 
+	 * @module JavaScript
+	 */
 	return {
 		
 		STRING_SINGLE_QUOTATION_REGEX: /'[^']*'/g,
@@ -1860,22 +2075,47 @@ Scoped.define("module:JavaScript", ["module:Objs"], function (Objs) {
 		IDENTIFIER_REGEX: /[a-zA-Z_][a-zA-Z_0-9]*/g,
 		IDENTIFIER_SCOPE_REGEX: /[a-zA-Z_][a-zA-Z_0-9\.]*/g,
 	
-		RESERVED: Objs.objectify(
-			["if", "then", "else", "return", "var"],
-			true),
+		RESERVED: Objs.objectify([
+	        "if", "then", "else", "return", "var"
+	    ], true),
 		
+	    /**
+	     * Is string a JS-reserved keyword?
+	     * 
+	     * @param {string} key string in question
+	     * @return {boolean} true if reserved
+	     */
 		isReserved: function (key) {
 			return key in this.RESERVED;
 		},
 		
+		/**
+		 * Is string a valid JS identifier?
+		 * 
+		 * @param {string} key string in question
+		 * @return {boolean} true if identifier
+		 */
 		isIdentifier: function (key) {
 			return !this.isReserved(key);
 		},
 		
+		/**
+		 * Remove string definitions from JS code.
+		 * 
+		 * @param {string} code input code
+		 * @return {string} code without strings
+		 */
 		removeStrings: function (code) {
 			return code.replace(this.STRING_SINGLE_QUOTATION_REGEX, "").replace(this.STRING_DOUBLE_QUOTATION_REGEX, "");
 		},	
-		
+
+		/**
+		 * Return JS identifiers from a piece of code.
+		 * 
+		 * @param {string} code input code
+		 * @param {boolean} keepScopes keep scopes, e.g. `foo.bar` instead of `foo` and `bar` (default: false)
+		 * @return {array} array of extracted identifiers
+		 */
 		extractIdentifiers: function (code, keepScopes) {
 			var regex = keepScopes ? this.IDENTIFIER_SCOPE_REGEX : this.IDENTIFIER_REGEX;
 			code = this.removeStrings(code);
@@ -2315,8 +2555,22 @@ Scoped.define("module:Lists.ArrayList", ["module:Lists.AbstractList", "module:Id
 });
 
 Scoped.define("module:Maths", [], function () {
+	/**
+	 * This module contains auxilary math functions.
+	 * 
+	 * @module BetaJS.Maths
+	 */
 	return {
 		
+		/**
+		 * Ceiling an integer to be a multiple of another integer.
+		 * 
+		 * @param {int} number the number to be ceiled
+		 * @param {int} steps the multiple
+		 * @param {int} max an optional maximum
+		 * 
+		 * @return {int} ceiled integer
+		 */
 	    discreteCeil: function (number, steps, max) {
 	        var x = Math.ceil(number / steps) * steps;
 	        return max && x > max ? 0 : x;
@@ -2668,6 +2922,15 @@ Scoped.define("module:Objs", ["module:Types"], function (Types) {
 			var result = {};
 			for (var i = 0; i < arguments.length; ++i)
 				result[arguments[i][0]] = arguments[i][1];
+			return result;
+		},
+		
+		specialize: function (ordinary, concrete, keys) {
+			var result = {};
+			var iterateOver = keys ? ordinary : concrete;
+			for (var key in iterateOver)
+				if (!(key in ordinary) || ordinary[key] != conrete[key])
+					result[key] = conrete[key];
 			return result;
 		}
 
@@ -3172,6 +3435,8 @@ Scoped.define("module:Properties.PropertiesMixin", [
 		__setChanged: function (key, value, oldValue, notStrong) {
 			this.trigger("change", key, value, oldValue);
 			this._afterSet(key, value);
+			if (this.destroyed())
+				return;
 			var keys = key ? key.split(".") : [];
 			var current = this.__properties.watchers;
 			var head = "";
@@ -3289,12 +3554,26 @@ Scoped.define("module:Properties.Properties", [
 	}]);
 });
 Scoped.define("module:Sort", [
-	    "module:Comparators",	    
-	    "module:Types",
-	    "module:Objs"
-	], function (Comparators, Types, Objs) {
+    "module:Comparators",	    
+    "module:Types",
+    "module:Objs"
+], function (Comparators, Types, Objs) {
+	
+	/**
+	 * Sort objects and arrays.
+	 * 
+	 * @module BetaJS.Sort
+	 */
 	return {		
 	
+		/**
+		 * Sort keys in an object according to a comparator. 
+		 * 
+		 * @param {object} object object to be sorted
+		 * @param {function} f comparator comparator for sorting, accepting keys first and then optionally values
+		 * 
+		 * @return {object} sorted object
+		 */
 		sort_object : function(object, f) {
 			var a = [];
 			for (var key in object)
@@ -3311,6 +3590,14 @@ Scoped.define("module:Sort", [
 			return o;
 		},
 		
+		/**
+		 * Deep sorting an object according to a comparator. 
+		 * 
+		 * @param {object} object object to be sorted
+		 * @param {function} f comparator comparator for sorting, accepting keys first and then optionally values
+		 * 
+		 * @return {object} sorted object
+		 */
 		deep_sort: function (object, f) {
 			f = f || Comparators.byValue;
 			if (Types.is_array(object)) {
@@ -3325,6 +3612,16 @@ Scoped.define("module:Sort", [
 				return object;
 		},
 	
+		/**
+		 * Sort an array of items with inter-dependency specifiers s.t. every item in the resulting array has all its dependencies come before.
+		 * 
+		 * @param {array} items list of items with inter-dependency specifiers
+		 * @param {string|function} identifier function / key mapping an item to its unique identifier
+		 * @param {string|function} before function / key mapping an item to its array of dependencies
+		 * @param {string|function} after function / key mapping an item to its array of depending items
+		 * 
+		 * @return {array} sorted array
+		 */
 		dependency_sort : function(items, identifier, before, after) {
 			var identifierf = Types.is_string(identifier) ? function(obj) {
 				return obj[identifier];
@@ -3389,17 +3686,36 @@ Scoped.define("module:Sort", [
 });
 
 Scoped.define("module:Strings", ["module:Objs"], function (Objs) {
-	/** String Utilities
+	/**
+	 * String Utilities
+	 * 
 	 * @module BetaJS.Strings
 	 */
 	return {
 		
+		/**
+		 * Pads a string from the left with characters if necessary.
+		 * 
+		 * @param {string} s string that should be padded
+		 * @param {string} padding padding string that should be used (e.g. whitespace)
+		 * @param {int} length minimum length of result string
+		 * 
+		 * @return {string} padded string
+		 */
 		padLeft: function (s, padding, length) {
 			while (s.length < length)
 				s = padding + s;
 			return s;
 		},
 		
+		/**
+		 * Pads a string from the left with zeros ('0') if necessary.
+		 * 
+		 * @param {string} s string that should be padded
+		 * @param {int} length minimum length of result string
+		 * 
+		 * @return {string} zero-padded string
+		 */
 		padZeros: function (s, length) {
 			return this.padLeft(s + "", "0", length);
 		},
@@ -3480,7 +3796,8 @@ Scoped.define("module:Strings", ["module:Objs"], function (Objs) {
 			return this.starts_with(s, needle) ? s.substring(needle.length) : s;
 		},
 		
-		/** Returns the complete remaining part of a string after a the last occurrence of a sub string
+		/**
+		 * Returns the complete remaining part of a string after the last occurrence of a sub string
 		 *
 		 * @param s string in question
 		 * @param needle sub string
@@ -3490,6 +3807,13 @@ Scoped.define("module:Strings", ["module:Objs"], function (Objs) {
 			return this.splitLast(s, needle).tail;
 		},
 		
+		/**
+		 * Returns the complete remaining part of a string after the first occurrence of a sub string
+		 *
+		 * @param s string in question
+		 * @param needle sub string
+		 * @return remaining part of the string in question after the first occurrence of the sub string
+		 */
 		first_after: function (s, needle) {
 			return s.substring(s.indexOf(needle) + 1, s.length);
 		},
@@ -3522,28 +3846,6 @@ Scoped.define("module:Strings", ["module:Objs"], function (Objs) {
 			return result;
 		},
 		
-		splitFirst: function (s, delimiter) {
-			var i = s.indexOf(delimiter);
-			return {
-				head: i >= 0 ? s.substring(0, i) : s,
-				tail: i >= 0 ? s.substring(i + delimiter.length) : ""
-			};
-		},
-		
-		splitLast: function (s, delimiter) {
-			var i = s.lastIndexOf(delimiter);
-			return {
-				head: i >= 0 ? s.substring(0, i) : "",
-				tail: i >= 0 ? s.substring(i + delimiter.length) : s
-			};
-		},
-		
-		replaceAll: function (s, sub, wth) {
-			while (s.indexOf(sub) >= 0)
-				s = s.replace(sub, wth);
-			return s;
-		},
-	
 		/** Trims all trailing and leading whitespace and removes block indentations
 		 *
 		 * @param s string
@@ -3568,12 +3870,41 @@ Scoped.define("module:Strings", ["module:Objs"], function (Objs) {
 			return a.join("\n").trim();
 		},
 	
+		/**
+		 * Replaces all occurrences of a substring with something else.
+		 * 
+		 * @param {string} s input string
+		 * @param {string} sub search string
+		 * @param {string} wth replacement string
+		 * 
+		 * @return {string} input with all occurrences of the search string replaced by the replacement string
+		 */
+		replaceAll: function (s, sub, wth) {
+			while (s.indexOf(sub) >= 0)
+				s = s.replace(sub, wth);
+			return s;
+		},
+	
+		/**
+		 * Capitalizes all first characters of all words in a string.
+		 * 
+		 * @param {string} input input string
+		 * 
+		 * @return {string} input with all first characters capitalized
+		 */
 		capitalize : function(input) {
 			return input.replace(/\w\S*/g, function(txt) {
 				return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();
 			});
 		},
 	
+		/**
+		 * Extracts the name from an email address name string (e.g. 'Foo Bar <foobar@domain.com>')
+		 * 
+		 * @param {string} input email address name input string
+		 * 
+		 * @return {string} name included in the string
+		 */
 		email_get_name : function(input) {
 		    input = input || "";
 			var temp = input.split("<");
@@ -3586,6 +3917,13 @@ Scoped.define("module:Strings", ["module:Objs"], function (Objs) {
 			return this.capitalize(input);
 		},
 	
+		/**
+		 * Extracts the email from an email address name string (e.g. 'Foo Bar <foobar@domain.com>')
+		 * 
+		 * @param {string} input email address name input string
+		 * 
+		 * @return {string} email included in the string
+		 */
 		email_get_email : function(input) {
 	        input = input || "";
 			var temp = input.split("<");
@@ -3598,11 +3936,57 @@ Scoped.define("module:Strings", ["module:Objs"], function (Objs) {
 			return input;
 		},
 	
+		/**
+		 * Extracts the salutatory name from an email address name string (normally the first name)
+		 * 
+		 * @param {string} input email address name input string
+		 * 
+		 * @return {string} salutatory name
+		 */
 		email_get_salutatory_name : function(input) {
-	        input = input || "";
-			return (this.email_get_name(input).split(" "))[0];
+			return (this.email_get_name(input || "").split(" "))[0];
 		},
 		
+		/**
+		 * Splits a string into two by the first occurrence of a delimiter
+		 * 
+		 * @param {string} s input string
+		 * @param {string} delimiter delimiter string
+		 * 
+		 * @return {object} a json object, mapping 'head' to the region left and 'tail' to region right to the delimiter
+		 */
+		splitFirst: function (s, delimiter) {
+			var i = s.indexOf(delimiter);
+			return {
+				head: i >= 0 ? s.substring(0, i) : s,
+				tail: i >= 0 ? s.substring(i + delimiter.length) : ""
+			};
+		},
+		
+		/**
+		 * Splits a string into two by the last occurrence of a delimiter
+		 * 
+		 * @param {string} s input string
+		 * @param {string} delimiter delimiter string
+		 * 
+		 * @return {object} a json object, mapping 'head' to the region left and 'tail' to region right to the delimiter
+		 */
+		splitLast: function (s, delimiter) {
+			var i = s.lastIndexOf(delimiter);
+			return {
+				head: i >= 0 ? s.substring(0, i) : "",
+				tail: i >= 0 ? s.substring(i + delimiter.length) : s
+			};
+		},
+		
+		/**
+		 * Replace all groups in a regular expression string by string parameters.
+		 * 
+		 * @param {string} regex regular expression with groups as a string
+		 * @param {array} args array of string parameters
+		 * 
+		 * @return {string} regular expression with groups being replaced by string parameters
+		 */
 		regexReplaceGroups: function (regex, args) {
 			var findGroup = /\(.*?\)/;
 			var f = function (captured) {
@@ -3617,6 +4001,13 @@ Scoped.define("module:Strings", ["module:Objs"], function (Objs) {
 			return regex;
 		},
 		
+		/**
+		 * Given a regular expression with named capture groups (e.g. '(foobar:\d+)'), compute a normal regular expression with mappings to the named groups.
+		 * 
+		 * @param {string} regex regular expression with named capture groups
+		 * 
+		 * @return {object} mapping object
+		 */
 		namedCaptureRegex: function (regex) {
 			var groupMap = {};
 			var groupIdx = 0;
@@ -3988,8 +4379,20 @@ Scoped.define("module:Structures.TreeMap", ["module:Structures.AvlTree"], functi
  */
 
 Scoped.define("module:Templates", ["module:Types", "module:Strings"], function (Types, Strings) {
+	/**
+     * A very simple templating engine.
+     *
+	 * @module BetaJS.Templates
+	 */
 	return {
 		
+		/**
+		 * Tokenizes a string comprised of escaped javascript code and normal text.
+		 * 
+		 * @param {string} s input string
+         *
+		 * @return {array} array of token objects
+		 */
 		tokenize: function (s) {
 			// Already tokenized?
 			if (Types.is_array(s))
@@ -4015,10 +4418,12 @@ Scoped.define("module:Templates", ["module:Types", "module:Strings"], function (
 			return tokens;
 		},
 		
-		/*
-		 * options
-		 *  - start_index: token start index
-		 *  - end_index: token end index
+		/**
+		 * Compiles a template string into a function that evaluates the template w.r.t. a given environment.
+		 * 
+		 * @param {string} s input string
+		 * @param {object} options options hash, allowing to specify start_index and end_index within the input string (optional)
+		 * @return {function} evaluation function
 		 */
 		compile: function(source, options) {
 			if (Types.is_string(source))
@@ -4256,7 +4661,13 @@ Scoped.define("module:Time", [], function () {
 
 });
 
+
 Scoped.define("module:TimeFormat", ["module:Time", "module:Strings", "module:Objs"], function (Time, Strings, Objs) {
+	/**
+	 * Module for formatting Time / Date
+	 * 
+	 * @module BetaJS.TimeFormat
+	 */
 	return {
 		
 		/*
@@ -4392,6 +4803,16 @@ Scoped.define("module:TimeFormat", ["module:Time", "module:Strings", "module:Obj
 		WEEKDAY: "ddd",
 		HOURS_MINUTES_TT: "hh:MM tt",
 		
+		
+		/**
+		 * Format a given time w.r.t. a given time format
+		 * 
+		 * @param {string} timeFormat a time format string
+		 * @param {int} time time as integer to be formatted
+		 * @param {int} timezone timezone bias (optional)
+		 * @return {string} formatted time
+		 * 
+		 */
 		format: function (timeFormat, time, timezone) {
 			var timezoneTime = Time.timeToTimezoneBasedDate(time, timezone);
 			var bias = Time.timezoneBias(timezone);
@@ -4409,14 +4830,34 @@ Scoped.define("module:TimeFormat", ["module:Time", "module:Strings", "module:Obj
 			return result;
 		},
 		
+		/**
+		 * Format the month as a three letter string
+		 * 
+		 * @param {int} month month as an int
+		 * @return {string} three letter month string
+		 */
 		monthString: function (month) {
 			return this.format("mmm", Time.encodePeriod({month: month}));			
 		},
 		
+		/**
+		 * Format the weekday as a three letter string
+		 * 
+		 * @param {int} weekday weekday as an int
+		 * @return {string} three letter weekday string
+		 */
 		weekdayString: function (weekday) {
 			return this.format("ddd", Time.encodePeriod({weekday: weekday}));
 		},
 		
+		/**
+		 * Format most significant part of date / time relative to current time
+		 * 
+		 * @param {int} time date/time to be formatted
+		 * @param {int} currentTime relative to current time (optional)
+		 * @param {int} timezone time zone bias (optional)
+		 * @return {string} formatted time
+		 */
 		formatRelativeMostSignificant: function (time, currentTime, timezone) {
 			currentTime = currentTime || Time.now();
 			var t = Time.decodeTime(time, timezone);
@@ -4448,11 +4889,10 @@ Scoped.define("module:Tokens", function() {
 	return {
 
 		/**
-		 * Returns a new token
+		 * Generates a random token
 		 * 
-		 * @param length
-		 *            optional length of token, default is 16
-		 * @return token
+		 * @param {integer} length optional length of token, default is 16
+		 * @return {string} generated token
 		 */
 		generate_token : function(length) {
 			length = length || 16;
@@ -4462,7 +4902,13 @@ Scoped.define("module:Tokens", function() {
 			return s.substr(0, length);
 		},
 
-		// http://jsperf.com/string-hashing-methods
+		/**
+		 * Generated a simple hash value from a string.
+		 * 
+		 * @param {string} input string
+		 * @return {integer} simple hash value
+		 * @see http://jsperf.com/string-hashing-methods 
+		 */
 		simple_hash : function(s) {
 			var nHash = 0;
 			if (!s.length)
@@ -4693,15 +5139,16 @@ Scoped.define("module:Trees.TreeQueryObject", ["module:Class", "module:Events.Ev
 });
 
 Scoped.define("module:Types", function () {
-	/** Type-Testing and Type-Parsing
+	/**
+	 * Type-Testing and Type-Parsing
+	 * 
 	 * @module BetaJS.Types
 	 */
 	return {
 		/**
 		 * Returns whether argument is an object
 		 * 
-		 * @param x
-		 *            argument
+		 * @param x argument
 		 * @return true if x is an object
 		 */
 		is_object : function(x) {
@@ -4711,8 +5158,7 @@ Scoped.define("module:Types", function () {
 		/**
 		 * Returns whether argument is an array
 		 * 
-		 * @param x
-		 *            argument
+		 * @param x argument
 		 * @return true if x is an array
 		 */
 		is_array : function(x) {
@@ -4723,8 +5169,7 @@ Scoped.define("module:Types", function () {
 		 * Returns whether argument is undefined (which is different from being
 		 * null)
 		 * 
-		 * @param x
-		 *            argument
+		 * @param x argument
 		 * @return true if x is undefined
 		 */
 		is_undefined : function(x) {
@@ -4735,8 +5180,7 @@ Scoped.define("module:Types", function () {
 		 * Returns whether argument is null (which is different from being
 		 * undefined)
 		 * 
-		 * @param x
-		 *            argument
+		 * @param x argument
 		 * @return true if x is null
 		 */
 		is_null : function(x) {
@@ -4746,8 +5190,7 @@ Scoped.define("module:Types", function () {
 		/**
 		 * Returns whether argument is undefined or null
 		 * 
-		 * @param x
-		 *            argument
+		 * @param x argument
 		 * @return true if x is undefined or null
 		 */
 		is_none : function(x) {
@@ -4757,8 +5200,7 @@ Scoped.define("module:Types", function () {
 		/**
 		 * Returns whether argument is defined (could be null)
 		 * 
-		 * @param x
-		 *            argument
+		 * @param x argument
 		 * @return true if x is defined
 		 */
 		is_defined : function(x) {
@@ -4769,8 +5211,7 @@ Scoped.define("module:Types", function () {
 		 * Returns whether argument is empty (undefined, null, an empty array or
 		 * an empty object)
 		 * 
-		 * @param x
-		 *            argument
+		 * @param x argument
 		 * @return true if x is empty
 		 */
 		is_empty : function(x) {
@@ -4789,8 +5230,7 @@ Scoped.define("module:Types", function () {
 		/**
 		 * Returns whether argument is a string
 		 * 
-		 * @param x
-		 *            argument
+		 * @param x argument
 		 * @return true if x is a a string
 		 */
 		is_string : function(x) {
@@ -4800,8 +5240,7 @@ Scoped.define("module:Types", function () {
 		/**
 		 * Returns whether argument is a function
 		 * 
-		 * @param x
-		 *            argument
+		 * @param x argument
 		 * @return true if x is a function
 		 */
 		is_function : function(x) {
@@ -4811,8 +5250,7 @@ Scoped.define("module:Types", function () {
 		/**
 		 * Returns whether argument is boolean
 		 * 
-		 * @param x
-		 *            argument
+		 * @param x argument
 		 * @return true if x is boolean
 		 */
 		is_boolean : function(x) {
@@ -4826,10 +5264,8 @@ Scoped.define("module:Types", function () {
 		 * arrays, we compare them recursively by their components. Otherwise,
 		 * we use localeCompare which compares strings.
 		 * 
-		 * @param x
-		 *            left value
-		 * @param y
-		 *            right value
+		 * @param x left value
+		 * @param y right value
 		 * @return 1 if x > y, -1 if x < y and 0 if x == y
 		 */
 		compare : function(x, y) {
@@ -4852,8 +5288,7 @@ Scoped.define("module:Types", function () {
 		/**
 		 * Parses a boolean string
 		 * 
-		 * @param x
-		 *            boolean as a string
+		 * @param x boolean as a string
 		 * @return boolean value
 		 */
 		parseBool : function(x) {
@@ -4869,8 +5304,7 @@ Scoped.define("module:Types", function () {
 		/**
 		 * Returns the type of a given expression
 		 * 
-		 * @param x
-		 *            expression
+		 * @param x expression
 		 * @return type string
 		 */
 		type_of : function(x) {
@@ -4879,6 +5313,13 @@ Scoped.define("module:Types", function () {
 			return typeof x;
 		},
 
+		/**
+		 * Parses a value given a specific type.
+		 * 
+		 * @param x value to be parsed
+		 * @param {string} type the specific type to be parsed (accepts: bool, boolean, int, integer, date, time, datetime, float, double)
+		 * @return parsed value
+		 */
 		parseType : function(x, type) {
 			if (!this.is_string(x))
 				return x;
@@ -4894,6 +5335,12 @@ Scoped.define("module:Types", function () {
 			return x;
 		},
 		
+		/**
+		 * Returns the specific type of a JavaScript object
+		 * 
+		 * @param {object} obj an object instance
+		 * @return {string} the object type
+		 */
 		objectType: function (obj) {
 			if (!this.is_object(obj))
 				return null;
@@ -6313,8 +6760,29 @@ Scoped.define("module:Collections.MappedCollection", [
 });
 
 Scoped.define("module:Async", ["module:Types", "module:Functions"], function (Types, Functions) {
+	
+	var __eventuallyOnce = {};
+	var __eventuallyOnceIdx = 1;
+
+	
+	/**
+	 * Auxilary functions for asynchronous operations.
+	 * 
+	 * @module BetaJS.Async
+	 */
 	return {		
 		
+		
+		/**
+		 * Wait asynchronously for a condition to be met.
+		 * 
+		 * @param {function} condition condition function
+		 * @param {object} conditionCtx condition context (optional)
+		 * @param {function} callback callback function
+		 * @param {object} callbackCtx callback context (optional)
+		 * @param {int} interval interval time between checks (optional, default 1)
+		 * 
+		 */
 		waitFor: function () {
 			var args = Functions.matchArgs(arguments, {
 				condition: true,
@@ -6327,7 +6795,6 @@ Scoped.define("module:Async", ["module:Types", "module:Functions"], function (Ty
 				try {
 					return !!args.condition.apply(args.conditionCtx || args.callbackCtx || this);
 				} catch (e) {
-					
 					return false;
 				}
 			};
@@ -6343,6 +6810,17 @@ Scoped.define("module:Async", ["module:Types", "module:Functions"], function (Ty
 			}
 		},
 		
+		
+		/**
+		 * Execute a function asynchronously eventually.
+		 * 
+		 * @param {function} function function to be executed asynchronously
+		 * @param {array} params optional list of parameters to be passed to the function
+		 * @param {object} context optional context for the function execution
+		 * @param {int} time time to wait until execution (default is 0)
+		 * 
+		 * @return handle to the eventual call
+		 */
 		eventually: function () {
 			var args = Functions.matchArgs(arguments, {
 				func: true,
@@ -6357,33 +6835,46 @@ Scoped.define("module:Async", ["module:Types", "module:Functions"], function (Ty
 			return timer;
 		},
 		
+		
+		/**
+		 * Clears a call scheduled for eventual execution.
+		 * 
+		 * @param ev event handle
+		 * 
+		 */
 		clearEventually: function (ev) {
 			clearTimeout(ev);
 		},
 		
+		
+		/**
+		 * Executes a function asynchronously eventually, but only once.
+		 * 
+		 * @param {function} function function to be executed asynchronously
+		 * @param {array} params list of parameters to be passed to the function
+		 * @param {object} context optional context for the function execution
+		 * 
+		 */
 		eventuallyOnce: function (func, params, context) {
 			var data = {
 				func: func,
 				params: params,
 				context: context
 			};
-			for (var key in this.__eventuallyOnce) {
-				var record = this.__eventuallyOnce[key];
+			for (var key in __eventuallyOnce) {
+				var record = __eventuallyOnce[key];
 				if (record.func == func && record.params == params && record.context == context)
 					return;
 			}
-			this.__eventuallyOnceIdx++;
-			var index = this.__eventuallyOnceIdx;
-			this.__eventuallyOnce[index] = data;
+			__eventuallyOnceIdx++;
+			var index = __eventuallyOnceIdx;
+			__eventuallyOnce[index] = data;
 			return this.eventually(function () {
-				delete this.__eventuallyOnce[index];
+				delete __eventuallyOnce[index];
 				func.apply(context || this, params || []);
 			}, this);
-		},
-		
-		__eventuallyOnce: {},
-		__eventuallyOnceIdx: 1
-		
+		}
+				
 	};
 
 });
@@ -6725,6 +7216,7 @@ Scoped.define("module:Promise", [
 });
 
 
+
 Scoped.define("module:Timers.Timer", [
     "module:Class",
     "module:Objs",
@@ -6741,7 +7233,7 @@ Scoped.define("module:Timers.Timer", [
 			 * bool start (optional, default true): should it start immediately
 			 * bool real_time (default false)
 			 * int duration (optional, default null)
-			 * int fire_max (optiona, default null)
+			 * int fire_max (optional, default null)
 			 * 
 			 */
 			constructor: function (options) {
@@ -7523,10 +8015,31 @@ Scoped.define("module:Net.HttpHeader", function () {
 	};
 });
 Scoped.define("module:Net.Uri", ["module:Objs", "module:Types"], function (Objs, Types) {
+	
+	var parse_strict_regex = /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/;
+	var parse_loose_regex = /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/;
+	var parse_key = ["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"];
+	var parse_key_parser = /(?:^|&)([^&=]*)=?([^&]*)/g;
+	
+	
+	/**
+	 * Uri Auxilary Functions
+	 * 
+	 * @module BetaJS.Net.Uri
+	 */
 	return {
 		
+		/**
+		 * Create a URI string from a set of parameters.
+		 * 
+		 * @param {object} obj parameters
+		 * 
+		 * @return {string} uri
+		 */
 		build: function (obj) {
 			var s = "";
+			if (obj.protocol)
+				s += obj.protocol + "://";
 			if (obj.username)
 				s += obj.username + ":";
 			if (obj.password)
@@ -7535,10 +8048,19 @@ Scoped.define("module:Net.Uri", ["module:Objs", "module:Types"], function (Objs,
 			if (obj.port)
 				s += ":" + obj.port;
 			if (obj.path)
-				s += "/" + obj.path;
+				s += "/" + obj.path;			
 			return s;
 		},
 		
+		
+		/**
+		 * Encode a set of uri query parameters.
+		 * 
+		 * @param {object} arr a key-value set of query parameters
+		 * @param {string} prefix an optional prefix to be used for generating the keys
+		 * 
+		 * @return {string} encoded query parameters
+		 */
 		encodeUriParams: function (arr, prefix) {
 			prefix = prefix || "";
 			var res = [];
@@ -7551,33 +8073,44 @@ Scoped.define("module:Net.Uri", ["module:Objs", "module:Types"], function (Objs,
 			return res.join("&");
 		},
 		
+		
+		/**
+		 * Append a set of uri query parameters to a URI.
+		 * 
+		 * @param {string} uri a uri
+		 * @param {object} arr a key-value set of query parameters
+		 * @param {string} prefix an optional prefix to be used for generating the keys
+		 * 
+		 * @return {string} uri with the encoded query parameters attached
+		 */
 		appendUriParams: function (uri, arr, prefix) {
 			return Types.is_empty(arr) ? uri : (uri + (uri.indexOf("?") != -1 ? "&" : "?") + this.encodeUriParams(arr, prefix));
 		},
 		
-		// parseUri 1.2.2
-		// (c) Steven Levithan <stevenlevithan.com>
-		// MIT License
-	
+		
+		/**
+		 * Parses a given uri into decomposes it into its components.
+		 * 
+		 * @thanks parseUri 1.2.2, (c) Steven Levithan <stevenlevithan.com>, MIT License
+		 * 
+		 * @param {string} str uri to be parsed
+		 * @param {boolean} strict use strict parsing (default false)
+		 * 
+		 * @return {object} decomposed uri
+		 */
 		parse: function (str, strict) {
-			var parser = strict ? this.__parse_strict_regex : this.__parse_loose_regex;
+			var parser = strict ? parse_strict_regex : parse_loose_regex;
 			var m = parser.exec(str);
 			var uri = {};
-			for (var i = 0; i < this.__parse_key.length; ++i)
-				uri[this.__parse_key[i]] = m[i] || "";
+			for (var i = 0; i < parse_key.length; ++i)
+				uri[parse_key[i]] = m[i] || "";
 			uri.queryKey = {};
-			uri[this.__parse_key[12]].replace(this.__parse_key_parser, function ($0, $1, $2) {
+			uri[parse_key[12]].replace(parse_key_parser, function ($0, $1, $2) {
 				if ($1) uri.queryKey[$1] = $2;
 			});
-	
 			return uri;
-		},
-		
-		__parse_strict_regex: /^(?:([^:\/?#]+):)?(?:\/\/((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?))?((((?:[^?#\/]*\/)*)([^?#]*))(?:\?([^#]*))?(?:#(.*))?)/,
-		__parse_loose_regex: /^(?:(?![^:@]+:[^:@\/]*@)([^:\/?#.]+):)?(?:\/\/)?((?:(([^:@]*)(?::([^:@]*))?)?@)?([^:\/?#]*)(?::(\d*))?)(((\/(?:[^?#](?![^?#\/]*\.[^?#\/.]+(?:[?#]|$)))*\/?)?([^?#\/]*))(?:\?([^#]*))?(?:#(.*))?)/,
-		__parse_key: ["source","protocol","authority","userInfo","user","password","host","port","relative","path","directory","file","query","anchor"],
-		__parse_key_parser: /(?:^|&)([^&=]*)=?([^&]*)/g
-	
+		}
+			
 	};
 });	
 
