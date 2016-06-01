@@ -16,7 +16,7 @@ Scoped.define("module:Addtitle", [
 
             clicktitle : function () {
 
-                this.scope('<').call('togglelist');
+                this.parent().call('togglelist');
 
             },
             addbutton : function () {

@@ -729,7 +729,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '101.1464458717864'
+		version: '102.1464505988019'
 	};
 });
 
@@ -1695,7 +1695,12 @@ Scoped.define("module:Addtitle", [
 
             clicktitle : function () {
 
-                this.scope('<').call('togglelist');
+                //console.log('Addtitle');
+                //console.log(this);
+                //window.test = this;
+
+                //this.scope('<').call('togglelist');
+                this.parent().call('togglelist');
 
             },
             addbutton : function () {

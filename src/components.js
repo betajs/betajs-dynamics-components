@@ -1,6 +1,12 @@
 
 window.components = new BetaJS.Collections.Collection({objects: [
 
+    //Titledlist
+    {value  : 'addtitle'},
+    {value  : 'titledlist'},
+    {value  : 'test_titledlist'},
+    {value  : 'test_titledlist_swipe'},
+
     //List
     {value  : 'test_list_loadmore'},
     {value  : 'list'},
@@ -16,12 +22,6 @@ window.components = new BetaJS.Collections.Collection({objects: [
 
     //Inputs
     {value  : 'scrollpicker'},
-
-    //Titledlist
-    {value  : 'titledlist'},
-    {value  : 'test_titledlist'},
-    {value  : 'test_titledlist_swipe'},
-    {value  : 'addtitle'},
 
     //Titledlist
     {value  : 'searchlist'},
