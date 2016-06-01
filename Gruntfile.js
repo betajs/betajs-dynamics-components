@@ -161,7 +161,8 @@ module.exports = function(grunt) {
 						]
 					},
 					options: {
-						namespace: 'BetaJS.Dynamics.Components.Templates'
+						namespace: 'module:Templates',
+						scoped: true
 					}
 				}
 			},
