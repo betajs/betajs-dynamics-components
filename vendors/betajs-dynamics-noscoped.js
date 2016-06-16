@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics - v0.0.46 - 2016-05-09
+betajs-dynamics - v0.0.50 - 2016-05-31
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -13,7 +13,7 @@ Scoped.binding('jquery', 'global:jQuery');
 Scoped.define("module:", function () {
 	return {
     "guid": "d71ebf84-e555-4e9b-b18a-11d74fdcefe2",
-    "version": "240.1462828907413"
+    "version": "245.1464717629369"
 };
 });
 Scoped.assumeVersion('base:version', 496);
@@ -442,9 +442,10 @@ Scoped.define("module:Data.Scope", [
 	    "base:Ids",
 	    "base:Properties.Properties",
 	    "base:Collections.Collection",
+	    "base:Events.Events",
 	    "module:Data.ScopeManager",
 	    "module:Data.MultiScope"
-	], function (Class, EventsMixin, ListenMixin, ObjectIdMixin, Functions, Types, Strings, Objs, Ids, Properties, Collection, ScopeManager, MultiScope, scoped) {
+	], function (Class, EventsMixin, ListenMixin, ObjectIdMixin, Functions, Types, Strings, Objs, Ids, Properties, Collection, Events, ScopeManager, MultiScope, scoped) {
 	return Class.extend({scoped: scoped}, [EventsMixin, ListenMixin, ObjectIdMixin, function (inherited) {
 		return {
 				
@@ -459,10 +460,14 @@ Scoped.define("module:Data.Scope", [
 					extendables: [],
 					collections: {},
 					computed: {},
-					events: {}
+					events: {},
+					channels: {},
+					registerchannels: []
 				}, options);
 				if (options.bindings)
 					options.bind = Objs.extend(options.bind, options.bindings);
+				this._channels = {};
+				this.__channelCache = {};				
 				var parent = options.parent;
 				this.__manager = parent ? parent.__manager : this._auto_destroy(new ScopeManager(this));
 				inherited.constructor.call(this);
@@ -508,6 +513,13 @@ Scoped.define("module:Data.Scope", [
 				}, this);
 				Objs.iter(options.events, function (value, key) {
 					this.on(key, value, this);
+				}, this);
+				Objs.iter(options.registerchannels, this.registerChannel, this);
+				Objs.iter(options.channels, function (value, key) {
+					var splt = Strings.splitFirst(key, ":");
+					var channel = this.channel(splt.head);
+					if (channel)
+						this.listenOn(this.channel(splt.head), splt.tail, value, this);
 				}, this);
 			},
 			
@@ -606,6 +618,22 @@ Scoped.define("module:Data.Scope", [
 			
 			_eventChain: function () {
 				return this.parent();
+			},
+			
+			registerChannel: function (s) {
+				this._channels[s] = this.auto_destroy(new Events());
+			},
+			
+			channel: function (s) {
+				if (!(s in this.__channelCache)) {
+					var result = null;
+					if (this._channels[s])
+						result = this._channels[s];
+					else if (this.__parent)
+						result = this.__parent.channel(s);
+					this.__channelCache[s] = result;
+				}
+				return this.__channelCache[s];
 			},
 			
 			root: function () {
@@ -880,9 +908,10 @@ Scoped.define("module:Dynamic", [
    	    "base:Strings",
    	    "base:Types",
    	    "base:Functions",
+   	    "base:Events.Events",
    	    "module:Registries",
    	    "jquery:"
-   	], function (Scope, HandlerMixin, Objs, Strings, Types, Functions, Registries, $, scoped) {
+   	], function (Scope, HandlerMixin, Objs, Strings, Types, Functions, Events, Registries, $, scoped) {
 	var Cls;
 	Cls = Scope.extend({scoped: scoped}, [HandlerMixin, function (inherited) {
    		return {
@@ -923,6 +952,7 @@ Scoped.define("module:Dynamic", [
 					}
 				}
 				inherited.constructor.call(this, options);
+				this._channels.global = this.cls.__globalEvents;
 				if (options.tagName) {
 					this._tagName = options.tagName;
 					this.data("tagname", this._tagName);
@@ -977,8 +1007,10 @@ Scoped.define("module:Dynamic", [
 	}], {
 		
 		__initialForward: [
-		    "functions", "attrs", "extendables", "collections", "template", "create", "scopes", "bindings", "computed", "types", "events", "dispose"
+		    "functions", "attrs", "extendables", "collections", "template", "create", "scopes", "bindings", "computed", "types", "events", "dispose", "channels", "registerchannels"
         ],
+        
+        __globalEvents: new Events(),
 		
 		canonicName: function () {
 			return Strings.last_after(this.classname, ".").toLowerCase();
@@ -1076,13 +1108,10 @@ Scoped.define("module:Handlers.Attr", [
 			},
 			
 			__inputVal: function (el, value) {
-				if (arguments.length > 1) {
-					if (el.type == "checkbox")
-						el.checked = value;
-					else
-						el.value = value;
-				}
-				return el.type == "checkbox" ? el.checked : el.value;
+				var valueKey = el.type === 'checkbox' || el.type === 'radio' ? 'checked' : 'value';
+				if (arguments.length > 1) 
+					el[valueKey] = value;
+				return el[valueKey];
 			},
 			
 			updateElement: function (element, attribute) {
@@ -1317,10 +1346,8 @@ Scoped.define("module:Handlers.HandlerMixin", [
 				this.__element.append(compiled);
 			} else if (parentElement) {
 				this.__activeElement = $(parentElement);
-				this.__activeElement.children().each(function (child) {
-					$(child).remove();
-				});
 				this.__element = compiled;
+				this.__activeElement.html("");
 				this.__activeElement.append(compiled);
 			} else {
 				this.__element = compiled;
