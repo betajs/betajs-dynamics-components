@@ -2,6 +2,7 @@
 <list ba-repeat="{{collectionitem :: (model.listcollection||listcollection)}}">
 
     <ba-{{view.listitem||collectionitem.listitem||listitem}}
+        ba-cache
         ba-data:id="{{collectionitem.cid()}}"
         ba-functions="{{collectionitem.callbacks}}"
         ba-view="{{collectionitem.view||view.listinner}}"
