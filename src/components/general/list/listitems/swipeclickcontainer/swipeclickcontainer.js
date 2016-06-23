@@ -12,10 +12,6 @@ Scoped.define("module:Swipeclickcontainer", [
 
 		template: Templates.swipeclickcontainer,
 
-		scopes : {
-			child_dynamic: ">"
-		},
-
 		attrs: {
 			start_swipe :'',
 			view : {
@@ -157,7 +153,7 @@ Scoped.define("module:Swipeclickcontainer", [
 
 		functions : {
 			click : function (doodad) {
-				this.scopes.child_dynamic.call('click');
+				this.scope(">").call('click');
 			},
 			create_style : function (name,left) {
 				var style = document.createElement('style');

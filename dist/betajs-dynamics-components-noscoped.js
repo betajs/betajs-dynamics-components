@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.7 - 2016-06-03
+betajs-dynamics-components - v0.0.8 - 2016-06-16
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -19,7 +19,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '104.1464896619761'
+		version: '105.1466106424519'
 	};
 });
 
@@ -331,10 +331,6 @@ Scoped.define("module:Swipeclickcontainer", [
 
 		template: Templates.swipeclickcontainer,
 
-		scopes : {
-			child_dynamic: ">"
-		},
-
 		attrs: {
 			start_swipe :'',
 			view : {
@@ -476,7 +472,7 @@ Scoped.define("module:Swipeclickcontainer", [
 
 		functions : {
 			click : function (doodad) {
-				this.scopes.child_dynamic.call('click');
+				this.scope(">").call('click');
 			},
 			create_style : function (name,left) {
 				var style = document.createElement('style');
