@@ -171,7 +171,7 @@ Scoped.define("module:Swipeclickcontainer", [
 				element.on("transitionend",function () {
 					element.find('ba-eventitem').css('visibility','hidden');
 					setTimeout(function () {
-						element.parent().slideUp();
+						element.parent().slideUp(200);
 						// Now we should remove the added element from the dom again, otherwise we have a leak.
 						// this.get("temporary_style_element").remove();
 					}, 10);

@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.9 - 2016-06-23
+betajs-dynamics-components - v0.0.9 - 2016-06-24
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -709,7 +709,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.0.9 - 2016-06-23
+betajs-dynamics-components - v0.0.9 - 2016-06-24
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -729,7 +729,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '109.1466699084932'
+		version: '110.1466722552422'
 	};
 });
 
@@ -1200,7 +1200,7 @@ Scoped.define("module:Swipeclickcontainer", [
 				element.on("transitionend",function () {
 					element.find('ba-eventitem').css('visibility','hidden');
 					setTimeout(function () {
-						element.parent().slideUp();
+						element.parent().slideUp(200);
 						// Now we should remove the added element from the dom again, otherwise we have a leak.
 						// this.get("temporary_style_element").remove();
 					}, 10);

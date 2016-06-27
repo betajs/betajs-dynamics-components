@@ -1,6 +1,10 @@
 
 window.components = new BetaJS.Collections.Collection({objects: [
 
+    //Swipecontainers
+    {value  : 'swipeclickcontainer'},
+    {value  : 'eventitem'},
+
     //Titledlist
     {value  : 'addtitle'},
     {value  : 'titledlist'},
@@ -15,10 +19,6 @@ window.components = new BetaJS.Collections.Collection({objects: [
     {value  : 'test_list_swipecontainer'},
     {value  : 'test_list_listcollection'},
     {value  : 'test_list_pushfunc'},
-
-    //Swipecontainers
-    {value  : 'swipeclickcontainer'},
-    {value  : 'eventitem'},
 
     //Inputs
     {value  : 'scrollpicker'},
