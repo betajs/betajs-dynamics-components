@@ -10,7 +10,7 @@ Scoped.define("module:Scrollpicker", [
         template: Templates.scrollpicker,
 
         attrs : {
-            initial_value : 22,
+            initial_value : 7,
             value : 22,
             first : 0,
             last : 23,
@@ -63,31 +63,30 @@ Scoped.define("module:Scrollpicker", [
                 currentCenter: true
             });
 
-            window.test = scroll;
-            var ele = $(element.find("[data-id='" + this.get('value') + "']"));
-            scroll.scrollToElement(ele, {
-                animate: false
-            });
-            ele.css({
-                "color": "black",
-                "background" : "white"
-            });
+            //var ele = $(element.find("[data-id='" + this.get('value') + "']"));
+            //scroll.scrollToElement(ele, {
+            //    animate: false
+            //});
+            //ele.css({
+            //    "color": "black",
+            //    "background" : "white"
+            //});
 
-            scroll.on("scrollend", function () {
-                console.log(this);
-                this.set('value', scroll.currentElement().data( "id" ));
-            }, this);
-
-            scroll.on("scroll", function () {
-                element.children().css({
-                    "color" : "#999999",
-                    "background" : "#F4F4F4"
-                });
-                scroll.currentElement().css({
-                    "color" : "black",
-                    "background" : "white"
-                });
-            });
+            //scroll.on("scrollend", function () {
+            //    console.log(this);
+            //    this.set('value', scroll.currentElement().data( "id" ));
+            //}, this);
+            //
+            //scroll.on("scroll", function () {
+            //    element.children().css({
+            //        "color" : "#999999",
+            //        "background" : "#F4F4F4"
+            //    });
+            //    scroll.currentElement().css({
+            //        "color" : "black",
+            //        "background" : "white"
+            //    });
+            //});
 
         }
 

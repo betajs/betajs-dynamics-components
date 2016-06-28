@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics - v0.0.54 - 2016-06-19
+betajs-dynamics - v0.0.56 - 2016-06-27
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -13,7 +13,7 @@ Scoped.binding('jquery', 'global:jQuery');
 Scoped.define("module:", function () {
 	return {
     "guid": "d71ebf84-e555-4e9b-b18a-11d74fdcefe2",
-    "version": "251.1466393258332"
+    "version": "253.1467079760262"
 };
 });
 Scoped.assumeVersion('base:version', 502);
@@ -1055,6 +1055,12 @@ Scoped.define("module:Dynamic", [
 		},
 		
 		_extender: {
+			registerchannels: function (base, overwrite) {
+				return Objs.extend(Objs.clone(base, 1), overwrite);
+			},
+			channels: function (base, overwrite) {
+				return Objs.extend(Objs.clone(base, 1), overwrite);
+			},
 			attrs: function (base, overwrite) {
 				return Objs.extend(Objs.clone(base, 1), overwrite);
 			},
@@ -1659,7 +1665,7 @@ Scoped.define("module:Handlers.Node", [
 				});
 				this._removeChildren();
 				if (this._tagHandler && !this._tagHandler.destroyed()) {
-					if (this._tagHandler.cacheable)
+					if (this._tagHandler.cacheable && this._tagHandler.cls.cacheable)
 						Registries.handlerCache.suspend(this._tagHandler, this._$element);
 					else
 						this._tagHandler.weakDestroy();
@@ -1722,7 +1728,7 @@ Scoped.define("module:Handlers.Node", [
 						attr.unbindTagHandler(this._tagHandler);
 					}, this);
 					this.off(null, null, this._tagHandler);
-					if (this._tagHandler.cacheable)
+					if (this._tagHandler.cacheable && this._tagHandler.cls.cacheable)
 						Registries.handlerCache.suspend(this._tagHandler, this._$element);
 					else
 						this._tagHandler.weakDestroy();

@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.9 - 2016-06-27
+betajs-dynamics-components - v0.0.9 - 2016-06-28
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -104,6 +104,13 @@ ba-scrollpicker {
     text-align: center; }
   ba-scrollpicker .selected {
     color: black; }
+
+ba-test_scrollpicker {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; }
 
 ba-loading {
   display: -webkit-box;

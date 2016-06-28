@@ -9,8 +9,12 @@ Scoped.define("module:Overlaycontainer", [
 		template: Templates.overlaycontainer,
 		
 		attrs : {
-            overlay : "",
-            message : "This is a message",
+            view : {
+                overlay : ""
+            },
+            model : {
+                message : "This is a message"
+            },
             value : null,
             showoverlay : true
         }
