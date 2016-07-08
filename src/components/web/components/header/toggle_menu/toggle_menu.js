@@ -1,12 +1,20 @@
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Toggle_menu", {
+Scoped.define("module:Toggle_menu", [
+    "dynamics:Dynamic",
+    "module:Templates"
+],function (Dynamic, Templates, scoped) {
 
-    template: BetaJS.Dynamics.Components.Templates.toggle_menu,
+    return Dynamic.extend({scoped: scoped}, {
 
-    functions : {
-        toggle_menu : function () {
-            this.scope("<+[tagname='ba-layout_web']").call('toggle_menu');
+        template: Templates.toggle_menu,
+
+        functions : {
+            toggle_menu : function () {
+                this.scope("<+[tagname='ba-layout_web']").call('toggle_menu');
+            }
         }
-    }
 
-}).register();
+    }).register();
+
+});
+

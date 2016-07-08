@@ -1,10 +1,11 @@
 
 Scoped.define("tests:Test_list_clickitem", [
     "dynamics:Dynamic",
-    "module:Templates"
+    "module:Templates",
+    "base:Collections.Collection"
 ], [
     "module:List"
-], function (Dynamic, Templates, scoped) {
+], function (Dynamic, Templates, Collection, scoped) {
 
     return Dynamic.extend({scoped : scoped}, {
 
@@ -13,7 +14,7 @@ Scoped.define("tests:Test_list_clickitem", [
         attrs: {
             testmodel : {
                 listitem : 'clickitem',
-                listcollection : new BetaJS.Collections.Collection({objects: [
+                listcollection : new Collection({objects: [
                     {value: "Item 1"},
                     {value: "Item 2"},
                     {value: "Item 3"},

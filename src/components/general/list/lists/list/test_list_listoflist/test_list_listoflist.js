@@ -2,10 +2,11 @@
 
 Scoped.define("tests:Test_list_listoflist", [
     "dynamics:Dynamic",
-    "module:Templates"
+    "module:Templates",
+    "base:Collections.Collection"
 ], [
     "module:List"
-], function (Dynamic, Templates, scoped) {
+], function (Dynamic, Templates, Collection, scoped) {
 
     return Dynamic.extend({scoped : scoped}, {
 
@@ -13,11 +14,11 @@ Scoped.define("tests:Test_list_listoflist", [
 
         collections : {
             listcollection : [
-                {listcollection : new BetaJS.Collections.Collection({objects: [
+                {listcollection : new Collection({objects: [
                     {value : "Test - list of list - Item 1"},
                     {value : "Test - list of list - Item 2"}
                 ]})},
-                {listcollection : new BetaJS.Collections.Collection({objects: [
+                {listcollection : new Collection({objects: [
                     {value : "Test - list of list - Item 1"},
                     {value : "Test - list of list - Item 2"}
                 ]})}

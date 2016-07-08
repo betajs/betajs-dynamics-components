@@ -2,8 +2,8 @@
 window.components = new BetaJS.Collections.Collection({objects: [
 
     //Inputs
-    {value  : 'test_scrollpicker'},
     {value  : 'scrollpicker'},
+    {value  : 'test_scrollpicker'},
 
     //Swipecontainers
     {value  : 'swipeclickcontainer'},

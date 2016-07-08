@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.9 - 2016-06-28
+betajs-dynamics-components - v0.0.9 - 2016-07-08
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -19,12 +19,12 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '112.1467138566077'
+		version: '113.1467993282786'
 	};
 });
 
 Scoped.extend('module:Templates', function () {
-return {"input":"<input autofocus>","overlaycontainer":"<overlaycontainer     ba-tap=\"showoverlay = false\"     ba-if=\"{{showoverlay}}\">      <overlayinner>          <ba-{{view.overlay}} ba-value='{{=value}}'>             <message>{{model.message}}</message>         </ba-{{view.overlay}}>      </overlayinner>  </overlaycontainer>","testoverlaycontainer":" <button ba-click=\"showoverlay = !showoverlay\">Show Overlaycontainer</button>  <ba-overlaycontainer         ba-overlay=\"{{=overlay}}\"         ba-showoverlay=\"{{=showoverlay}}\">          </ba-overlaycontainer>","scrollpicker":"<element ba-repeat-element=\"{{element_value :: value_array}}\" data-id=\"{{element_value}}\">         {{element_value}} </element>","test_scrollpicker":" <ba-scrollpicker></ba-scrollpicker>  <ba-scrollpicker></ba-scrollpicker> ","loading":" <loading>      <div class='uil-spin-css' style='-webkit-transform:scale(0.32)'><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>  </loading> ","loadmore":" <loadmore ba-click=\"load_more()\">      <button>{{view.value}}</button>  </loadmore>","eventitem":" <button         class=\"{{model.class}}\">     {{model.value}} - {{counter}} </button>","selectableitem":" <selectableitem         ba-class=\"{{{selected : selected.cid == this.cid()}}}\"         ba-click=\"select()\">     {{model.value}} </selectableitem>","swipeclickcontainer":" <behind>     <icon class='{{view.lefticon||lefticon}}'></icon>     <div></div>     <icon class='{{view.righticon||righticon}}'></icon> </behind>  <!--style=\"left: {{view.left}}px\"--> <swipe         class='{{start_swipe}}'         ba-gesture:click=\"{{{data: model, options: click_gesture}}}\"         ba-gesture:drag=\"{{drag_gesture}}\"         ba-interaction:drag=\"{{{data: model, options: drag_interaction}}}\"         ba-interaction:drop=\"{{{data: model, options: drop_interaction}}}\"         ba-gesture:swipe=\"{{swipe_gesture}}\"         ba-interaction:swipe=\"{{swipe_interaction}}\">      <container>          <ba-{{view.inner||inner}} ba-noscope>         </ba-{{view.inner||inner}}>          <swipeleft>             <div></div>             <icon class='{{view.lefticon||lefticon}}'></icon>         </swipeleft>          <swiperight>             <icon class='{{view.righticon||righticon}}'></icon>             <div></div>         </swiperight>      </container>  </swipe> ","list":" <list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">      <ba-{{view.listitem||collectionitem.listitem||listitem}}         ba-cache         ba-data:id=\"{{collectionitem.cid()}}\"         ba-functions=\"{{collectionitem.callbacks}}\"         ba-view=\"{{collectionitem.view||view.listinner}}\"         ba-model=\"{{collectionitem}}\">      </ba-{{view.listitem||collectionitem.listitem||listitem}}>  </list>  <ba-{{view.listend.item}}     ba-view=\"{{view.listend}}\"     ba-if=\"{{view.listend.item}}\"> </ba-{{view.listend.item}}> ","test_list_clickitem":" <ba-list ba-attrs=\"{{testmodel}}\"> </ba-list>","test_list_listcollection":" <ba-list ba-listcollection=\"{{listcollection}}\"> </ba-list>","test_list_listoflist":" <ba-list         ba-listitem=\"list\"         ba-listcollection=\"{{listcollection}}\"> </ba-list>","test_list_loadmore":" <ba-list ba-view=\"{{view}}\" ba-listcollection=\"{{listcollection}}\"> </ba-list>","test_list_pushfunc":"<button ba-click=\"test(input_value)\">Test func</button> <input ba-return=\"test(input_value)\" placeholder=\"Push item to list\" value=\"{{=input_value}}\"> <ba-titledlist ba-attrs=\"{{testmodel}}\"> </ba-titledlist>","test_list_swipecontainer":" <ba-list         ba-model=\"{{model}}\"         ba-view=\"{{view_model}}\"> </ba-list>","searchlist":" <searchbox ba-if=\"{{view.showsearch}}\">     <icon class=\"icon-search\"></icon>     <input placeholder=\"{{view.placeholder}}\" value=\"{{=searchvalue}}\"> </searchbox>  <ba-list ba-noscope></ba-list> ","test_searchlist":" <ba-searchlist         ba-view=\"{{view}}\">  </ba-searchlist>","test_titledlist":" <ba-titledlist         ba-model=\"{{model}}\"         ba-view=\"{{view}}\"         ba-functions=\"{{callbacks}}\"         ba-listcollection=\"{{listcollection}}\">  </ba-titledlist>","test_titledlist_swipe":" <ba-titledlist         ba-listcollection=\"{{listcollection}}\"         ba-attrs=\"{{push_attrs}}\">  </ba-titledlist>","titledlist":" <ba-{{view.titleitem}}     ba-click=\"click_title()\"     ba-functions=\"{{model.title_callbacks}}\"     ba-model=\"{{model.title_model}}\">{{model.title_model.value}}</ba-{{view.titleitem}}>  <ba-list         ba-noscope         ba-show=\"{{!collapsed}}\">  </ba-list> ","addtitle":" <addtitle>     <title ba-click=\"clicktitle()\">{{model.value}}</title>     <button ba-click=\"addbutton()\">         <span class=\"icon-plus\"></span>     </button> </addtitle>","test_addtitle":" <ba-addtitle         ba-attrs=\"{{testmodel}}\"> </ba-addtitle> ","clickitem":" <button         class=\"{{model.class}}\"         ba-click=\"click()\">     {{model.value}} </button>","clicktestcontainer":" <ba-{{view.inner||inner}}     ba-gesture:click=\"{{{data: model, options: click_gesture}}})\"     ba-noscope>     {{model.value||value}} </ba-{{view.inner||inner}}> ","pushfunc":" <pushfunc         ba-click=\"log()\">     {{model.title}} </pushfunc>","test_pushfunc":" <ba-pushfunc         ba-model=\"{{testmodel}}\"> </ba-pushfunc>","test_attrs":" <ba-titledlist         ba-attrs=\"{{model}}\">  </ba-titledlist>","header":" <ba-list ba-listcollection=\"{{left_collection}}\"></ba-list>","toggle_menu":"<button ba-click=\"toggle_menu()\" class=\"icon-reorder\"></button>","menu":" <ba-titledlist         ba-collapsible=\"{{false}}\"         ba-model=\"{{model}}\"         ba-listcollection=\"{{menu_collection}}\">  </ba-titledlist>","layout_web":"<header>     <ba-{{components.header}}>Header</ba-{{components.header}}> </header> <main>     <menu ba-show=\"{{model.display_menu}}\">         <ba-{{components.menu}}>Menu</ba-{{components.menu}}>     </menu>     <content>         <ba-{{components.content}}>Content</ba-{{components.content}}>     </content> </main>","index":"<!DOCTYPE html> <html> <head lang=\"en\">     <meta charset=\"UTF-8\">      <!--<script src=\"../vendors/jquery-1.9.closure-extern.js\"></script>-->     <script src=\"../vendors/jquery-2.1.4.js\"></script>      <script src=\"../vendors/scoped.js\"></script>     <script src=\"../vendors/beta.js\"></script>     <script src=\"../vendors/betajs-browser-noscoped.js\"></script>     <script src=\"../vendors/betajs-ui.js\"></script>     <script src=\"../vendors/betajs-dynamics-noscoped.js\"></script>      <script src=\"components.js\"></script>      <!--<script src=\"../vendors/betajs-simulator.js\"></script>-->     <script src=\"../../betajs-simulator/dist/betajs-simulator.js\"></script>     <link rel=\"stylesheet\" href=\"../..//betajs-simulator/dist/betajs-simulator.css\" />      <script src=\"../dist/betajs-dynamics-components-noscoped.js\"></script>     <link rel=\"stylesheet\" href=\"../dist/betajs-dynamics-components.css\" />     <link rel=\"stylesheet\" href=\"../vendors/icomoon/style.css\" />      <script src=\"//localhost:1337/livereload.js\"></script>      <title>BetaJS Simulator</title>      <script>      </script>  </head> <body>  <ba-simulator></ba-simulator>  <script>     console.log('Unresolved Dependencies : ');     console.log(Scoped.unresolved('global:')); </script>  </body> </html>"};
+return {"input":"<input autofocus>","overlaycontainer":"<overlaycontainer     ba-tap=\"showoverlay = false\"     ba-if=\"{{showoverlay}}\">      <overlayinner>          <ba-{{view.overlay}} ba-noscope>             <message>{{model.message}}</message>         </ba-{{view.overlay}}>      </overlayinner>  </overlaycontainer>","testoverlaycontainer":" <button ba-click=\"showoverlay = !showoverlay\">Show Overlaycontainer</button>  <ba-overlaycontainer         ba-overlay=\"{{=overlay}}\"         ba-showoverlay=\"{{=showoverlay}}\">          </ba-overlaycontainer>","scrollpicker":"<container>         <element ba-repeat-element=\"{{element_value :: value_array}}\" data-id=\"{{element_value}}\">                 {{element_value}}         </element> </container>","test_scrollpicker":" <ba-scrollpicker id=\"321\"></ba-scrollpicker> <ba-scrollpicker id=\"322\"></ba-scrollpicker> ","loading":" <loading>      <div class='uil-spin-css' style='-webkit-transform:scale(0.32)'><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>  </loading> ","loadmore":" <loadmore ba-click=\"load_more()\">      <button>{{view.value}}</button>  </loadmore>","eventitem":" <button         class=\"{{model.class}}\">     {{model.value}} - {{counter}} </button>","selectableitem":" <selectableitem         ba-class=\"{{{selected : selected.cid == this.cid()}}}\"         ba-click=\"select()\">     {{model.value}} </selectableitem>","swipeclickcontainer":" <behind>     <icon class='{{view.lefticon||lefticon}}'></icon>     <div></div>     <icon class='{{view.righticon||righticon}}'></icon> </behind>  <!--style=\"left: {{view.left}}px\"--> <swipe         class='{{start_swipe}}'         ba-gesture:click=\"{{{data: model, options: click_gesture}}}\"         ba-gesture:drag=\"{{drag_gesture}}\"         ba-interaction:drag=\"{{{data: model, options: drag_interaction}}}\"         ba-interaction:drop=\"{{{data: model, options: drop_interaction}}}\"         ba-gesture:swipe=\"{{swipe_gesture}}\"         ba-interaction:swipe=\"{{swipe_interaction}}\">      <container>          <ba-{{view.inner||inner}} ba-noscope>         </ba-{{view.inner||inner}}>          <swipeleft>             <div></div>             <icon class='{{view.lefticon||lefticon}}'></icon>         </swipeleft>          <swiperight>             <icon class='{{view.righticon||righticon}}'></icon>             <div></div>         </swiperight>      </container>  </swipe> ","list":" <list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">      <ba-{{view.listitem||collectionitem.listitem||listitem}}         ba-cache         ba-data:id=\"{{collectionitem.cid()}}\"         ba-functions=\"{{collectionitem.callbacks}}\"         ba-view=\"{{collectionitem.view||view.listinner}}\"         ba-model=\"{{collectionitem}}\">      </ba-{{view.listitem||collectionitem.listitem||listitem}}>  </list>  <ba-{{view.listend.item}}     ba-view=\"{{view.listend}}\"     ba-if=\"{{view.listend.item}}\"> </ba-{{view.listend.item}}> ","test_list_clickitem":" <ba-list ba-attrs=\"{{testmodel}}\"> </ba-list>","test_list_listcollection":" <ba-list ba-listcollection=\"{{listcollection}}\"> </ba-list>","test_list_listoflist":" <ba-list         ba-listitem=\"list\"         ba-listcollection=\"{{listcollection}}\"> </ba-list>","test_list_loadmore":" <ba-list ba-view=\"{{view}}\" ba-listcollection=\"{{listcollection}}\"> </ba-list>","test_list_pushfunc":"<button ba-click=\"test(input_value)\">Test func</button> <input ba-return=\"test(input_value)\" placeholder=\"Push item to list\" value=\"{{=input_value}}\"> <ba-titledlist ba-attrs=\"{{testmodel}}\"> </ba-titledlist>","test_list_swipecontainer":" <ba-list         ba-model=\"{{model}}\"         ba-view=\"{{view_model}}\"> </ba-list>","searchlist":" <searchbox ba-if=\"{{view.showsearch}}\">     <icon class=\"icon-search\"></icon>     <input placeholder=\"{{view.placeholder}}\" value=\"{{=searchvalue}}\"> </searchbox>  <ba-list ba-noscope></ba-list> ","test_searchlist":" <ba-searchlist         ba-view=\"{{view}}\">  </ba-searchlist>","test_titledlist":" <ba-titledlist         ba-model=\"{{model}}\"         ba-view=\"{{view}}\"         ba-functions=\"{{callbacks}}\"         ba-listcollection=\"{{listcollection}}\">  </ba-titledlist>","test_titledlist_swipe":" <ba-titledlist         ba-listcollection=\"{{listcollection}}\"         ba-attrs=\"{{push_attrs}}\">  </ba-titledlist>","titledlist":" <ba-{{view.titleitem}}     ba-click=\"click_title()\"     ba-functions=\"{{model.title_callbacks}}\"     ba-model=\"{{model.title_model}}\">{{model.title_model.value}}</ba-{{view.titleitem}}>  <ba-list         ba-noscope         ba-show=\"{{!collapsed}}\">  </ba-list> ","addtitle":" <addtitle>     <title ba-click=\"clicktitle()\">{{model.value}}</title>     <button ba-click=\"addbutton()\">         <span class=\"icon-plus\"></span>     </button> </addtitle>","test_addtitle":" <ba-addtitle         ba-attrs=\"{{testmodel}}\"> </ba-addtitle> ","clickitem":" <button         class=\"{{model.class}}\"         ba-click=\"click()\">     {{model.value}} </button>","clicktestcontainer":" <ba-{{view.inner||inner}}     ba-gesture:click=\"{{{data: model, options: click_gesture}}})\"     ba-noscope>     {{model.value||value}} </ba-{{view.inner||inner}}> ","header":" <ba-list ba-listcollection=\"{{left_collection}}\"></ba-list>","toggle_menu":"<button ba-click=\"toggle_menu()\" class=\"icon-reorder\"></button>","menu":" <ba-titledlist         ba-collapsible=\"{{false}}\"         ba-model=\"{{model}}\"         ba-listcollection=\"{{menu_collection}}\">  </ba-titledlist>","layout_web":"<header>     <ba-{{components.header}}>Header</ba-{{components.header}}> </header> <main>     <menu ba-show=\"{{model.display_menu}}\">         <ba-{{components.menu}}>Menu</ba-{{components.menu}}>     </menu>     <content>         <ba-{{components.content}}>Content</ba-{{components.content}}>     </content> </main>","index":"<!DOCTYPE html> <html> <head lang=\"en\">     <meta charset=\"UTF-8\">      <!--<script src=\"../vendors/jquery-1.9.closure-extern.js\"></script>-->     <script src=\"../vendors/jquery-2.1.4.js\"></script>      <script src=\"../vendors/scoped.js\"></script>     <script src=\"../vendors/beta.js\"></script>     <script src=\"../vendors/betajs-browser-noscoped.js\"></script>     <!--<script src=\"../vendors/betajs-ui.js\"></script>-->     <script src=\"../../betajs-ui/dist/betajs-ui.js\"></script>     <script src=\"../vendors/betajs-dynamics-noscoped.js\"></script>      <script src=\"components.js\"></script>      <!--<script src=\"../vendors/betajs-simulator.js\"></script>-->     <script src=\"../../betajs-simulator/dist/betajs-simulator.js\"></script>     <link rel=\"stylesheet\" href=\"../..//betajs-simulator/dist/betajs-simulator.css\" />      <script src=\"../dist/betajs-dynamics-components-noscoped.js\"></script>     <link rel=\"stylesheet\" href=\"../dist/betajs-dynamics-components.css\" />     <link rel=\"stylesheet\" href=\"../vendors/icomoon/style.css\" />      <script src=\"//localhost:1337/livereload.js\"></script>      <title>BetaJS Simulator</title>      <script>      </script>  </head> <body>  <ba-simulator></ba-simulator>  <script>     console.log('Unresolved Dependencies : ');     console.log(Scoped.unresolved('global:')); </script>  </body> </html>"};
 });
 
 Scoped.define("module:Input", [
@@ -107,8 +107,8 @@ Scoped.define("module:Scrollpicker", [
         template: Templates.scrollpicker,
 
         attrs : {
-            initial_value : 7,
-            value : 22,
+            initial_value : 14,
+            current_value : 10,
             first : 0,
             last : 23,
             increment : 1,
@@ -121,17 +121,19 @@ Scoped.define("module:Scrollpicker", [
             this.call('initialize_value_array');
             this.call('initialize_value');
 
+            console.log('Scrollpicker initial value :');
+            console.log(this.get('initial_value'));
+
         },
 
         functions : {
 
             initialize_value : function () {
-                //var inc = this.get('increment');
-                //var rounded_value = inc * Math.round(this.get('value')/inc);
-                //var index = this.get('value_array').indexOf(rounded_value);
-                //var displayed_value = index > -1 ? rounded_value : this.get('value_array')[0];
-                //return parseInt(displayed_value, 10);
-                this.set('value', this.get('initial_value'));
+                var inc = this.get('increment');
+                var rounded_value = inc * Math.round(this.get('initial_value')/inc);
+                var index = this.get('value_array').indexOf(rounded_value);
+                var displayed_value = index > -1 ? rounded_value : this.get('value_array')[0];
+                this.set('current_value', parseInt(displayed_value, 10));
             },
 
             initialize_value_array : function () {
@@ -152,6 +154,8 @@ Scoped.define("module:Scrollpicker", [
 
         _afterActivate : function (element) {
 
+            element = element.find('container');
+
             var scroll = new Loopscroll(element, {
                 enabled: true,
                 currentTop: this.get('currentTop'),
@@ -160,30 +164,38 @@ Scoped.define("module:Scrollpicker", [
                 currentCenter: true
             });
 
-            //var ele = $(element.find("[data-id='" + this.get('value') + "']"));
-            //scroll.scrollToElement(ele, {
-            //    animate: false
-            //});
-            //ele.css({
-            //    "color": "black",
-            //    "background" : "white"
+            //var self = this;
+            //element.scroll(function () {
+            //    console.log('There is a Scroll happening');
+            //    console.log(self.__cid);
             //});
 
-            //scroll.on("scrollend", function () {
-            //    console.log(this);
-            //    this.set('value', scroll.currentElement().data( "id" ));
-            //}, this);
-            //
-            //scroll.on("scroll", function () {
-            //    element.children().css({
-            //        "color" : "#999999",
-            //        "background" : "#F4F4F4"
-            //    });
-            //    scroll.currentElement().css({
-            //        "color" : "black",
-            //        "background" : "white"
-            //    });
-            //});
+            console.log('Scroll to Value');
+            console.log(this.get('current_value'));
+            var ele = $(element.find("[data-id='" + this.get('current_value') + "']"));
+            scroll.scrollToElement(ele, {
+                animate: false
+            });
+            ele.css({
+                "color": "black",
+                "background" : "white"
+            });
+
+            scroll.on("scrollend", function () {
+                console.log(this);
+                this.set('current_value', scroll.currentElement().data( "id" ));
+            }, this);
+
+            scroll.on("scroll", function () {
+                element.children().css({
+                    "color" : "#999999",
+                    "background" : "#F4F4F4"
+                });
+                scroll.currentElement().css({
+                    "color" : "black",
+                    "background" : "white"
+                });
+            });
 
         }
 
@@ -575,10 +587,11 @@ Scoped.define("module:List", [
 
 Scoped.define("tests:Test_list_clickitem", [
     "dynamics:Dynamic",
-    "module:Templates"
+    "module:Templates",
+    "base:Collections.Collection"
 ], [
     "module:List"
-], function (Dynamic, Templates, scoped) {
+], function (Dynamic, Templates, Collection, scoped) {
 
     return Dynamic.extend({scoped : scoped}, {
 
@@ -587,7 +600,7 @@ Scoped.define("tests:Test_list_clickitem", [
         attrs: {
             testmodel : {
                 listitem : 'clickitem',
-                listcollection : new BetaJS.Collections.Collection({objects: [
+                listcollection : new Collection({objects: [
                     {value: "Item 1"},
                     {value: "Item 2"},
                     {value: "Item 3"},
@@ -628,10 +641,11 @@ Scoped.define("tests:Test_list_listcollection", [
 
 Scoped.define("tests:Test_list_listoflist", [
     "dynamics:Dynamic",
-    "module:Templates"
+    "module:Templates",
+    "base:Collections.Collection"
 ], [
     "module:List"
-], function (Dynamic, Templates, scoped) {
+], function (Dynamic, Templates, Collection, scoped) {
 
     return Dynamic.extend({scoped : scoped}, {
 
@@ -639,11 +653,11 @@ Scoped.define("tests:Test_list_listoflist", [
 
         collections : {
             listcollection : [
-                {listcollection : new BetaJS.Collections.Collection({objects: [
+                {listcollection : new Collection({objects: [
                     {value : "Test - list of list - Item 1"},
                     {value : "Test - list of list - Item 2"}
                 ]})},
-                {listcollection : new BetaJS.Collections.Collection({objects: [
+                {listcollection : new Collection({objects: [
                     {value : "Test - list of list - Item 1"},
                     {value : "Test - list of list - Item 2"}
                 ]})}
@@ -849,42 +863,48 @@ Scoped.define("tests:Test_searchlist", [
 
 });
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_titledlist", {
+Scoped.define("module:Test_titledlist", [
+    "dynamics:Dynamic",
+    "module:Templates"
+],function (Dynamic, Templates, scoped) {
 
-    template : BetaJS.Dynamics.Components.Templates.test_titledlist,
+    return Dynamic.extend({scoped: scoped}, {
 
-    attrs : {
-        view : {
-            titleitem : 'addtitle',
-            listitem : 'clickitem'
-        },
-        model : {
-            title_model : {
-                value : 'Titledlist - Testtitle'
+        template: Templates.test_titledlist,
+
+        attrs : {
+            view : {
+                titleitem : 'addtitle',
+                listitem : 'clickitem'
             },
-            title_callbacks : {
-                addbutton : function () {
-                    console.log('This comes from the Test Titledlist : ');
-                    this.scope('<').call('additem', {value  : "Testtitledlist Item New"});
+            model : {
+                title_model : {
+                    value : 'Titledlist - Testtitle'
+                },
+                title_callbacks : {
+                    addbutton : function () {
+                        console.log('This comes from the Test Titledlist : ');
+                        this.scope('<').call('additem', {value  : "Testtitledlist Item New"});
+                    }
+                    //clicktitle : function () {
+                    //    console.log('This comes from the Test Titledlist : ');
+                    //    this.scope('<').call('togglelist');
+                    //}
                 }
-                //clicktitle : function () {
-                //    console.log('This comes from the Test Titledlist : ');
-                //    this.scope('<').call('togglelist');
-                //}
             }
+        },
+
+        collections : {
+            listcollection : [
+                {value: "Testtitledlist Item 1"},
+                {value: "Testtitledlist Item 2"},
+                {value: "Testtitledlist Item 3"}
+            ]
         }
-    },
 
-    collections : {
-        listcollection : [
-            {value: "Testtitledlist Item 1"},
-            {value: "Testtitledlist Item 2"},
-            {value: "Testtitledlist Item 3"}
-        ]
-    }
+    }).register();
 
-}).register();
-
+});
 
 
 Scoped.define("module:Test_titledlist_swipe", [
@@ -1126,205 +1146,135 @@ Scoped.define("module:Clicktestcontainer", [
 
 });
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Pushfunc", {
+Scoped.define("module:Header", [
+    "dynamics:Dynamic",
+    "module:Templates"
+],function (Dynamic, Templates, scoped) {
 
-    template: BetaJS.Dynamics.Components.Templates.pushfunc,
+    return Dynamic.extend({scoped: scoped}, {
 
-    initial: {
+        template: Templates.header,
+
+        collections : {
+            left_collection : [
+                {listitem : 'toggle_menu'},
+                {
+                    value : '',
+                    class : 'icon-home'
+                },
+                {
+                    value : 'Big Brother',
+                    class : 'icon-eye-open'
+                },
+                {value : 'Header 1'},
+                {value : 'Header 2'}
+            ]
+        }
+
+    }).register();
+
+});
+
+
+Scoped.define("module:Toggle_menu", [
+    "dynamics:Dynamic",
+    "module:Templates"
+],function (Dynamic, Templates, scoped) {
+
+    return Dynamic.extend({scoped: scoped}, {
+
+        template: Templates.toggle_menu,
+
+        functions : {
+            toggle_menu : function () {
+                this.scope("<+[tagname='ba-layout_web']").call('toggle_menu');
+            }
+        }
+
+    }).register();
+
+});
+
+
+
+
+Scoped.define("module:Menu_web", [
+    "dynamics:Dynamic",
+    "module:Templates",
+    "base: Collections.Collection"
+],function (Dynamic, Templates, Collection, scoped) {
+
+    return Dynamic.extend({scoped: scoped}, {
+
+        template: Templates.menu,
 
         attrs : {
             model : {
-                title :'Pushfunc'
+                title_model: {
+                    value: "Menu Title"
+                }
             }
         },
 
-        create : function () {
-            window.iterateModel(this);
+        collections : {
+            menu_collection : [
+                {value : 'Item 1'},
+                {value : 'Item 2'},
+                {
+                    listitem : 'titledlist',
+                    title_model : {
+                        value: 'Item 3'
+                    },
+                    listcollection : new Collection({objects:[
+                        {value : "Subitem 1"},
+                        {value : "Subitem 2"}
+                    ]})
+                },
+                {value : 'Item 4'}
+            ]
+        }
+
+    }).register();
+
+});
+
+
+
+Scoped.define("module:Layout_web", [
+    "dynamics:Dynamic",
+    "module:Templates"
+],function (Dynamic, Templates, scoped) {
+
+    return Dynamic.extend({scoped: scoped}, {
+
+        template: Templates.layout_web,
+
+        attrs : {
+            components : {
+                header : "header",
+                //header : null,
+                menu : "menu",
+                //menu : null,
+                main : null
+            },
+            model : {
+                header : 'Header',
+                menu : 'Menu',
+                main : 'Main',
+                display_menu : true
+            }
         },
 
         functions : {
-            log : function () {
-                console.log('Model');
-                console.log(this.get('model'));
-                console.log('Testfunc');
-                console.log(this.get('model').testfunc);
-                console.log('Testfunc Func');
-                this.get('model').testfunc.func.call(this, "This is an argument");
+            toggle_menu : function () {
+                this.setProp('model.display_menu', !this.getProp('model.display_menu'));
             }
         }
 
-    }
+    }).register();
 
-}).register();
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_pushfunc", {
-
-    template: BetaJS.Dynamics.Components.Templates.test_pushfunc,
-
-    initial: {
-
-        attrs: {
-            testfunc : {func: function () {
-                console.log('This is a testfunction');
-            }},
-            testmodel : {
-                title : 'This is the Test',
-                testfunc : {
-                    func : function (argument) {
-                        console.log('This is a testfunction');
-                        console.log(argument);
-                    },
-                    args : "Hello"
-                }
-            }
-        }
-
-    }
-
-}).register();
+});
 
 
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Test_attrs", {
-
-    template : BetaJS.Dynamics.Components.Templates.test_attrs,
-
-    attrs : {
-        model : {
-            titleitem : 'addtitle',
-            titleitem_model : {
-                title : 'Titledlist - TestAttrs',
-                titlefunc : 'togglelist',
-                addfunc : 'additem',
-                addbuttonscope :'<<'
-            },
-            functions : {
-                placeholder_func : function () {
-                    console.log('This is a testfunction from the test_titledlist');
-                }
-            },
-            model : {
-                listitem : 'clickitem'
-                //listitem : 'swipecontainer',
-                //type : 'clickitem',
-            },
-            listcollection : new BetaJS.Collections.Collection({objects: [
-                {title: "Test - Attrs Item 1"},
-                {title: "Test - Attrs Item 2"},
-                {title: "Test - Attrs Item 3"}
-            ]})
-        }
-    },
-
-    functions : {
-
-        additem : function () {
-
-            console.log('This comes from the Test Titledlist : ');
-            console.log(this.scope('>').call('additem', {title  : "title"}));
-
-        }
-
-    }
-
-}).register();
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Header", {
-
-    template: BetaJS.Dynamics.Components.Templates.header,
-
-    collections : {
-        left_collection : [
-            {listitem : 'toggle_menu'},
-            {
-                value : '',
-                class : 'icon-home'
-            },
-            {
-                value : 'Big Brother',
-                class : 'icon-eye-open'
-            },
-            {value : 'Header 1'},
-            {value : 'Header 2'}
-        ]
-    }
-
-}).register();
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Toggle_menu", {
-
-    template: BetaJS.Dynamics.Components.Templates.toggle_menu,
-
-    functions : {
-        toggle_menu : function () {
-            this.scope("<+[tagname='ba-layout_web']").call('toggle_menu');
-        }
-    }
-
-}).register();
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Menu_web", {
-
-    template: BetaJS.Dynamics.Components.Templates.menu,
-
-    attrs : {
-        model : {
-            title_model: {
-                value: "Menu Title"
-            }
-        }
-    },
-
-    collections : {
-        menu_collection : [
-            {value : 'Item 1'},
-            {value : 'Item 2'},
-            {
-                listitem : 'titledlist',
-                title_model : {
-                    value: 'Item 3'
-                },
-                listcollection : new BetaJS.Collections.Collection({objects:[
-                    {value : "Subitem 1"},
-                    {value : "Subitem 2"}
-                ]})
-            },
-            {value : 'Item 4'}
-        ]
-    }
-
-}).register();
-
-
-BetaJS.Dynamics.Dynamic.extend("BetaJS.Dynamics.Components.Layout_web", {
-
-    template: BetaJS.Dynamics.Components.Templates.layout_web,
-
-    attrs : {
-        components : {
-            header : "header",
-            //header : null,
-            menu : "menu",
-            //menu : null,
-            main : null
-        },
-        model : {
-            header : 'Header',
-            menu : 'Menu',
-            main : 'Main',
-            display_menu : true
-        }
-    },
-
-    functions : {
-        toggle_menu : function () {
-            this.setProp('model.display_menu', !this.getProp('model.display_menu'));
-        }
-    }
-
-}).register();
 
 }).call(Scoped);
