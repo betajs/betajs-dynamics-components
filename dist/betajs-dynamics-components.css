@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.9 - 2016-07-08
+betajs-dynamics-components - v0.0.9 - 2016-07-11
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -890,7 +890,6 @@ ba-menu_web {
 
 ba-menu_web {
   padding: 0 0 0 20px;
-  background: white;
   color: #2fa4e7;
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px; }
@@ -950,26 +949,5 @@ ba-layout_web {
       display: -ms-flexbox;
       display: -webkit-flex;
       display: flex; }
-
-ba-layout_web {
-  background: lightcoral; }
-  ba-layout_web header {
-    -webkit-box-flex: 0 0 50px;
-    -moz-box-flex: 0 0 50px;
-    -webkit-flex: 0 0 50px;
-    -ms-flex: 0 0 50px;
-    flex: 0 0 50px;
-    background: lightsteelblue; }
-  ba-layout_web main {
-    background: darkviolet; }
-    ba-layout_web main menu {
-      -webkit-box-flex: 0 0 200px;
-      -moz-box-flex: 0 0 200px;
-      -webkit-flex: 0 0 200px;
-      -ms-flex: 0 0 200px;
-      flex: 0 0 200px;
-      background: lightgreen; }
-    ba-layout_web main content {
-      background: lightcyan; }
 
 /*# sourceMappingURL=betajs-dynamics-components.css.map */

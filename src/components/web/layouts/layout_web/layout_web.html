@@ -1,11 +1,11 @@
 <header>
-    <ba-{{components.header}}>Header</ba-{{components.header}}>
+    <ba-{{view.header}}>Header</ba-{{view.header}}>
 </header>
 <main>
-    <menu ba-show="{{model.display_menu}}">
-        <ba-{{components.menu}}>Menu</ba-{{components.menu}}>
+    <menu ba-show="{{view.display_menu}}">
+        <ba-{{view.menu}} ba-view="{{view.menuview}}">Menu</ba-{{view.menu}}>
     </menu>
     <content>
-        <ba-{{components.content}}>Content</ba-{{components.content}}>
+        <ba-{{view.content}} ba-model={{contentmodel}}>Content</ba-{{view.content}}>
     </content>
 </main>

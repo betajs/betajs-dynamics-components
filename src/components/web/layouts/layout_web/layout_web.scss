@@ -25,21 +25,21 @@ ba-layout_web {
 }
 
 //Style
-$header_height : 50px;
-$menu_width : 200px;
-ba-layout_web {
-  background: lightcoral;
-
-  header {
-    @include flex(0 0 $header_height);
-    background : lightsteelblue;
-  }
-  main {
-    background: darkviolet;
-    menu {
-      @include flex(0 0 $menu_width);
-      background: lightgreen
-    }
-    content {background: lightcyan}
-  }
-}
+//$header_height : 50px;
+//$menu_width : 200px;
+//ba-layout_web {
+//  background: lightcoral;
+//
+//  header {
+//    @include flex(0 0 $header_height);
+//    background : lightsteelblue;
+//  }
+//  main {
+//    background: darkviolet;
+//    menu {
+//      @include flex(0 0 $menu_width);
+//      background: lightgreen
+//    }
+//    content {background: lightcyan}
+//  }
+//}

@@ -8,7 +8,7 @@ Scoped.define("module:Menu_web", [
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.menu,
+        template: Templates.menu_web,
 
         attrs : {
             model : {

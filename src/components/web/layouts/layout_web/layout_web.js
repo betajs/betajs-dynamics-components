@@ -9,24 +9,22 @@ Scoped.define("module:Layout_web", [
         template: Templates.layout_web,
 
         attrs : {
-            components : {
+            view : {
                 header : "header",
                 //header : null,
-                menu : "menu",
+                menu : "menu_web",
                 //menu : null,
-                main : null
+                content : null,
+                display_menu : true
             },
             model : {
-                header : 'Header',
-                menu : 'Menu',
-                main : 'Main',
-                display_menu : true
+
             }
         },
 
         functions : {
             toggle_menu : function () {
-                this.setProp('model.display_menu', !this.getProp('model.display_menu'));
+                this.setProp('view.display_menu', !this.getProp('view.display_menu'));
             }
         }
 

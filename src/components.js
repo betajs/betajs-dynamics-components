@@ -1,6 +1,11 @@
 
 window.components = new BetaJS.Collections.Collection({objects: [
 
+    //Web -
+    {value  : 'layout_web'},
+    {value  : 'menu_web'},
+    {value  : 'header'},
+
     //Inputs
     {value  : 'scrollpicker'},
     {value  : 'test_scrollpicker'},
@@ -30,11 +35,6 @@ window.components = new BetaJS.Collections.Collection({objects: [
 
     //Itemmizablelist
     //{value  : 'test_list_different_listitems'},
-
-    //Web -
-    {value  : 'header'},
-    {value  : 'menu_web'},
-    {value  : 'layout_web'},
 
     // List - Listitems
     {value  : 'clickitem'},
