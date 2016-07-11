@@ -994,6 +994,7 @@ ba-layout_web {
 
     menu {
       @include display-flex;
+      @include flex(0 0 140px);
       min-width: 10px;
     }
     content {

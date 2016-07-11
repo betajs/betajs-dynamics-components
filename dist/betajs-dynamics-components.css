@@ -937,6 +937,11 @@ ba-layout_web {
       display: -ms-flexbox;
       display: -webkit-flex;
       display: flex;
+      -webkit-box-flex: 0 0 140px;
+      -moz-box-flex: 0 0 140px;
+      -webkit-flex: 0 0 140px;
+      -ms-flex: 0 0 140px;
+      flex: 0 0 140px;
       min-width: 10px; }
     ba-layout_web main content {
       -webkit-box-flex: 1 1 0;
