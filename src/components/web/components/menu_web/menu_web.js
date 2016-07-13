@@ -3,7 +3,7 @@
 Scoped.define("module:Menu_web", [
     "dynamics:Dynamic",
     "module:Templates",
-    "base: Collections.Collection"
+    "base:Collections.Collection"
 ],function (Dynamic, Templates, Collection, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {

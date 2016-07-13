@@ -2,6 +2,12 @@
 Scoped.define("module:List", [
     "dynamics:Dynamic",
     "module:Templates"
+], [
+    "dynamics:Partials.RepeatPartial",
+    "dynamics:Partials.IfPartial",
+    "dynamics:Partials.DataPartial",
+    "dynamics:Partials.FunctionsPartial",
+    "dynamics:Partials.CachePartial"
 ], function (Dynamic, Templates, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {

@@ -3,7 +3,8 @@ Scoped.define("module:Searchlist", [
     "dynamics:Dynamic",
     "module:Templates"
 ],[
-    "module:List"
+    "module:List",
+    "dynamics:Partials.NoScopePartial"
 ],function (Dynamic, Templates, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {

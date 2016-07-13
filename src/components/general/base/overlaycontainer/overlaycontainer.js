@@ -2,6 +2,8 @@
 Scoped.define("module:Overlaycontainer", [
     "dynamics:Dynamic",
     "module:Templates"
+], [
+    "dynamics:Partials.TapPartial"
 ], function (Dynamic, Templates, scoped) {
 
 	return Dynamic.extend({scoped: scoped}, {

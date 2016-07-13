@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.9 - 2016-07-11
+betajs-dynamics-components - v0.0.10 - 2016-07-12
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -996,7 +996,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.0.9 - 2016-07-11
+betajs-dynamics-components - v0.0.10 - 2016-07-12
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -1016,7 +1016,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '116.1468271920031'
+		version: '117.1468377992295'
 	};
 });
 
@@ -1050,6 +1050,8 @@ Scoped.define("module:Input", [
 Scoped.define("module:Overlaycontainer", [
     "dynamics:Dynamic",
     "module:Templates"
+], [
+    "dynamics:Partials.TapPartial"
 ], function (Dynamic, Templates, scoped) {
 
 	return Dynamic.extend({scoped: scoped}, {
@@ -1097,7 +1099,9 @@ Scoped.define("module:Scrollpicker", [
     "dynamics:Dynamic",
     "module:Templates",
     "ui:Interactions.Loopscroll"
-],function (Dynamic, Templates, Loopscroll, scoped) {
+], [
+    "dynamics:Partials.RepeatElementPartial"
+], function (Dynamic, Templates, Loopscroll, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
@@ -1305,6 +1309,8 @@ Scoped.define("module:Eventitem", [
 Scoped.define("module:Selectableitem", [
     "dynamics:Dynamic",
     "module:Templates"
+], [
+    "dynamics:Partials.ClassPartial"
 ], function (Dynamic, Templates, scoped) {
 
     Dynamic.extend({scoped: scoped}, {
@@ -1341,10 +1347,7 @@ Scoped.define("module:Selectableitem", [
 
             select : function () {
                 console.log(this.scopes.parent_list);
-                this.scopes.parent_list.set('selected_item',{
-                    cid : this.cid(),
-                    value : this.properties().getProp('model.value')
-                });
+                this.scopes.parent_list.set('selected_item', this.get("model").data());
             }
 
         }
@@ -1554,6 +1557,12 @@ Scoped.define("module:Swipeclickcontainer", [
 Scoped.define("module:List", [
     "dynamics:Dynamic",
     "module:Templates"
+], [
+    "dynamics:Partials.RepeatPartial",
+    "dynamics:Partials.IfPartial",
+    "dynamics:Partials.DataPartial",
+    "dynamics:Partials.FunctionsPartial",
+    "dynamics:Partials.CachePartial"
 ], function (Dynamic, Templates, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
@@ -1801,7 +1810,8 @@ Scoped.define("module:Searchlist", [
     "dynamics:Dynamic",
     "module:Templates"
 ],[
-    "module:List"
+    "module:List",
+    "dynamics:Partials.NoScopePartial"
 ],function (Dynamic, Templates, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
@@ -1942,7 +1952,9 @@ Scoped.define("module:Titledlist", [
     "dynamics:Dynamic",
     "module:Templates"
 ], [
-  "module:List"
+  "module:List",
+  "dynamics:Partials.NoScopePartial",
+  "dynamics:Partials.ClickPartial"
 ], function (Dynamic, Templates, scoped) {
     Dynamic.extend({scoped: scoped}, {
 
@@ -2198,7 +2210,7 @@ Scoped.define("module:Toggle_menu", [
 Scoped.define("module:Menu_web", [
     "dynamics:Dynamic",
     "module:Templates",
-    "base: Collections.Collection"
+    "base:Collections.Collection"
 ],function (Dynamic, Templates, Collection, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {

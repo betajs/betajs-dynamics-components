@@ -3,7 +3,9 @@ Scoped.define("module:Scrollpicker", [
     "dynamics:Dynamic",
     "module:Templates",
     "ui:Interactions.Loopscroll"
-],function (Dynamic, Templates, Loopscroll, scoped) {
+], [
+    "dynamics:Partials.RepeatElementPartial"
+], function (Dynamic, Templates, Loopscroll, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 

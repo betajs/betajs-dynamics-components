@@ -2,6 +2,8 @@
 Scoped.define("module:Selectableitem", [
     "dynamics:Dynamic",
     "module:Templates"
+], [
+    "dynamics:Partials.ClassPartial"
 ], function (Dynamic, Templates, scoped) {
 
     Dynamic.extend({scoped: scoped}, {
@@ -38,10 +40,7 @@ Scoped.define("module:Selectableitem", [
 
             select : function () {
                 console.log(this.scopes.parent_list);
-                this.scopes.parent_list.set('selected_item',{
-                    cid : this.cid(),
-                    value : this.properties().getProp('model.value')
-                });
+                this.scopes.parent_list.set('selected_item', this.get("model").data());
             }
 
         }

@@ -3,7 +3,9 @@ Scoped.define("module:Titledlist", [
     "dynamics:Dynamic",
     "module:Templates"
 ], [
-  "module:List"
+  "module:List",
+  "dynamics:Partials.NoScopePartial",
+  "dynamics:Partials.ClickPartial"
 ], function (Dynamic, Templates, scoped) {
     Dynamic.extend({scoped: scoped}, {
 
