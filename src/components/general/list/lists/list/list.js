@@ -1,14 +1,15 @@
 
 Scoped.define("module:List", [
     "dynamics:Dynamic",
-    "module:Templates"
+    "module:Templates",
+    "base:Async"
 ], [
     "dynamics:Partials.RepeatPartial",
     "dynamics:Partials.IfPartial",
     "dynamics:Partials.DataPartial",
     "dynamics:Partials.FunctionsPartial",
     "dynamics:Partials.CachePartial"
-], function (Dynamic, Templates, scoped) {
+], function (Dynamic, Templates, Async, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
@@ -18,9 +19,6 @@ Scoped.define("module:List", [
             listitem: "clickitem",
             model: false,
             view : {
-                listend : {
-                    show : false
-                }
             }
         },
 
@@ -30,6 +28,17 @@ Scoped.define("module:List", [
                 {value: "List - Item 2"},
                 {value: "List - Item 3"}
             ]
+        },
+        
+        functions: {
+        	moreitems: function () {
+        		this.set("loading", true);
+               	Async.eventually(function () {
+               		this.get("loadmore").increase_forwards().callback(function () {
+               			 this.set("loading", false);
+               		}, this);
+               	}, this);
+        	}
         }
 
     }).register();

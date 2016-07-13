@@ -17,7 +17,7 @@ Scoped.define("module:Loadmore", [
         functions: {
 
             load_more: function () {
-                this.chainedTrigger('loadmore');
+                this.chainedTrigger('loadmore', this);
             }
 
         }

@@ -12,7 +12,7 @@
 
 </list>
 
-<ba-{{view.listend.item}}
-    ba-view="{{view.listend}}"
-    ba-if="{{view.listend.item}}">
-</ba-{{view.listend.item}}>
+<ba-loadmore ba-if="{{loadmore}}" ba-show="{{!loading}}" ba-event:loadmore="moreitems">
+</ba-loadmore>
+<ba-loading ba-if="{{loadmore}}" ba-show="{{loading}}">
+</ba-loading>
