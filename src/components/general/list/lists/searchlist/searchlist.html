@@ -4,4 +4,7 @@
     <input placeholder="{{view.placeholder}}" value="{{=searchvalue}}">
 </searchbox>
 
+<ba-loading ba-if="{{searchingindication}}">
+</ba-loading>
+
 <ba-list ba-noscope></ba-list>
