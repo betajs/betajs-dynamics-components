@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.12 - 2016-07-14
+betajs-dynamics-components - v0.0.13 - 2016-07-20
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -19,7 +19,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '119.1468523914741'
+		version: '120.1468987998862'
 	};
 });
 

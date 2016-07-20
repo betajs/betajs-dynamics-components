@@ -15,6 +15,7 @@ ba-scrollpicker {
     @include display-flex;
     @include flex-direction(column);
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 
     element {
       @include flex(0 0 $scrollelementheight);

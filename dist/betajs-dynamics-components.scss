@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.12 - 2016-07-14
+betajs-dynamics-components - v0.0.13 - 2016-07-20
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -234,6 +234,7 @@ ba-scrollpicker {
     @include display-flex;
     @include flex-direction(column);
     overflow-y: scroll;
+    -webkit-overflow-scrolling: touch;
 
     element {
       @include flex(0 0 $scrollelementheight);
