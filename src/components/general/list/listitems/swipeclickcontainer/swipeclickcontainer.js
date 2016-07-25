@@ -5,7 +5,9 @@ Scoped.define("module:Swipeclickcontainer", [
 	"browser:Loader"
 ],[
 	"ui:Dynamics.GesturePartial",
-	"ui:Dynamics.InteractionPartial"
+	"ui:Dynamics.InteractionPartial",
+	"ui:Interactions.Drag",
+	"ui:Interactions.Drop"
 ], function (Dynamic, Templates, Loader, scoped) {
 
 	return Dynamic.extend({scoped: scoped}, {
