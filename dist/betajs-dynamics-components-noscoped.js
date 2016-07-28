@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.13 - 2016-07-20
+betajs-dynamics-components - v0.0.13 - 2016-07-22
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -19,7 +19,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '120.1468987998862'
+		version: '121.1469197409536'
 	};
 });
 
@@ -71,7 +71,7 @@ Scoped.define("module:Overlaycontainer", [
             value : null,
             showoverlay : true
         }
-	
+
 	}).register();
 
 });
@@ -439,8 +439,6 @@ Scoped.define("module:Swipeclickcontainer", [
 				start_event: null,
 				events: {
 					"move": function (model, event) {
-						console.log('Swipeclickcontainer:');
-						console.log(model);
 						event.actionable_modifier.csscls("focus", true);
 						event.modifier.csscls("unfocus", true);
 

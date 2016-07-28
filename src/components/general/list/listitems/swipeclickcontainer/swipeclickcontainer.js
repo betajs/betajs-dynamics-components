@@ -76,8 +76,6 @@ Scoped.define("module:Swipeclickcontainer", [
 				start_event: null,
 				events: {
 					"move": function (model, event) {
-						console.log('Swipeclickcontainer:');
-						console.log(model);
 						event.actionable_modifier.csscls("focus", true);
 						event.modifier.csscls("unfocus", true);
 

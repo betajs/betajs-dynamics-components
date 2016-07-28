@@ -20,7 +20,7 @@ Scoped.define("module:Overlaycontainer", [
             value : null,
             showoverlay : true
         }
-	
+
 	}).register();
 
 });

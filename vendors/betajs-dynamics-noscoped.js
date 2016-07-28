@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics - v0.0.56 - 2016-06-27
+betajs-dynamics - v0.0.59 - 2016-07-13
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -13,7 +13,7 @@ Scoped.binding('jquery', 'global:jQuery');
 Scoped.define("module:", function () {
 	return {
     "guid": "d71ebf84-e555-4e9b-b18a-11d74fdcefe2",
-    "version": "253.1467079760262"
+    "version": "257.1468443097640"
 };
 });
 Scoped.assumeVersion('base:version', 502);
@@ -1055,6 +1055,9 @@ Scoped.define("module:Dynamic", [
 		},
 		
 		_extender: {
+			types: function (base, overwrite) {
+				return Objs.extend(Objs.clone(base, 1), overwrite);
+			},
 			registerchannels: function (base, overwrite) {
 				return Objs.extend(Objs.clone(base, 1), overwrite);
 			},
@@ -1116,7 +1119,7 @@ Scoped.define("module:Handlers.Attr", [
 			__inputVal: function (el, value) {
 				var valueKey = el.type === 'checkbox' || el.type === 'radio' ? 'checked' : 'value';
 				if (arguments.length > 1) 
-					el[valueKey] = value;
+					el[valueKey] = value === null || value === undefined ? "" : value;
 				return el[valueKey];
 			},
 			
@@ -2260,7 +2263,7 @@ Scoped.define("module:Partials.InnerTemplatePartial",
 
 });
 
-Scoped.define("module:Partials.NoScope", ["module:Handlers.Partial"], function (Partial, scoped) {
+Scoped.define("module:Partials.NoScopePartial", ["module:Handlers.Partial"], function (Partial, scoped) {
  	var Cls = Partial.extend({scoped: scoped}, function (inherited) {
  		return {
 			 			 			
@@ -2647,7 +2650,7 @@ Scoped.define("module:Partials.ReturnPartial", ["module:Handlers.Partial"], func
 	return Cls;
 });
 
-Scoped.define("module:Partials.ShareScope", ["module:Handlers.Partial"], function (Partial, scoped) {
+Scoped.define("module:Partials.ShareScopePartial", ["module:Handlers.Partial"], function (Partial, scoped) {
  	var Cls = Partial.extend({scoped: scoped}, function (inherited) {
  		return {
 			
