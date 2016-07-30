@@ -40,7 +40,6 @@ Scoped.define("module:Selectableitem", [
         functions : {
 
             select : function () {
-                console.log(this.scopes.parent_list);
                 this.scopes.parent_list.set('selected_item', Objs.extend({
                 	cid: this.cid()
                 }, this.get("model").data()));

@@ -17,7 +17,6 @@ Scoped.define("module:Scrollpicker", [
             first : 0,
             last : 23,
             increment : 1,
-            currentTop : false,
             value_array : []
         },
 
@@ -25,9 +24,6 @@ Scoped.define("module:Scrollpicker", [
 
             this.call('initialize_value_array');
             this.call('initialize_value');
-
-            console.log('Scrollpicker initial value :');
-            console.log(this.get('initial_value'));
 
         },
 
@@ -63,7 +59,8 @@ Scoped.define("module:Scrollpicker", [
 
             var scroll = new Loopscroll(element, {
                 enabled: true,
-                currentTop: this.get('currentTop'),
+                //currentTop: this.get('currentTop'),
+                currentTop: this.get('top'),
                 discrete: true,
                 scrollEndTimeout: 200,
                 currentCenter: true
