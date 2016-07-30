@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.14 - 2016-07-23
+betajs-dynamics-components - v0.0.154 - 2016-07-30
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -996,7 +996,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.0.14 - 2016-07-23
+betajs-dynamics-components - v0.0.154 - 2016-07-30
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -1016,7 +1016,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '121.1469292133363'
+		version: '122.1469855288164'
 	};
 });
 
@@ -1568,7 +1568,9 @@ Scoped.define("module:List", [
     "dynamics:Partials.IfPartial",
     "dynamics:Partials.DataPartial",
     "dynamics:Partials.FunctionsPartial",
-    "dynamics:Partials.CachePartial"
+    "dynamics:Partials.CachePartial",
+    "module:Loading",
+    "module:Loadmore"
 ], function (Dynamic, Templates, Async, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
@@ -1825,6 +1827,7 @@ Scoped.define("module:Searchlist", [
     "module:Templates"
 ],[
     "module:List",
+    "module:Loading",
     "dynamics:Partials.NoScopePartial"
 ],function (Dynamic, Templates, scoped) {
 

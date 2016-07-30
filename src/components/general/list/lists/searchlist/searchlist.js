@@ -4,6 +4,7 @@ Scoped.define("module:Searchlist", [
     "module:Templates"
 ],[
     "module:List",
+    "module:Loading",
     "dynamics:Partials.NoScopePartial"
 ],function (Dynamic, Templates, scoped) {
 
