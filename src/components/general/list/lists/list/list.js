@@ -8,7 +8,9 @@ Scoped.define("module:List", [
     "dynamics:Partials.IfPartial",
     "dynamics:Partials.DataPartial",
     "dynamics:Partials.FunctionsPartial",
-    "dynamics:Partials.CachePartial"
+    "dynamics:Partials.CachePartial",
+    "module:Loading",
+    "module:Loadmore"
 ], function (Dynamic, Templates, Async, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
