@@ -22,6 +22,10 @@ Scoped.define("module:Textinput", [
                 var s = this.get('value');
                 return s + (Strings.ends_with(s, "\n") ? " " : "");
             }
+        },
+
+        functions : {
+            blur : function () {/*Placeholder so no error...*/}
         }
 
     }).register();

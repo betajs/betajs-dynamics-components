@@ -44,9 +44,14 @@ Scoped.define("module:Scrollpicker", [
                 var inc = this.get('increment');
 
                 var value_array  = [];
-                for (var i = last ; i >= first ; i -= inc) {
-                    value_array.push(i);
-                }
+                if (first < last)
+                    for (var i = first ; i <= last  ; i += inc) {
+                        value_array.push(i);
+                    }
+                else if (first > last)
+                    for (var i = first ; i >= last ; i -= inc) {
+                        value_array.push(i);
+                    }
                 this.set('value_array',value_array);
 
             }

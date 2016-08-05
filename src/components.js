@@ -2,9 +2,9 @@
 window.components = new BetaJS.Collections.Collection({objects: [
 
     //Inputs
-    {value  : 'clickinput'},
     {value  : 'textinput'},
     {value  : 'scrollpicker'},
+    {value  : 'clickinput'},
     {value  : 'test_scrollpicker'},
 
     //Web -
