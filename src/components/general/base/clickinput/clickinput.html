@@ -1,0 +1,14 @@
+
+<title
+        ba-if="{{!view.edit}}"
+        ba-click="edititem()"
+>
+    {{model.value}}
+</title>
+
+<input
+        placeholder="{{view.placeholder}}"
+        ba-if="{{view.edit}}"
+        ba-return="view.edit = false"
+        onblur="{{view.edit = false}}"
+        value="{{=model.value}}">

@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.154 - 2016-07-31
+betajs-dynamics-components - v0.0.154 - 2016-08-04
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -36,6 +36,36 @@ li {
 ul {
   margin: 0;
   padding: 0; }
+
+ba-clickinput {
+  -webkit-box-flex: 0 0 44px;
+  -moz-box-flex: 0 0 44px;
+  -webkit-flex: 0 0 44px;
+  -ms-flex: 0 0 44px;
+  flex: 0 0 44px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  height: 44px;
+  line-height: 44px;
+  list-style: none;
+  margin: 0;
+  vertical-align: middle; }
+  ba-clickinput title, ba-clickinput input {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    display: block; }
 
 overlaycontainer {
   position: absolute;
@@ -716,7 +746,6 @@ ba-titledlist {
     display: block; }
 
 ba-addtitle {
-  background: white;
   border-bottom: 1px solid grey; }
   ba-addtitle addtitle {
     display: -webkit-box;

@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.0.154 - 2016-07-31
+betajs-dynamics-components - v0.0.154 - 2016-08-04
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -170,6 +170,31 @@ li {
 ul {
   margin: 0;
   padding: 0;
+}
+
+
+$height : $listitemheight;
+
+ba-clickinput {
+  @include flex(0 0 44px);
+  @include display-flex;
+  @include noselect;
+
+  height: $height;
+  line-height: $height;
+  list-style: none;
+  margin: 0;
+  vertical-align: middle;
+
+  //taskitem {
+  //  @include flex(1 1 0);
+  //  @include display-flex;
+
+    title, input {
+      @include flex(1 1 0);
+      display: block;
+    }
+  //}
 }
 
 
@@ -824,7 +849,6 @@ ba-titledlist {
 $clickitemheigth : 44px;
 
 ba-addtitle {
-  background: white;
   border-bottom: 1px solid grey;
 
   addtitle {

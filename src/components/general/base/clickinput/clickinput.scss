@@ -1,0 +1,24 @@
+
+$height : $listitemheight;
+
+ba-clickinput {
+  @include flex(0 0 44px);
+  @include display-flex;
+  @include noselect;
+
+  height: $height;
+  line-height: $height;
+  list-style: none;
+  margin: 0;
+  vertical-align: middle;
+
+  //taskitem {
+  //  @include flex(1 1 0);
+  //  @include display-flex;
+
+    title, input {
+      @include flex(1 1 0);
+      display: block;
+    }
+  //}
+}
