@@ -2,11 +2,14 @@
 Scoped.define("module:Selectableitem", [
     "dynamics:Dynamic",
     "module:Templates",
-    "base:Objs"
+    "base:Objs",
+	"base:Loggers.Logger"
 ], [
     "dynamics:Partials.ClassPartial"
-], function (Dynamic, Templates, Objs, scoped) {
+], function (Dynamic, Templates, Objs, Logger, scoped) {
 
+	var logger = Logger.global().tag("dynamic", "list");
+	
     Dynamic.extend({scoped: scoped}, {
 
         template: Templates.selectableitem,
@@ -30,7 +33,7 @@ Scoped.define("module:Selectableitem", [
             var parentlist = this.scopes.parent_list;
 
             if (!parentlist)
-                console.log('There is no parent list the selector can attach to, this currently only works  with ba-list');
+                logger.log('There is no parent list the selector can attach to, this currently only works  with ba-list');
             else if (parentlist.get('listcollection'))
                 if (!this.scopes.parent_list.get('selected_item'))
                     this.call('select')

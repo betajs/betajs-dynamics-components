@@ -2,14 +2,17 @@
 Scoped.define("module:Swipeclickcontainer", [
 	"dynamics:Dynamic",
 	"module:Templates",
-	"browser:Loader"
+	"browser:Loader",
+	"base:Loggers.Logger"
 ],[
 	"ui:Dynamics.GesturePartial",
 	"ui:Dynamics.InteractionPartial",
 	"ui:Interactions.Drag",
 	"ui:Interactions.Drop"
-], function (Dynamic, Templates, Loader, scoped) {
+], function (Dynamic, Templates, Loader, Logger, scoped) {
 
+	var logger = Logger.global().tag("dynamic", "list");
+	
 	return Dynamic.extend({scoped: scoped}, {
 
 		template: Templates.swipeclickcontainer,
@@ -92,7 +95,7 @@ Scoped.define("module:Swipeclickcontainer", [
 				},
 				events: {
 					"dropped": function (data, event) {
-						console.log('Drop successful');
+						logger.log('Drop successful');
 						//var source_doodad = event.source.data;
 						//var target_doodad = data;
 						//alert(source_doodad.get("v") + " --> " + target_doodad.get("v"));

@@ -1,32 +1,93 @@
 /*!
-betajs - v1.0.69 - 2016-08-04
+betajs - v1.0.87 - 2016-11-03
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 Apache-2.0 Software License.
 */
 /** @flow **//*!
-betajs-scoped - v0.0.10 - 2016-04-07
+betajs-scoped - v0.0.12 - 2016-10-02
 Copyright (c) Oliver Friedmann
 Apache-2.0 Software License.
 */
 var Scoped = (function () {
-var Globals = {
-
+var Globals = (function () {  
+/** 
+ * This helper module provides functions for reading and writing globally accessible namespaces, both in the browser and in NodeJS.
+ * 
+ * @module Globals
+ * @access private
+ */
+return { 
+		
+	/**
+	 * Returns the value of a global variable.
+	 * 
+	 * @param {string} key identifier of a global variable
+	 * @return value of global variable or undefined if not existing
+	 */
 	get : function(key/* : string */) {
 		if (typeof window !== "undefined")
 			return window[key];
 		if (typeof global !== "undefined")
 			return global[key];
-		return null;
+		if (typeof self !== "undefined")
+			return self[key];
+		return undefined;
 	},
 
+	
+	/**
+	 * Sets a global variable.
+	 * 
+	 * @param {string} key identifier of a global variable
+	 * @param value value to be set
+	 * @return value that has been set
+	 */
 	set : function(key/* : string */, value) {
 		if (typeof window !== "undefined")
 			window[key] = value;
 		if (typeof global !== "undefined")
 			global[key] = value;
+		if (typeof self !== "undefined")
+			self[key] = value;
 		return value;
 	},
 	
+	
+	/**
+	 * Returns the value of a global variable under a namespaced path.
+	 * 
+	 * @param {string} path namespaced path identifier of variable
+	 * @return value of global variable or undefined if not existing
+	 * 
+	 * @example
+	 * // returns window.foo.bar / global.foo.bar 
+	 * Globals.getPath("foo.bar")
+	 */
+	getPath: function (path/* : string */) {
+		var args = path.split(".");
+		if (args.length == 1)
+			return this.get(path);		
+		var current = this.get(args[0]);
+		for (var i = 1; i < args.length; ++i) {
+			if (!current)
+				return current;
+			current = current[args[i]];
+		}
+		return current;
+	},
+
+
+	/**
+	 * Sets a global variable under a namespaced path.
+	 * 
+	 * @param {string} path namespaced path identifier of variable
+	 * @param value value to be set
+	 * @return value that has been set
+	 * 
+	 * @example
+	 * // sets window.foo.bar / global.foo.bar 
+	 * Globals.setPath("foo.bar", 42);
+	 */
 	setPath: function (path/* : string */, value) {
 		var args = path.split(".");
 		if (args.length == 1)
@@ -39,36 +100,47 @@ var Globals = {
 		}
 		current[args[args.length - 1]] = value;
 		return value;
-	},
-	
-	getPath: function (path/* : string */) {
-		var args = path.split(".");
-		if (args.length == 1)
-			return this.get(path);		
-		var current = this.get(args[0]);
-		for (var i = 1; i < args.length; ++i) {
-			if (!current)
-				return current;
-			current = current[args[i]];
-		}
-		return current;
 	}
-
-};
+	
+};}).call(this);
 /*::
 declare module Helper {
 	declare function extend<A, B>(a: A, b: B): A & B;
 }
 */
 
-var Helper = {
+var Helper = (function () {  
+/** 
+ * This helper module provides auxiliary functions for the Scoped system.
+ * 
+ * @module Helper
+ * @access private
+ */
+return { 
 		
+	/**
+	 * Attached a context to a function.
+	 * 
+	 * @param {object} obj context for the function
+	 * @param {function} func function
+	 * 
+	 * @return function with attached context
+	 */
 	method: function (obj, func) {
 		return function () {
 			return func.apply(obj, arguments);
 		};
 	},
 
+	
+	/**
+	 * Extend a base object with all attributes of a second object.
+	 * 
+	 * @param {object} base base object
+	 * @param {object} overwrite second object
+	 * 
+	 * @return {object} extended base object
+	 */
 	extend: function (base, overwrite) {
 		base = base || {};
 		overwrite = overwrite || {};
@@ -77,10 +149,26 @@ var Helper = {
 		return base;
 	},
 	
+	
+	/**
+	 * Returns the type of an object, particulary returning 'array' for arrays.
+	 * 
+	 * @param obj object in question
+	 * 
+	 * @return {string} type of object
+	 */
 	typeOf: function (obj) {
 		return Object.prototype.toString.call(obj) === '[object Array]' ? "array" : typeof obj;
 	},
 	
+	
+	/**
+	 * Returns whether an object is null, undefined, an empty array or an empty object.
+	 * 
+	 * @param obj object in question
+	 * 
+	 * @return true if object is empty
+	 */
 	isEmpty: function (obj) {
 		if (obj === null || typeof obj === "undefined")
 			return true;
@@ -93,6 +181,15 @@ var Helper = {
 		return true;
 	},
 	
+	
+    /**
+     * Matches function arguments against some pattern.
+     * 
+     * @param {array} args function arguments
+     * @param {object} pattern typed pattern
+     * 
+     * @return {object} matched arguments as associative array 
+     */	
 	matchArgs: function (args, pattern) {
 		var i = 0;
 		var result = {};
@@ -106,18 +203,41 @@ var Helper = {
 		return result;
 	},
 	
+	
+	/**
+	 * Stringifies a value as JSON and functions to string representations.
+	 * 
+	 * @param value value to be stringified
+	 * 
+	 * @return stringified value
+	 */
 	stringify: function (value) {
 		if (this.typeOf(value) == "function")
 			return "" + value;
 		return JSON.stringify(value);
 	}	
 
-};
-var Attach = {
+	
+};}).call(this);
+var Attach = (function () {  
+/** 
+ * This module provides functionality to attach the Scoped system to the environment.
+ * 
+ * @module Attach
+ * @access private
+ */
+return { 
 		
 	__namespace: "Scoped",
 	__revert: null,
 	
+	
+	/**
+	 * Upgrades a pre-existing Scoped system to the newest version present. 
+	 * 
+	 * @param {string} namespace Optional namespace (default is 'Scoped')
+	 * @return {object} the attached Scoped system
+	 */
 	upgrade: function (namespace/* : ?string */) {
 		var current = Globals.get(namespace || Attach.__namespace);
 		if (current && Helper.typeOf(current) == "object" && current.guid == this.guid && Helper.typeOf(current.version) == "string") {
@@ -134,6 +254,13 @@ var Attach = {
 			return this.attach(namespace);		
 	},
 
+
+	/**
+	 * Attaches the Scoped system to the environment. 
+	 * 
+	 * @param {string} namespace Optional namespace (default is 'Scoped')
+	 * @return {object} the attached Scoped system
+	 */
 	attach : function(namespace/* : ?string */) {
 		if (namespace)
 			Attach.__namespace = namespace;
@@ -154,6 +281,13 @@ var Attach = {
 		return this;
 	},
 	
+
+	/**
+	 * Detaches the Scoped system from the environment. 
+	 * 
+	 * @param {boolean} forceDetach Overwrite any attached scoped system by null.
+	 * @return {object} the detached Scoped system
+	 */
 	detach: function (forceDetach/* : ?boolean */) {
 		if (forceDetach)
 			Globals.set(Attach.__namespace, null);
@@ -165,6 +299,15 @@ var Attach = {
 		return this;
 	},
 	
+
+	/**
+	 * Exports an object as a module if possible. 
+	 * 
+	 * @param {object} mod a module object (optional, default is 'module')
+	 * @param {object} object the object to be exported
+	 * @param {boolean} forceExport overwrite potentially pre-existing exports
+	 * @return {object} the Scoped system
+	 */
 	exports: function (mod, object, forceExport) {
 		mod = mod || (typeof module != "undefined" ? module : null);
 		if (typeof mod == "object" && mod && "exports" in mod && (forceExport || mod.exports == this || !mod.exports || Helper.isEmpty(mod.exports)))
@@ -172,7 +315,7 @@ var Attach = {
 		return this;
 	}	
 
-};
+};}).call(this);
 
 function newNamespace (opts/* : {tree ?: boolean, global ?: boolean, root ?: Object} */) {
 
@@ -221,6 +364,10 @@ function newNamespace (opts/* : {tree ?: boolean, global ?: boolean, root ?: Obj
 			try {
 				if (global)
 					nsRoot.data = global;
+			} catch (e) { }
+			try {
+				if (self)
+					nsRoot.data = self;
 			} catch (e) { }
 		} else
 			nsRoot.data = options.root;
@@ -337,12 +484,30 @@ function newNamespace (opts/* : {tree ?: boolean, global ?: boolean, root ?: Obj
 		return result;
 	}
 
+	/** 
+	 * The namespace module manages a namespace in the Scoped system.
+	 * 
+	 * @module Namespace
+	 * @access public
+	 */
 	return {
 		
+		/**
+		 * Extend a node in the namespace by an object.
+		 * 
+		 * @param {string} path path to the node in the namespace
+		 * @param {object} value object that should be used for extend the namespace node
+		 */
 		extend: function (path, value) {
 			nodeSetData(nodeNavigate(path), value);
 		},
 		
+		/**
+		 * Set the object value of a node in the namespace.
+		 * 
+		 * @param {string} path path to the node in the namespace
+		 * @param {object} value object that should be used as value for the namespace node
+		 */
 		set: function (path, value) {
 			var node = nodeNavigate(path);
 			if (node.data)
@@ -350,11 +515,25 @@ function newNamespace (opts/* : {tree ?: boolean, global ?: boolean, root ?: Obj
 			nodeSetData(node, value);
 		},
 		
+		/**
+		 * Read the object value of a node in the namespace.
+		 * 
+		 * @param {string} path path to the node in the namespace
+		 * @return {object} object value of the node or null if undefined
+		 */
 		get: function (path) {
 			var node = nodeNavigate(path);
 			return node.ready ? node.data : null;
 		},
 		
+		/**
+		 * Lazily navigate to a node in the namespace.
+		 * Will asynchronously call the callback as soon as the node is being touched.
+		 *
+		 * @param {string} path path to the node in the namespace
+		 * @param {function} callback callback function accepting the node's object value
+		 * @param {context} context optional callback context
+		 */
 		lazy: function (path, callback, context) {
 			var node = nodeNavigate(path);
 			if (node.ready)
@@ -367,14 +546,33 @@ function newNamespace (opts/* : {tree ?: boolean, global ?: boolean, root ?: Obj
 			}
 		},
 		
+		/**
+		 * Digest a node path, checking whether it has been defined by an external system.
+		 * 
+		 * @param {string} path path to the node in the namespace
+		 */
 		digest: function (path) {
 			nodeDigest(nodeNavigate(path));
 		},
 		
+		/**
+		 * Asynchronously access a node in the namespace.
+		 * Will asynchronously call the callback as soon as the node is being defined.
+		 *
+		 * @param {string} path path to the node in the namespace
+		 * @param {function} callback callback function accepting the node's object value
+		 * @param {context} context optional callback context
+		 */
 		obtain: function (path, callback, context) {
 			nodeAddWatcher(nodeNavigate(path), callback, context);
 		},
 		
+		/**
+		 * Returns all unresolved watchers under a certain path.
+		 * 
+		 * @param {string} path path to the node in the namespace
+		 * @return {array} list of all unresolved watchers 
+		 */
 		unresolvedWatchers: function (path) {
 			return nodeUnresolvedWatchers(nodeNavigate(path), path);
 		},
@@ -473,6 +671,12 @@ function newScope (parent, parentNS, rootNS, globalNS) {
 		return this;
 	};
 	
+	/** 
+	 * This module provides all functionality in a scope.
+	 * 
+	 * @module Scoped
+	 * @access public
+	 */
 	return {
 		
 		getGlobal: Helper.method(Globals, Globals.getPath),
@@ -489,12 +693,23 @@ function newScope (parent, parentNS, rootNS, globalNS) {
 		
 		dependencies: {},
 		
+		
+		/**
+		 * Returns a reference to the next scope that will be obtained by a subScope call.
+		 * 
+		 * @return {object} next scope
+		 */
 		nextScope: function () {
 			if (!nextScope)
 				nextScope = newScope(this, localNamespace, rootNamespace, globalNamespace);
 			return nextScope;
 		},
 		
+		/**
+		 * Creates a sub scope of the current scope and returns it.
+		 * 
+		 * @return {object} sub scope
+		 */
 		subScope: function () {
 			var sub = this.nextScope();
 			childScopes.push(sub);
@@ -502,6 +717,14 @@ function newScope (parent, parentNS, rootNS, globalNS) {
 			return sub;
 		},
 		
+		/**
+		 * Creates a binding within in the scope. 
+		 * 
+		 * @param {string} alias identifier of the new binding
+		 * @param {string} namespaceLocator identifier of an existing namespace path
+		 * @param {object} options options for the binding
+		 * 
+		 */
 		binding: function (alias, namespaceLocator, options) {
 			if (!bindings[alias] || !bindings[alias].readonly) {
 				var ns;
@@ -520,6 +743,14 @@ function newScope (parent, parentNS, rootNS, globalNS) {
 			return this;
 		},
 		
+		
+		/**
+		 * Resolves a name space locator to a name space.
+		 * 
+		 * @param {string} namespaceLocator name space locator
+		 * @return {object} resolved name space
+		 * 
+		 */
 		resolve: function (namespaceLocator) {
 			var parts = namespaceLocator.split(":");
 			if (parts.length == 1) {
@@ -537,7 +768,18 @@ function newScope (parent, parentNS, rootNS, globalNS) {
 				};
 			}
 		},
+
 		
+		/**
+		 * Defines a new name space once a list of name space locators is available.
+		 * 
+		 * @param {string} namespaceLocator the name space that is to be defined
+		 * @param {array} dependencies a list of name space locator dependencies (optional)
+		 * @param {array} hiddenDependencies a list of hidden name space locators (optional)
+		 * @param {function} callback a callback function accepting all dependencies as arguments and returning the new definition
+		 * @param {object} context a callback context (optional)
+		 * 
+		 */
 		define: function () {
 			return custom.call(this, arguments, "define", function (ns, result) {
 				if (ns.namespace.get(ns.path))
@@ -546,22 +788,14 @@ function newScope (parent, parentNS, rootNS, globalNS) {
 			});
 		},
 		
-		assume: function () {
-			var args = Helper.matchArgs(arguments, {
-				assumption: true,
-				dependencies: "array",
-				callback: true,
-				context: "object",
-				error: "string"
-			});
-			var dependencies = args.dependencies || [];
-			dependencies.unshift(args.assumption);
-			this.require(dependencies, function (assumptionValue) {
-				if (!args.callback.apply(args.context || this, arguments))
-					throw ("Scoped Assumption '" + args.assumption + "' failed, value is " + assumptionValue + (args.error ? ", but assuming " + args.error : "")); 
-			});
-		},
 		
+		/**
+		 * Assume a specific version of a module and fail if it is not met.
+		 * 
+		 * @param {string} assumption name space locator
+		 * @param {string} version assumed version
+		 * 
+		 */
 		assumeVersion: function () {
 			var args = Helper.matchArgs(arguments, {
 				assumption: true,
@@ -590,19 +824,33 @@ function newScope (parent, parentNS, rootNS, globalNS) {
 			});
 		},
 		
+		
+		/**
+		 * Extends a potentiall existing name space once a list of name space locators is available.
+		 * 
+		 * @param {string} namespaceLocator the name space that is to be defined
+		 * @param {array} dependencies a list of name space locator dependencies (optional)
+		 * @param {array} hiddenDependencies a list of hidden name space locators (optional)
+		 * @param {function} callback a callback function accepting all dependencies as arguments and returning the new additional definitions.
+		 * @param {object} context a callback context (optional)
+		 * 
+		 */
 		extend: function () {
 			return custom.call(this, arguments, "extend", function (ns, result) {
 				ns.namespace.extend(ns.path, result);
 			});
 		},
+				
 		
-		condition: function () {
-			return custom.call(this, arguments, "condition", function (ns, result) {
-				if (result)
-					ns.namespace.set(ns.path, result);
-			});
-		},
-		
+		/**
+		 * Requires a list of name space locators and calls a function once they are present.
+		 * 
+		 * @param {array} dependencies a list of name space locator dependencies (optional)
+		 * @param {array} hiddenDependencies a list of hidden name space locators (optional)
+		 * @param {function} callback a callback function accepting all dependencies as arguments
+		 * @param {object} context a callback context (optional)
+		 * 
+		 */
 		require: function () {
 			var args = Helper.matchArgs(arguments, {
 				dependencies: "array",
@@ -641,18 +889,36 @@ function newScope (parent, parentNS, rootNS, globalNS) {
 			}
 			return this;
 		},
+
 		
+		/**
+		 * Digest a name space locator, checking whether it has been defined by an external system.
+		 * 
+		 * @param {string} namespaceLocator name space locator
+		 */
 		digest: function (namespaceLocator) {
 			var ns = this.resolve(namespaceLocator);
 			ns.namespace.digest(ns.path);
 			return this;
 		},
 		
+		
+		/**
+		 * Returns all unresolved definitions under a namespace locator
+		 * 
+		 * @param {string} namespaceLocator name space locator, e.g. "global:"
+		 * @return {array} list of all unresolved definitions 
+		 */
 		unresolved: function (namespaceLocator) {
 			var ns = this.resolve(namespaceLocator);
 			return ns.namespace.unresolvedWatchers(ns.path);
 		},
 		
+		/**
+		 * Exports the scope.
+		 * 
+		 * @return {object} exported scope
+		 */
 		__export: function () {
 			return {
 				parentNamespace: parentNamespace.__export(),
@@ -663,6 +929,12 @@ function newScope (parent, parentNS, rootNS, globalNS) {
 			};
 		},
 		
+		/**
+		 * Imports a scope from an exported scope.
+		 * 
+		 * @param {object} data exported scope to be imported
+		 * 
+		 */
 		__import: function (data) {
 			parentNamespace.__import(data.parentNamespace);
 			rootNamespace.__import(data.rootNamespace);
@@ -678,16 +950,31 @@ var globalNamespace = newNamespace({tree: true, global: true});
 var rootNamespace = newNamespace({tree: true});
 var rootScope = newScope(null, rootNamespace, rootNamespace, globalNamespace);
 
-var Public = Helper.extend(rootScope, {
+var Public = Helper.extend(rootScope, (function () {  
+/** 
+ * This module includes all public functions of the Scoped system.
+ * 
+ * It includes all methods of the root scope and the Attach module.
+ * 
+ * @module Public
+ * @access public
+ */
+return {
 		
 	guid: "4b6878ee-cb6a-46b3-94ac-27d91f58d666",
-	version: '43.1460041676769',
+	version: '49.1475462345450',
 		
 	upgrade: Attach.upgrade,
 	attach: Attach.attach,
 	detach: Attach.detach,
 	exports: Attach.exports,
 	
+	/**
+	 * Exports all data contained in the Scoped system.
+	 * 
+	 * @return data of the Scoped system.
+	 * @access private
+	 */
 	__exportScoped: function () {
 		return {
 			globalNamespace: globalNamespace.__export(),
@@ -696,20 +983,28 @@ var Public = Helper.extend(rootScope, {
 		};
 	},
 	
+	/**
+	 * Import data into the Scoped system.
+	 * 
+	 * @param data of the Scoped system.
+	 * @access private
+	 */
 	__importScoped: function (data) {
 		globalNamespace.__import(data.globalNamespace);
 		rootNamespace.__import(data.rootNamespace);
 		rootScope.__import(data.rootScope);
 	}
 	
-});
+};
+
+}).call(this));
 
 Public = Public.upgrade();
 Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs - v1.0.69 - 2016-08-04
+betajs - v1.0.87 - 2016-11-03
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -720,12 +1015,416 @@ Scoped.binding('module', 'global:BetaJS');
 Scoped.define("module:", function () {
 	return {
     "guid": "71366f7a-7da3-4e55-9a0b-ea0e4e2a9e79",
-    "version": "533.1470347731072"
+    "version": "575.1478193128876"
 };
 });
 Scoped.require(['module:'], function (mod) {
 	this.exports(typeof module != 'undefined' ? module : null, mod);
 }, this);
+Scoped.define("module:Ajax.Support", [
+    "module:Ajax.NoCandidateAjaxException",
+    "module:Ajax.ReturnDataParseException",
+    "module:Ajax.RequestException",
+    "module:Promise",
+    "module:Objs",
+    "module:Types",
+    "module:Net.Uri",
+    "module:Net.HttpHeader"
+], function (NoCandidateAjaxException, ReturnDataParseException, RequestException, Promise, Objs, Types, Uri, HttpHeader) {
+	
+	/**
+	 * Ajax Support Module
+	 * 
+	 * @module BetaJS.Ajax.Support
+	 */
+	return {
+		
+		__registry: [],
+		
+		/**
+		 * Registers an ajax execution system 
+		 * 
+		 * @param {object} descriptor Descriptor object containing a supports and an execute function
+		 * @param {int} priority Priority of this execution system to be used if applicable
+		 */
+		register: function (descriptor, priority) {
+			this.__registry.push({
+				descriptor: descriptor,
+				priority: priority
+			});
+		},
+		
+		/**
+		 * Unwrap the status from return data
+		 * 
+		 * @param {object} json Status-encoded return object
+		 * @param {string} errorDecodeType Decode type for data in case it is an error
+		 * 
+		 * @return Unwrapped data in case of a success status
+		 */
+		unwrapStatus: function (json, errorDecodeType) {
+			/*
+			 * Should be:
+			 * {
+			 * 	status: XXX,
+			 *  statusText: XXX, (or empty)
+			 *  responseText: XXX (or empty)
+			 * }
+			 */
+			var status = json.status || HttpHeader.HTTP_STATUS_INTERNAL_SERVER_ERROR;
+			if (!HttpHeader.isSuccessStatus(status)) {
+				var status_text = json.statusText || HttpHeader.format(status);
+				var resp = json.responseText;
+				try {
+					resp = this.parseReturnData(json.responseText, errorDecodeType);
+				} catch (e) {}
+				throw new RequestException(status, status_text, resp);
+			} else 
+				return json.responseText; 
+		},
+		
+		/**
+		 * Parse return data given a decode type.
+		 * 
+		 * @param data Return data to be parsed
+		 * @param {string} decodeType Decode type, e.g. "json"
+		 * 
+		 * @return Parsed return data
+		 */
+		parseReturnData: function (data, decodeType) {
+			if (decodeType === "json" && Types.is_string(data))
+				return JSON.parse(data);
+			return data;
+		},
+		
+		/**
+		 * Process the return data and forward the result to a promise object.
+		 * 
+		 * @param {object} promise Promise object
+		 * @param {object} options Options for processing the return data
+		 * @param data Return data
+		 * @param {string} decodeType Decode type, e.g. "json"
+		 * 
+		 */
+		promiseReturnData: function (promise, options, data, decodeType) {
+			if (options.wrapStatus) {
+				try {
+					data = this.parseReturnData(data, "json");
+				} catch (e) {
+					promise.asyncError(new ReturnDataParseException(data, decodeType));
+					return;
+				}
+				try {
+					data = this.unwrapStatus(data, decodeType);
+				} catch (e) {
+					promise.asyncError(e);
+					return;
+				}
+			}
+			try {
+				promise.asyncSuccess(this.parseReturnData(data, decodeType));
+			} catch (e) {
+				promise.asyncError(new ReturnDataParseException(data, decodeType));
+			}
+		},
+		
+		/**
+		 * Process the return data and forward the result as an error to a promise object.
+		 * 
+		 * @param {object} promise Promise object
+		 * @param {int} status Error status
+		 * @param {string} status_text Optional status text
+		 * @param data Return data
+		 * @param {string} decodeType Decode type, e.g. "json"
+		 * 
+		 */
+		promiseRequestException: function (promise, status, status_text, data, decodeType) {
+			status_text = status_text || HttpHeader.format(status);
+			try {
+				promise.asyncError(new RequestException(status, status_text, this.parseReturnData(data, decodeType)));
+			} catch (e) {
+				promise.asyncError(new RequestException(status, status_text, data));
+			}
+		},
+		
+		/**
+		 * Preprocess Ajax Options object.
+		 * 
+		 * @param {object} options Options object
+		 * 
+		 * @return {object} Preprocessed options object
+		 */
+		preprocess: function (options) {
+			options = Objs.extend({
+				method: "GET",
+				mapMethodsKey: "_method",
+				wrapStatus: false,
+				wrapStatusParam: null,
+				context: this,
+				query: {},
+				jsonp: undefined,
+				postmessage: undefined,
+				contentType: "urlencoded", // json
+				resilience: 1,
+				resilience_delay: 1000,
+				cors: false,
+				sendContentType: true,
+				corscreds: false,
+				forceJsonp: false,
+				forcePostmessage: false/*,
+				decodeType: "json"*/
+			}, options);
+			if (options.params) {
+				options.query = Objs.extend(options.query, options.params);
+				delete options.params;
+			}
+			if (!Types.is_empty(options.query)) {
+				options.query = Objs.filter(options.query, function (value) {
+					return value !== null && value !== undefined;
+				});
+			}
+			options.method = options.method.toUpperCase();
+			if (options.baseUri)
+				options.uri = options.uri ? options.baseUri + options.uri : options.baseUri;
+			delete options.baseUri;
+			if (options.mapMethods && options.method in options.mapMethods) {
+				options.uri = Uri.appendUriParams(options.uri, Objs.objectBy(options.mapMethodsKey, options.method));
+				options.method = options.mapMethods[options.method];
+			}
+			if (options.wrapStatus && options.wrapStatusParam)
+				options.uri = Uri.appendUriParams(options.uri, Objs.objectBy(options.wrapStatusParam, "true"));
+			delete options.mapMethods;
+			delete options.mapMethodsKey;
+			if (options.contentType === "urlencoded" && !Types.is_empty(options.data)) {
+				options.data = Objs.filter(options.data, function (value) {
+					return value !== null && value !== undefined;
+				});
+			}
+			options.isCorsRequest = Uri.isCrossDomainUri(document.location.href, options.uri);
+			return options;
+		},
+		
+		/**
+		 * Execute an Ajax command.
+		 * 
+		 * @param {object} options Options for the Ajax command
+		 * @param {function} progress Optional progress function
+		 * @param {object} progressCtx Optional progress context
+		 * 
+		 * @return {object} Execution promise
+		 */
+		execute: function (options, progress, progressCtx) {
+			options = this.preprocess(options);
+			var current = null;		
+			this.__registry.forEach(function (candidate) {
+				if ((!current || current.priority < candidate.priority) && candidate.descriptor.supports.call(candidate.descriptor.context || candidate.descriptor, options))
+					current = candidate;
+			}, this);
+			if (!current)
+				return Promise.error(new NoCandidateAjaxException(options));
+			var helper = function (resilience) {
+				var promise = current.descriptor.execute.call(current.descriptor.context || current.descriptor, options, progress, progressCtx);
+				if (!resilience || resilience <= 1)
+					return promise;
+				var returnPromise = Promise.create();
+				promise.forwardSuccess(returnPromise).error(function () {
+					Async.eventually(function () {
+						helper(resilience - 1).forwardCallback(returnPromise);
+					}, options.resilience_delay);
+				});
+				return returnPromise;
+			};
+			return helper(options.resilience);
+		}
+
+	};
+});
+
+
+Scoped.define("module:Ajax.AjaxWrapper", [
+    "module:Class",
+    "module:Objs",
+    "module:Ajax.Support"
+], function (Class, Objs, Support, scoped) {
+	return Class.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * Ajax Wrapper Class
+		 * 
+		 * @class BetaJS.Ajax.AjaxWrapper
+		 */
+		return {
+		
+			/**
+			 * Creates an instance.
+			 * 
+			 * @param {object} options common options for ajax calls
+			 */
+			constructor: function (options) {
+				inherited.constructor.call(this);
+				this._options = options;
+			},
+			
+			/**
+			 * Execute an ajax call.
+			 * 
+			 * @param {object} options options for ajax call
+			 * @param {function} progress Optional progress function
+			 * @param {object} progressCtx Optional progress context
+			 * @return {object} promise for the ajax call
+			 */
+			execute: function (options, progress, progressCtx) {
+				return Support.execute(Objs.extend(Objs.clone(this._options, 1), options), progress, progressCtx);
+			}
+			
+		};
+	});
+});
+
+
+Scoped.define("module:Ajax.AjaxException", [
+    "module:Exceptions.Exception"
+], function (Exception, scoped) {
+	return Exception.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * Abstract Ajax Exception Class
+		 * 
+		 * @class BetaJS.Ajax.AjaxException
+		 */
+		return {
+			
+			/**
+			 * Returns the status code associated with the exception
+			 * 
+			 * @return {int} status code
+			 */
+			status_code: function () {
+				return 500;
+			}
+			
+		};
+	});
+});
+
+
+Scoped.define("module:Ajax.NoCandidateAjaxException", [
+	"module:Ajax.AjaxException"
+], function (Exception, scoped) {
+	return Exception.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * No Candidate Ajax Exception Class
+		 * 
+		 * @class BetaJS.Ajax.NoCandidateAjaxException
+		 */
+		return {
+			
+		};
+	});
+});
+
+
+Scoped.define("module:Ajax.ReturnDataParseException", [
+	"module:Ajax.AjaxException"
+], function (Exception, scoped) {
+   	return Exception.extend({scoped: scoped}, function (inherited) {
+   		
+   		/**
+   		 * Return Data Parse Exception Class
+   		 * 
+   		 * @class BetaJS.Ajax.ReturnDataParseException 
+   		 */
+   		return {
+   			
+   			/**
+   			 * Creates a new instance.
+   			 * 
+   			 * @param data return data
+   			 * @param {string} decodeType decode type for return data 
+   			 */
+   			constructor: function (data, decodeType) {
+   				inherited.constructor.call(this, "Could not decode data with type " + decodeType);
+   				this.__decodeType = decodeType;
+   				this.__data = data;
+   			}
+   			
+   		};
+   	});
+});
+
+
+Scoped.define("module:Ajax.RequestException", [
+	"module:Ajax.AjaxException",
+	"module:Objs"
+], function (Exception, Objs, scoped) {
+   	return Exception.extend({scoped: scoped}, function (inherited) {
+		   		
+		/**
+		 * Request Exception Class
+		 * 
+		 * @class BetaJS.Ajax.RequestException
+		 */
+		return {
+		
+			/**
+			 * Instantiates a Ajax Request Exception
+			 * 
+			 * @param status_code Status Code
+			 * @param {string} status_text Status Text
+			 * @param data Custom Exception Data
+			 */
+			constructor: function (status_code, status_text, data) {
+				inherited.constructor.call(this, status_code + ": " + status_text);
+				this.__status_code = status_code;
+				this.__status_text = status_text;
+				this.__data = data;
+			},
+		
+			/**
+			 * Returns the status code associated with the exception
+			 * 
+			 * @return {int} status code
+			 */
+			status_code: function () {
+				return this.__status_code;
+			},
+		
+			/**
+			 * Returns the status text associated with the exception
+			 * 
+			 * @return {string} status text
+			 */
+			status_text: function () {
+				return this.__status_text;
+			},
+		
+			/**
+			 * Returns the custom data associated with the exception 
+			 * 
+			 * @return custom data
+			 */
+			data: function () {
+				return this.__data;
+			},
+		
+			/**
+			 * Returns a JSON representation of the exception
+			 * 
+			 * @return {object} Exception JSON representation
+			 */
+			json: function () {
+				return Objs.extend({
+					data: this.data(),
+					status_code: this.status_code(),
+					status_text: this.status_text()
+				}, inherited.json.call(this));
+			}
+			
+		};
+   	});
+});
+
 Scoped.define("module:Class", ["module:Types", "module:Objs", "module:Functions", "module:Ids"], function (Types, Objs, Functions, Ids) {
 	var Class = function () {};
 
@@ -1082,10 +1781,24 @@ Scoped.define("module:Class", ["module:Types", "module:Objs", "module:Functions"
 
 });
 	
-Scoped.define("module:Classes.InvokerMixin", ["module:Objs", "module:Types", "module:Functions"], function (Objs, Types, Functions) {
+Scoped.define("module:Classes.InvokerMixin", [
+    "module:Objs", "module:Types", "module:Functions"
+], function (Objs, Types, Functions) {
+	
+	/**
+	 * Invoker Mixin, delegating method calls to an invocation function.
+	 * 
+	 * @mixin BetaJS.Classes.InvokerMixin
+	 */
 	return {
 		
-		invoke_delegate : function(invoker, members) {
+		/**
+		 * Delegate member functio names to an invoker function.
+		 * 
+		 * @param {function} invoker invoker delegation function
+		 * @param {array} members array of member function names
+		 */
+		invoke_delegate : function (invoker, members) {
 			if (!Types.is_array(members))
 				members = [members];
 			invoker = this[invoker];
@@ -1106,9 +1819,25 @@ Scoped.define("module:Classes.InvokerMixin", ["module:Objs", "module:Types", "mo
 
 
 
-Scoped.define("module:Classes.HelperClassMixin", ["module:Objs", "module:Types", "module:Functions", "module:Promise"], function (Objs, Types, Functions, Promise) {
+Scoped.define("module:Classes.HelperClassMixin", [
+    "module:Objs", "module:Types", "module:Functions", "module:Promise"
+], function (Objs, Types, Functions, Promise) {
+	
+	/**
+	 * HelperClass Mixin
+	 * 
+	 * @mixin BetaJS.Classes.HelperClassMixin
+	 */
 	return {
 	
+		/**
+		 * Add Helper Class
+		 * 
+		 * @param {class} helper_class helper class to add
+		 * @param {objects} options optional options
+		 * 
+		 * @return {object} added helper instance
+		 */
 		addHelper: function (helper_class, options) {
 			var helper = new helper_class(this, options);
 			this.__helpers = this.__helpers || [];
@@ -1116,6 +1845,12 @@ Scoped.define("module:Classes.HelperClassMixin", ["module:Objs", "module:Types",
 			return helper;
 		},
 		
+		/**
+		 * Notify all helpers of a method call.
+		 * 
+		 * @param {objects} options method call options
+		 * @return accumlated return value
+		 */
 		_helper: function (options) {
 			this.__helpers = this.__helpers || [];
 			if (Types.is_string(options)) {
@@ -1148,15 +1883,35 @@ Scoped.define("module:Classes.HelperClassMixin", ["module:Objs", "module:Types",
 
 
 
-Scoped.define("module:Classes.PathResolver", ["module:Class", "module:Objs"], function (Class, Objs, scoped) {
+Scoped.define("module:Classes.PathResolver", [
+    "module:Class", "module:Objs"
+], function (Class, Objs, scoped) {
 	return Class.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * Path Resolver Class
+		 * 
+		 * @class BetaJS.Classes.PathResolver
+		 */
 		return {
 
+			/**
+			 * Creates a new instance.
+			 * 
+			 * @param {object} bindings path resolution bindings
+			 */
 			constructor: function (bindings) {
 				inherited.constructor.call(this);
 				this._bindings = bindings || {};
 			},
 			
+			/**
+			 * Extend instance by more bindings.
+			 * 
+			 * @param {object} bindings bindings to extend
+			 * @param {string} namespace optional namespace
+			 * 
+			 */
 			extend: function (bindings, namespace) {
 				if (namespace) {
 					for (var key in bindings) {
@@ -1174,6 +1929,13 @@ Scoped.define("module:Classes.PathResolver", ["module:Class", "module:Objs"], fu
 					this._bindings = Objs.extend(this._bindings, bindings);
 			},
 			
+			/**
+			 * Map an array of path expressions to their resolutions.
+			 * 
+			 * @param {array} arr list of path expression
+			 * 
+			 * @return {array} resolved expressions
+			 */
 			map: function (arr) {
 				var result = [];
 				for (var i = 0; i < arr.length; ++i) {
@@ -1183,6 +1945,13 @@ Scoped.define("module:Classes.PathResolver", ["module:Class", "module:Objs"], fu
 				return result;
 			},
 			
+			/**
+			 * Resolve a path rexpression.
+			 * 
+			 * @param {string} path path expression to resolve
+			 * 
+			 * @return {string} resolved path expression
+			 */
 			resolve : function(path) {
 				var regExp = /\{([^}]+)\}/;
 				while (true) {
@@ -1194,6 +1963,13 @@ Scoped.define("module:Classes.PathResolver", ["module:Class", "module:Objs"], fu
 				return this.simplify(path);
 			},
 			
+			/**
+			 * Simplify a path expression.
+			 * 
+			 * @param {string} path path expression to simplify
+			 * 
+			 * @return {string} simplified path expression
+			 */
 			simplify: function (path) {
 				return path.replace(/[^\/]+\/\.\.\//, "").replace(/\/[^\/]+\/\.\./, "");
 			}
@@ -1203,10 +1979,24 @@ Scoped.define("module:Classes.PathResolver", ["module:Class", "module:Objs"], fu
 });
 
 
-Scoped.define("module:Classes.MultiDelegatable", ["module:Class", "module:Objs"], function (Class, Objs, scoped) {
+Scoped.define("module:Classes.MultiDelegatable", [
+    "module:Class", "module:Objs"
+], function (Class, Objs, scoped) {	
 	return Class.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * Multi Delegatable Class
+		 * 
+		 * @class BetaJS.Classes.MultiDelegatable
+		 */
 		return {
 
+			/**
+			 * Creates a new instance.
+			 * 
+			 * @param {array} objects list of objects
+			 * @param {array} methods list of methods
+			 */
 			constructor: function (objects, methods) {
 				inherited.constructor.call(this);
 				Objs.iter(methods, function (method) {
@@ -1227,10 +2017,23 @@ Scoped.define("module:Classes.MultiDelegatable", ["module:Class", "module:Objs"]
 
 
 Scoped.define("module:Classes.ObjectIdScopeMixin", function () {
+	
+	/**
+	 * Object Id Scope Mixin
+	 * 
+	 * @mixin BetaJS.Classes.ObjectIdScopeMixin
+	 */
 	return {
 
 		__objects: {},
 
+		/**
+		 * Return object for specific id
+		 * 
+		 * @param {string} id id of object
+		 * 
+		 * @return {object} object in question
+		 */
 	    get: function (id) {
 	        return this.__objects[id];
 	    }
@@ -1239,18 +2042,42 @@ Scoped.define("module:Classes.ObjectIdScopeMixin", function () {
 });	
 	
 		
-Scoped.define("module:Classes.ObjectIdScope", ["module:Class", "module:Classes.ObjectIdScopeMixin"], function (Class, Mixin, scoped) {
-	return Class.extend({scoped: scoped}, Mixin, {
-		singleton: function () {
-			if (!this.__singleton)
-				this.__singleton = new this();
-			return this.__singleton;
-		}
+Scoped.define("module:Classes.ObjectIdScope", [
+    "module:Class", "module:Classes.ObjectIdScopeMixin"
+], function (Class, Mixin, scoped) {
+	return Class.extend({scoped: scoped}, Mixin, function (inherited) {
+		
+		/**
+		 * Objecct Id Scope Class
+		 * 
+		 * @class BetaJS.Classes.ObjectIdScope
+		 */
+		return {
+
+			/**
+			 * Create or return singleton instance of this class.
+			 * 
+			 * @return {object} singleton instance
+			 */
+			singleton: function () {
+				if (!this.__singleton)
+					this.__singleton = new this();
+				return this.__singleton;
+			}
+		};
 	});
 });
 
 
-Scoped.define("module:Classes.ObjectIdMixin", ["module:Classes.ObjectIdScope", "module:Objs", "module:Ids"], function (ObjectIdScope, Objs, Ids) {
+Scoped.define("module:Classes.ObjectIdMixin", [
+    "module:Classes.ObjectIdScope", "module:Objs", "module:Ids"
+], function (ObjectIdScope, Objs, Ids) {
+	
+	/**
+	 * Object Id Mixin
+	 * 
+	 * @mixin BetaJS.Classes.ObjectIdMixin
+	 */
 	return {
 	
 	    _notifications: {
@@ -1276,10 +2103,6 @@ Scoped.define("module:Classes.ObjectIdMixin", ["module:Classes.ObjectIdScope", "
 	
 	};
 });
-
-
-
-
 
 Scoped.define("module:Comparators", ["module:Types", "module:Properties.Properties"], function (Types, Properties) {
 
@@ -1590,6 +2413,8 @@ Scoped.define("module:Events.EventsMixin", [
 					for (var i = 0; i < argss.length; ++i)
 						this.__call_event_object(event_object, argss[i]);
 				}
+				if (options && options.initcall)
+					this.__call_event_object(event_object, []);
 			}
 			return this;
 		},
@@ -2082,6 +2907,7 @@ Scoped.define("module:JavaScript", ["module:Objs"], function (Objs) {
 		STRING_SINGLE_QUOTATION_REGEX: /'[^']*'/g,
 		STRING_DOUBLE_QUOTATION_REGEX: /"[^"]*"/g,
 		
+		PROPER_IDENTIFIER_REGEX: /^[a-zA-Z_][a-zA-Z_0-9]*$/,
 		IDENTIFIER_REGEX: /[a-zA-Z_][a-zA-Z_0-9]*/g,
 		IDENTIFIER_SCOPE_REGEX: /[a-zA-Z_][a-zA-Z_0-9\.]*/g,
 	
@@ -2110,6 +2936,16 @@ Scoped.define("module:JavaScript", ["module:Objs"], function (Objs) {
 		},
 		
 		/**
+		 * Is string a valid proper JS identifier?
+		 * 
+		 * @param {string} key string in question
+		 * @return {boolean} true if identifier
+		 */
+		isProperIdentifier: function (key) {
+			return this.isIdentifier(key) && this.PROPER_IDENTIFIER_REGEX.test(key);
+		},
+
+		/**
 		 * Remove string definitions from JS code.
 		 * 
 		 * @param {string} code input code
@@ -2135,52 +2971,114 @@ Scoped.define("module:JavaScript", ["module:Objs"], function (Objs) {
 	};
 
 });
-Scoped.define("module:KeyValue.KeyValueStore", ["module:Class", "module:Events.EventsMixin"], function (Class, EventsMixin, scoped) {
-	return Class.extend({scoped: scoped}, [EventsMixin, {
+Scoped.define("module:KeyValue.KeyValueStore", [
+    "module:Class",
+    "module:Events.EventsMixin"
+], function (Class, EventsMixin, scoped) {
+	return Class.extend({scoped: scoped}, [EventsMixin, function (inherited) {
+		
+		/**
+		 * Abstract Key Value Store
+		 * 
+		 * @class BetaJS.KeyValue.KeyValueStore
+		 */
+		return {
+			
+			/**
+			 * Determines whether a key exists in the store.
+			 * 
+			 * @param {string} key key to check
+			 * 
+			 * @return {boolean} true if key exists
+			 */
+			mem: function (key) {
+				return this._mem(key);
+			},
+			
+			/**
+			 * Returns the value for a key in the store.
+			 * 
+			 * @param {string} key key to get the value for
+			 * 
+			 * @return value of key
+			 */
+			get: function (key) {
+				return this._get(key);
+			},
+			
+			/**
+			 * Sets the value of a key in the store.
+			 * 
+			 * @param {string} key key to set the value for
+			 * @param value new value for key
+			 */
+			set: function (key, value) {
+				this._set(key, value);
+				this.trigger("change:" + key, value);
+			},
+			
+			/**
+			 * Removes a key from the store
+			 * 
+			 * @param {string} key key to be removed
+			 */
+			remove: function (key) {
+				this._remove(key);
+			}
 
-		mem: function (key) {
-			return this._mem(key);
-		},
-		
-		get: function (key) {
-			return this._get(key);
-		},
-		
-		set: function (key, value) {
-			this._set(key, value);
-			this.trigger("change:" + key, value);
-		},
-		
-		remove: function (key) {
-			this._remove(key);
-		}
-	
+		};
 	}]);
 });
 
 
-Scoped.define("module:KeyValue.PrefixKeyValueStore", ["module:KeyValue.KeyValueStore"], function (KeyValueStore, scoped) {
+Scoped.define("module:KeyValue.PrefixKeyValueStore", [
+    "module:KeyValue.KeyValueStore"
+], function (KeyValueStore, scoped) {
 	return KeyValueStore.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * A delegated Key-Value-Store by automatically prefixing keys.
+		 * 
+		 * @class BetaJS.KeyValue.PrefixKeyValueStore
+		 */
 		return {
 
+			/**
+			 * Creates a new instance.
+			 * 
+			 * @param {object} kv Underlying Key-Value store
+			 * @param {string} prefix prefix string to be used for all keys
+			 */
 			constructor: function (kv, prefix) {
 				inherited.constructor.call(this);
 				this.__kv = kv;
 				this.__prefix = prefix;
 			},
 			
+			/**
+			 * @override
+			 */
 			_mem: function (key) {
 				return this.__kv.mem(this.__prefix + key);
 			},
 			
+			/**
+			 * @override
+			 */
 			_get: function (key) {
 				return this.__kv.get(this.__prefix + key);
 			},
 			
+			/**
+			 * @override
+			 */
 			_set: function (key, value) {
 				this.__kv.set(this.__prefix + key, value);
 			},
 			
+			/**
+			 * @override
+			 */
 			_remove: function (key) {
 				this.__kv.remove(this.__prefix + key);
 			}
@@ -2190,27 +3088,54 @@ Scoped.define("module:KeyValue.PrefixKeyValueStore", ["module:KeyValue.KeyValueS
 });
 
 
-Scoped.define("module:KeyValue.MemoryKeyValueStore", ["module:KeyValue.KeyValueStore", "module:Objs"], function (KeyValueStore, Objs, scoped) {
+Scoped.define("module:KeyValue.MemoryKeyValueStore", [
+	"module:KeyValue.KeyValueStore",
+	"module:Objs"
+], function (KeyValueStore, Objs, scoped) {
 	return KeyValueStore.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * A Memory-based Key-Value-Store.
+		 * 
+		 * @class BetaJS.KeyValue.MemoryKeyValueStore
+		 */
 		return {
 	
+			/**
+			 * Creates a new Memory KV-Store
+			 * 
+			 * @param {object} data Initial data object
+			 * @param {boolean} clone Should the initial data object be cloned or used directly (default: false)
+			 */
 			constructor: function (data, clone) {
 				inherited.constructor.call(this);
 				this.__data = Objs.clone(data, clone ? 1 : 0);
 			},
 			
+			/**
+			 * @override
+			 */
 			_mem: function (key) {
 				return key in this.__data;
 			},
 			
+			/**
+			 * @override
+			 */
 			_get: function (key) {
 				return this.__data[key];
 			},
 			
+			/**
+			 * @override
+			 */
 			_set: function (key, value) {
 				this.__data[key] = value;
 			},
 			
+			/**
+			 * @override
+			 */
 			_remove: function (key) {
 				delete this.__data[key];
 			}
@@ -2220,28 +3145,54 @@ Scoped.define("module:KeyValue.MemoryKeyValueStore", ["module:KeyValue.KeyValueS
 });
 
 
-Scoped.define("module:KeyValue.DefaultKeyValueStore", ["module:KeyValue.KeyValueStore"], function (KeyValueStore, scoped) {
+Scoped.define("module:KeyValue.DefaultKeyValueStore", [
+    "module:KeyValue.KeyValueStore"
+], function (KeyValueStore, scoped) {
 	return KeyValueStore.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * A delegated KV-Store falling back to a default KV-Store if a key is not defined.
+		 * 
+		 * @class BetaJS.KeyValue.DefaultKeyValueStore
+		 */
 		return {
 
+			/**
+			 * Creates a new instance.
+			 * 
+			 * @param {object} kv The main underlying key value store
+			 * @param {object} def The default key value store that we fallback to if a key is not defined in the main key value store
+			 */
 			constructor: function (kv, def) {
 				inherited.constructor.call(this);
 				this.__kv = kv;
 				this.__def = def;
 			},
 			
+			/**
+			 * @override
+			 */
 			_mem: function (key) {
 				return this.__kv.mem(key) || this.__def.mem(key);
 			},
 			
+			/**
+			 * @override
+			 */
 			_get: function (key) {
 				return this.__kv.mem(key) ? this.__kv.get(key) : this.__def.get(key);
 			},
 			
+			/**
+			 * @override
+			 */
 			_set: function (key, value) {
 				this.__kv.set(key, value);
 			},
 			
+			/**
+			 * @override
+			 */
 			_remove: function (key) {
 				this.__kv.remove(key);
 			}
@@ -2251,19 +3202,58 @@ Scoped.define("module:KeyValue.DefaultKeyValueStore", ["module:KeyValue.KeyValue
 });
 
 Scoped.define("module:Lists.AbstractList", [
-                                            "module:Class",
-                                            "module:Objs",
-                                            "module:Types",
-                                            "module:Iterators.ArrayIterator"
-                                            ], function (Class, Objs, Types, ArrayIterator, scoped) {
+	"module:Class",
+	"module:Objs",
+	"module:Types",
+	"module:Iterators.ArrayIterator"
+], function (Class, Objs, Types, ArrayIterator, scoped) {
 	return Class.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * Abstract List Class
+		 * 
+		 * @class BetaJS.Lists.AbstractList
+		 */
 		return {
 
+			/**
+			 * Add an object to the list.
+			 * 
+			 * @param {object} object Object to be added
+			 * @return {string} ident of object
+			 */
 			_add: function (object) {},
+			
+			/**
+			 * Remove an object from the list.
+			 * 
+			 * @param {string} ident Ident of object to be removed.
+			 * @return {object} removed object
+			 */
 			_remove: function (ident) {},
+			
+			/**
+			 * Get an object by ident.
+			 * 
+			 * @param {string} ident Ident of object
+			 * @return {object} object matching the ident
+			 */
 			_get: function (ident) {},
+			
+			/**
+			 * Iterate over all objects in the list.
+			 * 
+			 * @param {function} callback callback function for iteration
+			 * @param {object} context optional context for callback function
+			 */
 			_iterate: function (callback, context) {},
 
+			/**
+			 * Given an object, return the ident of the object.
+			 * 
+			 * @param {object} object object in question
+			 * @return {string} ident of object
+			 */
 			get_ident: function (object) {
 				var ident = null;
 				this._iterate(function (obj, id) {
@@ -2276,12 +3266,29 @@ Scoped.define("module:Lists.AbstractList", [
 				return ident;
 			},
 
+			/**
+			 * Determines whether an object exists in the list.
+			 * 
+			 * @param {object} object object in question
+			 * @return {boolean} true if object is contained in list
+			 */
 			exists: function (object) {
 				return object && this.get_ident(object) !== null;
 			},
 
+			/**
+			 * Notification when an object obtains a new ident.
+			 * 
+			 * @param {object} object object in question
+			 * @param {string} new_ident new identifier of object
+			 */
 			_ident_changed: function (object, new_ident) {},
 
+			/**
+			 * Creates a new instance.
+			 * 
+			 * @param {array} objects optional array of initial objects to be added to the list
+			 */
 			constructor: function (objects) {
 				inherited.constructor.call(this);
 				this.__count = 0;
@@ -2292,6 +3299,12 @@ Scoped.define("module:Lists.AbstractList", [
 				}
 			},
 
+			/**
+			 * Add an object to the list.
+			 * 
+			 * @param {object} object Object to be added
+			 * @return {string} ident of object
+			 */
 			add: function (object) {
 				var ident = this._add(object);
 				if (Types.is_defined(ident))
@@ -2299,10 +3312,19 @@ Scoped.define("module:Lists.AbstractList", [
 				return ident;
 			},
 
+			/**
+			 * Returns the number of objects contained in the list.
+			 * 
+			 * @return {int} number of objects
+			 */
 			count: function () {
 				return this.__count;
 			},
 
+			/**
+			 * Removes all objects from the list.
+			 * 
+			 */
 			clear: function () {
 				this._iterate(function (object, ident) {
 					this.remove_by_ident(ident);
@@ -2310,6 +3332,12 @@ Scoped.define("module:Lists.AbstractList", [
 				}, this);
 			},
 
+			/**
+			 * Remove an object from the list by identifier.
+			 * 
+			 * @param {string} ident Ident of object to be removed.
+			 * @return {object} removed object
+			 */
 			remove_by_ident: function (ident) {
 				var ret = this._remove(ident);
 				if (Types.is_defined(ret))
@@ -2317,10 +3345,21 @@ Scoped.define("module:Lists.AbstractList", [
 				return ret;
 			},
 
+			/**
+			 * Remove an object from the list.
+			 * 
+			 * @param {object} object object in question
+			 * @return {object} removed object
+			 */
 			remove: function (object) {
 				return this.remove_by_ident(this.get_ident(object));
 			},
 
+			/**
+			 * Remove objects from the list that match a filter function.
+			 * 
+			 * @param {function} filter filter function for object
+			 */
 			remove_by_filter: function (filter) {
 				this._iterate(function (object, ident) {
 					if (filter(object))
@@ -2329,17 +3368,34 @@ Scoped.define("module:Lists.AbstractList", [
 				}, this);
 			},
 
+			/**
+			 * Get an object by ident.
+			 * 
+			 * @param {string} ident Ident of object
+			 * @return {object} object matching the ident
+			 */
 			get: function (ident) {
 				return this._get(ident);
 			},
 
+			/**
+			 * Iterate over all objects in the list.
+			 * 
+			 * @param {function} callback callback function for iteration
+			 * @param {object} context optional context for callback function
+			 */
 			iterate: function (cb, context) {
 				this._iterate(function (object, ident) {
-					var ret = cb.apply(this, [object, ident]);
+					var ret = cb.call(this, object, ident);
 					return Types.is_defined(ret) ? ret : true;
 				}, context);
 			},
 
+			/**
+			 * Creates an iterator for the list.
+			 * 
+			 * @return {object} iterator for list
+			 */
 			iterator: function () {
 				return ArrayIterator.byIterate(this.iterate, this);
 			}
@@ -2349,65 +3405,105 @@ Scoped.define("module:Lists.AbstractList", [
 });
 
 
-Scoped.define("module:Lists.LinkedList", ["module:Lists.AbstractList"], function (AbstractList, scoped) {
-	return AbstractList.extend({scoped: scoped},  {
-
-		__first: null,
-		__last: null,
-
-		_add: function (obj) {
-			this.__last = {
-					obj: obj,
-					prev: this.__last,
-					next: null
-			};
-			if (this.__first)
-				this.__last.prev.next = this.__last;
-			else
-				this.__first = this.__last;
-			return this.__last;
-		},
-
-		_remove: function (container) {
-			if (container.next)
-				container.next.prev = container.prev;
-			else
-				this.__last = container.prev;
-			if (container.prev)
-				container.prev.next = container.next;
-			else
-				this.__first = container.next;
-			return container.obj;
-		},
-
-		_get: function (container) {
-			return container.obj;
-		},
-
-		_iterate: function (cb, context) {
-			var current = this.__first;
-			while (current) {
-				var prev = current;
-				current = current.next;
-				if (!cb.apply(context || this, [prev.obj, prev]))
-					return;
+Scoped.define("module:Lists.LinkedList", [
+    "module:Lists.AbstractList"
+], function (AbstractList, scoped) {
+	return AbstractList.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * Linked List Implementation of List
+		 * 
+		 * @class BetaJS.Lists.LinkedList
+		 */
+		return {
+			
+			__first: null,
+			__last: null,
+	
+			/**
+			 * @override
+			 */
+			_add: function (obj) {
+				this.__last = {
+						obj: obj,
+						prev: this.__last,
+						next: null
+				};
+				if (this.__first)
+					this.__last.prev.next = this.__last;
+				else
+					this.__first = this.__last;
+				return this.__last;
+			},
+	
+			/**
+			 * @override
+			 */
+			_remove: function (container) {
+				if (container.next)
+					container.next.prev = container.prev;
+				else
+					this.__last = container.prev;
+				if (container.prev)
+					container.prev.next = container.next;
+				else
+					this.__first = container.next;
+				return container.obj;
+			},
+	
+			/**
+			 * @override
+			 */
+			_get: function (container) {
+				return container.obj;
+			},
+	
+			/**
+			 * @override
+			 */
+			_iterate: function (cb, context) {
+				var current = this.__first;
+				while (current) {
+					var prev = current;
+					current = current.next;
+					if (!cb.apply(context || this, [prev.obj, prev]))
+						return;
+				}
 			}
-		}
-
+			
+		};
 	});
 });
 
 
-Scoped.define("module:Lists.ObjectIdList", ["module:Lists.AbstractList", "module:Ids"], function (AbstractList, Ids, scoped) {
+Scoped.define("module:Lists.ObjectIdList", [
+    "module:Lists.AbstractList",
+    "module:Ids"
+], function (AbstractList, Ids, scoped) {
 	return AbstractList.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * Object Id List Class
+		 * 
+		 * @class BetaJS.Lists.ObjectIdList
+		 */
 		return {
 
+			/**
+			 * Creates a new instance.
+			 * 
+			 * @param {array} objects optional initial set of objects
+			 * @param {function} id_generator optional id generating function
+			 */
 			constructor: function (objects, id_generator) {
 				this.__map = {};
 				this.__id_generator = id_generator;
 				inherited.constructor.call(this, objects);
 			},
 
+			/**
+			 * @override
+			 */
 			_add: function (object) {
 				var id = object.__cid;
 				if (!id) {
@@ -2421,21 +3517,33 @@ Scoped.define("module:Lists.ObjectIdList", ["module:Lists.AbstractList", "module
 				return id;
 			},
 
+			/**
+			 * @override
+			 */
 			_remove: function (ident) {
 				var obj = this.__map[ident];
 				delete this.__map[ident];
 				return obj;
 			},
 
+			/**
+			 * @override
+			 */
 			_get: function (ident) {
 				return this.__map[ident];
 			},
 
+			/**
+			 * @override
+			 */
 			_iterate: function (callback, context) {
 				for (var key in this.__map)
 					callback.apply(context || this, [this.__map[key], key]);
 			},
 
+			/**
+			 * @override
+			 */
 			get_ident: function (object) {
 				var ident = Ids.objectId(object);
 				return this.__map[ident] ? ident : null;
@@ -2449,8 +3557,20 @@ Scoped.define("module:Lists.ObjectIdList", ["module:Lists.AbstractList", "module
 
 Scoped.define("module:Lists.ArrayList", ["module:Lists.AbstractList", "module:Ids", "module:Objs"], function (AbstractList, Ids, Objs, scoped) {
 	return AbstractList.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * Array List Class
+		 * 
+		 * @class BetaJS.Lists.ArrayList
+		 */
 		return {
 
+			/**
+			 * Creates a new instance.
+			 * 
+			 * @param {array} objects optional initial set of objects
+			 * @param {options} options optional options parameter
+			 */
 			constructor: function (objects, options) {
 				this.__idToIndex = {};
 				this.__items = [];
@@ -2462,16 +3582,31 @@ Scoped.define("module:Lists.ArrayList", ["module:Lists.AbstractList", "module:Id
 				inherited.constructor.call(this, objects);
 			},
 
+			/**
+			 * Set current compare function.
+			 * 
+			 * @param {function} compare compare function
+			 */
 			set_compare: function (compare) {
 				this._compare = compare;
 				if (compare)
 					this.sort();
 			},
 
+			/**
+			 * Get current compare function.
+			 * 
+			 * @return {function} current compare function
+			 */
 			get_compare: function () {
 				return this._compare;
 			},
 
+			/**
+			 * Sort list using a compare function.
+			 * 
+			 * @param {function} compare compare function
+			 */
 			sort: function (compare) {
 				compare = compare || this._compare;
 				if (!compare)
@@ -2484,6 +3619,13 @@ Scoped.define("module:Lists.ArrayList", ["module:Lists.AbstractList", "module:Id
 
 			_sorted: function () {},
 
+			/**
+			 * Reindex the index of an item.
+			 * 
+			 * @param {int} index index of the item
+			 * 
+			 * @return {int} new index of the item
+			 */
 			re_index: function (index) {
 				if (!this._compare)
 					return index;
@@ -2517,6 +3659,9 @@ Scoped.define("module:Lists.ArrayList", ["module:Lists.AbstractList", "module:Id
 				return this._get_ident ? this._get_ident(object) : Ids.objectId(object);
 			},
 
+			/**
+			 * @override
+			 */
 			_add: function (object) {
 				var last = this.__items.length;
 				this.__items.push(object);
@@ -2525,6 +3670,9 @@ Scoped.define("module:Lists.ArrayList", ["module:Lists.AbstractList", "module:Id
 				return i;
 			},
 
+			/**
+			 * @override
+			 */
 			_remove: function (ident) {
 				var obj = this.__items[ident];
 				for (var i = ident + 1; i < this.__items.length; ++i) {
@@ -2536,10 +3684,16 @@ Scoped.define("module:Lists.ArrayList", ["module:Lists.AbstractList", "module:Id
 				return obj;
 			},
 
+			/**
+			 * @override
+			 */
 			_get: function (ident) {
 				return this.__items[ident];
 			},
 
+			/**
+			 * @override
+			 */
 			_iterate: function (callback, context) {
 				var items = Objs.clone(this.__items, 1);
 				for (var i = 0; i < items.length; ++i)
@@ -2551,11 +3705,21 @@ Scoped.define("module:Lists.ArrayList", ["module:Lists.AbstractList", "module:Id
 				this._ident_changed(object, index);
 			},
 
+			/**
+			 * @override
+			 */
 			get_ident: function (object) {
 				var id = this.__objectId(object);
 				return id in this.__idToIndex ? this.__idToIndex[id] : null;
 			},
 
+			/**
+			 * Returns the identifier given an id.
+			 * 
+			 * @param {string} id id
+			 * 
+			 * @return {string} identifier
+			 */
 			ident_by_id: function (id) {
 				return this.__idToIndex[id];
 			}
@@ -3043,6 +4207,166 @@ Scoped.define("module:Objs", [
 			return false;
 		},
 
+		/**
+		 * Maps an array of object, mapping values using a function.
+		 * 
+		 * @param obj object or array
+		 * @param {function} f function for mapping values
+		 * @param {object} context function context
+		 * 
+		 * @return object or array with mapped values
+		 * 
+		 */
+		map: function (obj, f, context) {
+			var result = null;
+			if (Types.is_array(obj)) {
+				result = [];
+				for (var i = 0; i < obj.length; ++i)
+					result.push(context ? f.apply(context, [obj[i], i]) : f(obj[i], i));
+				return result;
+			} else {
+				result = {};
+				for (var key in obj)
+					result[key] = context ? f.apply(context, [obj[key], key]) : f(obj[key], key);
+				return result;
+			}
+		},
+
+		/**
+		 * Maps the keys of an object using a function.
+		 * 
+		 * @param {object} obj object
+		 * @param {function} f function for mapping keys
+		 * @param {object} context function context
+		 * 
+		 * @return {object} object with mapped keys
+		 */
+		keyMap: function (obj, f, context) {
+			result = {};
+			for (var key in obj)
+				result[f.call(context || this, obj[key], key)] = obj[key];
+			return result;
+		},
+
+		/**
+		 * Returns all values of an object as an array.
+		 * 
+		 * @param {object} obj object
+		 * 
+		 * @return {array} values of object as array
+		 */
+		values: function (obj) {
+			var result = [];
+			for (var key in obj)
+				result.push(obj[key]);
+			return result;
+		},
+
+		/**
+		 * Filters all values of an object or array.
+		 * 
+		 * @param obj object or array
+		 * @param {function} f filter function
+		 * @param {object} context filter function context
+		 * 
+		 * @return object or array with filtered items
+		 */
+		filter: function (obj, f, context) {
+			f = f || function (x) { return !!x; };
+			if (Types.is_array(obj))
+				return obj.filter(f, context);
+			var ret = {};
+			for (var key in obj) {
+				if (context ? f.apply(context, [obj[key], key]) : f(obj[key], key))
+					ret[key] = obj[key];
+			}
+			return ret;
+		},
+
+		/**
+		 * Tests two objects for deep equality up to a certain depth.
+		 * 
+		 * @param {object} obj1 first object
+		 * @param {object} obj2 second object
+		 * @param {int} depth depth until deep comparison should be done
+		 * 
+		 * @return {boolean} true if both objects are equal 
+		 */
+		equals: function (obj1, obj2, depth) {
+			var key = null;
+			if (depth && depth > 0) {
+				for (key in obj1) {
+					if (!(key in obj2) || !this.equals(obj1[key], obj2[key], depth-1))
+						return false;
+				}
+				for (key in obj2) {
+					if (!(key in obj1))
+						return false;
+				}
+				return true;
+			} else
+				return obj1 == obj2;
+		},
+
+		/**
+		 * Converts an array into object using the array values as keys.
+		 * 
+		 * @param {array} arr array to be converted
+		 * @param f a function mapping the value of an array to a value of the object, or a constant value, or undefined (then true is used)
+		 * @param {object} context optional function context
+		 * 
+		 * @return {object} converted object
+		 */
+		objectify: function (arr, f, context) {
+			var result = {};
+			var is_function = Types.is_function(f);
+			if (Types.is_undefined(f))
+				f = true;
+			for (var i = 0; i < arr.length; ++i)
+				result[arr[i]] = is_function ? f.apply(context || this, [arr[i], i]) : f;
+				return result;
+		},
+
+		/**
+		 * Creates an object by pairing up the arguments to key value pairs.
+		 * 
+		 * @return {object} created object
+		 */
+		objectBy: function () {
+			var obj = {};
+			var count = arguments.length / 2;
+			for (var i = 0; i < count; ++i)
+				obj[arguments[2 * i]] = arguments[2 * i + 1];
+			return obj;
+		},
+
+		/**
+		 * Extracts all key-value pairs from an object instance not matching default key-value pairs in another instance.
+		 * 
+		 * @param {object} ordinary object with default key-value pairs
+		 * @param {object} concrete object with a concrete list of key-value pairs
+		 * @param {boolean} keys if true, iterating over the ordinary keys, otherwise iterating over the conrete keys (default)
+		 * 
+		 * @return {object} specialized key-value pairs
+		 */
+		specialize: function (ordinary, concrete, keys) {
+			var result = {};
+			var iterateOver = keys ? ordinary : concrete;
+			for (var key in iterateOver)
+				if (!(key in ordinary) || ordinary[key] != concrete[key])
+					result[key] = concrete[key];
+			return result;
+		},
+		
+		/**
+		 * Merges to objects.
+		 * 
+		 * @param {object} secondary Secondary object
+		 * @param {object} primary Primary object
+		 * @param {object} options Key-based options for merging
+		 * 
+		 * @return {object} Merged object
+		 */
 		merge: function (secondary, primary, options) {
 			secondary = secondary || {};
 			primary = primary || {};
@@ -3066,6 +4390,14 @@ Scoped.define("module:Objs", [
 			return result;
 		},
 
+		/**
+		 * Recursively merges one object into another without modifying the source objects.
+		 * 
+		 * @param {object} secondary Object to be merged into.
+		 * @param {object} primary Object to be merged in
+		 * 
+		 * @return {object} Recurisvely merged object
+		 */
 		tree_merge: function (secondary, primary) {
 			secondary = secondary || {};
 			primary = primary || {};
@@ -3079,88 +4411,31 @@ Scoped.define("module:Objs", [
 			}
 			return result;
 		},
-
-		map: function (obj, f, context) {
-			var result = null;
-			if (Types.is_array(obj)) {
-				result = [];
-				for (var i = 0; i < obj.length; ++i)
-					result.push(context ? f.apply(context, [obj[i], i]) : f(obj[i], i));
-				return result;
-			} else {
-				result = {};
-				for (var key in obj)
-					result[key] = context ? f.apply(context, [obj[key], key]) : f(obj[key], key);
-				return result;
-			}
-		},
-
-		keyMap: function (obj, f, context) {
-			result = {};
-			for (var key in obj)
-				result[f.call(context || this, obj[key], key)] = obj[key];
-			return result;
-		},
-
-		values: function (obj) {
+		
+		/**
+		 * Serializes an object in such a way that all subscopes appear in a flat notation.
+		 * 
+		 * @param {object} obj source object
+		 * @param {string} head prefix header, usually empty
+		 * 
+		 * @return {array} serialized object
+		 */
+		serializeFlatJSON: function (obj, head) {
 			var result = [];
-			for (var key in obj)
-				result.push(obj[key]);
-			return result;
-		},
-
-		filter: function (obj, f, context) {
-			f = f || function (x) { return !!x; };
-			if (Types.is_array(obj))
-				return obj.filter(f, context);
-			var ret = {};
-			for (var key in obj) {
-				if (context ? f.apply(context, [obj[key], key]) : f(obj[key], key))
-					ret[key] = obj[key];
+			if (Types.is_array(obj) && obj) {
+				obj.forEach(function (value) {
+					result = result.concat(this.serializeFlatJSON(value, head + "[]"));
+				}, this);
+			} else if (Types.is_object(obj) && obj) {
+				this.iter(obj, function (value, key) {
+					result = result.concat(this.serializeFlatJSON(value, head ? head + "[" + key + "]" : key));
+				}, this);
+			} else {
+				result = [{
+					key: head,
+					value: obj
+				}];
 			}
-			return ret;
-		},
-
-		equals: function (obj1, obj2, depth) {
-			var key = null;
-			if (depth && depth > 0) {
-				for (key in obj1) {
-					if (!(key in obj2) || !this.equals(obj1[key], obj2[key], depth-1))
-						return false;
-				}
-				for (key in obj2) {
-					if (!(key in obj1))
-						return false;
-				}
-				return true;
-			} else
-				return obj1 == obj2;
-		},
-
-		objectify: function (arr, f, context) {
-			var result = {};
-			var is_function = Types.is_function(f);
-			if (Types.is_undefined(f))
-				f = true;
-			for (var i = 0; i < arr.length; ++i)
-				result[arr[i]] = is_function ? f.apply(context || this, [arr[i], i]) : f;
-				return result;
-		},
-
-		objectBy: function () {
-			var obj = {};
-			var count = arguments.length / 2;
-			for (var i = 0; i < count; ++i)
-				obj[arguments[2 * i]] = arguments[2 * i + 1];
-			return obj;
-		},
-
-		specialize: function (ordinary, concrete, keys) {
-			var result = {};
-			var iterateOver = keys ? ordinary : concrete;
-			for (var key in iterateOver)
-				if (!(key in ordinary) || ordinary[key] != concrete[key])
-					result[key] = concrete[key];
 			return result;
 		}
 
@@ -5189,7 +6464,7 @@ Scoped.define("module:TimeFormat", ["module:Time", "module:Strings", "module:Obj
 				return Time.timeModulo(t, "second", "floor");
 			},
 			"mmm": function (t) {
-				return (new Date(t)).toDateString().substring(4,7);
+				return ((new Date(t)).toUTCString().split(" "))[2];
 			},
 			"mm": function (t) {
 				return Strings.padZeros(Time.timeComponentGet(t, "month"), 2);
@@ -5202,16 +6477,16 @@ Scoped.define("module:TimeFormat", ["module:Time", "module:Strings", "module:Obj
 			},
 			"dddd": function (t) {
 				var map = {2: "s", 3: "nes", 4: "rs", 6: "ur"};
-				return (new Date(t)).toDateString().substring(0,3) + (map[Time.timeComponentGet(t, "weekday")] || "") + "day";
+				return (new Date(t)).toUTCString().substring(0,3) + (map[Time.timeComponentGet(t, "weekday")] || "") + "day";
 			},
 			"ddd": function (t) {
-				return (new Date(t)).toDateString().substring(0,3);
+				return (new Date(t)).toUTCString().substring(0,3);
 			},
 			"dd": function (t) {
 				return Strings.padZeros(Time.timeComponentGet(t, "day"), 2);
 			},
 			"d": function (t) {
-				return Time.timeComponentGet(t, "day");
+				return Time.timeComponentGet(t, "day") + 1;
 			},
 			"yyyy": function (t) {
 				return Time.timeComponentGet(t, "year");
@@ -5376,24 +6651,94 @@ Scoped.define("module:Tokens", function() {
 	};
 });
 Scoped.define("module:Trees.TreeNavigator", function () {
+	
+	/**
+	 * Abstract Tree Navigator Mixin
+	 * 
+	 * @mixin BetaJS.Trees.TreeNavigator
+	 */
 	return {		
 
+		/**
+		 * Returns the root node of a tree.
+		 * 
+		 * @return {object} Root node
+		 */
 		nodeRoot: function () {},
+
+		/**
+		 * Retrusns the id of a node.
+		 * 
+		 * @param {object} node Node
+		 * @return {string} Id of node
+		 */
 		nodeId: function (node) {},
+
+		/**
+		 * Returns the parent of a node.
+		 * 
+		 * @param {object} node Node
+		 * @return {object} Parent node
+		 */
 		nodeParent: function (node) {},
+
+		/**
+		 * Returns the children of a node.
+		 * 
+		 * @param {object} node Node
+		 * @return {array} Children of the node
+		 */
 		nodeChildren: function (node) {},
+
+		/**
+		 * Watches a node for changes.
+		 * 
+		 * @param {object} node Node
+		 * @param {function} func Change callback function
+		 * @param {object} context Optional change callback context
+		 */
 		nodeWatch: function (node, func, context) {},
+
+		/**
+		 * Unwatches a node for changes.
+		 * 
+		 * @param {object} node Node
+		 * @param {function} func Change callback function
+		 * @param {object} context Optional change callback context
+		 */
 		nodeUnwatch: function (node, func, context) {},
+
+		/**
+		 * Returns the data associated with a node.
+		 * 
+		 * @param {object} node Node
+		 * @return {object} Node data
+		 */
 		nodeData: function (node) {}
 
 	};
 });
 
 
-Scoped.define("module:Trees.TreeQueryEngine", ["module:Class", "module:Parser.Lexer", "module:Trees.TreeQueryObject"], function (Class, Lexer, TreeQueryObject, scoped) {
+Scoped.define("module:Trees.TreeQueryEngine", [
+    "module:Class",
+    "module:Parser.Lexer",
+    "module:Trees.TreeQueryObject"
+], function (Class, Lexer, TreeQueryObject, scoped) {
 	return Class.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * Tree Query Engine Class
+		 * 
+		 * @class BetaJS.Trees.TreeQueryEngine
+		 */
 		return {
 
+			/**
+			 * Create a new instance.
+			 * 
+			 * @param {object} navigator Navigator instance
+			 */
 			constructor: function (navigator) {
 				inherited.constructor.call(this);
 				this.__navigator = navigator;
@@ -5408,6 +6753,14 @@ Scoped.define("module:Trees.TreeQueryEngine", ["module:Class", "module:Parser.Le
 				}));
 			},
 
+			/**
+			 * Query the tree.
+			 * 
+			 * @param {object} node Node to start the query from
+			 * @param {string} query Query string
+			 * 
+			 * @return {object} Tree query object for the query
+			 */
 			query: function (node, query) {
 				return new TreeQueryObject(this.__navigator, node, this.__lexer.lex(query));
 			}
@@ -5417,10 +6770,28 @@ Scoped.define("module:Trees.TreeQueryEngine", ["module:Class", "module:Parser.Le
 });
 
 
-Scoped.define("module:Trees.TreeQueryObject", ["module:Class", "module:Events.EventsMixin", "module:Objs", "module:Types"], function (Class, EventsMixin, Objs, Types, scoped) {
+Scoped.define("module:Trees.TreeQueryObject", [
+    "module:Class",
+    "module:Events.EventsMixin",
+    "module:Objs",
+    "module:Types"
+], function (Class, EventsMixin, Objs, Types, scoped) {
 	return Class.extend({scoped: scoped}, [EventsMixin, function (inherited) {
+		
+		/**
+		 * Object representing a tree query on a node
+		 *
+		 * @class BetaJS.Trees.TreeQueryObject
+		 */
 		return {
 
+			/**
+			 * Create new instance.
+			 * 
+			 * @param {object} navigator Navigator object
+			 * @param {object} node Node of the query
+			 * @param {object} query Lexed query
+			 */
 			constructor: function (navigator, node, query) {
 				inherited.constructor.call(this);
 				this.__navigator = navigator;
@@ -5432,6 +6803,9 @@ Scoped.define("module:Trees.TreeQueryObject", ["module:Class", "module:Events.Ev
 				this.__register(node, 0, {});
 			},
 
+			/**
+			 * @override
+			 */
 			destroy: function () {
 				Objs.iter(this.__partials, function (partials) {
 					Objs.iter(partials.partials, function (partial) {
@@ -5441,6 +6815,11 @@ Scoped.define("module:Trees.TreeQueryObject", ["module:Class", "module:Events.Ev
 				inherited.destroy.call(this);
 			},
 
+			/**
+			 * Returns the currently matching nodes.
+			 * 
+			 * @return {array} Matching nodes.
+			 */
 			result: function () {
 				var result = [];
 				Objs.iter(this.__result, function (value) {
@@ -5805,6 +7184,21 @@ Scoped.define("module:Types", function () {
 		},
 		
 		/**
+		 * Parses an object with given types.
+		 * 
+		 * @param {object} data object with key value pairs
+		 * @param {object} types object mapping keys to types
+		 * 
+		 * @return {object} object with properly parsed types
+		 */
+		parseTypes: function (data, types) {
+			var result = {};
+			for (var key in data)
+				result[key] = key in types ? this.parseType(data[key], types[key]) : data[key];
+			return result;
+		},
+		
+		/**
 		 * Returns the specific type of a JavaScript object
 		 * 
 		 * @param {object} obj an object instance
@@ -5848,10 +7242,11 @@ Scoped.define("module:Channels.Sender", [
 		 * 
 		 * @param {string} message Message string
 		 * @param data Custom message data
+		 * @param serializerInfo Custom serializer information
 		 */
-		send: function (message, data) {
+		send: function (message, data, serializerInfo) {
 			this.trigger("send", message, data);
-			this._send(message, data);
+			this._send(message, data, serializerInfo);
 		},
 		
 		/**
@@ -5859,8 +7254,9 @@ Scoped.define("module:Channels.Sender", [
 		 * 
 		 * @param {string} message Message string
 		 * @param data Custom message data
+		 * @param serializerInfo Custom serializer information
 		 */
-		_send: function (message, data) {}
+		_send: function (message, data, serializerInfo) {}
 	
 	}]);
 });
@@ -5908,11 +7304,11 @@ Scoped.define("module:Channels.ReceiverSender", [
 		return {
 
 			/**
-			 * TODO
+			 * Creates a new instance.
 			 * 
-			 * @param {object} receiver TODO
-			 * @param {boolean} async TODO
-			 * @param {int} delay TODO
+			 * @param {object} receiver Receiver object
+			 * @param {boolean} async Handle every invocation asynchronously
+			 * @param {int} delay Delay time for asynchronous invocation
 			 */
 			constructor: function (receiver, async, delay) {
 				inherited.constructor.call(this);
@@ -5921,7 +7317,10 @@ Scoped.define("module:Channels.ReceiverSender", [
 				this.__delay = delay;
 			},
 			
-			_send: function (message, data) {
+			/**
+			 * @override
+			 */
+			_send: function (message, data, serializerInfo) {
 				if (this.__async) {
 					Async.eventually(function () {
 						this.__receiver._receive(message, data);
@@ -5958,11 +7357,14 @@ Scoped.define("module:Channels.ReadySender", [
 				this.__sender = sender;
 			},
 			
-			_send: function (message, data) {
+			/**
+			 * @override
+			 */
+			_send: function (message, data, serializerInfo) {
 				if (this.__ready)
-					this.__sender.send(message, data);
+					this.__sender.send(message, data, serializerInfo);
 				else
-					this.__cache.push({message: message, data: data});
+					this.__cache.push({message: message, data: data, serializerInfo: serializerInfo});
 			},
 			
 			/**
@@ -5971,8 +7373,9 @@ Scoped.define("module:Channels.ReadySender", [
 			 */
 			ready: function () {
 				this.__ready = true;
-				for (var i = 0; i < this.__cache.length; ++i)
-					this.__sender.send(this.__cache[i].message, this.__cache[i].data);
+				this.__cache.forEach(function (entry) {
+					this.__sender.send(entry.message, entry.data, entry.serializerInfo);
+				}, this);
 				this.__cache = [];
 			},
 			
@@ -6013,8 +7416,8 @@ Scoped.define("module:Channels.SenderMultiplexer", ["module:Channels.Sender"], f
 				this.__prefix = prefix;
 			},
 						
-			_send: function (message, data) {
-				this.__sender.send(this.__prefix + ":" + message, data);
+			_send: function (message, data, serializerInfo) {
+				this.__sender.send(this.__prefix + ":" + message, data, serializerInfo);
 			}
 			
 		};
@@ -6116,7 +7519,7 @@ Scoped.define("module:Channels.TransportChannel", [
 			 * 
 			 * @param {object} sender Sender Channel
 			 * @param {object} receiver Receiver Channel
-			 * @param {object} options options (timeout, tries, timer) for configuring the Transport Channel
+			 * @param {object} options options (timeout, tries, timer, auto_destroy) for configuring the Transport Channel
 			 */
 			constructor: function (sender, receiver, options) {
 				inherited.constructor.call(this);
@@ -6127,6 +7530,10 @@ Scoped.define("module:Channels.TransportChannel", [
 					tries: 1,
 					timer: 500
 				});
+				if (this.__options.auto_destroy) {
+					this.auto_destroy(sender);
+					this.auto_destroy(receiver);
+				}
 				this.__receiver.on("receive:send", function (data) {
 					this.__reply(data);
 				}, this);
@@ -6170,7 +7577,7 @@ Scoped.define("module:Channels.TransportChannel", [
 						message: message,
 						data: data,
 						stateless: true
-					});
+					}, options.serializerInfo);
 					promise.asyncSuccess(true);
 				} else {
 					this.__sent_id++;
@@ -6186,7 +7593,7 @@ Scoped.define("module:Channels.TransportChannel", [
 						message: message,
 						data: data,
 						id: this.__sent_id
-					});
+					}, options.serializerInfo);
 				}
 				return promise;
 			},
@@ -6630,8 +8037,20 @@ Scoped.define("module:Classes.ObjectCache", [
     "module:Objs"
 ], function (Class, Objs, scoped) {
 	return Class.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * Object Cache Class
+		 * 
+		 * @class BetaJS.Classes.ObjectCache
+		 */
 		return {
 			
+			/**
+			 * Creates an instance.
+			 * 
+			 * @param {function} keyFunction Function mapping objects to strings
+			 * @param {object} keyFunctionCtx Optional key function context
+			 */
 			constructor: function (keyFunction, keyFunctionCtx) {
 				inherited.constructor.call(this);
 				this.__keyFunction = keyFunction;
@@ -6639,16 +8058,32 @@ Scoped.define("module:Classes.ObjectCache", [
 				this.__cache = {};
 			},
 			
+			/**
+			 * @override
+			 */
 			destroy: function () {
 				Objs.iter(this.__cache, function (obj) {
 					obj.off(null, null, this);
 				}, this);
 			},
 			
+			/**
+			 * Returns an object for a key.
+			 * 
+			 * @param {string} key Key of an object
+			 * 
+			 * @return {object} Object with that key
+			 */
 			get: function (key) {
 				return this.__cache[key];
 			},
 			
+			/**
+			 * Registers an object in the cache.
+			 * 
+			 * @param {object} obj Object to register.
+			 * 
+			 */
 			register: function (obj) {
 				var key = this.__keyFunction.call(this.__keyFunctionCtx || this, obj);
 				if (this.__cache[key] && !this.__cache[key].destroyed())
@@ -6657,6 +8092,7 @@ Scoped.define("module:Classes.ObjectCache", [
 				obj.on("destroy", function () {
 					delete this.__cache[key];
 				}, this);
+				return this;
 			}
 			
 		};
@@ -6670,22 +8106,56 @@ Scoped.define("module:Classes.ClassRegistry", [
     "module:Objs"
 ], function (Class, Types, Functions, Objs, scoped) {
 	return Class.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * Class Registry Class
+		 * 
+		 * @class BetaJS.Classes.ClassRegistry
+		 */
 		return {
 
+			/**
+			 * Creates an instance.
+			 * 
+			 * @param {array} classes Class maps in an array
+			 * @param {boolean} lowercase Should all keys be lowercased
+			 */
 			constructor: function (classes, lowercase) {
 				inherited.constructor.call(this);
 				this._classes = Types.is_array(classes) ? classes : [classes || {}];
 				this._lowercase = lowercase;
 			},
 			
+			/**
+			 * Sanitizes the key of a class.
+			 * 
+			 * @param {string} key Key to be sanitized
+			 * 
+			 * @return {string} Sanitized key
+			 */
 			_sanitize: function (key) {
 				return this._lowercase ? key.toLowerCase() : key;
 			},
 			
+			/**
+			 * Register a class.
+			 * 
+			 * @param {string} key Key of class
+			 * @param {object} cls Class to be registered
+			 * 
+			 */
 			register: function (key, cls) {
 				this._classes[this._classes.length - 1][this._sanitize(key)] = cls;
+				return this;
 			},
 			
+			/**
+			 * Return a class by key.
+			 * 
+			 * @param {string} key Key of class
+			 * 
+			 * @return {object} Class referenced by key
+			 */
 			get: function (key) {
 				if (!Types.is_string(key))
 					return key;
@@ -6696,11 +8166,23 @@ Scoped.define("module:Classes.ClassRegistry", [
 				return null;
 			},
 			
+			/**
+			 * Creates a new class based on its key.
+			 * 
+			 * @param {string} key Key of class
+			 * 
+			 * @return {object} Class instance
+			 */
 			create: function (key) {
 				var cons = Functions.newClassFunc(this.get(key));
 				return cons.apply(this, Functions.getArguments(arguments, 1));
 			},
 			
+			/**
+			 * Returns all classes as key-object map.
+			 * 
+			 * @return {object} Key-object map.
+			 */
 			classes: function () {
 				var result = {};
 				Objs.iter(this._classes, function (classes) {
@@ -6723,8 +8205,20 @@ Scoped.define("module:Classes.ContextRegistry", [
     "module:Iterators.ObjectValuesIterator"
 ], function (Class, Ids, Types, Objs, MappedIterator, ObjectValuesIterator, scoped) {
 	return Class.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * Context Registry Class
+		 * 
+		 * @class BetaJS.Classes.ContextRegistry
+		 */
 		return {
 			
+			/**
+			 * Creates an instance.
+			 * 
+			 * @param {function} serializer Serializer function
+			 * @param {object} serializerContext Optional serializer context
+			 */
 			constructor: function (serializer, serializerContext) {
 				inherited.constructor.apply(this);
 				this.__data = {};
@@ -6737,24 +8231,45 @@ Scoped.define("module:Classes.ContextRegistry", [
 				return Types.is_object(data) ? Ids.objectId(data) : data;
 			},
 			
+			/**
+			 * Serialize a context.
+			 * 
+			 * @param {object} ctx Context object to be serialized
+			 * 
+			 * @return {string} Serialized context object
+			 */
 			_serializeContext: function (ctx) {
 				return ctx ? Ids.objectId(ctx) : null;
 			},
 			
+			/**
+			 * Serializes data.
+			 * 
+			 * @param data Data to be serialized
+			 * 
+			 * @return {string} Serialized data
+			 */
 			_serializeData: function (data) {
 				return this.__serializer.call(this.__serializerContext, data);
 			},
 			
+			/**
+			 * Returns stored data based on serializing data
+			 * 
+			 * @param data Data to be serialized
+			 * 
+			 * @return Stored data
+			 */
 			get: function (data) {
 				var serializedData = this._serializeData(data);
 				return this.__data[serializedData];
 			},
 			
-			/*
-			 * Registers data with respect to an optional context
+			/**
+			 * Registers data with respect to an optional context.
 			 *
-			 * @param data - data (mandatory)
-			 * @param context - context (optional)
+			 * @param data manatory data
+			 * @param {object} context optional context
 			 * 
 			 * @return data if data was not registered before, null otherwise
 			 * 
@@ -6781,18 +8296,17 @@ Scoped.define("module:Classes.ContextRegistry", [
 				return result ? this.__data[serializedData].data : null;
 			},
 			
-			/*
+			/**
 			 * Unregisters data with respect to a context.
 			 * If no data is given, all data with respect to the context is unregistered.
 			 * If no context is given, all context with respect to the data are unregistered.
 			 * If nothing is given, everything is unregistered.
 			 * 
-			 * @param data - data (optional)
-			 * @param context - context (optional)
+			 * @param data optional data
+			 * @param {object} context optional context
 			 * 
-			 * @result unregistered data in an array
-			 */
-			
+			 * @result {array} unregistered data in an array
+			 */			
 			unregister: function (data, context) {
 				var result = [];
 				if (data) {
@@ -6846,10 +8360,20 @@ Scoped.define("module:Classes.ContextRegistry", [
 				return result;
 			},
 			
+			/**
+			 * Custom iterator iterating over the stored data
+			 * 
+			 * @return {object} Iterator
+			 */
 			customIterator: function () {
 				return new ObjectValuesIterator(this.__data);
 			},
 			
+			/**
+			 * Data iterator iterating over the stored data
+			 * 
+			 * @return {object} Iterator
+			 */
 			iterator: function () {
 				return new MappedIterator(this.customIterator(), function (item) {
 					return item.data;
@@ -7125,9 +8649,20 @@ Scoped.define("module:Collections.Collection", [
 	    "module:Promise"
 	], function (Class, EventsMixin, Objs, Functions, ArrayList, Ids, Properties, ArrayIterator, FilteredIterator, ObjectValuesIterator, Types, Promise, scoped) {
 	return Class.extend({scoped: scoped}, [EventsMixin, function (inherited) {
+		
+		/**
+		 * A collection class for managing a list of Properties-based objects.
+		 * 
+		 * @class BetaJS.Collections.Collection
+		 */
 		return {
 
-			constructor : function(options) {
+			/**
+			 * Creates an instance.
+			 * 
+			 * @param {object} options Options for the collection or an array of initial objects
+			 */
+			constructor : function (options) {
 				inherited.constructor.call(this);
 				if (Types.is_array(options)) {
 					options = {
@@ -7159,6 +8694,11 @@ Scoped.define("module:Collections.Collection", [
 					this.add_objects(options.objects);
 			},
 			
+			/**
+			 * Add a secondary key index to the collection.
+			 * 
+			 * @param {string} key Name of key to be added
+			 */
 			add_secondary_index: function (key) {
 				this.__indices[key] = {};
 				this.iterate(function (object) {
@@ -7166,23 +8706,51 @@ Scoped.define("module:Collections.Collection", [
 					this.__indices[key][value] = this.__indices[key][value] || {};
 					this.__indices[key][value][this.get_ident(object)] = object;
 				}, this);
+				return this;
 			},
 			
+			/**
+			 * Return entry by value from a secondary index.
+			 * 
+			 * @param {string} key Name of secondary index key
+			 * @param value Value to the secondary index
+			 * @param {boolean} returnFirst Only return single element
+			 * 
+			 * @return Returns entry associated with the key value pair
+			 */
 			get_by_secondary_index: function (key, value, returnFirst) {
 				return returnFirst ? Objs.ithValue(this.__indices[key][value]) : this.__indices[key][value];
 			},
 			
+			/**
+			 * Get the identifier of an object.
+			 * 
+			 * @param {object} obj Source object
+			 * 
+			 * @return {string} identifier of source object
+			 */
 			get_ident: function (obj) {
 				return Ids.objectId(obj);
 			},
 			
+			/**
+			 * Set the comparison function.
+			 * 
+			 * @param {function} compare Comparison function
+			 */
 			set_compare: function (compare) {
 				this.trigger("set_compare", compare);
 				this.__data.set_compare(compare);
+				return this;
 			},
 			
+			/**
+			 * Return the current comparison function.
+			 * 
+			 * @return {function} current compare function
+			 */
 			get_compare: function () {
-				this.__data.get_compare();
+				return this.__data.get_compare();
 			},
 			
 			__unload_item: function (object) {
@@ -7192,6 +8760,9 @@ Scoped.define("module:Collections.Collection", [
 					object.decreaseRef();
 			},
 		
+			/**
+			 * @override
+			 */
 			destroy: function () {
 				this.__data.iterate(this.__unload_item, this);
 				this.__data.destroy();
@@ -7199,22 +8770,49 @@ Scoped.define("module:Collections.Collection", [
 				inherited.destroy.call(this);
 			},
 			
+			/**
+			 * Return the number of elements in the collection.
+			 * 
+			 * @return {int} number of elements
+			 */
 			count: function () {
 				return this.__data.count();
 			},
 			
+			/**
+			 * Called when the index of an object has changed.
+			 * 
+			 * @param {object} object Object whose index has changed
+			 * @param {int} index New index
+			 */
 			_index_changed: function (object, index) {
 				this.trigger("index", object, index);
 			},
 			
+			/**
+			 * Called when the index of an object has been successfully updated.
+			 * 
+			 * @param {object} object Object whose index has been updated
+			 */
 			_re_indexed: function (object) {
 				this.trigger("reindexed", object);
 			},
 			
+			/**
+			 * Called when the collection has been sorted.
+			 * 
+			 */
 			_sorted: function () {
 				this.trigger("sorted");
 			},
 			
+			/**
+			 * Called when an attribute of an object has changed.
+			 * 
+			 * @param {object} object Object whose attribute has changed
+			 * @param {string} key Key of changed attribute
+			 * @param value New value of the object
+			 */
 			_object_changed: function (object, key, value) {
 				this.trigger("update");
 				this.trigger("change", object, key, value);
@@ -7222,6 +8820,12 @@ Scoped.define("module:Collections.Collection", [
 				this.__data.re_index(this.getIndex(object));
 			},
 			
+			/**
+			 * Add an object to the collection.
+			 * 
+			 * @param {object} object Object to be added
+			 * @return {string} Identifier of added object
+			 */
 			add: function (object) {
 				if (!Class.is_class_instance(object))
 					object = new Properties(object);
@@ -7244,6 +8848,13 @@ Scoped.define("module:Collections.Collection", [
 				return ident;
 			},
 			
+			/**
+			 * Replace objects by other objects with the same id.
+			 * 
+			 * @param {array} object New objects with ids
+			 * @param {boolean} keep_others True if objects with ids not included should be kept
+			 * 
+			 */
 			replace_objects: function (objects, keep_others) {
 				var addQueue = [];
 				var ids = {};
@@ -7277,8 +8888,15 @@ Scoped.define("module:Collections.Collection", [
 				}
 				while (addQueue.length > 0)
 					this.add(addQueue.shift());
+				return this;
 			},
 			
+			/**
+			 * Add objects in a bulk.
+			 * 
+			 * @param {array} objects Objects to be added
+			 * @return {int} Number of objects added
+			 */
 			add_objects: function (objects) {
 				var count = 0;
 				Objs.iter(objects, function (object) {
@@ -7288,10 +8906,22 @@ Scoped.define("module:Collections.Collection", [
 				return count;
 			},
 			
+			/**
+			 * Determine whether an object is already included.
+			 * 
+			 * @param {object} object Object in question
+			 * @return {boolean} True if contained
+			 */
 			exists: function (object) {
 				return this.__data.exists(object);
 			},
 			
+			/**
+			 * Remove an object from the collection.
+			 * 
+			 * @param {object} object Object to be removed
+			 * @return {object} Removed object
+			 */
 			remove: function (object) {
 				if (!this.exists(object))
 					return null;
@@ -7310,30 +8940,74 @@ Scoped.define("module:Collections.Collection", [
 				return result;
 			},
 			
+			/**
+			 * Get an object by index.
+			 * 
+			 * @param {int} index Index to be returned
+			 * @return {object} Object at that index
+			 */
 			getByIndex: function (index) {
 				return this.__data.get(index);
 			},
 			
+			/**
+			 * Get an object by identifier.
+			 * 
+			 * @param {string} id Identifier of object
+			 * @return {object} Object with that identifier
+			 */
 			getById: function (id) {
 				return this.__data.get(this.__data.ident_by_id(id));
 			},
 			
+			/**
+			 * Get the index of an object.
+			 * 
+			 * @param {object} object Object in question
+			 * @return {int} Index of object
+			 */
 			getIndex: function (object) {
 				return this.__data.get_ident(object);
 			},
 			
+			/**
+			 * Iterate over the collection.
+			 * 
+			 * @param {function} cb Item callback
+			 * @param {object} context Context for callback
+			 * 
+			 */
 			iterate: function (cb, context) {
 				this.__data.iterate(cb, context);
+				return this;
 			},
 			
+			/**
+			 * Creates an iterator instance for the collection.
+			 * 
+			 * @return {object} Iterator instance
+			 */
 			iterator: function () {
 				return ArrayIterator.byIterate(this.iterate, this);
 			},
 			
+			/**
+			 * Creates an iterator instance via a secondary index for a specific value.
+			 * 
+			 * @param {string} key Key of secondary index
+			 * @param value Particular value
+			 * @return {object} Iterator instance
+			 */
 			iterateSecondaryIndexValue: function (key, value) {
 				return new ObjectValuesIterator(this.__indices[key][value]);
 			},
 			
+			/**
+			 * Query the collection for items matching some query data.
+			 * 
+			 * @param {object} subset Query data to be matched.
+			 * @return {object} Iterator instance
+			 */
 			query: function (subset) {
 				var iterator = null;
 				for (var index_key in this.__indices) {
@@ -7347,12 +9021,22 @@ Scoped.define("module:Collections.Collection", [
 				});
 			},
 			
+			/**
+			 * Clears the whole collection.
+			 * 
+			 */
 			clear: function () {
 				this.iterate(function (obj) {
 					this.remove(obj);
 				}, this);
+				return this;
 			},
 			
+			/**
+			 * Increase the view of the collection by a number of steps.
+			 * 
+			 * @param {int} steps Steps to increase
+			 */
 			increase_forwards: function (steps) {
 				return Promise.error(true);
 			}
@@ -7577,6 +9261,7 @@ Scoped.define("module:Collections.GroupedCollection", [
 				options = options || {};
 				delete options.objects;
 				this.__groupby = options.groupby;
+				this.__keepEmptyGroups = options.keepEmptyGroups;
 				this.__insertCallback = options.insert;
 				this.__removeCallback = options.remove;
 				this.__callbackContext = options.context || this;
@@ -7597,35 +9282,36 @@ Scoped.define("module:Collections.GroupedCollection", [
 				inherited.destroy.call(this);
 			},
 			
-			__addParentObject: function (object) {
-				var group = this.__objectToGroup(object);
-				if (!group) {
+			touchGroup: function (data, create) {
+				data = Properties.is_instance_of(data) ? data.data() : data;
+				var query = {};
+				Objs.iter(this.__groupby, function (key) {
+					query[key] = data[key];
+				});
+				var group = this.query(query).nextOrNull();
+				if (!group && create) {
 					group = this.__createProperties ? this.__createProperties.call(this.__callbackContext) : new this.__propertiesClass();
 					group.items = group.auto_destroy(new Collection());
 					Objs.iter(this.__groupby, function (key) {
-						group.set(key, object.get(key));
+						group.set(key, data[key]);
 					});
-					this.__addObjectToGroup(object, group);
 					this.add(group);
-				} else
-					this.__addObjectToGroup(object, group);
+				}
+				return group;
+			},
+			
+			__addParentObject: function (object) {
+				var group = this.touchGroup(object, true);
+				this.__addObjectToGroup(object, group);
 			},
 			
 			__removeParentObject: function (object) {
-				var group = this.__objectToGroup(object);
+				var group = this.touchGroup(object);
 				if (group) {
 					this.__removeObjectFromGroup(object, group);
-					if (group.items.count() === 0)
+					if (!this.__keepEmptyGroups && group.items.count() === 0)
 						this.remove(group);
 				}
-			},
-			
-			__objectToGroup: function (object) {
-				var query = {};
-				Objs.iter(this.__groupby, function (key) {
-					query[key] = object.get(key);
-				});
-				return this.query(query).nextOrNull();
 			},
 			
 			__addObjectToGroup: function (object, group) {
@@ -7635,8 +9321,7 @@ Scoped.define("module:Collections.GroupedCollection", [
 			
 			__removeObjectFromGroup: function (object, group) {
 				group.items.remove(object);
-				if (group.items.count() > 0)
-					this.__removeObject(object, group);
+				this.__removeObject(object, group);
 			},
 			
 			/**
@@ -7741,13 +9426,29 @@ Scoped.define("module:Exceptions.ErrorCatcher", [
     "module:Class"
 ], function (Class, scoped) {
 	return Class.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * ErrorCatcher Object
+		 * 
+		 * @class BetaJS.Exceptions.ErrorCatcher
+		 */
 		return {
 			
+			/**
+			 * Creates an instance.
+			 * 
+			 * @param {object} thrower TODO
+			 */
 			constructor: function (thrower) {
 				inherited.constructor.call(this);
 				this.__thrower = thrower;
 			},
 			
+			/**
+			 * Throws an exception object.
+			 * 
+			 * @param e Exception object
+			 */
 			throwException: function (e) {
 				this.__thrower.throwException(e);
 			}
@@ -7762,8 +9463,19 @@ Scoped.define("module:Exceptions.UncaughtErrorCatcher", [
 	"module:Functions"
 ], function (ErrorCatcher, Functions, scoped) {
 	return ErrorCatcher.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * UncaughtErrorCatcher Object
+		 * 
+		 * @class BetaJS.Exceptions.UncaughtErrorCatcher
+		 */
 		return {
 			
+			/**
+			 * Creates an instance.
+			 * 
+			 * @param {object} thrower Thrower object
+			 */
 			constructor: function (thrower) {
 				inherited.constructor.call(this, thrower);
 				this.__listenerFunction = Functions.as_method(this._listenerFunction, this);
@@ -7775,6 +9487,9 @@ Scoped.define("module:Exceptions.UncaughtErrorCatcher", [
 				} catch (e) {}
 			},
 			
+			/**
+			 * @override
+			 */
 			destroy: function () {
 				try {
 					window.removeEventListener("error", this.__listenerFunction);
@@ -7795,17 +9510,29 @@ Scoped.define("module:Exceptions.UncaughtErrorCatcher", [
 Scoped.define("module:Exceptions.ExceptionThrower", [
     "module:Class"
 ], function (Class, scoped) {
-	return Class.extend({scoped: scoped}, {
-		
-		throwException: function (e) {
-			this._throwException(e);
-			return this;
-		},
-		
-		_throwException: function (e) {
-			throw e;
-		}
+	return Class.extend({scoped: scoped}, function (inherited) {
+		/**
+		 * Abstract Exception Thrower Class
+		 * 
+		 * @class BetaJS.Exceptions.ExceptionThrower
+		 */
+		return {
 			
+			/**
+			 * Throws an exception.
+			 * 
+			 * @param {exception} e exception to be thrown
+			 */
+			throwException: function (e) {
+				this._throwException(e);
+				return this;
+			},
+			
+			_throwException: function (e) {
+				throw e;
+			}
+
+		};
 	});
 });
 
@@ -7813,10 +9540,20 @@ Scoped.define("module:Exceptions.ExceptionThrower", [
 Scoped.define("module:Exceptions.NullExceptionThrower", [
 	"module:Exceptions.ExceptionThrower"
 ], function (ExceptionThrower, scoped) {
-	return ExceptionThrower.extend({scoped: scoped},{
-			
-		_throwException: function (e) {}
+	return ExceptionThrower.extend({scoped: scoped}, function (inherited) {
+		/**
+		 * Silentely forgets about the exception.
+		 * 
+		 * @class BetaJS.Exceptions.NullExceptionThrower
+		 */
+		return {
+
+			/**
+			 * @override
+			 */
+			_throwException: function (e) {}
 		
+		};
 	});
 });
 
@@ -7825,14 +9562,24 @@ Scoped.define("module:Exceptions.AsyncExceptionThrower", [
 	"module:Exceptions.ExceptionThrower",
 	"module:Async"
 ], function (ExceptionThrower, Async, scoped) {
-	return ExceptionThrower.extend({scoped: scoped},{
-			
-		_throwException: function (e) {
-			Async.eventually(function () {
-				throw e;
-			});
-		}
+	return ExceptionThrower.extend({scoped: scoped}, function (inherited) {
+		/**
+		 * Throws an exception asynchronously.
+		 * 
+		 * @class BetaJS.Exceptions.AsyncExceptionThrower
+		 */
+		return {
+
+			/**
+			 * @override
+			 */
+			_throwException: function (e) {
+				Async.eventually(function () {
+					throw e;
+				});
+			}
 		
+		};
 	});
 });
 
@@ -7841,12 +9588,22 @@ Scoped.define("module:Exceptions.ConsoleExceptionThrower", [
 	"module:Exceptions.ExceptionThrower",
 	"module:Exceptions.NativeException"
 ], function (ExceptionThrower, NativeException, scoped) {
-	return ExceptionThrower.extend({scoped: scoped}, {
+	return ExceptionThrower.extend({scoped: scoped}, function (inherited) {
+		/**
+		 * Throws execption by console-logging it.
+		 * 
+		 * @class BetaJS.Exceptions.ConsoleExceptionThrower
+		 */
+		return {
+
+			/**
+			 * @override
+			 */
+			_throwException: function (e) {
+				console.log("Exception", NativeException.ensure(e).json());
+			}
 		
-		_throwException: function (e) {
-			console.log("Exception", NativeException.ensure(e).json());
-		}
-			
+		};
 	});
 });
 
@@ -7855,12 +9612,22 @@ Scoped.define("module:Exceptions.EventExceptionThrower", [
 	"module:Exceptions.ExceptionThrower",
 	"module:Events.EventsMixin"
 ], function (ExceptionThrower, EventsMixin, scoped) {
-	return ExceptionThrower.extend({scoped: scoped}, [EventsMixin, {
+	return ExceptionThrower.extend({scoped: scoped}, [EventsMixin, function (inherited) {
+		/**
+		 * Throws exception by triggering an exception event.
+		 * 
+		 * @class BetaJS.Exceptions.EventExceptionThrower
+		 */
+		return {
 
-		_throwException: function (e) {
-			this.trigger("exception", e);
-		}
-	
+			/**
+			 * @override
+			 */
+			_throwException: function (e) {
+				this.trigger("exception", e);
+			}
+		
+		};
 	}]);
 });
 
@@ -7964,6 +9731,20 @@ Scoped.define("module:Exceptions.Exception", [
 			}			
 			
 		};
+	}, {
+		
+		/**
+		 * Ensures that a given exception is an instance of an Exception class
+		 * 
+		 * @param e Exception
+		 * @return {object} Exception instance
+		 */
+		ensure: function (e) {
+			if (!this.is_instance_of(e))
+				throw "Unasserted Exception " + e;
+			return e;
+		}
+
 	});
 });
 
@@ -8040,7 +9821,7 @@ Scoped.define("module:Exceptions.NativeException", [
 		 * @return {object} Exception instance, possibly wrapping e as a NativeException
 		 */
 		ensure: function (e) {
-			return Exception.is_instance_of(e) ? e : new NativeException(e);
+			return NativeException.is_instance_of(e) ? e : new NativeException(e);
 		}
 		
 	});
@@ -8173,8 +9954,21 @@ Scoped.define("module:Promise", [
     "module:Async",
     "module:Objs"
 ], function (Types, Functions, Async, Objs) {
+	
+	/**
+	 * Promise Class
+	 * 
+	 * @class BetaJS.Promise
+	 */
 	var Promise = {		
-			
+
+		/**
+		 * Creates a new promise instance.
+		 * 
+		 * @param value optional promise value
+		 * @param error optional promise error
+		 * @param {boolean} finished does this promise have its final value / error
+		 */
 		Promise: function (value, error, finished) {
 			this.__value = error ? null : (value || null);
 			this.__error = error ? error : null;
@@ -8184,14 +9978,34 @@ Scoped.define("module:Promise", [
 			this.__callbacks = [];
 		},
 		
+		/**
+		 * Create a new promise instance. (Simplified)
+		 * 
+		 * @param value optional promise value
+		 * @param error optional promise error
+		 * 
+		 * @return {object} promise instance
+		 */
 		create: function (value, error) {
 			return new this.Promise(value, error, arguments.length > 0);
 		},
 		
+		/**
+		 * Returns a promise instance for a value. The value might be a promise itself already.
+		 * 
+		 * @param value promise value or promise
+		 * @return {object} promise instance
+		 */
 		value: function (value) {
 			return this.is(value) ? value : new this.Promise(value, null, true);
 		},
 		
+		/**
+		 * Returns a promise instance for a value, setting the value asynchronously.
+		 * 
+		 * @param value promise value
+		 * @return {object} promise instance
+		 */
 		eventualValue: function (value) {
 			var promise = new this.Promise();
 			Async.eventually(function () {
@@ -8200,10 +10014,25 @@ Scoped.define("module:Promise", [
 			return promise;
 		},
 	
+		/**
+		 * Returns a promise instance for an error. The error might be a promise itself already.
+		 * 
+		 * @param error promise error or promise
+		 * @return {object} promise instance
+		 */
 		error: function (error) {
 			return this.is(error) ? error : new this.Promise(null, error, true);
 		},
 		
+		/**
+		 * Turns a function call into a promise, mapping exceptions to errors.
+		 * 
+		 * @param {function} f function
+		 * @param {object} ctx optional function context
+		 * @param {array} params optional function parameters
+		 * 
+		 * @return {object} promise
+		 */
 		box: function (f, ctx, params) {
 			try {
 				var result = f.apply(ctx || this, params || []);
@@ -8213,6 +10042,14 @@ Scoped.define("module:Promise", [
 			}
 		},
 		
+		/**
+		 * Try-Catch a function, wrapping it into a promise.
+		 * 
+		 * @param {function} f function
+		 * @param {object} ctx optional function context
+		 * 
+		 * @return {object} promise
+		 */
 		tryCatch: function (f, ctx) {
 			try {
 				return this.value(f.apply(ctx || this));
@@ -8221,8 +10058,16 @@ Scoped.define("module:Promise", [
 			}
 		},
 		
+		/**
+		 * Turns a function accepting a callback function as last parameter into a promise.
+		 * 
+		 * @param {object} optional function context
+		 * @param {function} func function
+		 * 
+		 * @return {object} promise
+		 */
 		funcCallback: function (ctx, func) {
-			var args  = Functions.getArguments(arguments, 1);
+			var args = [];
 			if (Types.is_function(ctx)) {
 				args = Functions.getArguments(arguments, 1);
 				func = ctx;
@@ -8235,6 +10080,13 @@ Scoped.define("module:Promise", [
 			return promise;
 		},
 		
+		/**
+		 * Takes a number of promises and creates a single new promise being successful if and only if all input promises are successful.
+		 * 
+		 * @param {array} promises promises array
+		 * 
+		 * @return {object} promise
+		 */
 		and: function (promises) {
 			var promise = this.create();
 			promise.__promises = [];
@@ -8295,6 +10147,13 @@ Scoped.define("module:Promise", [
 			return promise;
 		},
 		
+		/**
+		 * Takes a function and calls with a number of arguments, some of which might be promises and turns it into actual values.
+		 * 
+		 * @param {function} func function
+		 * 
+		 * @return {object} promise
+		 */
 		func: function (func) {
 			var args = Functions.getArguments(arguments, 1);
 			var promises = [];
@@ -8316,6 +10175,15 @@ Scoped.define("module:Promise", [
 			return promise;
 		},
 		
+		/**
+		 * Takes a method and calls with a number of arguments, some of which might be promises and turns it into actual values.
+		 * 
+		 * @param {object} ctx function context
+		 * @param {function} func function
+		 * @param {array} params parameters
+		 * 
+		 * @return {object} promise
+		 */
 		methodArgs: function (ctx, func, params) {
 			params.unshift(function () {
 				return func.apply(ctx, arguments);
@@ -8323,20 +10191,52 @@ Scoped.define("module:Promise", [
 			return this.func.apply(this, params);
 		},
 		
+		/**
+		 * Takes a method and calls with a number of arguments, some of which might be promises and turns it into actual values.
+		 * 
+		 * @param {object} ctx function context
+		 * @param {function} func function
+		 * 
+		 * @return {object} promise
+		 */
 		method: function (ctx, func) {
 			return this.methodArgs(ctx, func, Functions.getArguments(arguments, 2));
 		},
 	
+		/**
+		 * Takes a constructor and calls with a number of arguments, some of which might be promises and turns it into actual values.
+		 * 
+		 * @param {object} cls constructor class
+		 * 
+		 * @return {object} promise
+		 */
 		newClass: function (cls) {
 			var params = Functions.getArguments(arguments, 1);
 			params.unshift(Functions.newClassFunc(cls));
 			return this.func.apply(this, params);
 		},
 		
+		/**
+		 * Determines whether some value is a promise object.
+		 * 
+		 * @param obj value
+		 * 
+		 * @return {boolean} true if obj is a promise object
+		 */
 		is: function (obj) {
 			return obj && Types.is_object(obj) && obj.classGuid == this.Promise.prototype.classGuid;
 		},
 		
+		/**
+		 * Applies a method multiple times until it succeeds.
+		 * 
+		 * @param {function} method method
+		 * @param {object} context method context
+		 * @param {int} resilience number of times to call
+		 * @param {array} args arguments for method
+		 * 
+		 * @return {object} promise
+		 */
 		resilience: function (method, context, resilience, args) {
 			return method.apply(context, args).mapError(function (error) {
 				return resilience === 0 ? error : this.resilience(method, context, resilience - 1, args);
@@ -8348,14 +10248,36 @@ Scoped.define("module:Promise", [
 	Objs.extend(Promise.Promise.prototype, {
 		classGuid: "7e3ed52f-22da-4e9c-95a4-e9bb877a3935",
 		
+		/**
+		 * Be notified when the promise is successful.
+		 * 
+		 * @param {function} f callback function
+		 * @param {object} context optional callback context
+		 * @param {object} options optional options
+		 */
 		success: function (f, context, options) {
 			return this.callback(f, context, options, "success");
 		},
 		
+		/**
+		 * Be notified when the promise is unsuccessful.
+		 * 
+		 * @param {function} f callback function
+		 * @param {object} context optional callback context
+		 * @param {object} options optional options
+		 */
 		error: function (f, context, options) {
 			return this.callback(f, context, options, "error");
 		},
 		
+		/**
+		 * Be notified when the promise is finished..
+		 * 
+		 * @param {function} f callback function
+		 * @param {object} context callback context
+		 * @param {object} options options
+		 * @param {string} type type of callback like "success"
+		 */
 		callback: function (f, context, options, type) {
 			if ("end" in this)
 				this.end();
@@ -8372,6 +10294,12 @@ Scoped.define("module:Promise", [
 			return this;
 		},
 		
+		/**
+		 * Trigger the result.
+		 * 
+		 * @param {object} record optional specific callback record
+		 * 
+		 */
 		triggerResult: function (record) {
 			if (!this.__isFinished)
 				return this;
@@ -8391,26 +10319,57 @@ Scoped.define("module:Promise", [
 			return this;
 		},
 		
+		/**
+		 * Returns the value of the promise.
+		 * 
+		 * @return value of promise
+		 */
 		value: function () {
 			return this.__value;
 		},
 
+		/**
+		 * Returns the error of the promise.
+		 * 
+		 * @return error of promise
+		 */
 		err: function () {
 			return this.__error;
 		},
 
+		/**
+		 * Determines whether the promise has a value or an error already.
+		 * 
+		 * @return {boolean} true if value or error present
+		 */
 		isFinished: function () {
 			return this.__isFinished;
 		},
 
+		/**
+		 * Determines whether the promise has a value.
+		 * 
+		 * @return {boolean} true if value present
+		 */
 		hasValue: function () {
 			return this.__isFinished && !this.__hasError;
 		},
 
+		/**
+		 * Determines whether the promise has an error.
+		 * 
+		 * @return {boolean} true if error present
+		 */
 		hasError: function () {
 			return this.__isFinished && this.__hasError;
 		},
 
+		/**
+		 * Informs the promise of a successful value.
+		 * 
+		 * @param value success value
+		 * @param {object} promise optional success promise
+		 */
 		asyncSuccess: function (value, promise) {
 			if (this.__isFinished) 
 				return this;
@@ -8422,11 +10381,12 @@ Scoped.define("module:Promise", [
 			return this.triggerResult();
 		},
 
-		forwardSuccess: function (promise) {
-			this.success(promise.asyncSuccess, promise);
-			return this;
-		},
-
+		/**
+		 * Informs the promise of an error value.
+		 * 
+		 * @param error error value
+		 * @param {object} promise optional error promise
+		 */
 		asyncError: function (error, promise) {
 			if (this.__isFinished) 
 				return this;
@@ -8438,11 +10398,13 @@ Scoped.define("module:Promise", [
 			return this.triggerResult();
 		},
 
-		forwardError: function (promise) {
-			this.error(promise.asyncError, promise);
-			return this;
-		},
-
+		/**
+		 * Informs the promise of an error or success value.
+		 * 
+		 * @param error optional error value
+		 * @param value optional success value
+		 * @param {object} promise optional callback promise
+		 */
 		asyncCallback: function (error, value, promise) {
 			if (error)
 				return this.asyncError(error, promise);
@@ -8450,15 +10412,53 @@ Scoped.define("module:Promise", [
 				return this.asyncSuccess(value, promise);
 		},
 
-		asyncCallbackFunc: function () {
-			return Functions.as_method(this.asyncCallback, this);
+		/**
+		 * Forwards the success of this promise to another promise.
+		 * 
+		 * @param {object} promise promise to which the success should be forwarded to
+		 */
+		forwardSuccess: function (promise) {
+			this.success(promise.asyncSuccess, promise);
+			return this;
 		},
 
+		/**
+		 * Forwards the error of this promise to another promise.
+		 * 
+		 * @param {object} promise promise to which the error should be forwarded to
+		 */
+		forwardError: function (promise) {
+			this.error(promise.asyncError, promise);
+			return this;
+		},
+
+		/**
+		 * Forwards the callback of this promise to another promise.
+		 * 
+		 * @param {object} promise promise to which the callback should be forwarded to
+		 */
 		forwardCallback: function (promise) {
 			this.callback(promise.asyncCallback, promise);
 			return this;
 		},
 
+		/**
+		 * Generates a context-less function for the asynchronous callback.
+		 * 
+		 * @return {function} context-less function
+		 */
+		asyncCallbackFunc: function () {
+			return Functions.as_method(this.asyncCallback, this);
+		},
+
+		/**
+		 * Maps the success value of the promise to a function that might return another promise.
+		 * 
+		 * @param {function} func success callback
+		 * @param {object} ctx optional context
+		 * 
+		 * @return {object} promise
+		 */
 		mapSuccess: function (func, ctx) {
 			var promise = Promise.create();
 			this.forwardError(promise).success(function (value, pr) {
@@ -8471,6 +10471,14 @@ Scoped.define("module:Promise", [
 			return promise;
 		},
 		
+		/**
+		 * Maps the error value of the promise to a function that might return another promise.
+		 * 
+		 * @param {function} func error callback
+		 * @param {object} ctx optional context
+		 * 
+		 * @return {object} promise
+		 */
 		mapError: function (func, ctx) {
 			var promise = Promise.create();
 			this.forwardSuccess(promise).error(function (err, pr) {
@@ -8483,6 +10491,14 @@ Scoped.define("module:Promise", [
 			return promise;
 		},
 
+		/**
+		 * Maps the error or success value of the promise to a function that might return another promise.
+		 * 
+		 * @param {function} func callback function
+		 * @param {object} ctx optional context
+		 * 
+		 * @return {object} promise
+		 */
 		mapCallback: function (func, ctx) {
 			var promise = Promise.create();
 			this.callback(function (err, value, pr) {
@@ -8495,6 +10511,13 @@ Scoped.define("module:Promise", [
 			return promise;
 		},
 
+		/**
+		 * Concatenates more promises to this promise
+		 * 
+		 * @param {array} promises other promises
+		 * 
+		 * @return {object} promise
+		 */
 		and: function (promises) {
 			var result = Promise.and(this);
 			return result.and(promises);
@@ -8674,15 +10697,17 @@ Scoped.define("module:Timers.Timer", [
 Scoped.define("module:Iterators.ArrayIterator", ["module:Iterators.Iterator"], function (Iterator, scoped) {
 	return Iterator.extend({scoped: scoped}, function (inherited) {
 		
-		/** ArrayIterator Class
+		/**
+		 * ArrayIterator Class
 		 * 
 		 * @class BetaJS.Iterators.ArrayIterator
 		 */
 		return {
 
-			/** Creates an Array Iterator
+			/**
+			 * Creates an Array Iterator
 			 * 
-			 * @param arr array
+			 * @param {array} arr array
 			 */
 			constructor: function (arr) {
 				inherited.constructor.call(this);
@@ -8690,17 +10715,15 @@ Scoped.define("module:Iterators.ArrayIterator", ["module:Iterators.Iterator"], f
 				this.__i = 0;
 			},
 
-			/** Determines whether there are more items.
-			 * 
-			 * @return true if there are more items
+			/**
+			 * @override
 			 */
 			hasNext: function () {
 				return this.__i < this.__array.length;
 			},
 
-			/** Returns the next items if there is one.
-			 * 
-			 * @return next item
+			/**
+			 * @override
 			 */
 			next: function () {
 				var ret = this.__array[this.__i];
@@ -8711,6 +10734,14 @@ Scoped.define("module:Iterators.ArrayIterator", ["module:Iterators.Iterator"], f
 		};
 	}, {
 
+		/**
+		 * Creates an Array Iterator by an iteration function
+		 * 
+		 * @param {function} iterate_func Iteration function
+		 * @param {object} iterate_func_ctx Optional context
+		 * 
+		 * @return {object} Array Iterator instance
+		 */
 		byIterate: function (iterate_func, iterate_func_ctx) {
 			var result = [];
 			iterate_func.call(iterate_func_ctx || this, function (item) {
@@ -8724,18 +10755,35 @@ Scoped.define("module:Iterators.ArrayIterator", ["module:Iterators.Iterator"], f
 
 Scoped.define("module:Iterators.NativeMapIterator", ["module:Iterators.Iterator"], function (Iterator, scoped) {
 	return Iterator.extend({scoped: scoped}, function (inherited) {
+
+		/**
+		 * NativeMapIterator Class
+		 * 
+		 * @class BetaJS.Iterators.NativeMapIterator
+		 */
 		return {
 
+			/**
+			 * Creates a Native Map Iterator
+			 * 
+			 * @param {Map} map Iterator based on the values of this native map
+			 */
 			constructor: function (map) {
 				inherited.constructor.call(this);
 				this.__iter = map.values();
 				this.__next = this.__iter.next();
 			},
 
+			/**
+			 * @override
+			 */
 			hasNext: function () {
 				return !this.__next.done;
 			},
 
+			/**
+			 * @override
+			 */
 			next: function () {
 				var value = this.__next.value;
 				this.__next = this.__iter.next();
@@ -8749,8 +10797,19 @@ Scoped.define("module:Iterators.NativeMapIterator", ["module:Iterators.Iterator"
 
 Scoped.define("module:Iterators.ObjectKeysIterator", ["module:Iterators.ArrayIterator"], function (ArrayIterator, scoped) {
 	return ArrayIterator.extend({scoped: scoped}, function (inherited) {
+
+		/**
+		 * ObjectKeysIterator Class
+		 * 
+		 * @class BetaJS.Iterators.ObjectKeysIterator
+		 */
 		return {
 
+			/**
+			 * Creates an Object Keys Iterator
+			 * 
+			 * @param {object} obj Object to create iterator from
+			 */
 			constructor: function (obj) {
 				inherited.constructor.call(this, Object.keys(obj));
 			}
@@ -8762,8 +10821,19 @@ Scoped.define("module:Iterators.ObjectKeysIterator", ["module:Iterators.ArrayIte
 
 Scoped.define("module:Iterators.ObjectValuesIterator", ["module:Iterators.ArrayIterator", "module:Objs"], function (ArrayIterator, Objs, scoped) {
 	return ArrayIterator.extend({scoped: scoped}, function (inherited) {
+
+		/**
+		 * ObjectValuesIterator Class
+		 * 
+		 * @class BetaJS.Iterators.ObjectValuesIterator
+		 */
 		return {
 
+			/**
+			 * Creates an Object Values Iterator
+			 * 
+			 * @param {object} obj Object to create iterator from
+			 */
 			constructor: function (obj) {
 				inherited.constructor.call(this, Objs.values(obj));
 			}
@@ -8775,8 +10845,20 @@ Scoped.define("module:Iterators.ObjectValuesIterator", ["module:Iterators.ArrayI
 
 Scoped.define("module:Iterators.LazyMultiArrayIterator", ["module:Iterators.LazyIterator"], function (Iterator, scoped) {
 	return Iterator.extend({scoped: scoped}, function (inherited) {
+
+		/**
+		 * LazyMultiArrayIterator Class
+		 * 
+		 * @class BetaJS.Iterators.LazyMultiArrayIterator
+		 */
 		return {
 
+			/**
+			 * Creates a Lazy Multi Array Iterator
+			 * 
+			 * @param {function} next_callback Function returning the next array
+			 * @param {object} next_context Context for next function
+			 */
 			constructor: function (next_callback, next_context) {
 				inherited.constructor.call(this);
 				this.__next_callback = next_callback;
@@ -8785,6 +10867,9 @@ Scoped.define("module:Iterators.LazyMultiArrayIterator", ["module:Iterators.Lazy
 				this.__i = 0;
 			},
 
+			/**
+			 * @override
+			 */
 			_next: function () {
 				if (this.__array === null || this.__i >= this.__array.length) {
 					this.__array = this.__next_callback.apply(this.__next_context);
@@ -8804,8 +10889,21 @@ Scoped.define("module:Iterators.LazyMultiArrayIterator", ["module:Iterators.Lazy
 
 Scoped.define("module:Iterators.MappedIterator", ["module:Iterators.Iterator"], function (Iterator, scoped) {
 	return Iterator.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * A delegated iterator class, mapping each object using a function.
+		 * 
+		 * @class BetaJS.Iterators.MappedIterator
+		 */
 		return {
 
+			/**
+			 * Create a new instance.
+			 * 
+			 * @param {object} iterator Source iterator
+			 * @param {function} map Function mapping source objects to target objects
+			 * @param {object} context Context for the map function
+			 */
 			constructor: function (iterator, map, context) {
 				inherited.constructor.call(this);
 				this.__iterator = iterator;
@@ -8813,10 +10911,16 @@ Scoped.define("module:Iterators.MappedIterator", ["module:Iterators.Iterator"], 
 				this.__context = context || this;
 			},
 
+			/**
+			 * @override
+			 */
 			hasNext: function () {
 				return this.__iterator.hasNext();
 			},
 
+			/**
+			 * @override
+			 */
 			next: function () {
 				return this.hasNext() ? this.__map.call(this.__context, this.__iterator.next()) : null;
 			}
@@ -8828,8 +10932,21 @@ Scoped.define("module:Iterators.MappedIterator", ["module:Iterators.Iterator"], 
 
 Scoped.define("module:Iterators.FilteredIterator", ["module:Iterators.Iterator"], function (Iterator, scoped) {
 	return Iterator.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * A delegated iterator class, filtering single objects by a function.
+		 * 
+		 * @class BetaJS.Iterators.FilteredIterator
+		 */
 		return {
 
+			/**
+			 * Create a new instance.
+			 * 
+			 * @param {object} iterator Source iterator
+			 * @param {function} filter Filter function
+			 * @param {object} context Context for the filter function
+			 */
 			constructor: function (iterator, filter, context) {
 				inherited.constructor.call(this);
 				this.__iterator = iterator;
@@ -8838,11 +10955,17 @@ Scoped.define("module:Iterators.FilteredIterator", ["module:Iterators.Iterator"]
 				this.__next = null;
 			},
 
+			/**
+			 * @override
+			 */
 			hasNext: function () {
 				this.__crawl();
 				return this.__next !== null;
 			},
 
+			/**
+			 * @override
+			 */
 			next: function () {
 				this.__crawl();
 				var item = this.__next;
@@ -8869,8 +10992,20 @@ Scoped.define("module:Iterators.FilteredIterator", ["module:Iterators.Iterator"]
 
 Scoped.define("module:Iterators.SkipIterator", ["module:Iterators.Iterator"], function (Iterator, scoped) {
 	return Iterator.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * A delegated iterator class, skipping some elements.
+		 * 
+		 * @class BetaJS.Iterators.SkipIterator
+		 */
 		return {
 
+			/**
+			 * Create an instance.
+			 * 
+			 * @param {object} iterator Source iterator
+			 * @param {int} skip How many elements should be skipped
+			 */
 			constructor: function (iterator, skip) {
 				inherited.constructor.call(this);
 				this.__iterator = iterator;
@@ -8880,10 +11015,16 @@ Scoped.define("module:Iterators.SkipIterator", ["module:Iterators.Iterator"], fu
 				}
 			},
 
+			/**
+			 * @override
+			 */
 			hasNext: function () {
 				return this.__iterator.hasNext();
 			},
 
+			/**
+			 * @override
+			 */
 			next: function () {
 				return this.__iterator.next();
 			}
@@ -8895,18 +11036,37 @@ Scoped.define("module:Iterators.SkipIterator", ["module:Iterators.Iterator"], fu
 
 Scoped.define("module:Iterators.LimitIterator", ["module:Iterators.Iterator"], function (Iterator, scoped) {
 	return Iterator.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * A delegated iterator class, limiting the number of elements iterated.
+		 * 
+		 * @class BetaJS.Iterators.LimitIterator
+		 */
 		return {
 
+			/**
+			 * Creates an instance.
+			 * 
+			 * @param {object} iterator Source iterator
+			 * @param {int} limit What should be the maximum number of elements
+			 */
 			constructor: function (iterator, limit) {
 				inherited.constructor.call(this);
 				this.__iterator = iterator;
 				this.__limit = limit;
 			},
 
+			
+			/**
+			 * @override
+			 */
 			hasNext: function () {
 				return this.__limit > 0 && this.__iterator.hasNext();
 			},
 
+			/**
+			 * @override
+			 */
 			next: function () {
 				if (this.__limit <= 0)
 					return null;
@@ -8921,8 +11081,20 @@ Scoped.define("module:Iterators.LimitIterator", ["module:Iterators.Iterator"], f
 
 Scoped.define("module:Iterators.SortedIterator", ["module:Iterators.Iterator"], function (Iterator, scoped) {
 	return Iterator.extend({scoped: scoped}, function (inherited) {
+
+		/**
+		 * A delegated iterator class, sorting the source objects by a comparator.
+		 * 
+		 * @class BetaJS.Iterators.SortedIterator
+		 */
 		return {
 
+			/**
+			 * Create an instance.
+			 * 
+			 * @param {object} iterator Source iterator
+			 * @param {function} compare Function comparing two elements of the source iterator
+			 */
 			constructor: function (iterator, compare) {
 				inherited.constructor.call(this);
 				this.__array = iterator.asArray();
@@ -8930,10 +11102,16 @@ Scoped.define("module:Iterators.SortedIterator", ["module:Iterators.Iterator"], 
 				this.__i = 0;
 			},
 
+			/**
+			 * @override
+			 */
 			hasNext: function () {
 				return this.__i < this.__array.length;
 			},
 
+			/**
+			 * @override
+			 */
 			next: function () {
 				var ret = this.__array[this.__i];
 				this.__i++;
@@ -8947,8 +11125,18 @@ Scoped.define("module:Iterators.SortedIterator", ["module:Iterators.Iterator"], 
 
 Scoped.define("module:Iterators.LazyIterator", ["module:Iterators.Iterator"], function (Iterator, scoped) {
 	return Iterator.extend({scoped: scoped}, function (inherited) {
+
+		/**
+		 * Lazy Iterator Class that is based on only getting next elements without an internal hasNext.
+		 * 
+		 * @class BetaJS.Iterators.LazyIterator
+		 */
 		return {
 
+			/**
+			 * Create an instance.
+			 * 
+			 */
 			constructor: function () {
 				inherited.constructor.call(this);
 				this.__finished = false;
@@ -8957,14 +11145,30 @@ Scoped.define("module:Iterators.LazyIterator", ["module:Iterators.Iterator"], fu
 				this.__has_current = false;
 			},
 
+			/**
+			 * Initialize lazy iterator.
+			 */
 			_initialize: function () {},
 
+			/**
+			 * Get next element.
+			 * 
+			 * @return next element
+			 */
 			_next: function () {},
 
+			/**
+			 * The lazy iterator is finished.
+			 */
 			_finished: function () {
 				this.__finished = true;
 			},
 
+			/**
+			 * Set current element of lazy iterator.
+			 * 
+			 * @param result current element
+			 */
 			_current: function (result) {
 				this.__current = result;
 				this.__has_current = true;
@@ -8978,11 +11182,17 @@ Scoped.define("module:Iterators.LazyIterator", ["module:Iterators.Iterator"], fu
 					this._next();
 			},
 
+			/**
+			 * @override
+			 */
 			hasNext: function () {
 				this.__touch();
 				return this.__has_current;
 			},
 
+			/**
+			 * @override
+			 */
 			next: function () {
 				this.__touch();
 				this.__has_current = false;
@@ -8996,8 +11206,20 @@ Scoped.define("module:Iterators.LazyIterator", ["module:Iterators.Iterator"], fu
 
 Scoped.define("module:Iterators.SortedOrIterator", ["module:Iterators.LazyIterator", "module:Structures.TreeMap", "module:Objs"], function (Iterator, TreeMap, Objs, scoped) {
 	return Iterator.extend({scoped: scoped}, function (inherited) {
+
+		/**
+		 * Iterator Class, iterating over an array of source iterator and returning each element by sorting lazily over all source iterators.
+		 * 
+		 * @class BetaJS.Iterators.SortedOrIterator
+		 */
 		return {
 
+			/**
+			 * Create an instance.
+			 * 
+			 * @param {array} iterators Array of source iterators
+			 * @param {function} compare Function comparing two elements of the source iterator
+			 */
 			constructor: function (iterators, compare) {
 				this.__iterators = iterators;
 				this.__map = TreeMap.empty(compare);
@@ -9015,12 +11237,18 @@ Scoped.define("module:Iterators.SortedOrIterator", ["module:Iterators.LazyIterat
 				}
 			},
 
+			/**
+			 * @override
+			 */
 			_initialize: function () {
 				Objs.iter(this.__iterators, this.__process, this);
 				if (TreeMap.is_empty(this.__map))
 					this._finished();
 			},
 
+			/**
+			 * @override
+			 */
 			_next: function () {
 				var ret = TreeMap.take_min(this.__map);
 				this._current(ret[0].key);
@@ -9037,8 +11265,21 @@ Scoped.define("module:Iterators.SortedOrIterator", ["module:Iterators.LazyIterat
 
 Scoped.define("module:Iterators.PartiallySortedIterator", ["module:Iterators.Iterator"], function (Iterator, scoped) {
 	return Iterator.extend({scoped: scoped}, function (inherited) {
+
+		/**
+		 * A delegated iterator class, by sorting its elements in a partially sorted iterator.
+		 * 
+		 * @class BetaJS.Iterators.PartiallySortedIterator
+		 */
 		return {
 
+			/**
+			 * Creates an instance.
+			 * 
+			 * @param {object} iterator Source iterator
+			 * @param {function} compare Function comparing two elements of the source iterator
+			 * @param {function} partial_same Function determining whether two objects are partially the same
+			 */
 			constructor: function (iterator, compare, partial_same) {
 				inherited.constructor.call(this);
 				this.__compare = compare;
@@ -9068,11 +11309,17 @@ Scoped.define("module:Iterators.PartiallySortedIterator", ["module:Iterators.Ite
 				this.__head.sort(this.__compare);
 			},
 
+			/**
+			 * @override
+			 */
 			hasNext: function () {
 				this.__cache();
 				return this.__head.length > 0;
 			},
 
+			/**
+			 * @override
+			 */
 			next: function () {
 				this.__cache();
 				return this.__head.shift();
@@ -9082,8 +11329,20 @@ Scoped.define("module:Iterators.PartiallySortedIterator", ["module:Iterators.Ite
 	});		
 });
 
-Scoped.extend("module:Iterators", ["module:Types", "module:Iterators.Iterator", "module:Iterators.ArrayIterator"], function (Types, Iterator, ArrayIterator) {
+Scoped.extend("module:Iterators", [
+    "module:Types",
+    "module:Iterators.Iterator",
+    "module:Iterators.ArrayIterator"
+], function (Types, Iterator, ArrayIterator) {
 	return {
+	
+		/**
+		 * Ensure that something is an iterator and if it is not and iterator is created from the data.
+		 * 
+		 * @param mixed mixed type variable
+		 * 
+		 * @return {object} iterator
+		 */
 		ensure: function (mixed) {
 			if (mixed === null)
 				return new ArrayIterator([]);
@@ -9092,7 +11351,8 @@ Scoped.extend("module:Iterators", ["module:Types", "module:Iterators.Iterator", 
 			if (Types.is_array(mixed))
 				return new ArrayIterator(mixed);
 			return new ArrayIterator([mixed]);
-		}		
+		}
+	
 	};
 });
 
@@ -9103,209 +11363,254 @@ Scoped.define("module:Iterators.Iterator", [
     "module:Async",
     "module:Promise"
 ], function (Class, Functions, Async, Promise, scoped) {
-	return Class.extend({scoped: scoped}, {
-		
-		hasNext: function () {
-			return false;
-		},
-		
-		next: function () {
-			return null;
-		},
-		
-		nextOrNull: function () {
-			return this.hasNext() ? this.next() : null;
-		},
-
-		asArray: function () {
-			var arr = [];
-			while (this.hasNext())
-				arr.push(this.next());
-			return arr;
-		},
-
-		asArrayDelegate: function (f) {
-			var arr = [];
-			while (this.hasNext()) {
-				var obj = this.next();			
-				arr.push(obj[f].apply(obj, Functions.getArguments(arguments, 1)));
-			}
-			return arr;
-		},
-
-		iterate: function (cb, ctx) {
-			while (this.hasNext()) {
-				var result = cb.call(ctx || this, this.next());
-				if (result === false)
-					return;
-			}
-		},
-		
-		asyncIterate: function (cb, ctx, time) {
-			if (!this.hasNext())
-				return Promise.value(true);
-			var result = cb.call(ctx || this, this.next());
-			if (result === false)
-				return Promise.value(true);
-			var promise = Promise.create();
-			Async.eventually(function () {
-				this.asyncIterate(cb, ctx, time).forwardCallback(promise);
-			}, this, time);
-			return promise;
-		}
-
-	});
-});
-
-Scoped.define("module:Net.AjaxException", [
-    "module:Exceptions.Exception",
-    "module:Objs"
-], function (Exception, Objs, scoped) {
-	return Exception.extend({scoped: scoped}, function (inherited) {
+	return Class.extend({scoped: scoped}, function (inherited) {
 		
 		/**
-		 * Ajax Exception Class
+		 * Abstract Iterator Class
 		 * 
-		 * @class BetaJS.Net.AjaxException
+		 * @class BetaJS.Iterators.Iterator
 		 */
 		return {
 
 			/**
-			 * Instantiates an Ajax Exception
+			 * Determines whether there are more elements in the iterator.
+			 * Should be overwritten by subclass.
 			 * 
-			 * @param status_code Status Code
-			 * @param {string} status_text Status Text
-			 * @param data Custom Exception Data
+			 * @return {boolean} true if more elements present
 			 */
-			constructor: function (status_code, status_text, data) {
-				inherited.constructor.call(this, status_code + ": " + status_text);
-				this.__status_code = status_code;
-				this.__status_text = status_text;
-				this.__data = data;
+			hasNext: function () {
+				return false;
+			},
+			
+			/**
+			 * Returns the next element in the iterator.
+			 * Should be overwritten by subclass.
+			 * 
+			 * @return next element in iterator
+			 */
+			next: function () {
+				return null;
+			},
+			
+			/**
+			 * Returns the next element if present or null otherwise.
+			 * 
+			 * @return next element in iterator or null
+			 */
+			nextOrNull: function () {
+				return this.hasNext() ? this.next() : null;
+			},
+	
+			/**
+			 * Materializes the iterator as an array.
+			 * 
+			 * @return {array} array of elements in iterator
+			 */
+			asArray: function () {
+				var arr = [];
+				while (this.hasNext())
+					arr.push(this.next());
+				return arr;
 			},
 
 			/**
-			 * Returns the status code associated with the exception
+			 * Iterate over the iterator, calling a callback function for every element.
 			 * 
-			 * @return status code
+			 * @param {function} cb callback function
+			 * @param {object} ctx optional callback context
 			 */
-			status_code: function () {
-				return this.__status_code;
+			iterate: function (cb, ctx) {
+				while (this.hasNext()) {
+					var result = cb.call(ctx || this, this.next());
+					if (result === false)
+						return;
+				}
+			},
+			
+			/**
+			 * Asynchronously iterate over the iterator, calling a callback function for every element.
+			 * 
+			 * @param {function} cb callback function
+			 * @param {object} ctx optional callback context
+			 * @param {int} time optional time between calls
+			 * 
+			 * @return {object} finish promise
+			 */
+			asyncIterate: function (cb, ctx, time) {
+				if (!this.hasNext())
+					return Promise.value(true);
+				var result = cb.call(ctx || this, this.next());
+				if (result === false)
+					return Promise.value(true);
+				var promise = Promise.create();
+				Async.eventually(function () {
+					this.asyncIterate(cb, ctx, time).forwardCallback(promise);
+				}, this, time);
+				return promise;
+			}
+
+		};
+	});
+});
+
+Scoped.define("module:Loggers.ConsoleLogListener", [
+	"module:Loggers.LogListener"
+], function (LogListener, scoped) {
+	return LogListener.extend({scoped: scoped}, function (inherited) {
+		return {
+			
+			message: function (source, msg) {
+				console[msg.type].apply(console, msg.args);
+			}
+
+		};
+	});
+});
+Scoped.define("module:Loggers.LogListener", [
+	"module:Class"
+], function (Class, scoped) {
+	return Class.extend({scoped: scoped}, function (inherited) {
+		return {
+			
+			message: function (source, msg) {}
+			
+		};
+	});
+});
+Scoped.define("module:Loggers.LogListenerFilter", [
+	"module:Loggers.LogListener",
+	"module:Objs",
+	"module:Types"
+], function (LogListener, Objs, Types, scoped) {
+	return LogListener.extend({scoped: scoped}, function (inherited) {
+		return {
+			
+			constructor: function (target, tags) {
+				inherited.constructor.call(this);
+				this.__target = target;
+				this.__tags = tags;
 			},
 
-			/**
-			 * Returns the status text associated with the exception
-			 * 
-			 * @return {string} status text
-			 */
-			status_text: function () {
-				return this.__status_text;
-			},
-
-			/**
-			 * Returns the custom data associated with the exception 
-			 * 
-			 * @return custom data
-			 */
-			data: function () {
-				return this.__data;
-			},
-
-			/**
-			 * Returns a JSON representation of the exception
-			 * 
-			 * @return {object} Exception JSON representation
-			 */
-			json: function () {
-				return Objs.extend({
-					data: this.data(),
-					status_code: this.status_code(),
-					status_text: this.status_text()
-				}, inherited.json.call(this));
+			message: function (source, msg) {
+				var tags = Objs.objectify(msg.tags); 
+				var result = false;
+				if (Types.is_array(this.__tags[0])) {
+					result = this.__tags.some(function (sub) {
+						return sub.every(function (tag) {
+							return tags[tag];
+						});
+					});
+				} else {
+					result = this.__tags.every(function (tag) {
+						return tags[tag];
+					});
+				}
+				if (result)
+					this.__target.message(source, msg);
 			}
 			
 		};
 	});
 });
+Scoped.define("module:Loggers.Logger", [
+	"module:Class",
+	"module:Objs",
+	"module:Functions"
+], function (Class, Objs, Functions, scoped) {
+	var Cls = Class.extend({scoped: scoped}, function (inherited) {
+		return {
+			
+			constructor: function (options) {
+				inherited.constructor.call(this);
+				options = options || {};
+				this.__listeners = {};
+				this.__tags = options.tags || [];
+				Objs.iter(options.listeners, this.addListener, this);
+			},
+			
+			addListener: function (listener) {
+				this.__listeners[listener.cid()] = listener;
+				return this;
+			},
+			
+			removeListener: function (listener) {
+				delete this.__listeners[listener.cid()];
+				return this;
+			},
+			
+			log: function () {
+				return this.message(this, {
+					type: "log",
+					args: Functions.getArguments(arguments, 0)
+				});
+			},
+			
+			warn: function () {
+				return this.message(this, {
+					type: "warn",
+					args: Functions.getArguments(arguments, 0)
+				});
+			},
+			
+			error: function () {
+				return this.message(this, {
+					type: "error",
+					args: Functions.getArguments(arguments, 0)
+				});
+			},
+			
+			taggedlog: function (tags) {
+				return this.message(this, {
+					type: "log",
+					tags: tags,
+					args: Functions.getArguments(arguments, 1)
+				});
+			},
+			
+			taggedwarn: function (tags) {
+				return this.message(this, {
+					type: "warn",
+					tags: tags,
+					args: Functions.getArguments(arguments, 1)
+				});
+			},
 
+			taggederror: function (tags) {
+				return this.message(this, {
+					type: "error",
+					tags: tags,
+					args: Functions.getArguments(arguments, 1)
+				});
+			},
 
-
-Scoped.define("module:Net.Ajax", [
-    "module:Classes.ConditionalInstance",
-    "module:Objs",
-    "module:Net.Uri"
-], function (ConditionalInstance, Objs, Uri, scoped) {
-	return ConditionalInstance.extend({ scoped : scoped },
-		
-		/**
-		 * Abstract Ajax Class, child classes override this for concrete realizations of Ajax
-		 * 
-		 * @class BetaJS.Net.Ajax
-		 */
-		{
-
-		/**
-		 * Execute asynchronous ajax call
-		 * 
-		 * @param {object} options Ajax Call Options
-		 * @return {object} Success promise
-		 */
-		asyncCall : function(options) {
-			if (this._shouldMap (options))
-				options = this._mapToPost(options);
-			return this._asyncCall(Objs.extend(Objs.clone(this._options, 1), options));
-		},
-
-		/**
-		 * Abstract Call for executing Ajax.
-		 * 
-		 * @param {object} options Ajax Call Options
-		 * @return {object} Success promise
-		 */
-		_asyncCall : function(options) {
-			throw "Abstract";
-		},
-
-		/**
-		 * Check if should even attempt a mapping. Important to not assume
-		 * that the method option is always specified.
-		 * 
-		 * @param {object} options Ajax Call Options
-		 * @return {boolean} true if it should be mapped
-		 */
-		_shouldMap : function (options) {
-			return (this._options.mapPutToPost && options.method && options.method.toLowerCase() === "put") ||
-			       (this._options.mapDestroyToPost && options.method && options.method.toLowerCase() === "destroy");
-		},
-
-		/**
-		 * Some implementations do not supporting sending data with
-		 * the non-standard request. This fix converts the Request to use POST, so
-		 * the data is sent, but the server still thinks it is receiving a
-		 * non-standard request.
-		 * 
-		 * @param {object} options Ajax Call Options
-		 * @return {object} Updated options
-		 */
-		_mapToPost : function (options) {
-			options.uri = Uri.appendUriParams(options.uri, {
-				_method : options.method.toUpperCase()
-			});
-			options.method = "POST";
-			return options;
-		}
+			message: function (source, msg) {
+				Objs.iter(this.__listeners, function (listener) {
+					msg.tags = this.__tags.concat(msg.tags || []);
+					listener.message(this, msg);
+				}, this);
+				return this;
+			},
+			
+			tag: function () {
+				return new Cls({
+					tags: Functions.getArguments(arguments),
+					listeners: [this]
+				});
+			}
+			
+		};
 	}, {
 		
-		_initializeOptions: function (options) {
-			return Objs.extend({
-				"method" : "GET",
-				"data" : {}
-			}, options);
+		global: function () {
+			if (!this.__global)
+				this.__global = new Cls();
+			return this.__global;
 		}
 		
 	});
+	
+	return Cls;
 });
-
 Scoped.define("module:Net.SocketSenderChannel", [
     "module:Channels.Sender"
 ], function (Sender, scoped) {
@@ -9411,23 +11716,27 @@ Scoped.define("module:Net.HttpHeader", function () {
 		
 		HTTP_STATUS_OK : 200,
 		HTTP_STATUS_CREATED : 201,
+		HTTP_STATUS_BAD_REQUEST : 400,
 		HTTP_STATUS_UNAUTHORIZED: 401,
 		HTTP_STATUS_PAYMENT_REQUIRED : 402,
 		HTTP_STATUS_FORBIDDEN : 403,
 		HTTP_STATUS_NOT_FOUND : 404,
 		HTTP_STATUS_PRECONDITION_FAILED : 412,
 		HTTP_STATUS_INTERNAL_SERVER_ERROR : 500,
+		HTTP_STATUS_GATEWAY_TIMEOUT: 504,
 		
 		STRINGS: {
 			0: "Unknown Error",
 			200: "OK",
 			201: "Created",
+			400: "Bad Request",
 			401: "Unauthorized",
 			402: "Payment Required",
 			403: "Forbidden",
 			404: "Not found",
 			412: "Precondition Failed",
-			500: "Internal Server Error"
+			500: "Internal Server Error",
+			504: "Gateway timeout"
 		},
 		
 		
@@ -9442,6 +11751,17 @@ Scoped.define("module:Net.HttpHeader", function () {
 		format: function (code, prepend_code) {
 			var ret = this.STRINGS[code in this.STRINGS ? code : 0];
 			return prepend_code ? (code + " " + ret) : ret;
+		},
+		
+		/**
+		 * Returns true if a status code is in the 200 region.
+		 * 
+		 * @param {int} code status code
+		 * 
+		 * @return {boolean} true if code in the 200 region
+		 */
+		isSuccessStatus: function (code) {
+			return code >= this.HTTP_STATUS_OK && code < 300;
 		}
 		
 	};
@@ -9494,18 +11814,25 @@ Scoped.define("module:Net.Uri", [
 		 * 
 		 * @param {object} arr a key-value set of query parameters
 		 * @param {string} prefix an optional prefix to be used for generating the keys
+		 * @param {boolean} flatten flatten the components first
 		 * 
 		 * @return {string} encoded query parameters
 		 */
-		encodeUriParams: function (arr, prefix) {
+		encodeUriParams: function (arr, prefix, flatten) {
 			prefix = prefix || "";
 			var res = [];
-			Objs.iter(arr, function (value, key) {
-				if (Types.is_object(value))
-					res = res.concat(this.encodeUriParams(value, prefix + key + "_"));
-				else
-					res.push(prefix + key + "=" + encodeURIComponent(value));
-			}, this);
+			if (flatten) {
+				Objs.iter(Objs.serializeFlatJSON(arr), function (kv) {
+					res.push(prefix + kv.key + "=" + encodeURIComponent(kv.value));
+				}, this);
+			} else {
+                Objs.iter(arr, function (value, key) {
+                	if (Types.is_object(value))
+                		res = res.concat(this.encodeUriParams(value, prefix + key + "_"));
+                    else
+                        res.push(prefix + key + "=" + encodeURIComponent(value));
+                }, this);
+			}
 			return res.join("&");
 		},
 		
@@ -9562,6 +11889,29 @@ Scoped.define("module:Net.Uri", [
 				if ($1) uri.queryKey[$1] = $2;
 			});
 			return uri;
+		},
+		
+		/**
+		 * Determines whether a target URI is considered cross-domain with respect to a source URI.
+		 * 
+		 * @param {string} source source URI
+		 * @param {string} target target URI
+		 * 
+		 * @return {boolean} true if target is cross-domain w.r.t. source
+		 */
+		isCrossDomainUri: function (source, target) {
+			// If target has no protocol delimiter, there is no domain given, hence source domain is used
+			if (target.indexOf("//") < 0)
+				return false;
+			// If source has no protocol delimiter but target has, it is cross-domain.
+			if (source.indexOf("//") < 0)
+				return true;
+			source = this.parse(source.toLowerCase());
+			target = this.parse(target.toLowerCase());
+			// Terminate if one of protocols is the file protocol.
+			if (source.protocol === "file" || target.protocol === "file")
+				return source.protocol === target.protocol;
+			return source.host !== target.host || source.port !== target.port;
 		}
 			
 	};
@@ -9577,8 +11927,20 @@ Scoped.define("module:RMI.Client", [
                                     "module:RMI.Stub"
                                     ], function (Class, Objs, TransportChannel, Ids, Skeleton, Types, Stub, scoped) {
 	return Class.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * RMI Client Class
+		 * 
+		 * @class BetaJS.RMI.Client
+		 */
 		return {			
 
+			/**
+			 * Creates a new instance of an RMI client.
+			 * 
+			 * @param {object} sender_or_channel_or_null a channel or sender that should be connected to
+			 * @param {object} receiver_or_null a receiver that should be connected to
+			 */
 			constructor: function (sender_or_channel_or_null, receiver_or_null) {
 				inherited.constructor.call(this);
 				this.__channel = null;
@@ -9591,18 +11953,42 @@ Scoped.define("module:RMI.Client", [
 				}
 			},
 
+			/**
+			 * @override
+			 */
 			destroy: function () {
 				if (this.__channel)
 					this.disconnect();
 				inherited.destroy.call(this);
 			},
 
+			/**
+			 * Connect to a channel.
+			 * 
+			 * @param {object} channel channel to be connected to
+			 */
 			connect: function (channel) {
 				if (this.__channel)
 					return;
 				this.__channel = channel;
+				return this;
+			},
+			
+			/**
+			 * Connect to a channel using sender and receiver.
+			 * 
+			 * @param {object} sender sender channel to be connected to
+			 * @param {object} receiver receiver channel to be connected to
+			 * @param {object} options options for transport channel
+			 */
+			connectTransport: function (sender, receiver, options) {
+				return this.connect(this.auto_destroy(new TransportChannel(sender, receiver, options)));
 			},
 
+			/**
+			 * Disconnect from channel.
+			 * 
+			 */
 			disconnect: function () {
 				if (!this.__channel)
 					return;
@@ -9610,8 +11996,16 @@ Scoped.define("module:RMI.Client", [
 				Objs.iter(this.__instances, function (inst) {
 					this.release(inst);
 				}, this);
+				return this;
 			},
 
+			/**
+			 * Serialize a value.
+			 * 
+			 * @param value value to be serialized.
+			 * 
+			 * @return Serialized value
+			 */
 			_serializeValue: function (value) {
 				if (Skeleton.is_instance_of(value)) {
 					var registry = this.server;
@@ -9625,6 +12019,13 @@ Scoped.define("module:RMI.Client", [
 					return value;		
 			},
 
+			/**
+			 * Unserialize a value.
+			 * 
+			 * @param value value to be unserialized.
+			 * 
+			 * @return unserialized value
+			 */
 			_unserializeValue: function (value) {
 				if (value && value.__rmi_meta) {
 					var receiver = this;
@@ -9633,6 +12034,14 @@ Scoped.define("module:RMI.Client", [
 					return value;		
 			},
 
+			/**
+			 * Acquires an object instance.
+			 * 
+			 * @param {string} class_type class type of object instance
+			 * @param {string} instance_name registered name of instance
+			 * 
+			 * @return {object} object instance
+			 */
 			acquire: function (class_type, instance_name) {
 				if (this.__instances[instance_name])
 					return this.__instances[instance_name];
@@ -9643,23 +12052,30 @@ Scoped.define("module:RMI.Client", [
 				var instance = new class_type();
 				this.__instances[Ids.objectId(instance, instance_name)] = instance;
 				var self = this;
-				instance.__send = function (message, data) {
+				instance.__send = function (message, data, serializes) {
 					if (!self.__channel)
 						return;
 					data = Objs.map(data, self._serializeValue, self);
-					return self.__channel.send(instance_name + ":" + message, data).mapSuccess(function (result) {
+					return self.__channel.send(instance_name + ":" + message, data, {serializerInfo: serializes}).mapSuccess(function (result) {
 						return this._unserializeValue(result);
 					}, self);
 				};
 				return instance;		
 			},
 
+			/**
+			 * Releases an acquired instance.
+			 * 
+			 * @param {object} instance instance to be released
+			 * 
+			 */
 			release: function (instance) {
 				var instance_name = Ids.objectId(instance);
-				if (!this.__instances[instance_name])
-					return;
-				instance.weakDestroy();
-				delete this.__instances[instance_name];
+				if (this.__instances[instance_name]) {
+					instance.weakDestroy();
+					delete this.__instances[instance_name];
+				}
+				return this;
 			}
 
 		};
@@ -9764,8 +12180,18 @@ Scoped.define("module:RMI.Server", [
                                     "module:Promise"
                                     ], function (Class, EventsMixin, Objs, TransportChannel, ObjectIdList, Ids, Skeleton, Promise, scoped) {
 	return Class.extend({scoped: scoped}, [EventsMixin, function (inherited) {
+		
+		/**
+		 * @class BetaJS.RMI.Server
+		 */
 		return {
 
+			/**
+			 * Creates an RMI Server instance
+			 * 
+			 * @param {object} sender_or_channel_or_null a channel or sender that should be connected to
+			 * @param {object} receiver_or_null a receiver that should be connected to
+			 */
 			constructor: function (sender_or_channel_or_null, receiver_or_null) {
 				inherited.constructor.call(this);
 				this.__channels = new ObjectIdList();
@@ -9778,6 +12204,9 @@ Scoped.define("module:RMI.Server", [
 				}
 			},
 
+			/**
+			 * @override
+			 */
 			destroy: function () {
 				this.__channels.iterate(this.unregisterClient, this);
 				Objs.iter(this.__instances, function (inst) {
@@ -9787,21 +12216,44 @@ Scoped.define("module:RMI.Server", [
 				inherited.destroy.call(this);
 			},
 
+			/**
+			 * Registers an RMI skeleton instance.
+			 * 
+			 * @param {object} instance skeleton instance
+			 * @param {object} options Options like name of instance
+			 * 
+			 * @return {object} Instance
+			 */
 			registerInstance: function (instance, options) {
 				options = options || {};
 				this.__instances[Ids.objectId(instance, options.name)] = {
 						instance: instance,
 						options: options
 				};
+				if (options.auto_destroy)
+					this.auto_destroy(instance);
 				return instance;
 			},
 
+			/**
+			 * Unregisters a RMI skeleton instance
+			 * 
+			 * @param {object} instance skeleton instance
+			 */
 			unregisterInstance: function (instance) {
 				delete this.__instances[Ids.objectId(instance)];
 				instance.weakDestroy();
+				return this;
 			},
 
-			registerClient: function (channel) {
+			/**
+			 * Register a client channel
+			 * 
+			 * @param {object} channel Client channel
+			 * @param {object} options Options
+			 */
+			registerClient: function (channel, options) {
+				options = options || {};
 				var self = this;
 				this.__channels.add(channel);
 				channel._reply = function (message, data) {
@@ -9811,13 +12263,40 @@ Scoped.define("module:RMI.Server", [
 					else
 						return Promise.error(true);
 				};
+				if (options.auto_destroy)
+					this.auto_destroy(channel);
+				return this;
+			},
+			
+			/**
+			 * Register a client by sender and receiver channel
+			 * 
+			 * @param {object} sender Sender channel
+			 * @param {object} receiver Receiver channel
+			 * @param {object} options Options
+			 */
+			registerTransportClient: function (sender, receiver, options) {
+				return this.registerClient(this.auto_destroy(new TransportChannel(sender, receiver, options)));
 			},
 
+			/**
+			 * Unregister a client channel
+			 * 
+			 * @param {object} channel Client channel
+			 */
 			unregisterClient: function (channel) {
 				this.__channels.remove(channel);
 				channel._reply = null;
+				return this;
 			},
 
+			/**
+			 * Serialize a value.
+			 * 
+			 * @param value value to be serialized.
+			 * 
+			 * @return Serialized value
+			 */
 			_serializeValue: function (value) {
 				if (Skeleton.is_instance_of(value)) {
 					var registry = this;
@@ -9831,6 +12310,13 @@ Scoped.define("module:RMI.Server", [
 					return value;		
 			},
 
+			/**
+			 * Unserialize a value.
+			 * 
+			 * @param value value to be unserialized.
+			 * 
+			 * @return unserialized value
+			 */
 			_unserializeValue: function (value) {
 				if (value && value.__rmi_meta) {
 					var receiver = this.client;
@@ -9839,6 +12325,16 @@ Scoped.define("module:RMI.Server", [
 					return value;		
 			},
 
+			/**
+			 * Invokes an instance method on a channel.
+			 * 
+			 * @param {object} channel Channel to be used for invokation
+			 * @param {string} instance_id Id of instance to be used as context
+			 * @param {string} method Method to be called
+			 * @param data Data to be passed to method
+			 * 
+			 * @return Return value of method as promise. 
+			 */
 			_invoke: function (channel, instance_id, method, data) {
 				var instance = this.__instances[instance_id];
 				if (!instance) {
@@ -9988,6 +12484,12 @@ Scoped.define("module:RMI.Stub", [
 			 * @member {array} intf abstract interface list, needs to be overwritten in subclasses
 			 */
 			intf: [],
+			
+			/**
+			 * 
+			 * @member {object} serializes list of serialization information
+			 */
+			serializes: {},
 
 			/**
 			 * Instantiates the stub.
@@ -10010,7 +12512,7 @@ Scoped.define("module:RMI.Stub", [
 			 * @override
 			 */
 			invoke: function (message) {
-				return this.__send(message, Functions.getArguments(arguments, 1));
+				return this.__send(message, Functions.getArguments(arguments, 1), this.serializes[message]);
 			}
 
 		};
@@ -10126,6 +12628,20 @@ Scoped.define("module:Scheduling.SchedulableMixin", [], function () {
 				this.scheduler.schedulable(this, callback, initialSteps);
 			else 
 				callback.call(this, Infinity);
+		}
+				
+	};	
+});
+
+
+Scoped.define("module:Scheduling.Helper", [], function () {
+	return {
+		
+		schedulable: function (callback, initialSteps, scheduler, context) {
+			if (scheduler)
+				scheduler.schedulable(context || this, callback, initialSteps);
+			else 
+				callback.call(context || this, Infinity);
 		}
 				
 	};	
@@ -10292,40 +12808,77 @@ Scoped.define("module:Scheduling.DefaultScheduler", [
 
 
 Scoped.define("module:States.CompetingComposite", [
-                                                   "module:Class",
-                                                   "module:Objs"
-                                                   ], function (Class, Objs, scoped) {
-	return Class.extend({scoped: scoped}, {
-
-		_register_host: function (competing_host) {
-			this._hosts = this._hosts || [];
-			this._hosts.push(this._auto_destroy(competing_host));
-		},
-
-		other_hosts: function (competing_host) {
-			return Objs.filter(this._hosts || [], function (other) {
-				return other != competing_host;
-			}, this);
-		},
-
-		_next: function (competing_host, state) {
-			var others = this.other_hosts(competing_host);
-			for (var i = 0; i < others.length; ++i) {
-				var other = others[i];
-				var other_state = other.state();
-				if (!other_state.can_coexist_with(state))
-					other_state.retreat_against(state);
+    "module:Class",
+    "module:Objs"
+], function (Class, Objs, scoped) {
+	return Class.extend({scoped: scoped}, function (inherited) {
+		
+		/**
+		 * Competing Composite Class
+		 * 
+		 * @class BetaJS.States.CompetingComposite
+		 */
+		return {
+			
+			/**
+			 * Register a competing host
+			 * 
+			 * @param {object} competing_host Competing host
+			 */
+			_register_host: function (competing_host) {
+				this._hosts = this._hosts || [];
+				this._hosts.push(this._auto_destroy(competing_host));
+			},
+	
+			/**
+			 * Returns all other hosts of a competing host
+			 * 
+			 * @param {object} competing_host competing hosts in question
+			 * @return {array} other hosts
+			 */
+			other_hosts: function (competing_host) {
+				return Objs.filter(this._hosts || [], function (other) {
+					return other != competing_host;
+				}, this);
+			},
+	
+			/**
+			 * Transcend to another state of a competing host
+			 * 
+			 * @param {object} competing_host Competing host
+			 * @param {object} state State
+			 */
+			_next: function (competing_host, state) {
+				var others = this.other_hosts(competing_host);
+				for (var i = 0; i < others.length; ++i) {
+					var other = others[i];
+					var other_state = other.state();
+					if (!other_state.can_coexist_with(state))
+						other_state.retreat_against(state);
+				}
 			}
-		}
 
+		};
 	});
 });
 
 
 Scoped.define("module:States.CompetingHost", ["module:States.Host"], function (Host, scoped) {
 	return Host.extend({scoped: scoped}, function (inherited) {
+
+		/**
+		 * CompetingHost Class
+		 * 
+		 * @class BetaJS.States.CompetingHost
+		 */
 		return {
 
+			/**
+			 * Creates a new instance.
+			 * 
+			 * @param {object} composite Associated composite object
+			 * @param {object} options Host options
+			 */
 			constructor: function (composite, options) {
 				inherited.constructor.call(this, options);
 				this._composite = composite;
@@ -10333,10 +12886,18 @@ Scoped.define("module:States.CompetingHost", ["module:States.Host"], function (H
 					composite._register_host(this);
 			},
 
+			/**
+			 * Returns the associated composite.
+			 * 
+			 * @return {object} Composite
+			 */
 			composite: function () {
 				return this._composite;
 			},
 
+			/**
+			 * @override
+			 */
 			_can_transition_to: function (state) {
 				if (!inherited._can_transition_to.call(this, state))
 					return false;
@@ -10352,6 +12913,9 @@ Scoped.define("module:States.CompetingHost", ["module:States.Host"], function (H
 				return true;
 			},
 
+			/**
+			 * @override
+			 */
 			_next: function (state) {
 				if (this._composite)
 					this._composite._next(this, state);
@@ -10364,29 +12928,64 @@ Scoped.define("module:States.CompetingHost", ["module:States.Host"], function (H
 
 
 Scoped.define("module:States.CompetingState", ["module:States.State"], function (State, scoped) {
-	return State.extend({scoped: scoped}, {
+	return State.extend({scoped: scoped}, function (inherited) {
 
-		can_coexist_with: function (foreign_state) {
-			return true;
-		},
+		/**
+		 * ComponentState Class
+		 * 
+		 * @class BetaJS.States.CompetingState
+		 */
+		return {
+			
+			/**
+			 * Determines whether this state can coexist with a foreign state
+			 * 
+			 * @param {object} foreign_state Foreign state
+			 * @return {boolean} true if it can coexist
+			 */
+			can_coexist_with: function (foreign_state) {
+				return true;
+			},
+	
+			/**
+			 * Determines whether this state can prevail against a foreign state
+			 * 
+			 * @param {object} foreign_state Foreign state
+			 * @return {boolean} true if it can prevail
+			 */
+			can_prevail_against: function (foreign_state) {
+				return false;
+			},
+	
+			/**
+			 * Retreat against foreign state
+			 * 
+			 * @param {object} foreign_state Foreign state
+			 */
+			retreat_against: function (foreign_state) {
+			}
 
-		can_prevail_against: function (foreign_state) {
-			return false;
-		},
-
-		retreat_against: function (foreign_state) {
-		}
-
+		};
 	});
 });
 
-Scoped.define("module:Router.RouteParser", [ "module:Class", "module:Strings",
-                                             "module:Objs" ], function(Class, Strings, Objs, scoped) {
-	return Class.extend({
-		scoped : scoped
-	}, function(inherited) {
+Scoped.define("module:Router.RouteParser", [
+    "module:Class", "module:Strings", "module:Objs"
+], function (Class, Strings, Objs, scoped) {
+	return Class.extend({ scoped : scoped }, function(inherited) {
+		
+		/**
+		 * Route Parser Class
+		 * 
+		 * @class BetaJS.Router.RouteParser
+		 */
 		return {
 
+			/**
+			 * Create a new instance.
+			 * 
+			 * @param {object} routes routes mapping
+			 */
 			constructor : function(routes) {
 				inherited.constructor.call(this);
 				this.routes = {};
@@ -10395,6 +12994,12 @@ Scoped.define("module:Router.RouteParser", [ "module:Class", "module:Strings",
 				}, this);
 			},
 
+			/**
+			 * Return parses a route and returns the parsed result.
+			 * 
+			 * @param {string} route route to be parsed
+			 * @return {object} parsed route
+			 */
 			parse : function(route) {
 				for ( var key in this.routes) {
 					var entry = this.routes[key];
@@ -10409,6 +13014,15 @@ Scoped.define("module:Router.RouteParser", [ "module:Class", "module:Strings",
 				return null;
 			},
 
+			/**
+			 * Recreates a full route from an abstract route descriptor and route arguments.
+			 * 
+			 * @param {string} name route descriptor
+			 * @param {array} args arguments for route
+			 * 
+			 * @return {string} full route
+			 * 
+			 */
 			format : function(name, args) {
 				args = args || {};
 				var entry = this.routes[name];
@@ -10416,6 +13030,12 @@ Scoped.define("module:Router.RouteParser", [ "module:Class", "module:Strings",
 						entry.captureRegex.mapBack(args));
 			},
 
+			/**
+			 * Bind a new route.
+			 * 
+			 * @param {string} key route descriptor
+			 * @param {string} route route regex string
+			 */
 			bind : function(key, route) {
 				this.routes[key] = {
 						name : key,
@@ -10429,13 +13049,23 @@ Scoped.define("module:Router.RouteParser", [ "module:Class", "module:Strings",
 	});
 });
 
-Scoped.define("module:Router.RouteMap", [ "module:Class", "module:Strings",
-                                          "module:Objs" ], function(Class, Strings, Objs, scoped) {
-	return Class.extend({
-		scoped : scoped
-	}, function(inherited) {
+Scoped.define("module:Router.RouteMap", [
+	"module:Class", "module:Strings", "module:Objs"
+], function(Class, Strings, Objs, scoped) {
+	return Class.extend({ scoped : scoped }, function(inherited) {
+		
+		/**
+		 * RouteMap Class, mapping routes to routes.
+		 * 
+		 * @class BetaJS.Router.RouteMap
+		 */
 		return {
 
+			/**
+			 * Creates new instance.
+			 * 
+			 * @param {object} options initialization options
+			 */
 			constructor : function(options) {
 				inherited.constructor.call(this);
 				options = options || {};
@@ -10444,6 +13074,14 @@ Scoped.define("module:Router.RouteMap", [ "module:Class", "module:Strings",
 				this._bindings = options.bindings || {};
 			},
 
+			/**
+			 * Maps a route.
+			 * 
+			 * @param {string} name route name
+			 * @param {array} args route arguments
+			 * 
+			 * @return {object} mapped route
+			 */
 			map : function(name, args) {
 				var binding = this._bindings[name];
 				if (binding)
@@ -10456,6 +13094,12 @@ Scoped.define("module:Router.RouteMap", [ "module:Class", "module:Strings",
 				};
 			},
 
+			/**
+			 * Binds a route.
+			 * 
+			 * @param {string} name name of route
+			 * @param {function} func function to bind the route to
+			 */
 			bind : function(name, func) {
 				this._bindings[name] = func;
 				return this;
@@ -10465,93 +13109,168 @@ Scoped.define("module:Router.RouteMap", [ "module:Class", "module:Strings",
 	});
 });
 
-Scoped.define("module:Router.Router", [ "module:Class",
-                                        "module:Events.EventsMixin", "module:Objs",
-                                        "module:Router.RouteParser", "module:Comparators" ], function(Class,
-                                        		EventsMixin, Objs, RouteParser, Comparators, scoped) {
-	return Class.extend({
-		scoped : scoped
-	}, [
-	    EventsMixin,
-	    function(inherited) {
-	    	return {
+Scoped.define("module:Router.Router", [
+    "module:Class",
+    "module:Events.EventsMixin",
+    "module:Objs",
+    "module:Router.RouteParser",
+    "module:Comparators"
+], function(Class, EventsMixin, Objs, RouteParser, Comparators, scoped) {
+	return Class.extend({ scoped : scoped }, [EventsMixin, function(inherited) {
+		
+		/**
+		 * Router Class
+		 * 
+		 * @class BetaJS.Router.Router
+		 */
+    	return {
 
-	    		constructor : function(routes) {
-	    			inherited.constructor.call(this);
-	    			this._routeParser = new RouteParser(routes);
-	    			this._current = null;
-	    		},
+    		/**
+    		 * Creates new instance.
+    		 * 
+    		 * @param {object} routes routes mapping for route parser
+    		 */
+    		constructor : function(routes) {
+    			inherited.constructor.call(this);
+    			this._routeParser = new RouteParser(routes);
+    			this._current = null;
+    		},
 
-	    		destroy : function() {
-	    			this._routeParser.destroy();
-	    			inherited.destroy.call(this);
-	    		},
+    		/**
+    		 * @override
+    		 */
+    		destroy : function() {
+    			this._routeParser.destroy();
+    			inherited.destroy.call(this);
+    		},
 
-	    		bind : function(key, route, func, ctx) {
-	    			this._routeParser.bind(key, route);
-	    			if (func)
-	    				this.on("dispatch:" + key, func, ctx);
-	    			return this;
-	    		},
+    		/**
+    		 * Bind a new route.
+    		 * 
+			 * @param {string} key route descriptor
+			 * @param {string} route route regex string
+			 * @param {function} func optional function to be called when route is dispatched
+			 * @param {object} ctx optional function context
+    		 */
+    		bind : function(key, route, func, ctx) {
+    			this._routeParser.bind(key, route);
+    			if (func)
+    				this.on("dispatch:" + key, func, ctx);
+    			return this;
+    		},
 
-	    		current : function() {
-	    			return this._current;
-	    		},
+    		/**
+    		 * Returns the current route.
+    		 * 
+    		 * @return {string} current route
+    		 */
+    		current : function() {
+    			return this._current;
+    		},
 
-	    		navigate : function(route) {
-	    			this.trigger("navigate", route);
-	    			this.trigger("navigate:" + route);
-	    			var parsed = this._routeParser.parse(route);
-	    			if (parsed)
-	    				this.dispatch(parsed.name, parsed.args, route);
-	    			else
-	    				this.trigger("notfound", route);
-	    		},
+    		/**
+    		 * Navigates to a new route.
+    		 * 
+    		 * @param {string} route route to navigate to
+    		 */
+    		navigate : function(route) {
+    			this.trigger("navigate", route);
+    			this.trigger("navigate:" + route);
+    			var parsed = this._routeParser.parse(route);
+    			if (parsed)
+    				this.dispatch(parsed.name, parsed.args, route);
+    			else
+    				this.trigger("notfound", route);
+    			return this;
+    		},
 
-	    		dispatch : function(name, args, route) {
-	    			if (this._current) {
-	    				if (this._current.name === name && Comparators.deepEqual(args, this._current.args, 2))
-	    					return;
-	    				this.trigger("leave", this._current.name,
-	    						this._current.args, this._current);
-	    				this.trigger("leave:" + this._current.name,
-	    						this._current.args, this._current);
-	    			}
-	    			var current = {
-    					route : route || this.format(name, args),
-    					name : name,
-    					args : args
-	    			};
-	    			this.trigger("dispatch", name, args, current);
-	    			this.trigger("dispatch:" + name, args, current);
-	    			this._current = current;
-	    			this.trigger("dispatched", name, args, current);
-	    			this.trigger("dispatched:" + name, args, current);
-	    		},
+    		/**
+    		 * Dispatches a new route.
+    		 * 
+    		 * @param {string} name name of route
+    		 * @param {array} args arguments of new route
+    		 * @param {string} route optional route string
+    		 * 
+    		 */
+    		dispatch : function(name, args, route) {
+    			if (this._current) {
+    				if (this._current.name === name && Comparators.deepEqual(args, this._current.args, 2))
+    					return;
+    				this.trigger("leave", this._current.name,
+    						this._current.args, this._current);
+    				this.trigger("leave:" + this._current.name,
+    						this._current.args, this._current);
+    			}
+    			var current = {
+					route : route || this.format(name, args),
+					name : name,
+					args : args
+    			};
+    			this.trigger("dispatch", name, args, current);
+    			this.trigger("dispatch:" + name, args, current);
+    			this._current = current;
+    			this.trigger("dispatched", name, args, current);
+    			this.trigger("dispatched:" + name, args, current);
+    			return this;
+    		},
 
-	    		format : function(name, args) {
-	    			return this._routeParser.format(name, args);
-	    		}
+			/**
+			 * Recreates a full route from an abstract route descriptor and route arguments.
+			 * 
+			 * @param {string} name route descriptor
+			 * @param {array} args arguments for route
+			 * 
+			 * @return {string} full route
+			 * 
+			 */
+    		format : function(name, args) {
+    			return this._routeParser.format(name, args);
+    		}
 
-	    	};
-	    } ]);
+    	};
+    } ]);
 });
 
 
 
-Scoped.define("module:Router.RouteBinder", [ "module:Class", "module:Types" ], function(Class, Types, scoped) {
-	return Class.extend({ scoped : scoped
-	}, function(inherited) {
+Scoped.define("module:Router.RouteBinder", [
+	"module:Class", "module:Types"
+], function( Class, Types, scoped) {
+	return Class.extend({ scoped : scoped }, function(inherited) {
+		
+		/**
+		 * Abstract Route Binder Class for bidirectionally binding the route to a separate router.
+		 * 
+		 * @class BetaJS.Router.RouteBinder
+		 */
 		return {
 			
+			/**
+			 * Overwrite the local route of this binder.
+			 * 
+			 * @param {string} currentRoute current route
+			 */
 			_setLocalRoute: function (currentRoute) {},
 			
+			/**
+			 * Read the local route of this binder.
+			 * 
+			 * @return {string} local route
+			 */
 			_getLocalRoute: function () {},
 			
+			/**
+			 * Notify the router that the local route has changed.
+			 */
 			_localRouteChanged: function () {
 				this.setGlobalRoute(this._getLocalRoute());
 			},
 
+			/**
+			 * Creates a new instance.
+			 * 
+			 * @param {object} router router instance
+			 */
 			constructor : function(router) {
 				inherited.constructor.call(this);
 				this._router = router;
@@ -10564,20 +13283,35 @@ Scoped.define("module:Router.RouteBinder", [ "module:Class", "module:Types" ], f
 					this.setGlobalRoute(this._getLocalRoute());
 			},
 
+			/**
+			 * @override
+			 */
 			destroy : function() {
 				this._router.off(null, null, this);
 				inherited.destroy.call(this);
 			},
 			
+			/**
+			 * Sets the local route.
+			 * 
+			 * @param {string} currentRoute current route
+			 */
 			setLocalRoute: function (currentRoute) {
 				this._setLocalRoute(currentRoute);
+				return this;
 			},
 			
+			/**
+			 * Sets the global route.
+			 * 
+			 * @param {string} route new global route
+			 */
 			setGlobalRoute: function (route) {
 				if (Types.is_string(route))
 					this._router.navigate(route);
 				else
 					this._router.dispatch(route.name, route.args);
+				return this;
 			}
 
 		};
@@ -11112,97 +13846,6 @@ Scoped.define("module:States.StateRouter", ["module:Class", "module:Objs"], func
 			}
 
 		};		
-	});
-});
-
-Scoped.define("module:Workers.PseudoWorker", [
-    "module:Class",
-    "module:Events.EventsMixin"
-], function (Class, EventsMixin, scoped) {
-	return Class.extend({scoped: scoped}, [EventsMixin, {
-		
-		bind: function (peerWorker) {
-			this.__peer = peerWorker;
-		},
-		
-		postMessage: function (data) {
-			this.__peer.triggerAsync("message", data);
-		},
-		
-		addEventListener: function (event, callback) {
-			if (event === "message") {
-				this.on(event, function (data) {
-					callback.call(this, {data : data});
-				}, this);
-			} else {
-				this.on(event, callback);
-			}
-		}
-
-	}], {		
-		
-		createWorker: function (url) {
-			try {
-				return new Worker(url);
-			} catch (e) {
-				return null;
-			}
-		},
-		
-		createPseudoWorker: function (workerFactory, workerFactoryCtx) {
-			var clientWorker = new this();
-			var serverWorker = clientWorker.auto_destroy(new this());
-			clientWorker.bind(serverWorker);
-			serverWorker.bind(clientWorker);
-			workerFactory.call(workerFactoryCtx || this, serverWorker);
-			return clientWorker;
-		},
-		
-		createAsFallback: function (url, workerFactory, workerFactoryCtx) {
-			return this.createWorker(url) || this.createPseudoWorker(workerFactory, workerFactoryCtx);
-		}
-		
-	});
-});
-Scoped.define("module:Workers.WorkerSenderChannel", [
-    "module:Channels.Sender"
-], function (Sender, scoped) {
-	return Sender.extend({scoped: scoped}, function (inherited) {
-		return {
-			
-			constructor: function (worker) {
-				inherited.constructor.call(this);
-				this.__worker = worker || self;
-			},
-			
-			_send: function (message, data) {
-				this.__worker.postMessage({
-					message: message,
-					data: data
-				});
-			}
-			
-		};
-	});
-});
-
-
-Scoped.define("module:Workers.WorkerReceiverChannel", [
-    "module:Channels.Receiver"
-], function (Receiver, scoped) {
-	return Receiver.extend({scoped: scoped}, function (inherited) {
-		return {
-						
-			constructor: function (worker) {
-				inherited.constructor.call(this);
-				this.__worker = worker || self;
-				var _this = this;
-				this.__worker.addEventListener("message", function (data) {
-					_this._receive(data.data.message, data.data.data);
-				});
-		    }
-	
-		};
 	});
 });
 

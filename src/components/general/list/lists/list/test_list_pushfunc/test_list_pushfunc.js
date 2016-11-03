@@ -2,12 +2,15 @@
 Scoped.define("module:Test_list_pushfunc", [
     "dynamics:Dynamic",
     "module:Templates",
-    "base:Collections.Collection"
+    "base:Collections.Collection",
+	"base:Loggers.Logger"
 ],[
     "module:Titledlist",
     "module:Clickitem"
-], function (Dynamic, Templates, Collection, scoped) {
+], function (Dynamic, Templates, Collection, Logger, scoped) {
 
+	var logger = Logger.global().tag("dynamic", "list");
+	
     return Dynamic.extend({scoped : scoped}, {
 
         template: Templates.test_list_pushfunc,
@@ -19,9 +22,9 @@ Scoped.define("module:Test_list_pushfunc", [
                 },
                 functions : {
                     testfunc : function (argument) {
-                        console.log('This is a testfunction');
-                        console.log('This is the argument : ' + argument);
-                        console.log(this.get('listcollection'));
+                        logger.log('This is a testfunction');
+                        logger.log('This is the argument : ' + argument);
+                        logger.log(this.get('listcollection'));
                         this.get('listcollection').add(
                             {value : argument}
                         );

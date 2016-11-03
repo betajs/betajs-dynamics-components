@@ -1,8 +1,11 @@
 
 Scoped.define("module:Test_titledlist", [
     "dynamics:Dynamic",
-    "module:Templates"
-],function (Dynamic, Templates, scoped) {
+    "module:Templates",
+	"base:Loggers.Logger"
+],function (Dynamic, Templates, Logger, scoped) {
+	
+	var logger = Logger.global().tag("dynamic", "list");
 
     return Dynamic.extend({scoped: scoped}, {
 
@@ -19,11 +22,11 @@ Scoped.define("module:Test_titledlist", [
                 },
                 title_callbacks : {
                     addbutton : function () {
-                        console.log('This comes from the Test Titledlist : ');
+                    	logger.log('This comes from the Test Titledlist : ');
                         this.scope('<').call('additem', {value  : "Testtitledlist Item New"});
                     }
                     //clicktitle : function () {
-                    //    console.log('This comes from the Test Titledlist : ');
+                    //    logger.log('This comes from the Test Titledlist : ');
                     //    this.scope('<').call('togglelist');
                     //}
                 }

@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics - v0.0.61 - 2016-08-04
+betajs-dynamics - v0.0.71 - 2016-10-31
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -13,7 +13,7 @@ Scoped.binding('jquery', 'global:jQuery');
 Scoped.define("module:", function () {
 	return {
     "guid": "d71ebf84-e555-4e9b-b18a-11d74fdcefe2",
-    "version": "261.1470285674503"
+    "version": "273.1477956786489"
 };
 });
 Scoped.assumeVersion('base:version', 531);
@@ -206,7 +206,7 @@ Scoped.define("module:Data.Mesh", [
 					return base;
 				var splt = Strings.splitFirst(tail, ".");
 				var hd = head ? head + "." + splt.head : splt.head;
-				if (Properties.is_instance_of(current)) {
+				if (Properties.is_instance_of(current) && !current.destroyed()) {
 					if (current.has(splt.head))
 						return this._sub_navigate(current, splt.head, splt.tail, current, current.get(splt.head));
 					else if (splt.head in current)
@@ -994,17 +994,19 @@ Scoped.define("module:Dynamic", [
 					var source = ev.length === 1 ? this.activeElement() : this.activeElement().find(ev[1]);
 					this.__registered_dom_events.push(source);
 					source.on(ev[0] + "." + this.cid() + "-domevents", function (eventData) {
-						self.call(target, eventData);
+						self.execute(target, eventData, $(this));
 					});
 				}, this);
 				Objs.iter(this.windowevents, function (target, event) {
 					$(window).on(event + "." + this.cid() + "-windowevents", function (eventData) {
-						self.call(target, eventData);
+						self.execute(target, eventData, $(this));
 					});
 				}, this);
 			},
 			
 			destroy: function () {
+				if (this.free)
+					this.free();
 				Objs.iter(this.__dispose, function (attr) {
 					var obj = this.get(attr);
 					this.set(attr, null);
@@ -1036,7 +1038,10 @@ Scoped.define("module:Dynamic", [
 		},
 		
 		findByElement: function (element) {
-			return $(element).get(0).dynamicshandler;
+			if (!element)
+				return null;
+			element = $(element).get(0);
+			return element && element.dynamicshandler ? element.dynamicshandler : null; 
 		},
 		
 		register: function (key, registry) {
@@ -1080,7 +1085,22 @@ Scoped.define("module:Dynamic", [
 				return Objs.extend(Objs.clone(base, 1), overwrite);
 			},
 			attrs: function (base, overwrite) {
-				return Objs.extend(Objs.clone(base, 1), overwrite);
+				if (Types.is_function(base))
+					if (Types.is_function(overwrite)) {
+						return function () {
+							return Objs.extend(base(), overwrite());
+						};
+					} else {
+						return function () {
+							return Objs.extend(base(), overwrite);
+						};
+					}
+				else if (Types.is_function(overwrite)) {
+					return function () {
+						return Objs.extend(Objs.clone(base, 1), overwrite());
+					};
+				} else
+					return Objs.extend(Objs.clone(base, 1), overwrite);
 			},
 			dispose: function (first, second) {
 				return (first || []).concat(second || []);
@@ -1112,9 +1132,10 @@ Scoped.define("module:Handlers.Attr", [
 	    "base:Types",
 	    "base:Objs",
 	    "base:Strings",
+	    "base:Async",
 	    "module:Registries",
 	    "browser:Dom"
-	], function (Class, TagHandlerException, Parser, $, Types, Objs, Strings, Registries, Dom, scoped) {
+	], function (Class, TagHandlerException, Parser, $, Types, Objs, Strings, Async, Registries, Dom, scoped) {
 	var Cls;
 	Cls = Class.extend({scoped: scoped}, function (inherited) {
 		return {
@@ -1148,8 +1169,15 @@ Scoped.define("module:Handlers.Attr", [
 			
 			__inputVal: function (el, value) {
 				var valueKey = el.type === 'checkbox' || el.type === 'radio' ? 'checked' : 'value';
-				if (arguments.length > 1) 
-					el[valueKey] = value === null || value === undefined ? "" : value;
+				if (arguments.length > 1)  {
+					value = value === null || value === undefined ? "" : value;
+					if (el.type === "select-one") {
+						Async.eventually(function () {
+							el[valueKey] = value;
+						});
+					} else 
+						el[valueKey] = value;
+				}
 				return el[valueKey];
 			},
 			
@@ -1172,7 +1200,7 @@ Scoped.define("module:Handlers.Attr", [
 				if (this._dyn) {
 					var self = this;
 					if (this._dyn.bidirectional && this._attrName == "value") {
-						this._$element.on("change keyup keypress keydown blur focus update", function () {
+						this._$element.on("change keyup keypress keydown blur focus update input", function () {
 							self._node.mesh().write(self._dyn.variable, self.__inputVal(self._element));
 						});
 					}
@@ -1438,6 +1466,17 @@ Scoped.define("module:Handlers.HandlerMixin", [
 			return this.__activeElement;
 		},
 		
+		_updateActiveElement: function (activeElement) {
+			this.__activeElement = activeElement;
+			if (this.__removeObserver) {
+				this.__removeObserver.weakDestroy();
+				this.__removeObserver = this.auto_destroy(NodeRemoveObserver.create(this.__activeElement.get(0)));
+				this.__removeObserver.on("node-removed", function () {
+					this.weakDestroy();
+				}, this);				
+			}
+		},
+		
 		activate: function () {
 			if (this.__activated)
 				return;
@@ -1452,6 +1491,7 @@ Scoped.define("module:Handlers.HandlerMixin", [
 				this._handlerInitializeTemplate(this.template, this._parentElement);
 			else {
 				if (this.templateUrl) {
+					this.__activated = false;
 					Loader.loadHtml(this.templateUrl, function (template) {
 						this.templateUrl = null;
 						this.template = template;
@@ -1511,9 +1551,11 @@ Scoped.define("module:Handlers.Handler", [
 
 Scoped.define("module:Handlers.Partial", [
  	    "base:Class",
+ 	    "base:JavaScript",
+ 	    "base:Functions",
  	    "module:Parser",
  	    "module:Registries"
- 	], function (Class, Parser, Registries, scoped) {
+ 	], function (Class, JavaScript, Functions, Parser, Registries, scoped) {
  	return Class.extend({scoped: scoped}, function (inherited) {
  		return {
 			
@@ -1564,6 +1606,16 @@ Scoped.define("module:Handlers.Partial", [
 			_execute: function (code) {
 				var dyn = Parser.parseCode(code || this._value);
 				this._node.__executeDyn(dyn);
+			},
+			
+			_valueExecute: function (args) {
+				var value = this._value.trim();
+				if (JavaScript.isProperIdentifier(value)) {
+					args = Functions.getArguments(args);
+					args.unshift(value);
+					this._node._handler.execute.apply(this._node._handler, args);
+				} else
+					this._execute(value);			
 			}
 			
 			
@@ -1659,7 +1711,7 @@ Scoped.define("module:Handlers.Node", [
 				this._tagHandler = null;
 				
 				this._$element = $(element);
-				this._template = Dom.outerHTML(element);
+				this._template = element.outerHTML;
 				this._innerTemplate = element.innerHTML;
 				this._locals = locals || {};
 				this._active = true;
@@ -1784,11 +1836,14 @@ Scoped.define("module:Handlers.Node", [
 				if (!Registries.handler.get(tagv))
 					return false;
 				if (Info.isInternetExplorer() && Info.internetExplorerVersion() < 9) {
+					var isActiveElement = this._$element.get(0) === this._handler.activeElement().get(0);
 					this._$element = $(Dom.changeTag(this._$element.get(0), tagv));
 					this._element = this._$element.get(0);
 					Objs.iter(this._attrs, function (attr) {
 						attr.updateElement(this._element);
 					}, this);
+					if (isActiveElement)
+						this._handler._updateActiveElement(this._$element);
 				}
 				var createArguments = {
 					parentElement: this._$element.get(0),
@@ -2162,12 +2217,14 @@ Scoped.define("module:Partials.DataPartial", ["module:Handlers.Partial"], functi
 	return Cls;
 });
 
-Scoped.define("module:Partials.EventPartial", ["module:Handlers.Partial"], function (Partial, scoped) {
+Scoped.define("module:Partials.EventPartial", [
+    "module:Handlers.Partial"
+], function (Partial, scoped) {
   	var Cls = Partial.extend({scoped: scoped}, {
 			
 		bindTagHandler: function (handler) {
-			handler.on(this._postfix, function (arg1, arg2, arg3, arg4) {
-				this._node._handler.call(this._value, arg1, arg2, arg3, arg4);
+			handler.on(this._postfix, function () {
+				this._valueExecute(arguments);
 			}, this);
 		}
  		
@@ -2358,6 +2415,34 @@ Scoped.define("module:Partials.OnPartial", ["module:Handlers.Partial"], function
 	return Cls;
 });
 
+Scoped.define("module:Partials.RadioGroupPartial", ["module:Handlers.Partial"], function (Partial, scoped) {
+ 	var Cls = Partial.extend({scoped: scoped}, function (inherited) {
+ 		return {
+			
+ 			constructor: function (node, args, value) {
+ 				inherited.constructor.apply(this, arguments);
+ 				var self = this;
+ 				value = value.trim();
+ 				this._node._$element.prop("checked", self._node._$element.val() === this._node.properties().get(value));
+ 				this._node._$element.on("change." + this.cid(), function () {
+ 					self._node.properties().set(value, self._node._$element.val());
+ 				});
+ 				self._node.properties().on("change:" + value, function () {
+ 					this._node._$element.prop("checked", self._node._$element.val() === this._node.properties().get(value)); 					
+ 				}, this);
+ 			},
+ 			
+ 			destroy: function () {
+ 				this._node._$element.off("change." + this.cid());
+ 				inherited.destroy.call(this);
+ 			}
+ 		
+ 		};
+ 	});
+ 	Cls.register("ba-radio-group");
+	return Cls;
+});
+
 
 Scoped.define("module:Partials.RegisterPartial", ["module:Handlers.Partial"], function (Partial, scoped) {
  	var Cls = Partial.extend({scoped: scoped}, function (inherited) {
@@ -2413,7 +2498,7 @@ Scoped.define("module:Partials.RepeatElementPartial", [
 			
  			constructor: function (node, args, value) {
  				inherited.constructor.apply(this, arguments);
- 				this.__filteredTemplate = Dom.outerHTML($(node._template).removeAttr("ba-repeat-element").get(0));
+ 				this.__filteredTemplate = $(node._template).removeAttr("ba-repeat-element").get(0).outerHTML;
  			},
  			
  			_activate: function () {
@@ -2871,6 +2956,25 @@ Scoped.define("module:Partials.TemplateUrlPartial",
  	Cls.register("ba-template-url");
 	return Cls;
 
+});
+
+Scoped.define("module:Partials.TogglePartial", ["module:Handlers.Partial"], function (Partial, scoped) {
+ 	var Cls = Partial.extend({scoped: scoped}, function (inherited) {
+ 		return {
+			
+ 			constructor: function (node, args, value, postfix) {
+ 				inherited.constructor.apply(this, arguments);
+ 				node._$element.prop(postfix, value ? postfix : null);
+ 			},
+ 			
+ 			_apply: function (value) {
+ 				this._node._$element.prop(this._postfix, value ? this._postfix : null);
+ 			}
+ 		
+ 		};
+ 	});
+ 	Cls.register("ba-toggle");
+	return Cls;
 });
 
 Scoped.define("module:Partials.WeakIfPartial", ["module:Partials.ShowPartial"], function (Partial, scoped) {

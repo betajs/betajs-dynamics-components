@@ -1,10 +1,13 @@
 
 Scoped.define("tests:Test_addtitle", [
     "dynamics:Dynamic",
-    "module:Templates"
+    "module:Templates",
+	"base:Loggers.Logger"
 ], [
     "module:Addtitle"
-], function (Dynamic, Templates, scoped) {
+], function (Dynamic, Templates, Logger, scoped) {
+	
+	var logger = Logger.global().tag("dynamic", "list");
 
     return Dynamic.extend({scoped : scoped}, {
 
@@ -18,7 +21,7 @@ Scoped.define("tests:Test_addtitle", [
                     titlefunc : 'showlist',
                     addfunc : 'additem',
                     add_func : function () {
-                        console.log('This is the add_func');
+                        logger.log('This is the add_func');
                     }
                 }
             },
@@ -26,10 +29,10 @@ Scoped.define("tests:Test_addtitle", [
             functions : {
                 additem : function () {
                     this.get('testmodel').add_func.call(this, null);
-                    console.log("Add Item to List");
+                    logger.log("Add Item to List");
                 },
                 showlist : function () {
-                    console.log("You clicked the title");
+                	logger.log("You clicked the title");
                 }
             }
 

@@ -1,6 +1,6 @@
 {
 	"name": "betajs-dynamics-components",
-	"version": "0.1.0",
+	"version": "0.1.1",
 	"description": "BetaJS-Dynamics-Components is a Library of DOM Components that are built in BetaJS-Dynamics",
 	"homepage": "http://betajs.com",
 	"contributors": ["Oliver Friedmann, Victor Lingenthal"],

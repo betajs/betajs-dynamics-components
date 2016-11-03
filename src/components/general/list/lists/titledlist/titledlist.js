@@ -1,13 +1,17 @@
 
 Scoped.define("module:Titledlist", [
     "dynamics:Dynamic",
-    "module:Templates"
+    "module:Templates",
+	"base:Loggers.Logger"
 ], [
   "module:List",
   "dynamics:Partials.NoScopePartial",
   "dynamics:Partials.ClickPartial"
-], function (Dynamic, Templates, scoped) {
-    Dynamic.extend({scoped: scoped}, {
+], function (Dynamic, Templates, Logger, scoped) {
+	
+	var logger = Logger.global().tag("dynamic", "list");
+	
+    return Dynamic.extend({scoped: scoped}, {
 
         template: Templates.titledlist,
 
@@ -50,7 +54,7 @@ Scoped.define("module:Titledlist", [
             },
 
             click_title: function () {
-                console.log('You clicked the title');
+                logger.log('You clicked the title');
                 this.call('togglelist');
             }
 

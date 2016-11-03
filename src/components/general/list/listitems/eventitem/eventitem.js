@@ -1,9 +1,12 @@
 
 Scoped.define("module:Eventitem", [
     "dynamics:Dynamic",
-    "module:Templates"
-], function (Dynamic, Templates, scoped) {
+    "module:Templates",
+	"base:Loggers.Logger"
+], function (Dynamic, Templates, Logger, scoped) {
 
+	var logger = Logger.global().tag("dynamic", "calendar");
+	
     return Dynamic.extend({scoped : scoped}, {
 
         template: Templates.eventitem,
@@ -28,7 +31,7 @@ Scoped.define("module:Eventitem", [
             }, this);
 
             this.parent().on('archive', function () {
-                console.log('archived');
+                logger.log('archived');
             }, this);
 
         }
