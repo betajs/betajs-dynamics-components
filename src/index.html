@@ -14,6 +14,7 @@
     
     <script>
 		BetaJS.Loggers.Logger.global().addListener(new BetaJS.Loggers.ConsoleLogListener());
+		BetaJS.Loggers.Logger.global().addAugment(new BetaJS.Loggers.CallOriginLogAugment());
     </script>
     
     <script src="../vendors/betajs-dynamics-noscoped.js"></script>

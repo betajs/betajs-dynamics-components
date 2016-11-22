@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.1 - 2016-11-03
+betajs-dynamics-components - v0.1.2 - 2016-11-22
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -1004,7 +1004,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.1 - 2016-11-03
+betajs-dynamics-components - v0.1.2 - 2016-11-22
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -1024,12 +1024,12 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '130.1478193086847'
+		version: '131.1479849910602'
 	};
 });
 
 Scoped.extend('module:Templates', function () {
-return {"clickinput":" <title         ba-if=\"{{!view.edit}}\"         ba-click=\"edititem()\" >     {{model.value}} </title>  <input         placeholder=\"{{view.placeholder}}\"         ba-if=\"{{view.edit}}\"         ba-return=\"view.edit = false\"         onblur=\"{{view.edit = false}}\"         value=\"{{=model.value}}\">","input":"<input autofocus>","overlaycontainer":"<overlaycontainer     ba-tap=\"showoverlay = false\"     ba-if=\"{{showoverlay}}\">      <overlayinner>          <ba-{{view.overlay}} ba-noscope>             <message>{{model.message}}</message>         </ba-{{view.overlay}}>      </overlayinner>  </overlaycontainer>","testoverlaycontainer":" <button ba-click=\"showoverlay = !showoverlay\">Show Overlaycontainer</button>  <ba-overlaycontainer         ba-overlay=\"{{=overlay}}\"         ba-showoverlay=\"{{=showoverlay}}\">          </ba-overlaycontainer>","scrollpicker":"<container>         <element ba-repeat-element=\"{{element_value :: value_array}}\" data-id=\"{{element_value}}\">                 {{element_value}}         </element> </container>","test_scrollpicker":" <ba-scrollpicker id=\"321\"></ba-scrollpicker> <ba-scrollpicker id=\"322\"></ba-scrollpicker> ","textinput":" <textarea onblur=\"{{this.call('blur')}}\" value=\"{{=value}}\"></textarea> <pre>{{=preheighttext}}</pre>","loading":" <loading>      <div class='uil-spin-css' style='-webkit-transform:scale(0.32)'><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>  </loading> ","loadmore":" <loadmore ba-click=\"load_more()\">      <button>Load more</button>  </loadmore>","eventitem":" <button         class=\"{{model.class}}\">     {{model.value}} - {{counter}} </button>","selectableitem":" <selectableitem         ba-class=\"{{{selected : selected.cid == this.cid()}}}\"         ba-click=\"select()\">     {{model.value}} </selectableitem>","swipeclickcontainer":" <behind>     <icon class='{{view.lefticon||lefticon}}'></icon>     <div></div>     <icon class='{{view.righticon||righticon}}'></icon> </behind>  <!--style=\"left: {{view.left}}px\"--> <swipe         class='{{start_swipe}}'         ba-gesture:click=\"{{{data: model, options: click_gesture}}}\"         ba-gesture:drag=\"{{drag_gesture}}\"         ba-interaction:drag=\"{{{data: model, options: drag_interaction}}}\"         ba-interaction:drop=\"{{{data: model, options: drop_interaction}}}\"         ba-gesture:swipe=\"{{swipe_gesture}}\"         ba-interaction:swipe=\"{{swipe_interaction}}\">      <container>          <ba-{{view.inner||inner}} ba-noscope>         </ba-{{view.inner||inner}}>          <swipeleft>             <div></div>             <icon class='{{view.lefticon||lefticon}}'></icon>         </swipeleft>          <swiperight>             <icon class='{{view.righticon||righticon}}'></icon>             <div></div>         </swiperight>      </container>  </swipe> ","list":" <list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">      <ba-{{view.listitem||collectionitem.listitem||listitem}}         ba-cache         ba-data:id=\"{{collectionitem.cid()}}\"         ba-functions=\"{{collectionitem.callbacks}}\"         ba-view=\"{{collectionitem.view||view.listinner}}\"         ba-model=\"{{collectionitem}}\">      </ba-{{view.listitem||collectionitem.listitem||listitem}}>  </list>  <ba-loadmore ba-if=\"{{loadmore}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitems\"> </ba-loadmore> <ba-loading ba-if=\"{{loadmore}}\" ba-show=\"{{loading}}\"> </ba-loading> ","test_list_clickitem":" <ba-list ba-attrs=\"{{testmodel}}\"> </ba-list>","test_list_listcollection":" <ba-list ba-listcollection=\"{{listcollection}}\"> </ba-list>","test_list_listoflist":" <ba-list         ba-listitem=\"list\"         ba-listcollection=\"{{listcollection}}\"> </ba-list>","test_list_loadmore":" <ba-list ba-view=\"{{view}}\" ba-listcollection=\"{{listcollection}}\"> </ba-list>","test_list_pushfunc":"<button ba-click=\"test(input_value)\">Test func</button> <input ba-return=\"test(input_value)\" placeholder=\"Push item to list\" value=\"{{=input_value}}\"> <ba-titledlist ba-attrs=\"{{testmodel}}\"> </ba-titledlist>","test_list_swipecontainer":" <ba-list         ba-model=\"{{model}}\"         ba-view=\"{{view_model}}\"> </ba-list>","searchlist":" <searchbox ba-if=\"{{view.showsearch}}\">     <icon class=\"icon-search\"></icon>     <input placeholder=\"{{view.placeholder}}\" value=\"{{=searchvalue}}\"> </searchbox>  <ba-loading ba-if=\"{{searchingindication}}\"> </ba-loading>  <ba-list ba-noscope></ba-list> ","test_searchlist":" <ba-searchlist         ba-view=\"{{view}}\">  </ba-searchlist>","test_titledlist":" <ba-titledlist         ba-model=\"{{model}}\"         ba-view=\"{{view}}\"         ba-functions=\"{{callbacks}}\"         ba-listcollection=\"{{listcollection}}\">  </ba-titledlist>","test_titledlist_swipe":" <ba-titledlist         ba-listcollection=\"{{listcollection}}\"         ba-attrs=\"{{push_attrs}}\">  </ba-titledlist>","titledlist":" <ba-{{view.titleitem}}     ba-click=\"click_title()\"     ba-functions=\"{{model.title_callbacks}}\"     ba-model=\"{{model.title_model}}\">{{model.title_model.value}}</ba-{{view.titleitem}}>  <ba-list         ba-noscope         ba-show=\"{{!collapsed}}\">  </ba-list> ","addtitle":" <addtitle>     <title ba-click=\"clicktitle()\">{{model.value}}</title>     <button ba-click=\"addbutton()\">         <span class=\"icon-plus\"></span>     </button> </addtitle>","test_addtitle":" <ba-addtitle         ba-attrs=\"{{testmodel}}\"> </ba-addtitle> ","clickitem":" <button         class=\"{{model.class}}\"         ba-click=\"click()\">     {{model.value}} </button>","clicktestcontainer":" <ba-{{view.inner||inner}}     ba-gesture:click=\"{{{data: model, options: click_gesture}}})\"     ba-noscope>     {{model.value||value}} </ba-{{view.inner||inner}}> ","header":" <ba-list ba-listcollection=\"{{left_collection}}\"></ba-list>","toggle_menu":"<button ba-click=\"toggle_menu()\" class=\"icon-reorder\"></button>","menu_web":" <ba-titledlist         ba-collapsible=\"{{false}}\"         ba-model=\"{{model}}\"         ba-listcollection=\"{{menu_collection}}\">  </ba-titledlist>","layout_web":"<header>     <ba-{{view.header}}>Header</ba-{{view.header}}> </header> <main>     <menu ba-show=\"{{view.display_menu}}\">         <ba-{{view.menu}} ba-view=\"{{view.menuview}}\">Menu</ba-{{view.menu}}>     </menu>     <content>         <ba-{{view.content}} ba-model={{contentmodel}} ba-attrs=\"{{view.contentattrs}}\">Content</ba-{{view.content}}>     </content> </main>","index":"<!DOCTYPE html> <html> <head lang=\"en\">     <meta charset=\"UTF-8\">      <!--<script src=\"../vendors/jquery-1.9.closure-extern.js\"></script>-->     <script src=\"../vendors/jquery-2.1.4.js\"></script>      <script src=\"../vendors/scoped.js\"></script>     <script src=\"../vendors/beta.js\"></script>     <script src=\"../vendors/betajs-browser-noscoped.js\"></script>     <!--<script src=\"../vendors/betajs-ui.js\"></script>-->     <script src=\"../../betajs-ui/dist/betajs-ui.js\"></script>          <script>   BetaJS.Loggers.Logger.global().addListener(new BetaJS.Loggers.ConsoleLogListener());     </script>          <script src=\"../vendors/betajs-dynamics-noscoped.js\"></script>      <script src=\"components.js\"></script>      <!--<script src=\"../vendors/betajs-simulator.js\"></script>-->     <script src=\"../../betajs-simulator/dist/betajs-simulator.js\"></script>     <link rel=\"stylesheet\" href=\"../..//betajs-simulator/dist/betajs-simulator.css\" />      <script src=\"../dist/betajs-dynamics-components-noscoped.js\"></script>     <link rel=\"stylesheet\" href=\"../dist/betajs-dynamics-components.css\" />     <link rel=\"stylesheet\" href=\"../vendors/icomoon/style.css\" />      <script src=\"//localhost:1337/livereload.js\"></script>      <title>BetaJS Simulator</title>      <script>      </script>  </head> <body>  <ba-simulator></ba-simulator>  <script>     console.log('Unresolved Dependencies : ');     console.log(Scoped.unresolved('global:')); </script>  </body> </html>"};
+return {"clickinput":" <title         ba-if=\"{{!view.edit}}\"         ba-click=\"edititem()\" >     {{model.value}} </title>  <input         placeholder=\"{{view.placeholder}}\"         ba-if=\"{{view.edit}}\"         ba-return=\"view.edit = false\"         onblur=\"{{view.edit = false}}\"         value=\"{{=model.value}}\">","htmlview":"<iframe frameBorder='0' scrolling='no'></iframe>","input":"<input autofocus>","overlaycontainer":"<overlaycontainer     ba-tap=\"showoverlay = false\"     ba-if=\"{{showoverlay}}\">      <overlayinner>          <ba-{{view.overlay}} ba-noscope>             <message>{{model.message}}</message>         </ba-{{view.overlay}}>      </overlayinner>  </overlaycontainer>","testoverlaycontainer":" <button ba-click=\"showoverlay = !showoverlay\">Show Overlaycontainer</button>  <ba-overlaycontainer         ba-overlay=\"{{=overlay}}\"         ba-showoverlay=\"{{=showoverlay}}\">          </ba-overlaycontainer>","scrollpicker":"<container>         <element ba-repeat-element=\"{{element_value :: value_array}}\" data-id=\"{{element_value}}\">                 {{element_value}}         </element> </container>","test_scrollpicker":" <ba-scrollpicker id=\"321\"></ba-scrollpicker> <ba-scrollpicker id=\"322\"></ba-scrollpicker> ","textinput":" <textarea onblur=\"{{this.call('blur')}}\" value=\"{{=value}}\"></textarea> <pre>{{=preheighttext}}</pre>","loading":" <loading>      <div class='uil-spin-css' style='-webkit-transform:scale(0.32)'><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>  </loading> ","loadmore":" <loadmore ba-click=\"load_more()\">      <button>Load more</button>  </loadmore>","eventitem":" <button         class=\"{{model.class}}\">     {{model.value}} - {{counter}} </button>","selectableitem":" <selectableitem         ba-class=\"{{{selected : selected.cid == this.cid()}}}\"         ba-click=\"select()\">     {{model.value}} </selectableitem>","swipeclickcontainer":" <behind>     <icon class='{{view.lefticon||lefticon}}'></icon>     <div></div>     <icon class='{{view.righticon||righticon}}'></icon> </behind>  <!--style=\"left: {{view.left}}px\"--> <swipe         class='{{start_swipe}}'         ba-gesture:click=\"{{{data: model, options: click_gesture}}}\"         ba-gesture:drag=\"{{drag_gesture}}\"         ba-interaction:drag=\"{{{data: model, options: drag_interaction}}}\"         ba-interaction:drop=\"{{{data: model, options: drop_interaction}}}\"         ba-gesture:swipe=\"{{swipe_gesture}}\"         ba-interaction:swipe=\"{{swipe_interaction}}\">      <container>          <ba-{{view.inner||inner}} ba-noscope>         </ba-{{view.inner||inner}}>          <swipeleft>             <div></div>             <icon class='{{view.lefticon||lefticon}}'></icon>         </swipeleft>          <swiperight>             <icon class='{{view.righticon||righticon}}'></icon>             <div></div>         </swiperight>      </container>  </swipe> ","list":" <list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">      <ba-{{view.listitem||collectionitem.listitem||listitem}}         ba-cache         ba-data:id=\"{{collectionitem.cid()}}\"         ba-functions=\"{{collectionitem.callbacks}}\"         ba-view=\"{{collectionitem.view||view.listinner}}\"         ba-model=\"{{collectionitem}}\">      </ba-{{view.listitem||collectionitem.listitem||listitem}}>  </list>  <ba-loadmore ba-if=\"{{loadmore}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitems\"> </ba-loadmore> <ba-loading ba-if=\"{{loadmore}}\" ba-show=\"{{loading}}\"> </ba-loading> ","test_list_clickitem":" <ba-list ba-attrs=\"{{testmodel}}\"> </ba-list>","test_list_listcollection":" <ba-list ba-listcollection=\"{{listcollection}}\"> </ba-list>","test_list_listoflist":" <ba-list         ba-listitem=\"list\"         ba-listcollection=\"{{listcollection}}\"> </ba-list>","test_list_loadmore":" <ba-list ba-view=\"{{view}}\" ba-listcollection=\"{{listcollection}}\"> </ba-list>","test_list_pushfunc":"<button ba-click=\"test(input_value)\">Test func</button> <input ba-return=\"test(input_value)\" placeholder=\"Push item to list\" value=\"{{=input_value}}\"> <ba-titledlist ba-attrs=\"{{testmodel}}\"> </ba-titledlist>","test_list_swipecontainer":" <ba-list         ba-model=\"{{model}}\"         ba-view=\"{{view_model}}\"> </ba-list>","searchlist":" <searchbox ba-if=\"{{view.showsearch}}\">     <icon class=\"icon-search\"></icon>     <input placeholder=\"{{view.placeholder}}\" value=\"{{=searchvalue}}\"> </searchbox>  <ba-loading ba-if=\"{{searchingindication}}\"> </ba-loading>  <ba-list ba-noscope></ba-list> ","test_searchlist":" <ba-searchlist         ba-view=\"{{view}}\">  </ba-searchlist>","test_titledlist":" <ba-titledlist         ba-model=\"{{model}}\"         ba-view=\"{{view}}\"         ba-functions=\"{{callbacks}}\"         ba-listcollection=\"{{listcollection}}\">  </ba-titledlist>","test_titledlist_swipe":" <ba-titledlist         ba-listcollection=\"{{listcollection}}\"         ba-attrs=\"{{push_attrs}}\">  </ba-titledlist>","titledlist":" <ba-{{view.titleitem}}     ba-click=\"click_title()\"     ba-functions=\"{{model.title_callbacks}}\"     ba-model=\"{{model.title_model}}\">{{model.title_model.value}}</ba-{{view.titleitem}}>  <ba-list         ba-noscope         ba-show=\"{{!collapsed}}\">  </ba-list> ","addtitle":" <addtitle>     <title ba-click=\"clicktitle()\">{{model.value}}</title>     <button ba-click=\"addbutton()\">         <span class=\"icon-plus\"></span>     </button> </addtitle>","test_addtitle":" <ba-addtitle         ba-attrs=\"{{testmodel}}\"> </ba-addtitle> ","clickitem":" <button         class=\"{{model.class}}\"         ba-click=\"click()\">     {{model.value}} </button>","clicktestcontainer":" <ba-{{view.inner||inner}}     ba-gesture:click=\"{{{data: model, options: click_gesture}}})\"     ba-noscope>     {{model.value||value}} </ba-{{view.inner||inner}}> ","header":" <ba-list ba-listcollection=\"{{left_collection}}\"></ba-list>","toggle_menu":"<button ba-click=\"toggle_menu()\" class=\"icon-reorder\"></button>","menu_web":" <ba-titledlist         ba-collapsible=\"{{false}}\"         ba-model=\"{{model}}\"         ba-listcollection=\"{{menu_collection}}\">  </ba-titledlist>","layout_web":"<header>     <ba-{{view.header}}>Header</ba-{{view.header}}> </header> <main>     <menu ba-show=\"{{view.display_menu}}\">         <ba-{{view.menu}} ba-view=\"{{view.menuview}}\">Menu</ba-{{view.menu}}>     </menu>     <content>         <ba-{{view.content}} ba-model={{contentmodel}} ba-attrs=\"{{view.contentattrs}}\">Content</ba-{{view.content}}>     </content> </main>","index":"<!DOCTYPE html> <html> <head lang=\"en\">     <meta charset=\"UTF-8\">      <!--<script src=\"../vendors/jquery-1.9.closure-extern.js\"></script>-->     <script src=\"../vendors/jquery-2.1.4.js\"></script>      <script src=\"../vendors/scoped.js\"></script>     <script src=\"../vendors/beta.js\"></script>     <script src=\"../vendors/betajs-browser-noscoped.js\"></script>     <!--<script src=\"../vendors/betajs-ui.js\"></script>-->     <script src=\"../../betajs-ui/dist/betajs-ui.js\"></script>          <script>   BetaJS.Loggers.Logger.global().addListener(new BetaJS.Loggers.ConsoleLogListener());   BetaJS.Loggers.Logger.global().addAugment(new BetaJS.Loggers.CallOriginLogAugment());     </script>          <script src=\"../vendors/betajs-dynamics-noscoped.js\"></script>      <script src=\"components.js\"></script>      <!--<script src=\"../vendors/betajs-simulator.js\"></script>-->     <script src=\"../../betajs-simulator/dist/betajs-simulator.js\"></script>     <link rel=\"stylesheet\" href=\"../..//betajs-simulator/dist/betajs-simulator.css\" />      <script src=\"../dist/betajs-dynamics-components-noscoped.js\"></script>     <link rel=\"stylesheet\" href=\"../dist/betajs-dynamics-components.css\" />     <link rel=\"stylesheet\" href=\"../vendors/icomoon/style.css\" />      <script src=\"//localhost:1337/livereload.js\"></script>      <title>BetaJS Simulator</title>      <script>      </script>  </head> <body>  <ba-simulator></ba-simulator>  <script>     console.log('Unresolved Dependencies : ');     console.log(Scoped.unresolved('global:')); </script>  </body> </html>"};
 });
 
 Scoped.define("module:Clickinput", [
@@ -1069,6 +1069,102 @@ Scoped.define("module:Clickinput", [
     }).register();
 
 });
+
+Scoped.define("module:Htmlview", [
+    "dynamics:Dynamic",
+    "module:Templates",
+    "base:Async",
+    "browser:Loader",
+    "jquery:"
+], function (Dynamic, Templates, Async, Loader, $, scoped) {
+
+	return Dynamic.extend({scoped: scoped}, {
+		
+		template: Templates.htmlview,
+		
+		attrs: {
+			"html": "",
+			"loadhtml": ""
+		},
+		
+		events: {
+			"change:html": function () {
+				if (this.activated())
+					this._updateIFrame();
+			},
+			"change:loadhtml": function () {
+				this._loadHtml();
+			}
+		},
+		
+		_loadHtml: function () {
+			if (this.get("loadhtml")) {
+				Loader.loadHtml(this.get("loadhtml"), function (content) {
+					this.set("html", content);
+				}, this);
+			}
+		},
+		
+		_cleanupContent: function (content) {
+			var contentHtml = $(content);
+			// Remove malicious scripts
+			contentHtml.find("script").remove();
+			// Remove malicious iframes
+			contentHtml.find("iframe").remove();
+			return contentHtml;
+		},
+		
+		create : function () {
+			var helper = function () {
+				Async.eventually(function () {
+					if (this.destroyed())
+						return;
+					this._updateSize();
+					this._timeout *= 2;
+					helper.call(this);
+				}, this, this._timeout);
+			};
+			helper.call(this);
+			this._loadHtml();
+		},
+		
+		_afterActivate: function () {
+			this._updateIFrame();
+		},
+		
+		_updateIFrame: function () {
+			this.element().contents().find("html").html(this._cleanupContent(this.get('html')));
+			this._updateSize();
+			this._timeout = 100;
+		},
+		
+		_updateSize: function () {
+			var iframe = this.element();
+			var iframe_body = iframe.contents().find("body").get(0) || iframe.contents().find("html").get(0);
+			var inner_width = iframe_body.scrollWidth;
+			var inner_height = iframe_body.scrollHeight;
+			if (!iframe.contents().find("body").get(0)) {
+				var inner_height = 1;
+				iframe.contents().find("html").children().each(function () {
+					var tn = this.tagName.toLowerCase();
+					if (tn === "style" || tn === "script" || tn === "head")
+						return;
+					inner_height = Math.max(inner_height, $(this).height() + $(this).offset().top);
+				});
+			}
+			var outer_width = iframe.width();
+			var scale = outer_width / inner_width;
+			if (Math.abs(inner_height - iframe.height()) < 2)
+				return;
+			$(iframe_body).css('MozTransform','scale(' + scale + ')');
+			$(iframe_body).css('zoom', (scale * 100) + '%');
+			iframe.css("width", iframe.parent().width() + "px");
+			iframe.css("height", Math.ceil(inner_height * scale + 10) + "px");
+		}
+	}).register();
+
+});
+
 
 Scoped.define("module:Input", [
     "dynamics:Dynamic",
