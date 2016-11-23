@@ -1,9 +1,12 @@
 
 Scoped.define("module:Clickitem", [
     "dynamics:Dynamic",
-    "module:Templates"
-], function (Dynamic, Templates, scoped) {
-
+    "module:Templates",
+	"base:Loggers.Logger"
+], function (Dynamic, Templates, Logger, scoped) {
+	
+	var logger = Logger.global().tag("dynamic", "list");
+	
     return Dynamic.extend({scoped : scoped}, {
 
         template: Templates.clickitem,
@@ -16,16 +19,16 @@ Scoped.define("module:Clickitem", [
 
         functions : {
             click : function () {
-                console.log('Click');
-                //console.log("You Clicked item : " + this.properties().getProp('model.value'));
-                //console.log(this.cid());
+            	logger.log('Click');
+                //logger.log("You Clicked item : " + this.properties().getProp('model.value'));
+                //logger.log(this.cid());
                 //this.trigger('event', this.cid());
             }
         },
 
         create : function () {
             this.on("event", function (cid) {
-                console.log('event from item: ' + cid);
+            	logger.log('event from item: ' + cid);
             }, this);
         }
 

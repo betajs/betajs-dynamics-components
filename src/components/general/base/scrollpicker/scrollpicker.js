@@ -2,10 +2,13 @@
 Scoped.define("module:Scrollpicker", [
     "dynamics:Dynamic",
     "module:Templates",
-    "ui:Interactions.Loopscroll"
+    "ui:Interactions.Loopscroll",
+	"base:Loggers.Logger"
 ], [
     "dynamics:Partials.RepeatElementPartial"
-], function (Dynamic, Templates, Loopscroll, scoped) {
+], function (Dynamic, Templates, Loopscroll, Logger, scoped) {
+	
+	var logger = Logger.global().tag("dynamic", "scroll");
 
     return Dynamic.extend({scoped: scoped}, {
 
@@ -73,12 +76,12 @@ Scoped.define("module:Scrollpicker", [
 
             //var self = this;
             //element.scroll(function () {
-            //    console.log('There is a Scroll happening');
-            //    console.log(self.__cid);
+            //    logger.log('There is a Scroll happening');
+            //    logger.log(self.__cid);
             //});
 
-            console.log('Scroll to Value');
-            console.log(this.get('current_value'));
+            logger.log('Scroll to Value');
+            logger.log(this.get('current_value'));
             var ele = $(element.find("[data-id='" + this.get('current_value') + "']"));
             scroll.scrollToElement(ele, {
                 animate: false
@@ -89,7 +92,7 @@ Scoped.define("module:Scrollpicker", [
             });
 
             scroll.on("scrollend", function () {
-                console.log(this);
+            	logger.log(this);
                 this.set('current_value', scroll.currentElement().data( "id" ));
             }, this);
 

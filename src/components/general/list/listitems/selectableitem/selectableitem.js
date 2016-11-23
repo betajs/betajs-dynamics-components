@@ -9,11 +9,14 @@
 Scoped.define("module:Selectableitem", [
     "dynamics:Dynamic",
     "module:Templates",
-    "base:Objs"
+    "base:Objs",
+	"base:Loggers.Logger"
 ], [
     "dynamics:Partials.ClassPartial"
-], function (Dynamic, Templates, Objs, scoped) {
+], function (Dynamic, Templates, Objs, Logger, scoped) {
 
+	var logger = Logger.global().tag("dynamic", "list");
+	
     Dynamic.extend({scoped: scoped}, {
 
         template: Templates.selectableitem,
@@ -37,19 +40,18 @@ Scoped.define("module:Selectableitem", [
             var parentlist = this.scopes.parent_list;
 
             if (!parentlist)
-                console.log('There is no parent list the selector can attach to, this currently only works  with ba-list');
-            else if (parentlist.get('listcollection')) {
-                var selected_item = parentlist.get('selected_item');
-                console.log('selected_item');
-                console.log(selected_item);
-                if (!selected_item && selected_item !== undefined)
+
+                logger.log('There is no parent list the selector can attach to, this currently only works  with ba-list');
+            else if (parentlist.get('listcollection'))
+                if (!this.scopes.parent_list.get('selected_item'))
+                    //var selected_item = parentlist.get('selected_item');
+                    //if (!selected_item && selected_item !== undefined)
                     this.call('select')
-            }
+            },
 //            [8/9/16, 4:06:11 PM] Oliver Friedmann: this === selected_item
 //                [8/9/16, 4:06:56 PM] Oliver Friedmann: this.get(selected_key_name) === selected_item_key
 //                [8/9/16, 4:07:16 PM] Oliver Friedmann: selected_key_name = “classname”
 //[8/9/16, 4:07:25 PM] Oliver Friedmann: selected_item_key = “swipeclickcontainer”
-        },
 
         functions : {
 

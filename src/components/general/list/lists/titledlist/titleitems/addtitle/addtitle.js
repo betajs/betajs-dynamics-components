@@ -1,8 +1,11 @@
 
 Scoped.define("module:Addtitle", [
     "dynamics:Dynamic",
-    "module:Templates"
-], function (Dynamic, Templates, scoped) {
+    "module:Templates",
+	"base:Loggers.Logger"
+], function (Dynamic, Templates, Logger, scoped) {
+	
+	var logger = Logger.global().tag("dynamic", "list");
 
     return Dynamic.extend({scoped : scoped}, {
 
@@ -21,7 +24,7 @@ Scoped.define("module:Addtitle", [
             },
             addbutton : function () {
 
-                console.log("You clicked the addbuton, no addbutton() function given");
+            	logger.log("You clicked the addbuton, no addbutton() function given");
 
             }
 
