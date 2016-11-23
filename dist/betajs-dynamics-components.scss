@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.0 - 2016-08-05
+betajs-dynamics-components - v0.1.0 - 2016-11-23
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -678,6 +678,11 @@ ba-selectableitem {
     background: lightgrey;
   }
 }
+ba-test_selectableitem {
+  @include display-flex;
+  @include flex(1 1 0);
+
+}
 
 $swipeitemheight: 44px;
 
@@ -849,7 +854,7 @@ ba-titledlist {
 $clickitemheigth : 44px;
 
 ba-addtitle {
-  border-bottom: 1px solid grey;
+  //border-bottom: 1px solid grey;
 
   addtitle {
     @include display-flex;

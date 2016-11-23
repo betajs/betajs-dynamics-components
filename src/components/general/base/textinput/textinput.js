@@ -25,7 +25,9 @@ Scoped.define("module:Textinput", [
         },
 
         functions : {
-            blur : function () {/*Placeholder so no error...*/}
+            blur : function () {
+                console.log('Textinput');
+                this.trigger('blur')}
         }
 
     }).register();

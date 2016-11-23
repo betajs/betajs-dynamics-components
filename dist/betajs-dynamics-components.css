@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.0 - 2016-08-05
+betajs-dynamics-components - v0.1.0 - 2016-11-23
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -517,6 +517,18 @@ ba-selectableitem selectableitem {
 ba-selectableitem .selected {
   background: lightgrey; }
 
+ba-test_selectableitem {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0; }
+
 ba-swipeclickcontainer {
   position: relative;
   display: block; }
@@ -745,30 +757,28 @@ ba-titledlist {
     flex: 0 0;
     display: block; }
 
-ba-addtitle {
-  border-bottom: 1px solid grey; }
-  ba-addtitle addtitle {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    height: 44px;
-    line-height: 44px; }
-    ba-addtitle addtitle title {
-      -webkit-box-flex: 1 1 0;
-      -moz-box-flex: 1 1 0;
-      -webkit-flex: 1 1 0;
-      -ms-flex: 1 1 0;
-      flex: 1 1 0;
-      display: block;
-      padding: 0 22px; }
-    ba-addtitle addtitle button {
-      -webkit-box-flex: 0 0 44px;
-      -moz-box-flex: 0 0 44px;
-      -webkit-flex: 0 0 44px;
-      -ms-flex: 0 0 44px;
-      flex: 0 0 44px; }
+ba-addtitle addtitle {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  height: 44px;
+  line-height: 44px; }
+  ba-addtitle addtitle title {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    display: block;
+    padding: 0 22px; }
+  ba-addtitle addtitle button {
+    -webkit-box-flex: 0 0 44px;
+    -moz-box-flex: 0 0 44px;
+    -webkit-flex: 0 0 44px;
+    -ms-flex: 0 0 44px;
+    flex: 0 0 44px; }
 
 ba-clickitem {
   display: -webkit-box;
