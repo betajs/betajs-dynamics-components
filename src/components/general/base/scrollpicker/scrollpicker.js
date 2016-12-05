@@ -62,7 +62,7 @@ Scoped.define("module:Scrollpicker", [
         },
 
         _afterActivate : function (element) {
-
+        	element = $(element);
             element = element.find('container');
 
             var scroll = new Loopscroll(element, {
