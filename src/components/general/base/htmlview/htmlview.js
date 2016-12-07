@@ -62,13 +62,13 @@ Scoped.define("module:Htmlview", [
 		},
 		
 		_updateIFrame: function () {
-			this.element().contents().find("html").html(this._cleanupContent(this.get('html')));
+			$(this.element()).contents().find("html").html(this._cleanupContent(this.get('html')));
 			this._updateSize();
 			this._timeout = 100;
 		},
 		
 		_updateSize: function () {
-			var iframe = this.element();
+			var iframe = $(this.element());
 			var iframe_body = iframe.contents().find("body").get(0) || iframe.contents().find("html").get(0);
 			var inner_width = iframe_body.scrollWidth;
 			var inner_height = iframe_body.scrollHeight;

@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.3 - 2016-12-04
+betajs-dynamics-components - v0.1.4 - 2016-12-07
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -1004,7 +1004,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.3 - 2016-12-04
+betajs-dynamics-components - v0.1.4 - 2016-12-07
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -1024,7 +1024,7 @@ Scoped.binding("jquery", "global:jQuery");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '134.1480886179400'
+		version: '135.1481125381134'
 	};
 });
 
@@ -1034,8 +1034,9 @@ return {"clickinput":" <title         ba-if=\"{{!view.edit}}\"         ba-click=
 
 Scoped.define("module:Clickinput", [
     "dynamics:Dynamic",
-    "module:Templates"
-], function (Dynamic, Templates, scoped) {
+    "module:Templates",
+    "jquery:"
+], function (Dynamic, Templates, $, scoped) {
     return Dynamic.extend({scoped: scoped}, {
 
         template: Templates.clickinput,
@@ -1058,7 +1059,7 @@ Scoped.define("module:Clickinput", [
 
                 this.setProp('view.edit', true);
 
-                var SearchInput = this.activeElement().find('input');
+                var SearchInput = $(this.activeElement()).find('input');
                 var strLength = this.getProp('model.value').length;
                 SearchInput.focus();
                 SearchInput[0].setSelectionRange(strLength, strLength);
@@ -1133,13 +1134,13 @@ Scoped.define("module:Htmlview", [
 		},
 		
 		_updateIFrame: function () {
-			this.element().contents().find("html").html(this._cleanupContent(this.get('html')));
+			$(this.element()).contents().find("html").html(this._cleanupContent(this.get('html')));
 			this._updateSize();
 			this._timeout = 100;
 		},
 		
 		_updateSize: function () {
-			var iframe = this.element();
+			var iframe = $(this.element());
 			var iframe_body = iframe.contents().find("body").get(0) || iframe.contents().find("html").get(0);
 			var inner_width = iframe_body.scrollWidth;
 			var inner_height = iframe_body.scrollHeight;

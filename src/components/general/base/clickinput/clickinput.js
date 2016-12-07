@@ -1,8 +1,9 @@
 
 Scoped.define("module:Clickinput", [
     "dynamics:Dynamic",
-    "module:Templates"
-], function (Dynamic, Templates, scoped) {
+    "module:Templates",
+    "jquery:"
+], function (Dynamic, Templates, $, scoped) {
     return Dynamic.extend({scoped: scoped}, {
 
         template: Templates.clickinput,
@@ -25,7 +26,7 @@ Scoped.define("module:Clickinput", [
 
                 this.setProp('view.edit', true);
 
-                var SearchInput = this.activeElement().find('input');
+                var SearchInput = $(this.activeElement()).find('input');
                 var strLength = this.getProp('model.value').length;
                 SearchInput.focus();
                 SearchInput[0].setSelectionRange(strLength, strLength);
