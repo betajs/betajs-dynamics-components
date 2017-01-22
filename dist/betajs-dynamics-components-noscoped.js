@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.4 - 2016-12-07
+betajs-dynamics-components - v0.1.5 - 2017-01-21
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -14,12 +14,10 @@ Scoped.binding("base", "global:BetaJS");
 Scoped.binding("browser", "global:BetaJS.Browser");
 Scoped.binding("ui", "global:BetaJS.UI");
 
-Scoped.binding("jquery", "global:jQuery");
-
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '135.1481125381134'
+		version: '136.1485044928461'
 	};
 });
 
@@ -29,9 +27,8 @@ return {"clickinput":" <title         ba-if=\"{{!view.edit}}\"         ba-click=
 
 Scoped.define("module:Clickinput", [
     "dynamics:Dynamic",
-    "module:Templates",
-    "jquery:"
-], function (Dynamic, Templates, $, scoped) {
+    "module:Templates"
+], function (Dynamic, Templates, scoped) {
     return Dynamic.extend({scoped: scoped}, {
 
         template: Templates.clickinput,
@@ -54,10 +51,10 @@ Scoped.define("module:Clickinput", [
 
                 this.setProp('view.edit', true);
 
-                var SearchInput = $(this.activeElement()).find('input');
+                var SearchInput = this.activeElement().querySelector("input");
                 var strLength = this.getProp('model.value').length;
                 SearchInput.focus();
-                SearchInput[0].setSelectionRange(strLength, strLength);
+                SearchInput.setSelectionRange(strLength, strLength);
 
             }
         }
@@ -71,8 +68,8 @@ Scoped.define("module:Htmlview", [
     "module:Templates",
     "base:Async",
     "browser:Loader",
-    "jquery:"
-], function (Dynamic, Templates, Async, Loader, $, scoped) {
+    "browser:Dom"
+], function (Dynamic, Templates, Async, Loader, Dom, scoped) {
 
 	return Dynamic.extend({scoped: scoped}, {
 		
@@ -102,11 +99,15 @@ Scoped.define("module:Htmlview", [
 		},
 		
 		_cleanupContent: function (content) {
-			var contentHtml = $(content);
+			var contentHtml = Dom.elementByTemplate("<div>" + content + "</div>");
 			// Remove malicious scripts
-			contentHtml.find("script").remove();
+			var scripts = contentHtml.querySelectorAll("script");
+			for (var i = 0; i < scripts.length; ++i)
+				scripts[i].parentNode.removeChild(scripts[i]);
 			// Remove malicious iframes
-			contentHtml.find("iframe").remove();
+			var iframes = contentHtml.querySelectorAll("iframe");
+			for (var j = 0; j < iframes.length; ++j)
+				iframes[j].parentNode.removeChild(iframes[j]);
 			return contentHtml;
 		},
 		
@@ -129,33 +130,34 @@ Scoped.define("module:Htmlview", [
 		},
 		
 		_updateIFrame: function () {
-			$(this.element()).contents().find("html").html(this._cleanupContent(this.get('html')));
+			this.activeElement().querySelector("iframe").contentDocument.querySelector("html").innerHTML = this._cleanupContent(this.get('html')).innerHTML;
 			this._updateSize();
 			this._timeout = 100;
 		},
 		
 		_updateSize: function () {
-			var iframe = $(this.element());
-			var iframe_body = iframe.contents().find("body").get(0) || iframe.contents().find("html").get(0);
+			var iframe = this.activeElement().querySelector("iframe");
+			var iframe_body = iframe.contentDocument.querySelector("html") || iframe.contentDocument.querySelector("body");
 			var inner_width = iframe_body.scrollWidth;
 			var inner_height = iframe_body.scrollHeight;
-			if (!iframe.contents().find("body").get(0)) {
-				var inner_height = 1;
-				iframe.contents().find("html").children().each(function () {
-					var tn = this.tagName.toLowerCase();
+			if (!iframe.contentDocument.querySelector("body")) {
+				inner_height = 1;
+				var children = iframe.contentDocument.querySelector("html");
+				for (var i = 0; i < children.length; ++i) {
+					var tn = children[i].tagName.toLowerCase();
 					if (tn === "style" || tn === "script" || tn === "head")
 						return;
-					inner_height = Math.max(inner_height, $(this).height() + $(this).offset().top);
-				});
+					inner_height = Math.max(inner_height, children[i].innerHeight + children[i].offsetTop);
+				}
 			}
-			var outer_width = iframe.width();
+			var outer_width = iframe.clientWidth;
 			var scale = outer_width / inner_width;
-			if (Math.abs(inner_height - iframe.height()) < 2)
+			if (Math.abs(inner_height - iframe.clientHeight) < 2)
 				return;
-			$(iframe_body).css('MozTransform','scale(' + scale + ')');
-			$(iframe_body).css('zoom', (scale * 100) + '%');
-			iframe.css("width", iframe.parent().width() + "px");
-			iframe.css("height", Math.ceil(inner_height * scale + 10) + "px");
+			iframe_body.style.MozTransform = 'scale(' + scale + ')';
+			iframe_body.style.zoom = (scale * 100) + '%';
+			iframe.style.width = iframe.parentNode.offsetWidth + "px";
+			iframe.style.height = Math.ceil(inner_height * scale + 10) + "px";
 		}
 	}).register();
 
@@ -296,8 +298,7 @@ Scoped.define("module:Scrollpicker", [
         },
 
         _afterActivate : function (element) {
-        	element = $(element);
-            element = element.find('container');
+            element = element.querySelector('container');
 
             var scroll = new Loopscroll(element, {
                 enabled: true,
@@ -316,29 +317,25 @@ Scoped.define("module:Scrollpicker", [
 
             logger.log('Scroll to Value');
             logger.log(this.get('current_value'));
-            var ele = $(element.find("[data-id='" + this.get('current_value') + "']"));
+            var ele = element.querySelector("[data-id='" + this.get('current_value') + "']");
             scroll.scrollToElement(ele, {
                 animate: false
             });
-            ele.css({
-                "color": "black",
-                "background" : "white"
-            });
+            ele.style.color = "black";
+            ele.style.background = "white";
 
             scroll.on("scrollend", function () {
             	logger.log(this);
-                this.set('current_value', scroll.currentElement().data( "id" ));
+                this.set('current_value', scroll.currentElement().dataset.id);
             }, this);
 
             scroll.on("scroll", function () {
-                element.children().css({
-                    "color" : "#999999",
-                    "background" : "#F4F4F4"
-                });
-                scroll.currentElement().css({
-                    "color" : "black",
-                    "background" : "white"
-                });
+            	for (var i = 0; i < element.children.length; ++i) {
+            		element.children[i].style.color = "#999";
+            		element.children[i].style.background = "#F4F4F4";
+            	}
+                scroll.currentElement().style.color = "black";
+                scroll.currentElement().style.background = "white";
             });
 
         }
