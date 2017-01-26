@@ -62,8 +62,7 @@ Scoped.define("module:Scrollpicker", [
         },
 
         _afterActivate : function (element) {
-        	element = $(element);
-            element = element.find('container');
+            element = element.querySelector('container');
 
             var scroll = new Loopscroll(element, {
                 enabled: true,
@@ -82,29 +81,25 @@ Scoped.define("module:Scrollpicker", [
 
             logger.log('Scroll to Value');
             logger.log(this.get('current_value'));
-            var ele = $(element.find("[data-id='" + this.get('current_value') + "']"));
+            var ele = element.querySelector("[data-id='" + this.get('current_value') + "']");
             scroll.scrollToElement(ele, {
                 animate: false
             });
-            ele.css({
-                "color": "black",
-                "background" : "white"
-            });
+            ele.style.color = "black";
+            ele.style.background = "white";
 
             scroll.on("scrollend", function () {
             	logger.log(this);
-                this.set('current_value', scroll.currentElement().data( "id" ));
+                this.set('current_value', scroll.currentElement().dataset.id);
             }, this);
 
             scroll.on("scroll", function () {
-                element.children().css({
-                    "color" : "#999999",
-                    "background" : "#F4F4F4"
-                });
-                scroll.currentElement().css({
-                    "color" : "black",
-                    "background" : "white"
-                });
+            	for (var i = 0; i < element.children.length; ++i) {
+            		element.children[i].style.color = "#999";
+            		element.children[i].style.background = "#F4F4F4";
+            	}
+                scroll.currentElement().style.color = "black";
+                scroll.currentElement().style.background = "white";
             });
 
         }

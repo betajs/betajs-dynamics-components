@@ -4,8 +4,8 @@ Scoped.define("module:Htmlview", [
     "module:Templates",
     "base:Async",
     "browser:Loader",
-    "jquery:"
-], function (Dynamic, Templates, Async, Loader, $, scoped) {
+    "browser:Dom"
+], function (Dynamic, Templates, Async, Loader, Dom, scoped) {
 
 	return Dynamic.extend({scoped: scoped}, {
 		
@@ -35,11 +35,15 @@ Scoped.define("module:Htmlview", [
 		},
 		
 		_cleanupContent: function (content) {
-			var contentHtml = $(content);
+			var contentHtml = Dom.elementByTemplate("<div>" + content + "</div>");
 			// Remove malicious scripts
-			contentHtml.find("script").remove();
+			var scripts = contentHtml.querySelectorAll("script");
+			for (var i = 0; i < scripts.length; ++i)
+				scripts[i].parentNode.removeChild(scripts[i]);
 			// Remove malicious iframes
-			contentHtml.find("iframe").remove();
+			var iframes = contentHtml.querySelectorAll("iframe");
+			for (var j = 0; j < iframes.length; ++j)
+				iframes[j].parentNode.removeChild(iframes[j]);
 			return contentHtml;
 		},
 		
@@ -62,33 +66,34 @@ Scoped.define("module:Htmlview", [
 		},
 		
 		_updateIFrame: function () {
-			$(this.element()).contents().find("html").html(this._cleanupContent(this.get('html')));
+			this.activeElement().querySelector("iframe").contentDocument.querySelector("html").innerHTML = this._cleanupContent(this.get('html')).innerHTML;
 			this._updateSize();
 			this._timeout = 100;
 		},
 		
 		_updateSize: function () {
-			var iframe = $(this.element());
-			var iframe_body = iframe.contents().find("body").get(0) || iframe.contents().find("html").get(0);
+			var iframe = this.activeElement().querySelector("iframe");
+			var iframe_body = iframe.contentDocument.querySelector("html") || iframe.contentDocument.querySelector("body");
 			var inner_width = iframe_body.scrollWidth;
 			var inner_height = iframe_body.scrollHeight;
-			if (!iframe.contents().find("body").get(0)) {
-				var inner_height = 1;
-				iframe.contents().find("html").children().each(function () {
-					var tn = this.tagName.toLowerCase();
+			if (!iframe.contentDocument.querySelector("body")) {
+				inner_height = 1;
+				var children = iframe.contentDocument.querySelector("html");
+				for (var i = 0; i < children.length; ++i) {
+					var tn = children[i].tagName.toLowerCase();
 					if (tn === "style" || tn === "script" || tn === "head")
 						return;
-					inner_height = Math.max(inner_height, $(this).height() + $(this).offset().top);
-				});
+					inner_height = Math.max(inner_height, children[i].innerHeight + children[i].offsetTop);
+				}
 			}
-			var outer_width = iframe.width();
+			var outer_width = iframe.clientWidth;
 			var scale = outer_width / inner_width;
-			if (Math.abs(inner_height - iframe.height()) < 2)
+			if (Math.abs(inner_height - iframe.clientHeight) < 2)
 				return;
-			$(iframe_body).css('MozTransform','scale(' + scale + ')');
-			$(iframe_body).css('zoom', (scale * 100) + '%');
-			iframe.css("width", iframe.parent().width() + "px");
-			iframe.css("height", Math.ceil(inner_height * scale + 10) + "px");
+			iframe_body.style.MozTransform = 'scale(' + scale + ')';
+			iframe_body.style.zoom = (scale * 100) + '%';
+			iframe.style.width = iframe.parentNode.offsetWidth + "px";
+			iframe.style.height = Math.ceil(inner_height * scale + 10) + "px";
 		}
 	}).register();
 

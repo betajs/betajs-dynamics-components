@@ -1,5 +1,5 @@
 /** @flow **//*!
-betajs-scoped - v0.0.12 - 2016-10-02
+betajs-scoped - v0.0.13 - 2017-01-15
 Copyright (c) Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -803,7 +803,7 @@ function newScope (parent, parentNS, rootNS, globalNS) {
 			dependencies.unshift(args.assumption);
 			this.require(dependencies, function () {
 				var argv = arguments;
-				var assumptionValue = argv[0];
+				var assumptionValue = argv[0].replace(/[^\d\.]/g, "");
 				argv[0] = assumptionValue.split(".");
 				for (var i = 0; i < argv[0].length; ++i)
 					argv[0][i] = parseInt(argv[0][i], 10);
@@ -811,7 +811,7 @@ function newScope (parent, parentNS, rootNS, globalNS) {
 					if (!args.callback.apply(args.context || this, args))
 						throw ("Scoped Assumption '" + args.assumption + "' failed, value is " + assumptionValue + (args.error ? ", but assuming " + args.error : ""));
 				} else {
-					var version = (args.callback + "").split(".");
+					var version = (args.callback + "").replace(/[^\d\.]/g, "").split(".");
 					for (var j = 0; j < Math.min(argv[0].length, version.length); ++j)
 						if (parseInt(version[j], 10) > argv[0][j])
 							throw ("Scoped Version Assumption '" + args.assumption + "' failed, value is " + assumptionValue + ", but assuming at least " + args.callback);
@@ -957,7 +957,7 @@ var Public = Helper.extend(rootScope, (function () {
 return {
 		
 	guid: "4b6878ee-cb6a-46b3-94ac-27d91f58d666",
-	version: '49.1475462345450',
+	version: '0.0.13',
 		
 	upgrade: Attach.upgrade,
 	attach: Attach.attach,

@@ -1,10 +1,10 @@
 /*!
-betajs-ui - v1.0.21 - 2016-12-21
+betajs-ui - v1.0.32 - 2017-01-18
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
 /** @flow **//*!
-betajs-scoped - v0.0.12 - 2016-10-02
+betajs-scoped - v0.0.13 - 2017-01-15
 Copyright (c) Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -808,7 +808,7 @@ function newScope (parent, parentNS, rootNS, globalNS) {
 			dependencies.unshift(args.assumption);
 			this.require(dependencies, function () {
 				var argv = arguments;
-				var assumptionValue = argv[0];
+				var assumptionValue = argv[0].replace(/[^\d\.]/g, "");
 				argv[0] = assumptionValue.split(".");
 				for (var i = 0; i < argv[0].length; ++i)
 					argv[0][i] = parseInt(argv[0][i], 10);
@@ -816,7 +816,7 @@ function newScope (parent, parentNS, rootNS, globalNS) {
 					if (!args.callback.apply(args.context || this, args))
 						throw ("Scoped Assumption '" + args.assumption + "' failed, value is " + assumptionValue + (args.error ? ", but assuming " + args.error : ""));
 				} else {
-					var version = (args.callback + "").split(".");
+					var version = (args.callback + "").replace(/[^\d\.]/g, "").split(".");
 					for (var j = 0; j < Math.min(argv[0].length, version.length); ++j)
 						if (parseInt(version[j], 10) > argv[0][j])
 							throw ("Scoped Version Assumption '" + args.assumption + "' failed, value is " + assumptionValue + ", but assuming at least " + args.callback);
@@ -962,7 +962,7 @@ var Public = Helper.extend(rootScope, (function () {
 return {
 		
 	guid: "4b6878ee-cb6a-46b3-94ac-27d91f58d666",
-	version: '49.1475462345450',
+	version: '0.0.13',
 		
 	upgrade: Attach.upgrade,
 	attach: Attach.attach,
@@ -1004,7 +1004,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-ui - v1.0.21 - 2016-12-21
+betajs-ui - v1.0.32 - 2017-01-18
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1014,25 +1014,23 @@ var Scoped = this.subScope();
 Scoped.binding('module', 'global:BetaJS.UI');
 Scoped.binding('base', 'global:BetaJS');
 Scoped.binding('browser', 'global:BetaJS.Browser');
-Scoped.binding('jquery', 'global:jQuery');
 Scoped.binding('dynamics', 'global:BetaJS.Dynamics');
 Scoped.define("module:", function () {
 	return {
     "guid": "ff8d5222-1ae4-4719-b842-1dedb9162bc0",
-    "version": "73.1482350912310"
+    "version": "1.0.32"
 };
 });
-Scoped.assumeVersion('base:version', 474);
-Scoped.assumeVersion('browser:version', 70);
+Scoped.assumeVersion('base:version', '~1.0.96');
+Scoped.assumeVersion('browser:version', '~1.0.62');
 Scoped.define("module:Dynamics.GesturePartial", [
     "dynamics:Handlers.Partial",
     "module:Gestures.Gesture",
     "module:Gestures",
-    "base:Objs",
-    "jquery:"
+    "base:Objs"
 ], [
 	"module:Gestures.defaultGesture"
-], function (Partial, Gesture, Gestures, Objs, $, scoped) {
+], function (Partial, Gesture, Gestures, Objs, scoped) {
  	var Cls = Partial.extend({scoped: scoped}, function (inherited) {
 		return {
 			
@@ -1043,8 +1041,8 @@ Scoped.define("module:Dynamics.GesturePartial", [
 				if (this._postfix in node.gestures && !node.gestures[this._postfix].destroyed())
 					return;
 				value = Objs.extend(value, value.options);
-				var $element = $(this._node.element());
-				var gesture = new Gesture($element, Gestures.defaultGesture(value));
+				var element = this._node.element();
+				var gesture = new Gesture(element, Gestures.defaultGesture(value));
 				node.gestures[this._postfix] = gesture;
 				gesture.on("activate", function () {
 					if (value.activate_event)
@@ -1060,7 +1058,7 @@ Scoped.define("module:Dynamics.GesturePartial", [
 				}, this);		
 				if (value.transition_event) {
 					gesture.on("start", function () {
-						handler.call(value.transition_event, $element, gesture);
+						handler.call(value.transition_event, element, gesture);
 					}, this);
 				}
 			},
@@ -1092,9 +1090,8 @@ Scoped.define("module:Dynamics.InteractionPartial", [
     "module:Interactions",
     "base:Strings",
     "base:Objs",
-    "base:Types",
-    "jquery:"
-], function (Partial, Interactions, Strings, Objs, Types, $, scoped) {
+    "base:Types"
+], function (Partial, Interactions, Strings, Objs, Types, scoped) {
  	var Cls = Partial.extend({scoped: scoped}, function (inherited) {
  		return {
 			
@@ -1108,8 +1105,8 @@ Scoped.define("module:Dynamics.InteractionPartial", [
 				} 
 				value = Objs.extend(value, value.options);
 				var InteractionClass = Interactions[Strings.capitalize(value.type)];
-				var $element = $(this._node.element());
-				var interaction = new InteractionClass(value.sub ? $element.find(value.sub) : $element, Objs.extend({
+				var elem = value.sub ? this._node.element().querySelector(value.sub) : this._node.element();
+				var interaction = new InteractionClass(elem, Objs.extend({
 					enabled: true,
 					context: handler
 				}, value), value.data);
@@ -1147,15 +1144,16 @@ Scoped.define("module:Dynamics.InteractionPartial", [
 });
 
 Scoped.define("module:Elements.Animators", [
-	    "base:Class",
-	    "base:Objs"
-	], function (Class, Objs, scoped) {
+    "base:Class",
+    "base:Objs",
+    "browser:Dom"
+], function (Class, Objs, Dom, scoped) {
 	return Class.extend({scoped: scoped}, function (inherited) {
 		return {
 			
 			constructor: function (element, options, callback, context) {
 				inherited.constructor.call(this);
-				this._element = element;
+				this._element = Dom.unbox(element);
 				this._options = Objs.extend({
 					callback_on_revert: true,
 					callback_on_complete: true,
@@ -1229,35 +1227,82 @@ Scoped.define("module:Elements.Animators", [
 
 
 Scoped.define("module:Elements.DefaultAnimator", [
-	    "module:Elements.Animators",
-	    "base:Objs"
-	], function (Animators, Objs, scoped) {
+    "module:Elements.Animators",
+    "base:Objs",
+    "base:Types",
+    "base:Timers.Timer"
+], function (Animators, Objs, Types, Timer, scoped) {
 	return Animators.extend({scoped: scoped}, function (inherited) {
+		
+		var Methods = {
+			linear: function (x) {
+				return x;
+			},
+			swing: function (x) {
+				return Math.sin(x * Math.PI / 2);
+			}
+		};
+		
 		return {
 	
 			constructor: function (element, options, callback, context) {
 				options = Objs.extend({
 					duration: 250,
+					delay: 10,
 					styles: {},
 					method: "swing"
-				}, options);		
+				}, options);
+				if (Types.is_string(options.method))
+					options.method = Methods[options.method] || Methods.linear;
+				this.__timer = this.auto_destroy(new Timer({
+					delay: options.delay,
+					start: false,
+					context: this,
+					fire: this.__fire
+				}));
 				inherited.constructor.call(this, element, options, callback, context);
+			},
+
+			__setProgress: function (progress) {
+				progress = Math.max(0.0, Math.min(1.0, progress));
+				Objs.iter(this.__styles, function (value, key) {
+					value.target[key] = Math.round(value.start + (value.end - value.start) * progress) + value.postfix;
+				}, this);
+			},
+			
+			__fire: function () {
+				this.__setProgress(this._options.method(this.__timer.duration() / this._options.duration));
+				if (this.__timer.duration() >= this._options.duration)
+					this._complete();
 			},
 		
 			_start: function () {
-				var self = this;
-				this.__animate = this._element.animate(this._options.styles, this._options.duration, this._options.method, function () {
-					self._finished();
-				});
+				this.__completed = false;
+				this.__timer.stop();
+				this.__styles = Objs.map(this._options.styles, function (value, key) {
+					var target = key in this._element ? this._element : this._element.style;
+					return {
+						target: target,
+						start: parseFloat(target[key]),
+						end: parseFloat(value),
+						postfix: Types.is_string(value) ? value.replace(/[\d\.]/g, "") : ""
+					};
+				}, this);
+				this.__timer.start();
 			},
 			
 			_revert: function () {
-				this.__animate.stop();
+				this.__timer.stop();
+				this.__setProgress(0.0);
 				this._reverted();
 			},
 			
 			_complete: function () {
-				this.__animate.stop(true);
+				if (this.__completed)
+					return;
+				this.__completed = true;
+				this.__setProgress(1.0);
+				this.__timer.stop();
 				this._completed();
 			}			
 	
@@ -1266,33 +1311,32 @@ Scoped.define("module:Elements.DefaultAnimator", [
 });
 
 Scoped.define("module:Elements.ElementModifier", [
-	    "base:Class",
-	    "jquery:"
-	], function (Class, $, scoped) {
+    "base:Class",
+    "browser:Dom"
+], function (Class, Dom, scoped) {
 	return Class.extend({scoped: scoped}, function (inherited) {
 		return {
 			
 			constructor: function (element) {
 				inherited.constructor.call(this);
-				this._element = $(element);
+				this._element = Dom.unbox(element);
 				this._css = {};
 				this._cls = {};
 			},
 			
 			css: function (key, value) {
 				if (arguments.length < 2)
-					return this._element.css.apply(this._element, arguments);
-				if (this._element.css(key) === value)
+					return this._element.style[key];
+				if (this._element.style[key] === value)
 					return value;
 				if (!(key in this._css))
-					//this._css[key] = this._element.css(key);
-					this._css[key] = this._element.get(0).style[key];
-				this._element.css(key, value);
+					this._css[key] = this._element.style[key];
+				this._element.style[key] = value;
 				return value;
 			},
 			
 			csscls: function (key, value) {
-				var has = this._element.hasClass(key);
+				var has = Dom.elementHasClass(this._element, key);
 				if (arguments.length < 2)
 					return key;
 				if (has === value)
@@ -1300,28 +1344,28 @@ Scoped.define("module:Elements.ElementModifier", [
 				if (!(key in this._cls))
 					this._cls[key] = has;
 				if (value)
-					this._element.addClass(key);
+					Dom.elementAddClass(this._element, key);
 				else
-					this._element.removeClass(key);
+					Dom.elementRemoveClass(this._element, key);
 				return value;
 			},
 			
 			removeClass: function (cls) {
-				if (!this._element.hasClass(cls))
+				if (!Dom.elementHasClass(this._element, cls))
 					return;
 				if (!(cls in this._cls))
 					this._cls[cls] = true;
-				this._element.addClass(cls);
+				Dom.elementAddClass(this._element, cls);
 			},
 			
 			revert: function () {
 				for (var key in this._css)
-					this._element.css(key, this._css[key]);
+					this._element.style[key] = this._css[key];
 				for (key in this._cls) {
 					if (this._cls[key])
-						this._element.addClass(key);
+						Dom.elementAddClass(this._element, key);
 					else
-						this._element.removeClass(key);
+						Dom.elementRemoveClass(this._element, key);
 				}
 			}
 		
@@ -1348,7 +1392,6 @@ Scoped.define("module:Events.Mouse", ["browser:Info"], function (Info) {
 		},
 				
 		customCoords: function (event, type, multi) {
-			event = event.originalEvent ? event.originalEvent : event;
 			if (event.touches && event.touches.length) {
 				var touches = event.touches;
 				if (multi) {
@@ -1390,9 +1433,8 @@ Scoped.define("module:Events.Mouse", ["browser:Info"], function (Info) {
 Scoped.define("module:Events.Support", [
 	    "base:Objs",
 	    "base:Types",
-	    "jquery:",
 	    "browser:Dom"
-	], function (Objs, Types, $, Dom) {
+	], function (Objs, Types, Dom) {
 	return {		
 	
 		dispatchElementEvent: function (element, label, data, options) {
@@ -1407,26 +1449,34 @@ Scoped.define("module:Events.Support", [
 			for (var i = 0; i < elements.length; ++i) {
 				elements[i].dispatchEvent(new CustomEvent(label, Objs.extend({
 					bubbles: false,
-					cancelable: true,
+					cancelable
+					: true,
 					detail: data
 				}, options)));
 			}
 		},
 		
 		dispatchManualBubbleEvent: function (element, label, predicate, data, options) {
-			this.dispatchElementsEvent($(element).parents().andSelf().filter(predicate), label, data, options); 
+			var elements = [];
+			var current = Dom.unbox(element);
+			while (current) {
+				if (predicate(current))
+					elements.push(current);
+				current = current.parentNode;
+			}
+			this.dispatchElementsEvent(elements, label, data, options); 
 		},
 		
 		dispatchPointsSeparatorEvent: function (element, label, included, excluded, data, options) {
 			included = included ? (Types.is_array(included) ? included : [included]) : [];
 			excluded = excluded ? (Types.is_array(excluded) ? excluded : [excluded]) : [];
-			this.dispatchManualBubbleEvent(element, label, function () {
+			this.dispatchManualBubbleEvent(element, label, function (element) {
 				for (var i = 0; i < included.length; ++i) {
-					if (!Dom.pointWithinElement(included[i].x, included[i].y, this))
+					if (!Dom.pointWithinElement(included[i].x, included[i].y, element))
 						return false;
 				}
 				for (i = 0; i < excluded.length; ++i) {
-					if (Dom.pointWithinElement(excluded[i].x, excluded[i].y, this))
+					if (Dom.pointWithinElement(excluded[i].x, excluded[i].y, element))
 						return false;
 				}
 				return true;
@@ -1439,8 +1489,9 @@ Scoped.define("module:Events.Support", [
 Scoped.define("module:Gestures.ElementStateHost", [
     "base:States.CompetingHost",
     "module:Gestures.GestureStates",
-    "base:Classes.ClassRegistry"
-], function (CompetingHost, GestureStates, ClassRegistry, scoped) {
+    "base:Classes.ClassRegistry",
+    "browser:Dom"
+], function (CompetingHost, GestureStates, ClassRegistry, Dom, scoped) {
 	return CompetingHost.extend({scoped: scoped}, function (inherited) {
 		return {
 		    
@@ -1448,7 +1499,7 @@ Scoped.define("module:Gestures.ElementStateHost", [
 		        inherited.constructor.call(this, composite, {
 		        	stateRegistry: new ClassRegistry(GestureStates)
 		        });
-		        this._element = element;
+		        this._element = Dom.unbox(element);
 		    },
 		    
 		    element: function () {
@@ -1464,16 +1515,18 @@ Scoped.define("module:Gestures.Gesture", [
 	    "module:Gestures.ElementStateHost",
 	    "base:States.CompetingComposite",
 	    "base:Objs",
-	    "module:Gestures.GestureStates.EventDrivenState"
-	], function (ElementStateHost, CompetingComposite, Objs, EventDrivenState, scoped) {
+	    "module:Gestures.GestureStates.EventDrivenState",
+	    "browser:Dom"
+	], function (ElementStateHost, CompetingComposite, Objs, EventDrivenState, Dom, scoped) {
 	return ElementStateHost.extend({scoped: scoped}, function (inherited) {
 		return {
 			
 			constructor: function (element, machine) {
-		        var composite = element.data("gestures");
+				element = Dom.unbox(element);
+		        var composite = element.gestures_handler;
 		        if (!composite) {
 		            composite = new CompetingComposite();
-		            element.data("gestures", composite);
+		            element.gestures_handler = composite;
 		        }
 		        inherited.constructor.call(this, element, composite);
 		        for (var key in machine) {
@@ -1495,19 +1548,25 @@ Scoped.define("module:Gestures.Gesture", [
 
 
 Scoped.define("module:Gestures.ElementState", [
-  	    "base:States.CompetingState",
-  	    "base:Ids",
-  	    "base:Objs"
-  	], function (CompetingState, Ids, Objs, scoped) {
+    "base:States.CompetingState",
+    "base:Ids",
+    "base:Objs",
+    "browser:Events"
+], function (CompetingState, Ids, Objs, DomEvents, scoped) {
   	return CompetingState.extend({scoped: scoped}, function (inherited) {
   		return {
 
 		    _persistents: ["client_pos", "screen_pos"],
+		    
+		    constructor: function () {
+		    	inherited.constructor.apply(this, arguments);
+		    	this._domevents = this.auto_destroy(new DomEvents());
+		    },
 		
 		    _start: function () {
 		    	inherited._start.call(this);
 		        this.on("mousemove touchmove", function (event) {
-		            var original = event.type == "mousemove" ? event.originalEvent : event.originalEvent.touches[0];
+		            var original = event.type == "mousemove" ? event : event.touches[0];
 		            this._client_pos = {
 		                x: original.clientX,
 		                y: original.clientY
@@ -1524,17 +1583,13 @@ Scoped.define("module:Gestures.ElementState", [
 		    },
 		    
 		    on: function (event, func) {
-		        var self = this;
-		        var events = event.split(" ");
-		        Objs.iter(events, function (eventName) {
-		            this.element().on(eventName + "." + Ids.objectId(this), function (event) {
-		                func.call(self, event);
-		            });
-		        }, this);
+	        	this._domevents.on(this.element(), event, function (event) {
+	        		func.call(this, event);
+	        	}, this);
 		    },
 		    
 		    _end: function () {
-		        this.element().off("." + Ids.objectId(this));
+		    	this._domevents.clear();
 		    },
 		    
 		    trigger: function () {
@@ -1915,13 +1970,12 @@ Scoped.define("module:Interactions.Drag", [
 	    "module:Hardware.MouseCoords",
 	    "base:Ids",
 	    "base:Objs",
-	    "base:Functions",
 	    "module:Interactions.DragStates"
 	], [
 	    "module:Interactions.DragStates.Idle",
 	    "module:Interactions.DragStates.Dragging",
 	    "module:Interactions.DragStates.Stopping"
-	], function (ElemInter, ElemMod, Dom, EventsSupp, MouseEvents, MouseCoords, Ids, Objs, Functions, DragStates, scoped) {
+	], function (ElemInter, ElemMod, Dom, EventsSupp, MouseEvents, MouseCoords, Ids, Objs, DragStates, scoped) {
 	return ElemInter.extend({scoped: scoped}, function (inherited) {
 		return {
 
@@ -1942,7 +1996,7 @@ Scoped.define("module:Interactions.Drag", [
 				}, options);
 				inherited.constructor.call(this, element, options, DragStates);
 				this._host.initialize("Idle");
-				this._modifier = new ElemMod(this._element);
+				this._modifier = new ElemMod(this.element());
 				this.data = data;
 			},
 			
@@ -1954,11 +2008,11 @@ Scoped.define("module:Interactions.Drag", [
 			
 			_enable: function () {
 				if (this._options.start_event)
-					this._element.on(this._options.start_event + "." + Ids.objectId(this), Functions.as_method(this.start, this));
+					this.__on(this.element(), this._options.start_event, this.start, this);
 			},
 			
 			_disable: function () {
-				this._element.off("." + Ids.objectId(this));
+				this._domEvents.clear();
 				this.stop();
 			},
 			
@@ -1985,14 +2039,13 @@ Scoped.define("module:Interactions.Drag", [
 				this.trigger("dropped", drop);
 				this._host.state().next("Stopping", {immediately: true});
 				if (this._options.remove_element_on_drop) {
-					this.element().remove();
+					this.element().parentNode.removeChild(this.element());
 					this.destroy();
 				}
 			},
 			
 			actionable_element: function () {
-				var c = this._host.state()._cloned_element;
-				return c ? c : this._element;
+				return this._host.state()._cloned_element || this.element();
 			},
 			
 			modifier: function () {
@@ -2073,8 +2126,8 @@ Scoped.define("module:Interactions.DragStates.Dragging", [
 	    "module:Hardware.MouseCoords",
 	    "module:Elements.ElementModifier",
 	    "module:Events.Mouse",
-	    "jquery:"
-	], function (State, MouseCoords, ElementMod, MouseEvents, $, scoped) {
+	    "browser:Dom"
+	], function (State, MouseCoords, ElementMod, MouseEvents, Dom, scoped) {
 	return State.extend({scoped: scoped}, {
 		
 		_white_list: ["Stopping"],
@@ -2084,27 +2137,30 @@ Scoped.define("module:Interactions.DragStates.Dragging", [
 			var opts = this.parent().options();
 			this._page_coords = MouseCoords.coords;
 			if (opts.clone_element) {
+				var offset = Dom.elementOffset(this.element());
+				var dimensions = Dom.elementDimensions(this.element());
 				this._initial_element_coords = {
-					x: this.element().offset().left,
-					y: this.element().offset().top
+					x: offset.left,
+					y: offset.top
 				};
-				var zindex = this.element().css("z-index");
-				var width = this.element().width();
-				var height = this.element().height();
+				var zindex = this.element().style.zIndex;
+				var width = dimensions.width;
+				var height = dimensions.height;
 				if (opts.drag_original_element) {
-					this._placeholder_cloned_element = this.element().clone();
-					this._cloned_element = this.element().replaceWith(this._placeholder_cloned_element);
+					this._placeholder_cloned_element = this.element().cloneNode(true);
+					this.element().replaceWith(this._placeholder_cloned_element);
+					this._cloned_element = this._placeholder_cloned_element;
 				} else {
-					this._cloned_element = this.element().clone();
+					this._cloned_element = this.element().cloneNode(true);
 				}
 				this._cloned_modifier = new ElementMod(this._cloned_element); 
 				this._cloned_modifier.css("position", "absolute");
 				this._cloned_modifier.css("width", width + "px");
 				this._cloned_modifier.css("height", height + "px");
-				this._cloned_modifier.css("z-index", zindex + 1);
+				this._cloned_modifier.css("zIndex", zindex + 1);
 				this._cloned_modifier.css("left", this._initial_element_coords.x + "px");
 				this._cloned_modifier.css("top", this._initial_element_coords.y + "px");
-				$("body").append(this._cloned_element);
+				document.body.appendChild(this._cloned_element);
 			} else {
 				var modifier = this.parent().modifier();
 				modifier.css("position", "relative");
@@ -2123,9 +2179,9 @@ Scoped.define("module:Interactions.DragStates.Dragging", [
 				}
 			}
 			this.trigger("start");
-			this.on("body", MouseEvents.moveEvent(), this.__dragging);
+			this.on(document.body, MouseEvents.moveEvent(), this.__dragging);
 			if (opts.stop_event) {
-				this.on("body", opts.stop_event, function () {
+				this.on(document.body, opts.stop_event, function () {
 					if (opts.droppable)
 						this.triggerDom("drop");
 					if ("next" in this)
@@ -2208,10 +2264,9 @@ Scoped.define("module:Interactions.DragStates.Stopping", [
 					this._cloned_modifier.destroy();
 				}
 				if (this._cloned_element) {
-					if (this._placeholder_cloned_element) {
-						this._cloned_element = this._placeholder_cloned_element.replaceWith(this._cloned_element);
-					}
-					this._cloned_element.remove();
+					if (this._placeholder_cloned_element)
+						this._placeholder_cloned_element.replaceWith(this._cloned_element);
+					this._cloned_element.parentNode.removeChild(this._cloned_element);
 				}
 				this.parent().modifier().revert();
 				this.trigger("stop");
@@ -2249,7 +2304,7 @@ Scoped.define("module:Interactions.Drop", [
 				}, options);
 				inherited.constructor.call(this, element, options, DropStates);
 				this._host.initialize("Idle");
-				this._modifier = new ElemMod(this._element);
+				this._modifier = new ElemMod(this.element());
 				this.data = data;
 			},
 			
@@ -2325,7 +2380,7 @@ Scoped.define("module:Interactions.DropStates.Idle", ["module:Interactions.DropS
 			this.on(this.element(), "drag-hover", function (event) {
 				if (!this.parent()._enabled)
 					return;
-				var drag_source = event.originalEvent.detail;
+				var drag_source = event.detail;
 				if (this.parent()._is_hovering(drag_source))
 					this.next(this.parent().droppable(drag_source) ? "Hover" : "InvalidHover", {drag_source: drag_source});
 			});
@@ -2347,16 +2402,16 @@ Scoped.define("module:Interactions.DropStates.Hover", ["module:Interactions.Drop
 				if (this.options().classes && this.options().classes["hover.modifier"])
 					this.parent().modifier().csscls(this.options().classes["hover.modifier"], true);
 				this.on(this.element(), "drag-hover", function (event) {
-					this._drag_source = event.originalEvent.detail;
+					this._drag_source = event.detail;
 					if (!this.parent()._is_hovering(this._drag_source))
 						this.next("Idle");
 				});
 				this.on(this.element(), "drag-stop drag-leave", function (event) {
-					this._drag_source = event.originalEvent.detail;
+					this._drag_source = event.detail;
 					this.next("Idle");
 				});
 				this.on(this.element(), "drag-drop", function (event) {
-					this._drag_source = event.originalEvent.detail;
+					this._drag_source = event.detail;
 					this.next("Dropping");
 				});
 			},
@@ -2382,12 +2437,12 @@ Scoped.define("module:Interactions.DropStates.InvalidHover", ["module:Interactio
 			_start: function () {
 				this.trigger("hover-invalid");
 				this.on(this.element(), "drag-hover", function (event) {
-					this._drag_source = event.originalEvent.detail;
+					this._drag_source = event.detail;
 					if (!this.parent()._is_hovering(this._drag_source))
 						this.next("Idle");
 				});
 				this.on(this.element(), "drag-drop drag-stop drag-leave", function (event) {
-					this._drag_source = event.originalEvent.detail;
+					this._drag_source = event.detail;
 					this.next("Idle");
 				});
 			},
@@ -2421,7 +2476,6 @@ Scoped.define("module:Interactions.DropStates.Dropping", ["module:Interactions.D
 Scoped.define("module:Interactions.Droplist", [
         "module:Interactions.ElementInteraction",
 	    "base:Objs",
-	    "jquery:",
 	    "module:Interactions.DroplistStates",
 	    "browser:Dom"
 	], [
@@ -2429,7 +2483,7 @@ Scoped.define("module:Interactions.Droplist", [
 	    "module:Interactions.DroplistStates.Idle",
 	    "module:Interactions.DroplistStates.Hover",
 	    "module:Interactions.DroplistStates.Dropping"
-	], function (ElemInter, Objs, $, DroplistStates, Dom, scoped) {
+	], function (ElemInter, Objs, DroplistStates, Dom, scoped) {
 	return ElemInter.extend({scoped: scoped}, function (inherited) {
 		return {
 			
@@ -2447,8 +2501,8 @@ Scoped.define("module:Interactions.Droplist", [
 				inherited.constructor.call(this, element, options, DroplistStates);
 				this._host.initialize("Idle");
 				this.data = data;
-				this._floater = $(this._options.floater);
-				this._floater.css("display", "none");
+				this._floater = Dom.unbox(this._options.floater);
+				this._floater.style.display = "none";
 			},
 			
 			destroy: function () {
@@ -2466,7 +2520,7 @@ Scoped.define("module:Interactions.Droplist", [
 			
 			__eventData: function () {
 				return {
-					index: this._floater.index(),
+					index: Dom.elementIndex(this._floater),
 					element: this.element(),
 					target: this,
 					data: this.data,
@@ -2483,34 +2537,28 @@ Scoped.define("module:Interactions.Droplist", [
 			},
 			
 			__update_floater: function (data) {
-			    this._floater.css("display", "none");
+			    this._floater.style.display = "none";
 			    var coords = data.page_coords;
 			    var child = Dom.childContainingElement(this.element(), data.underneath);
 			    if (!child)
 			        return;
-			    child = $(child);
-			    if (child.get(0) == this._floater.get(0)) {
-			        this._floater.css("display", "");
+			    if (child === this._floater) {
+			        this._floater.style.display = "";
 			        return;
 			    }
 			    var bb = Dom.elementBoundingBox(child);
 			    bb = this._options.bounding_box.call(this._options.context, bb);
 			    if (bb.top <= coords.y && coords.y <= bb.bottom)
 			    	return;
-		        this._floater.css("display", "");
+		        this._floater.style.display = "";
 		        if (coords.y < bb.top)
-		        	this._floater.insertBefore(child);
+		        	Dom.elementInsertBefore(this._floater, child);
 		        else
-		        	this._floater.insertAfter(child);
+		        	Dom.elementInsertAfter(this._floater, child);
 			},
 			
 			insertAt: function (element, index) {
-				var lastIndex = this.element().children().size();
-				if (index < 0)
-					index = Math.max(0, lastIndex + 1 + index);
-				this.element().append(element);
-				if (index < lastIndex) 
-					this.element().children().eq(index).before(this.element().children().last());
+				Dom.elementInsertAt(element, this.element(), index);
 			}
 			
 		};
@@ -2539,7 +2587,7 @@ Scoped.define("module:Interactions.DroplistStates.Idle", ["module:Interactions.D
 
    		_start: function () {
    			this.on(this.element(), "drag-hover", function (event) {
-   				var drag_source = event.originalEvent.detail;
+   				var drag_source = event.detail;
    				if (this.parent().droppable(drag_source))
    					this.next("Hover");
    			});
@@ -2559,23 +2607,23 @@ Scoped.define("module:Interactions.DroplistStates.Hover", ["module:Interactions.
 			_start: function () {
 				this.trigger("hover");
 				this.on(this.element(), "drag-hover", function (event) {
-					this._drag_source = event.originalEvent.detail;
+					this._drag_source = event.detail;
 					this.parent().__update_floater(this._drag_source);
 				});
 				this.on(this.element(), "drag-stop drag-leave", function (event) {
-					this._drag_source = event.originalEvent.detail;
+					this._drag_source = event.detail;
 					this.next("Idle");
 				});
 				this.on(this.element(), "drag-drop", function (event) {
-					this._drag_source = event.originalEvent.detail;
+					this._drag_source = event.detail;
 					this.parent().__update_floater(this._drag_source);
-					this.next(this.parent()._floater.css("display") == "none" ? "Idle" : "Dropping");
+					this.next(this.parent()._floater.style.display == "none" ? "Idle" : "Dropping");
 				});
 			},
 			
 			_end: function () {
 				this.trigger("unhover");
-				this.parent()._floater.css("display", "none");
+				this.parent()._floater.style.display = "none";
 				inherited._end.call(this);
 			}
 		
@@ -2600,14 +2648,15 @@ Scoped.define("module:Interactions.DroplistStates.Dropping", ["module:Interactio
 });
 
 Scoped.define("module:Interactions.Infinitescroll", [
-        "module:Interactions.Scroll",
-	    "base:Objs",
-	    "module:Interactions.InfinitescrollStates"
-	], [
-	    "module:Interactions.InfinitescrollStates.Idle",
-	    "module:Interactions.InfinitescrollStates.Scrolling",
-	    "module:Interactions.InfinitescrollStates.ScrollingTo"
-	], function (Scroll, Objs, InfinitescrollStates, scoped) {
+    "module:Interactions.Scroll",
+    "base:Objs",
+    "module:Interactions.InfinitescrollStates",
+    "browser:Dom"
+], [
+    "module:Interactions.InfinitescrollStates.Idle",
+    "module:Interactions.InfinitescrollStates.Scrolling",
+    "module:Interactions.InfinitescrollStates.ScrollingTo"
+], function (Scroll, Objs, InfinitescrollStates, Dom, scoped) {
 	return Scroll.extend({scoped: scoped}, function (inherited) {
 		return {
 
@@ -2627,11 +2676,11 @@ Scoped.define("module:Interactions.Infinitescroll", [
 				this._extending = false;
 				if (options.prepend && this.options().whitespace) {
 					this.__top_white_space = this._whitespaceCreate();
-					this.itemsElement().prepend(this.__top_white_space);
+					Dom.elementPrependChild(this.itemsElement(), this.__top_white_space);
 				}
 				if (this.options().whitespace_bottom) {
 					this.__bottom_white_space = this._whitespaceCreate();
-					this.itemsElement().append(this.__bottom_white_space);
+					this.itemsElement().appendChild(this.__bottom_white_space);
 				}
 				this.reset(true);
 		    },
@@ -2643,7 +2692,7 @@ Scoped.define("module:Interactions.Infinitescroll", [
 		    		var self = this;
 		    		opts.append.call(opts.context, count || opts.append_count, function (added, done) {
 		    			if (self.__bottom_white_space)
-		    				self.itemsElement().append(self.__bottom_white_space);
+		    				self.itemsElement().appendChild(self.__bottom_white_space);
 		    			self._extending = false;
 		    			self._can_append = done;
 		    			self.appended(added);
@@ -2652,17 +2701,17 @@ Scoped.define("module:Interactions.Infinitescroll", [
 		    },
 		    
 		    appendNeeded: function () {
-		    	var total_height = this.element().get(0).scrollHeight;
-		    	var element_height = this.element().innerHeight();
-		    	var hidden_height = total_height - (this.element().scrollTop() + element_height) - this._whitespaceGetHeight(this.__bottom_white_space);
+		    	var total_height = this.element().scrollHeight;
+		    	var element_height = this.element().clientHeight;
+		    	var hidden_height = total_height - (this.element().scrollTop + element_height) - this._whitespaceGetHeight(this.__bottom_white_space);
 		    	return hidden_height < this.options().height_factor * element_height;
 		    },
 		    
 		    prependNeeded: function () {
 		    	if (!this.options().prepend)
 		    		return false;
-		    	var element_height = this.element().innerHeight();
-		    	var hidden_height = this.element().scrollTop() - this._whitespaceGetHeight(this.__top_white_space);
+		    	var element_height = this.element().clientHeight;
+		    	var hidden_height = this.element().scrollTop - this._whitespaceGetHeight(this.__top_white_space);
 		    	return hidden_height < this.options().height_factor * element_height;
 		    },
 		    
@@ -2673,7 +2722,7 @@ Scoped.define("module:Interactions.Infinitescroll", [
 		    		var self = this;
 		    		opts.prepend.call(opts.context, count || opts.prepend_count, function (added, done) {
 		    			if (self.__top_white_space)
-		    				self.itemsElement().prepend(self.__top_white_space);
+		    				Dom.elementPrependChild(self.itemsElement(), self.__top_white_space);
 		    			self._extending = false;
 		    			self._can_prepend = done;
 		    			self.prepended(added);
@@ -2686,13 +2735,13 @@ Scoped.define("module:Interactions.Infinitescroll", [
 		    },
 		    
 		    prepended: function (count) {
-		    	var first = this.itemsElement().find(":nth-child(2)");
-		    	var last = this.itemsElement().find(":nth-child(" + (1 + count) + ")");
-		    	var h = last.offset().top - first.offset().top + last.outerHeight();
+		    	var first = this.itemsElement().children[1];
+		    	var last = this.itemsElement().children[count];
+		    	var h = Dom.elementOffset(last).top - Dom.elementOffset(first).top + Dom.elementDimensions(last).height;
 		    	if (this.scrolling()) {
 		    		this._whitespaceSetHeight(this.__top_white_space, this._whitespaceGetHeight(this.__top_white_space) - h);
 		    	} else
-		    		this.element().scrollTop(this.element().scrollTop() - h);
+		    		this.element().scrollTop = this.element().scrollTop - h;
 		    },
 		    
 		    extendFix: function () {
@@ -2710,14 +2759,14 @@ Scoped.define("module:Interactions.Infinitescroll", [
 		    		return;
 				var h = this._whitespaceGetHeight(this.__top_white_space);
 		        this._whitespaceSetHeight(this.__top_white_space, this.options().whitespace);
-				this.element().scrollTop(this.element().scrollTop() + this.options().whitespace - h);
+		        this.element().scrollTop = this.element().scrollTop + this.options().whitespace - h;
 		    },
 		
 		    reset: function (increment) {
 		        this._whitespaceSetHeight(this.__bottom_white_space, this.options().whitespace);
 		        if (this.options().prepend) {
 			        this._whitespaceSetHeight(this.__top_white_space, this.options().whitespace);
-			        this.element().scrollTop(this.options().whitespace + (increment ? this.element().scrollTop() : 0));
+			        this.element().scrollTop = this.options().whitespace + (increment ? this.element().scrollTop : 0);
 		        }
 		    }
 		    		
@@ -2763,20 +2812,22 @@ Scoped.define("module:Interactions.ElementInteraction", [
 	    "base:Class",
 	    "base:Events.EventsMixin",
 	    "module:Hardware.MouseCoords",
-	    "jquery:",
 	    "base:Async",
 	    "base:States.Host",
 	    "base:Ids",
 	    "base:Objs",
-	    "base:Classes.ClassRegistry"
-	], function (Class, EventsMixin, MouseCoords, $, Async, StateHost, Ids, Objs, ClassRegistry, scoped) {
+	    "base:Classes.ClassRegistry",
+	    "browser:Dom",
+	    "browser:Events"
+	], function (Class, EventsMixin, MouseCoords, Async, StateHost, Ids, Objs, ClassRegistry, Dom, DomEvents, scoped) {
 	return Class.extend({scoped: scoped}, [EventsMixin, function (inherited) {
 		return {
 
 			constructor: function (element, options, stateNS) {
 				inherited.constructor.call(this);
+				this._domEvents = new DomEvents();
 				MouseCoords.require();
-				this._element = $($(element).get(0));
+				this._element = Dom.unbox(element);
 				this._enabled = false;
 				this._options = options || {};
 				if ("enabled" in this._options) {
@@ -2792,17 +2843,11 @@ Scoped.define("module:Interactions.ElementInteraction", [
 			},
 			
 			__on: function (element, event, callback, context) {
-				var self = this;
-				var events = event.split(" ");
-		        Objs.iter(events, function (eventName) {
-					$(element).on(eventName + "." + Ids.objectId(this), function () {
-						callback.apply(context || self, arguments);
-					});
-		        }, this);
+				this._domEvents.on(Dom.unbox(element), event, callback, context || this);
 			},
 			
 			destroy: function () {
-				this.element().off("." + Ids.objectId(this));
+				this._domEvents.destroy();
 				this.disable();
 				this._host.destroy();
 				MouseCoords.unrequire();
@@ -2839,13 +2884,12 @@ Scoped.define("module:Interactions.ElementInteraction", [
 
 	}], {
 			
-		multiple: function (element, options, callback, context) {
-			var self = this;
-			$(element).each(function () {
-				var obj = new self(this, options);
+		multiple: function (elements, options, callback, context) {
+			for (var i = 0; i < elements.length; ++i) {
+				var obj = new this(elements[i], options);
 				if (callback)
 					callback.call(context || obj, obj);
-			});
+			}
 		}
 		
 	});
@@ -2854,90 +2898,94 @@ Scoped.define("module:Interactions.ElementInteraction", [
 
 
 Scoped.define("module:Interactions.State", [
- 	    "base:States.State",
- 	    "jquery:",
- 	    "base:Ids",
- 	    "base:Objs"
- 	], function (State, $, Ids, Objs, scoped) {
- 	return State.extend({scoped: scoped}, {
-		
-		parent: function () {
-			return this.host.parent;
-		},
-		
-		element: function () {
-			return this.parent().element();
-		},
-		
-		options: function () {
-			return this.parent().options();
-		},
-		
-		on: function (element, event, callback, context) {
-			var self = this;
-			var events = event.split(" ");
-	        Objs.iter(events, function (eventName) {
-				$(element).on(eventName + "." + Ids.objectId(this), function () {
-					if (self.destroyed())
-						return;
-					callback.apply(context || self, arguments);
-				});
-	        }, this);
-		},
-		
-		_end: function () {
-			this.element().off("." + Ids.objectId(this));			
-			$("body").off("." + Ids.objectId(this));
-		}	
-	
+    "base:States.State",
+    "browser:Events",
+    "browser:Dom",
+    "base:Ids",
+    "base:Objs"
+], function (State, DomEvents, Dom, Ids, Objs, scoped) {
+ 	return State.extend({scoped: scoped}, function (inherited) {
+		return {
+			
+			constructor: function () {
+				inherited.constructor.apply(this, arguments);
+				this._domEvents = this.auto_destroy(new DomEvents());
+			},
+			
+			parent: function () {
+				return this.host.parent;
+			},
+			
+			element: function () {
+				return this.parent().element();
+			},
+			
+			options: function () {
+				return this.parent().options();
+			},
+			
+			on: function (element, event, callback, context) {
+				this._domEvents.on(Dom.unbox(element), event, function () {
+					if (!this.destroyed())
+						callback.apply(context || this, arguments);
+				}, this);
+			},
+			
+			_end: function () {
+				this._domEvents.clear();
+			}
+			
+		};
  	});
 });
 
 
 Scoped.define("module:Interactions.Loopscroll", [
     "module:Interactions.Scroll",
-    "module:Interactions.LoopscrollStates"
+    "module:Interactions.LoopscrollStates",
+    "browser:Dom"
 ], [
 	"module:Interactions.LoopscrollStates.Idle",
 	"module:Interactions.LoopscrollStates.Scrolling",
 	"module:Interactions.LoopscrollStates.ScrollingTo"
-], function (Scroll, LoopscrollStates, scoped) {
+], function (Scroll, LoopscrollStates, Dom, scoped) {
 	return Scroll.extend({scoped: scoped}, function (inherited) {
 		return {
 
 		    constructor: function (element, options, data) {
 		    	inherited.constructor.call(this, element, options, data, LoopscrollStates);
 				this.__top_white_space = this._whitespaceCreate();
-				this.itemsElement().prepend(this.__top_white_space);
+				Dom.elementPrependChild(this.itemsElement(), this.__top_white_space);
 				this.__bottom_white_space = this._whitespaceCreate();
-				this.itemsElement().append(this.__bottom_white_space);
+				this.itemsElement().appendChild(this.__bottom_white_space);
 		        this.reset(true);
 		    },
 		
 		    _rotateFix: function () {
+		    	var itemsElementChildren = this.itemsElement().children;
 		    	var top_ws_height = this._whitespaceGetHeight(this.__top_white_space);
 		    	var bottom_ws_height = this._whitespaceGetHeight(this.__bottom_white_space);
-		    	var full_height = this.element().get(0).scrollHeight;
-		    	var visible_height = this.element().innerHeight();
+		    	var full_height = this.element().scrollHeight;
+		    	var visible_height = this.element().clientHeight;
 		    	var elements_height = full_height - top_ws_height - bottom_ws_height;
-		    	var scroll_top = this.element().scrollTop();
-		    	var count = this.itemsElement().children().length - 2;
+		    	var scroll_top = this.element().scrollTop;
+		    	var count = itemsElementChildren.length - 2;
 		    	var top_elements = (scroll_top - top_ws_height) / elements_height * count; 
 		    	var bottom_elements = (elements_height - (scroll_top - top_ws_height) - visible_height) / elements_height * count;
 		    	if (top_elements < bottom_elements - 1) {
 			    	while (top_elements < bottom_elements - 1) {
-						var item = this.itemsElement().find(":nth-last-child(2)");
-						item.insertAfter(this.__top_white_space);
-						top_ws_height -= item.outerHeight();
+						var item = itemsElementChildren[itemsElementChildren.length - 2];
+						Dom.elementInsertAfter(item, this.__top_white_space);
+						top_ws_height -= Dom.elementDimensions(item).height;
 		                this._whitespaceSetHeight(this.__top_white_space, top_ws_height);
 						bottom_elements--;
 						top_elements++;
 			    	}
 				} else if (bottom_elements < top_elements - 1) {
 			    	while (bottom_elements < top_elements - 1) {
-						var item2 = this.itemsElement().find(":nth-child(2)");
-						item2.insertBefore(this.__bottom_white_space);
-						top_ws_height += item2.outerHeight();
+						var item2 = itemsElementChildren[1];
+						Dom.elementInsertBefore(item2, this.__bottom_white_space);
+						top_ws_height += Dom.elementDimensions(item2).height;
 		                this._whitespaceSetHeight(this.__top_white_space, top_ws_height);
 						bottom_elements++;
 						top_elements--;
@@ -2949,7 +2997,7 @@ Scoped.define("module:Interactions.Loopscroll", [
 		        this._whitespaceSetHeight(this.__bottom_white_space, this.options().whitespace);
 				var h = this._whitespaceGetHeight(this.__top_white_space);
 		        this._whitespaceSetHeight(this.__top_white_space, this.options().whitespace);
-				this.element().scrollTop(this.element().scrollTop() + this.options().whitespace - h);
+		        this.element().scrollTop = this.element().scrollTop + this.options().whitespace - h;
 		    },
 
 			scrollToElement: function (element, options) {
@@ -2959,7 +3007,7 @@ Scoped.define("module:Interactions.Loopscroll", [
 		    reset: function (increment) {
 		        this._whitespaceSetHeight(this.__bottom_white_space, this.options().whitespace);
 		        this._whitespaceSetHeight(this.__top_white_space, this.options().whitespace);
-		        this.element().scrollTop(this.options().whitespace + (increment ? this.element().scrollTop() : 0));
+		        this.element().scrollTop = this.options().whitespace + (increment ? this.element().scrollTop : 0);
 		    }
 		
 		};
@@ -3064,7 +3112,7 @@ Scoped.define("module:Interactions.PinchStates.Idle", ["module:Interactions.Stat
 			this.on(this.element(), "touchstart", function (event) {
 				if (!this.parent()._enabled)
 					return;
-				if (!event.originalEvent.touches || event.originalEvent.touches.length != 2)
+				if (!event.touches || event.touches.length != 2)
 					return;
 				this.next("Pinching", {
 					initial_coords: MouseEvents.clientCoords(event, true)
@@ -3091,7 +3139,7 @@ Scoped.define("module:Interactions.PinchStates.Pinching", ["module:Interactions.
 				this._current_coords = this._initial_coords;
 				this.trigger("pinchstart");
 				this.on(this.element(), "touchmove", function (event) {
-					if (!event.originalEvent.touches || event.originalEvent.touches.length != 2) {
+					if (!event.touches || event.touches.length != 2) {
 						this.next("Idle");
 						return;
 					}
@@ -3133,12 +3181,11 @@ Scoped.define("module:Interactions.PinchStates.Pinching", ["module:Interactions.
 });
 
 Scoped.define("module:Interactions.Scroll", [
-        "module:Interactions.ElementInteraction",
-	    "base:Objs",
-	    "jquery:",
-	    "browser:Dom",
-	    "module:Interactions.ScrollStates"
-	], function (ElemInter, Objs, $, Dom, ScrollStates, scoped) {
+    "module:Interactions.ElementInteraction",
+    "base:Objs",
+    "browser:Dom",
+    "module:Interactions.ScrollStates"
+], function (ElemInter, Objs, Dom, ScrollStates, scoped) {
 	return ElemInter.extend({scoped: scoped}, function (inherited) {
 		return {
 			
@@ -3155,41 +3202,41 @@ Scoped.define("module:Interactions.Scroll", [
 					enable_scroll_modifier: "scroll"
 				}, options);
 				inherited.constructor.call(this, element, options, stateNS);
-				this._itemsElement = options.itemsElement || element;
+				this._itemsElement = Dom.unbox(options.itemsElement || element);
 				this._disableScrollCounter = 0;
 				this._host.initialize("Idle");
 				this._scrollingDirection = true;
 				this._lastScrollTop = null;
 				this.__on(this.element(), "scroll", function () {
-					var scrollTop = this.element().scrollTop();
+					var scrollTop = this.element().scrollTop;
 					if (this._lastScrollTop !== null)
 						this._scrollingDirection = scrollTop >= this._lastScrollTop;
 					this._lastScrollTop = scrollTop;
 				});
 		    },
 		    
-		    _whitespaceType: function () {
+			_whitespaceType: function () {
 		        if (this.options().display_type)
 		            return this.options().display_type;
-		        return this.element().css("display").indexOf('flex') >= 0 ? "flex" : "default";
+		        return (this.element().style.display || "").toLowerCase().indexOf('flex') >= 0 ? "flex" : "default";
 		    },
 		
 		    _whitespaceCreate: function () {
-		        var whitespace = $("<whitespace></whitespace>");
+		        var whitespace = document.createElement("whitespace");
 		        var type = this._whitespaceType();
 		
 		        if (type == "flex") {
-		            whitespace.css("display", "-ms-flexbox");
-		            whitespace.css("display", "-webkit-flex");
-		            whitespace.css("display", "flex");
+		            whitespace.style.display = "-ms-flexbox";
+		            whitespace.style.display = "-webkit-flex";
+		            whitespace.style.display = "flex";
 		        } else
-		            whitespace.css("display", "block");
+		            whitespace.style.display = "block";
 		
 		        return whitespace;
 		    },
 		
 		    _whitespaceGetHeight: function (whitespace) {
-		        return whitespace ? parseInt(whitespace.css("height"), 10) : 0;
+		        return whitespace ? Dom.elementDimensions(whitespace).height : 0;
 		    },
 		
 		    _whitespaceSetHeight: function (whitespace, height) {
@@ -3198,11 +3245,11 @@ Scoped.define("module:Interactions.Scroll", [
 		        var type = this._whitespaceType();
 		
 		        if (type == "flex") {
-		            whitespace.css("-webkit-flex", "0 0 " + height + "px");
-		            whitespace.css("-ms-flex", "0 0 " + height + "px");
-		            whitespace.css("flex", "0 0 " + height + "px");
+		            whitespace.style["-webkit-flex"] = "0 0 " + height + "px";
+		            whitespace.style["-ms-flex"] = "0 0 " + height + "px";
+		            whitespace.style.flex = "0 0 " + height + "px";
 		        } else
-		            whitespace.css("height", height + "px");
+		            whitespace.style.height = height + "px";
 		    },
 		
 		    itemsElement: function () {
@@ -3214,50 +3261,51 @@ Scoped.define("module:Interactions.Scroll", [
 		    },
 		    
 		    currentElement: function () {
-		    	var offset = this.element().offset();
-		    	var h = this._options.currentTop ? this._options.elementMargin : (this.element().innerHeight() - 1 - this._options.elementMargin);
-		    	var w = this.element().innerWidth() / 2;
-		    	var current = $(Dom.elementFromPoint(offset.left + w, offset.top + h));
-		    	while (current && current.get(0) && current.parent().get(0) != this.itemsElement().get(0))
-		    		current = current.parent();
-		    	if (!current || !current.get(0))
+		    	var offset = Dom.elementOffset(this.element());
+		    	var h = this._options.currentTop ? this._options.elementMargin : (this.element().clientHeight - 1 - this._options.elementMargin);
+		    	var w = this.element().clientWidth / 2;
+		    	var current = Dom.elementFromPoint(offset.left + w, offset.top + h);
+		    	while (current && current.parentNode != this.itemsElement())
+		    		current = current.parentNode;
+		    	if (!current)
 		    		return null;
 		    	if (!this._options.currentCenter)
 		    		return current;    	
 		    	if (this._options.currentTop) {
-		    		var delta_top = this.element().offset().top - current.offset().top;
-		    		if (delta_top > current.outerHeight() / 2)
-		    			current = current.next();
+		    		var delta_top = offset.top - Dom.elementOffset(current).top;
+		    		if (delta_top > Dom.elementDimensions(current).height / 2)
+		    			current = current.nextElementSibling;
 		    	} else {
-		    		var delta_bottom = this.element().offset().top + h - current.offset().top;
-		    		if (delta_bottom < current.outerHeight() / 2)
-		    			current = current.prev();
+		    		var delta_bottom = offset.top + h - Dom.elementOffset(current).top;
+		    		if (delta_bottom < Dom.elementDimensions(current).height / 2)
+		    			current = current.previousElementSibling;
 		    	}
 		    	return current;
 		    },
 		    
 		    scrollTo: function (position, options) {
-		    	var scroll_top = position - (this._options.currentTop ? 0 : (this.element().innerHeight() - 1));
+		    	var scroll_top = position - (this._options.currentTop ? 0 : (this.element().clientHeight - 1));
 		    	options = options || {};
 		    	options.scroll_top = scroll_top;
 		    	this._host.state().next("ScrollingTo", options);
 		    },
 		    
 		    scrollToElement: function (element, options) {
-		    	var top = element.offset().top - this.element().offset().top + this.element().scrollTop();
-				this.scrollTo(top + (this._options.currentTop ? 0 : (element.outerHeight() - 1)), options);
+		    	element = Dom.unbox(element);
+		    	var top = Dom.elementOffset(element).top - Dom.elementOffset(this.element()).top + this.element().scrollTop;
+				this.scrollTo(top + (this._options.currentTop ? 0 : (Dom.elementDimensions(element).height - 1)), options);
 		    },
 		    
 		    disableScroll: function () {
 		    	if (this._disableScrollCounter === 0)
-		        	this.element().css("overflow", "hidden");
+		        	this.element().style.overflow = "hidden";
 		    	this._disableScrollCounter++;
 		    },
 		    
 		    enableScroll: function () {
 		    	this._disableScrollCounter--;
 		    	if (this._disableScrollCounter === 0)
-		    		this.element().css("overflow", this._options.enable_scroll_modifier);
+		    		this.element().style.overflow = this._options.enable_scroll_modifier;
 		    },
 		    
 		    scrolling: function () {
@@ -3303,12 +3351,12 @@ Scoped.define("module:Interactions.ScrollStates.Scrolling", ["module:Interaction
 						self.parent().trigger("scrollend");
 						self._scrollend();
 						var current = self.parent().currentElement();
-						if (opts.discrete && current)
+						if (opts.discrete && current) {
 							self.parent().scrollToElement(current, {
 								animate: true,
 								abortable: true
 							});
-						else
+						} else
 							self.eventualNext("Idle");
 					}, opts.scrollEndTimeout);
 				});
@@ -3367,7 +3415,7 @@ Scoped.define("module:Interactions.ScrollStates.ScrollingTo", ["module:Interacti
 						this);
 					this._animation.start();
 				} else {
-					this.element().scrollTop(this._scroll_top);
+					this.element().scrollTop = this._scroll_top;
 					this._scroll();
 					this._finished();
 				}
@@ -3421,22 +3469,23 @@ Scoped.define("module:Interactions.ScrollStates.ScrollingTo", ["module:Interacti
 });
 Scoped.define("module:Interactions.Shiftscroll", [
 	"module:Interactions.Scroll",
-	"base:Async"
-], function (Scroll, Async, scoped) {
+	"base:Async",
+	"browser:Dom"
+], function (Scroll, Async, Dom, scoped) {
 	return Scroll.extend({scoped: scoped}, function (inherited) {
 		return {
 
 			constructor: function () {
 		    	inherited.constructor.apply(this, arguments);		    			    
 				this.__bottom_white_space = this._whitespaceCreate();
-				this.itemsElement().append(this.__bottom_white_space);
+				this.itemsElement().appendChild(this.__bottom_white_space);
 				this._whitespaceFix();
 				Async.eventually(this._whitespaceFix, this);
 		    },
 		    
 		    _whitespaceFix: function () {
-		    	var boxHeight = this.element().innerHeight();
-		    	var itemHeight = this.itemsElement().find(":nth-child(1)").outerHeight();
+		    	var boxHeight = this.element().clientHeight;
+		    	var itemHeight = Dom.elementDimensions(this.itemsElement().firstElementChild).height;
 				this._whitespaceSetHeight(this.__bottom_white_space, boxHeight - itemHeight);
 		    }
 		    		
