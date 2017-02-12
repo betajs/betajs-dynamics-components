@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.6 - 2017-01-24
+betajs-dynamics-components - v0.1.7 - 2017-02-11
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -17,7 +17,7 @@ Scoped.binding("ui", "global:BetaJS.UI");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '137.1485300863865'
+		version: '138.1486871288584'
 	};
 });
 
@@ -682,7 +682,8 @@ Scoped.define("module:Swipeclickcontainer", [
 				events: {
 					"dropped": function (data, event) {
 						logger.log('Drop successful');
-						//var source_doodad = event.source.data;
+						var source_doodad = event.source.data;
+						this.scope(">").execute('dropped', source_doodad);
 						//var target_doodad = data;
 						//alert(source_doodad.get("v") + " --> " + target_doodad.get("v"));
 					}
