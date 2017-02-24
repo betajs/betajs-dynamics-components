@@ -1,7 +1,7 @@
 
 <list ba-repeat="{{collectionitem :: (model.listcollection||listcollection)}}">
 
-    <ba-{{view.listitem||collectionitem.listitem||listitem}}
+    <ba-{{view.listitem||collectionitem.listitem||getview(collectionitem)}}
         ba-cache
         ba-data:id="{{collectionitem.cid()}}"
         ba-data:pid="{{collectionitem.pid()}}"
@@ -9,7 +9,7 @@
         ba-view="{{collectionitem.view||view.listinner}}"
         ba-model="{{collectionitem}}">
 
-    </ba-{{view.listitem||collectionitem.listitem||listitem}}>
+    </ba-{{view.listitem||collectionitem.listitem||getview(collectionitem)}}>
 
 </list>
 
