@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.5 - 2017-01-24
+betajs-dynamics-components - v0.1.6 - 2017-01-26
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -1004,7 +1004,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.5 - 2017-01-24
+betajs-dynamics-components - v0.1.6 - 2017-01-26
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -1022,7 +1022,7 @@ Scoped.binding("ui", "global:BetaJS.UI");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '139.1485221695499'
+		version: '141.1485442800804'
 	};
 });
 
@@ -1593,13 +1593,14 @@ Scoped.define("module:Swipeclickcontainer", [
 	"dynamics:Dynamic",
 	"module:Templates",
 	"browser:Loader",
+	"browser:Dom",
 	"base:Loggers.Logger"
 ],[
 	"ui:Dynamics.GesturePartial",
 	"ui:Dynamics.InteractionPartial",
 	"ui:Interactions.Drag",
 	"ui:Interactions.Drop"
-], function (Dynamic, Templates, Loader, Logger, scoped) {
+], function (Dynamic, Templates, Loader, Dom, Logger, scoped) {
 
 	var logger = Logger.global().tag("dynamic", "list");
 	
@@ -1710,25 +1711,23 @@ Scoped.define("module:Swipeclickcontainer", [
 				events: {
 					"move": function (doodad, event) {
 						var element = event.element;
-						var parent = element.parent();
-						var w = parseInt(element.css("width"), 10);
-                        var x = parseInt(element.css("left"), 10);
+						var w = Dom.elementDimensions(element).width;
+                        var x = parseInt(element.style.left, 10);
                         var a = {};
 						var actions = this.get('swipe_actions');
 						for (var cls in actions) {
 							a = actions[cls];
 							if ((!a.less || x <= w * a.less) && (!a.greater || x >= w * a.greater))
-								element.addClass(cls);
+								Dom.elementAddClass(element, cls);
 							else
-								element.removeClass(cls);
+								Dom.elementRemoveClass(element, cls);
 						}
 					},
 					"release": function (doodad, event) {
 						var element = event.element;
-						var w = parseInt(element.css("width"), 10);
-						var x = parseInt(element.css("left"), 10);
+						var w = Dom.elementDimensions(element).width;
+						var x = parseInt(element.style.left, 10);
 						var actions = this.get('swipe_actions');
-
 						for (var cls in actions) {
 							a = actions[cls];
 
@@ -1737,7 +1736,7 @@ Scoped.define("module:Swipeclickcontainer", [
 								if (a.execute)
 									a.execute.call(this, element, x);
 							}
-						}
+						} 
 					}
 				}
 			}
@@ -1761,17 +1760,18 @@ Scoped.define("module:Swipeclickcontainer", [
 				this.set('start_swipe','old_class');
 				
 				var self = this;
-				element.on("transitionend",function () {
-					element.find('ba-eventitem').css('visibility','hidden');
+//				element.addEventListener("transitionend",function () {
+					//element.find('ba-eventitem').css('visibility','hidden');
 					setTimeout(function () {
-						element.parent().slideUp(200);
+						//element.parent().slideUp(200);
+						element.parentNode.style.display = 'none';
 						// Now we should remove the added element from the dom again, otherwise we have a leak.
 						// this.get("temporary_style_element").remove();
+						self.trigger(trigger);
 					}, 10);
-					self.trigger(trigger);
-				});
+	//			});
 
-				var max_left = element.width();
+				var max_left = parseInt(element.style.width, 10);
 				var sign = Math.sign(current_left);
 
 				/*
