@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics - v0.0.83 - 2017-01-15
+betajs-dynamics - v0.0.85 - 2017-02-11
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -12,7 +12,7 @@ Scoped.binding('browser', 'global:BetaJS.Browser');
 Scoped.define("module:", function () {
 	return {
     "guid": "d71ebf84-e555-4e9b-b18a-11d74fdcefe2",
-    "version": "0.0.83"
+    "version": "0.0.85"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -340,30 +340,30 @@ Scoped.define("module:Parser", [
 		
 		parseCode: function (code) {
 			var result = this.__cache[code];
-			if (result)
-				return result;
-			var bidirectional = false;
-			var c = code;
-			if (c.charAt(0) == "=") {
-				bidirectional = true;
-				c = c.substring(1);
+			if (!result) {
+				var bidirectional = false;
+				var c = code;
+				if (c.charAt(0) == "=") {
+					bidirectional = true;
+					c = c.substring(1);
+				}
+				var i = c.indexOf("::");
+				var args = null;
+				if (i >= 0) {
+					args = c.substring(0, i).trim();
+					c = c.substring(i + 2);
+				}
+				result = {
+					bidirectional: bidirectional,
+					args: args,
+					variable: bidirectional ? c : null,
+					/*jslint evil: true */
+					func: new Function ("obj", "with (obj) { return " + c + "; }"),
+					dependencies: Object.keys(Objs.objectify(JavaScript.extractIdentifiers(c, true)))
+				};
+				this.__cache[code] = result;
 			}
-			var i = c.indexOf("::");
-			var args = null;
-			if (i >= 0) {
-				args = c.substring(0, i).trim();
-				c = c.substring(i + 2);
-			}
-			result = {
-				bidirectional: bidirectional,
-				args: args,
-				variable: bidirectional ? c : null,
-				/*jslint evil: true */
-				func: new Function ("obj", "with (obj) { return " + c + "; }"),
-				dependencies: Object.keys(Objs.objectify(JavaScript.extractIdentifiers(c, true)))
-			};
-			this.__cache[code] = result;
-			return result;
+			return Objs.clone(result, 1);
 		}
 	
 	};
@@ -490,6 +490,10 @@ Scoped.define("module:Data.Scope", [
 				}, this);
 				this.setAll();
 				Objs.iter(options.collections, function (value, key) {
+					if (Types.is_array(options.collections)) {
+						key = value;
+						value = [];
+					}
 					if (!this.__properties.has(key) || (Class.is_instance_of(this.__properties.get(key)) && this.__properties.get(key).destroyed())) {
 						this.set(key, this.auto_destroy(new Collection({
 							objects: value,
@@ -769,7 +773,12 @@ Scoped.define("module:Data.MultiScope", [
 				return this;
 			},
 			
+			/* Deprecated */
 			call: function (name) {
+				return this.execute.apply(this, arguments);
+			},
+			
+			execute: function (name) {
 				var iter = this.iterator();
 				var result = null;
 				while (iter.hasNext()) {
@@ -1398,7 +1407,7 @@ Scoped.define("module:Handlers.HandlerMixin", [
 			this.template = options.template || this.template;
 			this.templateUrl = options.templateUrl || this.templateUrl;
 			if (this.templateUrl)
-				this.templateUrl = Strings.replaceAll(this.templateUrl, "%", Strings.last_after(this.cls.classname, ".").toLowerCase());
+				this.templateUrl = Strings.replaceAll(this.templateUrl, "%", Strings.last_after(this.cls.classname || "", ".").toLowerCase());
 			this.__elements = options.element ? [Dom.unbox(options.element)] : [];
 			this.initialContent = Dom.unbox(options.element ? options.element : this._parentElement).innerHTML;
 			this.__activeElement = options.element ? Dom.unbox(options.element) : Dom.unbox(this._parentElement);

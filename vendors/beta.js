@@ -1,5 +1,5 @@
 /*!
-betajs - v1.0.96 - 2017-01-15
+betajs - v1.0.98 - 2017-02-08
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -1004,7 +1004,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs - v1.0.96 - 2017-01-15
+betajs - v1.0.98 - 2017-02-08
 Copyright (c) Oliver Friedmann,Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -1015,7 +1015,7 @@ Scoped.binding('module', 'global:BetaJS');
 Scoped.define("module:", function () {
 	return {
     "guid": "71366f7a-7da3-4e55-9a0b-ea0e4e2a9e79",
-    "version": "1.0.96"
+    "version": "1.0.98"
 };
 });
 Scoped.require(['module:'], function (mod) {
@@ -6835,6 +6835,7 @@ Scoped.define("module:Templates.Template", ["module:Class", "module:Templates"],
 });
 
 
+
 Scoped.define("module:Time", [], function () {
 	/**
 	 * Time Helper Functions
@@ -7211,7 +7212,7 @@ Scoped.define("module:TimeFormat", ["module:Time", "module:Strings", "module:Obj
 				return Strings.padZeros(Time.timeComponentGet(t, "month") + 1, 2);
 			},
 			"m": function (t) {
-				return Time.timeComponentGet(t, "month");
+				return Time.timeComponentGet(t, "month") + 1;
 			},
 			"d+": function (t) {
 				return Time.timeComponent(t, "day", "floor");
@@ -9706,15 +9707,19 @@ Scoped.define("module:Collections.Collection", [
 			 * Add objects in a bulk.
 			 * 
 			 * @param {array} objects Objects to be added
+			 * @param {boolean} return_collection Whether the return value should be the collection or its length
 			 * @return {int} Number of objects added
 			 */
-			add_objects: function (objects) {
+			add_objects: function (objects, return_collection) {
 				var count = 0;
 				Objs.iter(objects, function (object) {
 					if (this.add(object))
 						count++;
-				}, this);		
-				return count;
+				}, this);
+				if (return_collection)
+					return this;
+				else
+				 	return count;
 			},
 			
 			/**
@@ -10427,7 +10432,7 @@ Scoped.define("module:Exceptions.ConsoleExceptionThrower", [
 			 * @override
 			 */
 			_throwException: function (e) {
-				console.log("Exception", NativeException.ensure(e).json());
+				console.log("Exception", e.toString());
 			}
 		
 		};
