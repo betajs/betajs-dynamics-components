@@ -40,7 +40,11 @@ Scoped.define("module:List", [
                			 this.set("loading", false);
                		}, this);
                	}, this);
-        	}
+        	},
+
+            getview: function (item) {
+        	    return this.get("listitemfunc") ? (this.get("listitemfunc"))(item) : this.get("listitem");
+            }
         }
 
     }).register();

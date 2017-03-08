@@ -96,10 +96,13 @@ Scoped.define("module:Swipeclickcontainer", [
 				},
 				events: {
 					"dropped": function (data, event) {
-						logger.log('Drop successful');
 						var source_doodad = event.source.data;
-						this.scope(">").execute('dropped', source_doodad);
-						//var target_doodad = data;
+
+						// this.scope(">").execute('dropped', source_doodad);
+
+                        this.scope(">").get("model").addTag(source_doodad);
+
+                        //var target_doodad = data;
 						//alert(source_doodad.get("v") + " --> " + target_doodad.get("v"));
 					}
 				}
