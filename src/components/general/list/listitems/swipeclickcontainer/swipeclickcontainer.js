@@ -96,14 +96,11 @@ Scoped.define("module:Swipeclickcontainer", [
 				},
 				events: {
 					"dropped": function (data, event) {
+
 						var source_doodad = event.source.data;
 
-						// this.scope(">").execute('dropped', source_doodad);
+						this.scope(">").execute('dropped', source_doodad);
 
-                        this.scope(">").get("model").addTag(source_doodad);
-
-                        //var target_doodad = data;
-						//alert(source_doodad.get("v") + " --> " + target_doodad.get("v"));
 					}
 				}
 			},
@@ -188,9 +185,7 @@ Scoped.define("module:Swipeclickcontainer", [
 				var max_left = parseInt(element.style.width, 10);
 				var sign = Math.sign(current_left);
 
-				/*
-				 * Instead of the create_style call, you should be able to user betajs browser (please update first):
-				 */
+				 //Instead of the create_style call, you should be able to user betajs browser (please update first):
 				this.set("temporary_style_element", Loader.inlineStyles(
 					'.new_class { left: ' + sign*max_left + 'px; }'
 				));

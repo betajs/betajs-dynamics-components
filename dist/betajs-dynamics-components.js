@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.7 - 2017-03-08
+betajs-dynamics-components - v0.1.7 - 2017-03-09
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -1004,7 +1004,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.7 - 2017-03-08
+betajs-dynamics-components - v0.1.7 - 2017-03-09
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -1022,7 +1022,7 @@ Scoped.binding("ui", "global:BetaJS.UI");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
-		version: '146.1488950230703'
+		version: '148.1489028623356'
 	};
 });
 
@@ -1688,8 +1688,17 @@ Scoped.define("module:Swipeclickcontainer", [
 					"dropped": function (data, event) {
 						var source_doodad = event.source.data;
 
-						// this.scope(">").execute('dropped', source_doodad);
-                        this.scope(">").get("model").addTag(source_doodad);
+						logger.log('Swipeclickcontainer Drop Event');
+						logger.log(this.scope('>'));
+						logger.log(this.scope('>').get('model'));
+						this.scope(">").execute('dropped', source_doodad);
+
+                        // this.scope(">").get("model").addTag(source_doodad);
+                        // this.channel('global').trigger('notification', {
+                        // 	message : source_doodad.get('name') + ' was added to Doodad' ,
+							// timer: 2000
+                        // });
+
 
                         //var target_doodad = data;
 						//alert(source_doodad.get("v") + " --> " + target_doodad.get("v"));
@@ -1777,9 +1786,7 @@ Scoped.define("module:Swipeclickcontainer", [
 				var max_left = parseInt(element.style.width, 10);
 				var sign = Math.sign(current_left);
 
-				/*
-				 * Instead of the create_style call, you should be able to user betajs browser (please update first):
-				 */
+				 //Instead of the create_style call, you should be able to user betajs browser (please update first):
 				this.set("temporary_style_element", Loader.inlineStyles(
 					'.new_class { left: ' + sign*max_left + 'px; }'
 				));
