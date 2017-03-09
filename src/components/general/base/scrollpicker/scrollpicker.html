@@ -1,5 +1,9 @@
 <container>
-        <element ba-repeat-element="{{element_value :: value_array}}" data-id="{{element_value}}">
+        <element
+                ba-repeat-element="{{element_value :: value_array}}"
+                ba-tap="select_element(element_value)"
+                data-id="{{element_value}}"
+        >
                 {{element_value}}
         </element>
 </container>

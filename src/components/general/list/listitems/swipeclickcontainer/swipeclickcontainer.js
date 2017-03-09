@@ -33,7 +33,7 @@ Scoped.define("module:Swipeclickcontainer", [
 					less: -1/7,
 					greater: -1,
 					execute: function (element,pos) {
-						this.call('slideout',element,pos,'other');
+						this.execute('slideout',element,pos,'other');
 					}
 				},
 				"nothing": {
@@ -44,14 +44,14 @@ Scoped.define("module:Swipeclickcontainer", [
 					greater : 1/7,
 					less: 2/3,
 					execute: function (element,pos) {
-						this.call('slideout',element,pos,'archive');
+						this.execute('slideout',element,pos,'archive');
 					}
 				},
 				"delete": {
 					greater: 2 / 3,
 					less: 1,
 					execute: function (element,pos) {
-						this.call('slideout',element,pos,'delete');
+						this.execute('slideout',element,pos,'delete');
 					}
 				}
 			},

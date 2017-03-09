@@ -25,43 +25,39 @@ Scoped.define("module:Scrollpicker", [
 
         create : function () {
 
-            this.call('initialize_value_array');
-            this.call('initialize_value');
+            this.initialize_value_array();
+            this.initialize_value();
 
         },
 
         functions : {
 
-            initialize_value : function () {
-                var inc = this.get('increment');
-                var rounded_value = inc * Math.round(this.get('initial_value')/inc);
-                var index = this.get('value_array').indexOf(rounded_value);
-                var displayed_value = index > -1 ? rounded_value : this.get('value_array')[0];
-                this.set('current_value', parseInt(displayed_value, 10));
+            select_element : function (value) {
+
+                var old_element = this.element()[0].querySelector("[data-id='" + this.get('current_value') + "']");
+
+                old_element.style.color = "";
+                old_element.style.background = "";
+
+                this.set('current_value', value);
+
+                var ele = this.element()[0].querySelector("[data-id='" + value + "']");
+
+                this.execute('scroll_to_element',ele);
             },
 
-            initialize_value_array : function () {
-
-                var first = this.get('first');
-                var last = this.get('last');
-                var inc = this.get('increment');
-
-                var value_array  = [];
-                if (first < last)
-                    for (var i = first ; i <= last  ; i += inc) {
-                        value_array.push(i);
-                    }
-                else if (first > last)
-                    for (var i = first ; i >= last ; i -= inc) {
-                        value_array.push(i);
-                    }
-                this.set('value_array',value_array);
-
+            scroll_to_element : function (element) {
+                this.get('scroll').scrollToElement(element, {
+                    animate: false
+                });
+                element.style.color = "black";
+                element.style.background = "white";
             }
 
         },
 
         _afterActivate : function (element) {
+
             element = element.querySelector('container');
 
             var scroll = new Loopscroll(element, {
@@ -73,20 +69,17 @@ Scoped.define("module:Scrollpicker", [
                 currentCenter: true
             });
 
+            this.set('scroll', scroll);
+
             //var self = this;
             //element.scroll(function () {
             //    logger.log('There is a Scroll happening');
             //    logger.log(self.__cid);
             //});
 
-            logger.log('Scroll to Value');
-            logger.log(this.get('current_value'));
             var ele = element.querySelector("[data-id='" + this.get('current_value') + "']");
-            scroll.scrollToElement(ele, {
-                animate: false
-            });
-            ele.style.color = "black";
-            ele.style.background = "white";
+
+            this.execute('scroll_to_element',ele);
 
             scroll.on("scrollend", function () {
             	logger.log(this);
@@ -101,6 +94,37 @@ Scoped.define("module:Scrollpicker", [
                 scroll.currentElement().style.color = "black";
                 scroll.currentElement().style.background = "white";
             });
+
+        },
+
+        initialize_value : function () {
+
+            var inc = this.get('increment');
+            var rounded_value = inc * Math.round(this.get('initial_value')/inc);
+            var index = this.get('value_array').indexOf(rounded_value);
+            var displayed_value = index > -1 ? rounded_value : this.get('value_array')[0];
+
+            this.set('current_value', parseInt(displayed_value, 10));
+
+        },
+
+        initialize_value_array : function () {
+
+            var first = this.get('first');
+            var last = this.get('last');
+            var inc = this.get('increment');
+
+            var value_array  = [];
+
+            if (first < last)
+                for (var i = first ; i <= last  ; i += inc)
+                    value_array.push(i);
+
+            else if (first > last)
+                for (var i = first ; i >= last ; i -= inc)
+                    value_array.push(i);
+
+            this.set('value_array',value_array);
 
         }
 

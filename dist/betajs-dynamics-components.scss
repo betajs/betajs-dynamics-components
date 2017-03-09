@@ -273,7 +273,10 @@ ba-scrollpicker {
     }
   }
 
-  .selected {color: black}
+  .selected {
+    background : white;
+    color: black
+  }
 }
 
 ba-test_scrollpicker {

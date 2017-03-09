@@ -139,6 +139,7 @@ ba-scrollpicker {
       display: block;
       text-align: center; }
   ba-scrollpicker .selected {
+    background: white;
     color: black; }
 
 ba-test_scrollpicker {

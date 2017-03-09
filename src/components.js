@@ -1,16 +1,16 @@
 
 window.components = new BetaJS.Collections.Collection({objects: [
 
+    //Inputs
+    {value  : 'scrollpicker'},
+    {value  : 'test_scrollpicker'},
+    {value  : 'textinput'},
+    {value  : 'clickinput'},
+
     // List - Listitems
     {value  : 'test_selectableitem'},
     {value  : 'selectableitem'},
     {value  : 'clickitem'},
-
-    //Inputs
-    {value  : 'textinput'},
-    {value  : 'scrollpicker'},
-    {value  : 'clickinput'},
-    {value  : 'test_scrollpicker'},
 
     //Web -
     {value  : 'layout_web'},
