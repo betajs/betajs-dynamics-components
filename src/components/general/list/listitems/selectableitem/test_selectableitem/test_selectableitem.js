@@ -1,14 +1,13 @@
 
 Scoped.define("module:Test_selectableitem", [
-    "dynamics:Dynamic",
-    "module:Templates"
+    "dynamics:Dynamic"
 ], [
     "module:List"
-], function (Dynamic, Templates, scoped) {
+], function (Dynamic, scoped) {
 
     Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.test_selectableitem,
+        template: "<%= template(filepathnoext + '.html') %>",
 
         attrs : {
             model : {

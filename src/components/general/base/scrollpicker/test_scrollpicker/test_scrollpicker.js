@@ -1,14 +1,13 @@
 
 Scoped.define("module:Test_scrollpicker", [
-    "dynamics:Dynamic",
-    "module:Templates"
+    "dynamics:Dynamic"
 ], [
    'module:Scrollpicker'
-], function (Dynamic, Templates, scoped) {
+], function (Dynamic, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.test_scrollpicker,
+        template: "<%= template(filepathnoext + '.html') %>",
 
         attrs : {
         },

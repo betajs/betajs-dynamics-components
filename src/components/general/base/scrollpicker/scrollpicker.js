@@ -1,18 +1,17 @@
 
 Scoped.define("module:Scrollpicker", [
     "dynamics:Dynamic",
-    "module:Templates",
     "ui:Interactions.Loopscroll",
 	"base:Loggers.Logger"
 ], [
     "dynamics:Partials.RepeatElementPartial"
-], function (Dynamic, Templates, Loopscroll, Logger, scoped) {
+], function (Dynamic, Loopscroll, Logger, scoped) {
 	
 	var logger = Logger.global().tag("dynamic", "scroll");
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.scrollpicker,
+        template: "<%= template(filepathnoext + '.html') %>",
 
         attrs : {
             initial_value : 14,

@@ -1,16 +1,15 @@
 
 Scoped.define("module:Searchlist", [
-    "dynamics:Dynamic",
-    "module:Templates"
+    "dynamics:Dynamic"
 ],[
     "module:List",
     "module:Loading",
     "dynamics:Partials.NoScopePartial"
-],function (Dynamic, Templates, scoped) {
+],function (Dynamic, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.searchlist,
+        template: "<%= template(filepathnoext + '.html') %>",
 
         attrs: {
             searchvalue : "",

@@ -2,13 +2,12 @@
 
 Scoped.define("module:Menu_web", [
     "dynamics:Dynamic",
-    "module:Templates",
     "base:Collections.Collection"
-],function (Dynamic, Templates, Collection, scoped) {
+],function (Dynamic, Collection, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.menu_web,
+        template: "<%= template(filepathnoext + '.html') %>",
 
         attrs : {
             model : {

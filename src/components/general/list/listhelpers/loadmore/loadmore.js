@@ -1,12 +1,11 @@
 
 Scoped.define("module:Loadmore", [
-    "dynamics:Dynamic",
-    "module:Templates"
-], function (Dynamic, Templates, scoped) {
+    "dynamics:Dynamic"
+], function (Dynamic, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.loadmore,
+        template: "<%= template(filepathnoext + '.html') %>",
 
         attrs: {
             view: {

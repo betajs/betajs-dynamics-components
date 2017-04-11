@@ -1,12 +1,11 @@
 
 Scoped.define("module:Textinput", [
     "dynamics:Dynamic",
-    "module:Templates",
     'base:Strings'
-], function (Dynamic, Templates, Strings, scoped) {
+], function (Dynamic, Strings, scoped) {
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.textinput,
+        template: "<%= template(filepathnoext + '.html') %>",
 
         attrs: {
             value : 'Test',

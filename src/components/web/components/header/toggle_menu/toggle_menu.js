@@ -1,12 +1,11 @@
 
 Scoped.define("module:Toggle_menu", [
-    "dynamics:Dynamic",
-    "module:Templates"
-],function (Dynamic, Templates, scoped) {
+    "dynamics:Dynamic"
+],function (Dynamic, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.toggle_menu,
+        template: "<%= template(filepathnoext + '.html') %>",
 
         functions : {
             toggle_menu : function () {

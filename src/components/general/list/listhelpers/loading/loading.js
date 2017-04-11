@@ -1,13 +1,12 @@
 
 
 Scoped.define("module:Loading", [
-    "dynamics:Dynamic",
-    "module:Templates"
-], function (Dynamic, Templates, scoped) {
+    "dynamics:Dynamic"
+], function (Dynamic, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.loading
+        template: "<%= template(filepathnoext + '.html') %>"
 
     }).register();
 

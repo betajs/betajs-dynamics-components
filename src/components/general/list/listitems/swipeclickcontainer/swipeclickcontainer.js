@@ -1,7 +1,6 @@
 
 Scoped.define("module:Swipeclickcontainer", [
 	"dynamics:Dynamic",
-	"module:Templates",
 	"browser:Loader",
 	"browser:Dom",
 	"base:Loggers.Logger"
@@ -10,13 +9,13 @@ Scoped.define("module:Swipeclickcontainer", [
 	"ui:Dynamics.InteractionPartial",
 	"ui:Interactions.Drag",
 	"ui:Interactions.Drop"
-], function (Dynamic, Templates, Loader, Dom, Logger, scoped) {
+], function (Dynamic, Loader, Dom, Logger, scoped) {
 
 	var logger = Logger.global().tag("dynamic", "list");
 	
 	return Dynamic.extend({scoped: scoped}, {
 
-		template: Templates.swipeclickcontainer,
+		template: "<%= template(filepathnoext + '.html') %>",
 
 		attrs: {
 			start_swipe :'',

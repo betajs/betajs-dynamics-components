@@ -8,18 +8,17 @@
 
 Scoped.define("module:Selectableitem", [
     "dynamics:Dynamic",
-    "module:Templates",
     "base:Objs",
 	"base:Loggers.Logger"
 ], [
     "dynamics:Partials.ClassPartial"
-], function (Dynamic, Templates, Objs, Logger, scoped) {
+], function (Dynamic, Objs, Logger, scoped) {
 
 	var logger = Logger.global().tag("dynamic", "list");
 	
     Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.selectableitem,
+        template: "<%= template(filepathnoext + '.html') %>",
 
         bindings : {
             selected: "<+[tagname='ba-list']:selected_item"

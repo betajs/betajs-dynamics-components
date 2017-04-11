@@ -1,17 +1,16 @@
 
 Scoped.define("tests:Test_list_swipecontainer", [
         "dynamics:Dynamic",
-        "module:Templates",
         "base:Collections.Collection"
     ],[
         "module:List",
         "module:Swipeclickcontainer",
         "module:Selectableitem"
-    ], function (Dynamic, Templates, Collection, scoped) {
+    ], function (Dynamic, Collection, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.test_list_swipecontainer,
+        template: "<%= template(filepathnoext + '.html') %>",
 
         attrs: {
             model : {

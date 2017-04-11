@@ -1,11 +1,10 @@
 
 Scoped.define("module:Clickinput", [
-    "dynamics:Dynamic",
-    "module:Templates"
-], function (Dynamic, Templates, scoped) {
+    "dynamics:Dynamic"
+], function (Dynamic, scoped) {
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.clickinput,
+        template: "<%= template(filepathnoext + '.html') %>",
 
         attrs: {
             model : {

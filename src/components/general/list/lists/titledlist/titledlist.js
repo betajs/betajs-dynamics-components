@@ -1,19 +1,18 @@
 
 Scoped.define("module:Titledlist", [
     "dynamics:Dynamic",
-    "module:Templates",
 	"base:Loggers.Logger"
 ], [
   "module:List",
   "dynamics:Partials.NoScopePartial",
   "dynamics:Partials.ClickPartial"
-], function (Dynamic, Templates, Logger, scoped) {
+], function (Dynamic, Logger, scoped) {
 	
 	var logger = Logger.global().tag("dynamic", "list");
 	
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.titledlist,
+        template: "<%= template(filepathnoext + '.html') %>",
 
         attrs: {
             model: {

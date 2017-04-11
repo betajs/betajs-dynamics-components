@@ -1,12 +1,11 @@
 
 Scoped.define("module:Layout_web", [
-    "dynamics:Dynamic",
-    "module:Templates"
-],function (Dynamic, Templates, scoped) {
+    "dynamics:Dynamic"
+],function (Dynamic, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.layout_web,
+        template: "<%= template(filepathnoext + '.html') %>",
 
         attrs : {
             view : {

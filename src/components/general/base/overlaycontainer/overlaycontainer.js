@@ -1,14 +1,13 @@
 
 Scoped.define("module:Overlaycontainer", [
-    "dynamics:Dynamic",
-    "module:Templates"
+    "dynamics:Dynamic"
 ], [
     "dynamics:Partials.TapPartial"
-], function (Dynamic, Templates, scoped) {
+], function (Dynamic, scoped) {
 
 	return Dynamic.extend({scoped: scoped}, {
 		
-		template: Templates.overlaycontainer,
+		template: "<%= template(filepathnoext + '.html') %>",
 		
 		attrs : {
             view : {

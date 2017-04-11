@@ -1,15 +1,14 @@
 
 Scoped.define("module:Htmlview", [
     "dynamics:Dynamic",
-    "module:Templates",
     "base:Async",
     "browser:Loader",
     "browser:Dom"
-], function (Dynamic, Templates, Async, Loader, Dom, scoped) {
+], function (Dynamic, Async, Loader, Dom, scoped) {
 
 	return Dynamic.extend({scoped: scoped}, {
 		
-		template: Templates.htmlview,
+		template: "<%= template(filepathnoext + '.html') %>",
 		
 		attrs: {
 			"html": "",

@@ -2,15 +2,14 @@
 
 Scoped.define("tests:Test_list_listoflist", [
     "dynamics:Dynamic",
-    "module:Templates",
     "base:Collections.Collection"
 ], [
     "module:List"
-], function (Dynamic, Templates, Collection, scoped) {
+], function (Dynamic, Collection, scoped) {
 
     return Dynamic.extend({scoped : scoped}, {
 
-        template: Templates.test_list_listoflist,
+        template: "<%= template(filepathnoext + '.html') %>",
 
         collections : {
             listcollection : [
