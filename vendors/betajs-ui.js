@@ -1,5 +1,5 @@
 /*!
-betajs-ui - v1.0.32 - 2017-01-18
+betajs-ui - v1.0.35 - 2017-03-20
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1004,7 +1004,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-ui - v1.0.32 - 2017-01-18
+betajs-ui - v1.0.35 - 2017-03-20
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1018,7 +1018,7 @@ Scoped.binding('dynamics', 'global:BetaJS.Dynamics');
 Scoped.define("module:", function () {
 	return {
     "guid": "ff8d5222-1ae4-4719-b842-1dedb9162bc0",
-    "version": "1.0.32"
+    "version": "1.0.35"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1106,9 +1106,11 @@ Scoped.define("module:Dynamics.InteractionPartial", [
 				value = Objs.extend(value, value.options);
 				var InteractionClass = Interactions[Strings.capitalize(value.type)];
 				var elem = value.sub ? this._node.element().querySelector(value.sub) : this._node.element();
+				var itemsElem = value.items ? this._node.element().querySelector(value.items) : undefined;
 				var interaction = new InteractionClass(elem, Objs.extend({
 					enabled: true,
-					context: handler
+					context: handler,
+					itemsElement: itemsElem
 				}, value), value.data);
 				node.interactions[this._postfix] = interaction;
 				Objs.iter(value.events, function (callee, event) {
@@ -1961,6 +1963,59 @@ Scoped.define("module:Hardware.MouseCoords", [
 		
 	};
 });
+Scoped.define("module:Helpers.Interactor", [
+    "base:Class",
+    "base:Objs",
+    "base:Types",
+    "base:Promise",
+    "base:Async",
+    "browser:Dom"
+], function (Class, Objs, Types, Promise, Async, Dom, scoped) {
+    return Class.extend({scoped: scoped}, function (inherited) {
+        return {
+
+            constructor: function (options) {
+                inherited.constructor.apply(this);
+                this._options = Objs.extend({
+                    delay: 1
+                }, options);
+            },
+
+            _element: function (element) {
+                return element ? (Types.is_string(element) ? document.querySelector(element) : element) : document.body;
+            },
+
+            mousedown: function (element) {
+                return this._event(element, "mousedown");
+            },
+
+            mouseup: function (element) {
+                return this._event(element, "mouseup");
+            },
+
+            mousemoveToElement: function (targetElement, element) {
+                targetElement = this._element(targetElement);
+                var offset = Dom.elementOffset(targetElement);
+                var dims = Dom.elementDimensions(targetElement);
+                return this._event(element, "mousemove", {
+                    pageX: offset.left + dims.width/2,
+                    pageY: offset.top + dims.height/2
+                });
+            },
+
+            _event: function (element, event, params) {
+                var promise = Promise.create();
+                element = this._element(element ? (Types.is_string(element) ? document.querySelector(element) : element) : document.body);
+                Async.eventually(function () {
+                    Dom.triggerDomEvent(element, event, params);
+                    promise.asyncSuccess(element);
+                }, this._options.delay);
+                return promise;
+            }
+
+        };
+    });
+});
 Scoped.define("module:Interactions.Drag", [
         "module:Interactions.ElementInteraction",
 	    "module:Elements.ElementModifier",
@@ -2465,8 +2520,8 @@ Scoped.define("module:Interactions.DropStates.Dropping", ["module:Interactions.D
 		_persistents: ["drag_source"],
 	
 		_start: function () {
-			this.trigger("dropped");
 			this._drag_source.source.dropped(this.parent());
+            this.trigger("dropped");
 			this.next("Idle");
 		}
 	
@@ -2639,8 +2694,8 @@ Scoped.define("module:Interactions.DroplistStates.Dropping", ["module:Interactio
 		_persistents: ["drag_source"],
 	
 		_start: function () {
-			this.trigger("dropped");
 			this._drag_source.source.dropped(this.parent());
+            this.trigger("dropped");
 			this.next("Idle");
 		}
 	
@@ -2650,13 +2705,14 @@ Scoped.define("module:Interactions.DroplistStates.Dropping", ["module:Interactio
 Scoped.define("module:Interactions.Infinitescroll", [
     "module:Interactions.Scroll",
     "base:Objs",
+	"base:Async",
     "module:Interactions.InfinitescrollStates",
     "browser:Dom"
 ], [
     "module:Interactions.InfinitescrollStates.Idle",
     "module:Interactions.InfinitescrollStates.Scrolling",
     "module:Interactions.InfinitescrollStates.ScrollingTo"
-], function (Scroll, Objs, InfinitescrollStates, Dom, scoped) {
+], function (Scroll, Objs, Async, InfinitescrollStates, Dom, scoped) {
 	return Scroll.extend({scoped: scoped}, function (inherited) {
 		return {
 
@@ -2682,7 +2738,9 @@ Scoped.define("module:Interactions.Infinitescroll", [
 					this.__bottom_white_space = this._whitespaceCreate();
 					this.itemsElement().appendChild(this.__bottom_white_space);
 				}
-				this.reset(true);
+				Async.eventually(function () {
+                    this.reset(true);
+				}, this);
 		    },
 		    
 		    append: function (count) {
@@ -2759,7 +2817,7 @@ Scoped.define("module:Interactions.Infinitescroll", [
 		    		return;
 				var h = this._whitespaceGetHeight(this.__top_white_space);
 		        this._whitespaceSetHeight(this.__top_white_space, this.options().whitespace);
-		        this.element().scrollTop = this.element().scrollTop + this.options().whitespace - h;
+		        this.element().scrollTop = Math.max(this.options().whitespace, this.element().scrollTop + this.options().whitespace - h);
 		    },
 		
 		    reset: function (increment) {

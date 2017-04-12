@@ -10,15 +10,17 @@ Scoped.define("module:Overlaycontainer", [
 		
 		template: Templates.overlaycontainer,
 		
-		attrs : {
-            view : {
-                overlay : ""
-            },
-            model : {
-                message : "This is a message"
-            },
-            value : null,
-            showoverlay : true
+		attrs : function () {
+		    return {
+                view : {
+                    overlay : ""
+                },
+                model : {
+                    message : "This is a message"
+                },
+                value : null,
+                showoverlay : true
+            }
         }
 
 	}).register();
