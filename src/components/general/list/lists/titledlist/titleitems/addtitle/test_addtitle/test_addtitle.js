@@ -1,17 +1,16 @@
 
 Scoped.define("tests:Test_addtitle", [
     "dynamics:Dynamic",
-    "module:Templates",
 	"base:Loggers.Logger"
 ], [
     "module:Addtitle"
-], function (Dynamic, Templates, Logger, scoped) {
+], function (Dynamic, Logger, scoped) {
 	
 	var logger = Logger.global().tag("dynamic", "list");
 
     return Dynamic.extend({scoped : scoped}, {
 
-        template : Templates.test_addtitle,
+        template : "<%= template(filepathnoext + '.html') %>",
 
         initial : {
 

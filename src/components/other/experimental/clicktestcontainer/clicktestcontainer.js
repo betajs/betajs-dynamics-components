@@ -1,15 +1,14 @@
 
 Scoped.define("module:Clicktestcontainer", [
-	"dynamics:Dynamic",
-	"module:Templates"
+	"dynamics:Dynamic"
 ],[
 	"ui:Dynamics.GesturePartial",
 	"ui:Dynamics.InteractionPartial"
-], function (Dynamic, Templates, scoped) {
+], function (Dynamic, scoped) {
 
 	return Dynamic.extend({scoped: scoped}, {
 
-		template: Templates.clicktestcontainer,
+		template: "<%= template(filepathnoext + '.html') %>",
 
 		attrs: {
 			model: {

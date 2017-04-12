@@ -1,12 +1,11 @@
 
 Scoped.define("module:Header", [
-    "dynamics:Dynamic",
-    "module:Templates"
-],function (Dynamic, Templates, scoped) {
+    "dynamics:Dynamic"
+],function (Dynamic, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.header,
+        template: "<%= template(filepathnoext + '.html') %>",
 
         collections : {
             left_collection : [

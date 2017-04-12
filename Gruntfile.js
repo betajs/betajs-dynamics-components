@@ -4,6 +4,8 @@ module.banner = '/*!\n<%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template
 var Routes = {};
 Routes.port = '8711';
 
+var betajsTemplates = require("grunt-betajs-templates");
+
 module.exports = function(grunt) {
 
 	grunt
@@ -17,13 +19,13 @@ module.exports = function(grunt) {
 			},
 			concat : {
 				options : {
-					banner : module.banner
+					banner : module.banner,
+					process: betajsTemplates.concatProcess(grunt)
 				},
 				dist_raw : {
 					dest : 'dist/betajs-dynamics-components-raw.js',
 					src : [
 						'src/fragments/begin.js-fragment',
-						'dist/betajs-dynamics-components-templates.js',
 						'src/components/**/*.js',
 						'src/fragments/end.js-fragment'
 					]
@@ -62,8 +64,7 @@ module.exports = function(grunt) {
 				}
 			},
 			clean : {
-				raw: "dist/betajs-dynamics-components-raw.js",
-				templates: "dist/betajs-dynamics-components-templates.js"
+				raw: "dist/betajs-dynamics-components-raw.js"
 			},
 			uglify : {
 				options : {
@@ -153,19 +154,6 @@ module.exports = function(grunt) {
 					}
 				}
 			},
-			betajs_templates: {
-				dist: {
-					files: {
-						"dist/betajs-dynamics-components-templates.js": [
-							"src/**/*.html"
-						]
-					},
-					options: {
-						namespace: 'module:Templates',
-						scoped: true
-					}
-				}
-			},
 			watch: {
 				scripts: {
 					files: ['src/**/*.js', 'src/**/*.scss', 'src/**/*.html'],
@@ -196,8 +184,8 @@ module.exports = function(grunt) {
 	grunt.loadNpmTasks('grunt-contrib-watch');
 	grunt.loadNpmTasks('grunt-betajs-templates');
 
-	grunt.registerTask('default', [ 'revision-count', "betajs_templates", 'concat:dist_raw', 'concat:dist_scss', 'sass:dist',
-		'preprocess', 'clean:raw', 'clean:templates', /*"cssmin",*/ 'concat:dist_scoped'/*, 'uglify'*/ ]);
+	grunt.registerTask('default', [ 'revision-count',  'concat:dist_raw', 'concat:dist_scss', 'sass:dist',
+		'preprocess', 'clean:raw', /*"cssmin",*/ 'concat:dist_scoped'/*, 'uglify'*/ ]);
 	grunt.registerTask('qunit', [ 'connect' ]);
 	grunt.registerTask('lint', [ 'jshint:source', 'jshint:dist',
 		'jshint:gruntfile', "jshint:tests" ]);

@@ -1,16 +1,15 @@
 
 Scoped.define("tests:Test_list_loadmore", [
     "dynamics:Dynamic",
-    "module:Templates",
     "base:Collections.Collection"
 ],[
     "module:List",
     "module:Loading"
-], function (Dynamic, Templates, Collection, scoped) {
+], function (Dynamic, Collection, scoped) {
 
     return Dynamic.extend({scoped : scoped}, {
 
-        template: Templates.test_list_loadmore,
+        template: "<%= template(filepathnoext + '.html') %>",
 
         attrs : {
           view : {

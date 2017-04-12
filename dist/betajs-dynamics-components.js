@@ -1,5 +1,9 @@
 /*!
+<<<<<<< HEAD
 betajs-dynamics-components - v0.1.7 - 2017-04-08
+=======
+betajs-dynamics-components - v0.1.7 - 2017-04-07
+>>>>>>> 089a9467106ac94b04ed1286f15cacf6ec3808ff
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -1004,7 +1008,11 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
+<<<<<<< HEAD
 betajs-dynamics-components - v0.1.7 - 2017-04-08
+=======
+betajs-dynamics-components - v0.1.7 - 2017-04-07
+>>>>>>> 089a9467106ac94b04ed1286f15cacf6ec3808ff
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -1022,6 +1030,7 @@ Scoped.binding("ui", "global:BetaJS.UI");
 Scoped.define("module:", function () {
 	return {
 		guid: "5d9ab671-06b1-49d4-a0ea-9ff09f55a8b7",
+<<<<<<< HEAD
 		version: '150.1491581036158'
 	};
 });
@@ -1029,14 +1038,19 @@ Scoped.define("module:", function () {
 Scoped.extend('module:Templates', function () {
 return {"clickinput":" <title         ba-if=\"{{!view.edit}}\"         ba-click=\"edititem()\" >     {{model.value}} </title>  <input         placeholder=\"{{view.placeholder}}\"         ba-if=\"{{view.edit}}\"         ba-return=\"view.edit = false\"         onblur=\"{{view.edit = false}}\"         value=\"{{=model.value}}\">","htmlview":"<iframe frameBorder='0' scrolling='no'></iframe>","input":"<input placeholder=\"{{view.placeholder}}\" autofocus>","overlaycontainer":"<overlaycontainer     ba-tap=\"showoverlay = false\"     ba-if=\"{{showoverlay}}\">      <overlayinner>          <ba-{{view.overlay}} ba-noscope>             <message>{{model.message}}</message>         </ba-{{view.overlay}}>      </overlayinner>  </overlaycontainer>","testoverlaycontainer":" <button ba-click=\"showoverlay = !showoverlay\">Show Overlaycontainer</button>  <ba-overlaycontainer         ba-overlay=\"{{=overlay}}\"         ba-showoverlay=\"{{=showoverlay}}\">          </ba-overlaycontainer>","scrollpicker":"<container>         <element                 ba-repeat-element=\"{{element_value :: value_array}}\"                 ba-tap=\"select_element(element_value)\"                 data-id=\"{{element_value}}\"         >                 {{element_value}}         </element> </container>","test_scrollpicker":" <ba-scrollpicker id=\"321\"></ba-scrollpicker> <ba-scrollpicker id=\"322\"></ba-scrollpicker> ","textinput":" <textarea autofocus onblur=\"{{this.call('blur')}}\" value=\"{{=value}}\"></textarea> <pre>{{=preheighttext}}</pre>","loading":" <loading>      <div class='uil-spin-css' style='-webkit-transform:scale(0.32)'><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>  </loading> ","loadmore":" <loadmore ba-click=\"load_more()\">      <button>Load more</button>  </loadmore>","eventitem":" <button         class=\"{{model.class}}\">     {{model.value}} - {{counter}} </button>","selectableitem":" <selectableitem         ba-class=\"{{{selected : selected.cid == this.cid()}}}\"         ba-click=\"select()\">     {{model.value}} </selectableitem>","test_selectableitem":" <ba-list         ba-listcollection=\"{{listcollection}}\"         ba-view.listitem=\"selectableitem\"         ba-selected_item=\"{{undefined}}\" ></ba-list>","swipeclickcontainer":" <behind>     <icon class='{{view.lefticon||lefticon}}'></icon>     <div></div>     <icon class='{{view.righticon||righticon}}'></icon> </behind>  <!--style=\"left: {{view.left}}px\"--> <swipe         class='{{start_swipe}}'         ba-gesture:click=\"{{{data: model, options: click_gesture}}}\"         ba-gesture:drag=\"{{drag_gesture}}\"         ba-interaction:drag=\"{{{data: model, options: drag_interaction}}}\"         ba-interaction:drop=\"{{{data: model, options: drop_interaction}}}\"         ba-gesture:swipe=\"{{swipe_gesture}}\"         ba-interaction:swipe=\"{{swipe_interaction}}\">      <container>          <ba-{{view.inner||inner}} ba-noscope>         </ba-{{view.inner||inner}}>          <swipeleft>             <div></div>             <icon class='{{view.lefticon||lefticon}}'></icon>         </swipeleft>          <swiperight>             <icon class='{{view.righticon||righticon}}'></icon>             <div></div>         </swiperight>      </container>  </swipe> ","list":" <list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">      <ba-{{view.listitem||collectionitem.listitem||getview(collectionitem)}}         ba-cache         ba-data:id=\"{{collectionitem.cid()}}\"         ba-data:pid=\"{{collectionitem.pid()}}\"         ba-functions=\"{{collectionitem.callbacks}}\"         ba-view=\"{{collectionitem.view||view.listinner}}\"         ba-model=\"{{collectionitem}}\">      </ba-{{view.listitem||collectionitem.listitem||getview(collectionitem)}}>  </list>  <ba-loadmore ba-if=\"{{loadmore}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitems\"> </ba-loadmore> <ba-loading ba-if=\"{{loadmore}}\" ba-show=\"{{loading}}\"> </ba-loading> ","test_list_clickitem":" <ba-list ba-attrs=\"{{testmodel}}\"> </ba-list>","test_list_listcollection":" <ba-list ba-listcollection=\"{{listcollection}}\"> </ba-list>","test_list_listoflist":" <ba-list         ba-listitem=\"list\"         ba-listcollection=\"{{listcollection}}\"> </ba-list>","test_list_loadmore":" <ba-list ba-view=\"{{view}}\" ba-listcollection=\"{{listcollection}}\"> </ba-list>","test_list_pushfunc":"<button ba-click=\"test(input_value)\">Test func</button> <input ba-return=\"test(input_value)\" placeholder=\"Push item to list\" value=\"{{=input_value}}\"> <ba-titledlist ba-attrs=\"{{testmodel}}\"> </ba-titledlist>","test_list_swipecontainer":" <ba-list         ba-model=\"{{model}}\"         ba-view=\"{{view_model}}\"> </ba-list>","searchlist":" <searchbox ba-if=\"{{view.showsearch}}\">     <icon class=\"icon-search\"></icon>     <input placeholder=\"{{view.placeholder}}\" value=\"{{=searchvalue}}\"> </searchbox>  <ba-loading ba-if=\"{{searchingindication}}\"> </ba-loading>  <ba-list ba-noscope></ba-list> ","test_searchlist":" <ba-searchlist         ba-view=\"{{view}}\">  </ba-searchlist>","test_titledlist_swipe":" <ba-titledlist         ba-listcollection=\"{{listcollection}}\"         ba-attrs=\"{{push_attrs}}\">  </ba-titledlist>","test_titledlist":" <ba-titledlist         ba-model=\"{{model}}\"         ba-view=\"{{view}}\"         ba-functions=\"{{callbacks}}\"         ba-listcollection=\"{{listcollection}}\">  </ba-titledlist>","titledlist":" <ba-{{view.titleitem}}     ba-click=\"click_title()\"     ba-functions=\"{{model.title_callbacks}}\"     ba-model=\"{{model.title_model}}\">{{model.title_model.value}}</ba-{{view.titleitem}}>  <ba-list         ba-noscope         ba-show=\"{{!collapsed}}\">  </ba-list> ","addtitle":" <addtitle>     <title ba-click=\"clicktitle()\">{{model.value}}</title>     <button ba-click=\"addbutton()\">         <span class=\"icon-plus\"></span>     </button> </addtitle>","test_addtitle":" <ba-addtitle         ba-attrs=\"{{testmodel}}\"> </ba-addtitle> ","clickitem":" <button         class=\"{{model.class}}\"         ba-click=\"click()\">     {{model.value}} </button>","clicktestcontainer":" <ba-{{view.inner||inner}}     ba-gesture:click=\"{{{data: model, options: click_gesture}}})\"     ba-noscope>     {{model.value||value}} </ba-{{view.inner||inner}}> ","header":" <ba-list ba-listcollection=\"{{left_collection}}\"></ba-list>","toggle_menu":"<button ba-click=\"toggle_menu()\" class=\"icon-reorder\"></button>","menu_web":" <ba-titledlist         ba-collapsible=\"{{false}}\"         ba-model=\"{{model}}\"         ba-listcollection=\"{{menu_collection}}\">  </ba-titledlist>","layout_web":"<header>     <ba-{{view.header}}>Header</ba-{{view.header}}> </header> <main>     <menu ba-show=\"{{view.display_menu}}\">         <ba-{{view.menu}} ba-view=\"{{view.menuview}}\">Menu</ba-{{view.menu}}>     </menu>     <content>         <ba-{{view.content}} ba-model={{contentmodel}} ba-attrs=\"{{view.contentattrs}}\">Content</ba-{{view.content}}>     </content> </main>","index":"<!DOCTYPE html> <html> <head lang=\"en\">     <meta charset=\"UTF-8\">      <!--<script src=\"../vendors/jquery-1.9.closure-extern.js\"></script>-->     <script src=\"../vendors/jquery-2.1.4.js\"></script>      <script src=\"../vendors/scoped.js\"></script>     <script src=\"../vendors/beta.js\"></script>     <script src=\"../vendors/betajs-browser-noscoped.js\"></script>     <script src=\"../vendors/betajs-ui.js\"></script>     <!--<script src=\"../../betajs-ui/dist/betajs-ui.js\"></script>-->          <script>   BetaJS.Loggers.Logger.global().addListener(new BetaJS.Loggers.ConsoleLogListener());   BetaJS.Loggers.Logger.global().addAugment(new BetaJS.Loggers.CallOriginLogAugment());     </script>          <script src=\"../vendors/betajs-dynamics-noscoped.js\"></script>      <script src=\"components.js\"></script>      <!--<script src=\"../vendors/betajs-simulator.js\"></script>-->     <script src=\"../../betajs-simulator/dist/betajs-simulator.js\"></script>     <link rel=\"stylesheet\" href=\"../..//betajs-simulator/dist/betajs-simulator.css\" />      <script src=\"../dist/betajs-dynamics-components-noscoped.js\"></script>     <link rel=\"stylesheet\" href=\"../dist/betajs-dynamics-components.css\" />     <link rel=\"stylesheet\" href=\"../vendors/icomoon/style.css\" />      <script src=\"//localhost:1337/livereload.js\"></script>      <title>BetaJS Simulator</title>      <script>      </script>  </head> <body>  <ba-simulator></ba-simulator>  <script>     console.log('Unresolved Dependencies : ');     console.log(Scoped.unresolved('global:')); </script>  </body> </html>"};
 });
+=======
+		version: '150.1491549446484'
+	};
+});
+
+>>>>>>> 089a9467106ac94b04ed1286f15cacf6ec3808ff
 
 Scoped.define("module:Clickinput", [
-    "dynamics:Dynamic",
-    "module:Templates"
-], function (Dynamic, Templates, scoped) {
+    "dynamics:Dynamic"
+], function (Dynamic, scoped) {
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.clickinput,
+        template: "\n<title\n        ba-if=\"{{!view.edit}}\"\n        ba-click=\"edititem()\"\n>\n    {{model.value}}\n</title>\n\n<input\n        placeholder=\"{{view.placeholder}}\"\n        ba-if=\"{{view.edit}}\"\n        ba-return=\"view.edit = false\"\n        onblur=\"{{view.edit = false}}\"\n        value=\"{{=model.value}}\">",
 
         attrs: {
             model : {
@@ -1070,15 +1084,14 @@ Scoped.define("module:Clickinput", [
 
 Scoped.define("module:Htmlview", [
     "dynamics:Dynamic",
-    "module:Templates",
     "base:Async",
     "browser:Loader",
     "browser:Dom"
-], function (Dynamic, Templates, Async, Loader, Dom, scoped) {
+], function (Dynamic, Async, Loader, Dom, scoped) {
 
 	return Dynamic.extend({scoped: scoped}, {
 		
-		template: Templates.htmlview,
+		template: "<iframe frameBorder='0' scrolling='no'></iframe>",
 		
 		attrs: {
 			"html": "",
@@ -1170,12 +1183,11 @@ Scoped.define("module:Htmlview", [
 
 
 Scoped.define("module:Input", [
-    "dynamics:Dynamic",
-    "module:Templates"
-], function (Dynamic, Templates, scoped) {
+    "dynamics:Dynamic"
+], function (Dynamic, scoped) {
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.input,
+        template: "<input placeholder=\"{{view.placeholder}}\" autofocus>",
 
         attrs: {
             model : {
@@ -1193,15 +1205,14 @@ Scoped.define("module:Input", [
 });
 
 Scoped.define("module:Overlaycontainer", [
-    "dynamics:Dynamic",
-    "module:Templates"
+    "dynamics:Dynamic"
 ], [
     "dynamics:Partials.TapPartial"
-], function (Dynamic, Templates, scoped) {
+], function (Dynamic, scoped) {
 
 	return Dynamic.extend({scoped: scoped}, {
 		
-		template: Templates.overlaycontainer,
+		template: "<overlaycontainer\n    ba-tap=\"showoverlay = false\"\n    ba-if=\"{{showoverlay}}\">\n\n    <overlayinner>\n\n        <ba-{{view.overlay}} ba-noscope>\n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
 		
 		attrs : function () {
 		    return {
@@ -1222,15 +1233,14 @@ Scoped.define("module:Overlaycontainer", [
 
 
 Scoped.define("tests:Testoverlaycontainer", [
-    "dynamics:Dynamic",
-    "module:Templates"
+    "dynamics:Dynamic"
 ],[
     "module:Overlaycontainer"
-],function (Dynamic, Templates, scoped) {
+],function (Dynamic, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.testoverlaycontainer,
+        template: "\n<button ba-click=\"showoverlay = !showoverlay\">Show Overlaycontainer</button>\n\n<ba-overlaycontainer\n        ba-overlay=\"{{=overlay}}\"\n        ba-showoverlay=\"{{=showoverlay}}\">\n\n        </ba-overlaycontainer>",
 
         attrs : {
             showoverlay : false,
@@ -1244,18 +1254,17 @@ Scoped.define("tests:Testoverlaycontainer", [
 
 Scoped.define("module:Scrollpicker", [
     "dynamics:Dynamic",
-    "module:Templates",
     "ui:Interactions.Loopscroll",
 	"base:Loggers.Logger"
 ], [
     "dynamics:Partials.RepeatElementPartial"
-], function (Dynamic, Templates, Loopscroll, Logger, scoped) {
+], function (Dynamic, Loopscroll, Logger, scoped) {
 	
 	var logger = Logger.global().tag("dynamic", "scroll");
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.scrollpicker,
+        template: "<container>\n        <element\n                ba-repeat-element=\"{{element_value :: value_array}}\"\n                ba-tap=\"select_element(element_value)\"\n                data-id=\"{{element_value}}\"\n        >\n                {{element_value}}\n        </element>\n</container>",
 
         attrs : {
             initial_value : 14,
@@ -1376,15 +1385,14 @@ Scoped.define("module:Scrollpicker", [
 });
 
 Scoped.define("module:Test_scrollpicker", [
-    "dynamics:Dynamic",
-    "module:Templates"
+    "dynamics:Dynamic"
 ], [
    'module:Scrollpicker'
-], function (Dynamic, Templates, scoped) {
+], function (Dynamic, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.test_scrollpicker,
+        template: "\n<ba-scrollpicker id=\"321\"></ba-scrollpicker>\n<ba-scrollpicker id=\"322\"></ba-scrollpicker>\n",
 
         attrs : {
         },
@@ -1400,12 +1408,11 @@ Scoped.define("module:Test_scrollpicker", [
 
 Scoped.define("module:Textinput", [
     "dynamics:Dynamic",
-    "module:Templates",
     'base:Strings'
-], function (Dynamic, Templates, Strings, scoped) {
+], function (Dynamic, Strings, scoped) {
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.textinput,
+        template: "\n<textarea onblur=\"{{this.call('blur')}}\" value=\"{{=value}}\"></textarea>\n<pre>{{=preheighttext}}</pre>",
 
         attrs: {
             value : 'Test',
@@ -1435,26 +1442,24 @@ Scoped.define("module:Textinput", [
 
 
 Scoped.define("module:Loading", [
-    "dynamics:Dynamic",
-    "module:Templates"
-], function (Dynamic, Templates, scoped) {
+    "dynamics:Dynamic"
+], function (Dynamic, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.loading
+        template: "\n<loading>\n\n    <div class='uil-spin-css' style='-webkit-transform:scale(0.32)'><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>\n\n</loading>\n"
 
     }).register();
 
 });
 
 Scoped.define("module:Loadmore", [
-    "dynamics:Dynamic",
-    "module:Templates"
-], function (Dynamic, Templates, scoped) {
+    "dynamics:Dynamic"
+], function (Dynamic, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.loadmore,
+        template: "\n<loadmore ba-click=\"load_more()\">\n\n    <button>Load more</button>\n\n</loadmore>",
 
         attrs: {
             view: {
@@ -1476,15 +1481,14 @@ Scoped.define("module:Loadmore", [
 
 Scoped.define("module:Eventitem", [
     "dynamics:Dynamic",
-    "module:Templates",
 	"base:Loggers.Logger"
-], function (Dynamic, Templates, Logger, scoped) {
+], function (Dynamic, Logger, scoped) {
 
 	var logger = Logger.global().tag("dynamic", "calendar");
 	
     return Dynamic.extend({scoped : scoped}, {
 
-        template: Templates.eventitem,
+        template: "\n<button\n        class=\"{{model.class}}\">\n    {{model.value}} - {{counter}}\n</button>",
 
         attrs: {
             counter : 0,
@@ -1524,18 +1528,17 @@ Scoped.define("module:Eventitem", [
 
 Scoped.define("module:Selectableitem", [
     "dynamics:Dynamic",
-    "module:Templates",
     "base:Objs",
 	"base:Loggers.Logger"
 ], [
     "dynamics:Partials.ClassPartial"
-], function (Dynamic, Templates, Objs, Logger, scoped) {
+], function (Dynamic, Objs, Logger, scoped) {
 
 	var logger = Logger.global().tag("dynamic", "list");
 	
     Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.selectableitem,
+        template: "\n<selectableitem\n        ba-class=\"{{{selected : selected.cid == this.cid()}}}\"\n        ba-click=\"select()\">\n    {{model.value}}\n</selectableitem>",
 
         bindings : {
             selected: "<+[tagname='ba-list']:selected_item"
@@ -1584,15 +1587,14 @@ Scoped.define("module:Selectableitem", [
 
 
 Scoped.define("module:Test_selectableitem", [
-    "dynamics:Dynamic",
-    "module:Templates"
+    "dynamics:Dynamic"
 ], [
     "module:List"
-], function (Dynamic, Templates, scoped) {
+], function (Dynamic, scoped) {
 
     Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.test_selectableitem,
+        template: "\n<ba-list\n        ba-listcollection=\"{{listcollection}}\"\n        ba-view.listitem=\"selectableitem\"\n        ba-selected_item=\"{{undefined}}\"\n></ba-list>",
 
         attrs : {
             model : {
@@ -1617,7 +1619,6 @@ Scoped.define("module:Test_selectableitem", [
 
 Scoped.define("module:Swipeclickcontainer", [
 	"dynamics:Dynamic",
-	"module:Templates",
 	"browser:Loader",
 	"browser:Dom",
 	"base:Loggers.Logger"
@@ -1626,13 +1627,13 @@ Scoped.define("module:Swipeclickcontainer", [
 	"ui:Dynamics.InteractionPartial",
 	"ui:Interactions.Drag",
 	"ui:Interactions.Drop"
-], function (Dynamic, Templates, Loader, Dom, Logger, scoped) {
+], function (Dynamic, Loader, Dom, Logger, scoped) {
 
 	var logger = Logger.global().tag("dynamic", "list");
 	
 	return Dynamic.extend({scoped: scoped}, {
 
-		template: Templates.swipeclickcontainer,
+		template: "\n<behind>\n    <icon class='{{view.lefticon||lefticon}}'></icon>\n    <div></div>\n    <icon class='{{view.righticon||righticon}}'></icon>\n</behind>\n\n<!--style=\"left: {{view.left}}px\"-->\n<swipe\n        class='{{start_swipe}}'\n        ba-gesture:click=\"{{{data: model, options: click_gesture}}}\"\n        ba-gesture:drag=\"{{drag_gesture}}\"\n        ba-interaction:drag=\"{{{data: model, options: drag_interaction}}}\"\n        ba-interaction:drop=\"{{{data: model, options: drop_interaction}}}\"\n        ba-gesture:swipe=\"{{swipe_gesture}}\"\n        ba-interaction:swipe=\"{{swipe_interaction}}\">\n\n    <container>\n\n        <ba-{{view.inner||inner}} ba-noscope>\n        </ba-{{view.inner||inner}}>\n\n        <swipeleft>\n            <div></div>\n            <icon class='{{view.lefticon||lefticon}}'></icon>\n        </swipeleft>\n\n        <swiperight>\n            <icon class='{{view.righticon||righticon}}'></icon>\n            <div></div>\n        </swiperight>\n\n    </container>\n\n</swipe>\n",
 
 		attrs: {
 			start_swipe :'',
@@ -1817,7 +1818,6 @@ Scoped.define("module:Swipeclickcontainer", [
 
 Scoped.define("module:List", [
     "dynamics:Dynamic",
-    "module:Templates",
     "base:Async"
 ], [
     "dynamics:Partials.RepeatPartial",
@@ -1827,11 +1827,11 @@ Scoped.define("module:List", [
     "dynamics:Partials.CachePartial",
     "module:Loading",
     "module:Loadmore"
-], function (Dynamic, Templates, Async, scoped) {
+], function (Dynamic, Async, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.list,
+        template: "\n<list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">\n\n    <ba-{{view.listitem||collectionitem.listitem||getview(collectionitem)}}\n        ba-cache\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-view=\"{{collectionitem.view||view.listinner}}\"\n        ba-model=\"{{collectionitem}}\">\n\n    </ba-{{view.listitem||collectionitem.listitem||getview(collectionitem)}}>\n\n</list>\n\n<ba-loadmore ba-if=\"{{loadmore}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitems\">\n</ba-loadmore>\n<ba-loading ba-if=\"{{loadmore}}\" ba-show=\"{{loading}}\">\n</ba-loading>\n",
 
         attrs: {
             listitem: "clickitem",
@@ -1869,15 +1869,14 @@ Scoped.define("module:List", [
 
 Scoped.define("tests:Test_list_clickitem", [
     "dynamics:Dynamic",
-    "module:Templates",
     "base:Collections.Collection"
 ], [
     "module:List"
-], function (Dynamic, Templates, Collection, scoped) {
+], function (Dynamic, Collection, scoped) {
 
     return Dynamic.extend({scoped : scoped}, {
 
-        template: Templates.test_list_clickitem,
+        template: "\n<ba-list ba-attrs=\"{{testmodel}}\">\n</ba-list>",
 
         attrs: {
             testmodel : {
@@ -1897,15 +1896,14 @@ Scoped.define("tests:Test_list_clickitem", [
 });
 
 Scoped.define("tests:Test_list_listcollection", [
-    "dynamics:Dynamic",
-    "module:Templates"
+    "dynamics:Dynamic"
 ], [
     "module:List"
-], function (Dynamic, Templates, scoped) {
+], function (Dynamic, scoped) {
 
     return Dynamic.extend({scoped : scoped}, {
 
-        template: Templates.test_list_listcollection,
+        template: "\n<ba-list ba-listcollection=\"{{listcollection}}\">\n</ba-list>",
 
         collections : {
             listcollection : [
@@ -1923,15 +1921,14 @@ Scoped.define("tests:Test_list_listcollection", [
 
 Scoped.define("tests:Test_list_listoflist", [
     "dynamics:Dynamic",
-    "module:Templates",
     "base:Collections.Collection"
 ], [
     "module:List"
-], function (Dynamic, Templates, Collection, scoped) {
+], function (Dynamic, Collection, scoped) {
 
     return Dynamic.extend({scoped : scoped}, {
 
-        template: Templates.test_list_listoflist,
+        template: "\n<ba-list\n        ba-listitem=\"list\"\n        ba-listcollection=\"{{listcollection}}\">\n</ba-list>",
 
         collections : {
             listcollection : [
@@ -1952,16 +1949,15 @@ Scoped.define("tests:Test_list_listoflist", [
 
 Scoped.define("tests:Test_list_loadmore", [
     "dynamics:Dynamic",
-    "module:Templates",
     "base:Collections.Collection"
 ],[
     "module:List",
     "module:Loading"
-], function (Dynamic, Templates, Collection, scoped) {
+], function (Dynamic, Collection, scoped) {
 
     return Dynamic.extend({scoped : scoped}, {
 
-        template: Templates.test_list_loadmore,
+        template: "\n<ba-list ba-view=\"{{view}}\" ba-listcollection=\"{{listcollection}}\">\n</ba-list>",
 
         attrs : {
           view : {
@@ -2001,19 +1997,18 @@ Scoped.define("tests:Test_list_loadmore", [
 
 Scoped.define("module:Test_list_pushfunc", [
     "dynamics:Dynamic",
-    "module:Templates",
     "base:Collections.Collection",
 	"base:Loggers.Logger"
 ],[
     "module:Titledlist",
     "module:Clickitem"
-], function (Dynamic, Templates, Collection, Logger, scoped) {
+], function (Dynamic, Collection, Logger, scoped) {
 
 	var logger = Logger.global().tag("dynamic", "list");
 	
     return Dynamic.extend({scoped : scoped}, {
 
-        template: Templates.test_list_pushfunc,
+        template: "<button ba-click=\"test(input_value)\">Test func</button>\n<input ba-return=\"test(input_value)\" placeholder=\"Push item to list\" value=\"{{=input_value}}\">\n<ba-titledlist ba-attrs=\"{{testmodel}}\">\n</ba-titledlist>",
 
         attrs: {
             testmodel : {
@@ -2053,17 +2048,16 @@ Scoped.define("module:Test_list_pushfunc", [
 
 Scoped.define("tests:Test_list_swipecontainer", [
         "dynamics:Dynamic",
-        "module:Templates",
         "base:Collections.Collection"
     ],[
         "module:List",
         "module:Swipeclickcontainer",
         "module:Selectableitem"
-    ], function (Dynamic, Templates, Collection, scoped) {
+    ], function (Dynamic, Collection, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.test_list_swipecontainer,
+        template: "\n<ba-list\n        ba-model=\"{{model}}\"\n        ba-view=\"{{view_model}}\">\n</ba-list>",
 
         attrs: {
             model : {
@@ -2086,17 +2080,16 @@ Scoped.define("tests:Test_list_swipecontainer", [
 });
 
 Scoped.define("module:Searchlist", [
-    "dynamics:Dynamic",
-    "module:Templates"
+    "dynamics:Dynamic"
 ],[
     "module:List",
     "module:Loading",
     "dynamics:Partials.NoScopePartial"
-],function (Dynamic, Templates, scoped) {
+],function (Dynamic, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.searchlist,
+        template: "\n<searchbox ba-if=\"{{view.showsearch}}\">\n    <icon class=\"icon-search\"></icon>\n    <input placeholder=\"{{view.placeholder}}\" value=\"{{=searchvalue}}\">\n</searchbox>\n\n<ba-loading ba-if=\"{{searchingindication}}\">\n</ba-loading>\n\n<ba-list ba-noscope></ba-list>\n",
 
         attrs: {
             searchvalue : "",
@@ -2136,13 +2129,12 @@ Scoped.define("module:Searchlist", [
 });
 
 Scoped.define("tests:Test_searchlist", [
-    "dynamics:Dynamic",
-    "module:Templates"
-], function (Dynamic, Templates, scoped) {
+    "dynamics:Dynamic"
+], function (Dynamic, scoped) {
 
     return Dynamic.extend({scoped : scoped}, {
 
-        template : Templates.test_searchlist,
+        template : "\n<ba-searchlist\n        ba-view=\"{{view}}\">\n\n</ba-searchlist>",
 
         attrs : {
             view : {
@@ -2166,52 +2158,16 @@ Scoped.define("tests:Test_searchlist", [
 
 });
 
-
-Scoped.define("module:Test_titledlist_swipe", [
-    "dynamics:Dynamic",
-    "module:Templates"
-],[
-    "module:Titledlist",
-    "module:Selectableitem"
-], function (Dynamic, Templates, scoped) {
-
-    return Dynamic.extend({scoped : scoped}, {
-
-        template : Templates.test_titledlist_swipe,
-
-        attrs : {
-            push_attrs : {
-                title_model : {
-                    value : 'Titledlist - Testtitle'
-                },
-                listitem: 'swipeclickcontainer',
-                inner: 'selectableitem'
-            }
-        },
-
-        collections : {
-            listcollection : [
-                {value: "Test - Titledlist - Swipe - Item 1"},
-                {value: "Test - Titledlist - Swipe - Item 2"},
-                {value: "Test - Titledlist - Swipe - Item 3"}
-            ]
-        }
-
-    }).register();
-
-});
-
 Scoped.define("module:Test_titledlist", [
     "dynamics:Dynamic",
-    "module:Templates",
 	"base:Loggers.Logger"
-],function (Dynamic, Templates, Logger, scoped) {
+],function (Dynamic, Logger, scoped) {
 	
 	var logger = Logger.global().tag("dynamic", "list");
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.test_titledlist,
+        template: "\n<ba-titledlist\n        ba-model=\"{{model}}\"\n        ba-view=\"{{view}}\"\n        ba-functions=\"{{callbacks}}\"\n        ba-listcollection=\"{{listcollection}}\">\n\n</ba-titledlist>",
 
         attrs : {
             view : {
@@ -2247,21 +2203,54 @@ Scoped.define("module:Test_titledlist", [
 
 });
 
+
+Scoped.define("module:Test_titledlist_swipe", [
+    "dynamics:Dynamic"
+],[
+    "module:Titledlist",
+    "module:Selectableitem"
+], function (Dynamic, scoped) {
+
+    return Dynamic.extend({scoped : scoped}, {
+
+        template : "\n<ba-titledlist\n        ba-listcollection=\"{{listcollection}}\"\n        ba-attrs=\"{{push_attrs}}\">\n\n</ba-titledlist>",
+
+        attrs : {
+            push_attrs : {
+                title_model : {
+                    value : 'Titledlist - Testtitle'
+                },
+                listitem: 'swipeclickcontainer',
+                inner: 'selectableitem'
+            }
+        },
+
+        collections : {
+            listcollection : [
+                {value: "Test - Titledlist - Swipe - Item 1"},
+                {value: "Test - Titledlist - Swipe - Item 2"},
+                {value: "Test - Titledlist - Swipe - Item 3"}
+            ]
+        }
+
+    }).register();
+
+});
+
 Scoped.define("module:Titledlist", [
     "dynamics:Dynamic",
-    "module:Templates",
 	"base:Loggers.Logger"
 ], [
   "module:List",
   "dynamics:Partials.NoScopePartial",
   "dynamics:Partials.ClickPartial"
-], function (Dynamic, Templates, Logger, scoped) {
+], function (Dynamic, Logger, scoped) {
 	
 	var logger = Logger.global().tag("dynamic", "list");
 	
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.titledlist,
+        template: "\n<ba-{{view.titleitem}}\n    ba-click=\"click_title()\"\n    ba-functions=\"{{model.title_callbacks}}\"\n    ba-model=\"{{model.title_model}}\">{{model.title_model.value}}</ba-{{view.titleitem}}>\n\n<ba-list\n        ba-noscope\n        ba-show=\"{{!collapsed}}\">\n\n</ba-list>\n",
 
         attrs: {
             model: {
@@ -2314,15 +2303,14 @@ Scoped.define("module:Titledlist", [
 
 Scoped.define("module:Addtitle", [
     "dynamics:Dynamic",
-    "module:Templates",
 	"base:Loggers.Logger"
-], function (Dynamic, Templates, Logger, scoped) {
+], function (Dynamic, Logger, scoped) {
 	
 	var logger = Logger.global().tag("dynamic", "list");
 
     return Dynamic.extend({scoped : scoped}, {
 
-        template:Templates.addtitle,
+        template: "\n<addtitle>\n    <title ba-click=\"clicktitle()\">{{model.value}}</title>\n    <button ba-click=\"addbutton()\">\n        <span class=\"icon-plus\"></span>\n    </button>\n</addtitle>",
 
         attrs: {
             model : {value: 'Title'}
@@ -2349,17 +2337,16 @@ Scoped.define("module:Addtitle", [
 
 Scoped.define("tests:Test_addtitle", [
     "dynamics:Dynamic",
-    "module:Templates",
 	"base:Loggers.Logger"
 ], [
     "module:Addtitle"
-], function (Dynamic, Templates, Logger, scoped) {
+], function (Dynamic, Logger, scoped) {
 	
 	var logger = Logger.global().tag("dynamic", "list");
 
     return Dynamic.extend({scoped : scoped}, {
 
-        template : Templates.test_addtitle,
+        template : "\n<ba-addtitle\n        ba-attrs=\"{{testmodel}}\">\n</ba-addtitle>\n",
 
         initial : {
 
@@ -2392,15 +2379,14 @@ Scoped.define("tests:Test_addtitle", [
 
 Scoped.define("module:Clickitem", [
     "dynamics:Dynamic",
-    "module:Templates",
 	"base:Loggers.Logger"
-], function (Dynamic, Templates, Logger, scoped) {
+], function (Dynamic, Logger, scoped) {
 	
 	var logger = Logger.global().tag("dynamic", "list");
 	
     return Dynamic.extend({scoped : scoped}, {
 
-        template: Templates.clickitem,
+        template: "\n<button\n        class=\"{{model.class}}\"\n        ba-click=\"click()\">\n    {{model.value}}\n</button>",
 
         attrs: {
             model : {
@@ -2428,16 +2414,15 @@ Scoped.define("module:Clickitem", [
 });
 
 Scoped.define("module:Clicktestcontainer", [
-	"dynamics:Dynamic",
-	"module:Templates"
+	"dynamics:Dynamic"
 ],[
 	"ui:Dynamics.GesturePartial",
 	"ui:Dynamics.InteractionPartial"
-], function (Dynamic, Templates, scoped) {
+], function (Dynamic, scoped) {
 
 	return Dynamic.extend({scoped: scoped}, {
 
-		template: Templates.clicktestcontainer,
+		template: "\n<ba-{{view.inner||inner}}\n    ba-gesture:click=\"{{{data: model, options: click_gesture}}})\"\n    ba-noscope>\n    {{model.value||value}}\n</ba-{{view.inner||inner}}>\n",
 
 		attrs: {
 			model: {
@@ -2468,13 +2453,12 @@ Scoped.define("module:Clicktestcontainer", [
 });
 
 Scoped.define("module:Header", [
-    "dynamics:Dynamic",
-    "module:Templates"
-],function (Dynamic, Templates, scoped) {
+    "dynamics:Dynamic"
+],function (Dynamic, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.header,
+        template: "\n<ba-list ba-listcollection=\"{{left_collection}}\"></ba-list>",
 
         collections : {
             left_collection : [
@@ -2498,13 +2482,12 @@ Scoped.define("module:Header", [
 
 
 Scoped.define("module:Toggle_menu", [
-    "dynamics:Dynamic",
-    "module:Templates"
-],function (Dynamic, Templates, scoped) {
+    "dynamics:Dynamic"
+],function (Dynamic, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.toggle_menu,
+        template: "<button ba-click=\"toggle_menu()\" class=\"icon-reorder\"></button>",
 
         functions : {
             toggle_menu : function () {
@@ -2521,13 +2504,12 @@ Scoped.define("module:Toggle_menu", [
 
 Scoped.define("module:Menu_web", [
     "dynamics:Dynamic",
-    "module:Templates",
     "base:Collections.Collection"
-],function (Dynamic, Templates, Collection, scoped) {
+],function (Dynamic, Collection, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.menu_web,
+        template: "\n<ba-titledlist\n        ba-collapsible=\"{{false}}\"\n        ba-model=\"{{model}}\"\n        ba-listcollection=\"{{menu_collection}}\">\n\n</ba-titledlist>",
 
         attrs : {
             model : {
@@ -2562,13 +2544,12 @@ Scoped.define("module:Menu_web", [
 
 
 Scoped.define("module:Layout_web", [
-    "dynamics:Dynamic",
-    "module:Templates"
-],function (Dynamic, Templates, scoped) {
+    "dynamics:Dynamic"
+],function (Dynamic, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.layout_web,
+        template: "<header>\n    <ba-{{view.header}}>Header</ba-{{view.header}}>\n</header>\n<main>\n    <menu ba-show=\"{{view.display_menu}}\">\n        <ba-{{view.menu}} ba-view=\"{{view.menuview}}\">Menu</ba-{{view.menu}}>\n    </menu>\n    <content>\n        <ba-{{view.content}} ba-model={{contentmodel}} ba-attrs=\"{{view.contentattrs}}\">Content</ba-{{view.content}}>\n    </content>\n</main>",
 
         attrs : {
             view : {

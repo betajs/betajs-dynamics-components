@@ -1,16 +1,15 @@
 
 
 Scoped.define("module:Test_titledlist_swipe", [
-    "dynamics:Dynamic",
-    "module:Templates"
+    "dynamics:Dynamic"
 ],[
     "module:Titledlist",
     "module:Selectableitem"
-], function (Dynamic, Templates, scoped) {
+], function (Dynamic, scoped) {
 
     return Dynamic.extend({scoped : scoped}, {
 
-        template : Templates.test_titledlist_swipe,
+        template : "<%= template(filepathnoext + '.html') %>",
 
         attrs : {
             push_attrs : {

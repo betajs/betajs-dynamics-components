@@ -1,15 +1,14 @@
 
 Scoped.define("module:Eventitem", [
     "dynamics:Dynamic",
-    "module:Templates",
 	"base:Loggers.Logger"
-], function (Dynamic, Templates, Logger, scoped) {
+], function (Dynamic, Logger, scoped) {
 
 	var logger = Logger.global().tag("dynamic", "calendar");
 	
     return Dynamic.extend({scoped : scoped}, {
 
-        template: Templates.eventitem,
+        template: "<%= template(filepathnoext + '.html') %>",
 
         attrs: {
             counter : 0,

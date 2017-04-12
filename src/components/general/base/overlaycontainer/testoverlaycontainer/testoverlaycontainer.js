@@ -1,14 +1,13 @@
 
 Scoped.define("tests:Testoverlaycontainer", [
-    "dynamics:Dynamic",
-    "module:Templates"
+    "dynamics:Dynamic"
 ],[
     "module:Overlaycontainer"
-],function (Dynamic, Templates, scoped) {
+],function (Dynamic, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.testoverlaycontainer,
+        template: "<%= template(filepathnoext + '.html') %>",
 
         attrs : {
             showoverlay : false,

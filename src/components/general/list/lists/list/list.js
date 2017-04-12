@@ -1,7 +1,6 @@
 
 Scoped.define("module:List", [
     "dynamics:Dynamic",
-    "module:Templates",
     "base:Async"
 ], [
     "dynamics:Partials.RepeatPartial",
@@ -11,11 +10,11 @@ Scoped.define("module:List", [
     "dynamics:Partials.CachePartial",
     "module:Loading",
     "module:Loadmore"
-], function (Dynamic, Templates, Async, scoped) {
+], function (Dynamic, Async, scoped) {
 
     return Dynamic.extend({scoped: scoped}, {
 
-        template: Templates.list,
+        template: "<%= template(filepathnoext + '.html') %>",
 
         attrs: {
             listitem: "clickitem",

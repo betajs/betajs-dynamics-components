@@ -1,19 +1,18 @@
 
 Scoped.define("module:Test_list_pushfunc", [
     "dynamics:Dynamic",
-    "module:Templates",
     "base:Collections.Collection",
 	"base:Loggers.Logger"
 ],[
     "module:Titledlist",
     "module:Clickitem"
-], function (Dynamic, Templates, Collection, Logger, scoped) {
+], function (Dynamic, Collection, Logger, scoped) {
 
 	var logger = Logger.global().tag("dynamic", "list");
 	
     return Dynamic.extend({scoped : scoped}, {
 
-        template: Templates.test_list_pushfunc,
+        template: "<%= template(filepathnoext + '.html') %>",
 
         attrs: {
             testmodel : {

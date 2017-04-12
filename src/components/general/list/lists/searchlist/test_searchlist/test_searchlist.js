@@ -1,12 +1,11 @@
 
 Scoped.define("tests:Test_searchlist", [
-    "dynamics:Dynamic",
-    "module:Templates"
-], function (Dynamic, Templates, scoped) {
+    "dynamics:Dynamic"
+], function (Dynamic, scoped) {
 
     return Dynamic.extend({scoped : scoped}, {
 
-        template : Templates.test_searchlist,
+        template : "<%= template(filepathnoext + '.html') %>",
 
         attrs : {
             view : {
