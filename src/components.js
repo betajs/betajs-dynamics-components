@@ -1,6 +1,16 @@
 
 window.components = new BetaJS.Collections.Collection({objects: [
 
+    //Swipecontainers
+    {value  : 'hoverbuttoncontainer'},
+    {value  : 'swipeclickcontainer'},
+    {value  : 'eventitem'},
+
+    //Web -
+    {value  : 'layout_web'},
+    {value  : 'menu_web'},
+    {value  : 'header'},
+
     //Inputs
     {value  : 'scrollpicker'},
     {value  : 'test_scrollpicker'},
@@ -11,15 +21,6 @@ window.components = new BetaJS.Collections.Collection({objects: [
     {value  : 'test_selectableitem'},
     {value  : 'selectableitem'},
     {value  : 'clickitem'},
-
-    //Web -
-    {value  : 'layout_web'},
-    {value  : 'menu_web'},
-    {value  : 'header'},
-
-    //Swipecontainers
-    {value  : 'swipeclickcontainer'},
-    {value  : 'eventitem'},
 
     //Titledlist
     {value  : 'addtitle'},

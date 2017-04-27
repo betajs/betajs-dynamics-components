@@ -1,9 +1,5 @@
 /*!
-<<<<<<< HEAD
-betajs-dynamics-components - v0.1.7 - 2017-04-08
-=======
-betajs-dynamics-components - v0.1.7 - 2017-04-07
->>>>>>> 089a9467106ac94b04ed1286f15cacf6ec3808ff
+betajs-dynamics-components - v0.1.8 - 2017-04-27
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -674,6 +670,71 @@ ba-eventitem {
   }
 }
 
+
+$hoverbuttoncontainerheight: 44px;
+
+ba-hoverbuttoncontainer {
+  @include display-flex;
+  position: relative;
+  display: block;
+
+  hoverbuttoncontainer {
+    @include display-flex;
+
+    container {
+      @include display-flex;
+      @include flex-settings(1 1 auto);
+      >* {width:100%}
+    }
+
+
+    hoverbuttons {
+      @include display-flex;
+      @include flex-settings(0 1 auto);
+
+      button {
+        position: relative;
+        @include display-flex;
+
+        width: $hoverbuttoncontainerheight;
+        line-height: $hoverbuttoncontainerheight;
+
+        span {
+          font-size: 18px;
+          color: $grey3;
+          margin: auto;
+        }
+      }
+      tooltip {
+        position: absolute;
+        top: $hoverbuttoncontainerheight;
+        left: 0;
+        //height: 20px;
+        line-height: initial;
+        z-index: 1;
+
+        opacity: 0;
+        visibility: hidden;
+
+        border: 1px solid $grey3;
+        background: $grey1;
+        color: $grey3;
+        text-align: center;
+      }
+      button:hover span {color: black}
+      button:hover tooltip {visibility: visible}
+    }
+    hoverbuttons:hover tooltip {
+      opacity: 1;
+      -webkit-transition: opacity 2s;
+      transition: opacity 2s;
+      -webkit-transition-timing-function: step-end;
+      transition-timing-function: step-end;
+    }
+  }
+
+
+}
 ba-selectableitem {
 
   selectableitem {

@@ -1,9 +1,5 @@
 /*!
-<<<<<<< HEAD
-betajs-dynamics-components - v0.1.7 - 2017-04-08
-=======
-betajs-dynamics-components - v0.1.7 - 2017-04-07
->>>>>>> 089a9467106ac94b04ed1286f15cacf6ec3808ff
+betajs-dynamics-components - v0.1.8 - 2017-04-27
 Copyright (c) Oliver Friedmann, Victor Lingenthal
 MIT Software License.
 */
@@ -515,6 +511,80 @@ ba-eventitem {
     text-align: center;
     display: block;
     color: inherit; }
+
+ba-hoverbuttoncontainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  position: relative;
+  display: block; }
+  ba-hoverbuttoncontainer hoverbuttoncontainer {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex; }
+    ba-hoverbuttoncontainer hoverbuttoncontainer container {
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-flex: 1 1 auto;
+      -moz-box-flex: 1 1 auto;
+      -webkit-flex: 1 1 auto;
+      -ms-flex: 1 1 auto;
+      flex: 1 1 auto; }
+      ba-hoverbuttoncontainer hoverbuttoncontainer container > * {
+        width: 100%; }
+    ba-hoverbuttoncontainer hoverbuttoncontainer hoverbuttons {
+      display: -webkit-box;
+      display: -moz-box;
+      display: -ms-flexbox;
+      display: -webkit-flex;
+      display: flex;
+      -webkit-box-flex: 0 1 auto;
+      -moz-box-flex: 0 1 auto;
+      -webkit-flex: 0 1 auto;
+      -ms-flex: 0 1 auto;
+      flex: 0 1 auto; }
+      ba-hoverbuttoncontainer hoverbuttoncontainer hoverbuttons button {
+        position: relative;
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        width: 44px;
+        line-height: 44px; }
+        ba-hoverbuttoncontainer hoverbuttoncontainer hoverbuttons button span {
+          font-size: 18px;
+          color: #777;
+          margin: auto; }
+      ba-hoverbuttoncontainer hoverbuttoncontainer hoverbuttons tooltip {
+        position: absolute;
+        top: 44px;
+        left: 0;
+        line-height: initial;
+        z-index: 1;
+        opacity: 0;
+        visibility: hidden;
+        border: 1px solid #777;
+        background: #ddd;
+        color: #777;
+        text-align: center; }
+      ba-hoverbuttoncontainer hoverbuttoncontainer hoverbuttons button:hover span {
+        color: black; }
+      ba-hoverbuttoncontainer hoverbuttoncontainer hoverbuttons button:hover tooltip {
+        visibility: visible; }
+    ba-hoverbuttoncontainer hoverbuttoncontainer hoverbuttons:hover tooltip {
+      opacity: 1;
+      -webkit-transition: opacity 2s;
+      transition: opacity 2s;
+      -webkit-transition-timing-function: step-end;
+      transition-timing-function: step-end; }
 
 ba-selectableitem selectableitem {
   display: block;
