@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.9 - 2017-05-08
+betajs-dynamics-components - v0.1.10 - 2017-05-08
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.9"
+    "version": "0.1.10"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
