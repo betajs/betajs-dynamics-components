@@ -1,50 +1,62 @@
 {
-	"name": "betajs-dynamics-components",
-	"version": "0.1.8",
-	"description": "BetaJS-Dynamics-Components is a Library of DOM Components that are built in BetaJS-Dynamics",
-	"homepage": "http://betajs.com",
-	"contributors": ["Oliver Friedmann, Victor Lingenthal"],
-	"license": "MIT",
-	"devDependencies": {
-		"grunt": "",
-		"grunt-contrib-nodeunit": "",
-		"grunt-contrib-concat": "",
-		"grunt-contrib-uglify": "",
-		"grunt-contrib-clean": "",
-	    "grunt-contrib-sass": "",
-	  	"grunt-contrib-connect": "",
-		"grunt-preprocess": "",
-		"grunt-git-revision-count": "",
-		"grunt-closure-tools": "",
-		"grunt-node-qunit": "",
-		"grunt-contrib-jshint": "",
-	    "grunt-contrib-cssmin": "",
-		"grunt-wget": "",
-		"grunt-jsdoc": "",
-		"grunt-shell": "",
-		"grunt-template": "",
-	    "grunt-contrib-watch": "",
-	    "grunt-betajs-templates": "git://github.com/betajs/grunt-betajs-templates.git"
-	},
-	"repository": {
-		"type": "git",
-		"url": "git://github.com/betajs/betajs-dynamics-components.git"
-	},
-	"meta": {
-		"status": "Active, In Development",
-		"weakDependencies": {
-			"betajs-scoped": "https://github.com/betajs/betajs-scoped"
-		},
-		"dependencies": {
-			"betajs": "https://github.com/betajs/betajs",
-			"betajs-browser": "https://github.com/betajs/betajs-browser",
-			"betajs-dynamics": "https://github.com/betajs/betajs-dyanmics"
-		},
-		"cdn": {
-			"betajs-dynamics-components.js": "http://cdn.rawgit.com/betajs/betajs-dynamics-components/master/dist/betajs-dynamics-components.js",
-			"betajs-dynamics-components.min.js": "http://cdn.rawgit.com/betajs/betajs-dynamics-components/master/dist/betajs-dynamics-components.min.js",
-			"betajs-dynamics-components-noscoped.js": "http://cdn.rawgit.com/betajs/betajs-dynamics-components/master/dist/betajs-dynamics-components-noscoped.js",
-			"betajs-dynamics-components-noscoped.min.js": "http://cdn.rawgit.com/betajs/betajs-dynamics-components/master/dist/betajs-dynamics-components-noscoped.min.js"
-		}
-	}
+    "homepage": "http://betajs.com",
+    "license": "Apache-2.0",
+    "licenses": [
+        {
+            "type": "Apache-2.0",
+            "url": "https://github.com/betajs/betajs-dynamics-components/blob/master/LICENSE"
+        }
+    ],
+    "author": {
+        "name": "BetaJS",
+        "email": "info@betajs.com"
+    },
+    "bugs": {
+        "url": "https://github.com/betajs/betajs-dynamics-components/issues"
+    },
+    "name": "betajs-dynamics-components",
+    "version": "0.1.9",
+    "description": "BetaJS-Dynamics-Components is a Library of DOM Components that are built in BetaJS-Dynamics",
+    "contributors": [
+        "Victor Lingenthal"
+    ],
+    "devDependencies": {
+        "lodash": "",
+        "grunt": "",
+        "grunt-contrib-jshint": "",
+        "grunt-contrib-concat": "",
+        "grunt-contrib-uglify": "",
+        "grunt-contrib-clean": "",
+        "grunt-contrib-copy": "",
+        "grunt-preprocess": "",
+        "grunt-closure-tools": "",
+        "grunt-node-qunit": "",
+        "qunit": "",
+        "jsdom": "",
+        "js-yaml": "",
+        "grunt-contrib-sass": "",
+        "grunt-contrib-cssmin": "",
+        "grunt-contrib-csslint": "",
+        "grunt-contrib-connect": "",
+        "grunt-githooks": "",
+        "betajs-scoped": "~0.0.13",
+        "betajs-compile": "~0.0.28",
+        "betajs": "~1.0.96",
+        "betajs-browser": "~1.0.65",
+        "betajs-dynamics": "~0.0.83",
+        "betajs-ui": "~1.0.37",
+        "grunt-betajs-templates": "~0.1.11",
+        "betajs-simulator": "",
+        "js-beautify": ""
+    },
+    "main": "dist/betajs-dynamics-components.js",
+    "repository": {
+        "type": "git",
+        "url": "git://github.com/betajs/betajs-dynamics-components.git"
+    },
+    "meta": {
+        "blog": "http://blog.betajs.com",
+        "twitter": "http://twitter.com/thebetajs",
+        "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d"
+    }
 }

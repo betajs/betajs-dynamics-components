@@ -1,15 +1,17 @@
 <html>
 <head>
-    <script src="../assets/jquery.js"></script>
-    <script src="../../vendors/beta.js"></script>
-    <script src="../../vendors/betajs-browser-noscoped.js"></script>
-    <script src="../../vendors/betajs-dynamics-noscoped.js"></script>
-    <script src="../../dist/betajs-dynamics-components.js"></script>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script src="../../node_modules/betajs-scoped/dist/scoped.js"></script>
+    <script src="../../node_modules/betajs/dist/beta-noscoped.js"></script>
+    <script src="../../node_modules/betajs-browser/dist/betajs-browser-noscoped.js"></script>
+    <script src="../../node_modules/betajs-ui/dist/betajs-ui-noscoped.js"></script>
+    <script src="../../node_modules/betajs-dynamics/dist/betajs-dynamics-noscoped.js"></script>
+    <script src="../../dist/betajs-dynamics-components-noscoped.js"></script>
     <link rel="stylesheet" href="../../dist/betajs-dynamics-components.css">
 </head>
 <body>
 
-<test>
+<div id="test">
     <h1>Tests for Clickitem</h1>
 
     <h3>Test Dynamics</h3>
@@ -32,10 +34,10 @@
             ba-functions="{{callbacks}}">
 
     </ba-clickitem>
-</test>
+</div>
 
 <script>
-    var root = $("test");
+    var root = $("#test");
 
     var dynamic = new BetaJS.Dynamics.Dynamic({
         element: root,
@@ -56,6 +58,7 @@
         create : function () {
             //Event Listener
             this.scope('>[id="test_event"]').on("event", function () {
+                alert("asdf");
                 this.set('event_notifier',this.get('event_notifier_after'));
             }, this);
         }
@@ -70,7 +73,7 @@
 
         //1. Event Listener
         QUnit.equal(dynamic.get('event_notifier'), $('#event_notifier').html().trim());
-        $('#test_event').find('button').click();
+        BetaJS.Browser.Dom.triggerDomEvent($('#test_event').find('button').get(0), "click");
         QUnit.equal(dynamic.get('event_notifier_after'), $('#event_notifier').html().trim());
 
         //2. Insert a Function to change the model.value to a model.new_value

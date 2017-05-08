@@ -1,7 +1,7 @@
 /*!
-betajs-dynamics-components - v0.1.8 - 2017-04-27
-Copyright (c) Oliver Friedmann, Victor Lingenthal
-MIT Software License.
+betajs-dynamics-components - v0.1.9 - 2017-05-08
+Copyright (c) Victor Lingenthal
+Apache-2.0 Software License.
 */
 component {
   margin: 10px; }
@@ -89,18 +89,6 @@ overlaycontainer {
       border-radius: 2px;
       padding: 10px; }
 
-ba-testoverlaycontainer {
-  padding: 10px; }
-  ba-testoverlaycontainer button {
-    color: white;
-    border-radius: 1px;
-    background-color: #4E8EF7;
-    text-transform: uppercase;
-    letter-spacing: 3px;
-    padding: 14px 28px;
-    font-size: 13px;
-    font-family: "AvenirNextLTPro-Medium", "Helvetica Neue", Helvetica, Arial, sans-serif; }
-
 ba-scrollpicker {
   -webkit-box-flex: 1 1 0;
   -moz-box-flex: 1 1 0;
@@ -141,18 +129,6 @@ ba-scrollpicker {
   ba-scrollpicker .selected {
     background: white;
     color: black; }
-
-ba-test_scrollpicker {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-flex: 1 1 0;
-  -moz-box-flex: 1 1 0;
-  -webkit-flex: 1 1 0;
-  -ms-flex: 1 1 0;
-  flex: 1 1 0; }
 
 ba-textinput {
   -webkit-box-flex: 1 1 0;
@@ -485,6 +461,27 @@ ba-loadmore {
     ba-loadmore loadmore button {
       flex: 1 1 0; }
 
+ba-clickitem {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column; }
+  ba-clickitem button {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    padding: 0 22px;
+    min-height: 44px;
+    text-align: center;
+    display: block;
+    color: inherit; }
+
 ba-eventitem {
   display: -webkit-box;
   display: -moz-box;
@@ -591,18 +588,6 @@ ba-selectableitem selectableitem {
   background: white; }
 ba-selectableitem .selected {
   background: lightgrey; }
-
-ba-test_selectableitem {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-flex: 1 1 0;
-  -moz-box-flex: 1 1 0;
-  -webkit-flex: 1 1 0;
-  -ms-flex: 1 1 0;
-  flex: 1 1 0; }
 
 ba-swipeclickcontainer {
   position: relative;
@@ -736,11 +721,6 @@ ba-list {
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch; }
 
-ba-test_list_loadmore {
-  height: 100%; }
-  ba-test_list_loadmore ba-list {
-    height: 100%; }
-
 ba-searchlist {
   -webkit-box-flex: 1 1 0;
   -moz-box-flex: 1 1 0;
@@ -786,30 +766,6 @@ ba-searchlist {
   ba-searchlist ba-listitem {
     display: block; }
 
-ba-test_searchlist {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-flex: 1 1 0;
-  -moz-box-flex: 1 1 0;
-  -webkit-flex: 1 1 0;
-  -ms-flex: 1 1 0;
-  flex: 1 1 0; }
-
-ba-test_titledlist {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-flex: 1 1 0;
-  -moz-box-flex: 1 1 0;
-  -webkit-flex: 1 1 0;
-  -ms-flex: 1 1 0;
-  flex: 1 1 0; }
-
 ba-titledlist {
   display: -webkit-box;
   display: -moz-box;
@@ -854,135 +810,6 @@ ba-addtitle addtitle {
     -webkit-flex: 0 0 44px;
     -ms-flex: 0 0 44px;
     flex: 0 0 44px; }
-
-ba-clickitem {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column; }
-  ba-clickitem button {
-    -webkit-box-flex: 1 1 0;
-    -moz-box-flex: 1 1 0;
-    -webkit-flex: 1 1 0;
-    -ms-flex: 1 1 0;
-    flex: 1 1 0;
-    padding: 0 22px;
-    min-height: 44px;
-    text-align: center;
-    display: block;
-    color: inherit; }
-
-ba-clicktestcontainer {
-  position: relative;
-  display: block;
-  overflow: hidden; }
-  ba-clicktestcontainer icon {
-    -webkit-box-flex: 0 0 44px;
-    -moz-box-flex: 0 0 44px;
-    -webkit-flex: 0 0 44px;
-    -ms-flex: 0 0 44px;
-    flex: 0 0 44px;
-    text-align: center;
-    margin: auto; }
-  ba-clicktestcontainer behind {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    z-index: 0;
-    box-sizing: border-box;
-    background: #ddd; }
-    ba-clicktestcontainer behind div {
-      -webkit-box-flex: 1 0 0;
-      -moz-box-flex: 1 0 0;
-      -webkit-flex: 1 0 0;
-      -ms-flex: 1 0 0;
-      flex: 1 0 0; }
-  ba-clicktestcontainer swipe {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    position: relative;
-    left: -100%;
-    width: 300%; }
-    ba-clicktestcontainer swipe ba-item {
-      border-bottom: 1px solid #d3d3d3;
-      height: 44px;
-      line-height: 44px;
-      vertical-align: middle;
-      background: white; }
-    ba-clicktestcontainer swipe swipeleft {
-      -webkit-box-flex: 1 1 0;
-      -moz-box-flex: 1 1 0;
-      -webkit-flex: 1 1 0;
-      -ms-flex: 1 1 0;
-      flex: 1 1 0;
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-order: 1;
-      -ms-flex-order: 1;
-      order: 1;
-      width: 1px;
-      z-index: 1;
-      background: #33CC00;
-      opacity: 0.5; }
-      ba-clicktestcontainer swipe swipeleft div {
-        -webkit-box-flex: 1 0 0;
-        -moz-box-flex: 1 0 0;
-        -webkit-flex: 1 0 0;
-        -ms-flex: 1 0 0;
-        flex: 1 0 0; }
-    ba-clicktestcontainer swipe > *:nth-child(1) {
-      -webkit-box-flex: 1 0 0;
-      -moz-box-flex: 1 0 0;
-      -webkit-flex: 1 0 0;
-      -ms-flex: 1 0 0;
-      flex: 1 0 0;
-      -webkit-order: 2;
-      -ms-flex-order: 2;
-      order: 2; }
-    ba-clicktestcontainer swipe swiperight {
-      -webkit-box-flex: 1 1 0;
-      -moz-box-flex: 1 1 0;
-      -webkit-flex: 1 1 0;
-      -ms-flex: 1 1 0;
-      flex: 1 1 0;
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
-      -webkit-order: 3;
-      -ms-flex-order: 3;
-      order: 3;
-      z-index: 1;
-      width: 1px;
-      background: yellow;
-      opacity: 0.5; }
-      ba-clicktestcontainer swipe swiperight div {
-        -webkit-box-flex: 1 0 0;
-        -moz-box-flex: 1 0 0;
-        -webkit-flex: 1 0 0;
-        -ms-flex: 1 0 0;
-        flex: 1 0 0; }
-    ba-clicktestcontainer swipe .showdrag {
-      opacity: 1 !important; }
-
-ba-clicktestcontainer swipe > *:nth-child(1) {
-  background: white; }
 
 ba-header ba-list {
   height: 100%; }
@@ -1103,5 +930,3 @@ ba-layout_web {
       display: -ms-flexbox;
       display: -webkit-flex;
       display: flex; }
-
-/*# sourceMappingURL=betajs-dynamics-components.css.map */

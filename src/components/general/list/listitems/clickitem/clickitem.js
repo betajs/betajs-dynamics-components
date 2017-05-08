@@ -1,9 +1,9 @@
-Scoped.define("module:Eventitem", [
+Scoped.define("module:Clickitem", [
     "dynamics:Dynamic",
     "base:Loggers.Logger"
 ], function(Dynamic, Logger, scoped) {
 
-    var logger = Logger.global().tag("dynamic", "calendar");
+    var logger = Logger.global().tag("dynamic", "list");
 
     return Dynamic.extend({
         scoped: scoped
@@ -12,28 +12,24 @@ Scoped.define("module:Eventitem", [
         template: "<%= template(filepathnoext + '.html') %>",
 
         attrs: {
-            counter: 0,
             model: {
-                value: 'Eventitem - Clicked '
+                value: 'Clickitem - Value'
             }
         },
 
         functions: {
             click: function() {
-                this.trigger('event', this.cid());
+                logger.log('Click');
+                //logger.log("You Clicked item : " + this.properties().getProp('model.value'));
+                //logger.log(this.cid());
+                //this.trigger('event', this.cid());
             }
         },
 
         create: function() {
-
             this.on("event", function(cid) {
-                this.set('counter', this.get('counter') + 1);
+                logger.log('event from item: ' + cid);
             }, this);
-
-            this.parent().on('archive', function() {
-                logger.log('archived');
-            }, this);
-
         }
 
     }).register();

@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+
+    <script src="../node_modules/betajs-scoped/dist/scoped.js"></script>
+    <script src="../node_modules/betajs/dist/beta-noscoped.js"></script>
+    <script src="../node_modules/betajs-browser/dist/betajs-browser-noscoped.js"></script>
+    <script src="../node_modules/betajs-ui/dist/betajs-ui-noscoped.js"></script>
+    <script src="../node_modules/betajs-dynamics/dist/betajs-dynamics-noscoped.js"></script>
+
+    <script src="../node_modules/betajs-simulator/dist/betajs-simulator-noscoped.js"></script>
+    <link rel="stylesheet" href="../node_modules/betajs-simulator/dist/betajs-simulator.css" />
+
+    <script src="../dist/betajs-dynamics-components-noscoped.js"></script>
+    <link rel="stylesheet" href="../dist/betajs-dynamics-components.css" />
+    <link rel="stylesheet" href="../vendors/icomoon/style.css" />
+
+</head>
+<body>
+
+<script>
+    var Scoped = Scoped.subScope();
+    Scoped.binding('module', 'global:BetaJS.Dynamics.Components');
+    Scoped.binding('base', 'global:BetaJS');
+    Scoped.binding('browser', 'global:BetaJS.Browser');
+    Scoped.binding('dynamics', 'global:BetaJS.Dynamics');
+    Scoped.binding('tests', 'module:Tests');
+</script>
+
+<script src="tests/test_selectableitem/test_selectableitem.js"></script>
+<link rel="stylesheet" href="tests/test_selectableitem/test_selectableitem.css" />
+<script src="tests/test_titledlist/test_titledlist.js"></script>
+<link rel="stylesheet" href="tests/test_titledlist/test_titledlist.css" />
+<script src="tests/test_titledlist_swipe/test_titledlist_swipe.js"></script>
+<script src="tests/test_list_loadmore/test_list_loadmore.js"></script>
+<link rel="stylesheet" href="tests/test_list_loadmore/test_list_loadmore.css" />
+<script src="tests/test_list_clickitem/test_list_clickitem.js"></script>
+<script src="tests/test_list_listoflist/test_list_listoflist.js"></script>
+<script src="tests/test_list_swipecontainer/test_list_swipecontainer.js"></script>
+<script src="tests/test_list_listcollection/test_list_listcollection.js"></script>
+<script src="tests/test_list_pushfunc/test_list_pushfunc.js"></script>
+<script src="tests/test_searchlist/test_searchlist.js"></script>
+<link rel="stylesheet" href="tests/test_searchlist/test_searchlist.css" />
+
+<script>
+    var components = new BetaJS.Collections.Collection([
+
+        //Inputs
+        {value  : 'scrollpicker'},
+        {value  : 'textinput'},
+        {value  : 'clickinput'},
+
+        // List - Listitems
+        {value  : 'test_selectableitem'},
+        {value  : 'selectableitem'},
+        {value  : 'clickitem'},
+
+        //Web -
+        {value  : 'layout_web'},
+        {value  : 'menu_web'},
+        {value  : 'header'},
+
+        //Swipecontainers
+        {value  : 'hoverbuttoncontainer'},
+        {value  : 'swipeclickcontainer'},
+        {value  : 'eventitem'},
+
+        //Titledlist
+        {value  : 'addtitle'},
+        {value  : 'titledlist'},
+        {value  : 'test_titledlist'},
+        {value  : 'test_titledlist_swipe'},
+
+        //List
+        {value  : 'test_list_loadmore'},
+        {value  : 'list'},
+        {value  : 'test_list_clickitem'},
+        {value  : 'test_list_listoflist'},
+        {value  : 'test_list_swipecontainer'},
+        {value  : 'test_list_listcollection'},
+        {value  : 'test_list_pushfunc'},
+
+        //Titledlist
+        {value  : 'searchlist'},
+        {value  : 'test_searchlist'},
+
+        //{value  : 'addvalue'},
+        {value  : 'overlaycontainer'},
+        {value  : 'testoverlaycontainer'}
+
+    ]);
+</script>
+
+<ba-simulator ba-components="{{components}}"></ba-simulator>
+
+<script>
+    BetaJS.Loggers.Logger.global().addListener(new BetaJS.Loggers.ConsoleLogListener());
+    BetaJS.Loggers.Logger.global().addAugment(new BetaJS.Loggers.CallOriginLogAugment());
+    BetaJS.Browser.Dom.ready(function () {
+        BetaJS.Dynamics.Dynamic.activate({element: document.body});
+    });
+</script>
+
+</body>
+</html>

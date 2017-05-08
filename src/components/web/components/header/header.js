@@ -1,25 +1,31 @@
-
 Scoped.define("module:Header", [
     "dynamics:Dynamic"
-],function (Dynamic, scoped) {
+], function(Dynamic, scoped) {
 
-    return Dynamic.extend({scoped: scoped}, {
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
 
         template: "<%= template(filepathnoext + '.html') %>",
 
-        collections : {
-            left_collection : [
-                {listitem : 'toggle_menu'},
-                {
-                    value : '',
-                    class : 'icon-home'
+        collections: {
+            left_collection: [{
+                    listitem: 'toggle_menu'
                 },
                 {
-                    value : 'Big Brother',
-                    class : 'icon-eye-open'
+                    value: '',
+                    "class": 'icon-home'
                 },
-                {value : 'Header 1'},
-                {value : 'Header 2'}
+                {
+                    value: 'Big Brother',
+                    "class": 'icon-eye-open'
+                },
+                {
+                    value: 'Header 1'
+                },
+                {
+                    value: 'Header 2'
+                }
             ]
         }
 

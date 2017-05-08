@@ -1,199 +1,48 @@
-module.banner = '/*!\n<%= pkg.name %> - v<%= pkg.version %> - <%= grunt.template.today("yyyy-mm-dd") %>\nCopyright (c) <%= pkg.contributors %>\n<%= pkg.license %> Software License.\n*/\n';
+module.exports = function (grunt) {
 
+    var pkg = grunt.file.readJSON('package.json');
+    var gruntHelper = require('betajs-compile');
+    var dist = 'betajs-dynamics-components';
+    var betajsTemplates = require("grunt-betajs-templates");
 
-var Routes = {};
-Routes.port = '8711';
+    gruntHelper.init(pkg, grunt)
 
-var betajsTemplates = require("grunt-betajs-templates");
+    .scopedclosurerevisionTask(null, "src/components/**/*.js", "dist/" + dist + "-noscoped.js", {
+        "module": "global:BetaJS.Dynamics.Components",
+        "base": "global:BetaJS",
+        "browser": "global:BetaJS.Browser",
+        "dynamics": "global:BetaJS.Dynamics",
+        "ui": "global:BetaJS.UI"
+    }, {
+        "base:version": pkg.devDependencies.betajs,
+        "browser:version": pkg.devDependencies["betajs-browser"],
+        "dynamics:version": pkg.devDependencies["betajs-dynamics"],
+        "ui:version": pkg.devDependencies["betajs-ui"]
+    }, null, betajsTemplates.concatProcess(grunt))
+    .concatTask('concat-scoped', [require.resolve("betajs-scoped"), 'dist/' + dist + '-noscoped.js'], 'dist/' + dist + '.js')
+    .uglifyTask('uglify-noscoped', 'dist/' + dist + '-noscoped.js', 'dist/' + dist + '-noscoped.min.js')
+    .uglifyTask('uglify-scoped', 'dist/' + dist + '.js', 'dist/' + dist + '.min.js')
+    .packageTask()
+    .jsbeautifyTask("beautify1", "src/**/**/**/**/*.js")
+    .jsbeautifyTask("beautify2", "src/**/**/**/**/**/*.js")
+    .jsbeautifyTask("beautify4", "src/**/**/**/**/**/**/**/*.js")
+    .concatsassTask('concat-dist-css', [
+        'src/global/**/*.scss',
+        'src/**/*.scss'
+    ], 'dist/' + dist + '.css')
+    .cssminTask('cssmin-dist', 'dist/' + dist + '.css', 'dist/' + dist + '.min.css')
 
-module.exports = function(grunt) {
+    /* Testing */
+    .lintTask(null, ['./src/**/*.js', 'dist/' + dist + '-noscoped.js', 'dist/' + dist + '.js', './Gruntfile.js', './tests/**/*.js'])
+    .browserqunitTask(null, 'tests/tests.html', true)
 
-	grunt
-		.initConfig({
-			pkg : grunt.file.readJSON('package.json'),
-			'revision-count' : {
-				options : {
-					property : 'revisioncount',
-					ref : 'HEAD'
-				}
-			},
-			concat : {
-				options : {
-					banner : module.banner,
-					process: betajsTemplates.concatProcess(grunt)
-				},
-				dist_raw : {
-					dest : 'dist/betajs-dynamics-components-raw.js',
-					src : [
-						'src/fragments/begin.js-fragment',
-						'src/components/**/*.js',
-						'src/fragments/end.js-fragment'
-					]
-				},
-				dist_scoped : {
-					dest : 'dist/betajs-dynamics-components.js',
-					src : [ 'vendors/scoped.js',
-						'dist/betajs-dynamics-components-noscoped.js'
-					]
-				},
-				dist_scss: {
-					dest: 'dist/betajs-dynamics-components.scss',
-					src: [
-						'src/global/**/*.scss',
-						'src/**/*.scss'
-					]
-				}
-			},
-			sass: {
-				dist: {
-					files: {
-						'dist/betajs-dynamics-components.css': 'dist/betajs-dynamics-components.scss'
-					}
-				}
-			},
-			preprocess : {
-				options : {
-					context : {
-						MAJOR_VERSION : '<%= revisioncount %>',
-						MINOR_VERSION : (new Date()).getTime()
-					}
-				},
-				dist : {
-					src : 'dist/betajs-dynamics-components-raw.js',
-					dest : 'dist/betajs-dynamics-components-noscoped.js'
-				}
-			},
-			clean : {
-				raw: "dist/betajs-dynamics-components-raw.js"
-			},
-			uglify : {
-				options : {
-					banner : module.banner
-				},
-				dist : {
-					files : {
-						'dist/betajs-dynamics-components-noscoped.min.js' : [ 'dist/betajs-dynamics-components-noscoped.js' ],
-						'dist/betajs-dynamics-components.min.js' : [ 'dist/betajs-dynamics-components.js' ]
-					}
-				}
-			},
-			jshint : {
-				options: {
-					es5: false,
-					es3: true
-				},
-				source : [ "./src/**/*.js"],
-				dist : [ "./dist/betajs-dynamics-components-noscoped.js", "./dist/betajs-dynamics-components.js" ],
-				gruntfile : [ "./Gruntfile.js" ],
-				tests: [  ]
-			},
-			wget : {
-				dependencies : {
-					options : {
-						overwrite : true
-					},
-					files : {
-						"./vendors/jquery-hashchange.js" : "http://cdn.rawgit.com/cowboy/jquery-hashchange/master/jquery.ba-hashchange.js",
-						"./vendors/scoped.js" : "https://raw.githubusercontent.com/betajs/betajs-scoped/master/dist/scoped.js",
-						"./vendors/beta.js" : "https://raw.githubusercontent.com/betajs/betajs/master/dist/beta.js",
-						"./vendors/betajs-ui.js" : "https://raw.githubusercontent.com/betajs/betajs-ui/master/dist/betajs-ui.js",
-						"./vendors/betajs-browser-noscoped.js" : "https://raw.githubusercontent.com/betajs/betajs-browser/master/dist/betajs-browser-noscoped.js",
-						"./vendors/betajs-dynamics-noscoped.js" : "https://raw.githubusercontent.com/betajs/betajs-dynamics/master/dist/betajs-dynamics-noscoped.js",
-						"./vendors/betajs-simulator.js" : "https://raw.githubusercontent.com/betajs/betajs-simulator/master/dist/betajs-simulator.js",
-						"./vendors/betajs-simulator.css" : "https://raw.githubusercontent.com/betajs/betajs-simulator/master/dist/betajs-simulator.css",
-						"./vendors/jquery-1.9.closure-extern.js" : "https://raw.githubusercontent.com/google/closure-compiler/master/contrib/externs/jquery-1.9.js"
-					}
-				}
-			},
-			shell : {
-				tests: {
-					command: "open tests/tests.html"
-				}
-			},
-			cssmin: {
-				target: {
-					files: {
-						'dist/betajs-dynamics-components.css.min': 'dist/betajs-dynamics-components.css'
-					}
-				}
-			},
-			jsdoc : {
-				dist : {
-					src : [ './README.md', './src/*/*.js' ],
-					options : {
-						destination : 'docs',
-						template : "node_modules/grunt-jsdoc/node_modules/ink-docstrap/template",
-						configure : "./jsdoc.conf.json",
-						tutorials: "./docsrc/tutorials",
-						recurse: true
-					}
-				}
-			},
-			connect: {
-				server: {
-					options: {
-						port: Routes.port,
-						base: '.',
-						keepalive: true,
-						open: {
-							target: 'http://localhost:' + Routes.port + '/tests/tests.html'
-						}
-					}
-				}
-			},
-			template : {
-				"readme" : {
-					options : {
-						data: {
-							indent: "",
-							framework: grunt.file.readJSON('package.json')
-						}
-					},
-					files : {
-						"README.md" : ["readme.tpl"]
-					}
-				}
-			},
-			watch: {
-				scripts: {
-					files: ['src/**/*.js', 'src/**/*.scss', 'src/**/*.html'],
-					tasks: ['default'],
-					options: {
-						spawn: false,
-						livereload: 1337
-					}
-				}
-			}
-		});
+    /* Markdown Files */
+    .readmeTask()
+    .licenseTask();
 
-	grunt.loadNpmTasks('grunt-contrib-concat');
-	grunt.loadNpmTasks('grunt-contrib-uglify');
-	grunt.loadNpmTasks('grunt-git-revision-count');
-	grunt.loadNpmTasks('grunt-preprocess');
-	grunt.loadNpmTasks('grunt-contrib-clean');
-	grunt.loadNpmTasks('grunt-wget');
-	grunt.loadNpmTasks('grunt-closure-tools');
-	grunt.loadNpmTasks('grunt-contrib-jshint');
-	grunt.loadNpmTasks('grunt-node-qunit');
-	grunt.loadNpmTasks('grunt-contrib-connect');
-	grunt.loadNpmTasks('grunt-jsdoc');
-	grunt.loadNpmTasks('grunt-shell');
-	grunt.loadNpmTasks('grunt-template');
-	grunt.loadNpmTasks('grunt-contrib-sass');
-	grunt.loadNpmTasks('grunt-contrib-cssmin');
-	grunt.loadNpmTasks('grunt-contrib-watch');
-	grunt.loadNpmTasks('grunt-betajs-templates');
+    grunt.initConfig(gruntHelper.config);
 
-	grunt.registerTask('default', [ 'revision-count',  'concat:dist_raw', 'concat:dist_scss', 'sass:dist',
-		'preprocess', 'clean:raw', /*"cssmin",*/ 'concat:dist_scoped'/*, 'uglify'*/ ]);
-	grunt.registerTask('qunit', [ 'connect' ]);
-	grunt.registerTask('lint', [ 'jshint:source', 'jshint:dist',
-		'jshint:gruntfile', "jshint:tests" ]);
-	grunt.registerTask('check', [ 'lint', 'qunit' ]);
-	grunt.registerTask('dependencies', [ 'wget:dependencies' ]);
-	grunt.registerTask('readme', [ 'template:readme' ]);
-	grunt.registerTask('server',[
-		'connect'
-	]);
+    grunt.registerTask('default', ['package', 'readme', 'license', 'beautify1', 'beautify2', 'beautify4', 'scopedclosurerevision', 'concat-scoped', 'uglify-noscoped', 'uglify-scoped', 'concat-dist-css', 'cssmin-dist']);
+    grunt.registerTask('check', ['lint', 'browserqunit']);
 
 };

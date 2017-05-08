@@ -1,16 +1,17 @@
-
 Scoped.define("module:Titledlist", [
     "dynamics:Dynamic",
-	"base:Loggers.Logger"
+    "base:Loggers.Logger"
 ], [
-  "module:List",
-  "dynamics:Partials.NoScopePartial",
-  "dynamics:Partials.ClickPartial"
-], function (Dynamic, Logger, scoped) {
-	
-	var logger = Logger.global().tag("dynamic", "list");
-	
-    return Dynamic.extend({scoped: scoped}, {
+    "module:List",
+    "dynamics:Partials.NoScopePartial",
+    "dynamics:Partials.ClickPartial"
+], function(Dynamic, Logger, scoped) {
+
+    var logger = Logger.global().tag("dynamic", "list");
+
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
 
         template: "<%= template(filepathnoext + '.html') %>",
 
@@ -27,32 +28,39 @@ Scoped.define("module:Titledlist", [
         },
 
         collections: {
-            listcollection: [
-                {value: "Titledlist - Item 1"},
-                {value: "Titledlist - Item 2"},
-                {value: "Titledlist - Item 3"}
+            listcollection: [{
+                    value: "Titledlist - Item 1"
+                },
+                {
+                    value: "Titledlist - Item 2"
+                },
+                {
+                    value: "Titledlist - Item 3"
+                }
             ]
         },
 
         functions: {
 
-            togglelist: function () {
+            togglelist: function() {
 
                 if (this.get('collapsible'))
                     this.set('collapsed', !this.get('collapsed'));
 
             },
 
-            additem: function (item) {
+            additem: function(item) {
 
-                item = item ? item : {value: "Titledlist - New Item"};
+                item = item ? item : {
+                    value: "Titledlist - New Item"
+                };
                 var index = this.get('listcollection').add(item);
 
                 return this.get('listcollection').getByIndex(index).cid();
 
             },
 
-            click_title: function () {
+            click_title: function() {
                 logger.log('You clicked the title');
                 this.call('togglelist');
             }

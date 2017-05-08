@@ -1,26 +1,27 @@
-
 Scoped.define("module:Clickinput", [
     "dynamics:Dynamic"
-], function (Dynamic, scoped) {
-    return Dynamic.extend({scoped: scoped}, {
+], function(Dynamic, scoped) {
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
 
         template: "<%= template(filepathnoext + '.html') %>",
 
         attrs: {
-            model : {
-                value : "Test"
+            model: {
+                value: "Test"
             },
-            view : {
-                placeholder : "",
-                edit : false,
-                autofocus : true
+            view: {
+                placeholder: "",
+                edit: false,
+                autofocus: true
             }
         },
 
-        extendables : ['view'],
+        extendables: ['view'],
 
-        functions : {
-            edititem : function () {
+        functions: {
+            edititem: function() {
 
                 this.setProp('view.edit', true);
 

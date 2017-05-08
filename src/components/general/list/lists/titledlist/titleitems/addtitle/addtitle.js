@@ -1,29 +1,32 @@
-
 Scoped.define("module:Addtitle", [
     "dynamics:Dynamic",
-	"base:Loggers.Logger"
-], function (Dynamic, Logger, scoped) {
-	
-	var logger = Logger.global().tag("dynamic", "list");
+    "base:Loggers.Logger"
+], function(Dynamic, Logger, scoped) {
 
-    return Dynamic.extend({scoped : scoped}, {
+    var logger = Logger.global().tag("dynamic", "list");
+
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
 
         template: "<%= template(filepathnoext + '.html') %>",
 
         attrs: {
-            model : {value: 'Title'}
+            model: {
+                value: 'Title'
+            }
         },
 
-        functions : {
+        functions: {
 
-            clicktitle : function () {
+            clicktitle: function() {
 
                 this.parent().call('togglelist');
 
             },
-            addbutton : function () {
+            addbutton: function() {
 
-            	logger.log("You clicked the addbuton, no addbutton() function given");
+                logger.log("You clicked the addbuton, no addbutton() function given");
 
             }
 

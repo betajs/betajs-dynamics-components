@@ -1,4 +1,3 @@
-
 /*
  *
  * selected_item = null, means the list will automatically select the first item in the list
@@ -9,18 +8,20 @@
 Scoped.define("module:Selectableitem", [
     "dynamics:Dynamic",
     "base:Objs",
-	"base:Loggers.Logger"
+    "base:Loggers.Logger"
 ], [
     "dynamics:Partials.ClassPartial"
-], function (Dynamic, Objs, Logger, scoped) {
+], function(Dynamic, Objs, Logger, scoped) {
 
-	var logger = Logger.global().tag("dynamic", "list");
-	
-    Dynamic.extend({scoped: scoped}, {
+    var logger = Logger.global().tag("dynamic", "list");
+
+    Dynamic.extend({
+        scoped: scoped
+    }, {
 
         template: "<%= template(filepathnoext + '.html') %>",
 
-        bindings : {
+        bindings: {
             selected: "<+[tagname='ba-list']:selected_item"
         },
 
@@ -28,13 +29,13 @@ Scoped.define("module:Selectableitem", [
             parent_list: "<+[tagname='ba-list']"
         },
 
-        attrs : {
-            model : {
-                value :'Selectableitem - Value'
+        attrs: {
+            model: {
+                value: 'Selectableitem - Value'
             }
         },
 
-        create : function () {
+        create: function() {
 
             var parentlist = this.scopes.parent_list;
 
@@ -45,18 +46,15 @@ Scoped.define("module:Selectableitem", [
                 if (!this.scopes.parent_list.get('selected_item'))
                     //var selected_item = parentlist.get('selected_item');
                     //if (!selected_item && selected_item !== undefined)
-                    this.call('select')
-            },
-//            [8/9/16, 4:06:11 PM] Oliver Friedmann: this === selected_item
-//                [8/9/16, 4:06:56 PM] Oliver Friedmann: this.get(selected_key_name) === selected_item_key
-//                [8/9/16, 4:07:16 PM] Oliver Friedmann: selected_key_name = “classname”
-//[8/9/16, 4:07:25 PM] Oliver Friedmann: selected_item_key = “swipeclickcontainer”
+                    this.call('select');
+        },
 
-        functions : {
 
-            select : function () {
+        functions: {
+
+            select: function() {
                 this.scopes.parent_list.set('selected_item', Objs.extend({
-                	cid: this.cid()
+                    cid: this.cid()
                 }, this.get("model").data()));
             }
 

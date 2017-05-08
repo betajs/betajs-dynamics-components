@@ -1,9 +1,10 @@
-
 Scoped.define("module:Loadmore", [
     "dynamics:Dynamic"
-], function (Dynamic, scoped) {
+], function(Dynamic, scoped) {
 
-    return Dynamic.extend({scoped: scoped}, {
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
 
         template: "<%= template(filepathnoext + '.html') %>",
 
@@ -15,7 +16,7 @@ Scoped.define("module:Loadmore", [
 
         functions: {
 
-            load_more: function () {
+            load_more: function() {
                 this.chainedTrigger('loadmore', this);
             }
 

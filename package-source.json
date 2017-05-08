@@ -1,0 +1,43 @@
+{
+  "name": "betajs-dynamics-components",
+  "version": "0.1.9",
+  "description": "BetaJS-Dynamics-Components is a Library of DOM Components that are built in BetaJS-Dynamics",
+  "contributors": ["Victor Lingenthal"],
+  "devDependencies": {
+    "lodash": "",
+    "grunt": "",
+    "grunt-contrib-jshint": "",
+    "grunt-contrib-concat": "",
+    "grunt-contrib-uglify": "",
+    "grunt-contrib-clean": "",
+    "grunt-contrib-copy": "",
+    "grunt-preprocess": "",
+    "grunt-closure-tools": "",
+    "grunt-node-qunit": "",
+    "qunit": "",
+    "jsdom": "",
+    "js-yaml": "",
+    "grunt-contrib-sass": "",
+    "grunt-contrib-cssmin": "",
+    "grunt-contrib-csslint": "",
+    "grunt-contrib-connect": "",
+    "grunt-githooks": "",
+    "betajs-scoped": "~0.0.13",
+    "betajs-compile": "~0.0.28",
+    "betajs": "~1.0.96",
+    "betajs-browser": "~1.0.65",
+    "betajs-dynamics": "~0.0.83",
+    "betajs-ui": "~1.0.37",
+    "grunt-betajs-templates": "~0.1.11",
+    "betajs-simulator": "",
+    "js-beautify": ""
+  },
+  "main": "dist/betajs-dynamics-components.js",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/betajs/betajs-dynamics-components.git"
+  },
+  "meta": {
+    "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d"
+  }
+}
