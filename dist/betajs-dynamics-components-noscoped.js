@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.10 - 2017-05-08
+betajs-dynamics-components - v0.1.10 - 2017-05-09
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -1252,6 +1252,8 @@ Scoped.define("module:Menu_web", [
 });
 Scoped.define("module:Layout_web", [
     "dynamics:Dynamic"
+], [
+    "dynamics:Partials.AttrsPartial"
 ], function(Dynamic, scoped) {
 
     return Dynamic.extend({

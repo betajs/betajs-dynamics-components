@@ -1,5 +1,7 @@
 Scoped.define("module:Layout_web", [
     "dynamics:Dynamic"
+], [
+    "dynamics:Partials.AttrsPartial"
 ], function(Dynamic, scoped) {
 
     return Dynamic.extend({
