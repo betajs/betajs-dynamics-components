@@ -10,6 +10,7 @@ Scoped.define("module:Textinput", [
 
         attrs: {
             value: 'Test',
+            height: 0,
             view: {
                 placeholder: "",
                 autofocus: true
@@ -26,8 +27,10 @@ Scoped.define("module:Textinput", [
 
         functions: {
             blur: function() {
-                console.log('Textinput');
                 this.trigger('blur');
+            },
+            focus: function() {
+                this.activeElement().getElementsByTagName("textarea")[0].focus();
             }
         }
 

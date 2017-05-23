@@ -1,8 +1,8 @@
 var components = new BetaJS.Collections.Collection([
 
     //Inputs
-    {value  : 'scrollpicker'},
     {value  : 'textinput'},
+    {value  : 'scrollpicker'},
     {value  : 'clickinput'},
 
     // List - Listitems

@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.10 - 2017-05-17
+betajs-dynamics-components - v0.1.10 - 2017-05-23
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -1004,7 +1004,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.10 - 2017-05-17
+betajs-dynamics-components - v0.1.10 - 2017-05-23
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -1360,6 +1360,7 @@ Scoped.define("module:Textinput", [
 
         attrs: {
             value: 'Test',
+            height: 0,
             view: {
                 placeholder: "",
                 autofocus: true
@@ -1376,8 +1377,10 @@ Scoped.define("module:Textinput", [
 
         functions: {
             blur: function() {
-                console.log('Textinput');
                 this.trigger('blur');
+            },
+            focus: function() {
+                this.activeElement().getElementsByTagName("textarea")[0].focus();
             }
         }
 
