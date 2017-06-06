@@ -47,7 +47,7 @@ Scoped.define("module:List", [
             },
 
             getview: function(item) {
-                return this.get("listitemfunc") ? (this.get("listitemfunc"))(item) : this.get("listitem");
+                return this.getProp("view.listitem") || item.get("listitem") || (this.get("listitemfunc") ? (this.get("listitemfunc"))(item) : this.get("listitem"));
             }
         }
 
