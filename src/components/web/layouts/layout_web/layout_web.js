@@ -24,6 +24,8 @@ Scoped.define("module:Layout_web", [
             }
         },
 
+        extendables: ['view'],
+
         functions: {
             toggle_menu: function() {
                 this.setProp('view.display_menu', !this.getProp('view.display_menu'));

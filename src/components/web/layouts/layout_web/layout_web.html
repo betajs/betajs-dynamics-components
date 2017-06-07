@@ -2,10 +2,16 @@
     <ba-{{view.header}}>Header</ba-{{view.header}}>
 </header>
 <main>
-    <menu ba-show="{{view.display_menu}}">
-        <ba-{{view.menu}} ba-view="{{view.menuview}}">Menu</ba-{{view.menu}}>
-    </menu>
-    <content>
-        <ba-{{view.content}} ba-model={{contentmodel}} ba-attrs="{{view.contentattrs}}">Content</ba-{{view.content}}>
-    </content>
+    <ba-{{view.menu}}
+        class="menu"
+        ba-show="{{view.display_menu}}"
+        ba-view="{{view.menuview}}">
+        Menu
+    </ba-{{view.menu}}>
+    <ba-{{view.content}}
+        class="content"
+        ba-model={{contentmodel}}
+        ba-attrs="{{view.contentattrs}}">
+        Content
+    </ba-{{view.content}}>
 </main>

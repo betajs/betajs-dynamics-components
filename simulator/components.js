@@ -1,5 +1,11 @@
 var components = new BetaJS.Collections.Collection([
 
+    //Web -
+    {value  : 'toggle_menu'},
+    {value  : 'layout_web'},
+    {value  : 'menu_web'},
+    {value  : 'header'},
+
     //Inputs
     {value  : 'textinput'},
     {value  : 'scrollpicker'},
@@ -9,11 +15,6 @@ var components = new BetaJS.Collections.Collection([
     {value  : 'test_selectableitem'},
     {value  : 'selectableitem'},
     {value  : 'clickitem'},
-
-    //Web -
-    {value  : 'layout_web'},
-    {value  : 'menu_web'},
-    {value  : 'header'},
 
     //Swipecontainers
     {value  : 'hoverbuttoncontainer'},

@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.10 - 2017-05-23
+betajs-dynamics-components - v0.1.10 - 2017-06-07
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -907,19 +907,19 @@ ba-layout_web {
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex; }
-    ba-layout_web main menu {
+    ba-layout_web main .menu {
       display: -webkit-box;
       display: -moz-box;
       display: -ms-flexbox;
       display: -webkit-flex;
       display: flex;
-      -webkit-box-flex: 0 0 140px;
-      -moz-box-flex: 0 0 140px;
-      -webkit-flex: 0 0 140px;
-      -ms-flex: 0 0 140px;
-      flex: 0 0 140px;
+      -webkit-box-flex: 0 0 160px;
+      -moz-box-flex: 0 0 160px;
+      -webkit-flex: 0 0 160px;
+      -ms-flex: 0 0 160px;
+      flex: 0 0 160px;
       min-width: 10px; }
-    ba-layout_web main content {
+    ba-layout_web main .content {
       -webkit-box-flex: 1 1 0;
       -moz-box-flex: 1 1 0;
       -webkit-flex: 1 1 0;

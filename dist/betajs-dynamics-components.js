@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.10 - 2017-05-23
+betajs-dynamics-components - v0.1.10 - 2017-06-07
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -1004,7 +1004,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.10 - 2017-05-23
+betajs-dynamics-components - v0.1.10 - 2017-06-07
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -2268,7 +2268,7 @@ Scoped.define("module:Layout_web", [
         scoped: scoped
     }, {
 
-        template: "<header>\n    <ba-{{view.header}}>Header</ba-{{view.header}}>\n</header>\n<main>\n    <menu ba-show=\"{{view.display_menu}}\">\n        <ba-{{view.menu}} ba-view=\"{{view.menuview}}\">Menu</ba-{{view.menu}}>\n    </menu>\n    <content>\n        <ba-{{view.content}} ba-model={{contentmodel}} ba-attrs=\"{{view.contentattrs}}\">Content</ba-{{view.content}}>\n    </content>\n</main>",
+        template: "<header>\n    <ba-{{view.header}}>Header</ba-{{view.header}}>\n</header>\n<main>\n    <ba-{{view.menu}}\n        class=\"menu\"\n        ba-show=\"{{view.display_menu}}\"\n        ba-view=\"{{view.menuview}}\">\n        Menu\n    </ba-{{view.menu}}>\n    <ba-{{view.content}}\n        class=\"content\"\n        ba-model={{contentmodel}}\n        ba-attrs=\"{{view.contentattrs}}\">\n        Content\n    </ba-{{view.content}}>\n</main>",
 
         attrs: {
             view: {
@@ -2283,6 +2283,8 @@ Scoped.define("module:Layout_web", [
 
             }
         },
+
+        extendables: ['view'],
 
         functions: {
             toggle_menu: function() {
