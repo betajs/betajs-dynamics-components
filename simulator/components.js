@@ -1,7 +1,6 @@
 var components = new BetaJS.Collections.Collection([
 
     //Web -
-    {value  : 'toggle_menu'},
     {value  : 'layout_web'},
     {value  : 'menu_web'},
     {value  : 'header'},

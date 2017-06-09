@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.10 - 2017-06-07
+betajs-dynamics-components - v0.1.11 - 2017-06-09
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -1004,7 +1004,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.10 - 2017-06-07
+betajs-dynamics-components - v0.1.11 - 2017-06-09
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -1019,7 +1019,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.10"
+    "version": "0.1.11"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1952,7 +1952,7 @@ Scoped.define("module:List", [
         scoped: scoped
     }, {
 
-        template: "\n<list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">\n\n    <ba-{{view.listitem||collectionitem.listitem||getview(collectionitem)}}\n        ba-cache\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-view=\"{{collectionitem.view||view.listinner}}\"\n        ba-model=\"{{collectionitem}}\">\n\n    </ba-{{view.listitem||collectionitem.listitem||getview(collectionitem)}}>\n\n</list>\n\n<ba-loadmore ba-if=\"{{loadmore}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitems\">\n</ba-loadmore>\n<ba-loading ba-if=\"{{loadmore}}\" ba-show=\"{{loading}}\">\n</ba-loading>\n",
+        template: "\n<list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">\n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-view=\"{{collectionitem.view||view.listinner}}\"\n        ba-model=\"{{collectionitem}}\">\n\n    </ba-{{getview(collectionitem)}}>\n\n</list>\n\n<ba-loadmore ba-if=\"{{loadmore}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitems\">\n</ba-loadmore>\n<ba-loading ba-if=\"{{loadmore}}\" ba-show=\"{{loading}}\">\n</ba-loading>\n",
 
         attrs: {
             listitem: "clickitem",
@@ -1984,7 +1984,7 @@ Scoped.define("module:List", [
             },
 
             getview: function(item) {
-                return this.get("listitemfunc") ? (this.get("listitemfunc"))(item) : this.get("listitem");
+                return this.getProp("view.listitem") || item.get("listitem") || (this.get("listitemfunc") ? (this.get("listitemfunc"))(item) : this.get("listitem"));
             }
         }
 
@@ -2157,6 +2157,8 @@ Scoped.define("module:Addtitle", [
 });
 Scoped.define("module:Header", [
     "dynamics:Dynamic"
+], [
+    "module:toggle_menu"
 ], function(Dynamic, scoped) {
 
     return Dynamic.extend({

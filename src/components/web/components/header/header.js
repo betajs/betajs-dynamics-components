@@ -1,5 +1,7 @@
 Scoped.define("module:Header", [
     "dynamics:Dynamic"
+], [
+    "module:toggle_menu"
 ], function(Dynamic, scoped) {
 
     return Dynamic.extend({
