@@ -60,7 +60,6 @@ a {color: $blue1}
 
 .icon-star {color: #428bca}
 .icon-star-empty {color: $grey1}
-.icon-search {color: $grey3}
 
 /*
  * Mixins
@@ -152,4 +151,32 @@ a {color: $blue1}
   -ms-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+@mixin noselect {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+@mixin placeholder-color($color) {
+  input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: $color;
+  }
+  input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: $color;
+    opacity: 1;
+  }
+  input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: $color;
+    opacity: 1;
+  }
+  input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: $color;
+  }
+  input::-ms-input-placeholder { /* Microsoft Edge */
+    color: $color;
+  }
 }

@@ -1,7 +1,5 @@
 
 <hoverbuttoncontainer
-        ba-on:mouseover="show_hover_buttons = true"
-        ba-on:mouseleave="show_hover_buttons = false"
         ba-gesture:click="{{{data: model, options: click_gesture}}}"
         ba-gesture:drag="{{drag_gesture}}"
         ba-interaction:drag="{{{data: model, options: drag_interaction}}}"
@@ -13,7 +11,6 @@
     </container>
 
     <hoverbuttons
-            ba-show="{{show_hover_buttons}}"
             ba-repeat="{{button :: buttons}}">
         <button ba-tap="button.click()">
             <span class="{{button.icon}}"></span>

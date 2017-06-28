@@ -1,11 +1,20 @@
 var components = new BetaJS.Collections.Collection([
 
+    //Swipecontainers
+    {value  : 'hoverbuttoncontainer'},
+    {value  : 'swipeclickcontainer'},
+    {value  : 'eventitem'},
+
     //Web -
     {value  : 'layout_web'},
     {value  : 'menu_web'},
     {value  : 'header'},
 
+    //Titledlist
+    {value  : 'test_searchlist'},
+
     //Inputs
+    {value  : 'searchbox'},
     {value  : 'textinput'},
     {value  : 'scrollpicker'},
     {value  : 'clickinput'},
@@ -14,11 +23,6 @@ var components = new BetaJS.Collections.Collection([
     {value  : 'test_selectableitem'},
     {value  : 'selectableitem'},
     {value  : 'clickitem'},
-
-    //Swipecontainers
-    {value  : 'hoverbuttoncontainer'},
-    {value  : 'swipeclickcontainer'},
-    {value  : 'eventitem'},
 
     //Titledlist
     {value  : 'addtitle'},
@@ -34,10 +38,6 @@ var components = new BetaJS.Collections.Collection([
     {value  : 'test_list_swipecontainer'},
     {value  : 'test_list_listcollection'},
     {value  : 'test_list_pushfunc'},
-
-    //Titledlist
-    {value  : 'searchlist'},
-    {value  : 'test_searchlist'},
 
     //{value  : 'addvalue'},
     {value  : 'overlaycontainer'},

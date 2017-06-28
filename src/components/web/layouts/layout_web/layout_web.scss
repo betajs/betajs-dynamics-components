@@ -4,7 +4,7 @@ ba-layout_web {
   @include display-flex;
   @include flex-direction(column);
 
-  header {
+  .header {
     @include display-flex;
     min-height: 10px;
   }
@@ -15,7 +15,7 @@ ba-layout_web {
 
     .menu {
       @include display-flex;
-      @include flex(0 0 160px);
+      //@include flex(0 0 160px);
       min-width: 10px;
     }
     .content {

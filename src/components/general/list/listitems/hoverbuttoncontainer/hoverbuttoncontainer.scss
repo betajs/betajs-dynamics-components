@@ -17,7 +17,7 @@ ba-hoverbuttoncontainer {
 
 
     hoverbuttons {
-      @include display-flex;
+      display: none;
       @include flex-settings(0 1 auto);
 
       button {
@@ -60,6 +60,10 @@ ba-hoverbuttoncontainer {
       transition-timing-function: step-end;
     }
   }
+}
 
-
+ba-hoverbuttoncontainer:hover {
+  hoverbuttons {
+    @include display-flex;
+  }
 }

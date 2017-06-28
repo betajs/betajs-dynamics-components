@@ -1,5 +1,8 @@
 Scoped.define("tests:Test_searchlist", [
     "dynamics:Dynamic"
+],[
+    "module:Searchlist",
+    "module:Clickitem"
 ], function(Dynamic, scoped) {
 
     return Dynamic.extend({
@@ -10,8 +13,8 @@ Scoped.define("tests:Test_searchlist", [
 
         attrs: {
             view: {
-                placeholder: "Test Searchlist",
-                listitem: 'swipecontainer',
+                placeholder: "Search this List",
+                listitem: 'clickitem',
                 listinner: {
                     inner: 'selectableitem'
                 }
@@ -20,13 +23,13 @@ Scoped.define("tests:Test_searchlist", [
 
         collections: {
             listcollection: [{
-                    title: "Test searchlist Item 1"
+                    value: "Test searchlist Item 1"
                 },
                 {
-                    title: "Test searchlist Item 2"
+                    value: "Test searchlist Item 2"
                 },
                 {
-                    title: "Test searchlist Item 3"
+                    value: "Test searchlist Item 3"
                 }
             ]
         }

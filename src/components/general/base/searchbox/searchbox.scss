@@ -1,0 +1,21 @@
+$searchboxheight: 36px;
+
+//Layout
+ba-searchbox {
+  height: $searchboxheight;
+  min-width: 180px;
+  @include display-flex;
+
+  div {
+    @include flex(1 1 0);
+    input {
+      width: 100%;
+      height: $searchboxheight;
+      padding: 0 5px 0 0;
+    }
+  }
+
+  icon {
+    @include flex(0 0 $searchboxheight);
+  }
+}

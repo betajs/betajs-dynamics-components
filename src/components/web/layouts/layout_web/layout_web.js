@@ -26,10 +26,22 @@ Scoped.define("module:Layout_web", [
 
         extendables: ['view'],
 
+        channels: {
+            "global:toggle_menu": function() {
+                this.execute('toggle_menu');
+            }
+        },
+
         functions: {
             toggle_menu: function() {
                 this.setProp('view.display_menu', !this.getProp('view.display_menu'));
             }
+        },
+
+        create: function() {
+            this.on('toggle', function() {
+                console.log('Toggle the menu');
+            })
         }
 
     }).register();

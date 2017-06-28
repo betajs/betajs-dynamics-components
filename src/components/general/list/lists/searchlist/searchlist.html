@@ -1,8 +1,8 @@
 
-<searchbox ba-if="{{view.showsearch}}">
-    <icon class="icon-search"></icon>
-    <input placeholder="{{view.placeholder}}" value="{{=searchvalue}}">
-</searchbox>
+<ba-searchbox
+        ba-value="{{=searchvalue}}"
+        ba-if="{{view.show_searchbox}}"
+        ba-view="{{view}}"></ba-searchbox>
 
 <ba-loading ba-if="{{searchingindication}}">
 </ba-loading>

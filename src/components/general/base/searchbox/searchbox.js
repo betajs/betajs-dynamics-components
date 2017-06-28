@@ -1,7 +1,6 @@
-Scoped.define("module:Toggle_menu", [
+Scoped.define("module:Searchbox", [
     "dynamics:Dynamic"
 ], function(Dynamic, scoped) {
-
     return Dynamic.extend({
         scoped: scoped
     }, {
@@ -9,12 +8,10 @@ Scoped.define("module:Toggle_menu", [
         template: "<%= template(filepathnoext + '.html') %>",
 
         attrs: {
-            toggle_icon: 'icon-reorder'
-        },
-
-        functions: {
-            toggle_menu: function() {
-                this.channel('global').trigger('toggle_menu');
+            value: "",
+            view: {
+                placeholder: "Placeholder",
+                autofocus: true
             }
         }
 

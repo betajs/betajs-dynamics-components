@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.11 - 2017-06-09
+betajs-dynamics-components - v0.1.11 - 2017-06-26
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -23,9 +23,6 @@ a {
 
 .icon-star-empty {
   color: #ddd; }
-
-.icon-search {
-  color: #777; }
 
 /*
  * Mixins
@@ -129,6 +126,31 @@ ba-scrollpicker {
   ba-scrollpicker .selected {
     background: white;
     color: black; }
+
+ba-searchbox {
+  height: 36px;
+  min-width: 180px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; }
+  ba-searchbox div {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0; }
+    ba-searchbox div input {
+      width: 100%;
+      height: 36px;
+      padding: 0 5px 0 0; }
+  ba-searchbox icon {
+    -webkit-box-flex: 0 0 36px;
+    -moz-box-flex: 0 0 36px;
+    -webkit-flex: 0 0 36px;
+    -ms-flex: 0 0 36px;
+    flex: 0 0 36px; }
 
 ba-textinput {
   -webkit-box-flex: 1 1 0;
@@ -537,11 +559,7 @@ ba-hoverbuttoncontainer {
       ba-hoverbuttoncontainer hoverbuttoncontainer container > * {
         width: 100%; }
     ba-hoverbuttoncontainer hoverbuttoncontainer hoverbuttons {
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex;
+      display: none;
       -webkit-box-flex: 0 1 auto;
       -moz-box-flex: 0 1 auto;
       -webkit-flex: 0 1 auto;
@@ -583,137 +601,18 @@ ba-hoverbuttoncontainer {
       -webkit-transition-timing-function: step-end;
       transition-timing-function: step-end; }
 
-ba-selectableitem selectableitem {
-  display: block;
-  background: white; }
-ba-selectableitem .selected {
-  background: lightgrey; }
-
-ba-swipeclickcontainer {
-  position: relative;
-  display: block; }
-  ba-swipeclickcontainer icon {
-    -webkit-box-flex: 0 0 44px;
-    -moz-box-flex: 0 0 44px;
-    -webkit-flex: 0 0 44px;
-    -ms-flex: 0 0 44px;
-    flex: 0 0 44px;
-    text-align: center;
-    margin: auto; }
-  ba-swipeclickcontainer behind {
-    position: absolute;
-    height: 100%;
-    width: 100%;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    z-index: 0;
-    box-sizing: border-box;
-    background: #ddd; }
-    ba-swipeclickcontainer behind div {
-      -webkit-box-flex: 1 0 0;
-      -moz-box-flex: 1 0 0;
-      -webkit-flex: 1 0 0;
-      -ms-flex: 1 0 0;
-      flex: 1 0 0; }
-  ba-swipeclickcontainer swipe {
-    position: relative;
-    display: block;
-    left: 0; }
-    ba-swipeclickcontainer swipe container {
-      position: relative;
-      width: 300%;
-      left: -100%;
-      height: 100%;
-      display: -webkit-box;
-      display: -moz-box;
-      display: -ms-flexbox;
-      display: -webkit-flex;
-      display: flex; }
-      ba-swipeclickcontainer swipe container swipeleft {
-        -webkit-box-flex: 1 0 0;
-        -moz-box-flex: 1 0 0;
-        -webkit-flex: 1 0 0;
-        -ms-flex: 1 0 0;
-        flex: 1 0 0;
-        display: -webkit-box;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-order: 1;
-        -ms-flex-order: 1;
-        order: 1;
-        left: -100%;
-        z-index: 1;
-        background: #33CC00; }
-        ba-swipeclickcontainer swipe container swipeleft div {
-          -webkit-box-flex: 1 0 0;
-          -moz-box-flex: 1 0 0;
-          -webkit-flex: 1 0 0;
-          -ms-flex: 1 0 0;
-          flex: 1 0 0; }
-      ba-swipeclickcontainer swipe container > *:nth-child(1) {
-        left: -100%;
-        -webkit-box-flex: 1 0 0;
-        -moz-box-flex: 1 0 0;
-        -webkit-flex: 1 0 0;
-        -ms-flex: 1 0 0;
-        flex: 1 0 0;
-        -webkit-order: 2;
-        -ms-flex-order: 2;
-        order: 2;
-        background: white; }
-      ba-swipeclickcontainer swipe container swiperight {
-        -webkit-box-flex: 1 0 0;
-        -moz-box-flex: 1 0 0;
-        -webkit-flex: 1 0 0;
-        -ms-flex: 1 0 0;
-        flex: 1 0 0;
-        display: -webkit-box;
-        display: -moz-box;
-        display: -ms-flexbox;
-        display: -webkit-flex;
-        display: flex;
-        -webkit-order: 3;
-        -ms-flex-order: 3;
-        order: 3;
-        z-index: 1;
-        background: yellow; }
-        ba-swipeclickcontainer swipe container swiperight div {
-          -webkit-box-flex: 1 0 0;
-          -moz-box-flex: 1 0 0;
-          -webkit-flex: 1 0 0;
-          -ms-flex: 1 0 0;
-          flex: 1 0 0; }
-
-ba-swipeclickcontainer swipe > container > *:nth-child(1) {
-  background: white; }
-ba-swipeclickcontainer .nothing swipeleft, ba-swipeclickcontainer .nothing swiperight {
-  background: lightgrey;
-  opacity: 0; }
-ba-swipeclickcontainer .delete swipeleft {
-  background: red; }
-
-body > swipe {
+ba-hoverbuttoncontainer:hover hoverbuttons {
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex; }
-  body > swipe container {
-    width: 100%; }
-    body > swipe container icon {
-      display: none; }
 
-ba-swipeclickcontainer .swipe {
-  -webkit-transition: all 0.3s ease;
-  -moz-transition: all 0.3s ease;
-  -o-transition: all 0.3s ease;
-  -ms-transition: all 0.3s ease;
-  transition: all 0.3s ease; }
+ba-selectableitem selectableitem {
+  display: block;
+  background: white; }
+ba-selectableitem .selected {
+  background: lightgrey; }
 
 ba-list {
   display: block;
@@ -736,7 +635,7 @@ ba-searchlist {
   -ms-flex-direction: column;
   flex-direction: column;
   width: 100%; }
-  ba-searchlist searchbox {
+  ba-searchlist ba-searchbox {
     -webkit-box-flex: 0 0 44px;
     -moz-box-flex: 0 0 44px;
     -webkit-flex: 0 0 44px;
@@ -748,14 +647,16 @@ ba-searchlist {
     display: -webkit-flex;
     display: flex;
     width: 100%;
+    line-height: 44px;
     border-bottom: 1px solid #ddd; }
-    ba-searchlist searchbox input {
+    ba-searchlist ba-searchbox input {
       -webkit-box-flex: 1 1 0;
       -moz-box-flex: 1 1 0;
       -webkit-flex: 1 1 0;
       -ms-flex: 1 1 0;
-      flex: 1 1 0; }
-    ba-searchlist searchbox icon {
+      flex: 1 1 0;
+      color: #777; }
+    ba-searchlist ba-searchbox icon {
       -webkit-box-flex: 0 0 44px;
       -moz-box-flex: 0 0 44px;
       -webkit-flex: 0 0 44px;
@@ -826,7 +727,7 @@ ba-header ba-list {
 ba-header {
   background: lightsteelblue;
   color: white;
-  height: 50px; }
+  height: 52px; }
   ba-header ba-list list button {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 14px;
@@ -855,6 +756,28 @@ ba-toggle_menu {
     color: inherit; }
 
 ba-toggle_menu button {
+  padding: 0 22px; }
+
+ba-toggle {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; }
+  ba-toggle button {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    color: inherit; }
+
+ba-toggle button {
   padding: 0 22px; }
 
 ba-menu_web {
@@ -889,7 +812,7 @@ ba-layout_web {
   -webkit-flex-direction: column;
   -ms-flex-direction: column;
   flex-direction: column; }
-  ba-layout_web header {
+  ba-layout_web .header {
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -913,11 +836,6 @@ ba-layout_web {
       display: -ms-flexbox;
       display: -webkit-flex;
       display: flex;
-      -webkit-box-flex: 0 0 160px;
-      -moz-box-flex: 0 0 160px;
-      -webkit-flex: 0 0 160px;
-      -ms-flex: 0 0 160px;
-      flex: 0 0 160px;
       min-width: 10px; }
     ba-layout_web main .content {
       -webkit-box-flex: 1 1 0;

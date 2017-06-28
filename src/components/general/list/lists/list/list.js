@@ -20,20 +20,17 @@ Scoped.define("module:List", [
         attrs: {
             listitem: "clickitem",
             model: false,
-            view: {}
+            // view: {}
         },
 
         collections: {
             listcollection: [{
-                    value: "List - Item 1"
-                },
-                {
-                    value: "List - Item 2"
-                },
-                {
-                    value: "List - Item 3"
-                }
-            ]
+                value: "List - Item 1"
+            }, {
+                value: "List - Item 2"
+            }, {
+                value: "List - Item 3"
+            }]
         },
 
         functions: {

@@ -12,23 +12,23 @@ Scoped.define("module:Header", [
 
         collections: {
             left_collection: [{
-                    listitem: 'toggle_menu'
-                },
-                {
-                    value: '',
-                    "class": 'icon-home'
-                },
-                {
-                    value: 'Big Brother',
-                    "class": 'icon-eye-open'
-                },
-                {
-                    value: 'Header 1'
-                },
-                {
-                    value: 'Header 2'
+                listitem: 'toggle_menu'
+            }, {
+                listitem: 'searchbox',
+                view: {
+                    placeholder: 'Test'
                 }
-            ]
+            }, {
+                value: '',
+                "class": 'icon-home'
+            }, {
+                value: 'Big Brother',
+                "class": 'icon-eye-open'
+            }, {
+                value: 'Header 1'
+            }, {
+                value: 'Header 2'
+            }]
         }
 
     }).register();

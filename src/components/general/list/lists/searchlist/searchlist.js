@@ -1,7 +1,12 @@
+// TODO:
+//  - Link Searchvalue with listcollection
+//  - Make Loading look nicer
+
 Scoped.define("module:Searchlist", [
     "dynamics:Dynamic"
 ], [
     "module:List",
+    "module:Searchbox",
     "module:Loading",
     "dynamics:Partials.NoScopePartial"
 ], function(Dynamic, scoped) {
@@ -15,26 +20,13 @@ Scoped.define("module:Searchlist", [
         attrs: {
             searchvalue: "",
             searchingindication: false,
-            //searching: false,
+            //searching: false
             view: {
-                placeholder: "Search for",
-                listitem: "clickitem",
-                showsearch: true
+                show_searchbox: true
             }
         },
 
-        collections: {
-            listcollection: [{
-                    value: "Searchlist - Item 1"
-                },
-                {
-                    value: "Searchlist - Item 2"
-                },
-                {
-                    value: "Searchlist - Item 3"
-                }
-            ]
-        },
+        extendables: ['view'],
 
         create: function() {
             this.on("change:searchvalue", function() {

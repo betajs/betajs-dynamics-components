@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.11 - 2017-06-09
+betajs-dynamics-components - v0.1.11 - 2017-06-26
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -343,6 +343,26 @@ Scoped.define("module:Scrollpicker", [
     }).register();
 
 });
+Scoped.define("module:Searchbox", [
+    "dynamics:Dynamic"
+], function(Dynamic, scoped) {
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
+
+        template: "<icon class=\"icon-search\"></icon>\n<div>\n    <input placeholder=\"{{view.placeholder}}\" value=\"{{=value}}\">\n</div>",
+
+        attrs: {
+            value: "",
+            view: {
+                placeholder: "Placeholder",
+                autofocus: true
+            }
+        }
+
+    }).register();
+
+});
 Scoped.define("module:Textinput", [
     "dynamics:Dynamic",
     'base:Strings'
@@ -518,7 +538,7 @@ Scoped.define("module:Hoverbuttoncontainer", [
         scoped: scoped
     }, {
 
-        template: "\n<hoverbuttoncontainer\n        ba-on:mouseover=\"show_hover_buttons = true\"\n        ba-on:mouseleave=\"show_hover_buttons = false\"\n        ba-gesture:click=\"{{{data: model, options: click_gesture}}}\"\n        ba-gesture:drag=\"{{drag_gesture}}\"\n        ba-interaction:drag=\"{{{data: model, options: drag_interaction}}}\"\n        ba-interaction:drop=\"{{{data: model, options: drop_interaction}}}\">\n\n    <container>\n        <ba-{{view.inner||inner}} ba-noscope>\n        </ba-{{view.inner||inner}}>\n    </container>\n\n    <hoverbuttons\n            ba-show=\"{{show_hover_buttons}}\"\n            ba-repeat=\"{{button :: buttons}}\">\n        <button ba-tap=\"button.click()\">\n            <span class=\"{{button.icon}}\"></span>\n            <tooltip>{{button.tooltip}}</tooltip>\n        </button>\n    </hoverbuttons>\n\n</hoverbuttoncontainer>\n",
+        template: "\n<hoverbuttoncontainer\n        ba-gesture:click=\"{{{data: model, options: click_gesture}}}\"\n        ba-gesture:drag=\"{{drag_gesture}}\"\n        ba-interaction:drag=\"{{{data: model, options: drag_interaction}}}\"\n        ba-interaction:drop=\"{{{data: model, options: drop_interaction}}}\">\n\n    <container>\n        <ba-{{view.inner||inner}} ba-noscope>\n        </ba-{{view.inner||inner}}>\n    </container>\n\n    <hoverbuttons\n            ba-repeat=\"{{button :: buttons}}\">\n        <button ba-tap=\"button.click()\">\n            <span class=\"{{button.icon}}\"></span>\n            <tooltip>{{button.tooltip}}</tooltip>\n        </button>\n    </hoverbuttons>\n\n</hoverbuttoncontainer>\n",
 
         attrs: {
             show_hover_buttons: false,
@@ -730,206 +750,6 @@ Scoped.define("module:Selectableitem", [
 
     }).register();
 });
-Scoped.define("module:Swipeclickcontainer", [
-    "dynamics:Dynamic",
-    "browser:Loader",
-    "browser:Dom",
-    "base:Loggers.Logger"
-], [
-    "ui:Dynamics.GesturePartial",
-    "ui:Dynamics.InteractionPartial",
-    "ui:Interactions.Drag",
-    "ui:Interactions.Drop"
-], function(Dynamic, Loader, Dom, Logger, scoped) {
-
-    var logger = Logger.global().tag("dynamic", "list");
-
-    return Dynamic.extend({
-        scoped: scoped
-    }, {
-
-        template: "\n<behind>\n    <icon class='{{view.lefticon||lefticon}}'></icon>\n    <div></div>\n    <icon class='{{view.righticon||righticon}}'></icon>\n</behind>\n\n<!--style=\"left: {{view.left}}px\"-->\n<swipe\n        class='{{start_swipe}}'\n        ba-gesture:click=\"{{{data: model, options: click_gesture}}}\"\n        ba-gesture:drag=\"{{drag_gesture}}\"\n        ba-interaction:drag=\"{{{data: model, options: drag_interaction}}}\"\n        ba-interaction:drop=\"{{{data: model, options: drop_interaction}}}\"\n        ba-gesture:swipe=\"{{swipe_gesture}}\"\n        ba-interaction:swipe=\"{{swipe_interaction}}\">\n\n    <container>\n\n        <ba-{{view.inner||inner}} ba-noscope>\n        </ba-{{view.inner||inner}}>\n\n        <swipeleft>\n            <div></div>\n            <icon class='{{view.lefticon||lefticon}}'></icon>\n        </swipeleft>\n\n        <swiperight>\n            <icon class='{{view.righticon||righticon}}'></icon>\n            <div></div>\n        </swiperight>\n\n    </container>\n\n</swipe>\n",
-
-        attrs: {
-            start_swipe: '',
-            view: {
-                slide_finish: false,
-                left: 0
-            },
-            value: "Swipeclickitem - Title",
-            lefticon: 'icon-ok',
-            righticon: 'icon-time',
-            inner: "eventitem",
-            swipe_actions: {
-                "other": {
-                    less: -1 / 7,
-                    greater: -1,
-                    execute: function(element, pos) {
-                        this.execute('slideout', element, pos, 'other');
-                    }
-                },
-                "nothing": {
-                    greater: -1 / 7,
-                    less: 1 / 7
-                },
-                "archive": {
-                    greater: 1 / 7,
-                    less: 2 / 3,
-                    execute: function(element, pos) {
-                        this.execute('slideout', element, pos, 'archive');
-                    }
-                },
-                "delete": {
-                    greater: 2 / 3,
-                    less: 1,
-                    execute: function(element, pos) {
-                        this.execute('slideout', element, pos, 'delete');
-                    }
-                }
-            },
-            click_gesture: {
-                mouse_up_activate: true,
-                wait_time: 250,
-                wait_activate: false,
-                disable_x: 10,
-                disable_y: 10,
-                enable_x: -1,
-                enable_y: -1,
-                activate_event: "click"
-            },
-            drag_gesture: {
-                mouse_up_activate: false,
-                wait_time: 750,
-                wait_activate: true,
-                disable_x: 10,
-                disable_y: 10,
-                enable_x: -1,
-                enable_y: -1,
-                interaction: "drag"
-            },
-            drag_interaction: {
-                droppable: true,
-                type: "drag",
-                clone_element: true,
-                start_event: null,
-                events: {
-                    "move": function(model, event) {
-                        event.actionable_modifier.csscls("focus", true);
-                        event.modifier.csscls("unfocus", true);
-
-                    }
-                }
-            },
-            drop_interaction: {
-                enabled: true,
-                type: "drop",
-                classes: {
-                    "hover.modifier": "green-style"
-                },
-                events: {
-                    "dropped": function(data, event) {
-
-                        var source_doodad = event.source.data;
-
-                        this.scope(">").execute('dropped', source_doodad);
-
-                    }
-                }
-            },
-            swipe_gesture: {
-                mouse_up_activate: false,
-                wait_time: 250,
-                wait_activate: false,
-                disable_x: -1,
-                disable_y: -1,
-                enable_x: 10,
-                enable_y: -1,
-                interaction: "swipe"
-            },
-            swipe_interaction: {
-                type: "drag",
-                enabled: true,
-                draggable_y: false,
-                start_event: null,
-                events: {
-                    "move": function(doodad, event) {
-                        var element = event.element;
-                        var w = Dom.elementDimensions(element).width;
-                        var x = parseInt(element.style.left, 10);
-                        var a = {};
-                        var actions = this.get('swipe_actions');
-                        for (var cls in actions) {
-                            a = actions[cls];
-                            if ((!a.less || x <= w * a.less) && (!a.greater || x >= w * a.greater))
-                                Dom.elementAddClass(element, cls);
-                            else
-                                Dom.elementRemoveClass(element, cls);
-                        }
-                    },
-                    "release": function(doodad, event) {
-                        var element = event.element;
-                        var w = Dom.elementDimensions(element).width;
-                        var x = parseInt(element.style.left, 10);
-                        var actions = this.get('swipe_actions');
-                        for (var cls in actions) {
-                            a = actions[cls];
-
-                            if ((!('greater' in a) || x <= w * a.less) && (!('less' in a) || x >= w * a.greater)) {
-                                event.source.abort();
-                                if (a.execute)
-                                    a.execute.call(this, element, x);
-                            }
-                        }
-                    }
-                }
-            }
-
-        },
-
-        functions: {
-            click: function(doodad) {
-                this.scope(">").call('click');
-            },
-            create_style: function(name, left) {
-                var style = document.createElement('style');
-                style.type = 'text/css';
-                style.innerHTML = '.' + name + ' { left: ' + left + 'px; }';
-                document.getElementsByTagName('head')[0].appendChild(style);
-            },
-            slideout: function(element, pos, trigger) {
-                var current_left = pos;
-
-                this.call('create_style', 'old_class', current_left);
-                this.set('start_swipe', 'old_class');
-
-                var self = this;
-                //				element.addEventListener("transitionend",function () {
-                //element.find('ba-eventitem').css('visibility','hidden');
-                setTimeout(function() {
-                    //element.parent().slideUp(200);
-                    element.parentNode.style.display = 'none';
-                    // Now we should remove the added element from the dom again, otherwise we have a leak.
-                    // this.get("temporary_style_element").remove();
-                    self.trigger(trigger);
-                }, 10);
-                //			});
-
-                var max_left = parseInt(element.style.width, 10);
-                var sign = Math.sign(current_left);
-
-                //Instead of the create_style call, you should be able to user betajs browser (please update first):
-                this.set("temporary_style_element", Loader.inlineStyles(
-                    '.new_class { left: ' + sign * max_left + 'px; }'
-                ));
-
-                this.call('create_style', 'new_class', sign * max_left);
-                this.set('start_swipe', 'swipe new_class');
-            }
-        }
-
-    }).register();
-
-});
 Scoped.define("module:List", [
     "dynamics:Dynamic",
     "base:Async"
@@ -952,20 +772,17 @@ Scoped.define("module:List", [
         attrs: {
             listitem: "clickitem",
             model: false,
-            view: {}
+            // view: {}
         },
 
         collections: {
             listcollection: [{
-                    value: "List - Item 1"
-                },
-                {
-                    value: "List - Item 2"
-                },
-                {
-                    value: "List - Item 3"
-                }
-            ]
+                value: "List - Item 1"
+            }, {
+                value: "List - Item 2"
+            }, {
+                value: "List - Item 3"
+            }]
         },
 
         functions: {
@@ -986,10 +803,15 @@ Scoped.define("module:List", [
     }).register();
 
 });
+// TODO:
+//  - Link Searchvalue with listcollection
+//  - Make Loading look nicer
+
 Scoped.define("module:Searchlist", [
     "dynamics:Dynamic"
 ], [
     "module:List",
+    "module:Searchbox",
     "module:Loading",
     "dynamics:Partials.NoScopePartial"
 ], function(Dynamic, scoped) {
@@ -998,31 +820,18 @@ Scoped.define("module:Searchlist", [
         scoped: scoped
     }, {
 
-        template: "\n<searchbox ba-if=\"{{view.showsearch}}\">\n    <icon class=\"icon-search\"></icon>\n    <input placeholder=\"{{view.placeholder}}\" value=\"{{=searchvalue}}\">\n</searchbox>\n\n<ba-loading ba-if=\"{{searchingindication}}\">\n</ba-loading>\n\n<ba-list ba-noscope></ba-list>\n",
+        template: "\n<ba-searchbox\n        ba-value=\"{{=searchvalue}}\"\n        ba-if=\"{{view.show_searchbox}}\"\n        ba-view=\"{{view}}\"></ba-searchbox>\n\n<ba-loading ba-if=\"{{searchingindication}}\">\n</ba-loading>\n\n<ba-list ba-noscope></ba-list>\n",
 
         attrs: {
             searchvalue: "",
             searchingindication: false,
-            //searching: false,
+            //searching: false
             view: {
-                placeholder: "Search for",
-                listitem: "clickitem",
-                showsearch: true
+                show_searchbox: true
             }
         },
 
-        collections: {
-            listcollection: [{
-                    value: "Searchlist - Item 1"
-                },
-                {
-                    value: "Searchlist - Item 2"
-                },
-                {
-                    value: "Searchlist - Item 3"
-                }
-            ]
-        },
+        extendables: ['view'],
 
         create: function() {
             this.on("change:searchvalue", function() {
@@ -1164,23 +973,23 @@ Scoped.define("module:Header", [
 
         collections: {
             left_collection: [{
-                    listitem: 'toggle_menu'
-                },
-                {
-                    value: '',
-                    "class": 'icon-home'
-                },
-                {
-                    value: 'Big Brother',
-                    "class": 'icon-eye-open'
-                },
-                {
-                    value: 'Header 1'
-                },
-                {
-                    value: 'Header 2'
+                listitem: 'toggle_menu'
+            }, {
+                listitem: 'searchbox',
+                view: {
+                    placeholder: 'Test'
                 }
-            ]
+            }, {
+                value: '',
+                "class": 'icon-home'
+            }, {
+                value: 'Big Brother',
+                "class": 'icon-eye-open'
+            }, {
+                value: 'Header 1'
+            }, {
+                value: 'Header 2'
+            }]
         }
 
     }).register();
@@ -1194,11 +1003,40 @@ Scoped.define("module:Toggle_menu", [
         scoped: scoped
     }, {
 
-        template: "<button ba-click=\"toggle_menu()\" class=\"icon-reorder\"></button>",
+        template: "<button ba-click=\"toggle_menu()\" class=\"{{toggle_icon}}\"></button>",
+
+        attrs: {
+            toggle_icon: 'icon-reorder'
+        },
+
+        functions: {
+            toggle_menu: function() {
+                this.channel('global').trigger('toggle_menu');
+            }
+        }
+
+    }).register();
+
+});
+Scoped.define("module:Toggle", [
+    "dynamics:Dynamic"
+], function(Dynamic, scoped) {
+
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
+
+        template: "<button ba-click=\"toggle_menu()\" class=\"{{toggle_icon}}\"></button>",
+
+        attrs: {
+            toggle_icon: 'icon-reorder'
+        },
 
         functions: {
             toggle_menu: function() {
                 this.scope("<+[tagname='ba-layout_web']").call('toggle_menu');
+
+                this.channel('toggle').trigger('toggle', 'menu');
             }
         }
 
@@ -1265,7 +1103,7 @@ Scoped.define("module:Layout_web", [
         scoped: scoped
     }, {
 
-        template: "<header>\n    <ba-{{view.header}}>Header</ba-{{view.header}}>\n</header>\n<main>\n    <ba-{{view.menu}}\n        class=\"menu\"\n        ba-show=\"{{view.display_menu}}\"\n        ba-view=\"{{view.menuview}}\">\n        Menu\n    </ba-{{view.menu}}>\n    <ba-{{view.content}}\n        class=\"content\"\n        ba-model={{contentmodel}}\n        ba-attrs=\"{{view.contentattrs}}\">\n        Content\n    </ba-{{view.content}}>\n</main>",
+        template: "\n<ba-{{view.header}}\n    class=\"header\"\n>Header</ba-{{view.header}}>\n\n\n<main>\n    <ba-{{view.menu}}\n        class=\"menu\"\n        ba-show=\"{{view.display_menu}}\"\n        ba-view=\"{{view.menuview}}\">\n        Menu\n    </ba-{{view.menu}}>\n    <ba-{{view.content}}\n        class=\"content\"\n        ba-model={{contentmodel}}\n        ba-view=\"{{view.contentview}}\"\n        ba-attrs=\"{{view.contentattrs}}\">\n        Content\n    </ba-{{view.content}}>\n</main>",
 
         attrs: {
             view: {
@@ -1283,10 +1121,22 @@ Scoped.define("module:Layout_web", [
 
         extendables: ['view'],
 
+        channels: {
+            "global:toggle_menu": function() {
+                this.execute('toggle_menu');
+            }
+        },
+
         functions: {
             toggle_menu: function() {
                 this.setProp('view.display_menu', !this.getProp('view.display_menu'));
             }
+        },
+
+        create: function() {
+            this.on('toggle', function() {
+                console.log('Toggle the menu');
+            })
         }
 
     }).register();

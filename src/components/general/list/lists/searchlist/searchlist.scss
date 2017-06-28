@@ -6,14 +6,16 @@ ba-searchlist {
   @include flex-direction(column);
   width: 100%;
 
-  searchbox {
+  ba-searchbox {
     @include flex(0 0 $searchboxheight);
     @include display-flex;
     width: 100%;
+    line-height: $searchboxheight;
     border-bottom: 1px solid #ddd;
 
     input {
       @include flex(1 1 0);
+      color: $grey3;
     }
 
     icon {

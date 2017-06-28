@@ -1,4 +1,4 @@
-Scoped.define("module:Toggle_menu", [
+Scoped.define("module:Toggle", [
     "dynamics:Dynamic"
 ], function(Dynamic, scoped) {
 
@@ -14,7 +14,9 @@ Scoped.define("module:Toggle_menu", [
 
         functions: {
             toggle_menu: function() {
-                this.channel('global').trigger('toggle_menu');
+                this.scope("<+[tagname='ba-layout_web']").call('toggle_menu');
+
+                this.channel('toggle').trigger('toggle', 'menu');
             }
         }
 
