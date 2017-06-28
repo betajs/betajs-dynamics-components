@@ -42,7 +42,7 @@ module.exports = function (grunt) {
 
     grunt.initConfig(gruntHelper.config);
 
-    grunt.registerTask('default', ['package', 'readme', 'license', 'beautify1', 'beautify2', 'beautify4', 'scopedclosurerevision', 'concat-scoped', 'uglify-noscoped', 'uglify-scoped', 'concat-dist-css', 'cssmin-dist']);
+    grunt.registerTask('default', ['package', 'readme', 'license', 'beautify1', 'beautify2', 'beautify4', 'scopedclosurerevision', 'concat-scoped', 'uglify-noscoped', 'uglify-scoped', 'concat-dist-css', 'cssmin-dist', 'lint']);
     grunt.registerTask('check', ['lint', 'browserqunit']);
 
 };

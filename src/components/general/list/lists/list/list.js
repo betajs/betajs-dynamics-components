@@ -19,7 +19,7 @@ Scoped.define("module:List", [
 
         attrs: {
             listitem: "clickitem",
-            model: false,
+            model: false
             // view: {}
         },
 

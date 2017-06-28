@@ -2,7 +2,6 @@ var components = new BetaJS.Collections.Collection([
 
     //Swipecontainers
     {value  : 'hoverbuttoncontainer'},
-    {value  : 'swipeclickcontainer'},
     {value  : 'eventitem'},
 
     //Web -
@@ -28,7 +27,6 @@ var components = new BetaJS.Collections.Collection([
     {value  : 'addtitle'},
     {value  : 'titledlist'},
     {value  : 'test_titledlist'},
-    {value  : 'test_titledlist_swipe'},
 
     //List
     {value  : 'test_list_loadmore'},

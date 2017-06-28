@@ -32,7 +32,6 @@
 <link rel="stylesheet" href="tests/test_selectableitem/test_selectableitem.css" />
 <script src="tests/test_titledlist/test_titledlist.js"></script>
 <link rel="stylesheet" href="tests/test_titledlist/test_titledlist.css" />
-<script src="tests/test_titledlist_swipe/test_titledlist_swipe.js"></script>
 <script src="tests/test_list_loadmore/test_list_loadmore.js"></script>
 <link rel="stylesheet" href="tests/test_list_loadmore/test_list_loadmore.css" />
 <script src="tests/test_list_clickitem/test_list_clickitem.js"></script>
@@ -53,6 +52,7 @@
     BetaJS.Browser.Dom.ready(function () {
         BetaJS.Dynamics.Dynamic.activate({element: document.body});
     });
+    console.log("Unresolved:", Scoped.unresolved("global:"));
 </script>
 
 </body>

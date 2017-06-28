@@ -29,21 +29,21 @@ Scoped.define("module:Hoverbuttoncontainer", [
                     icon: 'icon-trash',
                     tooltip: 'Delete',
                     click: function() {
-                        console.log('Delete was clicked')
+                        console.log('Delete was clicked');
                     }
                 },
                 "archive": {
                     icon: 'icon-archive',
                     tooltip: 'Archive',
                     click: function() {
-                        console.log('Archive was clicked')
+                        console.log('Archive was clicked');
                     }
                 },
                 "snooze": {
                     icon: 'icon-time',
                     tooltip: 'Snooze',
                     click: function() {
-                        console.log('Snooze was clicked')
+                        console.log('Snooze was clicked');
                     }
                 }
             },

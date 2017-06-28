@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.11 - 2017-06-26
+betajs-dynamics-components - v0.1.11 - 2017-06-28
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -1004,7 +1004,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.11 - 2017-06-26
+betajs-dynamics-components - v0.1.11 - 2017-06-28
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -1209,7 +1209,7 @@ Scoped.define("module:Overlaycontainer", [
                 },
                 value: null,
                 showoverlay: true
-            }
+            };
         }
 
     }).register();
@@ -1556,21 +1556,21 @@ Scoped.define("module:Hoverbuttoncontainer", [
                     icon: 'icon-trash',
                     tooltip: 'Delete',
                     click: function() {
-                        console.log('Delete was clicked')
+                        console.log('Delete was clicked');
                     }
                 },
                 "archive": {
                     icon: 'icon-archive',
                     tooltip: 'Archive',
                     click: function() {
-                        console.log('Archive was clicked')
+                        console.log('Archive was clicked');
                     }
                 },
                 "snooze": {
                     icon: 'icon-time',
                     tooltip: 'Snooze',
                     click: function() {
-                        console.log('Snooze was clicked')
+                        console.log('Snooze was clicked');
                     }
                 }
             },
@@ -1776,7 +1776,7 @@ Scoped.define("module:List", [
 
         attrs: {
             listitem: "clickitem",
-            model: false,
+            model: false
             // view: {}
         },
 
@@ -2000,29 +2000,6 @@ Scoped.define("module:Header", [
     }).register();
 
 });
-Scoped.define("module:Toggle_menu", [
-    "dynamics:Dynamic"
-], function(Dynamic, scoped) {
-
-    return Dynamic.extend({
-        scoped: scoped
-    }, {
-
-        template: "<button ba-click=\"toggle_menu()\" class=\"{{toggle_icon}}\"></button>",
-
-        attrs: {
-            toggle_icon: 'icon-reorder'
-        },
-
-        functions: {
-            toggle_menu: function() {
-                this.channel('global').trigger('toggle_menu');
-            }
-        }
-
-    }).register();
-
-});
 Scoped.define("module:Toggle", [
     "dynamics:Dynamic"
 ], function(Dynamic, scoped) {
@@ -2042,6 +2019,29 @@ Scoped.define("module:Toggle", [
                 this.scope("<+[tagname='ba-layout_web']").call('toggle_menu');
 
                 this.channel('toggle').trigger('toggle', 'menu');
+            }
+        }
+
+    }).register();
+
+});
+Scoped.define("module:Toggle_menu", [
+    "dynamics:Dynamic"
+], function(Dynamic, scoped) {
+
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
+
+        template: "<button ba-click=\"toggle_menu()\" class=\"{{toggle_icon}}\"></button>",
+
+        attrs: {
+            toggle_icon: 'icon-reorder'
+        },
+
+        functions: {
+            toggle_menu: function() {
+                this.channel('global').trigger('toggle_menu');
             }
         }
 
@@ -2141,7 +2141,7 @@ Scoped.define("module:Layout_web", [
         create: function() {
             this.on('toggle', function() {
                 console.log('Toggle the menu');
-            })
+            });
         }
 
     }).register();

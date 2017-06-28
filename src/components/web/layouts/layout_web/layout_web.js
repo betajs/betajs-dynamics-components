@@ -41,7 +41,7 @@ Scoped.define("module:Layout_web", [
         create: function() {
             this.on('toggle', function() {
                 console.log('Toggle the menu');
-            })
+            });
         }
 
     }).register();
