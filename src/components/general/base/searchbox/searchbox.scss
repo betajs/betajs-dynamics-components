@@ -3,7 +3,7 @@ $searchboxheight: 36px;
 //Layout
 ba-searchbox {
   height: $searchboxheight;
-  min-width: 180px;
+  //min-width: 180px;
   @include display-flex;
 
   div {

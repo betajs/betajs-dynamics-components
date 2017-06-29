@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.11 - 2017-06-28
+betajs-dynamics-components - v0.1.11 - 2017-06-29
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -129,7 +129,6 @@ ba-scrollpicker {
 
 ba-searchbox {
   height: 36px;
-  min-width: 180px;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -537,27 +536,37 @@ ba-hoverbuttoncontainer {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  position: relative;
-  display: block; }
+  min-width: 0px; }
   ba-hoverbuttoncontainer hoverbuttoncontainer {
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
     display: -webkit-flex;
-    display: flex; }
+    display: flex;
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    min-width: 0px; }
     ba-hoverbuttoncontainer hoverbuttoncontainer container {
       display: -webkit-box;
       display: -moz-box;
       display: -ms-flexbox;
       display: -webkit-flex;
       display: flex;
-      -webkit-box-flex: 1 1 auto;
-      -moz-box-flex: 1 1 auto;
-      -webkit-flex: 1 1 auto;
-      -ms-flex: 1 1 auto;
-      flex: 1 1 auto; }
+      -webkit-box-flex: 1 1 0;
+      -moz-box-flex: 1 1 0;
+      -webkit-flex: 1 1 0;
+      -ms-flex: 1 1 0;
+      flex: 1 1 0;
+      min-width: 0px; }
       ba-hoverbuttoncontainer hoverbuttoncontainer container > * {
-        width: 100%; }
+        -webkit-box-flex: 1 1 0;
+        -moz-box-flex: 1 1 0;
+        -webkit-flex: 1 1 0;
+        -ms-flex: 1 1 0;
+        flex: 1 1 0; }
     ba-hoverbuttoncontainer hoverbuttoncontainer hoverbuttons {
       display: none;
       -webkit-box-flex: 0 1 auto;
@@ -566,7 +575,6 @@ ba-hoverbuttoncontainer {
       -ms-flex: 0 1 auto;
       flex: 0 1 auto; }
       ba-hoverbuttoncontainer hoverbuttoncontainer hoverbuttons button {
-        position: relative;
         display: -webkit-box;
         display: -moz-box;
         display: -ms-flexbox;
@@ -736,28 +744,6 @@ ba-header {
     ba-header ba-list list button :hover {
       background: lightsalmon; }
 
-ba-toggle {
-  -webkit-box-flex: 1 1 0;
-  -moz-box-flex: 1 1 0;
-  -webkit-flex: 1 1 0;
-  -ms-flex: 1 1 0;
-  flex: 1 1 0;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex; }
-  ba-toggle button {
-    -webkit-box-flex: 1 1 0;
-    -moz-box-flex: 1 1 0;
-    -webkit-flex: 1 1 0;
-    -ms-flex: 1 1 0;
-    flex: 1 1 0;
-    color: inherit; }
-
-ba-toggle button {
-  padding: 0 22px; }
-
 ba-toggle_menu {
   -webkit-box-flex: 1 1 0;
   -moz-box-flex: 1 1 0;
@@ -778,6 +764,28 @@ ba-toggle_menu {
     color: inherit; }
 
 ba-toggle_menu button {
+  padding: 0 22px; }
+
+ba-toggle {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; }
+  ba-toggle button {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    color: inherit; }
+
+ba-toggle button {
   padding: 0 22px; }
 
 ba-menu_web {

@@ -3,16 +3,18 @@ $hoverbuttoncontainerheight: 44px;
 
 ba-hoverbuttoncontainer {
   @include display-flex;
-  position: relative;
-  display: block;
+  min-width: 0px; //Important for correct flex-box display!
 
   hoverbuttoncontainer {
     @include display-flex;
+    @include flex-settings(1 1 0);
+    min-width: 0px; //Important for correct flex-box display!
 
     container {
       @include display-flex;
-      @include flex-settings(1 1 auto);
-      >* {width:100%}
+      @include flex-settings(1 1 0);
+      min-width: 0px; //Important for correct flex-box display!
+      >* {@include flex-settings(1 1 0);}
     }
 
 
@@ -21,7 +23,7 @@ ba-hoverbuttoncontainer {
       @include flex-settings(0 1 auto);
 
       button {
-        position: relative;
+        //position: relative;
         @include display-flex;
 
         width: $hoverbuttoncontainerheight;
