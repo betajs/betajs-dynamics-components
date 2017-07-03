@@ -20,6 +20,8 @@ module.exports = function (grunt) {
         "ui:version": pkg.devDependencies["betajs-ui"]
     }, null, betajsTemplates.concatProcess(grunt))
     .concatTask('concat-scoped', [require.resolve("betajs-scoped"), 'dist/' + dist + '-noscoped.js'], 'dist/' + dist + '.js')
+    .concatTask('concat-simulator-js', ["simulator/tests/**/*.js"], 'simulator/dist/scripts.js')
+    .concatTask('concat-simulator-css', ["simulator/tests/**/*.css"], 'simulator/dist/styles.css')
     .uglifyTask('uglify-noscoped', 'dist/' + dist + '-noscoped.js', 'dist/' + dist + '-noscoped.min.js')
     .uglifyTask('uglify-scoped', 'dist/' + dist + '.js', 'dist/' + dist + '.min.js')
     .packageTask()
@@ -42,7 +44,8 @@ module.exports = function (grunt) {
 
     grunt.initConfig(gruntHelper.config);
 
-    grunt.registerTask('default', ['package', 'readme', 'license', 'beautify1', 'beautify2', 'beautify4', 'scopedclosurerevision', 'concat-scoped', 'uglify-noscoped', 'uglify-scoped', 'concat-dist-css', 'cssmin-dist', 'lint']);
+    grunt.registerTask('default', ['package', 'readme', 'license', 'beautify1', 'beautify2', 'beautify4', 'scopedclosurerevision', 'concat-scoped', 'uglify-noscoped', 'uglify-scoped', 'concat-dist-css', 'cssmin-dist', 'lint', 'simulator']);
+    grunt.registerTask('simulator', ['concat-simulator-js', 'concat-simulator-css']);
     grunt.registerTask('check', ['lint', 'browserqunit']);
 
 };
