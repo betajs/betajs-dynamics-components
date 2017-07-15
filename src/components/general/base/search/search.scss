@@ -1,7 +1,9 @@
-$searchboxheight: 36px;
+
+$searchboxheight: 36px!default;
+$spinkit-size: 16px !default;
 
 //Layout
-ba-searchbox {
+ba-search {
   height: $searchboxheight;
   //min-width: 180px;
   @include display-flex;
@@ -17,5 +19,13 @@ ba-searchbox {
 
   icon {
     @include flex(0 0 $searchboxheight);
+    line-height: $searchboxheight;
+    text-align: center;
+  }
+  ba-loading {
+    @include flex(0 0 $searchboxheight);
+    .sk-circle {
+      margin: ($searchboxheight - $spinkit-size)/2 auto;
+    }
   }
 }

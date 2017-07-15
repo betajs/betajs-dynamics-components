@@ -1,5 +1,6 @@
 
-<list ba-repeat="{{collectionitem :: (model.listcollection||listcollection)}}">
+<list ba-repeat="{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}">
+<!--<list ba-repeat="{{collectionitem :: (model.listcollection||listcollection)}}">-->
 
     <ba-{{getview(collectionitem)}}
         ba-cache

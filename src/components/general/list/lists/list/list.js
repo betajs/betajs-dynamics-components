@@ -19,8 +19,8 @@ Scoped.define("module:List", [
 
         attrs: {
             listitem: "clickitem",
-            model: false
-            // view: {}
+            model: false,
+            view: {}
         },
 
         collections: {
@@ -45,6 +45,12 @@ Scoped.define("module:List", [
 
             getview: function(item) {
                 return this.getProp("view.listitem") || item.get("listitem") || (this.get("listitemfunc") ? (this.get("listitemfunc"))(item) : this.get("listitem"));
+            }
+        },
+
+        events: {
+            "change:listcollection": function() {
+                console.log('List changed');
             }
         }
 

@@ -1,4 +1,4 @@
-$searchboxheight : 44px;
+$searchboxheight : $listitemheight;
 
 ba-searchlist {
   @include flex(1 1 0);
@@ -6,12 +6,20 @@ ba-searchlist {
   @include flex-direction(column);
   width: 100%;
 
-  ba-searchbox {
-    @include flex(0 0 $searchboxheight);
+  ba-search {
+    $search : 0 0 $searchboxheight !default;
+    @include flex($search);
     @include display-flex;
     width: 100%;
     line-height: $searchboxheight;
     border-bottom: 1px solid #ddd;
+
+    ba-loading {
+      @include flex(0 0 $searchboxheight);
+      .sk-circle {
+        margin: 14px auto;
+      }
+    }
 
     input {
       @include flex(1 1 0);

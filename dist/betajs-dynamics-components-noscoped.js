@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.11 - 2017-06-29
+betajs-dynamics-components - v0.1.11 - 2017-07-15
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -343,20 +343,32 @@ Scoped.define("module:Scrollpicker", [
     }).register();
 
 });
-Scoped.define("module:Searchbox", [
+Scoped.define("module:Search", [
     "dynamics:Dynamic"
+], [
+    "module:Loading"
 ], function(Dynamic, scoped) {
     return Dynamic.extend({
         scoped: scoped
     }, {
 
-        template: "<icon class=\"icon-search\"></icon>\n<div>\n    <input placeholder=\"{{view.placeholder}}\" value=\"{{=value}}\">\n</div>",
+        template: "<icon ba-if=\"{{!loading}}\" class=\"icon-search\"></icon>\n<ba-loading ba-if=\"{{loading}}\"></ba-loading>\n<div>\n    <input placeholder=\"{{view.placeholder}}\" value=\"{{=value}}\">\n</div>",
 
         attrs: {
             value: "",
+            loading: false,
             view: {
                 placeholder: "Placeholder",
                 autofocus: true
+            }
+        },
+
+        computed: {
+            'test:value': function() {
+                if (this.get('value'))
+                    this.set('loading', true);
+                else
+                    this.set('loading', false);
             }
         }
 
@@ -371,7 +383,7 @@ Scoped.define("module:Textinput", [
         scoped: scoped
     }, {
 
-        template: "\n<textarea autofocus onblur=\"{{this.call('blur')}}\" value=\"{{=value}}\"></textarea>\n<pre>{{=preheighttext}}</pre>",
+        template: "\n<textarea autofocus onblur=\"{{this.call('blur')}}\" value=\"{{=value}}\"></textarea>\n<pre>{{=preheighttext}}</pre>\n",
 
         attrs: {
             value: 'Test',
@@ -410,7 +422,7 @@ Scoped.define("module:Loading", [
         scoped: scoped
     }, {
 
-        template: "\n<loading>\n\n    <div class='uil-spin-css' style='-webkit-transform:scale(0.32)'><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div><div><div></div></div></div>\n\n</loading>\n"
+        template: "\n<div class=\"sk-circle\">\n    <div class=\"sk-circle1 sk-child\"></div>\n    <div class=\"sk-circle2 sk-child\"></div>\n    <div class=\"sk-circle3 sk-child\"></div>\n    <div class=\"sk-circle4 sk-child\"></div>\n    <div class=\"sk-circle5 sk-child\"></div>\n    <div class=\"sk-circle6 sk-child\"></div>\n    <div class=\"sk-circle7 sk-child\"></div>\n    <div class=\"sk-circle8 sk-child\"></div>\n    <div class=\"sk-circle9 sk-child\"></div>\n    <div class=\"sk-circle10 sk-child\"></div>\n    <div class=\"sk-circle11 sk-child\"></div>\n    <div class=\"sk-circle12 sk-child\"></div>\n</div>\n"
 
     }).register();
 
@@ -520,172 +532,6 @@ Scoped.define("module:Eventitem", [
     }).register();
 
 });
-Scoped.define("module:Hoverbuttoncontainer", [
-    "dynamics:Dynamic",
-    "browser:Loader",
-    "browser:Dom",
-    "base:Loggers.Logger"
-], [
-    "ui:Dynamics.GesturePartial",
-    "ui:Dynamics.InteractionPartial",
-    "ui:Interactions.Drag",
-    "ui:Interactions.Drop"
-], function(Dynamic, Loader, Dom, Logger, scoped) {
-
-    var logger = Logger.global().tag("dynamic", "list");
-
-    return Dynamic.extend({
-        scoped: scoped
-    }, {
-
-        template: "\n<hoverbuttoncontainer\n        ba-gesture:click=\"{{{data: model, options: click_gesture}}}\"\n        ba-gesture:drag=\"{{drag_gesture}}\"\n        ba-interaction:drag=\"{{{data: model, options: drag_interaction}}}\"\n        ba-interaction:drop=\"{{{data: model, options: drop_interaction}}}\">\n\n    <container>\n        <ba-{{view.inner||inner}} ba-noscope>\n        </ba-{{view.inner||inner}}>\n    </container>\n\n    <hoverbuttons\n            ba-repeat=\"{{button :: buttons}}\">\n        <button ba-tap=\"button.click()\">\n            <span class=\"{{button.icon}}\"></span>\n            <tooltip>{{button.tooltip}}</tooltip>\n        </button>\n    </hoverbuttons>\n\n</hoverbuttoncontainer>\n",
-
-        attrs: {
-            show_hover_buttons: false,
-            view: {
-                slide_finish: false,
-                left: 0
-            },
-            buttons: {
-                "delete": {
-                    icon: 'icon-trash',
-                    tooltip: 'Delete',
-                    click: function() {
-                        console.log('Delete was clicked');
-                    }
-                },
-                "archive": {
-                    icon: 'icon-archive',
-                    tooltip: 'Archive',
-                    click: function() {
-                        console.log('Archive was clicked');
-                    }
-                },
-                "snooze": {
-                    icon: 'icon-time',
-                    tooltip: 'Snooze',
-                    click: function() {
-                        console.log('Snooze was clicked');
-                    }
-                }
-            },
-            value: "Swipeclickitem - Title",
-            inner: "eventitem",
-            // swipe_actions: {
-            // 	"other": {
-            // 		execute: function (element,pos) {
-            // 			this.execute('slideout',element,pos,'other');
-            // 		}
-            // 	},
-            // 	"nothing": {
-            // 	},
-            // 	"archive": {
-            // 		execute: function (element,pos) {
-            // 			this.execute('slideout',element,pos,'archive');
-            // 		}
-            // 	},
-            // 	"delete": {
-            // 		execute: function (element,pos) {
-            // 			this.execute('slideout',element,pos,'delete');
-            // 		}
-            // 	}
-            // },
-            click_gesture: {
-                mouse_up_activate: true,
-                wait_time: 250,
-                wait_activate: false,
-                disable_x: 10,
-                disable_y: 10,
-                enable_x: -1,
-                enable_y: -1,
-                activate_event: "click"
-            },
-            drag_gesture: {
-                mouse_up_activate: false,
-                wait_time: 750,
-                wait_activate: true,
-                disable_x: 10,
-                disable_y: 10,
-                enable_x: -1,
-                enable_y: -1,
-                interaction: "drag"
-            },
-            drag_interaction: {
-                droppable: true,
-                type: "drag",
-                clone_element: true,
-                start_event: null,
-                events: {
-                    "move": function(model, event) {
-                        event.actionable_modifier.csscls("focus", true);
-                        event.modifier.csscls("unfocus", true);
-
-                    }
-                }
-            },
-            drop_interaction: {
-                enabled: true,
-                type: "drop",
-                classes: {
-                    "hover.modifier": "green-style"
-                },
-                events: {
-                    "dropped": function(data, event) {
-
-                        var source_doodad = event.source.data;
-
-                        this.scope(">").execute('dropped', source_doodad);
-
-                    }
-                }
-            }
-
-        },
-
-        functions: {
-            click: function(doodad) {
-                this.scope(">").call('click');
-            },
-            create_style: function(name, left) {
-                var style = document.createElement('style');
-                style.type = 'text/css';
-                style.innerHTML = '.' + name + ' { left: ' + left + 'px; }';
-                document.getElementsByTagName('head')[0].appendChild(style);
-            },
-            slideout: function(element, pos, trigger) {
-                var current_left = pos;
-
-                this.call('create_style', 'old_class', current_left);
-                this.set('start_swipe', 'old_class');
-
-                var self = this;
-                //				element.addEventListener("transitionend",function () {
-                //element.find('ba-eventitem').css('visibility','hidden');
-                setTimeout(function() {
-                    //element.parent().slideUp(200);
-                    element.parentNode.style.display = 'none';
-                    // Now we should remove the added element from the dom again, otherwise we have a leak.
-                    // this.get("temporary_style_element").remove();
-                    self.trigger(trigger);
-                }, 10);
-                //			});
-
-                var max_left = parseInt(element.style.width, 10);
-                var sign = Math.sign(current_left);
-
-                //Instead of the create_style call, you should be able to user betajs browser (please update first):
-                this.set("temporary_style_element", Loader.inlineStyles(
-                    '.new_class { left: ' + sign * max_left + 'px; }'
-                ));
-
-                this.call('create_style', 'new_class', sign * max_left);
-                this.set('start_swipe', 'swipe new_class');
-            }
-        }
-
-    }).register();
-
-});
 /*
  *
  * selected_item = null, means the list will automatically select the first item in the list
@@ -767,12 +613,12 @@ Scoped.define("module:List", [
         scoped: scoped
     }, {
 
-        template: "\n<list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">\n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-view=\"{{collectionitem.view||view.listinner}}\"\n        ba-model=\"{{collectionitem}}\">\n\n    </ba-{{getview(collectionitem)}}>\n\n</list>\n\n<ba-loadmore ba-if=\"{{loadmore}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitems\">\n</ba-loadmore>\n<ba-loading ba-if=\"{{loadmore}}\" ba-show=\"{{loading}}\">\n</ba-loading>\n",
+        template: "\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\">\n<!--<list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">-->\n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-view=\"{{collectionitem.view||view.listinner}}\"\n        ba-model=\"{{collectionitem}}\">\n\n    </ba-{{getview(collectionitem)}}>\n\n</list>\n\n<ba-loadmore ba-if=\"{{loadmore}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitems\">\n</ba-loadmore>\n<ba-loading ba-if=\"{{loadmore}}\" ba-show=\"{{loading}}\">\n</ba-loading>\n",
 
         attrs: {
             listitem: "clickitem",
-            model: false
-            // view: {}
+            model: false,
+            view: {}
         },
 
         collections: {
@@ -798,6 +644,12 @@ Scoped.define("module:List", [
             getview: function(item) {
                 return this.getProp("view.listitem") || item.get("listitem") || (this.get("listitemfunc") ? (this.get("listitemfunc"))(item) : this.get("listitem"));
             }
+        },
+
+        events: {
+            "change:listcollection": function() {
+                console.log('List changed');
+            }
         }
 
     }).register();
@@ -811,7 +663,7 @@ Scoped.define("module:Searchlist", [
     "dynamics:Dynamic"
 ], [
     "module:List",
-    "module:Searchbox",
+    "module:Search",
     "module:Loading",
     "dynamics:Partials.NoScopePartial"
 ], function(Dynamic, scoped) {
@@ -820,7 +672,7 @@ Scoped.define("module:Searchlist", [
         scoped: scoped
     }, {
 
-        template: "\n<ba-searchbox\n        ba-value=\"{{=searchvalue}}\"\n        ba-if=\"{{view.show_searchbox}}\"\n        ba-view=\"{{view}}\"></ba-searchbox>\n\n<ba-loading ba-if=\"{{searchingindication}}\">\n</ba-loading>\n\n<ba-list ba-noscope></ba-list>\n",
+        template: "\n<ba-search\n        ba-value=\"{{=searchvalue}}\"\n        ba-if=\"{{view.show_searchbox}}\"\n        ba-view=\"{{view}}\"></ba-search>\n\n<ba-loading ba-if=\"{{searchingindication}}\">\n</ba-loading>\n\n<ba-list ba-noscope></ba-list>\n",
 
         attrs: {
             searchvalue: "",

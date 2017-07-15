@@ -6,7 +6,7 @@ Scoped.define("module:Searchlist", [
     "dynamics:Dynamic"
 ], [
     "module:List",
-    "module:Searchbox",
+    "module:Search",
     "module:Loading",
     "dynamics:Partials.NoScopePartial"
 ], function(Dynamic, scoped) {
