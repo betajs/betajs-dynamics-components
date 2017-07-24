@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.11 - 2017-07-15
+betajs-dynamics-components - v0.1.11 - 2017-07-17
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -251,8 +251,6 @@ Scoped.define("tests:Test_list_repeatoptions", [
             view : {
                 repeatoptions : {
                     onremove: function (item, element) {
-                        window.test1 = element;
-                        window.test2 = item;
                         var promise = BetaJS.Promise.create();
                         //console.log(item, element);
                         Object.assign(element.style,{

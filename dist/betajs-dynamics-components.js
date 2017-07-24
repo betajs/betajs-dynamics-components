@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.11 - 2017-07-15
+betajs-dynamics-components - v0.1.11 - 2017-07-17
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -1004,7 +1004,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.11 - 2017-07-15
+betajs-dynamics-components - v0.1.11 - 2017-07-17
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -1229,7 +1229,7 @@ Scoped.define("module:Scrollpicker", [
         scoped: scoped
     }, {
 
-        template: "<container>\n        <element\n                ba-repeat-element=\"{{element_value :: value_array}}\"\n                ba-tap=\"select_element(element_value)\"\n                data-id=\"{{element_value}}\"\n        >\n                {{element_value}}\n        </element>\n</container>",
+        template: "<container>\n        <element\n                ba-repeat-element=\"{{element_value :: value_array}}\"\n                ba-click=\"select_element(element_value)\"\n                data-id=\"{{element_value}}\"\n        >\n                {{element_value}}\n        </element>\n</container>",
 
         attrs: {
             initial_value: 14,

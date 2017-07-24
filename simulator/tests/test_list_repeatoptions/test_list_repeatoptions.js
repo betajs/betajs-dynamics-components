@@ -14,8 +14,6 @@ Scoped.define("tests:Test_list_repeatoptions", [
             view : {
                 repeatoptions : {
                     onremove: function (item, element) {
-                        window.test1 = element;
-                        window.test2 = item;
                         var promise = BetaJS.Promise.create();
                         //console.log(item, element);
                         Object.assign(element.style,{
