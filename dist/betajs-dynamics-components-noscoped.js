@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.11 - 2017-07-17
+betajs-dynamics-components - v0.1.11 - 2017-08-02
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -648,7 +648,7 @@ Scoped.define("module:List", [
 
         events: {
             "change:listcollection": function() {
-                console.log('List changed');
+
             }
         }
 

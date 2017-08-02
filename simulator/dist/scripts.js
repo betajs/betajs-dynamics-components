@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.11 - 2017-07-17
+betajs-dynamics-components - v0.1.11 - 2017-08-02
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -235,81 +235,82 @@ Scoped.define("module:Test_list_pushfunc", [
     }).register();
 
 });
-Scoped.define("tests:Test_list_repeatoptions", [
-    "dynamics:Dynamic"
+Scoped.define("tests:Test_list_removepromise", [
+    "dynamics:Dynamic",
+    "base:Collections.Collection",
+    "base:Promise"
 ], [
     "module:List"
-], function(Dynamic, scoped) {
+], function(Dynamic, Collection, Promise, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
     }, {
 
-        templateUrl: "tests/test_list_repeatoptions/test_list_repeatoptions.html",
+        templateUrl: "tests/test_list_removepromise/test_list_removepromise.html",
 
-        attrs : {
+        attrs: {
             view : {
                 repeatoptions : {
                     onremove: function (item, element) {
-                        var promise = BetaJS.Promise.create();
-                        //console.log(item, element);
-                        Object.assign(element.style,{
-                            "-webkit-transition": "opacity 2s linear",
-                            opacity : 0
+
+                        console.log('onremove is called');
+
+                        var promise = Promise.create();
+
+                        //Slow for Testing in Browser
+                        var fadetime = 1000
+                        Object.assign(element.style, {
+                            "-webkit-transition": "opacity " + fadetime/1000 + "s linear",
+                            opacity: 0
                         });
                         setTimeout(function () {
-                            promise.asyncSuccess(true);
-                        }, 4000);
-                        //promise.asyncSuccess(true);
+                           promise.asyncSuccess(true);
+                        }, fadetime+1);
+
+                        //Fast, for Qunit
+                        // promise.asyncSuccess(true);
+
                         return promise;
                     }
                 }
+            },
+            testmodel: {
+                listitem: 'clickitem',
+                listcollection: new Collection({
+                    objects: [{
+                            value: "Item 1",
+                            callbacks : {
+                                click : function () {
+                                    this.parent().parent().execute('remove',this);
+                                }
+                            }
+                        },
+                        {
+                            value: "Item 2",
+                            callbacks : {
+                                click : function () {
+                                    this.parent().parent().execute('remove',this);
+                                }
+                            }
+                        },
+                        {
+                            value: "Item 3",
+                            callbacks : {
+                                click : function () {
+                                    this.parent().parent().execute('remove',this);
+                                }
+                            }
+                        }
+                    ]
+                })
             }
         },
 
-        collections: {
-            listcollection: [{
-                    value: "Test - List - listollection - Item 1",
-                    callbacks : {
-                        click : function () {
-                            var index = this.scope('<').get('listcollection').getIndex(this.get('model'));
-                            this.scope('<<').execute('remove', index);
-                        }
-                    }
-                },
-                {
-                    value: "Test - List - listollection - Item 2",
-                    callbacks : {
-                        click : function () {
-                            var index = this.scope('<').get('listcollection').getIndex(this.get('model'));
-                            this.scope('<<').execute('remove', index);
-                        }
-                    }
-                },
-                {
-                    value: "Test - List - listollection - Item 3",
-                    callbacks : {
-                        click : function () {
-                            var index = this.scope('<').get('listcollection').getIndex(this.get('model'));
-                            this.scope('<<').execute('remove', index);
-                        }
-                    }
-                },
-                {
-                    value: "Test - List - listollection - Item 4",
-                    callbacks : {
-                        click : function () {
-                            var index = this.scope('<').get('listcollection').getIndex(this.get('model'));
-                            this.scope('<<').execute('remove', index);
-                        }
-                    }
-                }
-            ]
-        },
-
-        functions : {
-            remove: function (index) {
-                this.get("listcollection").remove(this.get("listcollection").getByIndex(index));
+        functions: {
+            remove: function (self) {
+                console.log('Callback arrives');
+                self.parent().get('listcollection').remove(self.get('model'));
             }
         }
 

@@ -1,7 +1,7 @@
 var components = new BetaJS.Collections.Collection([
 
     //List
-    {value  : 'test_list_repeatoptions'},
+    {value  : 'test_list_removepromise'},
     {value  : 'test_list_loadmore'},
     {value  : 'list'},
     {value  : 'test_list_clickitem'},

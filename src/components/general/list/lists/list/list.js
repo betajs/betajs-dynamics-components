@@ -50,7 +50,7 @@ Scoped.define("module:List", [
 
         events: {
             "change:listcollection": function() {
-                console.log('List changed');
+
             }
         }
 
