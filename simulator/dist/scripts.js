@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.11 - 2017-08-02
+betajs-dynamics-components - v0.1.12 - 2017-08-10
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -258,7 +258,6 @@ Scoped.define("tests:Test_list_removepromise", [
 
                         var promise = Promise.create();
 
-                        //Slow for Testing in Browser
                         var fadetime = 1000
                         Object.assign(element.style, {
                             "-webkit-transition": "opacity " + fadetime/1000 + "s linear",
@@ -267,9 +266,6 @@ Scoped.define("tests:Test_list_removepromise", [
                         setTimeout(function () {
                            promise.asyncSuccess(true);
                         }, fadetime+1);
-
-                        //Fast, for Qunit
-                        // promise.asyncSuccess(true);
 
                         return promise;
                     }

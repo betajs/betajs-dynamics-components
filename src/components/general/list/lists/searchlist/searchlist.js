@@ -20,7 +20,7 @@ Scoped.define("module:Searchlist", [
         attrs: {
             searchvalue: "",
             searchingindication: false,
-            //searching: false
+            searching: false,
             view: {
                 show_searchbox: true
             }
@@ -28,13 +28,16 @@ Scoped.define("module:Searchlist", [
 
         extendables: ['view'],
 
-        create: function() {
-            this.on("change:searchvalue", function() {
+        events: {
+            "change:searchvalue": function() {
                 this.set("searchingindication", true);
-            }, this);
-            this.on("change:searching", function() {
+            },
+            "change:searching": function() {
                 this.set("searchingindication", this.get("searching"));
-            }, this);
+            }
+        },
+
+        create: function() {
             this.on("change:searchvalue", function() {
                 this.set("searching", true);
             }, this, {

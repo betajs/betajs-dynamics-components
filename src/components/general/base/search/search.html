@@ -1,5 +1,5 @@
 <icon ba-if="{{!loading}}" class="icon-search"></icon>
 <ba-loading ba-if="{{loading}}"></ba-loading>
 <div>
-    <input placeholder="{{view.placeholder}}" value="{{=value}}">
+    <input placeholder="{{view.placeholder || ''}}" value="{{=value}}" />
 </div>

@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.11 - 2017-08-02
+betajs-dynamics-components - v0.1.12 - 2017-08-10
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.11"
+    "version": "0.1.12"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -28,7 +28,7 @@ Scoped.define("module:Clickinput", [
         scoped: scoped
     }, {
 
-        template: "\n<title\n        ba-if=\"{{!view.edit}}\"\n        ba-click=\"edititem()\"\n>\n    {{model.value}}\n</title>\n\n<input\n        placeholder=\"{{view.placeholder}}\"\n        ba-if=\"{{view.edit}}\"\n        ba-return=\"view.edit = false\"\n        onblur=\"{{view.edit = false}}\"\n        value=\"{{=model.value}}\">",
+        template: "\n<title\n        ba-if=\"{{!view.edit}}\"\n        ba-click=\"edititem()\"\n>\n    {{model.value}}\n</title>\n\n<input\n        placeholder=\"{{view.placeholder || ''}}\"\n        ba-if=\"{{view.edit}}\"\n        ba-return=\"view.edit = false\"\n        onblur=\"{{view.edit = false}}\"\n        value=\"{{=model.value}}\" />",
 
         attrs: {
             model: {
@@ -166,7 +166,7 @@ Scoped.define("module:Input", [
         scoped: scoped
     }, {
 
-        template: "<input placeholder=\"{{view.placeholder}}\" autofocus>",
+        template: "<input placeholder=\"{{view.placeholder || ''}}\" autofocus />",
 
         attrs: {
             model: {
@@ -352,7 +352,7 @@ Scoped.define("module:Search", [
         scoped: scoped
     }, {
 
-        template: "<icon ba-if=\"{{!loading}}\" class=\"icon-search\"></icon>\n<ba-loading ba-if=\"{{loading}}\"></ba-loading>\n<div>\n    <input placeholder=\"{{view.placeholder}}\" value=\"{{=value}}\">\n</div>",
+        template: "<icon ba-if=\"{{!loading}}\" class=\"icon-search\"></icon>\n<ba-loading ba-if=\"{{loading}}\"></ba-loading>\n<div>\n    <input placeholder=\"{{view.placeholder || ''}}\" value=\"{{=value}}\" />\n</div>",
 
         attrs: {
             value: "",
@@ -363,12 +363,9 @@ Scoped.define("module:Search", [
             }
         },
 
-        computed: {
-            'test:value': function() {
-                if (this.get('value'))
-                    this.set('loading', true);
-                else
-                    this.set('loading', false);
+        events: {
+            'change:value': function() {
+                this.set('loading', true);
             }
         }
 
@@ -672,12 +669,12 @@ Scoped.define("module:Searchlist", [
         scoped: scoped
     }, {
 
-        template: "\n<ba-search\n        ba-value=\"{{=searchvalue}}\"\n        ba-if=\"{{view.show_searchbox}}\"\n        ba-view=\"{{view}}\"></ba-search>\n\n<ba-loading ba-if=\"{{searchingindication}}\">\n</ba-loading>\n\n<ba-list ba-noscope></ba-list>\n",
+        template: "\n<ba-search\n        ba-loading=\"{{searchingindication}}\"\n        ba-value=\"{{=searchvalue}}\"\n        ba-if=\"{{view.show_searchbox}}\"\n        ba-view=\"{{view}}\"></ba-search>\n\n<ba-loading ba-if=\"{{searchingindication}}\">\n</ba-loading>\n\n<ba-list ba-noscope></ba-list>\n",
 
         attrs: {
             searchvalue: "",
             searchingindication: false,
-            //searching: false
+            searching: false,
             view: {
                 show_searchbox: true
             }
@@ -685,13 +682,16 @@ Scoped.define("module:Searchlist", [
 
         extendables: ['view'],
 
-        create: function() {
-            this.on("change:searchvalue", function() {
+        events: {
+            "change:searchvalue": function() {
                 this.set("searchingindication", true);
-            }, this);
-            this.on("change:searching", function() {
+            },
+            "change:searching": function() {
                 this.set("searchingindication", this.get("searching"));
-            }, this);
+            }
+        },
+
+        create: function() {
             this.on("change:searchvalue", function() {
                 this.set("searching", true);
             }, this, {
@@ -847,29 +847,6 @@ Scoped.define("module:Header", [
     }).register();
 
 });
-Scoped.define("module:Toggle_menu", [
-    "dynamics:Dynamic"
-], function(Dynamic, scoped) {
-
-    return Dynamic.extend({
-        scoped: scoped
-    }, {
-
-        template: "<button ba-click=\"toggle_menu()\" class=\"{{toggle_icon}}\"></button>",
-
-        attrs: {
-            toggle_icon: 'icon-reorder'
-        },
-
-        functions: {
-            toggle_menu: function() {
-                this.channel('global').trigger('toggle_menu');
-            }
-        }
-
-    }).register();
-
-});
 Scoped.define("module:Toggle", [
     "dynamics:Dynamic"
 ], function(Dynamic, scoped) {
@@ -889,6 +866,29 @@ Scoped.define("module:Toggle", [
                 this.scope("<+[tagname='ba-layout_web']").call('toggle_menu');
 
                 this.channel('toggle').trigger('toggle', 'menu');
+            }
+        }
+
+    }).register();
+
+});
+Scoped.define("module:Toggle_menu", [
+    "dynamics:Dynamic"
+], function(Dynamic, scoped) {
+
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
+
+        template: "<button ba-click=\"toggle_menu()\" class=\"{{toggle_icon}}\"></button>",
+
+        attrs: {
+            toggle_icon: 'icon-reorder'
+        },
+
+        functions: {
+            toggle_menu: function() {
+                this.channel('global').trigger('toggle_menu');
             }
         }
 

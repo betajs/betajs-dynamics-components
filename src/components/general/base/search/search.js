@@ -18,12 +18,9 @@ Scoped.define("module:Search", [
             }
         },
 
-        computed: {
-            'test:value': function() {
-                if (this.get('value'))
-                    this.set('loading', true);
-                else
-                    this.set('loading', false);
+        events: {
+            'change:value': function() {
+                this.set('loading', true);
             }
         }
 
