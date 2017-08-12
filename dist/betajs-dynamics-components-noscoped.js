@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.13 - 2017-08-11
+betajs-dynamics-components - v0.1.14 - 2017-08-12
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.13"
+    "version": "0.1.14"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -725,19 +725,6 @@ Scoped.define("module:Titledlist", [
             collapsible: true,
             listitem: 'selectableitem',
             titleitem: 'title'
-        },
-
-        collections: {
-            listcollection: [{
-                    value: "Titledlist - Item 1"
-                },
-                {
-                    value: "Titledlist - Item 2"
-                },
-                {
-                    value: "Titledlist - Item 3"
-                }
-            ]
         },
 
         functions: {

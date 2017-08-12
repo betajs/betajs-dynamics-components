@@ -28,19 +28,6 @@ Scoped.define("module:Titledlist", [
             titleitem: 'title'
         },
 
-        collections: {
-            listcollection: [{
-                    value: "Titledlist - Item 1"
-                },
-                {
-                    value: "Titledlist - Item 2"
-                },
-                {
-                    value: "Titledlist - Item 3"
-                }
-            ]
-        },
-
         functions: {
 
             togglelist: function() {
