@@ -25,9 +25,7 @@ Scoped.define("module:Addtitle", [
 
             },
             addbutton: function() {
-
-                logger.log("You clicked the addbuton, no addbutton() function given");
-
+                this.trigger("add-button");
             }
 
         }

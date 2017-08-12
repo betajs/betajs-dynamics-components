@@ -2,6 +2,7 @@ Scoped.define("module:Titledlist", [
     "dynamics:Dynamic",
     "base:Loggers.Logger"
 ], [
+    "dynamics:Partials.EventForwardPartial",
     "module:List",
     "dynamics:Partials.NoScopePartial",
     "dynamics:Partials.ClickPartial"

@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.12 - 2017-08-10
+betajs-dynamics-components - v0.1.13 - 2017-08-11
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.12"
+    "version": "0.1.13"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -597,6 +597,7 @@ Scoped.define("module:List", [
     "dynamics:Dynamic",
     "base:Async"
 ], [
+    "dynamics:Partials.EventForwardPartial",
     "dynamics:Partials.RepeatPartial",
     "dynamics:Partials.IfPartial",
     "dynamics:Partials.DataPartial",
@@ -610,7 +611,7 @@ Scoped.define("module:List", [
         scoped: scoped
     }, {
 
-        template: "\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\">\n<!--<list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">-->\n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-view=\"{{collectionitem.view||view.listinner}}\"\n        ba-model=\"{{collectionitem}}\">\n\n    </ba-{{getview(collectionitem)}}>\n\n</list>\n\n<ba-loadmore ba-if=\"{{loadmore}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitems\">\n</ba-loadmore>\n<ba-loading ba-if=\"{{loadmore}}\" ba-show=\"{{loading}}\">\n</ba-loading>\n",
+        template: "\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\">\n<!--<list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">-->\n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner}}\"\n        ba-model=\"{{collectionitem}}\">\n\n    </ba-{{getview(collectionitem)}}>\n\n</list>\n\n<ba-loadmore ba-if=\"{{loadmore}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitems\">\n</ba-loadmore>\n<ba-loading ba-if=\"{{loadmore}}\" ba-show=\"{{loading}}\">\n</ba-loading>\n",
 
         attrs: {
             listitem: "clickitem",
@@ -640,12 +641,6 @@ Scoped.define("module:List", [
 
             getview: function(item) {
                 return this.getProp("view.listitem") || item.get("listitem") || (this.get("listitemfunc") ? (this.get("listitemfunc"))(item) : this.get("listitem"));
-            }
-        },
-
-        events: {
-            "change:listcollection": function() {
-
             }
         }
 
@@ -706,6 +701,7 @@ Scoped.define("module:Titledlist", [
     "dynamics:Dynamic",
     "base:Loggers.Logger"
 ], [
+    "dynamics:Partials.EventForwardPartial",
     "module:List",
     "dynamics:Partials.NoScopePartial",
     "dynamics:Partials.ClickPartial"
@@ -717,7 +713,7 @@ Scoped.define("module:Titledlist", [
         scoped: scoped
     }, {
 
-        template: "\n<ba-{{view.titleitem}}\n    ba-click=\"click_title()\"\n    ba-functions=\"{{model.title_callbacks}}\"\n    ba-model=\"{{model.title_model}}\">{{model.title_model.value}}</ba-{{view.titleitem}}>\n\n<ba-list\n        ba-noscope\n        ba-show=\"{{!collapsed}}\">\n\n</ba-list>\n",
+        template: "\n<ba-{{view.titleitem}}\n    ba-click=\"click_title()\"\n    ba-event-forward:title=\"{{[]}}\"\n    ba-model=\"{{model.title_model}}\">{{model.title_model.value}}</ba-{{view.titleitem}}>\n\n<ba-list\n        ba-noscope\n        ba-show=\"{{!collapsed}}\">\n\n</ba-list>\n",
 
         attrs: {
             model: {
@@ -801,9 +797,7 @@ Scoped.define("module:Addtitle", [
 
             },
             addbutton: function() {
-
-                logger.log("You clicked the addbuton, no addbutton() function given");
-
+                this.trigger("add-button");
             }
 
         }
