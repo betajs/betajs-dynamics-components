@@ -1,5 +1,11 @@
 var components = new BetaJS.Collections.Collection([
 
+    //Inputs
+    {value  : 'clickinput'},
+    {value  : 'search'},
+    {value  : 'textinput'},
+    {value  : 'scrollpicker'},
+
     //List
     {value  : 'test_list_removepromise'},
     {value  : 'test_list_loadmore'},
@@ -9,12 +15,6 @@ var components = new BetaJS.Collections.Collection([
     {value  : 'test_list_swipecontainer'},
     {value  : 'test_list_listcollection'},
     {value  : 'test_list_pushfunc'},
-
-    //Inputs
-    {value  : 'search'},
-    {value  : 'textinput'},
-    {value  : 'scrollpicker'},
-    {value  : 'clickinput'},
 
     //Swipecontainers
     {value  : 'hoverbuttoncontainer'},

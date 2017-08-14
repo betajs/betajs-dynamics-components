@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.11 - 2017-08-02
+betajs-dynamics-components - v0.1.11 - 2017-08-13
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -62,7 +62,13 @@ ba-clickinput {
     -webkit-flex: 1 1 0;
     -ms-flex: 1 1 0;
     flex: 1 1 0;
-    display: block; }
+    display: block;
+    height: 100%;
+    -moz-user-select: text;
+    -khtml-user-select: text;
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    user-select: text; }
 
 overlaycontainer {
   position: absolute;

@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.11 - 2017-08-02
+betajs-dynamics-components - v0.1.11 - 2017-08-13
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -28,7 +28,7 @@ Scoped.define("module:Clickinput", [
         scoped: scoped
     }, {
 
-        template: "\n<title\n        ba-if=\"{{!view.edit}}\"\n        ba-click=\"edititem()\"\n>\n    {{model.value}}\n</title>\n\n<input\n        placeholder=\"{{view.placeholder}}\"\n        ba-if=\"{{view.edit}}\"\n        ba-return=\"view.edit = false\"\n        onblur=\"{{view.edit = false}}\"\n        value=\"{{=model.value}}\">",
+        template: "\n<title\n        ba-if=\"{{!view.edit || !view.externaledit}}\"\n        ba-click=\"edititem()\"\n>\n    {{model.value}}\n</title>\n\n<input\n        placeholder=\"{{view.placeholder}}\"\n        ba-if=\"{{view.edit && view.externaledit}}\"\n        ba-return=\"view.edit = false\"\n        onblur=\"{{view.edit = false}}\"\n        value=\"{{=model.value}}\">\n",
 
         attrs: {
             model: {
@@ -37,7 +37,8 @@ Scoped.define("module:Clickinput", [
             view: {
                 placeholder: "",
                 edit: false,
-                autofocus: true
+                autofocus: true,
+                externaledit: true
             }
         },
 

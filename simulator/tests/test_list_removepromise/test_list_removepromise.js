@@ -21,9 +21,9 @@ Scoped.define("tests:Test_list_removepromise", [
 
                         var promise = Promise.create();
 
-                        var fadetime = 1000
+                        var fadetime = 1000;
                         Object.assign(element.style, {
-                            "-webkit-transition": "opacity " + fadetime/1000 + "s linear",
+                            "-webkit-transition": "opacity " + fadetime + "ms linear",
                             opacity: 0
                         });
                         setTimeout(function () {

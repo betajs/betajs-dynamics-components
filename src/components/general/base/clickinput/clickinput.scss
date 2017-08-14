@@ -12,13 +12,15 @@ ba-clickinput {
   margin: 0;
   vertical-align: middle;
 
-  //taskitem {
-  //  @include flex(1 1 0);
-  //  @include display-flex;
+  title, input {
+    @include flex(1 1 0);
+    display: block;
+    height: 100%;
 
-    title, input {
-      @include flex(1 1 0);
-      display: block;
-    }
-  //}
+    -moz-user-select: text;
+    -khtml-user-select: text;
+    -webkit-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
+  }
 }

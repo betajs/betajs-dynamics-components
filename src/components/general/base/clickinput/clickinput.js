@@ -14,7 +14,8 @@ Scoped.define("module:Clickinput", [
             view: {
                 placeholder: "",
                 edit: false,
-                autofocus: true
+                autofocus: true,
+                externaledit: true
             }
         },
 
