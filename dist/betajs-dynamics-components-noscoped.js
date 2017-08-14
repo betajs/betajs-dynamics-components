@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.11 - 2017-08-13
+betajs-dynamics-components - v0.1.14 - 2017-08-14
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.11"
+    "version": "0.1.14"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -28,7 +28,7 @@ Scoped.define("module:Clickinput", [
         scoped: scoped
     }, {
 
-        template: "\n<title\n        ba-if=\"{{!view.edit || !view.externaledit}}\"\n        ba-click=\"edititem()\"\n>\n    {{model.value}}\n</title>\n\n<input\n        placeholder=\"{{view.placeholder}}\"\n        ba-if=\"{{view.edit && view.externaledit}}\"\n        ba-return=\"view.edit = false\"\n        onblur=\"{{view.edit = false}}\"\n        value=\"{{=model.value}}\">\n",
+        template: "\n<title\n        ba-if=\"{{!view.edit || !view.externaledit}}\"\n        ba-click=\"edititem()\"\n>\n    {{model.value}}\n</title>\n\n<input\n        placeholder=\"{{view.placeholder || ''}}\"\n        ba-if=\"{{view.edit}}\"\n        ba-return=\"view.edit = false\"\n        onblur=\"{{view.edit = false}}\"\n        value=\"{{=model.value}}\" />\n",
 
         attrs: {
             model: {
@@ -167,7 +167,7 @@ Scoped.define("module:Input", [
         scoped: scoped
     }, {
 
-        template: "<input placeholder=\"{{view.placeholder}}\" autofocus>",
+        template: "<input placeholder=\"{{view.placeholder || ''}}\" autofocus />",
 
         attrs: {
             model: {
@@ -353,7 +353,7 @@ Scoped.define("module:Search", [
         scoped: scoped
     }, {
 
-        template: "<icon ba-if=\"{{!loading}}\" class=\"icon-search\"></icon>\n<ba-loading ba-if=\"{{loading}}\"></ba-loading>\n<div>\n    <input placeholder=\"{{view.placeholder}}\" value=\"{{=value}}\">\n</div>",
+        template: "<icon ba-if=\"{{!loading}}\" class=\"icon-search\"></icon>\n<ba-loading ba-if=\"{{loading}}\"></ba-loading>\n<div>\n    <input placeholder=\"{{view.placeholder || ''}}\" value=\"{{=value}}\" />\n</div>",
 
         attrs: {
             value: "",
@@ -364,12 +364,9 @@ Scoped.define("module:Search", [
             }
         },
 
-        computed: {
-            'test:value': function() {
-                if (this.get('value'))
-                    this.set('loading', true);
-                else
-                    this.set('loading', false);
+        events: {
+            'change:value': function() {
+                this.set('loading', true);
             }
         }
 
@@ -601,6 +598,7 @@ Scoped.define("module:List", [
     "dynamics:Dynamic",
     "base:Async"
 ], [
+    "dynamics:Partials.EventForwardPartial",
     "dynamics:Partials.RepeatPartial",
     "dynamics:Partials.IfPartial",
     "dynamics:Partials.DataPartial",
@@ -614,7 +612,7 @@ Scoped.define("module:List", [
         scoped: scoped
     }, {
 
-        template: "\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\">\n<!--<list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">-->\n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-view=\"{{collectionitem.view||view.listinner}}\"\n        ba-model=\"{{collectionitem}}\">\n\n    </ba-{{getview(collectionitem)}}>\n\n</list>\n\n<ba-loadmore ba-if=\"{{loadmore}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitems\">\n</ba-loadmore>\n<ba-loading ba-if=\"{{loadmore}}\" ba-show=\"{{loading}}\">\n</ba-loading>\n",
+        template: "\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\">\n<!--<list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">-->\n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner}}\"\n        ba-model=\"{{collectionitem}}\">\n\n    </ba-{{getview(collectionitem)}}>\n\n</list>\n\n<ba-loadmore ba-if=\"{{loadmore}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitems\">\n</ba-loadmore>\n<ba-loading ba-if=\"{{loadmore}}\" ba-show=\"{{loading}}\">\n</ba-loading>\n",
 
         attrs: {
             listitem: "clickitem",
@@ -645,12 +643,6 @@ Scoped.define("module:List", [
             getview: function(item) {
                 return this.getProp("view.listitem") || item.get("listitem") || (this.get("listitemfunc") ? (this.get("listitemfunc"))(item) : this.get("listitem"));
             }
-        },
-
-        events: {
-            "change:listcollection": function() {
-
-            }
         }
 
     }).register();
@@ -673,12 +665,12 @@ Scoped.define("module:Searchlist", [
         scoped: scoped
     }, {
 
-        template: "\n<ba-search\n        ba-value=\"{{=searchvalue}}\"\n        ba-if=\"{{view.show_searchbox}}\"\n        ba-view=\"{{view}}\"></ba-search>\n\n<ba-loading ba-if=\"{{searchingindication}}\">\n</ba-loading>\n\n<ba-list ba-noscope></ba-list>\n",
+        template: "\n<ba-search\n        ba-loading=\"{{searchingindication}}\"\n        ba-value=\"{{=searchvalue}}\"\n        ba-if=\"{{view.show_searchbox}}\"\n        ba-view=\"{{view}}\"></ba-search>\n\n<ba-loading ba-if=\"{{searchingindication}}\">\n</ba-loading>\n\n<ba-list ba-noscope></ba-list>\n",
 
         attrs: {
             searchvalue: "",
             searchingindication: false,
-            //searching: false
+            searching: false,
             view: {
                 show_searchbox: true
             }
@@ -686,13 +678,16 @@ Scoped.define("module:Searchlist", [
 
         extendables: ['view'],
 
-        create: function() {
-            this.on("change:searchvalue", function() {
+        events: {
+            "change:searchvalue": function() {
                 this.set("searchingindication", true);
-            }, this);
-            this.on("change:searching", function() {
+            },
+            "change:searching": function() {
                 this.set("searchingindication", this.get("searching"));
-            }, this);
+            }
+        },
+
+        create: function() {
             this.on("change:searchvalue", function() {
                 this.set("searching", true);
             }, this, {
@@ -707,6 +702,7 @@ Scoped.define("module:Titledlist", [
     "dynamics:Dynamic",
     "base:Loggers.Logger"
 ], [
+    "dynamics:Partials.EventForwardPartial",
     "module:List",
     "dynamics:Partials.NoScopePartial",
     "dynamics:Partials.ClickPartial"
@@ -718,7 +714,7 @@ Scoped.define("module:Titledlist", [
         scoped: scoped
     }, {
 
-        template: "\n<ba-{{view.titleitem}}\n    ba-click=\"click_title()\"\n    ba-functions=\"{{model.title_callbacks}}\"\n    ba-model=\"{{model.title_model}}\">{{model.title_model.value}}</ba-{{view.titleitem}}>\n\n<ba-list\n        ba-noscope\n        ba-show=\"{{!collapsed}}\">\n\n</ba-list>\n",
+        template: "\n<ba-{{view.titleitem}}\n    ba-click=\"click_title()\"\n    ba-event-forward:title=\"{{[]}}\"\n    ba-model=\"{{model.title_model}}\">{{model.title_model.value}}</ba-{{view.titleitem}}>\n\n<ba-list\n        ba-noscope\n        ba-show=\"{{!collapsed}}\">\n\n</ba-list>\n",
 
         attrs: {
             model: {
@@ -730,19 +726,6 @@ Scoped.define("module:Titledlist", [
             collapsible: true,
             listitem: 'selectableitem',
             titleitem: 'title'
-        },
-
-        collections: {
-            listcollection: [{
-                    value: "Titledlist - Item 1"
-                },
-                {
-                    value: "Titledlist - Item 2"
-                },
-                {
-                    value: "Titledlist - Item 3"
-                }
-            ]
         },
 
         functions: {
@@ -802,9 +785,7 @@ Scoped.define("module:Addtitle", [
 
             },
             addbutton: function() {
-
-                logger.log("You clicked the addbuton, no addbutton() function given");
-
+                this.trigger("add-button");
             }
 
         }

@@ -32,7 +32,17 @@ var components = new BetaJS.Collections.Collection([
 
     //Titledlist
     {value  : 'addtitle'},
-    {value  : 'titledlist'},
+    {value  : 'titledlist', attrs: {
+        listcollection: new BetaJS.Collections.Collection([{
+            value: "Titledlist - Item 1"
+        },
+        {
+            value: "Titledlist - Item 2"
+        },
+        {
+            value: "Titledlist - Item 3"
+        }
+    ])}},
     {value  : 'test_titledlist'},
 
     //{value  : 'addvalue'},

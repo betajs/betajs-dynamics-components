@@ -2,6 +2,7 @@ Scoped.define("module:Titledlist", [
     "dynamics:Dynamic",
     "base:Loggers.Logger"
 ], [
+    "dynamics:Partials.EventForwardPartial",
     "module:List",
     "dynamics:Partials.NoScopePartial",
     "dynamics:Partials.ClickPartial"
@@ -25,19 +26,6 @@ Scoped.define("module:Titledlist", [
             collapsible: true,
             listitem: 'selectableitem',
             titleitem: 'title'
-        },
-
-        collections: {
-            listcollection: [{
-                    value: "Titledlist - Item 1"
-                },
-                {
-                    value: "Titledlist - Item 2"
-                },
-                {
-                    value: "Titledlist - Item 3"
-                }
-            ]
         },
 
         functions: {

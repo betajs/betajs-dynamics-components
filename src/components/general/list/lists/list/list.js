@@ -2,6 +2,7 @@ Scoped.define("module:List", [
     "dynamics:Dynamic",
     "base:Async"
 ], [
+    "dynamics:Partials.EventForwardPartial",
     "dynamics:Partials.RepeatPartial",
     "dynamics:Partials.IfPartial",
     "dynamics:Partials.DataPartial",
@@ -45,12 +46,6 @@ Scoped.define("module:List", [
 
             getview: function(item) {
                 return this.getProp("view.listitem") || item.get("listitem") || (this.get("listitemfunc") ? (this.get("listitemfunc"))(item) : this.get("listitem"));
-            }
-        },
-
-        events: {
-            "change:listcollection": function() {
-
             }
         }
 
