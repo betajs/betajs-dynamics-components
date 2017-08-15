@@ -22,7 +22,7 @@ Scoped.define("module:Clickitem", [
                 logger.log('Click');
                 //logger.log("You Clicked item : " + this.properties().getProp('model.value'));
                 //logger.log(this.cid());
-                //this.trigger('event', this.cid());
+                this.trigger('event', this.cid());
             }
         },
 

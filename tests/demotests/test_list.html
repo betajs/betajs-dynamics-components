@@ -1,6 +1,5 @@
 <html>
 <head>
-    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
     <script src="../../node_modules/betajs-scoped/dist/scoped.js"></script>
     <script src="../../node_modules/betajs/dist/beta-noscoped.js"></script>
     <script src="../../node_modules/betajs-browser/dist/betajs-browser-noscoped.js"></script>
@@ -27,7 +26,7 @@
 </div>
 
 <script>
-    var root = $("#test");
+    var root = document.querySelector("#test");
 
     var dynamic = new BetaJS.Dynamics.Dynamic({
         element: root,
@@ -38,17 +37,17 @@
 
     dynamic.activate();
 
-    function test() {
+    function test(assert) {
 
         //0. Dynamics working?
-        QUnit.equal(dynamic.get("test_dynamics"), $('#dynamicsworking').html().trim());
+        assert.equal(dynamic.get("test_dynamics"), document.querySelector('#dynamicsworking').innerHTML.trim());
 
         //1. Test List Length & Content
         var listdynamic = dynamic.scope('>[id="test_list"]');
-        var domlist = $('#test_list').find('list');
+        var domlist = document.querySelector('#test_list list');
         var length = listdynamic.get('listcollection').count();
-        QUnit.equal(length, domlist.children().length);
-        QUnit.equal(listdynamic.get('listcollection').getByIndex(length-1).get('value'), domlist.find(':last').html().trim());
+        assert.equal(length, domlist.childNodes.length);
+        assert.equal(listdynamic.get('listcollection').getByIndex(length-1).get('value'), domlist.childNodes[length - 1].children[0].innerHTML.trim());
 
     }
 

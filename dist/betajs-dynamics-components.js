@@ -1484,7 +1484,7 @@ Scoped.define("module:Clickitem", [
                 logger.log('Click');
                 //logger.log("You Clicked item : " + this.properties().getProp('model.value'));
                 //logger.log(this.cid());
-                //this.trigger('event', this.cid());
+                this.trigger('event', this.cid());
             }
         },
 
@@ -1837,29 +1837,6 @@ Scoped.define("module:Header", [
     }).register();
 
 });
-Scoped.define("module:Toggle_menu", [
-    "dynamics:Dynamic"
-], function(Dynamic, scoped) {
-
-    return Dynamic.extend({
-        scoped: scoped
-    }, {
-
-        template: "<button ba-click=\"toggle_menu()\" class=\"{{toggle_icon}}\"></button>",
-
-        attrs: {
-            toggle_icon: 'icon-reorder'
-        },
-
-        functions: {
-            toggle_menu: function() {
-                this.channel('global').trigger('toggle_menu');
-            }
-        }
-
-    }).register();
-
-});
 Scoped.define("module:Toggle", [
     "dynamics:Dynamic"
 ], function(Dynamic, scoped) {
@@ -1879,6 +1856,29 @@ Scoped.define("module:Toggle", [
                 this.scope("<+[tagname='ba-layout_web']").call('toggle_menu');
 
                 this.channel('toggle').trigger('toggle', 'menu');
+            }
+        }
+
+    }).register();
+
+});
+Scoped.define("module:Toggle_menu", [
+    "dynamics:Dynamic"
+], function(Dynamic, scoped) {
+
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
+
+        template: "<button ba-click=\"toggle_menu()\" class=\"{{toggle_icon}}\"></button>",
+
+        attrs: {
+            toggle_icon: 'icon-reorder'
+        },
+
+        functions: {
+            toggle_menu: function() {
+                this.channel('global').trigger('toggle_menu');
             }
         }
 
