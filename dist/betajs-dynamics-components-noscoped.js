@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.14 - 2017-08-16
+betajs-dynamics-components - v0.1.14 - 2017-08-17
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -516,7 +516,7 @@ Scoped.define("module:Clickitem", [
                 this.trigger('click', this.getProp('model.eventid'));
                 //logger.log("You Clicked item : " + this.properties().getProp('model.value'));
                 //logger.log(this.cid());
-                //this.trigger('event', this.cid());
+                this.trigger('event', this.cid());
             }
         },
 

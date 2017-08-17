@@ -25,7 +25,7 @@ Scoped.define("module:Clickitem", [
                 this.trigger('click', this.getProp('model.eventid'));
                 //logger.log("You Clicked item : " + this.properties().getProp('model.value'));
                 //logger.log(this.cid());
-                //this.trigger('event', this.cid());
+                this.trigger('event', this.cid());
             }
         },
 

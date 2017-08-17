@@ -6,18 +6,14 @@
 	<head>
 		<meta charset="utf-8">
 		<title>BetaJS Dynamics Components Tests</title>
-		<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.11.0.css">
-		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script src="http://code.jquery.com/qunit/qunit-1.11.0.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.1.1/es5-shim.js"></script>
-		<script src="http://cdnjs.cloudflare.com/ajax/libs/json2/20140204/json2.js"></script>
+		<link rel="stylesheet" href="http://code.jquery.com/qunit/qunit-1.23.1.css">
 	</head>
 
 	<body>
 		<div id="qunit"></div>
 		<div id="qunit-fixture"></div>
 
-<!--		<democase src="demotests/test_clickitem.html"></democase> -->
+		<democase src="demotests/test_clickitem.html"></democase>
 		<democase src="demotests/test_selectableitem.html"></democase>
 		<democase src="demotests/test_list.html"></democase>
 
@@ -27,13 +23,12 @@
 		<script src="../node_modules/betajs-ui/dist/betajs-ui-noscoped.js"></script>
 		<script src="../node_modules/betajs-dynamics/dist/betajs-dynamics-noscoped.js"></script>
 		<script src="../dist/betajs-dynamics-components-noscoped.js"></script>
-
 		<script src="../node_modules/betajs-dynamics/tests/helper.js"></script>
-		
-        <script>
+		<script src="http://code.jquery.com/qunit/qunit-1.23.1.js"></script>
+		<script>
             if (BetaJS.Browser.Info.isChrome() && document.location.href.indexOf("file://") === 0)
-            	alert("Please either run grunt check, serve the tests via a webserver or use a different browser");
-        </script>
+                alert("Please either run grunt check, serve the tests via a webserver or use a different browser");
+		</script>
 	</body>
 
 </html>
