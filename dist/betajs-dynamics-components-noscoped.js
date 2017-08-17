@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.14 - 2017-08-17
+betajs-dynamics-components - v0.1.15 - 2017-08-17
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.14"
+    "version": "0.1.15"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -43,7 +43,7 @@ Scoped.define("module:Dropdown", [
                 },
                 dropdownmodel: {},
                 value: null,
-                showdropdown: true
+                showdropdown: false
             };
         },
 
@@ -500,10 +500,11 @@ Scoped.define("module:Clickitem", [
         scoped: scoped
     }, {
 
-        template: "\n<button\n        class=\"{{model.class}}\"\n        ba-click=\"click()\">\n    {{model.value}}\n</button>",
+        template: "\n<button\n        ba-class=\"{{{\n            'icon' : model.icon,\n            'noicon' : !model.icon\n        }}}\"\n        ba-click=\"click()\">\n    <icon class=\"{{model.icon}}\"></icon>\n    <value>\n        {{model.value}}\n    </value>\n</button>\n\n",
 
         attrs: {
             model: {
+                icon: '',
                 value: 'Clickitem - Value',
                 eventid: 'noid'
             }

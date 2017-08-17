@@ -20,7 +20,7 @@ Scoped.define("module:Dropdown", [
                 },
                 dropdownmodel: {},
                 value: null,
-                showdropdown: true
+                showdropdown: false
             };
         },
 

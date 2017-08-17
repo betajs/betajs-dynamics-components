@@ -1,6 +1,13 @@
 
 <button
-        class="{{model.class}}"
+        ba-class="{{{
+            'icon' : model.icon,
+            'noicon' : !model.icon
+        }}}"
         ba-click="click()">
-    {{model.value}}
+    <icon class="{{model.icon}}"></icon>
+    <value>
+        {{model.value}}
+    </value>
 </button>
+

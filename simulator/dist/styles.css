@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.14 - 2017-08-17
+betajs-dynamics-components - v0.1.15 - 2017-08-17
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -34,19 +34,22 @@ ul {
   margin: 0;
   padding: 0; }
 
-ba-dropdown {
+ba-test_clickitem ba-clickitem {
+  height: 44px; }
+
+ba-test_dropdown {
   margin: 10px;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  flex-direction: row-reverse; }
-  ba-dropdown > button {
+  flex-direction: row-reverse;
+  height: 44px; }
+  ba-test_dropdown ba-dropdown {
+    border: 1px solid #777;
     -webkit-box-flex: 0 0 44px;
     -moz-box-flex: 0 0 44px;
     -webkit-flex: 0 0 44px;
     -ms-flex: 0 0 44px;
-    flex: 0 0 44px;
-    height: 44px;
-    border: 1px solid #777; }
+    flex: 0 0 44px; }

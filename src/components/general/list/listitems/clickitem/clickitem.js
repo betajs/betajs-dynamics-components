@@ -13,6 +13,7 @@ Scoped.define("module:Clickitem", [
 
         attrs: {
             model: {
+                icon: '',
                 value: 'Clickitem - Value',
                 eventid: 'noid'
             }

@@ -1,5 +1,5 @@
 
-$clickitemheigth : 44px;
+$clickitemheigth : $listitemheight;
 
 ba-clickitem {
   @include display-flex;
@@ -7,11 +7,18 @@ ba-clickitem {
 
   button {
     @include flex(1 1 0);
-    padding: 0 $clickitemheigth/2;
-    min-height: 44px;
-    text-align: center;
-    display: block;
+    @include display-flex;
     color : inherit;
+
+    value {@include flex(1 1 0)}
+  }
+  .icon {
+    icon {@include flex(0 0 $clickitemheigth)}
+    value {text-align: left}
+  }
+  .noicon {
+    icon {display: none}
+    value {text-align: center}
   }
 
 }

@@ -1,16 +1,21 @@
 var components = new BetaJS.Collections.Collection([
 
-    //Base - Misc
-    {value  : 'test_dropdown'},
-    {value  : 'dropdown'},
-    {value  : 'overlaycontainer'},
-    {value  : 'testoverlaycontainer'},
+    // List - Listitems
+    {value  : 'test_clickitem'},
+    {value  : 'test_selectableitem'},
+    {value  : 'selectableitem'},
 
     //Inputs
     {value  : 'clickinput'},
     {value  : 'search'},
     {value  : 'textinput'},
     {value  : 'scrollpicker'},
+
+    //Base - Misc
+    {value  : 'test_dropdown'},
+    {value  : 'dropdown'},
+    {value  : 'overlaycontainer'},
+    {value  : 'testoverlaycontainer'},
 
     //List
     {value  : 'test_list_removepromise'},
@@ -30,11 +35,6 @@ var components = new BetaJS.Collections.Collection([
     {value  : 'layout_web'},
     {value  : 'menu_web'},
     {value  : 'header'},
-
-    // List - Listitems
-    {value  : 'test_selectableitem'},
-    {value  : 'selectableitem'},
-    {value  : 'clickitem'},
 
     //Titledlist
     {value  : 'addtitle'},

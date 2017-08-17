@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.14 - 2017-08-17
+betajs-dynamics-components - v0.1.15 - 2017-08-17
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -34,16 +34,28 @@ ul {
   margin: 0;
   padding: 0; }
 
-ba-dropdown button {
-  position: relative;
-  font-size: 14px; }
-  ba-dropdown button dropdown {
-    position: absolute;
-    right: 0;
-    top: 43px;
-    border: 1px solid #777; }
-    ba-dropdown button dropdown button {
-      white-space: nowrap; }
+ba-dropdown {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; }
+  ba-dropdown button {
+    -webkit-box-flex: 1 1 auto;
+    -moz-box-flex: 1 1 auto;
+    -webkit-flex: 1 1 auto;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+    position: relative;
+    font-size: 14px; }
+    ba-dropdown button dropdown {
+      position: absolute;
+      right: 0;
+      top: 43px;
+      border: 1px solid #777;
+      background: white; }
+      ba-dropdown button dropdown button {
+        white-space: nowrap; }
 
 ba-clickinput {
   -webkit-box-flex: 0 0 44px;
@@ -309,11 +321,30 @@ ba-clickitem {
     -webkit-flex: 1 1 0;
     -ms-flex: 1 1 0;
     flex: 1 1 0;
-    padding: 0 22px;
-    min-height: 44px;
-    text-align: center;
-    display: block;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
     color: inherit; }
+    ba-clickitem button value {
+      -webkit-box-flex: 1 1 0;
+      -moz-box-flex: 1 1 0;
+      -webkit-flex: 1 1 0;
+      -ms-flex: 1 1 0;
+      flex: 1 1 0; }
+  ba-clickitem .icon icon {
+    -webkit-box-flex: 0 0 44px;
+    -moz-box-flex: 0 0 44px;
+    -webkit-flex: 0 0 44px;
+    -ms-flex: 0 0 44px;
+    flex: 0 0 44px; }
+  ba-clickitem .icon value {
+    text-align: left; }
+  ba-clickitem .noicon icon {
+    display: none; }
+  ba-clickitem .noicon value {
+    text-align: center; }
 
 ba-eventitem {
   display: -webkit-box;

@@ -1,8 +1,27 @@
 /*!
-betajs-dynamics-components - v0.1.14 - 2017-08-17
+betajs-dynamics-components - v0.1.15 - 2017-08-17
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
+Scoped.define("tests:Test_clickitem", [
+    "dynamics:Dynamic"
+],[
+    "module:Clickitem"
+], function(Dynamic, scoped) {
+
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
+
+        templateUrl: "tests/test_clickitem/test_clickitem.html",
+
+        attrs: {
+
+        }
+
+    }).register();
+
+});
 Scoped.define("module:Test_dropdown", [
     "dynamics:Dynamic",
     "base:Collections.Collection"
