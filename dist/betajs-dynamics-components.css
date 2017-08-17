@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.14 - 2017-08-14
+betajs-dynamics-components - v0.1.14 - 2017-08-16
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -33,6 +33,17 @@ li {
 ul {
   margin: 0;
   padding: 0; }
+
+ba-dropdown button {
+  position: relative;
+  font-size: 14px; }
+  ba-dropdown button dropdown {
+    position: absolute;
+    right: 0;
+    top: 43px;
+    border: 1px solid #777; }
+    ba-dropdown button dropdown button {
+      white-space: nowrap; }
 
 ba-clickinput {
   -webkit-box-flex: 0 0 44px;
@@ -69,28 +80,6 @@ ba-clickinput {
     -webkit-user-select: text;
     -ms-user-select: text;
     user-select: text; }
-
-overlaycontainer {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  overflow: scroll;
-  background: rgba(0, 0, 0, 0.5);
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex; }
-  overlaycontainer overlayinner {
-    margin: auto;
-    max-width: 85%;
-    max-height: 80%; }
-    overlaycontainer overlayinner message {
-      background: white;
-      border-radius: 2px;
-      padding: 10px; }
 
 ba-scrollpicker {
   -webkit-box-flex: 1 1 0;
@@ -200,6 +189,28 @@ ba-textinput {
     word-wrap: break-word;
     word-break: break-word;
     white-space: pre-wrap; }
+
+overlaycontainer {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  overflow: scroll;
+  background: rgba(0, 0, 0, 0.5);
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; }
+  overlaycontainer overlayinner {
+    margin: auto;
+    max-width: 85%;
+    max-height: 80%; }
+    overlaycontainer overlayinner message {
+      background: white;
+      border-radius: 2px;
+      padding: 10px; }
 
 .sk-circle {
   margin: auto auto;

@@ -1,5 +1,11 @@
 var components = new BetaJS.Collections.Collection([
 
+    //Base - Misc
+    {value  : 'test_dropdown'},
+    {value  : 'dropdown'},
+    {value  : 'overlaycontainer'},
+    {value  : 'testoverlaycontainer'},
+
     //Inputs
     {value  : 'clickinput'},
     {value  : 'search'},
@@ -44,10 +50,6 @@ var components = new BetaJS.Collections.Collection([
         }
     ])}},
     {value  : 'test_titledlist'},
-
-    //{value  : 'addvalue'},
-    {value  : 'overlaycontainer'},
-    {value  : 'testoverlaycontainer'}
 
     //Todo
     // {value  : 'test_searchlist'},

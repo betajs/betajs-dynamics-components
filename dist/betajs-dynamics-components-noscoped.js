@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.14 - 2017-08-14
+betajs-dynamics-components - v0.1.14 - 2017-08-16
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -21,39 +21,37 @@ Scoped.assumeVersion('base:version', '~1.0.96');
 Scoped.assumeVersion('browser:version', '~1.0.65');
 Scoped.assumeVersion('dynamics:version', '~0.0.83');
 Scoped.assumeVersion('ui:version', '~1.0.37');
-Scoped.define("module:Clickinput", [
+Scoped.define("module:Dropdown", [
     "dynamics:Dynamic"
+], [
+    "dynamics:Partials.EventForwardPartial",
+    "dynamics:Partials.EventPartial",
+    "dynamics:Partials.TapPartial",
+    "module:List"
 ], function(Dynamic, scoped) {
+
     return Dynamic.extend({
         scoped: scoped
     }, {
 
-        template: "\n<title\n        ba-if=\"{{!view.edit || !view.externaledit}}\"\n        ba-click=\"edititem()\"\n>\n    {{model.value}}\n</title>\n\n<input\n        placeholder=\"{{view.placeholder || ''}}\"\n        ba-if=\"{{view.edit}}\"\n        ba-return=\"view.edit = false\"\n        onblur=\"{{view.edit = false}}\"\n        value=\"{{=model.value}}\" />\n",
+        template: "<button\n        ba-tap=\"showdropdown = true\"\n        class=\"icon-more_vert\">\n    <dropdown ba-if=\"{{showdropdown}}\">\n        <ba-{{view.dropdown}}\n            ba-event:item-click=\"hide_dropdown\"\n            ba-event-forward:dropdown=\"{{}}\"\n            ba-model='{{dropdownmodel}}'\n\n        ></ba-{{view.dropdown}}>\n    </dropdown>\n</button>\n",
 
-        attrs: {
-            model: {
-                value: "Test"
-            },
-            view: {
-                placeholder: "",
-                edit: false,
-                autofocus: true,
-                externaledit: true
-            }
+        attrs: function() {
+            return {
+                view: {
+                    dropdown: 'list'
+                },
+                dropdownmodel: {},
+                value: null,
+                showdropdown: true
+            };
         },
 
         extendables: ['view'],
 
         functions: {
-            edititem: function() {
-
-                this.setProp('view.edit', true);
-
-                var SearchInput = this.activeElement().querySelector("input");
-                var strLength = this.getProp('model.value').length;
-                SearchInput.focus();
-                SearchInput.setSelectionRange(strLength, strLength);
-
+            hide_dropdown: function() {
+                this.set('showdropdown', false);
             }
         }
 
@@ -160,6 +158,45 @@ Scoped.define("module:Htmlview", [
     }).register();
 
 });
+Scoped.define("module:Clickinput", [
+    "dynamics:Dynamic"
+], function(Dynamic, scoped) {
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
+
+        template: "\n<title\n        ba-if=\"{{!view.edit || !view.externaledit}}\"\n        ba-click=\"edititem()\"\n>\n    {{model.value}}\n</title>\n\n<input\n        placeholder=\"{{view.placeholder || ''}}\"\n        ba-if=\"{{view.edit}}\"\n        ba-return=\"view.edit = false\"\n        onblur=\"{{view.edit = false}}\"\n        value=\"{{=model.value}}\" />\n",
+
+        attrs: {
+            model: {
+                value: "Test"
+            },
+            view: {
+                placeholder: "",
+                edit: false,
+                autofocus: true,
+                externaledit: true
+            }
+        },
+
+        extendables: ['view'],
+
+        functions: {
+            edititem: function() {
+
+                this.setProp('view.edit', true);
+
+                var SearchInput = this.activeElement().querySelector("input");
+                var strLength = this.getProp('model.value').length;
+                SearchInput.focus();
+                SearchInput.setSelectionRange(strLength, strLength);
+
+            }
+        }
+
+    }).register();
+
+});
 Scoped.define("module:Input", [
     "dynamics:Dynamic"
 ], function(Dynamic, scoped) {
@@ -178,34 +215,6 @@ Scoped.define("module:Input", [
                 autofocus: true
             }
 
-        }
-
-    }).register();
-
-});
-Scoped.define("module:Overlaycontainer", [
-    "dynamics:Dynamic"
-], [
-    "dynamics:Partials.TapPartial"
-], function(Dynamic, scoped) {
-
-    return Dynamic.extend({
-        scoped: scoped
-    }, {
-
-        template: "<overlaycontainer\n    ba-tap=\"showoverlay = false\"\n    ba-if=\"{{showoverlay}}\">\n\n    <overlayinner>\n\n        <ba-{{view.overlay}} ba-noscope>\n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
-
-        attrs: function() {
-            return {
-                view: {
-                    overlay: ""
-                },
-                model: {
-                    message: "This is a message"
-                },
-                value: null,
-                showoverlay: true
-            };
         }
 
     }).register();
@@ -412,6 +421,34 @@ Scoped.define("module:Textinput", [
     }).register();
 
 });
+Scoped.define("module:Overlaycontainer", [
+    "dynamics:Dynamic"
+], [
+    "dynamics:Partials.TapPartial"
+], function(Dynamic, scoped) {
+
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
+
+        template: "<overlaycontainer\n    ba-tap=\"showoverlay = false\"\n    ba-if=\"{{showoverlay}}\">\n\n    <overlayinner>\n\n        <ba-{{view.overlay}} ba-noscope>\n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
+
+        attrs: function() {
+            return {
+                view: {
+                    overlay: ""
+                },
+                model: {
+                    message: "This is a message"
+                },
+                value: null,
+                showoverlay: true
+            };
+        }
+
+    }).register();
+
+});
 Scoped.define("module:Loading", [
     "dynamics:Dynamic"
 ], function(Dynamic, scoped) {
@@ -467,13 +504,16 @@ Scoped.define("module:Clickitem", [
 
         attrs: {
             model: {
-                value: 'Clickitem - Value'
+                value: 'Clickitem - Value',
+                eventid: 'noid'
             }
         },
 
         functions: {
             click: function() {
                 logger.log('Click');
+
+                this.trigger('click', this.getProp('model.eventid'));
                 //logger.log("You Clicked item : " + this.properties().getProp('model.value'));
                 //logger.log(this.cid());
                 //this.trigger('event', this.cid());
@@ -780,9 +820,7 @@ Scoped.define("module:Addtitle", [
         functions: {
 
             clicktitle: function() {
-
                 this.parent().call('togglelist');
-
             },
             addbutton: function() {
                 this.trigger("add-button");

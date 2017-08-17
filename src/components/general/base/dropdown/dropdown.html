@@ -1,0 +1,12 @@
+<button
+        ba-tap="showdropdown = true"
+        class="icon-more_vert">
+    <dropdown ba-if="{{showdropdown}}">
+        <ba-{{view.dropdown}}
+            ba-event:item-click="hide_dropdown"
+            ba-event-forward:dropdown="{{}}"
+            ba-model='{{dropdownmodel}}'
+
+        ></ba-{{view.dropdown}}>
+    </dropdown>
+</button>

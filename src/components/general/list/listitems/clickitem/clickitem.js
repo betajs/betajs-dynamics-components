@@ -13,13 +13,16 @@ Scoped.define("module:Clickitem", [
 
         attrs: {
             model: {
-                value: 'Clickitem - Value'
+                value: 'Clickitem - Value',
+                eventid: 'noid'
             }
         },
 
         functions: {
             click: function() {
                 logger.log('Click');
+
+                this.trigger('click', this.getProp('model.eventid'));
                 //logger.log("You Clicked item : " + this.properties().getProp('model.value'));
                 //logger.log(this.cid());
                 //this.trigger('event', this.cid());

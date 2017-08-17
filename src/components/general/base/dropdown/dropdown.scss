@@ -1,0 +1,20 @@
+
+ba-dropdown {
+
+  button {
+    position: relative;
+    font-size: 14px;
+
+    dropdown {
+      position: absolute;
+      right: 0;
+      top: ($listitemheight - 1px);
+
+      border: 1px solid $grey3;
+
+      button {
+        white-space: nowrap;
+      }
+    }
+  }
+}

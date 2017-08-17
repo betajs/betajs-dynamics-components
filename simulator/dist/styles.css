@@ -1,45 +1,52 @@
 /*!
-betajs-dynamics-components - v0.1.14 - 2017-08-14
+betajs-dynamics-components - v0.1.14 - 2017-08-16
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
-ba-test_list_loadmore {
-  height: 100%;
-}
+component {
+  margin: 10px; }
 
-ba-test_list_loadmore ba-list {
-  height: 100%;
-}
+/*******************************
+ **           Timer           **
+ *******************************/
+/*******************************
+ **          Layout           **
+ *******************************/
+/*******************************
+ **           Style           **
+ *******************************/
+a {
+  color: dodgerblue; }
 
-b
-ba-test_searchlist {
+.icon-star {
+  color: #428bca; }
+
+.icon-star-empty {
+  color: #ddd; }
+
+/*
+ * Mixins
+ */
+li {
+  list-style: none; }
+
+ul {
+  margin: 0;
+  padding: 0; }
+
+ba-dropdown {
+  margin: 10px;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex;
-  -webkit-box-flex: 1 1 0;
-  -moz-box-flex: 1 1 0;
-  -webkit-flex: 1 1 0;
-  -ms-flex: 1 1 0;
-  flex: 1 1 0;
-}
-
-ba-selectableitem selectableitem {
-  display: block;
-  background: white; }
-ba-selectableitem .selected {
-  background: lightgrey; }
-
-ba-test_titledlist {
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex;
-  -webkit-box-flex: 1 1 0;
-  -moz-box-flex: 1 1 0;
-  -webkit-flex: 1 1 0;
-  -ms-flex: 1 1 0;
-  flex: 1 1 0;
-}
+  flex-direction: row-reverse; }
+  ba-dropdown > button {
+    -webkit-box-flex: 0 0 44px;
+    -moz-box-flex: 0 0 44px;
+    -webkit-flex: 0 0 44px;
+    -ms-flex: 0 0 44px;
+    flex: 0 0 44px;
+    height: 44px;
+    border: 1px solid #777; }

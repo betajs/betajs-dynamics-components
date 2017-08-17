@@ -20,9 +20,7 @@ Scoped.define("module:Addtitle", [
         functions: {
 
             clicktitle: function() {
-
                 this.parent().call('togglelist');
-
             },
             addbutton: function() {
                 this.trigger("add-button");

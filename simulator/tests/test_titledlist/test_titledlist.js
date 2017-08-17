@@ -1,6 +1,8 @@
 Scoped.define("module:Test_titledlist", [
     "dynamics:Dynamic",
     "base:Loggers.Logger"
+],[
+    "module:Titledlist"
 ], function(Dynamic, Logger, scoped) {
 
     var logger = Logger.global().tag("dynamic", "list");

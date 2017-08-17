@@ -1,0 +1,12 @@
+
+ba-dropdown {
+  margin: 10px;
+  @include display-flex;
+  flex-direction: row-reverse;
+  >button {
+    @include flex(0 0 $listitemheight);
+    height: $listitemheight;
+
+    border: 1px solid $grey3;
+  }
+}

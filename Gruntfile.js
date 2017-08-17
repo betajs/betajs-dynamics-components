@@ -21,7 +21,10 @@ module.exports = function (grunt) {
     }, null, betajsTemplates.concatProcess(grunt))
     .concatTask('concat-scoped', [require.resolve("betajs-scoped"), 'dist/' + dist + '-noscoped.js'], 'dist/' + dist + '.js')
     .concatTask('concat-simulator-js', ["simulator/tests/**/*.js"], 'simulator/dist/scripts.js')
-    .concatTask('concat-simulator-css', ["simulator/tests/**/*.css"], 'simulator/dist/styles.css')
+    .concatsassTask('concat-simulator-css', [
+        'src/global/**/*.scss',
+        'simulator/tests/**/*.scss'
+    ], 'simulator/dist/styles.css')
     .uglifyTask('uglify-noscoped', 'dist/' + dist + '-noscoped.js', 'dist/' + dist + '-noscoped.min.js')
     .uglifyTask('uglify-scoped', 'dist/' + dist + '.js', 'dist/' + dist + '.min.js')
     .packageTask()
