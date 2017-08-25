@@ -1,5 +1,10 @@
 var components = new BetaJS.Collections.Collection([
 
+    // Tests
+    {value: "Unit-Test-Click-Item", externalfile: "../tests/demotests/test_clickitem.html"},
+    {value: "Unit-Test-List", externalfile: "../tests/demotests/test_list.html"},
+    {value: "Unit-Test-Selectable-Item", externalfile: "../tests/demotests/test_selectableitem.html"},
+
     // List - Listitems
     {value  : 'test_clickitem'},
     {value  : 'test_selectableitem'},
