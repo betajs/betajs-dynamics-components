@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.15 - 2017-08-17
+betajs-dynamics-components - v0.1.15 - 2017-09-01
 Copyright (c) Victor Lingenthal
 Apache-2.0 Software License.
 */
@@ -509,28 +509,6 @@ ba-header {
     ba-header ba-list list button :hover {
       background: lightsalmon; }
 
-ba-toggle_menu {
-  -webkit-box-flex: 1 1 0;
-  -moz-box-flex: 1 1 0;
-  -webkit-flex: 1 1 0;
-  -ms-flex: 1 1 0;
-  flex: 1 1 0;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex; }
-  ba-toggle_menu button {
-    -webkit-box-flex: 1 1 0;
-    -moz-box-flex: 1 1 0;
-    -webkit-flex: 1 1 0;
-    -ms-flex: 1 1 0;
-    flex: 1 1 0;
-    color: inherit; }
-
-ba-toggle_menu button {
-  padding: 0 22px; }
-
 ba-toggle {
   -webkit-box-flex: 1 1 0;
   -moz-box-flex: 1 1 0;
@@ -551,6 +529,28 @@ ba-toggle {
     color: inherit; }
 
 ba-toggle button {
+  padding: 0 22px; }
+
+ba-toggle_menu {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; }
+  ba-toggle_menu button {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    color: inherit; }
+
+ba-toggle_menu button {
   padding: 0 22px; }
 
 ba-menu_web {
