@@ -1,5 +1,11 @@
 var components = new BetaJS.Collections.Collection([
 
+    //Base - Misc
+    {value  : 'test_dropdown'},
+    {value  : 'dropdown'},
+    {value  : 'overlaycontainer'},
+    {value  : 'testoverlaycontainer'},
+
     // Tests
     {value: "Unit-Test-Click-Item", externalfile: "../tests/demotests/test_clickitem.html"},
     {value: "Unit-Test-List", externalfile: "../tests/demotests/test_list.html"},
@@ -15,12 +21,6 @@ var components = new BetaJS.Collections.Collection([
     {value  : 'search'},
     {value  : 'textinput'},
     {value  : 'scrollpicker'},
-
-    //Base - Misc
-    {value  : 'test_dropdown'},
-    {value  : 'dropdown'},
-    {value  : 'overlaycontainer'},
-    {value  : 'testoverlaycontainer'},
 
     //List
     {value  : 'test_list_removepromise'},

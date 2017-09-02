@@ -1,6 +1,6 @@
 /*!
-betajs-dynamics-components - v0.1.15 - 2017-08-17
-Copyright (c) Victor Lingenthal
+betajs-dynamics-components - v0.1.15 - 2017-09-02
+Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
 Scoped.define("tests:Test_clickitem", [

@@ -7,6 +7,7 @@ ba-dropdown {
 
     position: relative;
     font-size: 14px;
+    color: $grey3;
 
     dropdown {
       position: absolute;
@@ -19,6 +20,19 @@ ba-dropdown {
       button {
         white-space: nowrap;
       }
+      button:hover {
+        background: $grey1;
+      }
+    }
+    opacity: 1;
+    div {
+      display: none;
+    }
+  }
+  button:hover {
+    opacity: 0.99;
+    div {
+      display: flex;
     }
   }
 }

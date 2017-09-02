@@ -34,6 +34,7 @@ BetaJS-Dynamics-Components is a Library of DOM Components that are built in Beta
 ## Main Contributors
 
 - Victor Lingenthal
+- Oliver Friedmann
 
 ## License
 

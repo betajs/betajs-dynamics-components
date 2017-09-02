@@ -1,6 +1,6 @@
 /*!
-betajs-dynamics-components - v0.1.15 - 2017-08-17
-Copyright (c) Victor Lingenthal
+betajs-dynamics-components - v0.1.15 - 2017-09-02
+Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
 /** @flow **//*!
@@ -1007,8 +1007,8 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.15 - 2017-08-17
-Copyright (c) Victor Lingenthal
+betajs-dynamics-components - v0.1.15 - 2017-09-02
+Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
 
@@ -1030,19 +1030,22 @@ Scoped.assumeVersion('browser:version', '~1.0.65');
 Scoped.assumeVersion('dynamics:version', '~0.0.83');
 Scoped.assumeVersion('ui:version', '~1.0.37');
 Scoped.define("module:Dropdown", [
-    "dynamics:Dynamic"
+    "dynamics:Dynamic",
+    "base:Loggers.Logger"
 ], [
     "dynamics:Partials.EventForwardPartial",
     "dynamics:Partials.EventPartial",
     "dynamics:Partials.TapPartial",
     "module:List"
-], function(Dynamic, scoped) {
+], function(Dynamic, Logger, scoped) {
+
+    var logger = Logger.global().tag("dynamic", "list");
 
     return Dynamic.extend({
         scoped: scoped
     }, {
 
-        template: "<button\n        ba-tap=\"showdropdown = true\"\n        class=\"icon-more_vert\">\n    <dropdown ba-if=\"{{showdropdown}}\">\n        <ba-{{view.dropdown}}\n            ba-event:item-click=\"hide_dropdown\"\n            ba-event-forward:dropdown=\"{{}}\"\n            ba-model='{{dropdownmodel}}'\n\n        ></ba-{{view.dropdown}}>\n    </dropdown>\n</button>\n",
+        template: "<button\n        onblur=\"{{this.execute('blur')}}\"\n        ba-tap=\"click()\"\n        class=\"icon-more_vert\">\n    <dropdown ba-if=\"{{showdropdown}}\">\n        <ba-{{view.dropdown}}\n            ba-event:item-click=\"hide_dropdown\"\n            ba-event-forward:dropdown=\"{{}}\"\n            ba-model='{{dropdownmodel}}'\n\n        ></ba-{{view.dropdown}}>\n    </dropdown>\n    <div></div>\n</button>\n",
 
         attrs: function() {
             return {
@@ -1058,6 +1061,18 @@ Scoped.define("module:Dropdown", [
         extendables: ['view'],
 
         functions: {
+            click: function() {
+                if (this.get('showdropdown') == false) {
+                    this.set('showdropdown', true);
+                    this.element()[0].focus();
+                } else
+                    this.set('showdropdown', false);
+            },
+            blur: function() {
+                if (window.getComputedStyle(this.element()[0]).getPropertyValue("opacity") == 1) {
+                    this.execute('hide_dropdown');
+                }
+            },
             hide_dropdown: function() {
                 this.set('showdropdown', false);
             }
@@ -1398,7 +1413,7 @@ Scoped.define("module:Textinput", [
         scoped: scoped
     }, {
 
-        template: "\n<textarea autofocus onblur=\"{{this.call('blur')}}\" value=\"{{=value}}\"></textarea>\n<pre>{{=preheighttext}}</pre>\n",
+        template: "\n<textarea autofocus onblur=\"{{this.execute('blur')}}\" value=\"{{=value}}\"></textarea>\n<pre>{{=preheighttext}}</pre>\n",
 
         attrs: {
             value: 'Test',

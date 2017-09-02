@@ -14,10 +14,10 @@ module.exports = function (grunt) {
         "dynamics": "global:BetaJS.Dynamics",
         "ui": "global:BetaJS.UI"
     }, {
-        "base:version": pkg.devDependencies.betajs,
-        "browser:version": pkg.devDependencies["betajs-browser"],
-        "dynamics:version": pkg.devDependencies["betajs-dynamics"],
-        "ui:version": pkg.devDependencies["betajs-ui"]
+        "base:version": pkg.dependencies.betajs,
+        "browser:version": pkg.dependencies["betajs-browser"],
+        "dynamics:version": pkg.dependencies["betajs-dynamics"],
+        "ui:version": pkg.dependencies["betajs-ui"]
     }, null, betajsTemplates.concatProcess(grunt))
     .concatTask('concat-scoped', [require.resolve("betajs-scoped"), 'dist/' + dist + '-noscoped.js'], 'dist/' + dist + '.js')
     .concatTask('concat-simulator-js', ["simulator/tests/**/*.js"], 'simulator/dist/scripts.js')
