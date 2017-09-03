@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.15 - 2017-09-02
+betajs-dynamics-components - v0.1.15 - 2017-09-03
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -60,12 +60,8 @@ ba-dropdown {
         white-space: nowrap; }
       ba-dropdown button dropdown button:hover {
         background: #ddd; }
-    ba-dropdown button div {
-      display: none; }
   ba-dropdown button:hover {
     opacity: 0.99; }
-    ba-dropdown button:hover div {
-      display: flex; }
 
 ba-clickinput {
   -webkit-box-flex: 0 0 44px;

@@ -25,14 +25,8 @@ ba-dropdown {
       }
     }
     opacity: 1;
-    div {
-      display: none;
-    }
   }
   button:hover {
     opacity: 0.99;
-    div {
-      display: flex;
-    }
   }
 }
