@@ -31,7 +31,7 @@ Scoped.define("module:Dropdown", [
 
         functions: {
             click: function() {
-                if (this.get('showdropdown') == false) {
+                if (this.get('showdropdown') === false) {
                     this.set('showdropdown', true);
                     this.element()[0].focus();
                 } else

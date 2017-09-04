@@ -1,5 +1,6 @@
 
-<list ba-repeat="{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}">
+<list ba-repeat="{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}"
+      ba-interaction:scroll="{{infinite_scroll_options}}">
 <!--<list ba-repeat="{{collectionitem :: (model.listcollection||listcollection)}}">-->
 
     <ba-{{getview(collectionitem)}}
@@ -15,7 +16,7 @@
 
 </list>
 
-<ba-loadmore ba-if="{{loadmore}}" ba-show="{{!loading}}" ba-event:loadmore="moreitems">
+<ba-loadmore ba-if="{{loadmore && loadmorestyle !== 'infinite'}}" ba-show="{{!loading}}" ba-event:loadmore="moreitems">
 </ba-loadmore>
 <ba-loading ba-if="{{loadmore}}" ba-show="{{loading}}">
 </ba-loading>

@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.15 - 2017-09-03
+betajs-dynamics-components - v0.1.16 - 2017-09-04
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.15"
+    "version": "0.1.16"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -54,7 +54,7 @@ Scoped.define("module:Dropdown", [
 
         functions: {
             click: function() {
-                if (this.get('showdropdown') == false) {
+                if (this.get('showdropdown') === false) {
                     this.set('showdropdown', true);
                     this.element()[0].focus();
                 } else
@@ -652,7 +652,8 @@ Scoped.define("module:Selectableitem", [
 });
 Scoped.define("module:List", [
     "dynamics:Dynamic",
-    "base:Async"
+    "base:Async",
+    "base:Promise"
 ], [
     "dynamics:Partials.EventForwardPartial",
     "dynamics:Partials.RepeatPartial",
@@ -662,18 +663,36 @@ Scoped.define("module:List", [
     "dynamics:Partials.CachePartial",
     "module:Loading",
     "module:Loadmore"
-], function(Dynamic, Async, scoped) {
+], function(Dynamic, Async, Promise, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
     }, {
 
-        template: "\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\">\n<!--<list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">-->\n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner}}\"\n        ba-model=\"{{collectionitem}}\">\n\n    </ba-{{getview(collectionitem)}}>\n\n</list>\n\n<ba-loadmore ba-if=\"{{loadmore}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitems\">\n</ba-loadmore>\n<ba-loading ba-if=\"{{loadmore}}\" ba-show=\"{{loading}}\">\n</ba-loading>\n",
+        template: "\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\"\n      ba-interaction:scroll=\"{{infinite_scroll_options}}\">\n<!--<list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">-->\n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner}}\"\n        ba-model=\"{{collectionitem}}\">\n\n    </ba-{{getview(collectionitem)}}>\n\n</list>\n\n<ba-loadmore ba-if=\"{{loadmore && loadmorestyle !== 'infinite'}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitems\">\n</ba-loadmore>\n<ba-loading ba-if=\"{{loadmore}}\" ba-show=\"{{loading}}\">\n</ba-loading>\n",
 
         attrs: {
             listitem: "clickitem",
             model: false,
-            view: {}
+            view: {},
+            infinite_scroll_options: {
+                disabled: true,
+                parent_elem: true,
+                enable_scroll_modifier: "",
+                type: "infinitescroll",
+                append: function(count, callback) {
+                    console.log("append");
+                    this.execute("moreitems").success(function() {
+                        callback(1, true);
+                    });
+                }
+            },
+            loadmorestyle: "button" //infinite
+        },
+
+        create: function() {
+            if (this.get("loadmore") && this.get("loadmorestyle") === "infinite")
+                this.setProp("infinite_scroll_options.disabled", false);
         },
 
         collections: {
@@ -688,12 +707,15 @@ Scoped.define("module:List", [
 
         functions: {
             moreitems: function() {
+                var promise = Promise.create();
                 this.set("loading", true);
                 Async.eventually(function() {
                     this.get("loadmore").increase_forwards().callback(function() {
+                        promise.asyncSuccess(true);
                         this.set("loading", false);
                     }, this);
                 }, this);
+                return promise;
             },
 
             getview: function(item) {
@@ -883,29 +905,6 @@ Scoped.define("module:Header", [
     }).register();
 
 });
-Scoped.define("module:Toggle_menu", [
-    "dynamics:Dynamic"
-], function(Dynamic, scoped) {
-
-    return Dynamic.extend({
-        scoped: scoped
-    }, {
-
-        template: "<button ba-click=\"toggle_menu()\" class=\"{{toggle_icon}}\"></button>",
-
-        attrs: {
-            toggle_icon: 'icon-reorder'
-        },
-
-        functions: {
-            toggle_menu: function() {
-                this.channel('global').trigger('toggle_menu');
-            }
-        }
-
-    }).register();
-
-});
 Scoped.define("module:Toggle", [
     "dynamics:Dynamic"
 ], function(Dynamic, scoped) {
@@ -925,6 +924,29 @@ Scoped.define("module:Toggle", [
                 this.scope("<+[tagname='ba-layout_web']").call('toggle_menu');
 
                 this.channel('toggle').trigger('toggle', 'menu');
+            }
+        }
+
+    }).register();
+
+});
+Scoped.define("module:Toggle_menu", [
+    "dynamics:Dynamic"
+], function(Dynamic, scoped) {
+
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
+
+        template: "<button ba-click=\"toggle_menu()\" class=\"{{toggle_icon}}\"></button>",
+
+        attrs: {
+            toggle_icon: 'icon-reorder'
+        },
+
+        functions: {
+            toggle_menu: function() {
+                this.channel('global').trigger('toggle_menu');
             }
         }
 
