@@ -23,7 +23,8 @@ module.exports = function (grunt) {
     .concatTask('concat-simulator-js', ["simulator/tests/**/*.js"], 'simulator/dist/scripts.js')
     .concatsassTask('concat-simulator-css', [
         'src/global/**/*.scss',
-        'simulator/tests/**/*.scss'
+        'simulator/tests/**/*.scss',
+        'tests/demotests/**/*.scss'
     ], 'simulator/dist/styles.css')
     .uglifyTask('uglify-noscoped', 'dist/' + dist + '-noscoped.js', 'dist/' + dist + '-noscoped.min.js')
     .uglifyTask('uglify-scoped', 'dist/' + dist + '.js', 'dist/' + dist + '.min.js')

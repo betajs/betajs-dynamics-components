@@ -1,7 +1,7 @@
 var components = new BetaJS.Collections.Collection([
 
     //Base - Misc
-    {value: "UT-dropdown", externalfile: "../tests/demotests/dropdown.html"},
+    {value: "UT-dropdown", externalfile: "../tests/demotests/dropdown/dropdown.html"},
 
     {value  : 'test_dropdown'},
     {value  : 'dropdown'},

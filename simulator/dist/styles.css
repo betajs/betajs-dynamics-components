@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.16 - 2017-09-04
+betajs-dynamics-components - v0.1.16 - 2017-09-07
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -53,3 +53,10 @@ ba-test_dropdown {
     -webkit-flex: 0 0 44px;
     -ms-flex: 0 0 44px;
     flex: 0 0 44px; }
+
+demo ba-dropdown {
+  margin: 10px;
+  display: flex;
+  flex-direction: row-reverse;
+  height: 44px;
+  background: hotpink; }
