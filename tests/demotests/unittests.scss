@@ -1,0 +1,10 @@
+appframe {
+  demo {
+    @include flex(1 1 0);
+    @include display-flex;
+    border-bottom: 1px solid black;
+
+    box-sizing: content-box;
+
+  }
+}

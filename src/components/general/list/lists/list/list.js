@@ -43,16 +43,6 @@ Scoped.define("module:List", [
                 this.setProp("infinite_scroll_options.disabled", false);
         },
 
-        collections: {
-            listcollection: [{
-                value: "List - Item 1"
-            }, {
-                value: "List - Item 2"
-            }, {
-                value: "List - Item 3"
-            }]
-        },
-
         functions: {
             moreitems: function() {
                 var promise = Promise.create();

@@ -1,0 +1,97 @@
+<html>
+<head>
+    <script src="../../../node_modules/betajs-scoped/dist/scoped.js"></script>
+    <script src="../../../node_modules/betajs/dist/beta-noscoped.js"></script>
+    <script src="../../../node_modules/betajs-browser/dist/betajs-browser-noscoped.js"></script>
+    <script src="../../../node_modules/betajs-ui/dist/betajs-ui-noscoped.js"></script>
+    <script src="../../../node_modules/betajs-dynamics/dist/betajs-dynamics-noscoped.js"></script>
+    <script src="../../../dist/betajs-dynamics-components-noscoped.js"></script>
+    <link rel="stylesheet" href="../../../dist/betajs-dynamics-components.css">
+    <link rel="stylesheet" href="../../../simulator/dist/styles.css">
+</head>
+
+<body>
+<div id="test">
+
+    <demo class="dropdown">
+        <ba-dropdown></ba-dropdown>
+    </demo>
+
+    <h1>Tests for Dropdown</h1>
+
+    <h3>Test Dynamics</h3>
+    <div id="dynamicsworking">{{test_dynamics}}</div>
+
+    <h3>Test Events</h3>
+    <!--<ba-clickitem-->
+            <!--id="test_event"-->
+            <!--ba-data:id="test_event"-->
+            <!--ba-model="{{{value : 'Test Events'}}}">-->
+
+    <!--</ba-clickitem>-->
+    <div id="event_notifier">{{event_notifier}}</div>
+
+    <h3>Test Pushfunction</h3>
+    <!--<ba-clickitem-->
+            <!--id="test_pushfunction"-->
+            <!--ba-data:id="test_pushfunction"-->
+            <!--ba-new_value="{{new_value}}"-->
+            <!--ba-functions="{{callbacks}}">-->
+
+    <!--</ba-clickitem>-->
+</div>
+
+<script>
+    var root = document.querySelector("#test");
+
+    var dynamic = new BetaJS.Dynamics.Dynamic({
+        element: root,
+        attrs : {
+            test_dynamics: "Dynamics Working?",
+            new_value : "Clickitem - New Value",
+            event_notifier : "Event not triggerd yet",
+            event_notifier_after : "Event has been triggered",
+            callbacks : {
+                //Function to be pushed into clickitem
+                click : function () {
+                    console.log("The Old Value is : " + this.properties().getProp('model.value'));
+                    this.properties().setProp('model.value', this.get('new_value'));
+                    console.log("The New Value is : " + this.properties().getProp('model.value'));
+                }
+            }
+        },
+        create : function () {
+            //Event Listener
+            this.scope('>[id="test_event"]').on("event", function () {
+                this.set('event_notifier',this.get('event_notifier_after'));
+            }, this);
+        }
+    });
+
+    dynamic.activate();
+
+    function test(assert) {
+
+        //0. Dynamics working?
+        assert.equal(dynamic.get("test_dynamics"), document.querySelector('#dynamicsworking').innerHTML.trim());
+
+        var getDisplayValue = function (selector) {
+            return document.defaultView.getComputedStyle(document.querySelector(selector)).display;
+        }
+
+        //1. Dropdown opening
+        assert.equal('none',getDisplayValue('ba-dropdown dropdown'));
+        BetaJS.Browser.Dom.triggerDomEvent(document.querySelector('ba-dropdown button'), "click");
+        assert.notEqual('none',getDisplayValue('ba-dropdown dropdown'));
+
+        //2. Dropdown closing after click on an item
+        assert.notEqual('none',getDisplayValue('ba-dropdown dropdown'));
+        BetaJS.Browser.Dom.triggerDomEvent(document.querySelector('ba-dropdown dropdown button'), "click");
+        assert.equal('none',getDisplayValue('ba-dropdown dropdown'));
+
+    }
+
+</script>
+
+</body>
+</html>

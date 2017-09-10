@@ -1,0 +1,71 @@
+<html>
+<head>
+    <script src="../../../node_modules/betajs-scoped/dist/scoped.js"></script>
+    <script src="../../../node_modules/betajs/dist/beta-noscoped.js"></script>
+    <script src="../../../node_modules/betajs-browser/dist/betajs-browser-noscoped.js"></script>
+    <script src="../../../node_modules/betajs-ui/dist/betajs-ui-noscoped.js"></script>
+    <script src="../../../node_modules/betajs-dynamics/dist/betajs-dynamics-noscoped.js"></script>
+    <script src="../../../dist/betajs-dynamics-components-noscoped.js"></script>
+    <link rel="stylesheet" href="../../../dist/betajs-dynamics-components.css">
+    <link rel="stylesheet" href="../../../simulator/dist/styles.css">
+</head>
+<body>
+<div id="test">
+
+    <demo class="list">
+        <ba-list
+                ba-listcollection="{{listcollection}}"
+                id="test_list"
+                ba-data:id="test_list"></ba-list>
+    </demo>
+
+    <h1>Tests for List</h1>
+
+    <h3>Test Dynamics</h3>
+    <div id="dynamicsworking">{{test_dynamics}}</div>
+
+    <h3>Basic Test</h3>
+
+
+
+</div>
+
+    <script>
+        var root = document.querySelector("#test");
+
+        var dynamic = new BetaJS.Dynamics.Dynamic({
+            element: root,
+            attrs : {
+                test_dynamics: "Dynamics Working?"
+            },
+            collections: {
+                listcollection: [{
+                    value: "List - Item 1"
+                }, {
+                    value: "List - Item 2"
+                }, {
+                    value: "List - Item 3"
+                }]
+            }
+        });
+
+        dynamic.activate();
+
+        function test(assert) {
+
+            //0. Dynamics working?
+            assert.equal(dynamic.get("test_dynamics"), document.querySelector('#dynamicsworking').innerHTML.trim());
+
+            //1. Test List Length & Content
+            var listdynamic = dynamic.scope('>[id="test_list"]');
+            var domlist = document.querySelector('#test_list list');
+            var length = listdynamic.get('listcollection').count();
+            assert.equal(length, domlist.childNodes.length);
+            assert.equal(dynamic.get('listcollection').getByIndex(length-1).get('value'), domlist.childNodes[length - 1].querySelector('value').innerHTML.trim());
+
+        }
+
+    </script>
+
+</body>
+</html>

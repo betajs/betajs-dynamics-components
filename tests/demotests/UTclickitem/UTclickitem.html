@@ -9,36 +9,36 @@
     <link rel="stylesheet" href="../../../dist/betajs-dynamics-components.css">
     <link rel="stylesheet" href="../../../simulator/dist/styles.css">
 </head>
-
 <body>
+
 <div id="test">
 
-    <demo>
-        <ba-dropdown></ba-dropdown>
+    <demo class="clickitem">
+        <ba-clickitem></ba-clickitem>
     </demo>
 
-    <h1>Tests for Dropdown</h1>
+    <h1>Tests for Clickitem</h1>
 
     <h3>Test Dynamics</h3>
     <div id="dynamicsworking">{{test_dynamics}}</div>
 
     <h3>Test Events</h3>
-    <!--<ba-clickitem-->
-            <!--id="test_event"-->
-            <!--ba-data:id="test_event"-->
-            <!--ba-model="{{{value : 'Test Events'}}}">-->
+    <ba-clickitem
+            id="test_event"
+            ba-data:id="test_event"
+            ba-model="{{{value : 'Test Events'}}}">
 
-    <!--</ba-clickitem>-->
+    </ba-clickitem>
     <div id="event_notifier">{{event_notifier}}</div>
 
     <h3>Test Pushfunction</h3>
-    <!--<ba-clickitem-->
-            <!--id="test_pushfunction"-->
-            <!--ba-data:id="test_pushfunction"-->
-            <!--ba-new_value="{{new_value}}"-->
-            <!--ba-functions="{{callbacks}}">-->
+    <ba-clickitem
+            id="test_pushfunction"
+            ba-data:id="test_pushfunction"
+            ba-new_value="{{new_value}}"
+            ba-functions="{{callbacks}}">
 
-    <!--</ba-clickitem>-->
+    </ba-clickitem>
 </div>
 
 <script>

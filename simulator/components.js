@@ -1,17 +1,16 @@
 var components = new BetaJS.Collections.Collection([
 
-    //Base - Misc
-    {value: "UT-dropdown", externalfile: "../tests/demotests/dropdown/dropdown.html"},
+    // Tests
+    {value: "UT-list", externalfile: "../tests/demotests/UTlist/UTlist.html"},
+    {value: "UT-clickitem", externalfile: "../tests/demotests/UTclickitem/UTclickitem.html"},
+    {value: "UT-dropdown", externalfile: "../tests/demotests/UTdropdown/UTdropdown.html"},
+    {value: "Unit-Test-List", externalfile: "../tests/demotests/test_list.html"},
+    {value: "Unit-Test-Selectable-Item", externalfile: "../tests/demotests/test_selectableitem.html"},
 
-    {value  : 'test_dropdown'},
-    {value  : 'dropdown'},
+    //Overlaycontainer
     {value  : 'overlaycontainer'},
     {value  : 'testoverlaycontainer'},
 
-    // Tests
-    {value: "Unit-Test-Click-Item", externalfile: "../tests/demotests/test_clickitem.html"},
-    {value: "Unit-Test-List", externalfile: "../tests/demotests/test_list.html"},
-    {value: "Unit-Test-Selectable-Item", externalfile: "../tests/demotests/test_selectableitem.html"},
 
     // List - Listitems
     {value  : 'test_clickitem'},

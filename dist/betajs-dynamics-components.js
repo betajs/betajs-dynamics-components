@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.16 - 2017-09-04
+betajs-dynamics-components - v0.1.16 - 2017-09-10
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1007,7 +1007,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.16 - 2017-09-04
+betajs-dynamics-components - v0.1.16 - 2017-09-10
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1703,16 +1703,6 @@ Scoped.define("module:List", [
                 this.setProp("infinite_scroll_options.disabled", false);
         },
 
-        collections: {
-            listcollection: [{
-                value: "List - Item 1"
-            }, {
-                value: "List - Item 2"
-            }, {
-                value: "List - Item 3"
-            }]
-        },
-
         functions: {
             moreitems: function() {
                 var promise = Promise.create();
@@ -1913,6 +1903,29 @@ Scoped.define("module:Header", [
     }).register();
 
 });
+Scoped.define("module:Toggle_menu", [
+    "dynamics:Dynamic"
+], function(Dynamic, scoped) {
+
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
+
+        template: "<button ba-click=\"toggle_menu()\" class=\"{{toggle_icon}}\"></button>",
+
+        attrs: {
+            toggle_icon: 'icon-reorder'
+        },
+
+        functions: {
+            toggle_menu: function() {
+                this.channel('global').trigger('toggle_menu');
+            }
+        }
+
+    }).register();
+
+});
 Scoped.define("module:Toggle", [
     "dynamics:Dynamic"
 ], function(Dynamic, scoped) {
@@ -1932,29 +1945,6 @@ Scoped.define("module:Toggle", [
                 this.scope("<+[tagname='ba-layout_web']").call('toggle_menu');
 
                 this.channel('toggle').trigger('toggle', 'menu');
-            }
-        }
-
-    }).register();
-
-});
-Scoped.define("module:Toggle_menu", [
-    "dynamics:Dynamic"
-], function(Dynamic, scoped) {
-
-    return Dynamic.extend({
-        scoped: scoped
-    }, {
-
-        template: "<button ba-click=\"toggle_menu()\" class=\"{{toggle_icon}}\"></button>",
-
-        attrs: {
-            toggle_icon: 'icon-reorder'
-        },
-
-        functions: {
-            toggle_menu: function() {
-                this.channel('global').trigger('toggle_menu');
             }
         }
 

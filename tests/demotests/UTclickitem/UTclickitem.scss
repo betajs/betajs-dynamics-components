@@ -1,0 +1,9 @@
+.clickitem {
+  padding: 10px;
+  height: $listitemheight;
+
+  ba-clickitem {
+    @include flex(0 0 $listitemheight);
+    border: 1px solid $grey1;
+  }
+}
