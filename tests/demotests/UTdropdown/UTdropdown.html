@@ -14,7 +14,7 @@
 <div id="test">
 
     <demo class="dropdown">
-        <ba-dropdown></ba-dropdown>
+        <ba-dropdown ba-dropdownmodel="{{model}}"></ba-dropdown>
     </demo>
 
     <h1>Tests for Dropdown</h1>
@@ -22,23 +22,6 @@
     <h3>Test Dynamics</h3>
     <div id="dynamicsworking">{{test_dynamics}}</div>
 
-    <h3>Test Events</h3>
-    <!--<ba-clickitem-->
-            <!--id="test_event"-->
-            <!--ba-data:id="test_event"-->
-            <!--ba-model="{{{value : 'Test Events'}}}">-->
-
-    <!--</ba-clickitem>-->
-    <div id="event_notifier">{{event_notifier}}</div>
-
-    <h3>Test Pushfunction</h3>
-    <!--<ba-clickitem-->
-            <!--id="test_pushfunction"-->
-            <!--ba-data:id="test_pushfunction"-->
-            <!--ba-new_value="{{new_value}}"-->
-            <!--ba-functions="{{callbacks}}">-->
-
-    <!--</ba-clickitem>-->
 </div>
 
 <script>
@@ -48,23 +31,24 @@
         element: root,
         attrs : {
             test_dynamics: "Dynamics Working?",
-            new_value : "Clickitem - New Value",
-            event_notifier : "Event not triggerd yet",
-            event_notifier_after : "Event has been triggered",
-            callbacks : {
-                //Function to be pushed into clickitem
-                click : function () {
-                    console.log("The Old Value is : " + this.properties().getProp('model.value'));
-                    this.properties().setProp('model.value', this.get('new_value'));
-                    console.log("The New Value is : " + this.properties().getProp('model.value'));
-                }
+            model : {
+                listcollection: new BetaJS.Collections.Collection([{
+                    value: "List - Item 1"
+                }, {
+                    value: "List - Item 2"
+                }, {
+                    value: "List - Item 3"
+                }])
             }
         },
-        create : function () {
-            //Event Listener
-            this.scope('>[id="test_event"]').on("event", function () {
-                this.set('event_notifier',this.get('event_notifier_after'));
-            }, this);
+        collections: {
+            listcollection: [{
+                value: "List - Item 1"
+            }, {
+                value: "List - Item 2"
+            }, {
+                value: "List - Item 3"
+            }]
         }
     });
 

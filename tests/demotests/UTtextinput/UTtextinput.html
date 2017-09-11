@@ -1,0 +1,63 @@
+<html>
+<head>
+    <script src="../../../node_modules/betajs-scoped/dist/scoped.js"></script>
+    <script src="../../../node_modules/betajs/dist/beta-noscoped.js"></script>
+    <script src="../../../node_modules/betajs-browser/dist/betajs-browser-noscoped.js"></script>
+    <script src="../../../node_modules/betajs-ui/dist/betajs-ui-noscoped.js"></script>
+    <script src="../../../node_modules/betajs-dynamics/dist/betajs-dynamics-noscoped.js"></script>
+    <script src="../../../dist/betajs-dynamics-components-noscoped.js"></script>
+    <link rel="stylesheet" href="../../../dist/betajs-dynamics-components.css">
+    <link rel="stylesheet" href="../../../simulator/dist/styles.css">
+</head>
+
+<body>
+<div id="test">
+
+    <demo class="textinput">
+        <ba-textinput ba-value="{{initial_value}}"></ba-textinput>
+    </demo>
+
+    <h1>Tests for Textinput</h1>
+
+    <h3>Test Dynamics</h3>
+    <div id="dynamicsworking">{{test_dynamics}}</div>
+
+</div>
+
+<script>
+    var root = document.querySelector("#test");
+
+    var dynamic = new BetaJS.Dynamics.Dynamic({
+        element: root,
+        attrs : {
+            initial_value : 'Initial Value',
+            upated_value : 'upated',
+            test_dynamics: "Dynamics Working?"
+        }
+    });
+
+    dynamic.activate();
+
+    function test(assert) {
+
+        //0. Dynamics working?
+        assert.equal(dynamic.get("test_dynamics"), document.querySelector('#dynamicsworking').innerHTML.trim());
+
+        var getTextinput = function (selector) {
+            return document.querySelector(selector || 'ba-textinput');
+        }
+
+        //1. Input Field loading correct value
+        assert.equal(dynamic.get('initial_value'),getTextinput('ba-textinput textarea').value);
+
+        //2. Autofocus working - can't test this as keypress events don't work with input fields.
+        getTextinput('ba-textinput textarea').value = dynamic.get('upated_value');
+        assert.equal(dynamic.get('upated_value'),getTextinput('ba-textinput textarea').value);
+
+
+    }
+
+</script>
+
+</body>
+</html>

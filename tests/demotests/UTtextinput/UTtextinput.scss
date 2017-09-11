@@ -1,0 +1,12 @@
+.textinput {
+  @include flex(1 1 0);
+  @include display-flex;
+
+  padding: 10px;
+  height: $listitemheight;
+  box-sizing: content-box;
+
+  ba-textinput {
+    border: 1px solid $grey1;
+  }
+}

@@ -9,13 +9,12 @@ Scoped.define("module:Textinput", [
         template: "<%= template(filepathnoext + '.html') %>",
 
         attrs: {
-            value: 'Test',
+            value: null,
             height: 0,
             view: {
-                placeholder: "",
+                placeholder: '',
                 autofocus: true
             }
-
         },
 
         computed: {

@@ -1,0 +1,65 @@
+<html>
+<head>
+    <script src="../../../node_modules/betajs-scoped/dist/scoped.js"></script>
+    <script src="../../../node_modules/betajs/dist/beta-noscoped.js"></script>
+    <script src="../../../node_modules/betajs-browser/dist/betajs-browser-noscoped.js"></script>
+    <script src="../../../node_modules/betajs-ui/dist/betajs-ui-noscoped.js"></script>
+    <script src="../../../node_modules/betajs-dynamics/dist/betajs-dynamics-noscoped.js"></script>
+    <script src="../../../dist/betajs-dynamics-components-noscoped.js"></script>
+    <link rel="stylesheet" href="../../../dist/betajs-dynamics-components.css">
+    <link rel="stylesheet" href="../../../simulator/dist/styles.css">
+</head>
+
+<body>
+<div id="test">
+
+    <demo class="scrollpicker">
+        <ba-scrollpicker id="scrollpicker"></ba-scrollpicker>
+    </demo>
+
+    <h1>Tests for Textinput</h1>
+
+    <h3>Test Dynamics</h3>
+    <div id="dynamicsworking">{{test_dynamics}}</div>
+
+</div>
+
+<script>
+    var root = document.querySelector("#test");
+
+    var dynamic = new BetaJS.Dynamics.Dynamic({
+        element: root,
+        attrs : {
+            test_dynamics: "Dynamics Working?"
+        }
+    });
+
+    dynamic.activate();
+
+    function test(assert) {
+
+        //0. Dynamics working?
+        assert.equal(dynamic.get("test_dynamics"), document.querySelector('#dynamicsworking').innerHTML.trim());
+
+        var getDynamic = function (selector,addition) {
+            var dynamictag = 'ba-scrollpicker';
+            if (addition)
+                return document.querySelector(dynamictag + ' ' + selector);
+            else
+                return document.querySelector(selector || dynamictag);
+        }
+
+        //1. Elements loaded?
+        var demodynamic = dynamic.scope('>[tagname="ba-scrollpicker"]');
+        assert.equal(demodynamic.get('increment')*(demodynamic.get('last')-demodynamic.get('first'))+5,getDynamic('container',1).childNodes.length-1);
+
+        //2. Initial Element correct?
+        assert.equal(dynamic.get('upated_value'),getDynamic(' textarea').value);
+
+
+    }
+
+</script>
+
+</body>
+</html>

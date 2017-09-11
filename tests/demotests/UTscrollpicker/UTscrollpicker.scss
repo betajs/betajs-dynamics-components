@@ -1,0 +1,11 @@
+.scrollpicker {
+  @include flex(1 1 0);
+  @include display-flex;
+
+  height: 50%;
+  box-sizing: content-box;
+
+  ba-scrollpicker {
+    border: 1px solid $grey1;
+  }
+}

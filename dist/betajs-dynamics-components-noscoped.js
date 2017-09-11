@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.16 - 2017-09-10
+betajs-dynamics-components - v0.1.16 - 2017-09-11
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -257,7 +257,8 @@ Scoped.define("module:Scrollpicker", [
             first: 0,
             last: 23,
             increment: 1,
-            value_array: []
+            value_array: [],
+            last_elem: null
         },
 
         create: function() {
@@ -273,8 +274,10 @@ Scoped.define("module:Scrollpicker", [
 
                 var old_element = this.element()[0].querySelector("[data-id='" + this.get('current_value') + "']");
 
-                old_element.style.color = "";
-                old_element.style.background = "";
+                Object.assign(old_element.style, {
+                    color: "",
+                    background: ""
+                });
 
                 this.set('current_value', value);
 
@@ -287,8 +290,11 @@ Scoped.define("module:Scrollpicker", [
                 this.get('scroll').scrollToElement(element, {
                     animate: false
                 });
-                element.style.color = "black";
-                element.style.background = "white";
+
+                Object.assign(element.style, {
+                    color: "black",
+                    background: "white"
+                });
             }
 
         },
@@ -308,29 +314,35 @@ Scoped.define("module:Scrollpicker", [
 
             this.set('scroll', scroll);
 
-            //var self = this;
-            //element.scroll(function () {
-            //    logger.log('There is a Scroll happening');
-            //    logger.log(self.__cid);
-            //});
-
             var ele = element.querySelector("[data-id='" + this.get('current_value') + "']");
 
             this.execute('scroll_to_element', ele);
 
             scroll.on("scrollend", function() {
-                logger.log(this);
                 this.set('current_value', scroll.currentElement().dataset.id);
             }, this);
 
             scroll.on("scroll", function() {
-                for (var i = 0; i < element.children.length; ++i) {
-                    element.children[i].style.color = "#999";
-                    element.children[i].style.background = "#F4F4F4";
+                if (this.get('last_elem')) {
+                    Object.assign(this.get('last_elem').style, {
+                        color: "#999",
+                        background: "#F4F4F4"
+                    });
                 }
-                scroll.currentElement().style.color = "black";
-                scroll.currentElement().style.background = "white";
-            });
+                // for (var i = 0; i < element.children.length; ++i) {
+                //     Object.assign(element.children[i].style, {
+                //         color: "#999",
+                //         background: "#F4F4F4"
+                //     });
+                // }
+
+                var current_elem = scroll.currentElement();
+                Object.assign(current_elem.style, {
+                    color: "black",
+                    background: "white"
+                });
+                this.set('last_elem', current_elem);
+            }, this);
 
         },
 
@@ -408,13 +420,12 @@ Scoped.define("module:Textinput", [
         template: "\n<textarea autofocus onblur=\"{{this.execute('blur')}}\" value=\"{{=value}}\"></textarea>\n<pre>{{=preheighttext}}</pre>\n",
 
         attrs: {
-            value: 'Test',
+            value: null,
             height: 0,
             view: {
-                placeholder: "",
+                placeholder: '',
                 autofocus: true
             }
-
         },
 
         computed: {

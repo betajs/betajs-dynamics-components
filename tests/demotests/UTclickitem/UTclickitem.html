@@ -82,9 +82,9 @@
 
         //2. Insert a Function to change the model.value to a model.new_value
         var pushfunc_item = document.querySelector('#test_pushfunction button');
-        assert.equal(dynamic.scope('>[id="test_pushfunction"]').getProp('model.value'), pushfunc_item.innerHTML.trim());
+        assert.equal(dynamic.scope('>[id="test_pushfunction"]').getProp('model.value'), pushfunc_item.querySelector('value').innerHTML.trim());
         pushfunc_item.click();
-        assert.equal(dynamic.get('new_value'), pushfunc_item.innerHTML.trim());
+        assert.equal(dynamic.get('new_value'), pushfunc_item.querySelector('value').innerHTML.trim());
 
     }
 
