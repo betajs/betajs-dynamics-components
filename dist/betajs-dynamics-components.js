@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.16 - 2017-09-11
+betajs-dynamics-components - v0.1.16 - 2017-09-12
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1007,7 +1007,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.16 - 2017-09-11
+betajs-dynamics-components - v0.1.16 - 2017-09-12
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1283,8 +1283,8 @@ Scoped.define("module:Scrollpicker", [
                 var old_element = this.element()[0].querySelector("[data-id='" + this.get('current_value') + "']");
 
                 Object.assign(old_element.style, {
-                    color: "",
-                    background: ""
+                    color: null,
+                    background: null
                 });
 
                 this.set('current_value', value);
@@ -1337,12 +1337,6 @@ Scoped.define("module:Scrollpicker", [
                         background: "#F4F4F4"
                     });
                 }
-                // for (var i = 0; i < element.children.length; ++i) {
-                //     Object.assign(element.children[i].style, {
-                //         color: "#999",
-                //         background: "#F4F4F4"
-                //     });
-                // }
 
                 var current_elem = scroll.currentElement();
                 Object.assign(current_elem.style, {

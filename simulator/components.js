@@ -1,10 +1,10 @@
 var components = new BetaJS.Collections.Collection([
 
     // Tests
+    {value: "UTclickitem", externalfile: "../tests/demotests/UTclickitem/UTclickitem.html"},
     {value: "UTscrollpicker", externalfile: "../tests/demotests/UTscrollpicker/UTscrollpicker.html"},
     {value: "UTtextinput", externalfile: "../tests/demotests/UTtextinput/UTtextinput.html"},
     {value: "UTlist", externalfile: "../tests/demotests/UTlist/UTlist.html"},
-    {value: "UTclickitem", externalfile: "../tests/demotests/UTclickitem/UTclickitem.html"},
     {value: "UTdropdown", externalfile: "../tests/demotests/UTdropdown/UTdropdown.html"},
     {value: "Unit-Test-Selectable-Item", externalfile: "../tests/demotests/test_selectableitem.html"},
 

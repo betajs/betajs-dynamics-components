@@ -9,7 +9,7 @@ appframe {
       @include flex-direction(column);
 
       demo {
-        @include flex(1 1 0);
+        @include flex(0 0 auto);
         @include display-flex;
         border-bottom: 1px solid black;
 
