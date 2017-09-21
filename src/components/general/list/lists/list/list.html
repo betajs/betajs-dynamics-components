@@ -8,6 +8,7 @@
         ba-data:id="{{collectionitem.cid()}}"
         ba-data:pid="{{collectionitem.pid()}}"
         ba-functions="{{collectionitem.callbacks}}"
+        ba-isselected="{{selected === collectionitem}}"
         ba-event-forward:item="{{[collectionitem]}}"
         ba-view="{{collectionitem.view||view.listinner}}"
         ba-model="{{collectionitem}}">

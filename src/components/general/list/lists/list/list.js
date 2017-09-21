@@ -22,6 +22,7 @@ Scoped.define("module:List", [
         attrs: {
             listitem: "clickitem",
             model: false,
+            selected: null,
             view: {},
             infinite_scroll_options: {
                 disabled: true,
