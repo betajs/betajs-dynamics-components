@@ -36,6 +36,7 @@ Scoped.define("module:List", [
                     });
                 }
             },
+            loadmorebackwards: false,
             loadmorestyle: "button" //infinite
         },
 
@@ -57,8 +58,30 @@ Scoped.define("module:List", [
                 return promise;
             },
 
+            moreitemsbackwards: function() {
+                var promise = Promise.create();
+                this.set("loading", true);
+                Async.eventually(function() {
+                    this.get("loadmore").increase_backwards().callback(function() {
+                        promise.asyncSuccess(true);
+                        this.set("loading", false);
+                    }, this);
+                }, this);
+                return promise;
+            },
+
             getview: function(item) {
                 return this.getProp("view.listitem") || item.get("listitem") || (this.get("listitemfunc") ? (this.get("listitemfunc"))(item) : this.get("listitem"));
+            },
+
+            elementByItem: function(item) {
+                return this.activeElement().querySelector("[data-id='" + item.cid() + "']");
+            },
+
+            scrollTo: function(item) {
+                var element = this.execute("elementByItem", item);
+                var parent = this.activeElement();
+                parent.scrollTop = element.offsetTop - parent.offsetTop;
             }
         }
 

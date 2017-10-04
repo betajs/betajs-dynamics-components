@@ -1,3 +1,7 @@
+<ba-loadmore ba-if="{{loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}" ba-show="{{!loading}}" ba-event:loadmore="moreitemsbackwards">
+</ba-loadmore>
+<ba-loading ba-if="{{loadmore && loadmorebackwards}}" ba-show="{{loading}}">
+</ba-loading>
 
 <list ba-repeat="{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}"
       ba-interaction:scroll="{{infinite_scroll_options}}">
@@ -5,6 +9,7 @@
 
     <ba-{{getview(collectionitem)}}
         ba-cache
+        data-id="{{collectionitem.cid()}}"
         ba-data:id="{{collectionitem.cid()}}"
         ba-data:pid="{{collectionitem.pid()}}"
         ba-functions="{{collectionitem.callbacks}}"
