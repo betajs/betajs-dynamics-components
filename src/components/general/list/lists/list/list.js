@@ -37,6 +37,7 @@ Scoped.define("module:List", [
                 }
             },
             loadmorebackwards: false,
+            loadmoresteps: undefined,
             loadmorestyle: "button" //infinite
         },
 
@@ -50,7 +51,7 @@ Scoped.define("module:List", [
                 var promise = Promise.create();
                 this.set("loading", true);
                 Async.eventually(function() {
-                    this.get("loadmore").increase_forwards().callback(function() {
+                    this.get("loadmore").increase_forwards(this.get("loadmoresteps")).callback(function() {
                         promise.asyncSuccess(true);
                         this.set("loading", false);
                     }, this);
@@ -62,7 +63,7 @@ Scoped.define("module:List", [
                 var promise = Promise.create();
                 this.set("loading", true);
                 Async.eventually(function() {
-                    this.get("loadmore").increase_backwards().callback(function() {
+                    this.get("loadmore").increase_backwards(this.get("loadmoresteps")).callback(function() {
                         promise.asyncSuccess(true);
                         this.set("loading", false);
                     }, this);
