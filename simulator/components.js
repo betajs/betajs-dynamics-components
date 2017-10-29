@@ -10,8 +10,6 @@ var components = new BetaJS.Collections.Collection([
 
     //Overlaycontainer
     {value  : 'overlaycontainer'},
-    {value  : 'testoverlaycontainer'},
-
 
     // List - Listitems
     {value  : 'test_clickitem'},

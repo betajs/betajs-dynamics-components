@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.18 - 2017-10-22
+betajs-dynamics-components - v0.1.19 - 2017-10-29
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -80,7 +80,7 @@ ba-clickinput {
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none;
-  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+  -webkit-tap-highlight-color: transparent;
   height: 44px;
   line-height: 44px;
   list-style: none;
@@ -373,7 +373,7 @@ ba-eventitem {
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
-    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    -webkit-tap-highlight-color: transparent;
     padding: 0 22px;
     min-height: 44px;
     text-align: center;
@@ -516,28 +516,6 @@ ba-header {
     ba-header ba-list list button :hover {
       background: lightsalmon; }
 
-ba-toggle {
-  -webkit-box-flex: 1 1 0;
-  -moz-box-flex: 1 1 0;
-  -webkit-flex: 1 1 0;
-  -ms-flex: 1 1 0;
-  flex: 1 1 0;
-  display: -webkit-box;
-  display: -moz-box;
-  display: -ms-flexbox;
-  display: -webkit-flex;
-  display: flex; }
-  ba-toggle button {
-    -webkit-box-flex: 1 1 0;
-    -moz-box-flex: 1 1 0;
-    -webkit-flex: 1 1 0;
-    -ms-flex: 1 1 0;
-    flex: 1 1 0;
-    color: inherit; }
-
-ba-toggle button {
-  padding: 0 22px; }
-
 ba-toggle_menu {
   -webkit-box-flex: 1 1 0;
   -moz-box-flex: 1 1 0;
@@ -558,6 +536,28 @@ ba-toggle_menu {
     color: inherit; }
 
 ba-toggle_menu button {
+  padding: 0 22px; }
+
+ba-toggle {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; }
+  ba-toggle button {
+    -webkit-box-flex: 1 1 0;
+    -moz-box-flex: 1 1 0;
+    -webkit-flex: 1 1 0;
+    -ms-flex: 1 1 0;
+    flex: 1 1 0;
+    color: inherit; }
+
+ba-toggle button {
   padding: 0 22px; }
 
 ba-menu_web {
