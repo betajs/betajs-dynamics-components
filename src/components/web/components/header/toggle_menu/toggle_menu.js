@@ -18,6 +18,6 @@ Scoped.define("module:Toggle_menu", [
             }
         }
 
-    }).register();
+    }).registerFunctions({ /*<%= template_function_cache(filepathnoext + '.html') %>*/ }).register();
 
 });

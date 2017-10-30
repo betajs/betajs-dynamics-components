@@ -20,7 +20,7 @@ Scoped.define("module:Textinput", [
         computed: {
             "preheighttext:value": function() {
                 var s = this.get('value');
-                return s + (Strings.ends_with(s, "\n") ? " " : "");
+                return s + (Strings.ends_with(s || '', "\n") ? " " : "");
             }
         },
 
@@ -33,6 +33,6 @@ Scoped.define("module:Textinput", [
             }
         }
 
-    }).register();
+    }).registerFunctions({ /*<%= template_function_cache(filepathnoext + '.html') %>*/ }).register();
 
 });

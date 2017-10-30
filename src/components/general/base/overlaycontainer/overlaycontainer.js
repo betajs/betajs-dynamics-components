@@ -23,6 +23,6 @@ Scoped.define("module:Overlaycontainer", [
             };
         }
 
-    }).register();
+    }).registerFunctions({ /*<%= template_function_cache(filepathnoext + '.html') %>*/ }).register();
 
 });

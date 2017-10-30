@@ -8,6 +8,6 @@ Scoped.define("module:Loading", [
 
         template: "<%= template(filepathnoext + '.html') %>"
 
-    }).register();
+    }).registerFunctions({ /*<%= template_function_cache(filepathnoext + '.html') %>*/ }).register();
 
 });

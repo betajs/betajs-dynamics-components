@@ -28,6 +28,6 @@ Scoped.define("module:Addtitle", [
 
         }
 
-    }).register();
+    }).registerFunctions({ /*<%= template_function_cache(filepathnoext + '.html') %>*/ }).register();
 
 });

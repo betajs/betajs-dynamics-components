@@ -47,6 +47,6 @@ Scoped.define("module:Dropdown", [
             }
         }
 
-    }).register();
+    }).registerFunctions({ /*<%= template_function_cache(filepathnoext + '.html') %>*/ }).register();
 
 });

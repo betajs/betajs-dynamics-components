@@ -45,6 +45,6 @@ Scoped.define("module:Menu_web", [
             ]
         }
 
-    }).register();
+    }).registerFunctions({ /*<%= template_function_cache(filepathnoext + '.html') %>*/ }).register();
 
 });
