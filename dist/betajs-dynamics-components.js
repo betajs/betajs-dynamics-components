@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.19 - 2017-10-29
+betajs-dynamics-components - v0.1.19 - 2017-11-01
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1009,7 +1009,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.19 - 2017-10-29
+betajs-dynamics-components - v0.1.19 - 2017-11-01
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1474,6 +1474,39 @@ Scoped.define("module:Overlaycontainer", [
                 value: null,
                 showoverlay: true
             };
+        }
+
+    }).register();
+
+});
+Scoped.define("module:Clickcontainer", [
+    "dynamics:Dynamic",
+    "base:Loggers.Logger"
+], function(Dynamic, Logger, scoped) {
+
+    var logger = Logger.global().tag("dynamic", "list");
+
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
+
+        template: "\n<clickcontainer\n        ba-click=\"click()\">\n<ba-{{view.inner}}></ba-{{view.inner}}>\n</clickcontainer>\n\n",
+
+        attrs: {
+            view: {
+                inner: 'contactitem'
+            }
+        },
+
+        functions: {
+            click: function() {
+                logger.log('Click');
+
+                this.trigger('click', this.getProp('model.eventid'));
+                //logger.log("You Clicked item : " + this.properties().getProp('model.value'));
+                //logger.log(this.cid());
+                this.trigger('event', this.cid());
+            }
         }
 
     }).register();

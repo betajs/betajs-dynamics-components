@@ -1,5 +1,9 @@
 var components = new BetaJS.Collections.Collection([
 
+    //Listcontainers
+    {value  : 'eventitem'},
+    {value  : 'clickcontainer'},
+
     // Tests
     {value: "UTclickitem", externalfile: "../tests/demotests/UTclickitem/UTclickitem.html"},
     {value: "UTscrollpicker", externalfile: "../tests/demotests/UTscrollpicker/UTscrollpicker.html"},
@@ -32,9 +36,6 @@ var components = new BetaJS.Collections.Collection([
     {value  : 'test_list_listcollection'},
     {value  : 'test_list_pushfunc'},
 
-    //Swipecontainers
-    {value  : 'hoverbuttoncontainer'},
-    {value  : 'eventitem'},
 
     //Web -
     {value  : 'layout_web'},

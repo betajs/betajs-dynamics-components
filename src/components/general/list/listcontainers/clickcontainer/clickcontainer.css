@@ -1,0 +1,10 @@
+ba-clickitem {
+  background: white;
+  border-bottom: 1px solid grey; }
+  ba-clickitem clickitem {
+    padding: 0 22px;
+    height: 44px;
+    line-height: 44px;
+    display: block; }
+
+/*# sourceMappingURL=clickitem.css.map */

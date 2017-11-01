@@ -1,0 +1,24 @@
+
+$clickitemheigth : $listitemheight;
+
+ba-clickcontainer {
+  @include display-flex;
+  @include flex-direction(column);
+
+  button {
+    @include flex(1 1 0);
+    @include display-flex;
+    color : inherit;
+
+    value {@include flex(1 1 0)}
+  }
+  .icon {
+    icon {@include flex(0 0 $clickitemheigth)}
+    value {text-align: left}
+  }
+  .noicon {
+    icon {display: none}
+    value {text-align: center}
+  }
+
+}
