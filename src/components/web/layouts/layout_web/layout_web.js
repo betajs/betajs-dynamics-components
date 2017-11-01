@@ -44,6 +44,6 @@ Scoped.define("module:Layout_web", [
             });
         }
 
-    }).register();
+    }).registerFunctions({ /*<%= template_function_cache(filepathnoext + '.html') %>*/ }).register();
 
 });

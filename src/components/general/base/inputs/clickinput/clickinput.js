@@ -34,6 +34,6 @@ Scoped.define("module:Clickinput", [
             }
         }
 
-    }).register();
+    }).registerFunctions({ /*<%= template_function_cache(filepathnoext + '.html') %>*/ }).register();
 
 });

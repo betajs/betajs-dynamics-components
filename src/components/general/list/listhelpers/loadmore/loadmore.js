@@ -22,6 +22,6 @@ Scoped.define("module:Loadmore", [
 
         }
 
-    }).register();
+    }).registerFunctions({ /*<%= template_function_cache(filepathnoext + '.html') %>*/ }).register();
 
 });

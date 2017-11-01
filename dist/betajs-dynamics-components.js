@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.19 - 2017-11-01
+betajs-dynamics-components - v0.1.20 - 2017-11-01
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1009,7 +1009,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.19 - 2017-11-01
+betajs-dynamics-components - v0.1.20 - 2017-11-01
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1024,7 +1024,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.19"
+    "version": "0.1.20"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1080,7 +1080,7 @@ Scoped.define("module:Dropdown", [
             }
         }
 
-    }).register();
+    }).registerFunctions({ /**/"this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "showdropdown": function (obj) { with (obj) { return showdropdown; } }, "view.dropdown": function (obj) { with (obj) { return view.dropdown; } }, "[]": function (obj) { with (obj) { return []; } }, "dropdownmodel": function (obj) { with (obj) { return dropdownmodel; } }, "click()": function (obj) { with (obj) { return click(); } }/**/ }).register();
 
 });
 Scoped.define("module:Htmlview", [
@@ -1180,7 +1180,7 @@ Scoped.define("module:Htmlview", [
             iframe.style.width = iframe.parentNode.offsetWidth + "px";
             iframe.style.height = Math.ceil(inner_height * scale + 10) + "px";
         }
-    }).register();
+    }).registerFunctions({ /**//**/ }).register();
 
 });
 Scoped.define("module:Clickinput", [
@@ -1219,7 +1219,7 @@ Scoped.define("module:Clickinput", [
             }
         }
 
-    }).register();
+    }).registerFunctions({ /**/"!view.edit || !view.externaledit": function (obj) { with (obj) { return !view.edit || !view.externaledit; } }, "model.value": function (obj) { with (obj) { return model.value; } }, "view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }, "view.edit": function (obj) { with (obj) { return view.edit; } }, "view.edit = false": function (obj) { with (obj) { return view.edit = false; } }, "edititem()": function (obj) { with (obj) { return edititem(); } }/**/ }).register();
 
 });
 Scoped.define("module:Input", [
@@ -1242,7 +1242,7 @@ Scoped.define("module:Input", [
 
         }
 
-    }).register();
+    }).registerFunctions({ /**/"view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }/**/ }).register();
 
 });
 Scoped.define("module:Scrollpicker", [
@@ -1381,7 +1381,7 @@ Scoped.define("module:Scrollpicker", [
 
         }
 
-    }).register();
+    }).registerFunctions({ /**/"value_array": function (obj) { with (obj) { return value_array; } }, "element_value": function (obj) { with (obj) { return element_value; } }, "select_element(element_value)": function (obj) { with (obj) { return select_element(element_value); } }/**/ }).register();
 
 });
 Scoped.define("module:Search", [
@@ -1410,7 +1410,7 @@ Scoped.define("module:Search", [
             }
         }
 
-    }).register();
+    }).registerFunctions({ /**/"!loading": function (obj) { with (obj) { return !loading; } }, "loading": function (obj) { with (obj) { return loading; } }, "view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }, "value": function (obj) { with (obj) { return value; } }/**/ }).register();
 
 });
 Scoped.define("module:Textinput", [
@@ -1435,7 +1435,7 @@ Scoped.define("module:Textinput", [
         computed: {
             "preheighttext:value": function() {
                 var s = this.get('value');
-                return s + (Strings.ends_with(s, "\n") ? " " : "");
+                return s + (Strings.ends_with(s || '', "\n") ? " " : "");
             }
         },
 
@@ -1448,7 +1448,7 @@ Scoped.define("module:Textinput", [
             }
         }
 
-    }).register();
+    }).registerFunctions({ /**/"this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "value": function (obj) { with (obj) { return value; } }, "preheighttext": function (obj) { with (obj) { return preheighttext; } }/**/ }).register();
 
 });
 Scoped.define("module:Overlaycontainer", [
@@ -1476,7 +1476,7 @@ Scoped.define("module:Overlaycontainer", [
             };
         }
 
-    }).register();
+    }).registerFunctions({ /**/"showoverlay": function (obj) { with (obj) { return showoverlay; } }, "view.overlay": function (obj) { with (obj) { return view.overlay; } }, "model.message": function (obj) { with (obj) { return model.message; } }, "showoverlay = false": function (obj) { with (obj) { return showoverlay = false; } }/**/ }).register();
 
 });
 Scoped.define("module:Clickcontainer", [
@@ -1494,7 +1494,7 @@ Scoped.define("module:Clickcontainer", [
 
         attrs: {
             view: {
-                inner: 'contactitem'
+                inner: 'eventitem'
             }
         },
 
@@ -1522,7 +1522,7 @@ Scoped.define("module:Loading", [
 
         template: "\n<div class=\"sk-circle\">\n    <div class=\"sk-circle1 sk-child\"></div>\n    <div class=\"sk-circle2 sk-child\"></div>\n    <div class=\"sk-circle3 sk-child\"></div>\n    <div class=\"sk-circle4 sk-child\"></div>\n    <div class=\"sk-circle5 sk-child\"></div>\n    <div class=\"sk-circle6 sk-child\"></div>\n    <div class=\"sk-circle7 sk-child\"></div>\n    <div class=\"sk-circle8 sk-child\"></div>\n    <div class=\"sk-circle9 sk-child\"></div>\n    <div class=\"sk-circle10 sk-child\"></div>\n    <div class=\"sk-circle11 sk-child\"></div>\n    <div class=\"sk-circle12 sk-child\"></div>\n</div>\n"
 
-    }).register();
+    }).registerFunctions({ /**//**/ }).register();
 
 });
 Scoped.define("module:Loadmore", [
@@ -1549,7 +1549,7 @@ Scoped.define("module:Loadmore", [
 
         }
 
-    }).register();
+    }).registerFunctions({ /**/"load_more()": function (obj) { with (obj) { return load_more(); } }/**/ }).register();
 
 });
 Scoped.define("module:Clickitem", [
@@ -1590,7 +1590,10 @@ Scoped.define("module:Clickitem", [
             }, this);
         }
 
-    }).register();
+    }).registerFunctions({ /**/"{\n            'icon' : model.icon,\n            'noicon' : !model.icon\n        }": function (obj) { with (obj) { return {
+            'icon' : model.icon,
+            'noicon' : !model.icon
+        }; } }, "model.icon": function (obj) { with (obj) { return model.icon; } }, "model.value": function (obj) { with (obj) { return model.value; } }, "click()": function (obj) { with (obj) { return click(); } }/**/ }).register();
 
 });
 Scoped.define("module:Eventitem", [
@@ -1604,7 +1607,7 @@ Scoped.define("module:Eventitem", [
         scoped: scoped
     }, {
 
-        template: "\n<button\n        class=\"{{model.class}}\">\n    {{model.value}} - {{counter}}\n</button>",
+        template: "\n<button\n        class=\"{{model['class']}}\">\n    {{model.value}} - {{counter}}\n</button>",
 
         attrs: {
             counter: 0,
@@ -1631,7 +1634,7 @@ Scoped.define("module:Eventitem", [
 
         }
 
-    }).register();
+    }).registerFunctions({ /**/"model['class']": function (obj) { with (obj) { return model['class']; } }, "model.value": function (obj) { with (obj) { return model.value; } }, "counter": function (obj) { with (obj) { return counter; } }/**/ }).register();
 
 });
 /*
@@ -1696,7 +1699,7 @@ Scoped.define("module:Selectableitem", [
 
         }
 
-    }).register();
+    }).registerFunctions({ /**/"{selected : selected.cid == this.cid()}": function (obj) { with (obj) { return {selected : selected.cid == this.cid()}; } }, "model.value": function (obj) { with (obj) { return model.value; } }, "select()": function (obj) { with (obj) { return select(); } }/**/ }).register();
 });
 Scoped.define("module:List", [
     "dynamics:Dynamic",
@@ -1786,7 +1789,7 @@ Scoped.define("module:List", [
             }
         }
 
-    }).register();
+    }).registerFunctions({ /**/"loadmore && loadmorestyle !== 'infinite' && loadmorebackwards": function (obj) { with (obj) { return loadmore && loadmorestyle !== 'infinite' && loadmorebackwards; } }, "!loading": function (obj) { with (obj) { return !loading; } }, "loadmore && loadmorebackwards": function (obj) { with (obj) { return loadmore && loadmorebackwards; } }, "loading": function (obj) { with (obj) { return loading; } }, "(model.listcollection||listcollection)": function (obj) { with (obj) { return (model.listcollection||listcollection); } }, "infinite_scroll_options": function (obj) { with (obj) { return infinite_scroll_options; } }, "getview(collectionitem)": function (obj) { with (obj) { return getview(collectionitem); } }, "collectionitem.cid()": function (obj) { with (obj) { return collectionitem.cid(); } }, "collectionitem.pid()": function (obj) { with (obj) { return collectionitem.pid(); } }, "collectionitem.callbacks": function (obj) { with (obj) { return collectionitem.callbacks; } }, "selected === collectionitem": function (obj) { with (obj) { return selected === collectionitem; } }, "[collectionitem]": function (obj) { with (obj) { return [collectionitem]; } }, "collectionitem.view||view.listinner": function (obj) { with (obj) { return collectionitem.view||view.listinner; } }, "collectionitem": function (obj) { with (obj) { return collectionitem; } }, "loadmore && loadmorestyle !== 'infinite'": function (obj) { with (obj) { return loadmore && loadmorestyle !== 'infinite'; } }, "loadmore": function (obj) { with (obj) { return loadmore; } }/**/ }).register();
 
 });
 // TODO:
@@ -1836,7 +1839,7 @@ Scoped.define("module:Searchlist", [
             });
         }
 
-    }).register();
+    }).registerFunctions({ /**/"searchingindication": function (obj) { with (obj) { return searchingindication; } }, "searchvalue": function (obj) { with (obj) { return searchvalue; } }, "view.show_searchbox": function (obj) { with (obj) { return view.show_searchbox; } }, "view": function (obj) { with (obj) { return view; } }, "[]": function (obj) { with (obj) { return []; } }/**/ }).register();
 
 });
 Scoped.define("module:Titledlist", [
@@ -1896,7 +1899,7 @@ Scoped.define("module:Titledlist", [
 
         }
 
-    }).register();
+    }).registerFunctions({ /**/"view.titleitem": function (obj) { with (obj) { return view.titleitem; } }, "[]": function (obj) { with (obj) { return []; } }, "model.title_model": function (obj) { with (obj) { return model.title_model; } }, "model.title_model.value": function (obj) { with (obj) { return model.title_model.value; } }, "!collapsed": function (obj) { with (obj) { return !collapsed; } }, "click_title()": function (obj) { with (obj) { return click_title(); } }/**/ }).register();
 
 });
 Scoped.define("module:Addtitle", [
@@ -1929,7 +1932,7 @@ Scoped.define("module:Addtitle", [
 
         }
 
-    }).register();
+    }).registerFunctions({ /**/"model.value": function (obj) { with (obj) { return model.value; } }, "clicktitle()": function (obj) { with (obj) { return clicktitle(); } }, "addbutton()": function (obj) { with (obj) { return addbutton(); } }/**/ }).register();
 
 });
 Scoped.define("module:Header", [
@@ -1965,7 +1968,7 @@ Scoped.define("module:Header", [
             }]
         }
 
-    }).register();
+    }).registerFunctions({ /**/"left_collection": function (obj) { with (obj) { return left_collection; } }/**/ }).register();
 
 });
 Scoped.define("module:Toggle_menu", [
@@ -1988,7 +1991,7 @@ Scoped.define("module:Toggle_menu", [
             }
         }
 
-    }).register();
+    }).registerFunctions({ /**/"toggle_icon": function (obj) { with (obj) { return toggle_icon; } }, "toggle_menu()": function (obj) { with (obj) { return toggle_menu(); } }/**/ }).register();
 
 });
 Scoped.define("module:Toggle", [
@@ -2013,7 +2016,7 @@ Scoped.define("module:Toggle", [
             }
         }
 
-    }).register();
+    }).registerFunctions({ /**/"toggle_icon": function (obj) { with (obj) { return toggle_icon; } }, "toggle_menu()": function (obj) { with (obj) { return toggle_menu(); } }/**/ }).register();
 
 });
 Scoped.define("module:Menu_web", [
@@ -2063,7 +2066,7 @@ Scoped.define("module:Menu_web", [
             ]
         }
 
-    }).register();
+    }).registerFunctions({ /**/"false": function (obj) { with (obj) { return false; } }, "model": function (obj) { with (obj) { return model; } }, "menu_collection": function (obj) { with (obj) { return menu_collection; } }/**/ }).register();
 
 });
 Scoped.define("module:Layout_web", [
@@ -2112,7 +2115,7 @@ Scoped.define("module:Layout_web", [
             });
         }
 
-    }).register();
+    }).registerFunctions({ /**/"view.header": function (obj) { with (obj) { return view.header; } }, "view.menu": function (obj) { with (obj) { return view.menu; } }, "view.display_menu": function (obj) { with (obj) { return view.display_menu; } }, "view.menuview": function (obj) { with (obj) { return view.menuview; } }, "view.content": function (obj) { with (obj) { return view.content; } }, "contentmodel": function (obj) { with (obj) { return contentmodel; } }, "view.contentview": function (obj) { with (obj) { return view.contentview; } }, "view.contentattrs": function (obj) { with (obj) { return view.contentattrs; } }/**/ }).register();
 
 });
 }).call(Scoped);

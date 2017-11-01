@@ -134,6 +134,6 @@ Scoped.define("module:Scrollpicker", [
 
         }
 
-    }).register();
+    }).registerFunctions({ /*<%= template_function_cache(filepathnoext + '.html') %>*/ }).register();
 
 });

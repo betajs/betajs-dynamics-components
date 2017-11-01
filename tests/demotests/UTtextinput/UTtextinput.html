@@ -45,7 +45,7 @@
 
         var getTextinput = function (selector) {
             return document.querySelector(selector || 'ba-textinput');
-        }
+        };
 
         //1. Input Field loading correct value
         assert.equal(dynamic.get('initial_value'),getTextinput('ba-textinput textarea').value);

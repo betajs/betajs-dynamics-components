@@ -20,6 +20,6 @@ Scoped.define("module:Toggle", [
             }
         }
 
-    }).register();
+    }).registerFunctions({ /*<%= template_function_cache(filepathnoext + '.html') %>*/ }).register();
 
 });
