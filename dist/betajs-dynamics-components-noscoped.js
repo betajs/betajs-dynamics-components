@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.20 - 2017-11-01
+betajs-dynamics-components - v0.1.21 - 2017-11-08
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.20"
+    "version": "0.1.21"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -70,7 +70,7 @@ Scoped.define("module:Dropdown", [
             }
         }
 
-    }).registerFunctions({ /**/"this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "showdropdown": function (obj) { with (obj) { return showdropdown; } }, "view.dropdown": function (obj) { with (obj) { return view.dropdown; } }, "[]": function (obj) { with (obj) { return []; } }, "dropdownmodel": function (obj) { with (obj) { return dropdownmodel; } }, "click()": function (obj) { with (obj) { return click(); } }/**/ }).register();
+    }).registerFunctions({ /**/"this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "showdropdown": function (obj) { with (obj) { return showdropdown; } }, "view.dropdown": function (obj) { with (obj) { return view.dropdown; } }, "[]": function (obj) { with (obj) { return []; } }, "dropdownmodel": function (obj) { with (obj) { return dropdownmodel; } }, "click()": function (obj) { with (obj) { return click(); } }, "hide_dropdown": function (obj) { with (obj) { return hide_dropdown; } }/**/ }).register();
 
 });
 Scoped.define("module:Htmlview", [
@@ -723,7 +723,6 @@ Scoped.define("module:List", [
                 enable_scroll_modifier: "",
                 type: "infinitescroll",
                 append: function(count, callback) {
-                    console.log("append");
                     this.execute("moreitems").success(function() {
                         callback(1, true);
                     });
@@ -779,7 +778,7 @@ Scoped.define("module:List", [
             }
         }
 
-    }).registerFunctions({ /**/"loadmore && loadmorestyle !== 'infinite' && loadmorebackwards": function (obj) { with (obj) { return loadmore && loadmorestyle !== 'infinite' && loadmorebackwards; } }, "!loading": function (obj) { with (obj) { return !loading; } }, "loadmore && loadmorebackwards": function (obj) { with (obj) { return loadmore && loadmorebackwards; } }, "loading": function (obj) { with (obj) { return loading; } }, "(model.listcollection||listcollection)": function (obj) { with (obj) { return (model.listcollection||listcollection); } }, "infinite_scroll_options": function (obj) { with (obj) { return infinite_scroll_options; } }, "getview(collectionitem)": function (obj) { with (obj) { return getview(collectionitem); } }, "collectionitem.cid()": function (obj) { with (obj) { return collectionitem.cid(); } }, "collectionitem.pid()": function (obj) { with (obj) { return collectionitem.pid(); } }, "collectionitem.callbacks": function (obj) { with (obj) { return collectionitem.callbacks; } }, "selected === collectionitem": function (obj) { with (obj) { return selected === collectionitem; } }, "[collectionitem]": function (obj) { with (obj) { return [collectionitem]; } }, "collectionitem.view||view.listinner": function (obj) { with (obj) { return collectionitem.view||view.listinner; } }, "collectionitem": function (obj) { with (obj) { return collectionitem; } }, "loadmore && loadmorestyle !== 'infinite'": function (obj) { with (obj) { return loadmore && loadmorestyle !== 'infinite'; } }, "loadmore": function (obj) { with (obj) { return loadmore; } }/**/ }).register();
+    }).registerFunctions({ /**/"loadmore && loadmorestyle !== 'infinite' && loadmorebackwards": function (obj) { with (obj) { return loadmore && loadmorestyle !== 'infinite' && loadmorebackwards; } }, "!loading": function (obj) { with (obj) { return !loading; } }, "loadmore && loadmorebackwards": function (obj) { with (obj) { return loadmore && loadmorebackwards; } }, "loading": function (obj) { with (obj) { return loading; } }, "(model.listcollection||listcollection)": function (obj) { with (obj) { return (model.listcollection||listcollection); } }, "infinite_scroll_options": function (obj) { with (obj) { return infinite_scroll_options; } }, "getview(collectionitem)": function (obj) { with (obj) { return getview(collectionitem); } }, "collectionitem.cid()": function (obj) { with (obj) { return collectionitem.cid(); } }, "collectionitem.pid()": function (obj) { with (obj) { return collectionitem.pid(); } }, "collectionitem.callbacks": function (obj) { with (obj) { return collectionitem.callbacks; } }, "selected === collectionitem": function (obj) { with (obj) { return selected === collectionitem; } }, "[collectionitem]": function (obj) { with (obj) { return [collectionitem]; } }, "collectionitem.view||view.listinner": function (obj) { with (obj) { return collectionitem.view||view.listinner; } }, "collectionitem": function (obj) { with (obj) { return collectionitem; } }, "loadmore && loadmorestyle !== 'infinite'": function (obj) { with (obj) { return loadmore && loadmorestyle !== 'infinite'; } }, "loadmore": function (obj) { with (obj) { return loadmore; } }, "moreitemsbackwards": function (obj) { with (obj) { return moreitemsbackwards; } }, "moreitems": function (obj) { with (obj) { return moreitems; } }/**/ }).register();
 
 });
 // TODO:
@@ -799,14 +798,14 @@ Scoped.define("module:Searchlist", [
         scoped: scoped
     }, {
 
-        template: "\n<ba-search\n        ba-loading=\"{{searchingindication}}\"\n        ba-value=\"{{=searchvalue}}\"\n        ba-if=\"{{view.show_searchbox}}\"\n        ba-view=\"{{view}}\"></ba-search>\n\n<ba-loading ba-if=\"{{searchingindication}}\">\n</ba-loading>\n\n<ba-list ba-noscope ba-event-forward=\"{{[]}}\"></ba-list>\n",
+        template: "\n<ba-search\n        ba-loading=\"{{searchingindication}}\"\n        ba-value=\"{{=searchvalue}}\"\n        ba-if=\"{{view.showsearch}}\"\n        ba-view=\"{{view}}\"></ba-search>\n\n<ba-loading ba-if=\"{{searchingindication}}\">\n</ba-loading>\n\n<ba-list ba-noscope ba-event-forward=\"{{[]}}\"></ba-list>\n",
 
         attrs: {
             searchvalue: "",
             searchingindication: false,
             searching: false,
             view: {
-                show_searchbox: true
+                showsearch: true
             }
         },
 
@@ -829,7 +828,7 @@ Scoped.define("module:Searchlist", [
             });
         }
 
-    }).registerFunctions({ /**/"searchingindication": function (obj) { with (obj) { return searchingindication; } }, "searchvalue": function (obj) { with (obj) { return searchvalue; } }, "view.show_searchbox": function (obj) { with (obj) { return view.show_searchbox; } }, "view": function (obj) { with (obj) { return view; } }, "[]": function (obj) { with (obj) { return []; } }/**/ }).register();
+    }).registerFunctions({ /**/"searchingindication": function (obj) { with (obj) { return searchingindication; } }, "searchvalue": function (obj) { with (obj) { return searchvalue; } }, "view.showsearch": function (obj) { with (obj) { return view.showsearch; } }, "view": function (obj) { with (obj) { return view; } }, "[]": function (obj) { with (obj) { return []; } }/**/ }).register();
 
 });
 Scoped.define("module:Titledlist", [
@@ -961,29 +960,6 @@ Scoped.define("module:Header", [
     }).registerFunctions({ /**/"left_collection": function (obj) { with (obj) { return left_collection; } }/**/ }).register();
 
 });
-Scoped.define("module:Toggle_menu", [
-    "dynamics:Dynamic"
-], function(Dynamic, scoped) {
-
-    return Dynamic.extend({
-        scoped: scoped
-    }, {
-
-        template: "<button ba-click=\"toggle_menu()\" class=\"{{toggle_icon}}\"></button>",
-
-        attrs: {
-            toggle_icon: 'icon-reorder'
-        },
-
-        functions: {
-            toggle_menu: function() {
-                this.channel('global').trigger('toggle_menu');
-            }
-        }
-
-    }).registerFunctions({ /**/"toggle_icon": function (obj) { with (obj) { return toggle_icon; } }, "toggle_menu()": function (obj) { with (obj) { return toggle_menu(); } }/**/ }).register();
-
-});
 Scoped.define("module:Toggle", [
     "dynamics:Dynamic"
 ], function(Dynamic, scoped) {
@@ -1003,6 +979,29 @@ Scoped.define("module:Toggle", [
                 this.scope("<+[tagname='ba-layout_web']").call('toggle_menu');
 
                 this.channel('toggle').trigger('toggle', 'menu');
+            }
+        }
+
+    }).registerFunctions({ /**/"toggle_icon": function (obj) { with (obj) { return toggle_icon; } }, "toggle_menu()": function (obj) { with (obj) { return toggle_menu(); } }/**/ }).register();
+
+});
+Scoped.define("module:Toggle_menu", [
+    "dynamics:Dynamic"
+], function(Dynamic, scoped) {
+
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
+
+        template: "<button ba-click=\"toggle_menu()\" class=\"{{toggle_icon}}\"></button>",
+
+        attrs: {
+            toggle_icon: 'icon-reorder'
+        },
+
+        functions: {
+            toggle_menu: function() {
+                this.channel('global').trigger('toggle_menu');
             }
         }
 
@@ -1097,12 +1096,6 @@ Scoped.define("module:Layout_web", [
             toggle_menu: function() {
                 this.setProp('view.display_menu', !this.getProp('view.display_menu'));
             }
-        },
-
-        create: function() {
-            this.on('toggle', function() {
-                console.log('Toggle the menu');
-            });
         }
 
     }).registerFunctions({ /**/"view.header": function (obj) { with (obj) { return view.header; } }, "view.menu": function (obj) { with (obj) { return view.menu; } }, "view.display_menu": function (obj) { with (obj) { return view.display_menu; } }, "view.menuview": function (obj) { with (obj) { return view.menuview; } }, "view.content": function (obj) { with (obj) { return view.content; } }, "contentmodel": function (obj) { with (obj) { return contentmodel; } }, "view.contentview": function (obj) { with (obj) { return view.contentview; } }, "view.contentattrs": function (obj) { with (obj) { return view.contentattrs; } }/**/ }).register();

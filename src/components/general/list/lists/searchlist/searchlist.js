@@ -22,7 +22,7 @@ Scoped.define("module:Searchlist", [
             searchingindication: false,
             searching: false,
             view: {
-                show_searchbox: true
+                showsearch: true
             }
         },
 
