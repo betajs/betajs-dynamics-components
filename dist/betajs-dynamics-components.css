@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.20 - 2017-11-01
+betajs-dynamics-components - v0.1.20 - 2017-11-09
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -236,40 +236,7 @@ ba-clickcontainer {
   display: -moz-box;
   display: -ms-flexbox;
   display: -webkit-flex;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column; }
-  ba-clickcontainer button {
-    -webkit-box-flex: 1 1 0;
-    -moz-box-flex: 1 1 0;
-    -webkit-flex: 1 1 0;
-    -ms-flex: 1 1 0;
-    flex: 1 1 0;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    color: inherit; }
-    ba-clickcontainer button value {
-      -webkit-box-flex: 1 1 0;
-      -moz-box-flex: 1 1 0;
-      -webkit-flex: 1 1 0;
-      -ms-flex: 1 1 0;
-      flex: 1 1 0; }
-  ba-clickcontainer .icon icon {
-    -webkit-box-flex: 0 0 44px;
-    -moz-box-flex: 0 0 44px;
-    -webkit-flex: 0 0 44px;
-    -ms-flex: 0 0 44px;
-    flex: 0 0 44px; }
-  ba-clickcontainer .icon value {
-    text-align: left; }
-  ba-clickcontainer .noicon icon {
-    display: none; }
-  ba-clickcontainer .noicon value {
-    text-align: center; }
+  display: flex; }
 
 .sk-circle {
   margin: auto auto;

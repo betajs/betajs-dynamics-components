@@ -5,6 +5,7 @@
 Scoped.define("module:Searchlist", [
     "dynamics:Dynamic"
 ], [
+    "dynamics:Partials.EventForwardPartial",
     "module:List",
     "module:Search",
     "module:Loading",

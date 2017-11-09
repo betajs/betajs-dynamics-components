@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.20 - 2017-11-01
+betajs-dynamics-components - v0.1.20 - 2017-11-09
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1009,7 +1009,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.20 - 2017-11-01
+betajs-dynamics-components - v0.1.20 - 2017-11-09
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1080,7 +1080,7 @@ Scoped.define("module:Dropdown", [
             }
         }
 
-    }).registerFunctions({ /**/"this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "showdropdown": function (obj) { with (obj) { return showdropdown; } }, "view.dropdown": function (obj) { with (obj) { return view.dropdown; } }, "[]": function (obj) { with (obj) { return []; } }, "dropdownmodel": function (obj) { with (obj) { return dropdownmodel; } }, "click()": function (obj) { with (obj) { return click(); } }/**/ }).register();
+    }).registerFunctions({ /**/"this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "showdropdown": function (obj) { with (obj) { return showdropdown; } }, "view.dropdown": function (obj) { with (obj) { return view.dropdown; } }, "[]": function (obj) { with (obj) { return []; } }, "dropdownmodel": function (obj) { with (obj) { return dropdownmodel; } }, "click()": function (obj) { with (obj) { return click(); } }, "hide_dropdown": function (obj) { with (obj) { return hide_dropdown; } }/**/ }).register();
 
 });
 Scoped.define("module:Htmlview", [
@@ -1490,7 +1490,7 @@ Scoped.define("module:Clickcontainer", [
         scoped: scoped
     }, {
 
-        template: "\n<clickcontainer\n        ba-click=\"click()\">\n<ba-{{view.inner}}></ba-{{view.inner}}>\n</clickcontainer>\n\n",
+        template: "\n<clickcontainer ba-test=\"test\"\n        ba-click=\"click()\">\n<ba-{{view.inner}}\n    ba-noscope></ba-{{view.inner}}>\n</clickcontainer>\n\n",
 
         attrs: {
             view: {
@@ -1500,12 +1500,7 @@ Scoped.define("module:Clickcontainer", [
 
         functions: {
             click: function() {
-                logger.log('Click');
-
-                this.trigger('click', this.getProp('model.eventid'));
-                //logger.log("You Clicked item : " + this.properties().getProp('model.value'));
-                //logger.log(this.cid());
-                this.trigger('event', this.cid());
+                this.trigger('clickcontainerclick', this.get('model'));
             }
         }
 
@@ -1789,7 +1784,7 @@ Scoped.define("module:List", [
             }
         }
 
-    }).registerFunctions({ /**/"loadmore && loadmorestyle !== 'infinite' && loadmorebackwards": function (obj) { with (obj) { return loadmore && loadmorestyle !== 'infinite' && loadmorebackwards; } }, "!loading": function (obj) { with (obj) { return !loading; } }, "loadmore && loadmorebackwards": function (obj) { with (obj) { return loadmore && loadmorebackwards; } }, "loading": function (obj) { with (obj) { return loading; } }, "(model.listcollection||listcollection)": function (obj) { with (obj) { return (model.listcollection||listcollection); } }, "infinite_scroll_options": function (obj) { with (obj) { return infinite_scroll_options; } }, "getview(collectionitem)": function (obj) { with (obj) { return getview(collectionitem); } }, "collectionitem.cid()": function (obj) { with (obj) { return collectionitem.cid(); } }, "collectionitem.pid()": function (obj) { with (obj) { return collectionitem.pid(); } }, "collectionitem.callbacks": function (obj) { with (obj) { return collectionitem.callbacks; } }, "selected === collectionitem": function (obj) { with (obj) { return selected === collectionitem; } }, "[collectionitem]": function (obj) { with (obj) { return [collectionitem]; } }, "collectionitem.view||view.listinner": function (obj) { with (obj) { return collectionitem.view||view.listinner; } }, "collectionitem": function (obj) { with (obj) { return collectionitem; } }, "loadmore && loadmorestyle !== 'infinite'": function (obj) { with (obj) { return loadmore && loadmorestyle !== 'infinite'; } }, "loadmore": function (obj) { with (obj) { return loadmore; } }/**/ }).register();
+    }).registerFunctions({ /**/"loadmore && loadmorestyle !== 'infinite' && loadmorebackwards": function (obj) { with (obj) { return loadmore && loadmorestyle !== 'infinite' && loadmorebackwards; } }, "!loading": function (obj) { with (obj) { return !loading; } }, "loadmore && loadmorebackwards": function (obj) { with (obj) { return loadmore && loadmorebackwards; } }, "loading": function (obj) { with (obj) { return loading; } }, "(model.listcollection||listcollection)": function (obj) { with (obj) { return (model.listcollection||listcollection); } }, "infinite_scroll_options": function (obj) { with (obj) { return infinite_scroll_options; } }, "getview(collectionitem)": function (obj) { with (obj) { return getview(collectionitem); } }, "collectionitem.cid()": function (obj) { with (obj) { return collectionitem.cid(); } }, "collectionitem.pid()": function (obj) { with (obj) { return collectionitem.pid(); } }, "collectionitem.callbacks": function (obj) { with (obj) { return collectionitem.callbacks; } }, "selected === collectionitem": function (obj) { with (obj) { return selected === collectionitem; } }, "[collectionitem]": function (obj) { with (obj) { return [collectionitem]; } }, "collectionitem.view||view.listinner": function (obj) { with (obj) { return collectionitem.view||view.listinner; } }, "collectionitem": function (obj) { with (obj) { return collectionitem; } }, "loadmore && loadmorestyle !== 'infinite'": function (obj) { with (obj) { return loadmore && loadmorestyle !== 'infinite'; } }, "loadmore": function (obj) { with (obj) { return loadmore; } }, "moreitemsbackwards": function (obj) { with (obj) { return moreitemsbackwards; } }, "moreitems": function (obj) { with (obj) { return moreitems; } }/**/ }).register();
 
 });
 // TODO:
@@ -1799,6 +1794,7 @@ Scoped.define("module:List", [
 Scoped.define("module:Searchlist", [
     "dynamics:Dynamic"
 ], [
+    "dynamics:Partials.EventForwardPartial",
     "module:List",
     "module:Search",
     "module:Loading",
