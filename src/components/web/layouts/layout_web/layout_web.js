@@ -36,12 +36,6 @@ Scoped.define("module:Layout_web", [
             toggle_menu: function() {
                 this.setProp('view.display_menu', !this.getProp('view.display_menu'));
             }
-        },
-
-        create: function() {
-            this.on('toggle', function() {
-                console.log('Toggle the menu');
-            });
         }
 
     }).registerFunctions({ /*<%= template_function_cache(filepathnoext + '.html') %>*/ }).register();

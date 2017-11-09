@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.20 - 2017-11-09
+betajs-dynamics-components - v0.1.21 - 2017-11-10
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.20"
+    "version": "0.1.21"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -718,7 +718,6 @@ Scoped.define("module:List", [
                 enable_scroll_modifier: "",
                 type: "infinitescroll",
                 append: function(count, callback) {
-                    console.log("append");
                     this.execute("moreitems").success(function() {
                         callback(1, true);
                     });
@@ -795,14 +794,14 @@ Scoped.define("module:Searchlist", [
         scoped: scoped
     }, {
 
-        template: "\n<ba-search\n        ba-loading=\"{{searchingindication}}\"\n        ba-value=\"{{=searchvalue}}\"\n        ba-if=\"{{view.show_searchbox}}\"\n        ba-view=\"{{view}}\"></ba-search>\n\n<ba-loading ba-if=\"{{searchingindication}}\">\n</ba-loading>\n\n<ba-list ba-noscope ba-event-forward=\"{{[]}}\"></ba-list>\n",
+        template: "\n<ba-search\n        ba-loading=\"{{searchingindication}}\"\n        ba-value=\"{{=searchvalue}}\"\n        ba-if=\"{{view.showsearch}}\"\n        ba-view=\"{{view}}\"></ba-search>\n\n<ba-loading ba-if=\"{{searchingindication}}\">\n</ba-loading>\n\n<ba-list ba-noscope ba-event-forward=\"{{[]}}\"></ba-list>\n",
 
         attrs: {
             searchvalue: "",
             searchingindication: false,
             searching: false,
             view: {
-                show_searchbox: true
+                showsearch: true
             }
         },
 
@@ -825,7 +824,7 @@ Scoped.define("module:Searchlist", [
             });
         }
 
-    }).registerFunctions({ /**/"searchingindication": function (obj) { with (obj) { return searchingindication; } }, "searchvalue": function (obj) { with (obj) { return searchvalue; } }, "view.show_searchbox": function (obj) { with (obj) { return view.show_searchbox; } }, "view": function (obj) { with (obj) { return view; } }, "[]": function (obj) { with (obj) { return []; } }/**/ }).register();
+    }).registerFunctions({ /**/"searchingindication": function (obj) { with (obj) { return searchingindication; } }, "searchvalue": function (obj) { with (obj) { return searchvalue; } }, "view.showsearch": function (obj) { with (obj) { return view.showsearch; } }, "view": function (obj) { with (obj) { return view; } }, "[]": function (obj) { with (obj) { return []; } }/**/ }).register();
 
 });
 Scoped.define("module:Titledlist", [
@@ -1093,12 +1092,6 @@ Scoped.define("module:Layout_web", [
             toggle_menu: function() {
                 this.setProp('view.display_menu', !this.getProp('view.display_menu'));
             }
-        },
-
-        create: function() {
-            this.on('toggle', function() {
-                console.log('Toggle the menu');
-            });
         }
 
     }).registerFunctions({ /**/"view.header": function (obj) { with (obj) { return view.header; } }, "view.menu": function (obj) { with (obj) { return view.menu; } }, "view.display_menu": function (obj) { with (obj) { return view.display_menu; } }, "view.menuview": function (obj) { with (obj) { return view.menuview; } }, "view.content": function (obj) { with (obj) { return view.content; } }, "contentmodel": function (obj) { with (obj) { return contentmodel; } }, "view.contentview": function (obj) { with (obj) { return view.contentview; } }, "view.contentattrs": function (obj) { with (obj) { return view.contentattrs; } }/**/ }).register();

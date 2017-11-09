@@ -30,7 +30,6 @@ Scoped.define("module:List", [
                 enable_scroll_modifier: "",
                 type: "infinitescroll",
                 append: function(count, callback) {
-                    console.log("append");
                     this.execute("moreitems").success(function() {
                         callback(1, true);
                     });
