@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.21 - 2017-11-10
+betajs-dynamics-components - v0.1.22 - 2017-11-17
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1009,7 +1009,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.21 - 2017-11-10
+betajs-dynamics-components - v0.1.22 - 2017-11-17
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1024,7 +1024,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.21"
+    "version": "0.1.22"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1047,7 +1047,7 @@ Scoped.define("module:Dropdown", [
         scoped: scoped
     }, {
 
-        template: "<button\n        onblur=\"{{this.execute('blur')}}\"\n        ba-tap=\"click()\"\n        class=\"icon-more_vert\">\n    <dropdown ba-if=\"{{showdropdown}}\">\n        <ba-{{view.dropdown}}\n            ba-event:item-click=\"hide_dropdown\"\n            ba-event-forward:dropdown=\"{{[]}}\"\n            ba-model='{{dropdownmodel}}'\n\n        ></ba-{{view.dropdown}}>\n    </dropdown>\n    <div></div>\n</button>\n",
+        template: "<button\n        onblur=\"{{this.execute('blur')}}\"\n        ba-tap=\"{{click()}}\"\n        class=\"icon-more_vert\">\n    <dropdown ba-if=\"{{showdropdown}}\">\n        <ba-{{view.dropdown}}\n            ba-event:item-click=\"hide_dropdown\"\n            ba-event-forward:dropdown=\"{{[]}}\"\n            ba-model='{{dropdownmodel}}'\n\n        ></ba-{{view.dropdown}}>\n    </dropdown>\n    <div></div>\n</button>\n",
 
         attrs: function() {
             return {
@@ -1080,7 +1080,7 @@ Scoped.define("module:Dropdown", [
             }
         }
 
-    }).registerFunctions({ /**/"this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "showdropdown": function (obj) { with (obj) { return showdropdown; } }, "view.dropdown": function (obj) { with (obj) { return view.dropdown; } }, "[]": function (obj) { with (obj) { return []; } }, "dropdownmodel": function (obj) { with (obj) { return dropdownmodel; } }, "click()": function (obj) { with (obj) { return click(); } }, "hide_dropdown": function (obj) { with (obj) { return hide_dropdown; } }/**/ }).register();
+    }).registerFunctions({ /**/"this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "click()": function (obj) { with (obj) { return click(); } }, "showdropdown": function (obj) { with (obj) { return showdropdown; } }, "view.dropdown": function (obj) { with (obj) { return view.dropdown; } }, "[]": function (obj) { with (obj) { return []; } }, "dropdownmodel": function (obj) { with (obj) { return dropdownmodel; } }/**/ }).register();
 
 });
 Scoped.define("module:Htmlview", [
@@ -1190,7 +1190,7 @@ Scoped.define("module:Clickinput", [
         scoped: scoped
     }, {
 
-        template: "\n<title\n        ba-if=\"{{!view.edit || !view.externaledit}}\"\n        ba-click=\"edititem()\"\n>\n    {{model.value}}\n</title>\n\n<input\n        placeholder=\"{{view.placeholder || ''}}\"\n        ba-if=\"{{view.edit}}\"\n        ba-return=\"view.edit = false\"\n        onblur=\"{{view.edit = false}}\"\n        value=\"{{=model.value}}\" />\n",
+        template: "\n<title\n        ba-if=\"{{!view.edit || !view.externaledit}}\"\n        ba-click=\"{{edititem()}}\"\n>\n    {{model.value}}\n</title>\n\n<input\n        placeholder=\"{{view.placeholder || ''}}\"\n        ba-if=\"{{view.edit}}\"\n        ba-return=\"{{view.edit = false}}\"\n        onblur=\"{{view.edit = false}}\"\n        value=\"{{=model.value}}\" />\n",
 
         attrs: {
             model: {
@@ -1219,7 +1219,7 @@ Scoped.define("module:Clickinput", [
             }
         }
 
-    }).registerFunctions({ /**/"!view.edit || !view.externaledit": function (obj) { with (obj) { return !view.edit || !view.externaledit; } }, "model.value": function (obj) { with (obj) { return model.value; } }, "view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }, "view.edit": function (obj) { with (obj) { return view.edit; } }, "view.edit = false": function (obj) { with (obj) { return view.edit = false; } }, "edititem()": function (obj) { with (obj) { return edititem(); } }/**/ }).register();
+    }).registerFunctions({ /**/"!view.edit || !view.externaledit": function (obj) { with (obj) { return !view.edit || !view.externaledit; } }, "edititem()": function (obj) { with (obj) { return edititem(); } }, "model.value": function (obj) { with (obj) { return model.value; } }, "view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }, "view.edit": function (obj) { with (obj) { return view.edit; } }, "view.edit = false": function (obj) { with (obj) { return view.edit = false; } }/**/ }).register();
 
 });
 Scoped.define("module:Input", [
@@ -1259,7 +1259,7 @@ Scoped.define("module:Scrollpicker", [
         scoped: scoped
     }, {
 
-        template: "<container>\n        <element\n                ba-repeat-element=\"{{element_value :: value_array}}\"\n                ba-click=\"select_element(element_value)\"\n                data-id=\"{{element_value}}\"\n        >\n                {{element_value}}\n        </element>\n</container>",
+        template: "<container>\n        <element\n                ba-repeat-element=\"{{element_value :: value_array}}\"\n                ba-click=\"{{select_element(element_value)}}\"\n                data-id=\"{{element_value}}\"\n        >\n                {{element_value}}\n        </element>\n</container>",
 
         attrs: {
             initial_value: 14,
@@ -1381,7 +1381,7 @@ Scoped.define("module:Scrollpicker", [
 
         }
 
-    }).registerFunctions({ /**/"value_array": function (obj) { with (obj) { return value_array; } }, "element_value": function (obj) { with (obj) { return element_value; } }, "select_element(element_value)": function (obj) { with (obj) { return select_element(element_value); } }/**/ }).register();
+    }).registerFunctions({ /**/"value_array": function (obj) { with (obj) { return value_array; } }, "select_element(element_value)": function (obj) { with (obj) { return select_element(element_value); } }, "element_value": function (obj) { with (obj) { return element_value; } }/**/ }).register();
 
 });
 Scoped.define("module:Search", [
@@ -1461,7 +1461,7 @@ Scoped.define("module:Overlaycontainer", [
         scoped: scoped
     }, {
 
-        template: "<overlaycontainer\n    ba-tap=\"showoverlay = false\"\n    ba-if=\"{{showoverlay}}\">\n\n    <overlayinner>\n\n        <ba-{{view.overlay}} ba-noscope>\n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
+        template: "<overlaycontainer\n    ba-tap=\"{{showoverlay = false}}\"\n    ba-if=\"{{showoverlay}}\">\n\n    <overlayinner>\n\n        <ba-{{view.overlay}} ba-noscope>\n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
 
         attrs: function() {
             return {
@@ -1476,7 +1476,7 @@ Scoped.define("module:Overlaycontainer", [
             };
         }
 
-    }).registerFunctions({ /**/"showoverlay": function (obj) { with (obj) { return showoverlay; } }, "view.overlay": function (obj) { with (obj) { return view.overlay; } }, "model.message": function (obj) { with (obj) { return model.message; } }, "showoverlay = false": function (obj) { with (obj) { return showoverlay = false; } }/**/ }).register();
+    }).registerFunctions({ /**/"showoverlay = false": function (obj) { with (obj) { return showoverlay = false; } }, "showoverlay": function (obj) { with (obj) { return showoverlay; } }, "view.overlay": function (obj) { with (obj) { return view.overlay; } }, "model.message": function (obj) { with (obj) { return model.message; } }/**/ }).register();
 
 });
 Scoped.define("module:Clickcontainer", [
@@ -1490,7 +1490,7 @@ Scoped.define("module:Clickcontainer", [
         scoped: scoped
     }, {
 
-        template: "\n<clickcontainer ba-test=\"test\"\n        ba-click=\"click()\">\n<ba-{{view.inner}}\n    ba-noscope></ba-{{view.inner}}>\n</clickcontainer>\n\n",
+        template: "\n<clickcontainer ba-test=\"test\"\n        ba-click=\"{{click()}}\">\n<ba-{{view.inner}}\n    ba-noscope></ba-{{view.inner}}>\n</clickcontainer>\n\n",
 
         attrs: {
             view: {
@@ -1528,7 +1528,7 @@ Scoped.define("module:Loadmore", [
         scoped: scoped
     }, {
 
-        template: "\n<loadmore ba-click=\"load_more()\">\n\n    <button>Load more</button>\n\n</loadmore>",
+        template: "\n<loadmore ba-click=\"{{load_more()}}\">\n\n    <button>Load more</button>\n\n</loadmore>",
 
         attrs: {
             view: {
@@ -1558,7 +1558,7 @@ Scoped.define("module:Clickitem", [
         scoped: scoped
     }, {
 
-        template: "\n<button\n        ba-class=\"{{{\n            'icon' : model.icon,\n            'noicon' : !model.icon\n        }}}\"\n        ba-click=\"click()\">\n    <icon class=\"{{model.icon}}\"></icon>\n    <value>\n        {{model.value}}\n    </value>\n</button>\n\n",
+        template: "\n<button\n        ba-class=\"{{{\n            'icon' : model.icon,\n            'noicon' : !model.icon\n        }}}\"\n        ba-click=\"{{click()}}\">\n    <icon class=\"{{model.icon}}\"></icon>\n    <value>\n        {{model.value}}\n    </value>\n</button>\n\n",
 
         attrs: {
             model: {
@@ -1588,7 +1588,7 @@ Scoped.define("module:Clickitem", [
     }).registerFunctions({ /**/"{\n            'icon' : model.icon,\n            'noicon' : !model.icon\n        }": function (obj) { with (obj) { return {
             'icon' : model.icon,
             'noicon' : !model.icon
-        }; } }, "model.icon": function (obj) { with (obj) { return model.icon; } }, "model.value": function (obj) { with (obj) { return model.value; } }, "click()": function (obj) { with (obj) { return click(); } }/**/ }).register();
+        }; } }, "click()": function (obj) { with (obj) { return click(); } }, "model.icon": function (obj) { with (obj) { return model.icon; } }, "model.value": function (obj) { with (obj) { return model.value; } }/**/ }).register();
 
 });
 Scoped.define("module:Eventitem", [
@@ -1653,7 +1653,7 @@ Scoped.define("module:Selectableitem", [
         scoped: scoped
     }, {
 
-        template: "\n<selectableitem\n        ba-class=\"{{{selected : selected.cid == this.cid()}}}\"\n        ba-click=\"select()\">\n    {{model.value}}\n</selectableitem>",
+        template: "\n<selectableitem\n        ba-class=\"{{{selected : selected.cid == this.cid()}}}\"\n        ba-click=\"{{select()}}\">\n    {{model.value}}\n</selectableitem>",
 
         bindings: {
             selected: "<+[tagname='ba-list']:selected_item"
@@ -1694,7 +1694,7 @@ Scoped.define("module:Selectableitem", [
 
         }
 
-    }).registerFunctions({ /**/"{selected : selected.cid == this.cid()}": function (obj) { with (obj) { return {selected : selected.cid == this.cid()}; } }, "model.value": function (obj) { with (obj) { return model.value; } }, "select()": function (obj) { with (obj) { return select(); } }/**/ }).register();
+    }).registerFunctions({ /**/"{selected : selected.cid == this.cid()}": function (obj) { with (obj) { return {selected : selected.cid == this.cid()}; } }, "select()": function (obj) { with (obj) { return select(); } }, "model.value": function (obj) { with (obj) { return model.value; } }/**/ }).register();
 });
 Scoped.define("module:List", [
     "dynamics:Dynamic",
@@ -1783,7 +1783,7 @@ Scoped.define("module:List", [
             }
         }
 
-    }).registerFunctions({ /**/"loadmore && loadmorestyle !== 'infinite' && loadmorebackwards": function (obj) { with (obj) { return loadmore && loadmorestyle !== 'infinite' && loadmorebackwards; } }, "!loading": function (obj) { with (obj) { return !loading; } }, "loadmore && loadmorebackwards": function (obj) { with (obj) { return loadmore && loadmorebackwards; } }, "loading": function (obj) { with (obj) { return loading; } }, "(model.listcollection||listcollection)": function (obj) { with (obj) { return (model.listcollection||listcollection); } }, "infinite_scroll_options": function (obj) { with (obj) { return infinite_scroll_options; } }, "getview(collectionitem)": function (obj) { with (obj) { return getview(collectionitem); } }, "collectionitem.cid()": function (obj) { with (obj) { return collectionitem.cid(); } }, "collectionitem.pid()": function (obj) { with (obj) { return collectionitem.pid(); } }, "collectionitem.callbacks": function (obj) { with (obj) { return collectionitem.callbacks; } }, "selected === collectionitem": function (obj) { with (obj) { return selected === collectionitem; } }, "[collectionitem]": function (obj) { with (obj) { return [collectionitem]; } }, "collectionitem.view||view.listinner": function (obj) { with (obj) { return collectionitem.view||view.listinner; } }, "collectionitem": function (obj) { with (obj) { return collectionitem; } }, "loadmore && loadmorestyle !== 'infinite'": function (obj) { with (obj) { return loadmore && loadmorestyle !== 'infinite'; } }, "loadmore": function (obj) { with (obj) { return loadmore; } }, "moreitemsbackwards": function (obj) { with (obj) { return moreitemsbackwards; } }, "moreitems": function (obj) { with (obj) { return moreitems; } }/**/ }).register();
+    }).registerFunctions({ /**/"loadmore && loadmorestyle !== 'infinite' && loadmorebackwards": function (obj) { with (obj) { return loadmore && loadmorestyle !== 'infinite' && loadmorebackwards; } }, "!loading": function (obj) { with (obj) { return !loading; } }, "loadmore && loadmorebackwards": function (obj) { with (obj) { return loadmore && loadmorebackwards; } }, "loading": function (obj) { with (obj) { return loading; } }, "(model.listcollection||listcollection)": function (obj) { with (obj) { return (model.listcollection||listcollection); } }, "infinite_scroll_options": function (obj) { with (obj) { return infinite_scroll_options; } }, "getview(collectionitem)": function (obj) { with (obj) { return getview(collectionitem); } }, "collectionitem.cid()": function (obj) { with (obj) { return collectionitem.cid(); } }, "collectionitem.pid()": function (obj) { with (obj) { return collectionitem.pid(); } }, "collectionitem.callbacks": function (obj) { with (obj) { return collectionitem.callbacks; } }, "selected === collectionitem": function (obj) { with (obj) { return selected === collectionitem; } }, "[collectionitem]": function (obj) { with (obj) { return [collectionitem]; } }, "collectionitem.view||view.listinner": function (obj) { with (obj) { return collectionitem.view||view.listinner; } }, "collectionitem": function (obj) { with (obj) { return collectionitem; } }, "loadmore && loadmorestyle !== 'infinite'": function (obj) { with (obj) { return loadmore && loadmorestyle !== 'infinite'; } }, "loadmore": function (obj) { with (obj) { return loadmore; } }/**/ }).register();
 
 });
 // TODO:
@@ -1853,7 +1853,7 @@ Scoped.define("module:Titledlist", [
         scoped: scoped
     }, {
 
-        template: "\n<ba-{{view.titleitem}}\n    ba-click=\"click_title()\"\n    ba-event-forward:title=\"{{[]}}\"\n    ba-model=\"{{model.title_model}}\">{{model.title_model.value}}</ba-{{view.titleitem}}>\n\n<ba-list\n        ba-noscope\n        ba-event-forward=\"{{[]}}\"\n        ba-show=\"{{!collapsed}}\">\n\n</ba-list>\n",
+        template: "\n<ba-{{view.titleitem}}\n    ba-click=\"{{click_title()}}\"\n    ba-event-forward:title=\"{{[]}}\"\n    ba-model=\"{{model.title_model}}\">{{model.title_model.value}}</ba-{{view.titleitem}}>\n\n<ba-list\n        ba-noscope\n        ba-event-forward=\"{{[]}}\"\n        ba-show=\"{{!collapsed}}\">\n\n</ba-list>\n",
 
         attrs: {
             model: {
@@ -1894,7 +1894,7 @@ Scoped.define("module:Titledlist", [
 
         }
 
-    }).registerFunctions({ /**/"view.titleitem": function (obj) { with (obj) { return view.titleitem; } }, "[]": function (obj) { with (obj) { return []; } }, "model.title_model": function (obj) { with (obj) { return model.title_model; } }, "model.title_model.value": function (obj) { with (obj) { return model.title_model.value; } }, "!collapsed": function (obj) { with (obj) { return !collapsed; } }, "click_title()": function (obj) { with (obj) { return click_title(); } }/**/ }).register();
+    }).registerFunctions({ /**/"view.titleitem": function (obj) { with (obj) { return view.titleitem; } }, "click_title()": function (obj) { with (obj) { return click_title(); } }, "[]": function (obj) { with (obj) { return []; } }, "model.title_model": function (obj) { with (obj) { return model.title_model; } }, "model.title_model.value": function (obj) { with (obj) { return model.title_model.value; } }, "!collapsed": function (obj) { with (obj) { return !collapsed; } }/**/ }).register();
 
 });
 Scoped.define("module:Addtitle", [
@@ -1908,7 +1908,7 @@ Scoped.define("module:Addtitle", [
         scoped: scoped
     }, {
 
-        template: "\n<addtitle>\n    <title ba-click=\"clicktitle()\">{{model.value}}</title>\n    <button ba-click=\"addbutton()\">\n        <span class=\"icon-plus\"></span>\n    </button>\n</addtitle>",
+        template: "\n<addtitle>\n    <title ba-click=\"{{clicktitle()}}\">{{model.value}}</title>\n    <button ba-click=\"{{addbutton()}}\">\n        <span class=\"icon-plus\"></span>\n    </button>\n</addtitle>",
 
         attrs: {
             model: {
@@ -1927,7 +1927,7 @@ Scoped.define("module:Addtitle", [
 
         }
 
-    }).registerFunctions({ /**/"model.value": function (obj) { with (obj) { return model.value; } }, "clicktitle()": function (obj) { with (obj) { return clicktitle(); } }, "addbutton()": function (obj) { with (obj) { return addbutton(); } }/**/ }).register();
+    }).registerFunctions({ /**/"clicktitle()": function (obj) { with (obj) { return clicktitle(); } }, "model.value": function (obj) { with (obj) { return model.value; } }, "addbutton()": function (obj) { with (obj) { return addbutton(); } }/**/ }).register();
 
 });
 Scoped.define("module:Header", [
@@ -1966,29 +1966,6 @@ Scoped.define("module:Header", [
     }).registerFunctions({ /**/"left_collection": function (obj) { with (obj) { return left_collection; } }/**/ }).register();
 
 });
-Scoped.define("module:Toggle_menu", [
-    "dynamics:Dynamic"
-], function(Dynamic, scoped) {
-
-    return Dynamic.extend({
-        scoped: scoped
-    }, {
-
-        template: "<button ba-click=\"toggle_menu()\" class=\"{{toggle_icon}}\"></button>",
-
-        attrs: {
-            toggle_icon: 'icon-reorder'
-        },
-
-        functions: {
-            toggle_menu: function() {
-                this.channel('global').trigger('toggle_menu');
-            }
-        }
-
-    }).registerFunctions({ /**/"toggle_icon": function (obj) { with (obj) { return toggle_icon; } }, "toggle_menu()": function (obj) { with (obj) { return toggle_menu(); } }/**/ }).register();
-
-});
 Scoped.define("module:Toggle", [
     "dynamics:Dynamic"
 ], function(Dynamic, scoped) {
@@ -1997,7 +1974,7 @@ Scoped.define("module:Toggle", [
         scoped: scoped
     }, {
 
-        template: "<button ba-click=\"toggle_menu()\" class=\"{{toggle_icon}}\"></button>",
+        template: "<button ba-click=\"{{toggle_menu()}}\" class=\"{{toggle_icon}}\"></button>",
 
         attrs: {
             toggle_icon: 'icon-reorder'
@@ -2011,7 +1988,30 @@ Scoped.define("module:Toggle", [
             }
         }
 
-    }).registerFunctions({ /**/"toggle_icon": function (obj) { with (obj) { return toggle_icon; } }, "toggle_menu()": function (obj) { with (obj) { return toggle_menu(); } }/**/ }).register();
+    }).registerFunctions({ /**/"toggle_menu()": function (obj) { with (obj) { return toggle_menu(); } }, "toggle_icon": function (obj) { with (obj) { return toggle_icon; } }/**/ }).register();
+
+});
+Scoped.define("module:Toggle_menu", [
+    "dynamics:Dynamic"
+], function(Dynamic, scoped) {
+
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
+
+        template: "<button ba-click=\"{{toggle_menu()}}\" class=\"{{toggle_icon}}\"></button>",
+
+        attrs: {
+            toggle_icon: 'icon-reorder'
+        },
+
+        functions: {
+            toggle_menu: function() {
+                this.channel('global').trigger('toggle_menu');
+            }
+        }
+
+    }).registerFunctions({ /**/"toggle_menu()": function (obj) { with (obj) { return toggle_menu(); } }, "toggle_icon": function (obj) { with (obj) { return toggle_icon; } }/**/ }).register();
 
 });
 Scoped.define("module:Menu_web", [
