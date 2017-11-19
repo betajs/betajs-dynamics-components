@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.22 - 2017-11-17
+betajs-dynamics-components - v0.1.23 - 2017-11-19
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1009,7 +1009,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.22 - 2017-11-17
+betajs-dynamics-components - v0.1.23 - 2017-11-19
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1024,7 +1024,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.22"
+    "version": "0.1.23"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1721,6 +1721,7 @@ Scoped.define("module:List", [
             listitem: "clickitem",
             model: false,
             selected: null,
+            scrolltolast: null,
             view: {},
             infinite_scroll_options: {
                 disabled: true,
@@ -1738,9 +1739,33 @@ Scoped.define("module:List", [
             loadmorestyle: "button" //infinite
         },
 
+        types: {
+            scrolltolast: "boolean"
+        },
+
         create: function() {
             if (this.get("loadmore") && this.get("loadmorestyle") === "infinite")
                 this.setProp("infinite_scroll_options.disabled", false);
+        },
+
+        events: {
+            "change:listcollection": function() {
+                Async.eventually(function() {
+                    if (this.getCollection() && this.get("scrolltolast")) {
+                        this.listenOn(this.getCollection(), "replaced-objects", function() {
+                            this.execute("scrollToLast");
+                        }, {
+                            eventually: true
+                        });
+                        this.execute("scrollToLast");
+                    }
+                }, this);
+            }
+        },
+
+        getCollection: function() {
+            var coll = this.get("listcollection");
+            return coll.value ? coll.value() : coll;
         },
 
         functions: {
@@ -1773,14 +1798,25 @@ Scoped.define("module:List", [
             },
 
             elementByItem: function(item) {
-                return this.activeElement().querySelector("[data-id='" + item.cid() + "']");
+                return item ? this.activeElement().querySelector("[data-id='" + item.cid() + "']") : null;
             },
 
             scrollTo: function(item) {
+                if (!item)
+                    return;
                 var element = this.execute("elementByItem", item);
                 var parent = this.activeElement();
                 parent.scrollTop = element.offsetTop - parent.offsetTop;
+            },
+
+            scrollToLast: function() {
+                this.execute("scrollTo", this.getCollection().first());
+            },
+
+            scrollToFirst: function() {
+                this.execute("scrollTo", this.getCollection().last());
             }
+
         }
 
     }).registerFunctions({ /**/"loadmore && loadmorestyle !== 'infinite' && loadmorebackwards": function (obj) { with (obj) { return loadmore && loadmorestyle !== 'infinite' && loadmorebackwards; } }, "!loading": function (obj) { with (obj) { return !loading; } }, "loadmore && loadmorebackwards": function (obj) { with (obj) { return loadmore && loadmorebackwards; } }, "loading": function (obj) { with (obj) { return loading; } }, "(model.listcollection||listcollection)": function (obj) { with (obj) { return (model.listcollection||listcollection); } }, "infinite_scroll_options": function (obj) { with (obj) { return infinite_scroll_options; } }, "getview(collectionitem)": function (obj) { with (obj) { return getview(collectionitem); } }, "collectionitem.cid()": function (obj) { with (obj) { return collectionitem.cid(); } }, "collectionitem.pid()": function (obj) { with (obj) { return collectionitem.pid(); } }, "collectionitem.callbacks": function (obj) { with (obj) { return collectionitem.callbacks; } }, "selected === collectionitem": function (obj) { with (obj) { return selected === collectionitem; } }, "[collectionitem]": function (obj) { with (obj) { return [collectionitem]; } }, "collectionitem.view||view.listinner": function (obj) { with (obj) { return collectionitem.view||view.listinner; } }, "collectionitem": function (obj) { with (obj) { return collectionitem; } }, "loadmore && loadmorestyle !== 'infinite'": function (obj) { with (obj) { return loadmore && loadmorestyle !== 'infinite'; } }, "loadmore": function (obj) { with (obj) { return loadmore; } }/**/ }).register();

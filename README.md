@@ -1,4 +1,4 @@
-# betajs-dynamics-components 0.1.22
+# betajs-dynamics-components 0.1.23
 
 
 BetaJS-Dynamics-Components is a Library of DOM Components that are built in BetaJS-Dynamics
