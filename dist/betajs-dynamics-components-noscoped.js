@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.23 - 2017-11-19
+betajs-dynamics-components - v0.1.24 - 2017-12-06
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.23"
+    "version": "0.1.24"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -37,7 +37,7 @@ Scoped.define("module:Dropdown", [
         scoped: scoped
     }, {
 
-        template: "<button\n        onblur=\"{{this.execute('blur')}}\"\n        ba-tap=\"{{click()}}\"\n        class=\"icon-more_vert\">\n    <dropdown ba-if=\"{{showdropdown}}\">\n        <ba-{{view.dropdown}}\n            ba-event:item-click=\"hide_dropdown\"\n            ba-event-forward:dropdown=\"{{[]}}\"\n            ba-model='{{dropdownmodel}}'\n\n        ></ba-{{view.dropdown}}>\n    </dropdown>\n    <div></div>\n</button>\n",
+        template: "<button\n        onblur=\"{{this.execute('blur')}}\"\n        ba-tap=\"{{click()}}\"\n        class=\"icon-more_vert\">\n    <dropdown ba-show=\"{{showdropdown}}\">\n        <ba-{{view.dropdown}}\n            ba-event:item-click=\"hide_dropdown\"\n            ba-event-forward:dropdown=\"{{[]}}\"\n            ba-model='{{dropdownmodel}}'\n\n        ></ba-{{view.dropdown}}>\n    </dropdown>\n    <div></div>\n</button>\n",
 
         attrs: function() {
             return {
