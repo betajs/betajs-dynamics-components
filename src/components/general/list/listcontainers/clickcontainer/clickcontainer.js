@@ -1,9 +1,6 @@
 Scoped.define("module:Clickcontainer", [
-    "dynamics:Dynamic",
-    "base:Loggers.Logger"
-], function(Dynamic, Logger, scoped) {
-
-    var logger = Logger.global().tag("dynamic", "list");
+    "dynamics:Dynamic"
+], function(Dynamic, scoped) {
 
     return Dynamic.extend({
         scoped: scoped

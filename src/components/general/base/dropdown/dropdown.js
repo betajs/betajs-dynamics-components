@@ -1,14 +1,11 @@
 Scoped.define("module:Dropdown", [
-    "dynamics:Dynamic",
-    "base:Loggers.Logger"
+    "dynamics:Dynamic"
 ], [
     "dynamics:Partials.EventForwardPartial",
     "dynamics:Partials.EventPartial",
     "dynamics:Partials.TapPartial",
     "module:List"
-], function(Dynamic, Logger, scoped) {
-
-    var logger = Logger.global().tag("dynamic", "list");
+], function(Dynamic, scoped) {
 
     return Dynamic.extend({
         scoped: scoped

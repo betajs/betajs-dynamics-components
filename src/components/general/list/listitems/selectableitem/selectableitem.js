@@ -7,13 +7,10 @@
 
 Scoped.define("module:Selectableitem", [
     "dynamics:Dynamic",
-    "base:Objs",
-    "base:Loggers.Logger"
+    "base:Objs"
 ], [
     "dynamics:Partials.ClassPartial"
-], function(Dynamic, Objs, Logger, scoped) {
-
-    var logger = Logger.global().tag("dynamic", "list");
+], function(Dynamic, Objs, scoped) {
 
     Dynamic.extend({
         scoped: scoped
@@ -41,7 +38,7 @@ Scoped.define("module:Selectableitem", [
 
             if (!parentlist)
 
-                logger.log('There is no parent list the selector can attach to, this currently only works  with ba-list');
+                console.warn('There is no parent list the selector can attach to, this currently only works  with ba-list');
             else if (parentlist.get('listcollection'))
                 if (!this.scopes.parent_list.get('selected_item'))
                     //var selected_item = parentlist.get('selected_item');

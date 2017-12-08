@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.24 - 2017-12-06
+betajs-dynamics-components - v0.1.25 - 2017-12-08
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1009,7 +1009,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.24 - 2017-12-06
+betajs-dynamics-components - v0.1.25 - 2017-12-08
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1024,7 +1024,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.24"
+    "version": "0.1.25"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1032,16 +1032,13 @@ Scoped.assumeVersion('browser:version', '~1.0.65');
 Scoped.assumeVersion('dynamics:version', '~0.0.83');
 Scoped.assumeVersion('ui:version', '~1.0.37');
 Scoped.define("module:Dropdown", [
-    "dynamics:Dynamic",
-    "base:Loggers.Logger"
+    "dynamics:Dynamic"
 ], [
     "dynamics:Partials.EventForwardPartial",
     "dynamics:Partials.EventPartial",
     "dynamics:Partials.TapPartial",
     "module:List"
-], function(Dynamic, Logger, scoped) {
-
-    var logger = Logger.global().tag("dynamic", "list");
+], function(Dynamic, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
@@ -1247,13 +1244,10 @@ Scoped.define("module:Input", [
 });
 Scoped.define("module:Scrollpicker", [
     "dynamics:Dynamic",
-    "ui:Interactions.Loopscroll",
-    "base:Loggers.Logger"
+    "ui:Interactions.Loopscroll"
 ], [
     "dynamics:Partials.RepeatElementPartial"
-], function(Dynamic, Loopscroll, Logger, scoped) {
-
-    var logger = Logger.global().tag("dynamic", "scroll");
+], function(Dynamic, Loopscroll, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
@@ -1480,11 +1474,8 @@ Scoped.define("module:Overlaycontainer", [
 
 });
 Scoped.define("module:Clickcontainer", [
-    "dynamics:Dynamic",
-    "base:Loggers.Logger"
-], function(Dynamic, Logger, scoped) {
-
-    var logger = Logger.global().tag("dynamic", "list");
+    "dynamics:Dynamic"
+], function(Dynamic, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
@@ -1548,11 +1539,8 @@ Scoped.define("module:Loadmore", [
 
 });
 Scoped.define("module:Clickitem", [
-    "dynamics:Dynamic",
-    "base:Loggers.Logger"
-], function(Dynamic, Logger, scoped) {
-
-    var logger = Logger.global().tag("dynamic", "list");
+    "dynamics:Dynamic"
+], function(Dynamic, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
@@ -1570,19 +1558,10 @@ Scoped.define("module:Clickitem", [
 
         functions: {
             click: function() {
-                logger.log('Click');
 
                 this.trigger('click', this.getProp('model.eventid'));
-                //logger.log("You Clicked item : " + this.properties().getProp('model.value'));
-                //logger.log(this.cid());
                 this.trigger('event', this.cid());
             }
-        },
-
-        create: function() {
-            this.on("event", function(cid) {
-                logger.log('event from item: ' + cid);
-            }, this);
         }
 
     }).registerFunctions({ /**/"{\n            'icon' : model.icon,\n            'noicon' : !model.icon\n        }": function (obj) { with (obj) { return {
@@ -1592,11 +1571,8 @@ Scoped.define("module:Clickitem", [
 
 });
 Scoped.define("module:Eventitem", [
-    "dynamics:Dynamic",
-    "base:Loggers.Logger"
-], function(Dynamic, Logger, scoped) {
-
-    var logger = Logger.global().tag("dynamic", "calendar");
+    "dynamics:Dynamic"
+], function(Dynamic, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
@@ -1623,10 +1599,6 @@ Scoped.define("module:Eventitem", [
                 this.set('counter', this.get('counter') + 1);
             }, this);
 
-            this.parent().on('archive', function() {
-                logger.log('archived');
-            }, this);
-
         }
 
     }).registerFunctions({ /**/"model['class']": function (obj) { with (obj) { return model['class']; } }, "model.value": function (obj) { with (obj) { return model.value; } }, "counter": function (obj) { with (obj) { return counter; } }/**/ }).register();
@@ -1641,13 +1613,10 @@ Scoped.define("module:Eventitem", [
 
 Scoped.define("module:Selectableitem", [
     "dynamics:Dynamic",
-    "base:Objs",
-    "base:Loggers.Logger"
+    "base:Objs"
 ], [
     "dynamics:Partials.ClassPartial"
-], function(Dynamic, Objs, Logger, scoped) {
-
-    var logger = Logger.global().tag("dynamic", "list");
+], function(Dynamic, Objs, scoped) {
 
     Dynamic.extend({
         scoped: scoped
@@ -1675,7 +1644,7 @@ Scoped.define("module:Selectableitem", [
 
             if (!parentlist)
 
-                logger.log('There is no parent list the selector can attach to, this currently only works  with ba-list');
+                console.warn('There is no parent list the selector can attach to, this currently only works  with ba-list');
             else if (parentlist.get('listcollection'))
                 if (!this.scopes.parent_list.get('selected_item'))
                     //var selected_item = parentlist.get('selected_item');
@@ -1874,16 +1843,13 @@ Scoped.define("module:Searchlist", [
 
 });
 Scoped.define("module:Titledlist", [
-    "dynamics:Dynamic",
-    "base:Loggers.Logger"
+    "dynamics:Dynamic"
 ], [
     "dynamics:Partials.EventForwardPartial",
     "module:List",
     "dynamics:Partials.NoScopePartial",
     "dynamics:Partials.ClickPartial"
-], function(Dynamic, Logger, scoped) {
-
-    var logger = Logger.global().tag("dynamic", "list");
+], function(Dynamic, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
@@ -1924,7 +1890,6 @@ Scoped.define("module:Titledlist", [
             },
 
             click_title: function() {
-                logger.log('You clicked the title');
                 this.call('togglelist');
             }
 
@@ -1934,11 +1899,8 @@ Scoped.define("module:Titledlist", [
 
 });
 Scoped.define("module:Addtitle", [
-    "dynamics:Dynamic",
-    "base:Loggers.Logger"
-], function(Dynamic, Logger, scoped) {
-
-    var logger = Logger.global().tag("dynamic", "list");
+    "dynamics:Dynamic"
+], function(Dynamic, scoped) {
 
     return Dynamic.extend({
         scoped: scoped

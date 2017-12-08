@@ -1,9 +1,6 @@
 Scoped.define("module:Eventitem", [
-    "dynamics:Dynamic",
-    "base:Loggers.Logger"
-], function(Dynamic, Logger, scoped) {
-
-    var logger = Logger.global().tag("dynamic", "calendar");
+    "dynamics:Dynamic"
+], function(Dynamic, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
@@ -28,10 +25,6 @@ Scoped.define("module:Eventitem", [
 
             this.on("event", function(cid) {
                 this.set('counter', this.get('counter') + 1);
-            }, this);
-
-            this.parent().on('archive', function() {
-                logger.log('archived');
             }, this);
 
         }
