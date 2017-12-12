@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.21 - 2017-11-10
+betajs-dynamics-components - v0.1.25 - 2017-12-12
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -143,6 +143,11 @@ ba-scrollpicker {
 
 ba-search {
   height: 36px;
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;

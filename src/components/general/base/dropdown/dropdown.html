@@ -1,8 +1,8 @@
 <button
         onblur="{{this.execute('blur')}}"
-        ba-tap="click()"
+        ba-tap="{{click()}}"
         class="icon-more_vert">
-    <dropdown ba-if="{{showdropdown}}">
+    <dropdown ba-show="{{showdropdown}}">
         <ba-{{view.dropdown}}
             ba-event:item-click="hide_dropdown"
             ba-event-forward:dropdown="{{[]}}"

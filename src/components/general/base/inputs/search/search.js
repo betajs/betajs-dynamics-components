@@ -18,8 +18,10 @@ Scoped.define("module:Search", [
             }
         },
 
+        extendables: ['view'],
+
         events: {
-            'change:value': function() {
+            'change:value': function(value) {
                 this.set('loading', true);
             }
         }

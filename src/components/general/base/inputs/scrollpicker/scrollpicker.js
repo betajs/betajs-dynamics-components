@@ -1,12 +1,9 @@
 Scoped.define("module:Scrollpicker", [
     "dynamics:Dynamic",
-    "ui:Interactions.Loopscroll",
-    "base:Loggers.Logger"
+    "ui:Interactions.Loopscroll"
 ], [
     "dynamics:Partials.RepeatElementPartial"
-], function(Dynamic, Loopscroll, Logger, scoped) {
-
-    var logger = Logger.global().tag("dynamic", "scroll");
+], function(Dynamic, Loopscroll, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
