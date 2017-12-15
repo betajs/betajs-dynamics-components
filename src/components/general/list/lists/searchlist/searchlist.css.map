@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAGE,2BAAU;EACR,OAAO,EAAE,IAAI;EACb,KAAK,EAAE,IAAI;EACX,aAAa,EAAE,cAAc;AAM/B,6BAAY;EAAC,OAAO,EAAE,KAAK",
-"sources": ["searchlist.scss"],
-"names": [],
-"file": "searchlist.css"
-}

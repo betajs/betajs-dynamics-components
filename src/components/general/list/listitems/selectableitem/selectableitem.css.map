@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAEE,gCAAe;EACb,OAAO,EAAE,KAAK;EACd,UAAU,EAAE,KAAK;AAGnB,2BAAU;EACR,UAAU,EAAE,SAAS",
-"sources": ["selectableitem.scss"],
-"names": [],
-"file": "selectableitem.css"
-}

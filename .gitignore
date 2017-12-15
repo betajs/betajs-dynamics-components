@@ -10,3 +10,5 @@ node_modules
 browserstack.json
 BrowserStackLocal
 /docs
+/src/**/*.css
+/src/**/*.map

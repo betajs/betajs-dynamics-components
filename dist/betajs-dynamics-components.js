@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.25 - 2017-12-12
+betajs-dynamics-components - v0.1.26 - 2017-12-14
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1009,7 +1009,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.25 - 2017-12-12
+betajs-dynamics-components - v0.1.26 - 2017-12-14
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1024,7 +1024,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.25"
+    "version": "0.1.26"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1966,29 +1966,6 @@ Scoped.define("module:Header", [
     }).registerFunctions({ /**/"left_collection": function (obj) { with (obj) { return left_collection; } }/**/ }).register();
 
 });
-Scoped.define("module:Toggle_menu", [
-    "dynamics:Dynamic"
-], function(Dynamic, scoped) {
-
-    return Dynamic.extend({
-        scoped: scoped
-    }, {
-
-        template: "<button ba-click=\"{{toggle_menu()}}\" class=\"{{toggle_icon}}\"></button>",
-
-        attrs: {
-            toggle_icon: 'icon-reorder'
-        },
-
-        functions: {
-            toggle_menu: function() {
-                this.channel('global').trigger('toggle_menu');
-            }
-        }
-
-    }).registerFunctions({ /**/"toggle_menu()": function (obj) { with (obj) { return toggle_menu(); } }, "toggle_icon": function (obj) { with (obj) { return toggle_icon; } }/**/ }).register();
-
-});
 Scoped.define("module:Toggle", [
     "dynamics:Dynamic"
 ], function(Dynamic, scoped) {
@@ -2008,6 +1985,29 @@ Scoped.define("module:Toggle", [
                 this.scope("<+[tagname='ba-layout_web']").call('toggle_menu');
 
                 this.channel('toggle').trigger('toggle', 'menu');
+            }
+        }
+
+    }).registerFunctions({ /**/"toggle_menu()": function (obj) { with (obj) { return toggle_menu(); } }, "toggle_icon": function (obj) { with (obj) { return toggle_icon; } }/**/ }).register();
+
+});
+Scoped.define("module:Toggle_menu", [
+    "dynamics:Dynamic"
+], function(Dynamic, scoped) {
+
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
+
+        template: "<button ba-click=\"{{toggle_menu()}}\" class=\"{{toggle_icon}}\"></button>",
+
+        attrs: {
+            toggle_icon: 'icon-reorder'
+        },
+
+        functions: {
+            toggle_menu: function() {
+                this.channel('global').trigger('toggle_menu');
             }
         }
 

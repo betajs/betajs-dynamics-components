@@ -1,7 +1,0 @@
-{
-"version": 3,
-"mappings": "AAGA,YAAa;EACX,UAAU,EAAE,KAAK;EACjB,aAAa,EAAE,cAAc;EAE7B,sBAAU;IACR,OAAO,EAAE,MAAoB;IAC7B,MAAM,EARS,IAAI;IASnB,WAAW,EATI,IAAI;IAUnB,OAAO,EAAE,KAAK",
-"sources": ["clickitem.scss"],
-"names": [],
-"file": "clickitem.css"
-}

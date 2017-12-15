@@ -29,6 +29,7 @@ module.exports = function (grunt) {
     .uglifyTask('uglify-noscoped', 'dist/' + dist + '-noscoped.js', 'dist/' + dist + '-noscoped.min.js')
     .uglifyTask('uglify-scoped', 'dist/' + dist + '.js', 'dist/' + dist + '.min.js')
     .packageTask()
+    .autoincreasepackageTask(null, "package-source.json")
     .jsbeautifyTask("beautify1", "src/**/**/**/**/*.js")
     .jsbeautifyTask("beautify2", "src/**/**/**/**/**/*.js")
     .jsbeautifyTask("beautify4", "src/**/**/**/**/**/**/**/*.js")
@@ -48,7 +49,7 @@ module.exports = function (grunt) {
 
     grunt.initConfig(gruntHelper.config);
 
-    grunt.registerTask('default', ['package', 'readme', 'license', 'beautify1', 'beautify2', 'beautify4', 'scopedclosurerevision', 'concat-scoped', 'uglify-noscoped', 'uglify-scoped', 'concat-dist-css', 'cssmin-dist', 'lint', 'simulator']);
+    grunt.registerTask('default', ['autoincreasepackage', 'package', 'readme', 'license', 'beautify1', 'beautify2', 'beautify4', 'scopedclosurerevision', 'concat-scoped', 'uglify-noscoped', 'uglify-scoped', 'concat-dist-css', 'cssmin-dist', 'lint', 'simulator']);
     grunt.registerTask('simulator', ['concat-simulator-js', 'concat-simulator-css']);
     grunt.registerTask('check', ['lint', 'browserqunit']);
 

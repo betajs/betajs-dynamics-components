@@ -15,7 +15,7 @@
         "url": "https://github.com/betajs/betajs-dynamics-components/issues"
     },
     "name": "betajs-dynamics-components",
-    "version": "0.1.25",
+    "version": "0.1.26",
     "description": "BetaJS-Dynamics-Components is a Library of DOM Components that are built in BetaJS-Dynamics",
     "contributors": [
         "Victor Lingenthal",
@@ -42,7 +42,7 @@
         "grunt-contrib-connect": "",
         "grunt-githooks": "",
         "betajs-scoped": "~0.0.13",
-        "betajs-compile": "~0.0.28",
+        "betajs-compile": "~0.0.37",
         "betajs": "~1.0.96",
         "betajs-browser": "~1.0.65",
         "betajs-dynamics": "~0.0.83",
