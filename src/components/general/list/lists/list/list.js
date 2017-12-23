@@ -67,7 +67,7 @@ Scoped.define("module:List", [
 
         getCollection: function() {
             var coll = this.get("listcollection");
-            return coll.value ? coll.value() : coll;
+            return coll && coll.value ? coll.value() : coll;
         },
 
         functions: {
