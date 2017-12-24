@@ -53,6 +53,8 @@ Scoped.define("module:List", [
         events: {
             "change:listcollection": function() {
                 Async.eventually(function() {
+                    if (this.destroyed())
+                        return;
                     if (this.getCollection() && this.get("scrolltolast")) {
                         this.listenOn(this.getCollection(), "replaced-objects", function() {
                             this.execute("scrollToLast");
