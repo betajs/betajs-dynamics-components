@@ -6,6 +6,7 @@ overlaycontainer {
   right: 0;
   left: 0;
   overflow: scroll;
+  z-index: 100;
   background: rgba(0, 0, 0, 0.5);
 
   @include display-flex;
