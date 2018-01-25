@@ -22,7 +22,7 @@ Scoped.define("module:Search", [
 
         events: {
             'change:value': function(value) {
-                this.set('loading', true);
+                this.set('loading', !!value);
             }
         }
 

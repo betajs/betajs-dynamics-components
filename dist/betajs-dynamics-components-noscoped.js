@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.28 - 2018-01-07
+betajs-dynamics-components - v0.1.29 - 2018-01-17
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.28"
+    "version": "0.1.29"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -392,7 +392,7 @@ Scoped.define("module:Search", [
 
         events: {
             'change:value': function(value) {
-                this.set('loading', true);
+                this.set('loading', !!value);
             }
         }
 
@@ -920,183 +920,6 @@ Scoped.define("module:Addtitle", [
         }
 
     }).registerFunctions({ /**/"clicktitle()": function (obj) { with (obj) { return clicktitle(); } }, "model.value": function (obj) { with (obj) { return model.value; } }, "addbutton()": function (obj) { with (obj) { return addbutton(); } }/**/ }).register();
-
-});
-Scoped.define("module:Header", [
-    "dynamics:Dynamic"
-], [
-    "module:Toggle_menu"
-], function(Dynamic, scoped) {
-
-    return Dynamic.extend({
-        scoped: scoped
-    }, {
-
-        template: "\n<ba-list ba-listcollection=\"{{left_collection}}\"></ba-list>",
-
-        collections: {
-            left_collection: [{
-                listitem: 'toggle_menu'
-            }, {
-                listitem: 'searchbox',
-                view: {
-                    placeholder: 'Test'
-                }
-            }, {
-                value: '',
-                "class": 'icon-home'
-            }, {
-                value: 'Big Brother',
-                "class": 'icon-eye-open'
-            }, {
-                value: 'Header 1'
-            }, {
-                value: 'Header 2'
-            }]
-        }
-
-    }).registerFunctions({ /**/"left_collection": function (obj) { with (obj) { return left_collection; } }/**/ }).register();
-
-});
-Scoped.define("module:Toggle_menu", [
-    "dynamics:Dynamic"
-], function(Dynamic, scoped) {
-
-    return Dynamic.extend({
-        scoped: scoped
-    }, {
-
-        template: "<button ba-click=\"{{toggle_menu()}}\" class=\"{{toggle_icon}}\"></button>",
-
-        attrs: {
-            toggle_icon: 'icon-reorder'
-        },
-
-        functions: {
-            toggle_menu: function() {
-                this.channel('global').trigger('toggle_menu');
-            }
-        }
-
-    }).registerFunctions({ /**/"toggle_menu()": function (obj) { with (obj) { return toggle_menu(); } }, "toggle_icon": function (obj) { with (obj) { return toggle_icon; } }/**/ }).register();
-
-});
-Scoped.define("module:Toggle", [
-    "dynamics:Dynamic"
-], function(Dynamic, scoped) {
-
-    return Dynamic.extend({
-        scoped: scoped
-    }, {
-
-        template: "<button ba-click=\"{{toggle_menu()}}\" class=\"{{toggle_icon}}\"></button>",
-
-        attrs: {
-            toggle_icon: 'icon-reorder'
-        },
-
-        functions: {
-            toggle_menu: function() {
-                this.scope("<+[tagname='ba-layout_web']").call('toggle_menu');
-
-                this.channel('toggle').trigger('toggle', 'menu');
-            }
-        }
-
-    }).registerFunctions({ /**/"toggle_menu()": function (obj) { with (obj) { return toggle_menu(); } }, "toggle_icon": function (obj) { with (obj) { return toggle_icon; } }/**/ }).register();
-
-});
-Scoped.define("module:Menu_web", [
-    "dynamics:Dynamic",
-    "base:Collections.Collection"
-], function(Dynamic, Collection, scoped) {
-
-    return Dynamic.extend({
-        scoped: scoped
-    }, {
-
-        template: "\n<ba-titledlist\n        ba-collapsible=\"{{false}}\"\n        ba-model=\"{{model}}\"\n        ba-listcollection=\"{{menu_collection}}\">\n\n</ba-titledlist>",
-
-        attrs: {
-            model: {
-                title_model: {
-                    value: "Menu Title"
-                }
-            }
-        },
-
-        collections: {
-            menu_collection: [{
-                    value: 'Item 1'
-                },
-                {
-                    value: 'Item 2'
-                },
-                {
-                    listitem: 'titledlist',
-                    title_model: {
-                        value: 'Item 3'
-                    },
-                    listcollection: new Collection({
-                        objects: [{
-                                value: "Subitem 1"
-                            },
-                            {
-                                value: "Subitem 2"
-                            }
-                        ]
-                    })
-                },
-                {
-                    value: 'Item 4'
-                }
-            ]
-        }
-
-    }).registerFunctions({ /**/"false": function (obj) { with (obj) { return false; } }, "model": function (obj) { with (obj) { return model; } }, "menu_collection": function (obj) { with (obj) { return menu_collection; } }/**/ }).register();
-
-});
-Scoped.define("module:Layout_web", [
-    "dynamics:Dynamic"
-], [
-    "dynamics:Partials.AttrsPartial"
-], function(Dynamic, scoped) {
-
-    return Dynamic.extend({
-        scoped: scoped
-    }, {
-
-        template: "\n<ba-{{view.header}}\n    class=\"header\"\n>Header</ba-{{view.header}}>\n\n\n<main>\n    <ba-{{view.menu}}\n        class=\"menu\"\n        ba-show=\"{{view.display_menu}}\"\n        ba-view=\"{{view.menuview}}\">\n        Menu\n    </ba-{{view.menu}}>\n    <ba-{{view.content}}\n        class=\"content\"\n        ba-model={{contentmodel}}\n        ba-view=\"{{view.contentview}}\"\n        ba-attrs=\"{{view.contentattrs}}\">\n        Content\n    </ba-{{view.content}}>\n</main>",
-
-        attrs: {
-            view: {
-                header: "header",
-                //header : null,
-                menu: "menu_web",
-                //menu : null,
-                content: null,
-                display_menu: true
-            },
-            model: {
-
-            }
-        },
-
-        extendables: ['view'],
-
-        channels: {
-            "global:toggle_menu": function() {
-                this.execute('toggle_menu');
-            }
-        },
-
-        functions: {
-            toggle_menu: function() {
-                this.setProp('view.display_menu', !this.getProp('view.display_menu'));
-            }
-        }
-
-    }).registerFunctions({ /**/"view.header": function (obj) { with (obj) { return view.header; } }, "view.menu": function (obj) { with (obj) { return view.menu; } }, "view.display_menu": function (obj) { with (obj) { return view.display_menu; } }, "view.menuview": function (obj) { with (obj) { return view.menuview; } }, "view.content": function (obj) { with (obj) { return view.content; } }, "contentmodel": function (obj) { with (obj) { return contentmodel; } }, "view.contentview": function (obj) { with (obj) { return view.contentview; } }, "view.contentattrs": function (obj) { with (obj) { return view.contentattrs; } }/**/ }).register();
 
 });
 }).call(Scoped);
