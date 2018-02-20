@@ -12,3 +12,4 @@ BrowserStackLocal
 /docs
 /src/**/*.css
 /src/**/*.map
+package-lock.json
