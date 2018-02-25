@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.29 - 2018-01-17
+betajs-dynamics-components - v0.1.30 - 2018-02-25
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.29"
+    "version": "0.1.30"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -463,6 +463,53 @@ Scoped.define("module:Overlaycontainer", [
         }
 
     }).registerFunctions({ /**/"showoverlay = false": function (obj) { with (obj) { return showoverlay = false; } }, "showoverlay": function (obj) { with (obj) { return showoverlay; } }, "view.overlay": function (obj) { with (obj) { return view.overlay; } }, "model.message": function (obj) { with (obj) { return model.message; } }/**/ }).register();
+
+});
+Scoped.define("module:Jsconsole", [
+    "dynamics:Dynamic",
+    "base:Functions"
+], [
+    "dynamics:Partials.RepeatPartial",
+    "dynamics:Partials.ReturnPartial"
+], function(Dynamic, Functions, scoped) {
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
+
+        template: "<console-output ba-repeat=\"{{log::logs}}\">\n    <p style=\"color:{{log.color}}\">{{log.text}}</p>\n</console-output>\n<console-input>\n    <input value=\"{{=command}}\" ba-return=\"{{run_command()}}\" />\n</console-input>",
+
+        collections: ["logs"],
+
+        create: function() {
+            this.set("command", "");
+            var oldLog = console.log;
+            var logs = this.get("logs");
+            console.log = function() {
+                logs.add({
+                    color: "gray",
+                    text: Functions.getArguments(arguments).join(" ")
+                });
+                return oldLog.apply(this, arguments);
+            };
+        },
+
+        functions: {
+            run_command: function() {
+                var logs = this.get("logs");
+                logs.add({
+                    color: "black",
+                    text: this.get("command")
+                });
+                var result = window["ev" + "al"](this.get("command"));
+                logs.add({
+                    color: "blue",
+                    text: result
+                });
+                this.set("command", "");
+            }
+        }
+
+    }).registerFunctions({ /**/"logs": function (obj) { with (obj) { return logs; } }, "log.color": function (obj) { with (obj) { return log.color; } }, "log.text": function (obj) { with (obj) { return log.text; } }, "command": function (obj) { with (obj) { return command; } }, "run_command()": function (obj) { with (obj) { return run_command(); } }/**/ }).register();
 
 });
 Scoped.define("module:Clickcontainer", [

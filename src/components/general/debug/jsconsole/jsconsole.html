@@ -1,0 +1,6 @@
+<console-output ba-repeat="{{log::logs}}">
+    <p style="color:{{log.color}}">{{log.text}}</p>
+</console-output>
+<console-input>
+    <input value="{{=command}}" ba-return="{{run_command()}}" />
+</console-input>

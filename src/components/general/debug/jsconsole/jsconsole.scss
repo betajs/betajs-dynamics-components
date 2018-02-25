@@ -1,0 +1,19 @@
+ba-jsconsole {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  z-index: 10000;
+  background: white;
+  opacity: 0.5;
+}
+
+ba-jsconsole console-output {
+  overflow-y: scroll;
+  height: 100px;
+  display: block;
+  font-family: 'Courier New';
+}
+
+ba-jsconsole console-input {
+  background: yellow;
+}
