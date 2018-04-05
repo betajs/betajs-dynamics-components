@@ -119,8 +119,15 @@ Scoped.define("module:List", [
 
             scrollToFirst: function() {
                 this.execute("scrollTo", this.getCollection().last());
-            }
+            },
 
+            isEqual: function(collectionitem, selected) {
+                if (selected) {
+                    if (selected === collectionitem) return true;
+                    else if (selected.pid() === collectionitem.pid()) return true;
+                }
+                return false;
+            }
         }
 
     }).registerFunctions({ /*<%= template_function_cache(filepathnoext + '.html') %>*/ }).register();
