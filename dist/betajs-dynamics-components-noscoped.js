@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.31 - 2018-04-05
+betajs-dynamics-components - v0.1.32 - 2018-04-07
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.31"
+    "version": "0.1.32"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -377,7 +377,7 @@ Scoped.define("module:Search", [
         scoped: scoped
     }, {
 
-        template: "\n<icon ba-if=\"{{!loading}}\" class=\"icon-search\"></icon>\n<ba-loading ba-if=\"{{loading}}\"></ba-loading>\n<div>\n    <input placeholder=\"{{view.placeholder || ''}}\" value=\"{{=value}}\" />\n</div>\n",
+        template: "\n<icon ba-if=\"{{!searching}}\" class=\"icon-search\"></icon>\n<ba-loading ba-if=\"{{searching}}\"></ba-loading>\n<div>\n    <input placeholder=\"{{view.placeholder || ''}}\" value=\"{{=value}}\" />\n</div>\n",
 
         attrs: {
             value: "",
@@ -396,7 +396,7 @@ Scoped.define("module:Search", [
             }
         }
 
-    }).registerFunctions({ /**/"!loading": function (obj) { with (obj) { return !loading; } }, "loading": function (obj) { with (obj) { return loading; } }, "view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }, "value": function (obj) { with (obj) { return value; } }/**/ }).register();
+    }).registerFunctions({ /**/"!searching": function (obj) { with (obj) { return !searching; } }, "searching": function (obj) { with (obj) { return searching; } }, "view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }, "value": function (obj) { with (obj) { return value; } }/**/ }).register();
 
 });
 Scoped.define("module:Textinput", [
@@ -857,7 +857,7 @@ Scoped.define("module:Searchlist", [
         scoped: scoped
     }, {
 
-        template: "\n<ba-search\n        ba-loading=\"{{searchingindication}}\"\n        ba-value=\"{{=searchvalue}}\"\n        ba-if=\"{{view.showsearch}}\"\n        ba-view=\"{{view}}\"></ba-search>\n\n<ba-loading ba-if=\"{{searchingindication}}\">\n</ba-loading>\n\n<ba-list ba-noscope ba-event-forward=\"{{[]}}\"></ba-list>\n",
+        template: "\n<ba-search\n        ba-searching=\"{{searchingindication}}\"\n        ba-value=\"{{=searchvalue}}\"\n        ba-if=\"{{view.showsearch}}\"\n        ba-view=\"{{view}}\"></ba-search>\n\n<!--<ba-loading ba-if=\"{{searchingindication}}\">-->\n<!--</ba-loading>-->\n\n<ba-list ba-noscope ba-event-forward=\"{{[]}}\"></ba-list>\n",
 
         attrs: {
             searchvalue: "",

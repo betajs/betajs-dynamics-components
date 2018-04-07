@@ -1,11 +1,11 @@
 
 <ba-search
-        ba-loading="{{searchingindication}}"
+        ba-searching="{{searchingindication}}"
         ba-value="{{=searchvalue}}"
         ba-if="{{view.showsearch}}"
         ba-view="{{view}}"></ba-search>
 
-<ba-loading ba-if="{{searchingindication}}">
-</ba-loading>
+<!--<ba-loading ba-if="{{searchingindication}}">-->
+<!--</ba-loading>-->
 
 <ba-list ba-noscope ba-event-forward="{{[]}}"></ba-list>
