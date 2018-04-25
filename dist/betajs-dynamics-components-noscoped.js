@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.32 - 2018-04-07
+betajs-dynamics-components - v0.1.33 - 2018-04-25
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.32"
+    "version": "0.1.33"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -857,7 +857,7 @@ Scoped.define("module:Searchlist", [
         scoped: scoped
     }, {
 
-        template: "\n<ba-search\n        ba-searching=\"{{searchingindication}}\"\n        ba-value=\"{{=searchvalue}}\"\n        ba-if=\"{{view.showsearch}}\"\n        ba-view=\"{{view}}\"></ba-search>\n\n<!--<ba-loading ba-if=\"{{searchingindication}}\">-->\n<!--</ba-loading>-->\n\n<ba-list ba-noscope ba-event-forward=\"{{[]}}\"></ba-list>\n",
+        template: "\n<ba-search\n        ba-searching=\"{{=searchingindication}}\"\n        ba-value=\"{{=searchvalue}}\"\n        ba-if=\"{{view.showsearch}}\"\n        ba-view=\"{{view}}\"></ba-search>\n\n<!--<ba-loading ba-if=\"{{searchingindication}}\">-->\n<!--</ba-loading>-->\n\n<ba-list ba-noscope ba-event-forward=\"{{[]}}\"></ba-list>\n",
 
         attrs: {
             searchvalue: "",
