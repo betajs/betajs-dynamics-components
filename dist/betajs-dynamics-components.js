@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.33 - 2018-04-25
+betajs-dynamics-components - v0.1.33 - 2018-04-30
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1009,7 +1009,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.33 - 2018-04-25
+betajs-dynamics-components - v0.1.33 - 2018-04-30
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1830,11 +1830,11 @@ Scoped.define("module:List", [
             },
 
             scrollToLast: function() {
-                this.execute("scrollTo", this.getCollection().first());
+                this.execute("scrollTo", this.getCollection().last());
             },
 
             scrollToFirst: function() {
-                this.execute("scrollTo", this.getCollection().last());
+                this.execute("scrollTo", this.getCollection().first());
             },
 
             isEqual: function(collectionitem, selected) {

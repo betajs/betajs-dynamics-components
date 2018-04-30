@@ -114,11 +114,11 @@ Scoped.define("module:List", [
             },
 
             scrollToLast: function() {
-                this.execute("scrollTo", this.getCollection().first());
+                this.execute("scrollTo", this.getCollection().last());
             },
 
             scrollToFirst: function() {
-                this.execute("scrollTo", this.getCollection().last());
+                this.execute("scrollTo", this.getCollection().first());
             },
 
             isEqual: function(collectionitem, selected) {
