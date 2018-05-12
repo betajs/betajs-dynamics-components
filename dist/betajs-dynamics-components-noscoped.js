@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.36 - 2018-05-12
+betajs-dynamics-components - v0.1.37 - 2018-05-12
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.36"
+    "version": "0.1.37"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -98,7 +98,6 @@ Scoped.define("module:Dropdownselect", [
                     background: null,
                     useremove: true
                 },
-                // model: {},
                 model: new Properties({
                     icon: 'icon-more_vert',
                     color: null,
@@ -634,7 +633,7 @@ Scoped.define("module:Loadmore", [
         scoped: scoped
     }, {
 
-        template: "\n<loadmore ba-click=\"{{load_more()}}\">\n\n    <button>Load more</button>\n\n</loadmore>",
+        template: "\n<loadmore ba-click=\"{{load_more()}}\">\n\n    <button class=\"icon-ellipsis\"></button>\n\n</loadmore>",
 
         attrs: {
             view: {
@@ -661,7 +660,7 @@ Scoped.define("module:Clickitem", [
         scoped: scoped
     }, {
 
-        template: "\n<button\n        ba-class=\"{{{\n            'icon' : model.background || model.icon,\n            'noicon' : !model.icon && !model.background\n        }}}\"\n        ba-click=\"{{click()}}\">\n    <icon\n            class=\"{{model.icon}}\"\n            style=\"background : {{model.background}}; color : {{model.icon_color}}\"\n    ></icon>\n    <value>\n        {{model.value || model.name}}\n    </value>\n</button>\n\n",
+        template: "\n<button\n        ba-class=\"{{{\n            'icon' : model.background || model.icon,\n            'noicon' : !model.icon && !model.background\n        }}}\"\n        ba-tap=\"{{click()}}\">\n    <icon\n            class=\"{{model.icon}}\"\n            style=\"background : {{model.background}}; color : {{model.icon_color}}\"\n    ></icon>\n    <value>\n        {{model.value || model.name}}\n    </value>\n</button>\n\n",
 
         attrs: {
             model: {
