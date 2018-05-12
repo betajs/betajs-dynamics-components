@@ -30,12 +30,17 @@ Scoped.define("module:Dropdownselect", [
                 }),
                 removemodel: new Properties({
                     icon: 'icon-remove',
+                    background: 'white',
                     value: 'Remove'
                 }),
                 dropdownmodel: {},
                 value: null,
                 showdropdown: false
             };
+        },
+
+        create: function() {
+            if (!this.get('model')) this.set('model', this.get('view'));
         },
 
         extendables: ['view'],

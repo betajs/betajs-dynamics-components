@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.35 - 2018-05-12
+betajs-dynamics-components - v0.1.36 - 2018-05-12
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.35"
+    "version": "0.1.36"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -98,6 +98,7 @@ Scoped.define("module:Dropdownselect", [
                     background: null,
                     useremove: true
                 },
+                // model: {},
                 model: new Properties({
                     icon: 'icon-more_vert',
                     color: null,
@@ -105,12 +106,17 @@ Scoped.define("module:Dropdownselect", [
                 }),
                 removemodel: new Properties({
                     icon: 'icon-remove',
+                    background: 'white',
                     value: 'Remove'
                 }),
                 dropdownmodel: {},
                 value: null,
                 showdropdown: false
             };
+        },
+
+        create: function() {
+            if (!this.get('model')) this.set('model', this.get('view'));
         },
 
         extendables: ['view'],
@@ -655,7 +661,7 @@ Scoped.define("module:Clickitem", [
         scoped: scoped
     }, {
 
-        template: "\n<button\n        ba-class=\"{{{\n            'icon' : model.icon,\n            'noicon' : !model.icon\n        }}}\"\n        ba-click=\"{{click()}}\">\n    <icon\n            class=\"{{model.icon}}\"\n            style=\"background : {{model.background}}; color : {{model.icon_color}}\"\n    ></icon>\n    <value>\n        {{model.value || model.name}}\n    </value>\n</button>\n\n",
+        template: "\n<button\n        ba-class=\"{{{\n            'icon' : model.background || model.icon,\n            'noicon' : !model.icon && !model.background\n        }}}\"\n        ba-click=\"{{click()}}\">\n    <icon\n            class=\"{{model.icon}}\"\n            style=\"background : {{model.background}}; color : {{model.icon_color}}\"\n    ></icon>\n    <value>\n        {{model.value || model.name}}\n    </value>\n</button>\n\n",
 
         attrs: {
             model: {
@@ -673,9 +679,9 @@ Scoped.define("module:Clickitem", [
             }
         }
 
-    }).registerFunctions({ /**/"{\n            'icon' : model.icon,\n            'noicon' : !model.icon\n        }": function (obj) { with (obj) { return {
-            'icon' : model.icon,
-            'noicon' : !model.icon
+    }).registerFunctions({ /**/"{\n            'icon' : model.background || model.icon,\n            'noicon' : !model.icon && !model.background\n        }": function (obj) { with (obj) { return {
+            'icon' : model.background || model.icon,
+            'noicon' : !model.icon && !model.background
         }; } }, "click()": function (obj) { with (obj) { return click(); } }, "model.icon": function (obj) { with (obj) { return model.icon; } }, "model.background": function (obj) { with (obj) { return model.background; } }, "model.icon_color": function (obj) { with (obj) { return model.icon_color; } }, "model.value || model.name": function (obj) { with (obj) { return model.value || model.name; } }/**/ }).register();
 
 });
