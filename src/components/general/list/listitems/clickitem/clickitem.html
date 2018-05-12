@@ -5,9 +5,12 @@
             'noicon' : !model.icon
         }}}"
         ba-click="{{click()}}">
-    <icon class="{{model.icon}}"></icon>
+    <icon
+            class="{{model.icon}}"
+            style="background : {{model.background}}; color : {{model.icon_color}}"
+    ></icon>
     <value>
-        {{model.value}}
+        {{model.value || model.name}}
     </value>
 </button>
 

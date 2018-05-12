@@ -51,6 +51,7 @@ module.exports = function (grunt) {
 
     grunt.registerTask('default', ['autoincreasepackage', 'package', 'readme', 'license', 'beautify1', 'beautify2', 'beautify4', 'scopedclosurerevision', 'concat-scoped', 'uglify-noscoped', 'uglify-scoped', 'concat-dist-css', 'cssmin-dist', 'lint', 'simulator']);
     grunt.registerTask('simulator', ['concat-simulator-js', 'concat-simulator-css']);
+    grunt.registerTask('tests', ['browserqunit']);
     grunt.registerTask('check', ['lint', 'browserqunit']);
 
 };

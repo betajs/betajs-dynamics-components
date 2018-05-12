@@ -1,4 +1,4 @@
-Scoped.define("module:Dropdown", [
+Scoped.define("module:Dropdownselect", [
     "dynamics:Dynamic",
     "base:Properties.Properties"
 ], [
@@ -19,8 +19,19 @@ Scoped.define("module:Dropdown", [
                 view: {
                     dropdown: 'list',
                     icon: 'icon-more_vert',
+                    color: null,
+                    background: null,
                     useremove: true
                 },
+                model: new Properties({
+                    icon: 'icon-more_vert',
+                    color: null,
+                    background: null
+                }),
+                removemodel: new Properties({
+                    icon: 'icon-remove',
+                    value: 'Remove'
+                }),
                 dropdownmodel: {},
                 value: null,
                 showdropdown: false
@@ -44,6 +55,10 @@ Scoped.define("module:Dropdown", [
             },
             hide_dropdown: function() {
                 this.set('showdropdown', false);
+            },
+            remove_selected: function() {
+                this.set('model', this.get('view'));
+                this.execute('hide_dropdown');
             }
         }
 

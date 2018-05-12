@@ -1,0 +1,23 @@
+<button
+        onblur="{{this.execute('blur')}}"
+        ba-tap="{{click()}}"
+        class="{{model.icon}}"
+        style="color: {{model.icon_color}}; background: {{model.background}}" >
+    <dropdownselect ba-show="{{showdropdown}}">
+        <ba-{{view.dropdown}}
+            ba-view.listitem="{{view.listitem}}"
+            ba-event:item-click="hide_dropdown"
+            ba-event-forward:dropdownselect="{{[]}}"
+            ba-model='{{dropdownmodel}}'
+            ba-listcollection='{{dropdownmodel}}'
+
+        ></ba-{{view.dropdown}}>
+        <ba-clickitem
+                ba-model="{{removemodel}}"
+                ba-if="{{view.useremove}}"
+                ba-event:click="remove_selected"
+                ba-event-forward:dropdownselect="{{[]}}"
+        ></ba-clickitem>
+    </dropdownselect>
+    <div></div>
+</button>

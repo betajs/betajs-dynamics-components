@@ -1,5 +1,5 @@
 
-ba-dropdown {
+ba-dropdownselect {
   @include display-flex;
 
   button {
@@ -9,7 +9,7 @@ ba-dropdown {
     font-size: 14px;
     color: $grey3;
 
-    dropdown {
+    dropdownselect {
       position: absolute;
       right: 0;
       top: ($listitemheight - 1px);

@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.33 - 2018-04-30
+betajs-dynamics-components - v0.1.35 - 2018-05-12
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.33"
+    "version": "0.1.35"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -22,24 +22,27 @@ Scoped.assumeVersion('browser:version', '~1.0.65');
 Scoped.assumeVersion('dynamics:version', '~0.0.83');
 Scoped.assumeVersion('ui:version', '~1.0.37');
 Scoped.define("module:Dropdown", [
-    "dynamics:Dynamic"
+    "dynamics:Dynamic",
+    "base:Properties.Properties"
 ], [
     "dynamics:Partials.EventForwardPartial",
     "dynamics:Partials.EventPartial",
     "dynamics:Partials.TapPartial",
     "module:List"
-], function(Dynamic, scoped) {
+], function(Dynamic, Properties, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
     }, {
 
-        template: "<button\n        onblur=\"{{this.execute('blur')}}\"\n        ba-tap=\"{{click()}}\"\n        class=\"icon-more_vert\">\n    <dropdown ba-show=\"{{showdropdown}}\">\n        <ba-{{view.dropdown}}\n            ba-event:item-click=\"hide_dropdown\"\n            ba-event-forward:dropdown=\"{{[]}}\"\n            ba-model='{{dropdownmodel}}'\n\n        ></ba-{{view.dropdown}}>\n    </dropdown>\n    <div></div>\n</button>\n",
+        template: "<button\n        onblur=\"{{this.execute('blur')}}\"\n        ba-tap=\"{{click()}}\"\n        class=\"{{view.icon}}\">\n    <dropdown ba-show=\"{{showdropdown}}\">\n        <ba-{{view.dropdown}}\n            ba-view.listitem=\"{{view.listitem}}\"\n            ba-event:item-click=\"hide_dropdown\"\n            ba-event-forward:dropdown=\"{{[]}}\"\n            ba-model='{{dropdownmodel}}'\n            ba-listcollection='{{dropdownmodel}}'\n\n        ></ba-{{view.dropdown}}>\n    </dropdown>\n</button>\n",
 
         attrs: function() {
             return {
                 view: {
-                    dropdown: 'list'
+                    dropdown: 'list',
+                    icon: 'icon-more_vert',
+                    useremove: true
                 },
                 dropdownmodel: {},
                 value: null,
@@ -67,7 +70,74 @@ Scoped.define("module:Dropdown", [
             }
         }
 
-    }).registerFunctions({ /**/"this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "click()": function (obj) { with (obj) { return click(); } }, "showdropdown": function (obj) { with (obj) { return showdropdown; } }, "view.dropdown": function (obj) { with (obj) { return view.dropdown; } }, "[]": function (obj) { with (obj) { return []; } }, "dropdownmodel": function (obj) { with (obj) { return dropdownmodel; } }/**/ }).register();
+    }).registerFunctions({ /**/"this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "click()": function (obj) { with (obj) { return click(); } }, "view.icon": function (obj) { with (obj) { return view.icon; } }, "showdropdown": function (obj) { with (obj) { return showdropdown; } }, "view.dropdown": function (obj) { with (obj) { return view.dropdown; } }, "view.listitem": function (obj) { with (obj) { return view.listitem; } }, "[]": function (obj) { with (obj) { return []; } }, "dropdownmodel": function (obj) { with (obj) { return dropdownmodel; } }/**/ }).register();
+
+});
+Scoped.define("module:Dropdownselect", [
+    "dynamics:Dynamic",
+    "base:Properties.Properties"
+], [
+    "dynamics:Partials.EventForwardPartial",
+    "dynamics:Partials.EventPartial",
+    "dynamics:Partials.TapPartial",
+    "module:List"
+], function(Dynamic, Properties, scoped) {
+
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
+
+        template: "<button\n        onblur=\"{{this.execute('blur')}}\"\n        ba-tap=\"{{click()}}\"\n        class=\"{{model.icon}}\"\n        style=\"color: {{model.icon_color}}; background: {{model.background}}\" >\n    <dropdownselect ba-show=\"{{showdropdown}}\">\n        <ba-{{view.dropdown}}\n            ba-view.listitem=\"{{view.listitem}}\"\n            ba-event:item-click=\"hide_dropdown\"\n            ba-event-forward:dropdownselect=\"{{[]}}\"\n            ba-model='{{dropdownmodel}}'\n            ba-listcollection='{{dropdownmodel}}'\n\n        ></ba-{{view.dropdown}}>\n        <ba-clickitem\n                ba-model=\"{{removemodel}}\"\n                ba-if=\"{{view.useremove}}\"\n                ba-event:click=\"remove_selected\"\n                ba-event-forward:dropdownselect=\"{{[]}}\"\n        ></ba-clickitem>\n    </dropdownselect>\n    <div></div>\n</button>\n",
+
+        attrs: function() {
+            return {
+                view: {
+                    dropdown: 'list',
+                    icon: 'icon-more_vert',
+                    color: null,
+                    background: null,
+                    useremove: true
+                },
+                model: new Properties({
+                    icon: 'icon-more_vert',
+                    color: null,
+                    background: null
+                }),
+                removemodel: new Properties({
+                    icon: 'icon-remove',
+                    value: 'Remove'
+                }),
+                dropdownmodel: {},
+                value: null,
+                showdropdown: false
+            };
+        },
+
+        extendables: ['view'],
+
+        functions: {
+            click: function() {
+                if (this.get('showdropdown') === false) {
+                    this.set('showdropdown', true);
+                    this.element()[0].focus();
+                } else
+                    this.set('showdropdown', false);
+            },
+            blur: function() {
+                if (window.getComputedStyle(this.element()[0]).getPropertyValue("opacity") == 1) {
+                    this.execute('hide_dropdown');
+                }
+            },
+            hide_dropdown: function() {
+                this.set('showdropdown', false);
+            },
+            remove_selected: function() {
+                this.set('model', this.get('view'));
+                this.execute('hide_dropdown');
+            }
+        }
+
+    }).registerFunctions({ /**/"this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "click()": function (obj) { with (obj) { return click(); } }, "model.icon": function (obj) { with (obj) { return model.icon; } }, "model.icon_color": function (obj) { with (obj) { return model.icon_color; } }, "model.background": function (obj) { with (obj) { return model.background; } }, "showdropdown": function (obj) { with (obj) { return showdropdown; } }, "view.dropdown": function (obj) { with (obj) { return view.dropdown; } }, "view.listitem": function (obj) { with (obj) { return view.listitem; } }, "[]": function (obj) { with (obj) { return []; } }, "dropdownmodel": function (obj) { with (obj) { return dropdownmodel; } }, "removemodel": function (obj) { with (obj) { return removemodel; } }, "view.useremove": function (obj) { with (obj) { return view.useremove; } }/**/ }).register();
 
 });
 Scoped.define("module:Htmlview", [
@@ -585,7 +655,7 @@ Scoped.define("module:Clickitem", [
         scoped: scoped
     }, {
 
-        template: "\n<button\n        ba-class=\"{{{\n            'icon' : model.icon,\n            'noicon' : !model.icon\n        }}}\"\n        ba-click=\"{{click()}}\">\n    <icon class=\"{{model.icon}}\"></icon>\n    <value>\n        {{model.value}}\n    </value>\n</button>\n\n",
+        template: "\n<button\n        ba-class=\"{{{\n            'icon' : model.icon,\n            'noicon' : !model.icon\n        }}}\"\n        ba-click=\"{{click()}}\">\n    <icon\n            class=\"{{model.icon}}\"\n            style=\"background : {{model.background}}; color : {{model.icon_color}}\"\n    ></icon>\n    <value>\n        {{model.value || model.name}}\n    </value>\n</button>\n\n",
 
         attrs: {
             model: {
@@ -598,7 +668,7 @@ Scoped.define("module:Clickitem", [
         functions: {
             click: function() {
 
-                this.trigger('click', this.getProp('model.eventid'));
+                this.trigger('click', this.get('model'));
                 this.trigger('event', this.cid());
             }
         }
@@ -606,7 +676,7 @@ Scoped.define("module:Clickitem", [
     }).registerFunctions({ /**/"{\n            'icon' : model.icon,\n            'noicon' : !model.icon\n        }": function (obj) { with (obj) { return {
             'icon' : model.icon,
             'noicon' : !model.icon
-        }; } }, "click()": function (obj) { with (obj) { return click(); } }, "model.icon": function (obj) { with (obj) { return model.icon; } }, "model.value": function (obj) { with (obj) { return model.value; } }/**/ }).register();
+        }; } }, "click()": function (obj) { with (obj) { return click(); } }, "model.icon": function (obj) { with (obj) { return model.icon; } }, "model.background": function (obj) { with (obj) { return model.background; } }, "model.icon_color": function (obj) { with (obj) { return model.icon_color; } }, "model.value || model.name": function (obj) { with (obj) { return model.value || model.name; } }/**/ }).register();
 
 });
 Scoped.define("module:Eventitem", [
