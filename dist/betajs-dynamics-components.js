@@ -1,10 +1,10 @@
 /*!
-betajs-dynamics-components - v0.1.37 - 2018-05-12
+betajs-dynamics-components - v0.1.37 - 2018-06-05
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
 /** @flow **//*!
-betajs-scoped - v0.0.17 - 2017-10-22
+betajs-scoped - v0.0.17 - 2018-02-17
 Copyright (c) Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -476,7 +476,7 @@ function newNamespace (opts/* : {tree ?: boolean, global ?: boolean, root ?: Obj
 	function nodeUnresolvedWatchers(node/* : Node */, base, result) {
 		node = node || nsRoot;
 		result = result || [];
-		if (!node.ready)
+		if (!node.ready && node.lazy.length === 0 && node.watchers.length > 0)
 			result.push(base);
 		for (var k in node.children) {
 			var c = node.children[k];
@@ -1009,7 +1009,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.37 - 2018-05-12
+betajs-dynamics-components - v0.1.37 - 2018-06-05
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1815,6 +1815,7 @@ Scoped.define("module:List", [
             model: false,
             selected: null,
             scrolltolast: null,
+            scrolltofirst: null,
             view: {},
             infinite_scroll_options: {
                 disabled: true,
@@ -1833,7 +1834,8 @@ Scoped.define("module:List", [
         },
 
         types: {
-            scrolltolast: "boolean"
+            scrolltolast: "boolean",
+            scrolltofirst: "boolean"
         },
 
         create: function() {
@@ -1846,13 +1848,23 @@ Scoped.define("module:List", [
                 Async.eventually(function() {
                     if (this.destroyed())
                         return;
-                    if (this.getCollection() && this.get("scrolltolast")) {
-                        this.listenOn(this.getCollection(), "replaced-objects", function() {
+                    if (this.getCollection()) {
+                        if (this.get("scrolltolast")) {
+                            this.listenOn(this.getCollection(), "replaced-objects", function() {
+                                this.execute("scrollToLast");
+                            }, {
+                                eventually: true
+                            });
                             this.execute("scrollToLast");
-                        }, {
-                            eventually: true
-                        });
-                        this.execute("scrollToLast");
+                        }
+                        if (this.get("scrolltofirst")) {
+                            this.listenOn(this.getCollection(), "replaced-objects", function() {
+                                this.execute("scrollToFirst");
+                            }, {
+                                eventually: true
+                            });
+                            this.execute("scrollToFirst");
+                        }
                     }
                 }, this);
             }
