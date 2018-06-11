@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.38 - 2018-05-12
+betajs-dynamics-components - v0.1.38 - 2018-06-11
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -805,6 +805,7 @@ Scoped.define("module:List", [
             model: false,
             selected: null,
             scrolltolast: null,
+            scrolltofirst: null,
             view: {},
             infinite_scroll_options: {
                 disabled: true,
@@ -823,7 +824,8 @@ Scoped.define("module:List", [
         },
 
         types: {
-            scrolltolast: "boolean"
+            scrolltolast: "boolean",
+            scrolltofirst: "boolean"
         },
 
         create: function() {
@@ -836,13 +838,23 @@ Scoped.define("module:List", [
                 Async.eventually(function() {
                     if (this.destroyed())
                         return;
-                    if (this.getCollection() && this.get("scrolltolast")) {
-                        this.listenOn(this.getCollection(), "replaced-objects", function() {
+                    if (this.getCollection()) {
+                        if (this.get("scrolltolast")) {
+                            this.listenOn(this.getCollection(), "replaced-objects", function() {
+                                this.execute("scrollToLast");
+                            }, {
+                                eventually: true
+                            });
                             this.execute("scrollToLast");
-                        }, {
-                            eventually: true
-                        });
-                        this.execute("scrollToLast");
+                        }
+                        if (this.get("scrolltofirst")) {
+                            this.listenOn(this.getCollection(), "replaced-objects", function() {
+                                this.execute("scrollToFirst");
+                            }, {
+                                eventually: true
+                            });
+                            this.execute("scrollToFirst");
+                        }
                     }
                 }, this);
             }
