@@ -10,6 +10,7 @@ var components = new BetaJS.Collections.Collection([
     {value: "UTtextinput", externalfile: "../tests/demotests/UTtextinput/UTtextinput.html"},
     {value: "UTlist", externalfile: "../tests/demotests/UTlist/UTlist.html"},
     {value: "UTdropdown", externalfile: "../tests/demotests/UTdropdown/UTdropdown.html"},
+    {value: "UTdropdownselect", externalfile: "../tests/demotests/UTdropdownselect/UTdropdownselect.html"},
     {value: "Unit-Test-Selectable-Item", externalfile: "../tests/demotests/test_selectableitem.html"},
 
     //Overlaycontainer

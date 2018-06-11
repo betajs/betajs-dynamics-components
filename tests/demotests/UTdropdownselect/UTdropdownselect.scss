@@ -1,0 +1,14 @@
+.dropdownselect {
+  @include flex(1 1 0);
+  @include display-flex;
+
+  padding: 10px;
+  flex-direction: row-reverse;
+  height: $listitemheight;
+  box-sizing: content-box;
+
+  ba-dropdownselect {
+    @include flex(0 0 $listitemheight);
+    border: 1px solid $grey1;
+  }
+}

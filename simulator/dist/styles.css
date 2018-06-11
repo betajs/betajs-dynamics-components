@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.37 - 2018-05-12
+betajs-dynamics-components - v0.1.38 - 2018-05-12
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -103,6 +103,29 @@ appframe custom-container {
   height: 44px;
   box-sizing: content-box; }
   .dropdown ba-dropdown {
+    -webkit-box-flex: 0 0 44px;
+    -moz-box-flex: 0 0 44px;
+    -webkit-flex: 0 0 44px;
+    -ms-flex: 0 0 44px;
+    flex: 0 0 44px;
+    border: 1px solid #ddd; }
+
+.dropdownselect {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  padding: 10px;
+  flex-direction: row-reverse;
+  height: 44px;
+  box-sizing: content-box; }
+  .dropdownselect ba-dropdownselect {
     -webkit-box-flex: 0 0 44px;
     -moz-box-flex: 0 0 44px;
     -webkit-flex: 0 0 44px;

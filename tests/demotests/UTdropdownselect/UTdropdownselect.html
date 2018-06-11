@@ -1,0 +1,93 @@
+<html>
+<head>
+    <script src="../../../node_modules/betajs-scoped/dist/scoped.js"></script>
+    <script src="../../../node_modules/betajs/dist/beta-noscoped.js"></script>
+    <script src="../../../node_modules/betajs-browser/dist/betajs-browser-noscoped.js"></script>
+    <script src="../../../node_modules/betajs-ui/dist/betajs-ui-noscoped.js"></script>
+    <script src="../../../node_modules/betajs-dynamics/dist/betajs-dynamics-noscoped.js"></script>
+    <script src="../../../dist/betajs-dynamics-components-noscoped.js"></script>
+    <link rel="stylesheet" href="../../../dist/betajs-dynamics-components.css">
+    <link rel="stylesheet" href="../../../simulator/dist/styles.css">
+    <style>
+        .dropdownselect dropdownselect{
+            width: 150px;
+        }
+        .dropdownselect ba-clickitem {
+            height: 44px;
+            flex: 0 0 44px;
+        }
+    </style>
+</head>
+
+<body>
+<div id="test">
+
+    <demo class="dropdownselect">
+        <ba-dropdownselect ba-dropdownmodel="{{model}}"></ba-dropdownselect>
+    </demo>
+
+    <h1>Tests for Dropdownselect</h1>
+
+    <h3>Test Dynamics</h3>
+    <div id="dynamicsworking">{{test_dynamics}}</div>
+
+</div>
+
+<script>
+    var root = document.querySelector("#test");
+
+    var dynamic = new BetaJS.Dynamics.Dynamic({
+        element: root,
+        attrs : {
+            test_dynamics: "Dynamics Working?",
+            model : {
+                listcollection: new BetaJS.Collections.Collection([{
+                    value: "List - Item 1",
+                    icon: 'icon-star'
+                }, {
+                    value: "List - Item 2",
+                    icon: 'icon-plus'
+                }, {
+                    value: "List - Item 3",
+                    icon: 'icon-time'
+                }])
+            }
+        },
+        collections: {
+            listcollection: [{
+                value: "List - Item 1"
+            }, {
+                value: "List - Item 2"
+            }, {
+                value: "List - Item 3"
+            }]
+        }
+    });
+
+    dynamic.activate();
+
+    function test(assert) {
+
+        //0. Dynamics working?
+        assert.equal(dynamic.get("test_dynamics"), document.querySelector('#dynamicsworking').innerHTML.trim());
+
+        var getDisplayValue = function (selector) {
+            return document.defaultView.getComputedStyle(document.querySelector(selector)).display;
+        };
+
+        //1. Dropdown opening
+        assert.equal('none',getDisplayValue('ba-dropdownselect dropdownselect'));
+        BetaJS.Browser.Dom.triggerDomEvent(document.querySelector('ba-dropdownselect button'), "click");
+        assert.notEqual('none',getDisplayValue('ba-dropdownselect dropdownselect'));
+
+        //2. Dropdown closing after click on an item
+        assert.notEqual('none',getDisplayValue('ba-dropdownselect dropdownselect'));
+        BetaJS.Browser.Dom.triggerDomEvent(document.querySelector('ba-dropdownselect dropdownselect button'), "click");
+        assert.equal('none',getDisplayValue('ba-dropdownselect dropdownselect'));
+
+    }
+
+</script>
+
+</body>
+</html>
