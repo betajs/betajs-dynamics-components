@@ -19,27 +19,29 @@ Scoped.define("module:List", [
 
         template: "<%= template(filepathnoext + '.html') %>",
 
-        attrs: {
-            listitem: "clickitem",
-            model: false,
-            selected: null,
-            scrolltolast: null,
-            scrolltofirst: null,
-            view: {},
-            infinite_scroll_options: {
-                disabled: true,
-                parent_elem: true,
-                enable_scroll_modifier: "",
-                type: "infinitescroll",
-                append: function(count, callback) {
-                    this.execute("moreitems").success(function() {
-                        callback(1, true);
-                    });
-                }
-            },
-            loadmorebackwards: false,
-            loadmoresteps: undefined,
-            loadmorestyle: "button" //infinite
+        attrs: function() {
+            return {
+                listitem: "clickitem",
+                model: false,
+                selected: null,
+                scrolltolast: null,
+                scrolltofirst: null,
+                view: {},
+                infinite_scroll_options: {
+                    disabled: true,
+                    parent_elem: true,
+                    enable_scroll_modifier: "",
+                    type: "infinitescroll",
+                    append: function(count, callback) {
+                        this.execute("moreitems").success(function() {
+                            callback(1, true);
+                        });
+                    }
+                },
+                loadmorebackwards: false,
+                loadmoresteps: undefined,
+                loadmorestyle: "button" //infinite
+            };
         },
 
         types: {
