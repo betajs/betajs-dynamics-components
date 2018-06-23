@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.39 - 2018-06-19
+betajs-dynamics-components - v0.1.41 - 2018-06-23
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1009,7 +1009,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.39 - 2018-06-19
+betajs-dynamics-components - v0.1.41 - 2018-06-23
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1024,7 +1024,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.39"
+    "version": "0.1.41"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1768,7 +1768,7 @@ Scoped.define("module:Selectableitem", [
 
             if (!parentlist)
 
-                console.warn('There is no parent list the selector can attach to, this currently only works  with ba-list');
+                console.warn('There is no parent list the selector can attach to, this currently only works with ba-list');
             else if (parentlist.get('listcollection'))
                 if (!this.scopes.parent_list.get('selected_item'))
                     //var selected_item = parentlist.get('selected_item');
@@ -1817,6 +1817,7 @@ Scoped.define("module:List", [
                 selected: null,
                 scrolltolast: null,
                 scrolltofirst: null,
+                autoscroll: false,
                 view: {},
                 infinite_scroll_options: {
                     disabled: true,
@@ -1837,39 +1838,51 @@ Scoped.define("module:List", [
 
         types: {
             scrolltolast: "boolean",
-            scrolltofirst: "boolean"
+            scrolltofirst: "boolean",
+            autoscroll: "boolean"
         },
 
         create: function() {
             if (this.get("loadmore") && this.get("loadmorestyle") === "infinite")
                 this.setProp("infinite_scroll_options.disabled", false);
+            /*
+            if (this.get("listcollection"))
+                this._setupListCollection();
+                */
         },
 
         events: {
             "change:listcollection": function() {
-                Async.eventually(function() {
-                    if (this.destroyed())
-                        return;
-                    if (this.getCollection()) {
-                        if (this.get("scrolltolast")) {
-                            this.listenOn(this.getCollection(), "replaced-objects", function() {
-                                this.execute("scrollToLast");
-                            }, {
-                                eventually: true
-                            });
-                            this.execute("scrollToLast");
-                        }
-                        if (this.get("scrolltofirst")) {
-                            this.listenOn(this.getCollection(), "replaced-objects", function() {
-                                this.execute("scrollToFirst");
-                            }, {
-                                eventually: true
-                            });
-                            this.execute("scrollToFirst");
-                        }
-                    }
-                }, this);
+                this._setupListCollection();
             }
+        },
+
+        _setupListCollection: function() {
+            var evts = "replaced-objects";
+            if (this.get("autoscroll"))
+                evts += " add";
+            Async.eventually(function() {
+                if (this.destroyed())
+                    return;
+                if (this.getCollection()) {
+                    if (this.get("scrolltolast")) {
+                        this.listenOn(this.getCollection(), evts, function() {
+                            this.execute("scrollToLast");
+                        }, {
+                            eventually: true
+                        });
+                        this.execute("scrollToLast");
+                    }
+                    if (this.get("scrolltofirst")) {
+                        this.listenOn(this.getCollection(), evts, function() {
+                            this.execute("scrollToFirst");
+                        }, {
+                            eventually: true
+                        });
+                        this.execute("scrollToFirst");
+                    }
+                }
+            }, this);
         },
 
         getCollection: function() {

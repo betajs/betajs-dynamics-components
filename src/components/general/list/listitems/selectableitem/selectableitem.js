@@ -38,7 +38,7 @@ Scoped.define("module:Selectableitem", [
 
             if (!parentlist)
 
-                console.warn('There is no parent list the selector can attach to, this currently only works  with ba-list');
+                console.warn('There is no parent list the selector can attach to, this currently only works with ba-list');
             else if (parentlist.get('listcollection'))
                 if (!this.scopes.parent_list.get('selected_item'))
                     //var selected_item = parentlist.get('selected_item');

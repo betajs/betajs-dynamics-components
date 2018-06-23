@@ -26,6 +26,7 @@ Scoped.define("module:List", [
                 selected: null,
                 scrolltolast: null,
                 scrolltofirst: null,
+                autoscroll: false,
                 view: {},
                 infinite_scroll_options: {
                     disabled: true,
@@ -46,39 +47,51 @@ Scoped.define("module:List", [
 
         types: {
             scrolltolast: "boolean",
-            scrolltofirst: "boolean"
+            scrolltofirst: "boolean",
+            autoscroll: "boolean"
         },
 
         create: function() {
             if (this.get("loadmore") && this.get("loadmorestyle") === "infinite")
                 this.setProp("infinite_scroll_options.disabled", false);
+            /*
+            if (this.get("listcollection"))
+                this._setupListCollection();
+                */
         },
 
         events: {
             "change:listcollection": function() {
-                Async.eventually(function() {
-                    if (this.destroyed())
-                        return;
-                    if (this.getCollection()) {
-                        if (this.get("scrolltolast")) {
-                            this.listenOn(this.getCollection(), "replaced-objects", function() {
-                                this.execute("scrollToLast");
-                            }, {
-                                eventually: true
-                            });
-                            this.execute("scrollToLast");
-                        }
-                        if (this.get("scrolltofirst")) {
-                            this.listenOn(this.getCollection(), "replaced-objects", function() {
-                                this.execute("scrollToFirst");
-                            }, {
-                                eventually: true
-                            });
-                            this.execute("scrollToFirst");
-                        }
-                    }
-                }, this);
+                this._setupListCollection();
             }
+        },
+
+        _setupListCollection: function() {
+            var evts = "replaced-objects";
+            if (this.get("autoscroll"))
+                evts += " add";
+            Async.eventually(function() {
+                if (this.destroyed())
+                    return;
+                if (this.getCollection()) {
+                    if (this.get("scrolltolast")) {
+                        this.listenOn(this.getCollection(), evts, function() {
+                            this.execute("scrollToLast");
+                        }, {
+                            eventually: true
+                        });
+                        this.execute("scrollToLast");
+                    }
+                    if (this.get("scrolltofirst")) {
+                        this.listenOn(this.getCollection(), evts, function() {
+                            this.execute("scrollToFirst");
+                        }, {
+                            eventually: true
+                        });
+                        this.execute("scrollToFirst");
+                    }
+                }
+            }, this);
         },
 
         getCollection: function() {
