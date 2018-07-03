@@ -13,7 +13,8 @@ Scoped.define("module:Overlaycontainer", [
         attrs: function() {
             return {
                 view: {
-                    overlay: ""
+                    overlay: "",
+                    fullpage: false
                 },
                 model: {
                     message: "This is a message"

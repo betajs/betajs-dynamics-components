@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.41 - 2018-06-23
+betajs-dynamics-components - v0.1.42 - 2018-07-03
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -249,7 +249,7 @@ ba-textinput {
     word-break: break-word;
     white-space: pre-wrap; }
 
-overlaycontainer {
+ba-overlaycontainer overlaycontainer {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -263,14 +263,24 @@ overlaycontainer {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex; }
-  overlaycontainer overlayinner {
-    margin: auto;
-    max-width: 85%;
-    max-height: 80%; }
-    overlaycontainer overlayinner message {
-      background: white;
-      border-radius: 2px;
-      padding: 10px; }
+  ba-overlaycontainer overlaycontainer overlayinner message {
+    background: white;
+    border-radius: 2px;
+    padding: 10px; }
+ba-overlaycontainer .normal overlayinner {
+  margin: auto;
+  max-width: 85%;
+  max-height: 80%; }
+ba-overlaycontainer .fullpage {
+  transition: top 1000;
+  -webkit-transition: top 1000; }
+  ba-overlaycontainer .fullpage overlayinner {
+    position: absolute;
+    top: 44px;
+    bottom: 0;
+    width: 100%;
+    max-width: 100%;
+    max-height: 100%; }
 
 ba-jsconsole {
   position: absolute;

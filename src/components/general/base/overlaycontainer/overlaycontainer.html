@@ -1,6 +1,10 @@
 <overlaycontainer
     ba-tap="{{showoverlay = false}}"
-    ba-if="{{showoverlay}}">
+    ba-if="{{showoverlay}}"
+    ba-class="{{{
+                normal : !view.fullpage,
+                fullpage : view.fullpage
+            }}}">
 
     <overlayinner>
 
