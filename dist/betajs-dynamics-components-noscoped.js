@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.42 - 2018-07-03
+betajs-dynamics-components - v0.1.43 - 2018-07-05
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.42"
+    "version": "0.1.43"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -482,11 +482,12 @@ Scoped.define("module:Textinput", [
         scoped: scoped
     }, {
 
-        template: "\n<textarea autofocus onblur=\"{{this.execute('blur')}}\" value=\"{{=value}}\"></textarea>\n<pre>{{=preheighttext}}</pre>\n",
+        template: "<textinput>\n    <!--<form name=\"myForm\">-->\n        <textarea onblur=\"{{this.execute('blur')}}\" value=\"{{=value}}\"></textarea>\n        <!--<input type=BUTTON value=\"Click to Set Cursor\" name=\"myButton\"-->\n               <!--onClick=\"{{focus()}}\">-->\n    <!--</form>-->\n    <pre>{{=preheighttext}}</pre>\n</textinput>",
 
         attrs: {
             value: null,
             height: 0,
+            test: true,
             view: {
                 placeholder: '',
                 autofocus: true
@@ -502,9 +503,20 @@ Scoped.define("module:Textinput", [
 
         functions: {
             blur: function() {
+                console.log('Textinput blur');
                 this.trigger('blur');
             },
             focus: function() {
+                console.log('Textinput focus');
+                if (this.get('test')) {
+                    // document.myForm.myTextarea.setAttribute('style', 'background:blue');
+                    this.activeElement().getElementsByTagName("textarea")[0].setAttribute('style', 'background:blue');
+                    this.set('test', false);
+                } else {
+                    this.activeElement().getElementsByTagName("textarea")[0].setAttribute('style', 'background:red');
+                    this.set('test', true);
+                }
+                // document.myForm.myTextarea.focus();
                 this.activeElement().getElementsByTagName("textarea")[0].focus();
             }
         }
@@ -522,7 +534,7 @@ Scoped.define("module:Overlaycontainer", [
         scoped: scoped
     }, {
 
-        template: "<overlaycontainer\n    ba-tap=\"{{showoverlay = false}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage\n            }}}\">\n\n    <overlayinner>\n\n        <ba-{{view.overlay}} ba-noscope>\n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
+        template: "<overlaycontainer\n    ba-tap=\"{{showoverlay = false}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage\n            }}}\">\n\n    <overlayinner>\n\n        <ba-{{view.overlay}} ba-noscope>\n        <!--<ba-{{view.overlay}} ba-model=\"{{model}}\">-->\n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
 
         attrs: function() {
             return {
