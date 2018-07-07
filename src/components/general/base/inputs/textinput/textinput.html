@@ -1,8 +1,7 @@
-<textinput>
-    <!--<form name="myForm">-->
-        <textarea onblur="{{this.execute('blur')}}" value="{{=value}}"></textarea>
-        <!--<input type=BUTTON value="Click to Set Cursor" name="myButton"-->
-               <!--onClick="{{focus()}}">-->
-    <!--</form>-->
-    <pre>{{=preheighttext}}</pre>
-</textinput>
+
+<textarea
+        onfocus="{{this.execute('onfocus')}}"
+        onfocusout="{{this.execute('blur')}}"
+        value="{{=value}}"
+></textarea>
+<pre>{{=preheighttext}}</pre>

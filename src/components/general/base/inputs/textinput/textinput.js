@@ -11,7 +11,6 @@ Scoped.define("module:Textinput", [
         attrs: {
             value: null,
             height: 0,
-            test: true,
             view: {
                 placeholder: '',
                 autofocus: true
@@ -27,21 +26,11 @@ Scoped.define("module:Textinput", [
 
         functions: {
             blur: function() {
-                console.log('Textinput blur');
+                console.log('Textinput: Blur not working every time');
                 this.trigger('blur');
             },
-            focus: function() {
-                console.log('Textinput focus');
-                if (this.get('test')) {
-                    // document.myForm.myTextarea.setAttribute('style', 'background:blue');
-                    this.activeElement().getElementsByTagName("textarea")[0].setAttribute('style', 'background:blue');
-                    this.set('test', false);
-                } else {
-                    this.activeElement().getElementsByTagName("textarea")[0].setAttribute('style', 'background:red');
-                    this.set('test', true);
-                }
-                // document.myForm.myTextarea.focus();
-                this.activeElement().getElementsByTagName("textarea")[0].focus();
+            onfocus: function() {
+                this.trigger('onfocus');
             }
         }
 

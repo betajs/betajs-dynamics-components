@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.43 - 2018-07-05
+betajs-dynamics-components - v0.1.44 - 2018-07-06
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1009,7 +1009,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.43 - 2018-07-05
+betajs-dynamics-components - v0.1.44 - 2018-07-06
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1024,7 +1024,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.43"
+    "version": "0.1.44"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1492,12 +1492,11 @@ Scoped.define("module:Textinput", [
         scoped: scoped
     }, {
 
-        template: "<textinput>\n    <!--<form name=\"myForm\">-->\n        <textarea onblur=\"{{this.execute('blur')}}\" value=\"{{=value}}\"></textarea>\n        <!--<input type=BUTTON value=\"Click to Set Cursor\" name=\"myButton\"-->\n               <!--onClick=\"{{focus()}}\">-->\n    <!--</form>-->\n    <pre>{{=preheighttext}}</pre>\n</textinput>",
+        template: "\n<textarea\n        onfocus=\"{{this.execute('onfocus')}}\"\n        onfocusout=\"{{this.execute('blur')}}\"\n        value=\"{{=value}}\"\n></textarea>\n<pre>{{=preheighttext}}</pre>\n",
 
         attrs: {
             value: null,
             height: 0,
-            test: true,
             view: {
                 placeholder: '',
                 autofocus: true
@@ -1513,25 +1512,15 @@ Scoped.define("module:Textinput", [
 
         functions: {
             blur: function() {
-                console.log('Textinput blur');
+                console.log('Textinput: Blur not working every time');
                 this.trigger('blur');
             },
-            focus: function() {
-                console.log('Textinput focus');
-                if (this.get('test')) {
-                    // document.myForm.myTextarea.setAttribute('style', 'background:blue');
-                    this.activeElement().getElementsByTagName("textarea")[0].setAttribute('style', 'background:blue');
-                    this.set('test', false);
-                } else {
-                    this.activeElement().getElementsByTagName("textarea")[0].setAttribute('style', 'background:red');
-                    this.set('test', true);
-                }
-                // document.myForm.myTextarea.focus();
-                this.activeElement().getElementsByTagName("textarea")[0].focus();
+            onfocus: function() {
+                this.trigger('onfocus');
             }
         }
 
-    }).registerFunctions({ /**/"this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "value": function (obj) { with (obj) { return value; } }, "preheighttext": function (obj) { with (obj) { return preheighttext; } }/**/ }).register();
+    }).registerFunctions({ /**/"this.execute('onfocus')": function (obj) { with (obj) { return this.execute('onfocus'); } }, "this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "value": function (obj) { with (obj) { return value; } }, "preheighttext": function (obj) { with (obj) { return preheighttext; } }/**/ }).register();
 
 });
 Scoped.define("module:Overlaycontainer", [
@@ -1944,6 +1933,7 @@ Scoped.define("module:List", [
                     return;
                 var element = this.execute("elementByItem", item);
                 var parent = this.activeElement();
+
                 parent.scrollTop = element.offsetTop - parent.offsetTop;
             },
 
