@@ -41,6 +41,7 @@ Scoped.define("module:List", [
                 },
                 loadmorebackwards: false,
                 loadmoresteps: undefined,
+                "async-timeout": false,
                 loadmorestyle: "button" //infinite
             };
         },
@@ -48,16 +49,15 @@ Scoped.define("module:List", [
         types: {
             scrolltolast: "boolean",
             scrolltofirst: "boolean",
-            autoscroll: "boolean"
+            autoscroll: "boolean",
+            "async-timeout": "int"
         },
 
         create: function() {
             if (this.get("loadmore") && this.get("loadmorestyle") === "infinite")
                 this.setProp("infinite_scroll_options.disabled", false);
-            /*
             if (this.get("listcollection"))
                 this._setupListCollection();
-                */
         },
 
         events: {
@@ -89,6 +89,23 @@ Scoped.define("module:List", [
                             eventually: true
                         });
                         this.execute("scrollToFirst");
+                    }
+                    this.listenOn(this.getCollection(), "collection-updating", function() {
+                        this.set("loading", true);
+                    });
+                    this.listenOn(this.getCollection(), "collection-updated", function() {
+                        this.set("loading", false);
+                    });
+                    if (this.getCollection().count() === 0 && this.get("async-timeout")) {
+                        /*
+                        this.getCollection().once("add", function() {
+                            this.set("loading", false);
+                        }, this);
+                        */
+                        this.set("loading", true);
+                        Async.eventually(function() {
+                            this.set("loading", false);
+                        }, this, this.get("async-timeout"));
                     }
                 }
             }, this);
