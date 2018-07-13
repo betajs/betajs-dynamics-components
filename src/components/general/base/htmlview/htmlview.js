@@ -2,8 +2,9 @@ Scoped.define("module:Htmlview", [
     "dynamics:Dynamic",
     "base:Async",
     "browser:Loader",
-    "browser:Dom"
-], function(Dynamic, Async, Loader, Dom, scoped) {
+    "browser:Dom",
+    "ui:Interactions.Pinch"
+], function(Dynamic, Async, Loader, Dom, Pinch, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
@@ -13,7 +14,12 @@ Scoped.define("module:Htmlview", [
 
         attrs: {
             "html": "",
-            "loadhtml": ""
+            "loadhtml": "",
+            "fakezoom": false
+        },
+
+        types: {
+            "fakezoom": "boolean"
         },
 
         events: {
@@ -61,12 +67,39 @@ Scoped.define("module:Htmlview", [
             this._loadHtml();
         },
 
+        _iframe: function() {
+            return this.activeElement().querySelector("iframe");
+        },
+
+        _iframeHtml: function() {
+            return this._iframe().contentDocument.querySelector("html");
+        },
+
+        _iframeBody: function() {
+            return this._iframe().contentDocument.querySelector("body");
+        },
+
         _afterActivate: function() {
             this._updateIFrame();
+            Async.eventually(function() {
+                if (this.get("fakezoom")) {
+                    var zoom = 100;
+                    var iframe = this._iframe();
+                    var element = this._iframeBody();
+                    var pinch = this.auto_destroy(new Pinch(element, {
+                        enabled: true
+                    }));
+                    pinch.on("pinch", function(details) {
+                        var delta = details.delta_last.x;
+                        zoom += delta / 5;
+                        iframe.style.zoom = zoom + "%";
+                    });
+                }
+            }, this, 1000);
         },
 
         _updateIFrame: function() {
-            this.activeElement().querySelector("iframe").contentDocument.querySelector("html").innerHTML = this._cleanupContent(this.get('html')).innerHTML;
+            this._iframeHtml().innerHTML = this._cleanupContent(this.get('html')).innerHTML;
             this._updateSize();
             this._timeout = 100;
         },

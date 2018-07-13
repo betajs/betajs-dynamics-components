@@ -73,7 +73,7 @@ Scoped.define("module:List", [
             Async.eventually(function() {
                 if (this.destroyed())
                     return;
-                if (this.getCollection()) {
+                if (this.getCollection() && this.getCollection().on) {
                     if (this.get("scrolltolast")) {
                         this.listenOn(this.getCollection(), evts, function() {
                             this.execute("scrollToLast");

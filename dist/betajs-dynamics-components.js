@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.45 - 2018-07-12
+betajs-dynamics-components - v0.1.46 - 2018-07-13
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1009,7 +1009,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.45 - 2018-07-12
+betajs-dynamics-components - v0.1.46 - 2018-07-13
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1024,7 +1024,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.45"
+    "version": "0.1.46"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1159,8 +1159,9 @@ Scoped.define("module:Htmlview", [
     "dynamics:Dynamic",
     "base:Async",
     "browser:Loader",
-    "browser:Dom"
-], function(Dynamic, Async, Loader, Dom, scoped) {
+    "browser:Dom",
+    "ui:Interactions.Pinch"
+], function(Dynamic, Async, Loader, Dom, Pinch, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
@@ -1170,7 +1171,12 @@ Scoped.define("module:Htmlview", [
 
         attrs: {
             "html": "",
-            "loadhtml": ""
+            "loadhtml": "",
+            "fakezoom": false
+        },
+
+        types: {
+            "fakezoom": "boolean"
         },
 
         events: {
@@ -1218,12 +1224,39 @@ Scoped.define("module:Htmlview", [
             this._loadHtml();
         },
 
+        _iframe: function() {
+            return this.activeElement().querySelector("iframe");
+        },
+
+        _iframeHtml: function() {
+            return this._iframe().contentDocument.querySelector("html");
+        },
+
+        _iframeBody: function() {
+            return this._iframe().contentDocument.querySelector("body");
+        },
+
         _afterActivate: function() {
             this._updateIFrame();
+            Async.eventually(function() {
+                if (this.get("fakezoom")) {
+                    var zoom = 100;
+                    var iframe = this._iframe();
+                    var element = this._iframeBody();
+                    var pinch = this.auto_destroy(new Pinch(element, {
+                        enabled: true
+                    }));
+                    pinch.on("pinch", function(details) {
+                        var delta = details.delta_last.x;
+                        zoom += delta / 5;
+                        iframe.style.zoom = zoom + "%";
+                    });
+                }
+            }, this, 1000);
         },
 
         _updateIFrame: function() {
-            this.activeElement().querySelector("iframe").contentDocument.querySelector("html").innerHTML = this._cleanupContent(this.get('html')).innerHTML;
+            this._iframeHtml().innerHTML = this._cleanupContent(this.get('html')).innerHTML;
             this._updateSize();
             this._timeout = 100;
         },
@@ -1869,7 +1902,7 @@ Scoped.define("module:List", [
             Async.eventually(function() {
                 if (this.destroyed())
                     return;
-                if (this.getCollection()) {
+                if (this.getCollection() && this.getCollection().on) {
                     if (this.get("scrolltolast")) {
                         this.listenOn(this.getCollection(), evts, function() {
                             this.execute("scrollToLast");
