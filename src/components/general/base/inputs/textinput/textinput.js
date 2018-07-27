@@ -13,6 +13,7 @@ Scoped.define("module:Textinput", [
             height: 0,
             view: {
                 placeholder: '',
+                placeholder_visible: true,
                 autofocus: true
             }
         },
@@ -26,7 +27,7 @@ Scoped.define("module:Textinput", [
 
         functions: {
             blur: function() {
-                console.log('Textinput: Blur not working every time');
+                console.log('Textinput: Blur not working every time on ios');
                 this.trigger('blur');
             },
             onfocus: function() {

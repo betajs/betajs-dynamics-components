@@ -1,10 +1,10 @@
 /*!
-betajs-dynamics-components - v0.1.46 - 2018-07-13
+betajs-dynamics-components - v0.1.47 - 2018-07-27
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
 /** @flow **//*!
-betajs-scoped - v0.0.17 - 2018-02-17
+betajs-scoped - v0.0.17 - 2017-10-22
 Copyright (c) Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -476,7 +476,7 @@ function newNamespace (opts/* : {tree ?: boolean, global ?: boolean, root ?: Obj
 	function nodeUnresolvedWatchers(node/* : Node */, base, result) {
 		node = node || nsRoot;
 		result = result || [];
-		if (!node.ready && node.lazy.length === 0 && node.watchers.length > 0)
+		if (!node.ready)
 			result.push(base);
 		for (var k in node.children) {
 			var c = node.children[k];
@@ -1009,7 +1009,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.46 - 2018-07-13
+betajs-dynamics-components - v0.1.47 - 2018-07-27
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1024,7 +1024,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.46"
+    "version": "0.1.47"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1525,13 +1525,14 @@ Scoped.define("module:Textinput", [
         scoped: scoped
     }, {
 
-        template: "\n<textarea\n        onfocus=\"{{this.execute('onfocus')}}\"\n        onfocusout=\"{{this.execute('blur')}}\"\n        value=\"{{=value}}\"\n></textarea>\n<pre>{{=preheighttext}}</pre>\n",
+        template: "<placeholder ba-if=\"{{view.placeholder_visible && !value}}\">{{view.placeholder}}</placeholder>\n<textarea\n        onfocus=\"{{this.execute('onfocus')}}\"\n        onfocusout=\"{{this.execute('blur')}}\"\n        value=\"{{=value}}\"\n></textarea>\n<pre>{{=preheighttext}}</pre>\n",
 
         attrs: {
             value: null,
             height: 0,
             view: {
                 placeholder: '',
+                placeholder_visible: true,
                 autofocus: true
             }
         },
@@ -1545,7 +1546,7 @@ Scoped.define("module:Textinput", [
 
         functions: {
             blur: function() {
-                console.log('Textinput: Blur not working every time');
+                console.log('Textinput: Blur not working every time on ios');
                 this.trigger('blur');
             },
             onfocus: function() {
@@ -1553,7 +1554,7 @@ Scoped.define("module:Textinput", [
             }
         }
 
-    }).registerFunctions({ /**/"this.execute('onfocus')": function (obj) { with (obj) { return this.execute('onfocus'); } }, "this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "value": function (obj) { with (obj) { return value; } }, "preheighttext": function (obj) { with (obj) { return preheighttext; } }/**/ }).register();
+    }).registerFunctions({ /**/"view.placeholder_visible && !value": function (obj) { with (obj) { return view.placeholder_visible && !value; } }, "view.placeholder": function (obj) { with (obj) { return view.placeholder; } }, "this.execute('onfocus')": function (obj) { with (obj) { return this.execute('onfocus'); } }, "this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "value": function (obj) { with (obj) { return value; } }, "preheighttext": function (obj) { with (obj) { return preheighttext; } }/**/ }).register();
 
 });
 Scoped.define("module:Overlaycontainer", [

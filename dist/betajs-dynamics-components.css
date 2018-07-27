@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.46 - 2018-07-13
+betajs-dynamics-components - v0.1.47 - 2018-07-27
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -222,38 +222,35 @@ ba-textinput {
   -ms-flex: 1 1 0;
   flex: 1 1 0;
   position: relative; }
-  ba-textinput textinput {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex; }
-    ba-textinput textinput textarea {
-      -webkit-box-flex: 0 0 auto;
-      -moz-box-flex: 0 0 auto;
-      -webkit-flex: 0 0 auto;
-      -ms-flex: 0 0 auto;
-      flex: 0 0 auto;
-      width: 100%;
-      z-index: 1;
-      position: absolute;
-      top: 0;
-      bottom: 0;
-      -moz-user-select: text;
-      -webkit-user-select: text; }
-    ba-textinput textinput pre {
-      -webkit-box-flex: 0 0 auto;
-      -moz-box-flex: 0 0 auto;
-      -webkit-flex: 0 0 auto;
-      -ms-flex: 0 0 auto;
-      flex: 0 0 auto;
-      z-index: 0; }
-    ba-textinput textinput textarea, ba-textinput textinput pre {
-      margin-top: 4px;
-      margin-bottom: 4px;
-      word-wrap: break-word;
-      word-break: break-word;
-      white-space: pre-wrap; }
+  ba-textinput placeholder {
+    position: absolute;
+    z-index: 2; }
+  ba-textinput textarea {
+    -webkit-box-flex: 0 0 auto;
+    -moz-box-flex: 0 0 auto;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    width: 100%;
+    z-index: 1;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    -moz-user-select: text;
+    -webkit-user-select: text; }
+  ba-textinput pre {
+    -webkit-box-flex: 0 0 auto;
+    -moz-box-flex: 0 0 auto;
+    -webkit-flex: 0 0 auto;
+    -ms-flex: 0 0 auto;
+    flex: 0 0 auto;
+    z-index: 0; }
+  ba-textinput textarea, ba-textinput pre {
+    margin-top: 4px;
+    margin-bottom: 4px;
+    word-wrap: break-word;
+    word-break: break-word;
+    white-space: pre-wrap; }
 
 ba-overlaycontainer overlaycontainer {
   position: absolute;
