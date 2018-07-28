@@ -19,6 +19,7 @@ Scoped.define("module:Titledlist", [
                     value: 'Titledlist - Title'
                 }
             },
+            selectable: true,
             collapsed: false,
             collapsible: true,
             listitem: 'selectableitem',

@@ -6,6 +6,7 @@ ba-textinput {
   placeholder {
     position: absolute;
     z-index: 2;
+    pointer-events: none;
   }
 
   textarea {
@@ -17,10 +18,13 @@ ba-textinput {
     bottom: 0;
     -moz-user-select: text;
     -webkit-user-select: text;
+    overflow-y: scroll;
   }
   pre {
     @include flex(0 0 auto);
     z-index: 0;
+    overflow: hidden;
+    color: transparent;
   }
   textarea, pre {
     margin-top: 4px;
