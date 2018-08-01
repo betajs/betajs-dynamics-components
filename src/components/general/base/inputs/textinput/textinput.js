@@ -25,12 +25,25 @@ Scoped.define("module:Textinput", [
             }
         },
 
+        windowevents: {
+            "touchstart": function(event) {
+                if (document.activeElement.nodeName == 'TEXTAREA' && event.target.nodeName == 'TEXTAREA' || event.target.nodeName == 'INPUT') return;
+                else this.execute('blur');
+            }
+        },
+
         functions: {
+            click_textarea: function() {
+                console.log('Select Textarea');
+                if (document.activeElement.nodeName == 'TEXTAREA') return;
+                else this.element()[1].select();
+            },
             blur: function() {
-                console.log('Textinput: Blur not working every time on ios');
                 this.trigger('blur');
+                this.element()[1].blur();
             },
             onfocus: function() {
+                console.log('onfocus');
                 this.trigger('onfocus');
             }
         }
