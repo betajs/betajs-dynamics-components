@@ -224,7 +224,7 @@ ba-textinput {
   position: relative; }
   ba-textinput placeholder {
     position: absolute;
-    z-index: 2;
+    z-index: 1;
     pointer-events: none; }
   ba-textinput textarea {
     -webkit-box-flex: 0 0 auto;
