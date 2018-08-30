@@ -24,6 +24,7 @@ Scoped.define("module:List", [
                 listitem: "clickitem",
                 model: false,
                 selected: null,
+                selection: null,
                 scrolltolast: null,
                 scrolltofirst: null,
                 autoscroll: false,
