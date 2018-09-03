@@ -82,6 +82,8 @@ Scoped.define("module:Htmlview", [
         _afterActivate: function() {
             this._updateIFrame();
             Async.eventually(function() {
+                if (this.destroyed())
+                    return;
                 if (this.get("fakezoom")) {
                     var zoom = 100;
                     var iframe = this._iframe();
