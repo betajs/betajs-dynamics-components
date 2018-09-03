@@ -37,6 +37,9 @@
         "js-beautify": ""
     },
     "main": "dist/betajs-dynamics-components.js",
+    "scripts": {
+        "relink": "npm link betajs && npm link betajs-compile && npm link betajs-scoped && npm link betajs-shims && npm link betajs-browser && npm link betajs-dynamics && npm link grunt-betajs-templates && npm link betajs-simulator && npm link betajs-ui"
+    },
     "repository": {
         "type": "git",
         "url": "git://github.com/betajs/betajs-dynamics-components.git"

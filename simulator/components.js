@@ -26,8 +26,6 @@ var components = new BetaJS.Collections.Collection([
     {value  : 'search'},
     {value  : 'textinput'},
     {value  : 'scrollpicker'},
-    {value  : 'scrollpicker'},
-    {value  : 'scrollpicker'},
 
     //List
     {value  : 'test_list_removepromise'},
