@@ -1,9 +1,5 @@
-<container>
-        <element
-                ba-repeat-element="{{element_value :: value_array}}"
-                ba-click="{{select_element(element_value)}}"
-                data-id="{{element_value}}"
-        >
-                {{element_value}}
+<container ba-interaction:loopscroll="{{loopscroll}}">
+        <element ba-repeat-element="{{value :: values}}" data-value="{{value}}">
+                {{value}}
         </element>
 </container>

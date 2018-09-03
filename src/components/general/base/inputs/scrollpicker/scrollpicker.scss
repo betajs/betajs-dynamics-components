@@ -21,11 +21,19 @@ ba-scrollpicker {
       @include flex(0 0 $scrollelementheight);
       @include display-flex;
       color: $grey5;
+      background: #F4F4F4;
 
       line-height: $scrollelementheight;
       display: block;
       text-align: center;
+      box-sizing: border-box;
+
+      &.selected {
+        color: black;
+        background: white;
+      }
     }
+
   }
 
 }

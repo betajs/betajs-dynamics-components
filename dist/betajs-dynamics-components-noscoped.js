@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.52 - 2018-09-03
+betajs-dynamics-components - v0.1.54 - 2018-09-03
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.52"
+    "version": "0.1.54"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -346,6 +346,7 @@ Scoped.define("module:Scrollpicker", [
     "dynamics:Dynamic",
     "ui:Interactions.Loopscroll"
 ], [
+    // It has to be a repeat element partial, otherwise whitespace is removed from container
     "dynamics:Partials.RepeatElementPartial"
 ], function(Dynamic, Loopscroll, scoped) {
 
@@ -353,129 +354,97 @@ Scoped.define("module:Scrollpicker", [
         scoped: scoped
     }, {
 
-        template: "<container>\n        <element\n                ba-repeat-element=\"{{element_value :: value_array}}\"\n                ba-click=\"{{select_element(element_value)}}\"\n                data-id=\"{{element_value}}\"\n        >\n                {{element_value}}\n        </element>\n</container>",
+        template: "<container ba-interaction:loopscroll=\"{{loopscroll}}\">\n        <element ba-repeat-element=\"{{value :: values}}\" data-value=\"{{value}}\">\n                {{value}}\n        </element>\n</container>",
 
         attrs: {
-            initial_value: 14,
-            current_value: 10,
             first: 0,
             last: 23,
             increment: 1,
-            value_array: [],
-            last_elem: null
+            top: false,
+            value: 10,
+            valueadd: 0
+        },
+
+        types: {
+            first: "int",
+            last: "int",
+            increment: "int",
+            top: "bool",
+            value: "int",
+            valueadd: "int"
+        },
+
+        events: {
+            "change:value": function(value) {
+                if (!this.activeElement() || !this.activeElement().querySelector("container"))
+                    return;
+                if (!this.__ignoreValue)
+                    this._loopScroll().scrollToElement(this.getElementByValue(this.get("value")));
+            }
         },
 
         create: function() {
+            var values = [];
+            var dir = (this.get("first") <= this.get("last") ? 1 : -1);
+            for (var i = this.get("first"); dir * (this.get("last") - i) >= 0; i += dir * this.get("increment"))
+                values.push(i);
+            this.set('values', values);
 
-            this.initialize_value_array();
-            this.initialize_value();
-
+            this.set("loopscroll", {
+                type: "loopscroll",
+                enabled: true,
+                currentTop: this.get("top"),
+                discrete: true,
+                scrollEndTimeout: 200,
+                elementMargin: 0,
+                currentCenter: true,
+                currentElementClass: "selected",
+                discreteUpperThreshold: 0.25,
+                discreteLowerThreshold: 0.75,
+                scrollToOnClick: true
+            });
         },
 
-        functions: {
+        _loopScroll: function() {
+            // This is not particularly nice, but we'll improve on this later.
+            return this.activeElement().querySelector("container").dynnodehandler.interactions.loopscroll;
+        },
 
-            select_element: function(value) {
+        _encodeValue: function(value) {
+            value += this.get("valueadd");
+            var delta = this.get("first") - value;
+            delta = Math.round(delta / this.get("increment")) * this.get("increment");
+            value = this.get("first") - delta;
+            value = this.get("first") <= this.get("last") ?
+                Math.max(this.get("first"), Math.min(this.get('last'), value)) :
+                Math.max(this.get("last"), Math.min(this.get('first'), value));
+            return value;
+        },
 
-                var old_element = this.element()[0].querySelector("[data-id='" + this.get('current_value') + "']");
+        _decodeValue: function(value) {
+            return value - this.get("valueadd");
+        },
 
-                Object.assign(old_element.style, {
-                    color: null,
-                    background: null
-                });
+        getElementByValue: function(value) {
+            return this.activeElement().querySelector("[data-value='" + this._encodeValue(value) + "']");
+        },
 
-                this.set('current_value', value);
-
-                var ele = this.element()[0].querySelector("[data-id='" + value + "']");
-
-                this.execute('scroll_to_element', ele);
-            },
-
-            scroll_to_element: function(element) {
-                this.get('scroll').scrollToElement(element, {
-                    animate: false
-                });
-
-                Object.assign(element.style, {
-                    color: "black",
-                    background: "white"
-                });
-            }
-
+        getValueByElement: function(element) {
+            return this._decodeValue(parseInt(element.dataset.value, 10));
         },
 
         _afterActivate: function(element) {
-
-            element = element.querySelector('container');
-
-            var scroll = new Loopscroll(element, {
-                enabled: true,
-                //currentTop: this.get('currentTop'),
-                currentTop: this.get('top'),
-                discrete: true,
-                scrollEndTimeout: 200,
-                currentCenter: true
-            });
-
-            this.set('scroll', scroll);
-
-            var ele = element.querySelector("[data-id='" + this.get('current_value') + "']");
-
-            this.execute('scroll_to_element', ele);
-
-            scroll.on("scrollend", function() {
-                this.set('current_value', scroll.currentElement().dataset.id);
+            // This is a massive hack.
+            this.activeElement().querySelector("[ba-repeat-element]").remove();
+            this._loopScroll().scrollToElement(this.getElementByValue(this.get("value")));
+            this._loopScroll().on("change-current-element", function(element) {
+                this.__ignoreValue = true;
+                this.set("value", this.getValueByElement(element));
+                this.__ignoreValue = false;
             }, this);
-
-            scroll.on("scroll", function() {
-                if (this.get('last_elem')) {
-                    Object.assign(this.get('last_elem').style, {
-                        color: "#999",
-                        background: "#F4F4F4"
-                    });
-                }
-
-                var current_elem = scroll.currentElement();
-                Object.assign(current_elem.style, {
-                    color: "black",
-                    background: "white"
-                });
-                this.set('last_elem', current_elem);
-            }, this);
-
-        },
-
-        initialize_value: function() {
-
-            var inc = this.get('increment');
-            var rounded_value = inc * Math.round(this.get('initial_value') / inc);
-            var index = this.get('value_array').indexOf(rounded_value);
-            var displayed_value = index > -1 ? rounded_value : this.get('value_array')[0];
-
-            this.set('current_value', parseInt(displayed_value, 10));
-
-        },
-
-        initialize_value_array: function() {
-
-            var first = this.get('first');
-            var last = this.get('last');
-            var inc = this.get('increment');
-
-            var value_array = [];
-
-            if (first < last)
-                for (var i = first; i <= last; i += inc)
-                    value_array.push(i);
-
-            else if (first > last)
-                for (var j = first; j >= last; j -= inc)
-                    value_array.push(j);
-
-            this.set('value_array', value_array);
-
         }
 
-    }).registerFunctions({ /**/"value_array": function (obj) { with (obj) { return value_array; } }, "select_element(element_value)": function (obj) { with (obj) { return select_element(element_value); } }, "element_value": function (obj) { with (obj) { return element_value; } }/**/ }).register();
+    }).registerFunctions({ /**/"loopscroll": function (obj) { with (obj) { return loopscroll; } }, "values": function (obj) { with (obj) { return values; } }, "value": function (obj) { with (obj) { return value; } }/**/ }).register();
 
 });
 Scoped.define("module:Search", [
@@ -517,7 +486,7 @@ Scoped.define("module:Textinput", [
         scoped: scoped
     }, {
 
-        template: "<placeholder\n        ba-if=\"{{view.placeholder_visible && !value}}\"\n>{{view.placeholder}}</placeholder>\n<!--ba-tap=\"{{click_textarea()}}\"-->\n<!--onfocus=\"{{this.execute('onfocus')}}\"-->\n<!--onfocusout=\"{{this.execute('blur')}}\"-->\n<textarea\n        value=\"{{=value}}\"\n></textarea>\n<pre>{{=preheighttext}}</pre>\n",
+        template: "<placeholder\n        ba-if=\"{{view.placeholder_visible && !value}}\"\n>{{view.placeholder}}</placeholder>\n\n\n\n<textarea\n        value=\"{{=value}}\"\n></textarea>\n<pre>{{=preheighttext}}</pre>\n",
 
         attrs: {
             value: null,
@@ -572,7 +541,7 @@ Scoped.define("module:Overlaycontainer", [
         scoped: scoped
     }, {
 
-        template: "<overlaycontainer\n    ba-tap=\"{{showoverlay = false}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage\n            }}}\">\n\n    <overlayinner>\n\n        <ba-{{view.overlay}} ba-noscope>\n        <!--<ba-{{view.overlay}} ba-model=\"{{model}}\">-->\n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
+        template: "<overlaycontainer\n    ba-tap=\"{{showoverlay = false}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage\n            }}}\">\n\n    <overlayinner>\n\n        <ba-{{view.overlay}} ba-noscope>\n        \n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
 
         attrs: function() {
             return {
@@ -852,7 +821,7 @@ Scoped.define("module:List", [
         scoped: scoped
     }, {
 
-        template: "<ba-loadmore ba-if=\"{{loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitemsbackwards\">\n</ba-loadmore>\n<ba-loading ba-if=\"{{loadmore && loadmorebackwards}}\" ba-show=\"{{loading}}\">\n</ba-loading>\n\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\"\n      ba-interaction:scroll=\"{{infinite_scroll_options}}\">\n<!--<list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">-->\n    <!--ba-isselected=\"{{isselected(collectionitem)}}\"-->\n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-experimental=\"{{!!collectionitem.experimental}}\"\n        data-id=\"{{collectionitem.cid()}}\"\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-selection=\"{{=selection}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-isselected=\"{{isEqual(collectionitem, selected)}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner}}\"\n        ba-model=\"{{collectionitem}}\">\n\n    </ba-{{getview(collectionitem)}}>\n\n</list>\n\n<ba-loadmore ba-if=\"{{loadmore && loadmorestyle !== 'infinite'}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitems\">\n</ba-loadmore>\n<ba-loading ba-show=\"{{loading}}\">\n</ba-loading>\n",
+        template: "<ba-loadmore ba-if=\"{{loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitemsbackwards\">\n</ba-loadmore>\n<ba-loading ba-if=\"{{loadmore && loadmorebackwards}}\" ba-show=\"{{loading}}\">\n</ba-loading>\n\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\"\n      ba-interaction:scroll=\"{{infinite_scroll_options}}\">\n\n    \n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-experimental=\"{{!!collectionitem.experimental}}\"\n        data-id=\"{{collectionitem.cid()}}\"\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-selection=\"{{=selection}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-isselected=\"{{isEqual(collectionitem, selected)}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner}}\"\n        ba-model=\"{{collectionitem}}\">\n\n    </ba-{{getview(collectionitem)}}>\n\n</list>\n\n<ba-loadmore ba-if=\"{{loadmore && loadmorestyle !== 'infinite'}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitems\">\n</ba-loadmore>\n<ba-loading ba-show=\"{{loading}}\">\n</ba-loading>\n",
 
         attrs: function() {
             return {
@@ -1032,7 +1001,7 @@ Scoped.define("module:Searchlist", [
         scoped: scoped
     }, {
 
-        template: "\n<ba-search\n        ba-searching=\"{{=searchingindication}}\"\n        ba-value=\"{{=searchvalue}}\"\n        ba-if=\"{{view.showsearch}}\"\n        ba-view=\"{{view}}\"\n></ba-search>\n\n<!--<ba-loading ba-if=\"{{searchingindication}}\">-->\n<!--</ba-loading>-->\n\n<ba-list ba-noscope ba-event-forward=\"{{[]}}\"></ba-list>\n",
+        template: "\n<ba-search\n        ba-searching=\"{{=searchingindication}}\"\n        ba-value=\"{{=searchvalue}}\"\n        ba-if=\"{{view.showsearch}}\"\n        ba-view=\"{{view}}\"\n></ba-search>\n\n\n\n\n<ba-list ba-noscope ba-event-forward=\"{{[]}}\"></ba-list>\n",
 
         attrs: {
             searchvalue: "",
