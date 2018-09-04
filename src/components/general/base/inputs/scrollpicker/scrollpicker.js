@@ -55,8 +55,8 @@ Scoped.define("module:Scrollpicker", [
                 elementMargin: 0,
                 currentCenter: true,
                 currentElementClass: "selected",
-                discreteUpperThreshold: 0.25,
-                discreteLowerThreshold: 0.75,
+                discreteUpperThreshold: 0.99,
+                discreteLowerThreshold: 0.01,
                 scrollToOnClick: true
             });
         },
