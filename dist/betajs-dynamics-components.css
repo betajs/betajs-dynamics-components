@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.55 - 2018-09-04
+betajs-dynamics-components - v0.1.56 - 2018-09-04
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -171,15 +171,45 @@ ba-scrollpicker {
       display: -ms-flexbox;
       display: -webkit-flex;
       display: flex;
-      color: #999;
-      background: #F4F4F4;
       line-height: 30px;
       display: block;
       text-align: center;
       box-sizing: border-box; }
-      ba-scrollpicker container element.selected {
-        color: black;
-        background: white; }
+  ba-scrollpicker scrolloverlay {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex;
+    -webkit-flex-direction: column;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none; }
+    ba-scrollpicker scrolloverlay pickeroverlay {
+      -webkit-box-flex: 1 1 0;
+      -moz-box-flex: 1 1 0;
+      -webkit-flex: 1 1 0;
+      -ms-flex: 1 1 0;
+      flex: 1 1 0;
+      background: gainsboro;
+      opacity: .7;
+      border-bottom: 1px solid grey; }
+    ba-scrollpicker scrolloverlay valueoverlay {
+      -webkit-box-flex: 0 0 30px;
+      -moz-box-flex: 0 0 30px;
+      -webkit-flex: 0 0 30px;
+      -ms-flex: 0 0 30px;
+      flex: 0 0 30px; }
+  ba-scrollpicker .valuetop {
+    -webkit-flex-direction: column-reverse;
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse; }
+    ba-scrollpicker .valuetop pickeroverlay {
+      border-bottom: none !important;
+      border-top: 1px solid grey; }
 
 ba-search {
   height: 36px;

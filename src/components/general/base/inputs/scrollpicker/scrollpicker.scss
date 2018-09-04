@@ -6,8 +6,6 @@ ba-scrollpicker {
   @include flex(1 1 0);
   position: relative;
 
-//  overflow: hidden;
-
   container {
     position: absolute;
     width: 100%;
@@ -20,20 +18,49 @@ ba-scrollpicker {
     element {
       @include flex(0 0 $scrollelementheight);
       @include display-flex;
-      color: $grey5;
-      background: #F4F4F4;
 
       line-height: $scrollelementheight;
       display: block;
       text-align: center;
       box-sizing: border-box;
-
-      &.selected {
-        color: black;
-        background: white;
-      }
     }
-
+  }
+  scrolloverlay {
+    @include display-flex;
+    @include flex-direction(column);
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    pickeroverlay {
+      @include flex(1 1 0);
+      background: gainsboro;
+      opacity: .7;
+      border-bottom: 1px solid grey;
+    }
+    valueoverlay {
+      @include flex(0 0 $scrollelementheight);
+    }
+  }
+  .valuetop {
+    @include flex-direction(column-reverse);
+    pickeroverlay {
+      border-bottom: none!important;
+      border-top: 1px solid grey;
+    }
   }
 
 }
+
+//Elementstyling
+//ba-scrollpicker {
+//  element {
+//    color: $grey5;
+//    background: #F4F4F4;
+//
+//    &.selected {
+//      color: black;
+//      background: white;
+//    }
+//  }
+//}

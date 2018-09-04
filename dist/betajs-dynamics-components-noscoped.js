@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.55 - 2018-09-04
+betajs-dynamics-components - v0.1.56 - 2018-09-04
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.55"
+    "version": "0.1.56"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -354,7 +354,7 @@ Scoped.define("module:Scrollpicker", [
         scoped: scoped
     }, {
 
-        template: "<container ba-interaction:loopscroll=\"{{loopscroll}}\">\n        <element ba-repeat-element=\"{{value :: values}}\" data-value=\"{{value}}\">\n                {{value}}\n        </element>\n</container>",
+        template: "<container ba-interaction:loopscroll=\"{{loopscroll}}\">\n        <element ba-repeat-element=\"{{value :: values}}\" data-value=\"{{value}}\">\n                {{value}}\n        </element>\n</container>\n<scrolloverlay ba-class=\"{{{\n                  valuetop : top\n               }}}\">\n        <pickeroverlay></pickeroverlay>\n        <valueoverlay></valueoverlay>\n</scrolloverlay>",
 
         attrs: {
             first: 0,
@@ -402,8 +402,8 @@ Scoped.define("module:Scrollpicker", [
                 elementMargin: 0,
                 currentCenter: true,
                 currentElementClass: "selected",
-                discreteUpperThreshold: 0.25,
-                discreteLowerThreshold: 0.75,
+                discreteUpperThreshold: 0.99,
+                discreteLowerThreshold: 0.01,
                 scrollToOnClick: true
             });
         },
@@ -447,7 +447,9 @@ Scoped.define("module:Scrollpicker", [
             }, this);
         }
 
-    }).registerFunctions({ /**/"loopscroll": function (obj) { with (obj) { return loopscroll; } }, "values": function (obj) { with (obj) { return values; } }, "value": function (obj) { with (obj) { return value; } }/**/ }).register();
+    }).registerFunctions({ /**/"loopscroll": function (obj) { with (obj) { return loopscroll; } }, "values": function (obj) { with (obj) { return values; } }, "value": function (obj) { with (obj) { return value; } }, "{\n                  valuetop : top\n               }": function (obj) { with (obj) { return {
+                  valuetop : top
+               }; } }/**/ }).register();
 
 });
 Scoped.define("module:Search", [
