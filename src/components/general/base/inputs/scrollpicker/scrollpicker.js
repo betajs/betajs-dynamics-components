@@ -15,6 +15,7 @@ Scoped.define("module:Scrollpicker", [
         attrs: {
             first: 0,
             last: 23,
+            atleast: 100,
             increment: 1,
             top: false,
             value: 10,
@@ -42,8 +43,10 @@ Scoped.define("module:Scrollpicker", [
         create: function() {
             var values = [];
             var dir = (this.get("first") <= this.get("last") ? 1 : -1);
-            for (var i = this.get("first"); dir * (this.get("last") - i) >= 0; i += dir * this.get("increment"))
-                values.push(i);
+            while (values.length < this.get("atleast")) {
+                for (var i = this.get("first"); dir * (this.get("last") - i) >= 0; i += dir * this.get("increment"))
+                    values.push(i);
+            }
             this.set('values', values);
 
             this.set("loopscroll", {

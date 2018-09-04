@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.54 - 2018-09-03
+betajs-dynamics-components - v0.1.55 - 2018-09-04
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.54"
+    "version": "0.1.55"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -359,6 +359,7 @@ Scoped.define("module:Scrollpicker", [
         attrs: {
             first: 0,
             last: 23,
+            atleast: 100,
             increment: 1,
             top: false,
             value: 10,
@@ -386,8 +387,10 @@ Scoped.define("module:Scrollpicker", [
         create: function() {
             var values = [];
             var dir = (this.get("first") <= this.get("last") ? 1 : -1);
-            for (var i = this.get("first"); dir * (this.get("last") - i) >= 0; i += dir * this.get("increment"))
-                values.push(i);
+            while (values.length < this.get("atleast")) {
+                for (var i = this.get("first"); dir * (this.get("last") - i) >= 0; i += dir * this.get("increment"))
+                    values.push(i);
+            }
             this.set('values', values);
 
             this.set("loopscroll", {
@@ -541,7 +544,7 @@ Scoped.define("module:Overlaycontainer", [
         scoped: scoped
     }, {
 
-        template: "<overlaycontainer\n    ba-tap=\"{{showoverlay = false}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage\n            }}}\">\n\n    <overlayinner>\n\n        <ba-{{view.overlay}} ba-noscope>\n        \n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
+        template: "<overlaycontainer\n    ba-click=\"{{showoverlay = false}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage\n            }}}\">\n\n    <overlayinner>\n\n        <ba-{{view.overlay}} ba-noscope>\n        \n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
 
         attrs: function() {
             return {
