@@ -4,3 +4,8 @@
 <div>
     <input placeholder="{{view.placeholder || ''}}" value="{{=value}}" />
 </div>
+<ba-dropdown
+        ba-if="{{view.filter_visible}}"
+        ba-view.icon="icon-filter"
+        ba-dropdownmodel="{{view.dropdownmodel}}"
+></ba-dropdown>

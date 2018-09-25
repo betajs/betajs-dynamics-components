@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.56 - 2018-09-06
+betajs-dynamics-components - v0.1.58 - 2018-09-25
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.56"
+    "version": "0.1.58"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -455,20 +455,22 @@ Scoped.define("module:Scrollpicker", [
 Scoped.define("module:Search", [
     "dynamics:Dynamic"
 ], [
-    "module:Loading"
+    "module:Loading",
+    "module:Dropdown"
 ], function(Dynamic, scoped) {
     return Dynamic.extend({
         scoped: scoped
     }, {
 
-        template: "\n<icon ba-if=\"{{!searching}}\" class=\"icon-search\"></icon>\n<ba-loading ba-if=\"{{searching}}\"></ba-loading>\n<div>\n    <input placeholder=\"{{view.placeholder || ''}}\" value=\"{{=value}}\" />\n</div>\n",
+        template: "\n<icon ba-if=\"{{!searching}}\" class=\"icon-search\"></icon>\n<ba-loading ba-if=\"{{searching}}\"></ba-loading>\n<div>\n    <input placeholder=\"{{view.placeholder || ''}}\" value=\"{{=value}}\" />\n</div>\n<ba-dropdown\n        ba-if=\"{{view.filter_visible}}\"\n        ba-view.icon=\"icon-filter\"\n        ba-dropdownmodel=\"{{view.dropdownmodel}}\"\n></ba-dropdown>\n",
 
         attrs: {
             value: "",
             loading: false,
             view: {
                 placeholder: "Placeholder",
-                autofocus: true
+                autofocus: true,
+                filter_visible: false
             }
         },
 
@@ -480,7 +482,7 @@ Scoped.define("module:Search", [
             }
         }
 
-    }).registerFunctions({ /**/"!searching": function (obj) { with (obj) { return !searching; } }, "searching": function (obj) { with (obj) { return searching; } }, "view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }, "value": function (obj) { with (obj) { return value; } }/**/ }).register();
+    }).registerFunctions({ /**/"!searching": function (obj) { with (obj) { return !searching; } }, "searching": function (obj) { with (obj) { return searching; } }, "view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }, "value": function (obj) { with (obj) { return value; } }, "view.filter_visible": function (obj) { with (obj) { return view.filter_visible; } }, "view.dropdownmodel": function (obj) { with (obj) { return view.dropdownmodel; } }/**/ }).register();
 
 });
 Scoped.define("module:Textinput", [
@@ -1006,7 +1008,7 @@ Scoped.define("module:Searchlist", [
         scoped: scoped
     }, {
 
-        template: "\n<ba-search\n        ba-searching=\"{{=searchingindication}}\"\n        ba-value=\"{{=searchvalue}}\"\n        ba-if=\"{{view.showsearch}}\"\n        ba-view=\"{{view}}\"\n></ba-search>\n\n<!--<ba-loading ba-if=\"{{searchingindication}}\">-->\n<!--</ba-loading>-->\n\n<ba-list ba-noscope ba-event-forward=\"{{[]}}\"></ba-list>\n",
+        template: "\n<ba-search\n        ba-searching=\"{{=searchingindication}}\"\n        ba-value=\"{{=searchvalue}}\"\n        ba-if=\"{{view.showsearch}}\"\n        ba-view=\"{{view.searchview}}\"\n></ba-search>\n\n<!--<ba-loading ba-if=\"{{searchingindication}}\">-->\n<!--</ba-loading>-->\n\n<ba-list ba-noscope ba-event-forward=\"{{[]}}\"></ba-list>\n",
 
         attrs: {
             searchvalue: "",
@@ -1036,7 +1038,7 @@ Scoped.define("module:Searchlist", [
             });
         }
 
-    }).registerFunctions({ /**/"searchingindication": function (obj) { with (obj) { return searchingindication; } }, "searchvalue": function (obj) { with (obj) { return searchvalue; } }, "view.showsearch": function (obj) { with (obj) { return view.showsearch; } }, "view": function (obj) { with (obj) { return view; } }, "[]": function (obj) { with (obj) { return []; } }/**/ }).register();
+    }).registerFunctions({ /**/"searchingindication": function (obj) { with (obj) { return searchingindication; } }, "searchvalue": function (obj) { with (obj) { return searchvalue; } }, "view.showsearch": function (obj) { with (obj) { return view.showsearch; } }, "view.searchview": function (obj) { with (obj) { return view.searchview; } }, "[]": function (obj) { with (obj) { return []; } }/**/ }).register();
 
 });
 Scoped.define("module:Titledlist", [

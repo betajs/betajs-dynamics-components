@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.56 - 2018-09-06
+betajs-dynamics-components - v0.1.58 - 2018-09-25
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -54,11 +54,13 @@ ba-dropdown {
       position: absolute;
       right: 0;
       top: 43px;
+      min-height: 20px;
       border: 1px solid #777;
       background: white;
       z-index: 1000; }
       ba-dropdown button dropdown button {
-        white-space: nowrap; }
+        white-space: nowrap;
+        min-height: 20px; }
       ba-dropdown button dropdown button:hover {
         background: #ddd; }
       ba-dropdown button dropdown list {
@@ -233,22 +235,17 @@ ba-search {
       width: 100%;
       height: 36px;
       padding: 0 5px 0 0; }
-  ba-search icon {
-    -webkit-box-flex: 0 0 36px;
-    -moz-box-flex: 0 0 36px;
-    -webkit-flex: 0 0 36px;
-    -ms-flex: 0 0 36px;
-    flex: 0 0 36px;
-    line-height: 36px;
-    text-align: center; }
-  ba-search ba-loading {
+  ba-search ba-loading, ba-search icon, ba-search ba-dropdown {
     -webkit-box-flex: 0 0 36px;
     -moz-box-flex: 0 0 36px;
     -webkit-flex: 0 0 36px;
     -ms-flex: 0 0 36px;
     flex: 0 0 36px; }
-    ba-search ba-loading .sk-circle {
-      margin: 10px auto; }
+  ba-search icon {
+    line-height: 36px;
+    text-align: center; }
+  ba-search ba-loading .sk-circle {
+    margin: 10px auto; }
 
 ba-textinput {
   -webkit-box-flex: 1 1 0;

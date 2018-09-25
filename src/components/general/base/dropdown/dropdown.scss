@@ -14,11 +14,15 @@ ba-dropdown {
       right: 0;
       top: ($listitemheight - 1px);
 
+      min-height: 20px;
       border: 1px solid $grey3;
       background: white;
       z-index: 1000;
 
-      button {white-space: nowrap}
+      button {
+        white-space: nowrap;
+        min-height: 20px;
+      }
       button:hover {background: $grey1}
       list {@include flex-direction(column)}
     }

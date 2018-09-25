@@ -1,7 +1,8 @@
 Scoped.define("module:Search", [
     "dynamics:Dynamic"
 ], [
-    "module:Loading"
+    "module:Loading",
+    "module:Dropdown"
 ], function(Dynamic, scoped) {
     return Dynamic.extend({
         scoped: scoped
@@ -14,7 +15,8 @@ Scoped.define("module:Search", [
             loading: false,
             view: {
                 placeholder: "Placeholder",
-                autofocus: true
+                autofocus: true,
+                filter_visible: false
             }
         },
 

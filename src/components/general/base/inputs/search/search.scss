@@ -17,15 +17,13 @@ ba-search {
     }
   }
 
+  ba-loading, icon, ba-dropdown {@include flex(0 0 $searchboxheight)}
+
   icon {
-    @include flex(0 0 $searchboxheight);
     line-height: $searchboxheight;
     text-align: center;
   }
-  ba-loading {
-    @include flex(0 0 $searchboxheight);
-    .sk-circle {
-      margin: ($searchboxheight - $spinkit-size)/2 auto;
-    }
+  ba-loading .sk-circle {
+    margin: ($searchboxheight - $spinkit-size)/2 auto;
   }
 }
