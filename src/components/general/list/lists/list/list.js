@@ -154,6 +154,8 @@ Scoped.define("module:List", [
                 if (!item)
                     return;
                 var element = this.execute("elementByItem", item);
+                if (!element)
+                    return;
                 var parent = this.activeElement();
 
                 parent.scrollTop = element.offsetTop - parent.offsetTop;
