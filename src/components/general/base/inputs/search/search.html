@@ -1,9 +1,22 @@
 
-<icon ba-if="{{!searching}}" class="icon-search"></icon>
+<icon
+        ba-if="{{!searching}}"
+        class="icon-search"
+></icon>
+
 <ba-loading ba-if="{{searching}}"></ba-loading>
+
 <div>
-    <input placeholder="{{view.placeholder || ''}}" value="{{=value}}" />
+    <input
+            placeholder="{{view.placeholder || ''}}"
+            value="{{=value}}"
+    />
 </div>
+
+<ba-{{view.searchbuttons}}
+        ba-event-forward
+></ba-{{view.searchbuttons}}>
+
 <ba-dropdown
         ba-if="{{view.filter_visible}}"
         ba-event:~dropdown-item-click="searchdropdown-click"

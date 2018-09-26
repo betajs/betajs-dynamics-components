@@ -16,7 +16,8 @@ Scoped.define("module:Search", [
             view: {
                 placeholder: "Placeholder",
                 autofocus: true,
-                filter_visible: false
+                filter_visible: false,
+                searchbuttons: null
             }
         },
 
