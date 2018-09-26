@@ -6,6 +6,7 @@
 </div>
 <ba-dropdown
         ba-if="{{view.filter_visible}}"
+        ba-event:~dropdown-item-click="searchdropdown-click"
         ba-view.icon="icon-filter"
         ba-dropdownmodel="{{view.dropdownmodel}}"
 ></ba-dropdown>
