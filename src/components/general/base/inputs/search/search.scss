@@ -17,7 +17,7 @@ ba-search {
     }
   }
 
-  ba-loading, icon, ba-dropdown {@include flex(0 0 $searchboxheight)}
+  ba-loading, icon, ba-dropdown {@include flex(0 0 $listitemheight)}
 
   icon {
     line-height: $searchboxheight;

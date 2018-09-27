@@ -13,6 +13,7 @@ ba-searchlist {
     width: 100%;
     line-height: $searchboxheight;
     border-bottom: 1px solid #ddd;
+    z-index: 1;
 
     ba-loading {
       @include flex(0 0 $searchboxheight);
@@ -32,6 +33,7 @@ ba-searchlist {
       text-align: center;
     }
   }
+  ba-list {z-index: 0}
   ba-listitem {display: block}
 
 }

@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.60 - 2018-09-26
+betajs-dynamics-components - v0.1.62 - 2018-09-27
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -236,11 +236,11 @@ ba-search {
       height: 36px;
       padding: 0 5px 0 0; }
   ba-search ba-loading, ba-search icon, ba-search ba-dropdown {
-    -webkit-box-flex: 0 0 36px;
-    -moz-box-flex: 0 0 36px;
-    -webkit-flex: 0 0 36px;
-    -ms-flex: 0 0 36px;
-    flex: 0 0 36px; }
+    -webkit-box-flex: 0 0 44px;
+    -moz-box-flex: 0 0 44px;
+    -webkit-flex: 0 0 44px;
+    -ms-flex: 0 0 44px;
+    flex: 0 0 44px; }
   ba-search icon {
     line-height: 36px;
     text-align: center; }
@@ -534,7 +534,8 @@ ba-searchlist {
     display: flex;
     width: 100%;
     line-height: 44px;
-    border-bottom: 1px solid #ddd; }
+    border-bottom: 1px solid #ddd;
+    z-index: 1; }
     ba-searchlist ba-search ba-loading {
       -webkit-box-flex: 0 0 44px;
       -moz-box-flex: 0 0 44px;
@@ -558,6 +559,8 @@ ba-searchlist {
       flex: 0 0 44px;
       line-height: 44px;
       text-align: center; }
+  ba-searchlist ba-list {
+    z-index: 0; }
   ba-searchlist ba-listitem {
     display: block; }
 
