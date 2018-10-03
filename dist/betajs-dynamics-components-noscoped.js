@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.62 - 2018-09-27
+betajs-dynamics-components - v0.1.63 - 2018-10-02
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,7 +14,8 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.62"
+    "version": "0.1.63",
+    "datetime": 1538497962346
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -494,7 +495,7 @@ Scoped.define("module:Textinput", [
         scoped: scoped
     }, {
 
-        template: "<placeholder\n        ba-if=\"{{view.placeholder_visible && !value}}\"\n>{{view.placeholder}}</placeholder>\n<!--ba-tap=\"{{click_textarea()}}\"-->\n<!--onfocus=\"{{this.execute('onfocus')}}\"-->\n<!--onfocusout=\"{{this.execute('blur')}}\"-->\n<textarea\n        onfocus=\"{{this.execute('onfocus')}}\"\n        value=\"{{=value}}\"\n></textarea>\n<pre>{{=preheighttext}}</pre>\n",
+        template: "<placeholder\n        ba-if=\"{{view.placeholder_visible && !value}}\"\n>{{view.placeholder}}</placeholder>\n\n\n\n<textarea\n        onfocus=\"{{this.execute('onfocus')}}\"\n        value=\"{{=value}}\"\n></textarea>\n<pre>{{=preheighttext}}</pre>\n",
 
         attrs: {
             value: null,
@@ -549,7 +550,7 @@ Scoped.define("module:Overlaycontainer", [
         scoped: scoped
     }, {
 
-        template: "<overlaycontainer\n    ba-click=\"{{showoverlay = false}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage\n            }}}\">\n\n    <overlayinner>\n\n        <ba-{{view.overlay}} ba-noscope>\n        <!--<ba-{{view.overlay}} ba-model=\"{{model}}\">-->\n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
+        template: "<overlaycontainer\n    ba-click=\"{{showoverlay = false}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage\n            }}}\">\n\n    <overlayinner>\n\n        <ba-{{view.overlay}} ba-noscope>\n        \n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
 
         attrs: function() {
             return {
@@ -822,14 +823,16 @@ Scoped.define("module:List", [
     "dynamics:Partials.FunctionsPartial",
     "dynamics:Partials.CachePartial",
     "module:Loading",
-    "module:Loadmore"
+    "module:Loadmore",
+    "ui:Interactions.Infinitescroll",
+    "ui:Interactions.Droplist"
 ], function(Dynamic, Async, Promise, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
     }, {
 
-        template: "<ba-loadmore ba-if=\"{{loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitemsbackwards\">\n</ba-loadmore>\n<ba-loading ba-if=\"{{loadmore && loadmorebackwards}}\" ba-show=\"{{loading}}\">\n</ba-loading>\n\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\"\n      ba-interaction:scroll=\"{{infinite_scroll_options}}\">\n<!--<list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">-->\n    <!--ba-isselected=\"{{isselected(collectionitem)}}\"-->\n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-experimental=\"{{!!collectionitem.experimental}}\"\n        data-id=\"{{collectionitem.cid()}}\"\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-selection=\"{{=selection}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-isselected=\"{{isEqual(collectionitem, selected)}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner}}\"\n        ba-model=\"{{collectionitem}}\">\n\n    </ba-{{getview(collectionitem)}}>\n\n</list>\n\n<ba-loadmore ba-if=\"{{loadmore && loadmorestyle !== 'infinite'}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitems\">\n</ba-loadmore>\n<ba-loading ba-show=\"{{loading}}\">\n</ba-loading>\n",
+        template: "<ba-loadmore ba-if=\"{{loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitemsbackwards\">\n</ba-loadmore>\n<ba-loading ba-if=\"{{loadmore && loadmorebackwards}}\" ba-show=\"{{loading}}\">\n</ba-loading>\n\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\"\n      ba-interaction:scroll=\"{{infinite_scroll_options}}\"\n      ba-interaction:droplist=\"{{drop_list_options}}\">\n\n    \n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-experimental=\"{{!!collectionitem.experimental}}\"\n        data-id=\"{{collectionitem.cid()}}\"\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-selection=\"{{=selection}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-isselected=\"{{isEqual(collectionitem, selected)}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner}}\"\n        ba-model=\"{{collectionitem}}\">\n\n    </ba-{{getview(collectionitem)}}>\n\n</list>\n\n<div class=\"doodad\" data-id=\"floater\" style=\"display:none\">\n    <div class=\"inner\" style=\"height: 35px; background-color: #EEEEEE\">\n        Drop Here\n    </div>\n</div>\n<ba-loadmore ba-if=\"{{loadmore && loadmorestyle !== 'infinite'}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitems\">\n</ba-loadmore>\n<ba-loading ba-show=\"{{loading}}\">\n</ba-loading>\n",
 
         attrs: function() {
             return {
@@ -840,6 +843,7 @@ Scoped.define("module:List", [
                 scrolltolast: null,
                 scrolltofirst: null,
                 autoscroll: false,
+                droplist: false,
                 view: {},
                 infinite_scroll_options: {
                     disabled: true,
@@ -850,6 +854,26 @@ Scoped.define("module:List", [
                         this.execute("moreitems").success(function() {
                             callback(1, true);
                         });
+                    }
+                },
+                drop_list_options: {
+                    disabled: true,
+                    type: "droplist",
+                    floater: "[data-id='floater']",
+                    bounding_box: function(bb) {
+                        var height = bb.bottom - bb.top + 1;
+                        var margin = Math.floor(height * 0.2);
+                        bb.top += margin;
+                        bb.bottom -= margin;
+                        return bb;
+                    },
+                    events: {
+                        "dropped": function(dummy, event) {
+                            var item = event.source.data;
+                            var before = this.getCollection().getByIndex(event.index - 1);
+                            var after = this.getCollection().getByIndex(event.index);
+                            this.trigger("droplist-dropped", item, before, after);
+                        }
                     }
                 },
                 loadmorebackwards: false,
@@ -863,12 +887,15 @@ Scoped.define("module:List", [
             scrolltolast: "boolean",
             scrolltofirst: "boolean",
             autoscroll: "boolean",
-            "async-timeout": "int"
+            "async-timeout": "int",
+            droplist: "boolean"
         },
 
         create: function() {
             if (this.get("loadmore") && this.get("loadmorestyle") === "infinite")
                 this.setProp("infinite_scroll_options.disabled", false);
+            if (this.get("droplist"))
+                this.setProp("drop_list_options.disabled", false);
             if (this.get("listcollection"))
                 this._setupListCollection();
         },
@@ -990,7 +1017,7 @@ Scoped.define("module:List", [
             }
         }
 
-    }).registerFunctions({ /**/"loadmore && loadmorestyle !== 'infinite' && loadmorebackwards": function (obj) { with (obj) { return loadmore && loadmorestyle !== 'infinite' && loadmorebackwards; } }, "!loading": function (obj) { with (obj) { return !loading; } }, "loadmore && loadmorebackwards": function (obj) { with (obj) { return loadmore && loadmorebackwards; } }, "loading": function (obj) { with (obj) { return loading; } }, "(model.listcollection||listcollection)": function (obj) { with (obj) { return (model.listcollection||listcollection); } }, "infinite_scroll_options": function (obj) { with (obj) { return infinite_scroll_options; } }, "getview(collectionitem)": function (obj) { with (obj) { return getview(collectionitem); } }, "!!collectionitem.experimental": function (obj) { with (obj) { return !!collectionitem.experimental; } }, "collectionitem.cid()": function (obj) { with (obj) { return collectionitem.cid(); } }, "collectionitem.pid()": function (obj) { with (obj) { return collectionitem.pid(); } }, "selection": function (obj) { with (obj) { return selection; } }, "collectionitem.callbacks": function (obj) { with (obj) { return collectionitem.callbacks; } }, "isEqual(collectionitem, selected)": function (obj) { with (obj) { return isEqual(collectionitem, selected); } }, "[collectionitem]": function (obj) { with (obj) { return [collectionitem]; } }, "collectionitem.view||view.listinner": function (obj) { with (obj) { return collectionitem.view||view.listinner; } }, "collectionitem": function (obj) { with (obj) { return collectionitem; } }, "loadmore && loadmorestyle !== 'infinite'": function (obj) { with (obj) { return loadmore && loadmorestyle !== 'infinite'; } }/**/ }).register();
+    }).registerFunctions({ /**/"loadmore && loadmorestyle !== 'infinite' && loadmorebackwards": function (obj) { with (obj) { return loadmore && loadmorestyle !== 'infinite' && loadmorebackwards; } }, "!loading": function (obj) { with (obj) { return !loading; } }, "loadmore && loadmorebackwards": function (obj) { with (obj) { return loadmore && loadmorebackwards; } }, "loading": function (obj) { with (obj) { return loading; } }, "(model.listcollection||listcollection)": function (obj) { with (obj) { return (model.listcollection||listcollection); } }, "infinite_scroll_options": function (obj) { with (obj) { return infinite_scroll_options; } }, "drop_list_options": function (obj) { with (obj) { return drop_list_options; } }, "getview(collectionitem)": function (obj) { with (obj) { return getview(collectionitem); } }, "!!collectionitem.experimental": function (obj) { with (obj) { return !!collectionitem.experimental; } }, "collectionitem.cid()": function (obj) { with (obj) { return collectionitem.cid(); } }, "collectionitem.pid()": function (obj) { with (obj) { return collectionitem.pid(); } }, "selection": function (obj) { with (obj) { return selection; } }, "collectionitem.callbacks": function (obj) { with (obj) { return collectionitem.callbacks; } }, "isEqual(collectionitem, selected)": function (obj) { with (obj) { return isEqual(collectionitem, selected); } }, "[collectionitem]": function (obj) { with (obj) { return [collectionitem]; } }, "collectionitem.view||view.listinner": function (obj) { with (obj) { return collectionitem.view||view.listinner; } }, "collectionitem": function (obj) { with (obj) { return collectionitem; } }, "loadmore && loadmorestyle !== 'infinite'": function (obj) { with (obj) { return loadmore && loadmorestyle !== 'infinite'; } }/**/ }).register();
 
 });
 // TODO:
