@@ -5,7 +5,8 @@ Scoped.define("module:Dropdownselect", [
     "dynamics:Partials.EventForwardPartial",
     "dynamics:Partials.EventPartial",
     "dynamics:Partials.TapPartial",
-    "module:List"
+    "module:List",
+    "module:Clickitem"
 ], function(Dynamic, Properties, scoped) {
 
     return Dynamic.extend({
