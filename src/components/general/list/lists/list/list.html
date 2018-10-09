@@ -4,7 +4,8 @@
 </ba-loading>
 
 <list ba-repeat="{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}"
-      ba-interaction:scroll="{{infinite_scroll_options}}">
+      ba-interaction:scroll="{{infinite_scroll_options}}"
+      ba-interaction:droplist="{{drop_list_options}}">
 <!--<list ba-repeat="{{collectionitem :: (model.listcollection||listcollection)}}">-->
     <!--ba-isselected="{{isselected(collectionitem)}}"-->
 
@@ -25,6 +26,11 @@
 
 </list>
 
+<div class="doodad" data-id="floater" style="display:none">
+    <div class="inner" style="height: 35px; background-color: #EEEEEE">
+        Drop Here
+    </div>
+</div>
 <ba-loadmore ba-if="{{loadmore && loadmorestyle !== 'infinite'}}" ba-show="{{!loading}}" ba-event:loadmore="moreitems">
 </ba-loadmore>
 <ba-loading ba-show="{{loading}}">

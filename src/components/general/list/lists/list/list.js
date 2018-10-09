@@ -10,7 +10,9 @@ Scoped.define("module:List", [
     "dynamics:Partials.FunctionsPartial",
     "dynamics:Partials.CachePartial",
     "module:Loading",
-    "module:Loadmore"
+    "module:Loadmore",
+    "ui:Interactions.Infinitescroll",
+    "ui:Interactions.Droplist"
 ], function(Dynamic, Async, Promise, scoped) {
 
     return Dynamic.extend({
@@ -28,6 +30,7 @@ Scoped.define("module:List", [
                 scrolltolast: null,
                 scrolltofirst: null,
                 autoscroll: false,
+                droplist: false,
                 view: {},
                 infinite_scroll_options: {
                     disabled: true,
@@ -38,6 +41,26 @@ Scoped.define("module:List", [
                         this.execute("moreitems").success(function() {
                             callback(1, true);
                         });
+                    }
+                },
+                drop_list_options: {
+                    disabled: true,
+                    type: "droplist",
+                    floater: "[data-id='floater']",
+                    bounding_box: function(bb) {
+                        var height = bb.bottom - bb.top + 1;
+                        var margin = Math.floor(height * 0.2);
+                        bb.top += margin;
+                        bb.bottom -= margin;
+                        return bb;
+                    },
+                    events: {
+                        "dropped": function(dummy, event) {
+                            var item = event.source.data;
+                            var before = this.getCollection().getByIndex(event.index - 1);
+                            var after = this.getCollection().getByIndex(event.index);
+                            this.trigger("droplist-dropped", item, before, after);
+                        }
                     }
                 },
                 loadmorebackwards: false,
@@ -51,12 +74,15 @@ Scoped.define("module:List", [
             scrolltolast: "boolean",
             scrolltofirst: "boolean",
             autoscroll: "boolean",
-            "async-timeout": "int"
+            "async-timeout": "int",
+            droplist: "boolean"
         },
 
         create: function() {
             if (this.get("loadmore") && this.get("loadmorestyle") === "infinite")
                 this.setProp("infinite_scroll_options.disabled", false);
+            if (this.get("droplist"))
+                this.setProp("drop_list_options.disabled", false);
             if (this.get("listcollection"))
                 this._setupListCollection();
         },
