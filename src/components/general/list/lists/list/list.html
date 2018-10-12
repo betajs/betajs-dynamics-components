@@ -1,6 +1,6 @@
-<ba-loadmore ba-if="{{loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}" ba-show="{{!loading}}" ba-event:loadmore="moreitemsbackwards">
+<ba-loadmore ba-if="{{!!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}" ba-show="{{!loading}}" ba-event:loadmore="moreitemsbackwards">
 </ba-loadmore>
-<ba-loading ba-if="{{loadmore && loadmorebackwards}}" ba-show="{{loading}}">
+<ba-loading ba-show="{{loading}}">
 </ba-loading>
 
 <list ba-repeat="{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}"
@@ -32,7 +32,7 @@
         Drop Here
     </div>
 </div>
-<ba-loadmore ba-if="{{loadmore && loadmorestyle !== 'infinite'}}" ba-show="{{!loading}}" ba-event:loadmore="moreitems">
+<ba-loadmore ba-if="{{!!loadmore && loadmorestyle !== 'infinite'}}" ba-show="{{!loading}}" ba-event:loadmore="moreitems">
 </ba-loadmore>
 <ba-loading ba-show="{{loading}}">
 </ba-loading>
