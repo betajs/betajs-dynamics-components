@@ -1,6 +1,6 @@
 <ba-loadmore ba-if="{{!!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}" ba-show="{{!loading}}" ba-event:loadmore="moreitemsbackwards">
 </ba-loadmore>
-<ba-loading ba-show="{{loading}}">
+<ba-loading ba-show="{{loadmorebackwards && loading}}">
 </ba-loading>
 
 <list ba-repeat="{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}"
