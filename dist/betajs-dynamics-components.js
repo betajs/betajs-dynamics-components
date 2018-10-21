@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.68 - 2018-10-12
+betajs-dynamics-components - v0.1.70 - 2018-10-22
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1006,7 +1006,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.68 - 2018-10-12
+betajs-dynamics-components - v0.1.70 - 2018-10-22
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1021,8 +1021,8 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.68",
-    "datetime": 1539347729325
+    "version": "0.1.70",
+    "datetime": 1540155355114
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1926,7 +1926,8 @@ Scoped.define("module:List", [
                         this.listenOn(this.getCollection(), evts, function() {
                             this.execute("scrollToLast");
                         }, {
-                            eventually: true
+                            eventually: true,
+                            off_on_destroyed: true
                         });
                         this.execute("scrollToLast");
                     }
@@ -1934,7 +1935,8 @@ Scoped.define("module:List", [
                         this.listenOn(this.getCollection(), evts, function() {
                             this.execute("scrollToFirst");
                         }, {
-                            eventually: true
+                            eventually: true,
+                            off_on_destroyed: true
                         });
                         this.execute("scrollToFirst");
                     }

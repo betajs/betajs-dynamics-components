@@ -105,7 +105,8 @@ Scoped.define("module:List", [
                         this.listenOn(this.getCollection(), evts, function() {
                             this.execute("scrollToLast");
                         }, {
-                            eventually: true
+                            eventually: true,
+                            off_on_destroyed: true
                         });
                         this.execute("scrollToLast");
                     }
@@ -113,7 +114,8 @@ Scoped.define("module:List", [
                         this.listenOn(this.getCollection(), evts, function() {
                             this.execute("scrollToFirst");
                         }, {
-                            eventually: true
+                            eventually: true,
+                            off_on_destroyed: true
                         });
                         this.execute("scrollToFirst");
                     }
