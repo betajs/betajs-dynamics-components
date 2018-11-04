@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.70 - 2018-10-22
+betajs-dynamics-components - v0.1.71 - 2018-11-03
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,8 +14,8 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.70",
-    "datetime": 1540155355114
+    "version": "0.1.71",
+    "datetime": 1541303196330
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -814,6 +814,7 @@ Scoped.define("module:Selectableitem", [
 });
 Scoped.define("module:List", [
     "dynamics:Dynamic",
+    "browser:Dom",
     "base:Async",
     "base:Promise"
 ], [
@@ -827,7 +828,7 @@ Scoped.define("module:List", [
     "module:Loadmore",
     "ui:Interactions.Infinitescroll",
     "ui:Interactions.Droplist"
-], function(Dynamic, Async, Promise, scoped) {
+], function(Dynamic, Dom, Async, Promise, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
@@ -844,6 +845,7 @@ Scoped.define("module:List", [
                 scrolltolast: null,
                 scrolltofirst: null,
                 autoscroll: false,
+                stickybottom: false,
                 droplist: false,
                 view: {},
                 infinite_scroll_options: {
@@ -888,6 +890,7 @@ Scoped.define("module:List", [
             scrolltolast: "boolean",
             scrolltofirst: "boolean",
             autoscroll: "boolean",
+            stickybottom: "boolean",
             "async-timeout": "int",
             droplist: "boolean"
         },
@@ -952,6 +955,11 @@ Scoped.define("module:List", [
                     }
                 }
             }, this);
+        },
+
+        _afterActivate: function() {
+            if (this.get("stickybottom"))
+                Dom.containerStickyBottom(this.activeElement());
         },
 
         getCollection: function() {

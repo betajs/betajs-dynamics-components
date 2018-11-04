@@ -1,5 +1,6 @@
 Scoped.define("module:List", [
     "dynamics:Dynamic",
+    "browser:Dom",
     "base:Async",
     "base:Promise"
 ], [
@@ -13,7 +14,7 @@ Scoped.define("module:List", [
     "module:Loadmore",
     "ui:Interactions.Infinitescroll",
     "ui:Interactions.Droplist"
-], function(Dynamic, Async, Promise, scoped) {
+], function(Dynamic, Dom, Async, Promise, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
@@ -30,6 +31,7 @@ Scoped.define("module:List", [
                 scrolltolast: null,
                 scrolltofirst: null,
                 autoscroll: false,
+                stickybottom: false,
                 droplist: false,
                 view: {},
                 infinite_scroll_options: {
@@ -74,6 +76,7 @@ Scoped.define("module:List", [
             scrolltolast: "boolean",
             scrolltofirst: "boolean",
             autoscroll: "boolean",
+            stickybottom: "boolean",
             "async-timeout": "int",
             droplist: "boolean"
         },
@@ -138,6 +141,11 @@ Scoped.define("module:List", [
                     }
                 }
             }, this);
+        },
+
+        _afterActivate: function() {
+            if (this.get("stickybottom"))
+                Dom.containerStickyBottom(this.activeElement());
         },
 
         getCollection: function() {
