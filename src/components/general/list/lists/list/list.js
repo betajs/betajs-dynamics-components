@@ -187,6 +187,11 @@ Scoped.define("module:List", [
                 var parent = this.activeElement();
 
                 parent.scrollTop = element.offsetTop - parent.offsetTop;
+                // parent.scrollTop = element.offsetTop + 1000 + parent.offsetTop;
+                // console.log(element.offsetTop);
+                // console.log(parent.offsetTop);
+                // window.parent = parent;
+                // window.element = element;
             },
 
             scrollToLast: function() {
