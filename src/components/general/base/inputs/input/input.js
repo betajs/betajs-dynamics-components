@@ -1,5 +1,7 @@
 Scoped.define("module:Input", [
     "dynamics:Dynamic"
+], [
+    "dynamics:Partials.OnPartial"
 ], function(Dynamic, scoped) {
     return Dynamic.extend({
         scoped: scoped
@@ -8,12 +10,24 @@ Scoped.define("module:Input", [
         template: "<%= template(filepathnoext + '.html') %>",
 
         attrs: {
-            model: {
-                value: ""
-            },
+            value: "",
             view: {
                 placeholder: "",
                 autofocus: true
+            }
+
+        },
+
+        functions: {
+            blur: function() {
+                this.trigger('blur');
+                this.element()[0].blur();
+            },
+            keydown: function(event) {
+                if (event.code === "Enter" && !event.shiftKey) {
+                    this.execute("blur");
+                    event.preventDefault();
+                }
             }
 
         }

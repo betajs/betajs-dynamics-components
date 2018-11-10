@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.71 - 2018-11-03
+betajs-dynamics-components - v0.1.72 - 2018-11-10
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1006,7 +1006,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.71 - 2018-11-03
+betajs-dynamics-components - v0.1.72 - 2018-11-10
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1021,8 +1021,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.71",
-    "datetime": 1541303196330
+    "version": "0.1.72"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1330,25 +1329,39 @@ Scoped.define("module:Clickinput", [
 });
 Scoped.define("module:Input", [
     "dynamics:Dynamic"
+], [
+    "dynamics:Partials.OnPartial"
 ], function(Dynamic, scoped) {
     return Dynamic.extend({
         scoped: scoped
     }, {
 
-        template: "<input placeholder=\"{{view.placeholder || ''}}\" autofocus />",
+        template: "<input\n        value=\"{{value}}\"\n        ba-on:keydown=\"{{keydown(event)}}\"\n        placeholder=\"{{view.placeholder || ''}}\"\n        autofocus />",
 
         attrs: {
-            model: {
-                value: ""
-            },
+            value: "",
             view: {
                 placeholder: "",
                 autofocus: true
             }
 
+        },
+
+        functions: {
+            blur: function() {
+                this.trigger('blur');
+                this.element()[0].blur();
+            },
+            keydown: function(event) {
+                if (event.code === "Enter" && !event.shiftKey) {
+                    this.execute("blur");
+                    event.preventDefault();
+                }
+            }
+
         }
 
-    }).registerFunctions({ /**/"view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }/**/ }).register();
+    }).registerFunctions({ /**/"value": function (obj) { with (obj) { return value; } }, "keydown(event)": function (obj) { with (obj) { return keydown(event); } }, "view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }/**/ }).register();
 
 });
 Scoped.define("module:Scrollpicker", [
@@ -1471,11 +1484,12 @@ Scoped.define("module:Search", [
         scoped: scoped
     }, {
 
-        template: "\n<icon\n        ba-if=\"{{!searching}}\"\n        class=\"icon-search\"\n></icon>\n\n<ba-loading ba-if=\"{{searching}}\"></ba-loading>\n\n<div>\n    <input\n            placeholder=\"{{view.placeholder || ''}}\"\n            value=\"{{=value}}\"\n    />\n</div>\n\n<ba-{{view.searchbuttons}}\n        ba-event-forward\n></ba-{{view.searchbuttons}}>\n\n<ba-dropdown\n        ba-if=\"{{view.filter_visible}}\"\n        ba-event:~dropdown-item-click=\"searchdropdown-click\"\n        ba-view.icon=\"icon-filter\"\n        ba-dropdownmodel=\"{{view.dropdownmodel}}\"\n></ba-dropdown>\n",
+        template: "\n<icon\n        ba-if=\"{{!searching}}\"\n        class=\"icon-search\"\n></icon>\n\n<ba-loading ba-if=\"{{searching}}\"></ba-loading>\n\n<div>\n    <input\n            onfocus=\"{{this.execute('onfocus')}}\"\n            onblur=\"{{this.execute('onblur')}}\"\n            placeholder=\"{{view.placeholder || ''}}\"\n            value=\"{{=value}}\"\n    />\n</div>\n\n<ba-{{view.searchbuttons}}\n        ba-if=\"{{nosearch}}\"\n        ba-event-forward\n></ba-{{view.searchbuttons}}>\n\n<ba-dropdown\n        ba-if=\"{{view.filter_visible}}\"\n        ba-event:~dropdown-item-click=\"searchdropdown-click\"\n        ba-view.icon=\"icon-filter\"\n        ba-dropdownmodel=\"{{view.dropdownmodel}}\"\n></ba-dropdown>\n",
 
         attrs: {
             value: "",
             loading: false,
+            nosearch: true,
             view: {
                 placeholder: "Placeholder",
                 autofocus: true,
@@ -1490,20 +1504,31 @@ Scoped.define("module:Search", [
             'change:value': function(value) {
                 this.set('loading', !!value);
             }
+        },
+
+        functions: {
+            onfocus: function() {
+                this.set('nosearch', false);
+            },
+            onblur: function() {
+                this.set('nosearch', true);
+            }
         }
 
-    }).registerFunctions({ /**/"!searching": function (obj) { with (obj) { return !searching; } }, "searching": function (obj) { with (obj) { return searching; } }, "view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }, "value": function (obj) { with (obj) { return value; } }, "view.searchbuttons": function (obj) { with (obj) { return view.searchbuttons; } }, "view.filter_visible": function (obj) { with (obj) { return view.filter_visible; } }, "view.dropdownmodel": function (obj) { with (obj) { return view.dropdownmodel; } }/**/ }).register();
+    }).registerFunctions({ /**/"!searching": function (obj) { with (obj) { return !searching; } }, "searching": function (obj) { with (obj) { return searching; } }, "this.execute('onfocus')": function (obj) { with (obj) { return this.execute('onfocus'); } }, "this.execute('onblur')": function (obj) { with (obj) { return this.execute('onblur'); } }, "view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }, "value": function (obj) { with (obj) { return value; } }, "view.searchbuttons": function (obj) { with (obj) { return view.searchbuttons; } }, "nosearch": function (obj) { with (obj) { return nosearch; } }, "view.filter_visible": function (obj) { with (obj) { return view.filter_visible; } }, "view.dropdownmodel": function (obj) { with (obj) { return view.dropdownmodel; } }/**/ }).register();
 
 });
 Scoped.define("module:Textinput", [
     "dynamics:Dynamic",
     'base:Strings'
+], [
+    "dynamics:Partials.OnPartial"
 ], function(Dynamic, Strings, scoped) {
     return Dynamic.extend({
         scoped: scoped
     }, {
 
-        template: "<placeholder\n        ba-if=\"{{view.placeholder_visible && !value}}\"\n>{{view.placeholder}}</placeholder>\n\n\n\n<textarea\n        onfocus=\"{{this.execute('onfocus')}}\"\n        value=\"{{=value}}\"\n></textarea>\n<pre>{{=preheighttext}}</pre>\n",
+        template: "<placeholder\n        ba-if=\"{{view.placeholder_visible && !value}}\"\n>{{view.placeholder}}</placeholder>\n<!--ba-tap=\"{{click_textarea()}}\"-->\n<!--onfocus=\"{{this.execute('onfocus')}}\"-->\n<!--onfocusout=\"{{this.execute('blur')}}\"-->\n<textarea\n        onfocus=\"{{this.execute('onfocus')}}\"\n        value=\"{{=value}}\"\n></textarea>\n<pre>{{=preheighttext}}</pre>\n",
 
         attrs: {
             value: null,
@@ -1531,7 +1556,6 @@ Scoped.define("module:Textinput", [
 
         functions: {
             click_textarea: function() {
-                console.log('Select Textarea');
                 if (document.activeElement.nodeName == 'TEXTAREA') return;
                 else this.element()[1].select();
             },
@@ -1540,7 +1564,6 @@ Scoped.define("module:Textinput", [
                 this.element()[1].blur();
             },
             onfocus: function() {
-                console.log('onfocus');
                 this.trigger('onfocus');
             }
         }
@@ -1558,7 +1581,7 @@ Scoped.define("module:Overlaycontainer", [
         scoped: scoped
     }, {
 
-        template: "<overlaycontainer\n    ba-click=\"{{showoverlay = false}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage\n            }}}\">\n\n    <overlayinner>\n\n        <ba-{{view.overlay}}\n            ba-event-forward\n            ba-noscope>\n        \n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
+        template: "<overlaycontainer\n    ba-click=\"{{showoverlay = false}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage\n            }}}\">\n\n    <overlayinner>\n\n        <ba-{{view.overlay}}\n            ba-event-forward\n            ba-noscope>\n        <!--<ba-{{view.overlay}} ba-model=\"{{model}}\">-->\n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
 
         attrs: function() {
             return {
@@ -1841,7 +1864,7 @@ Scoped.define("module:List", [
         scoped: scoped
     }, {
 
-        template: "<ba-loadmore ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitemsbackwards\">\n</ba-loadmore>\n<ba-loading ba-show=\"{{loadmorebackwards && loading}}\">\n</ba-loading>\n\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\"\n      ba-interaction:scroll=\"{{infinite_scroll_options}}\"\n      ba-interaction:droplist=\"{{drop_list_options}}\">\n\n    \n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-experimental=\"{{!!collectionitem.experimental}}\"\n        data-id=\"{{collectionitem.cid()}}\"\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-selection=\"{{=selection}}\"\n        ba-droplist=\"{{droplist}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-isselected=\"{{isEqual(collectionitem, selected)}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner}}\"\n        ba-model=\"{{collectionitem}}\">\n\n    </ba-{{getview(collectionitem)}}>\n\n</list>\n\n<div class=\"doodad\" data-id=\"floater\" style=\"display:none\">\n    <div class=\"inner\" style=\"height: 35px; background-color: #EEEEEE\">\n        Drop Here\n    </div>\n</div>\n<ba-loadmore ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite'}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitems\">\n</ba-loadmore>\n<ba-loading ba-show=\"{{loading}}\">\n</ba-loading>\n",
+        template: "<!--<ba-loadmore ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitemsbackwards\">-->\n<!--</ba-loadmore>-->\n<ba-loading ba-show=\"{{loadmorebackwards && loading}}\">\n</ba-loading>\n\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\"\n      ba-interaction:scroll=\"{{infinite_scroll_options}}\"\n      ba-interaction:droplist=\"{{drop_list_options}}\">\n<!--<list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">-->\n    <!--ba-isselected=\"{{isselected(collectionitem)}}\"-->\n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-experimental=\"{{!!collectionitem.experimental}}\"\n        data-id=\"{{collectionitem.cid()}}\"\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-selection=\"{{=selection}}\"\n        ba-droplist=\"{{droplist}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-isselected=\"{{isEqual(collectionitem, selected)}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner}}\"\n        ba-model=\"{{collectionitem}}\">\n\n    </ba-{{getview(collectionitem)}}>\n\n</list>\n\n<div class=\"doodad\" data-id=\"floater\" style=\"display:none\">\n    <div class=\"inner\" style=\"line-height: 35px; height: 35px; background-color: #EEEEEE\">\n        Move Here\n    </div>\n</div>\n<ba-loadmore ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite'}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitems\">\n</ba-loadmore>\n<ba-loading ba-show=\"{{loading}}\">\n</ba-loading>\n",
 
         attrs: function() {
             return {
@@ -2035,7 +2058,7 @@ Scoped.define("module:List", [
             }
         }
 
-    }).registerFunctions({ /**/"!!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards": function (obj) { with (obj) { return !!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards; } }, "!loading": function (obj) { with (obj) { return !loading; } }, "loadmorebackwards && loading": function (obj) { with (obj) { return loadmorebackwards && loading; } }, "(model.listcollection||listcollection)": function (obj) { with (obj) { return (model.listcollection||listcollection); } }, "infinite_scroll_options": function (obj) { with (obj) { return infinite_scroll_options; } }, "drop_list_options": function (obj) { with (obj) { return drop_list_options; } }, "getview(collectionitem)": function (obj) { with (obj) { return getview(collectionitem); } }, "!!collectionitem.experimental": function (obj) { with (obj) { return !!collectionitem.experimental; } }, "collectionitem.cid()": function (obj) { with (obj) { return collectionitem.cid(); } }, "collectionitem.pid()": function (obj) { with (obj) { return collectionitem.pid(); } }, "selection": function (obj) { with (obj) { return selection; } }, "droplist": function (obj) { with (obj) { return droplist; } }, "collectionitem.callbacks": function (obj) { with (obj) { return collectionitem.callbacks; } }, "isEqual(collectionitem, selected)": function (obj) { with (obj) { return isEqual(collectionitem, selected); } }, "[collectionitem]": function (obj) { with (obj) { return [collectionitem]; } }, "collectionitem.view||view.listinner": function (obj) { with (obj) { return collectionitem.view||view.listinner; } }, "collectionitem": function (obj) { with (obj) { return collectionitem; } }, "!!loadmore && loadmorestyle !== 'infinite'": function (obj) { with (obj) { return !!loadmore && loadmorestyle !== 'infinite'; } }, "loading": function (obj) { with (obj) { return loading; } }/**/ }).register();
+    }).registerFunctions({ /**/"loadmorebackwards && loading": function (obj) { with (obj) { return loadmorebackwards && loading; } }, "(model.listcollection||listcollection)": function (obj) { with (obj) { return (model.listcollection||listcollection); } }, "infinite_scroll_options": function (obj) { with (obj) { return infinite_scroll_options; } }, "drop_list_options": function (obj) { with (obj) { return drop_list_options; } }, "getview(collectionitem)": function (obj) { with (obj) { return getview(collectionitem); } }, "!!collectionitem.experimental": function (obj) { with (obj) { return !!collectionitem.experimental; } }, "collectionitem.cid()": function (obj) { with (obj) { return collectionitem.cid(); } }, "collectionitem.pid()": function (obj) { with (obj) { return collectionitem.pid(); } }, "selection": function (obj) { with (obj) { return selection; } }, "droplist": function (obj) { with (obj) { return droplist; } }, "collectionitem.callbacks": function (obj) { with (obj) { return collectionitem.callbacks; } }, "isEqual(collectionitem, selected)": function (obj) { with (obj) { return isEqual(collectionitem, selected); } }, "[collectionitem]": function (obj) { with (obj) { return [collectionitem]; } }, "collectionitem.view||view.listinner": function (obj) { with (obj) { return collectionitem.view||view.listinner; } }, "collectionitem": function (obj) { with (obj) { return collectionitem; } }, "!!loadmore && loadmorestyle !== 'infinite'": function (obj) { with (obj) { return !!loadmore && loadmorestyle !== 'infinite'; } }, "!loading": function (obj) { with (obj) { return !loading; } }, "loading": function (obj) { with (obj) { return loading; } }/**/ }).register();
 
 });
 // TODO:

@@ -1,1 +1,5 @@
-<input placeholder="{{view.placeholder || ''}}" autofocus />
+<input
+        value="{{value}}"
+        ba-on:keydown="{{keydown(event)}}"
+        placeholder="{{view.placeholder || ''}}"
+        autofocus />

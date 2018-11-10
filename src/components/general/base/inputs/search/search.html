@@ -8,12 +8,15 @@
 
 <div>
     <input
+            onfocus="{{this.execute('onfocus')}}"
+            onblur="{{this.execute('onblur')}}"
             placeholder="{{view.placeholder || ''}}"
             value="{{=value}}"
     />
 </div>
 
 <ba-{{view.searchbuttons}}
+        ba-if="{{nosearch}}"
         ba-event-forward
 ></ba-{{view.searchbuttons}}>
 

@@ -1,6 +1,8 @@
 Scoped.define("module:Textinput", [
     "dynamics:Dynamic",
     'base:Strings'
+], [
+    "dynamics:Partials.OnPartial"
 ], function(Dynamic, Strings, scoped) {
     return Dynamic.extend({
         scoped: scoped
@@ -34,7 +36,6 @@ Scoped.define("module:Textinput", [
 
         functions: {
             click_textarea: function() {
-                console.log('Select Textarea');
                 if (document.activeElement.nodeName == 'TEXTAREA') return;
                 else this.element()[1].select();
             },
@@ -43,7 +44,6 @@ Scoped.define("module:Textinput", [
                 this.element()[1].blur();
             },
             onfocus: function() {
-                console.log('onfocus');
                 this.trigger('onfocus');
             }
         }

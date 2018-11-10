@@ -22,6 +22,7 @@ var components = new BetaJS.Collections.Collection([
     {value  : 'selectableitem'},
 
     //Inputs
+    {value  : 'input'},
     {value  : 'clickinput'},
     {value  : 'search'},
     {value  : 'textinput'},

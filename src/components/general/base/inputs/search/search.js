@@ -13,6 +13,7 @@ Scoped.define("module:Search", [
         attrs: {
             value: "",
             loading: false,
+            nosearch: true,
             view: {
                 placeholder: "Placeholder",
                 autofocus: true,
@@ -26,6 +27,15 @@ Scoped.define("module:Search", [
         events: {
             'change:value': function(value) {
                 this.set('loading', !!value);
+            }
+        },
+
+        functions: {
+            onfocus: function() {
+                this.set('nosearch', false);
+            },
+            onblur: function() {
+                this.set('nosearch', true);
             }
         }
 

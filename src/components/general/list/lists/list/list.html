@@ -1,5 +1,5 @@
-<ba-loadmore ba-if="{{!!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}" ba-show="{{!loading}}" ba-event:loadmore="moreitemsbackwards">
-</ba-loadmore>
+<!--<ba-loadmore ba-if="{{!!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}" ba-show="{{!loading}}" ba-event:loadmore="moreitemsbackwards">-->
+<!--</ba-loadmore>-->
 <ba-loading ba-show="{{loadmorebackwards && loading}}">
 </ba-loading>
 
@@ -28,8 +28,8 @@
 </list>
 
 <div class="doodad" data-id="floater" style="display:none">
-    <div class="inner" style="height: 35px; background-color: #EEEEEE">
-        Drop Here
+    <div class="inner" style="line-height: 35px; height: 35px; background-color: #EEEEEE">
+        Move Here
     </div>
 </div>
 <ba-loadmore ba-if="{{!!loadmore && loadmorestyle !== 'infinite'}}" ba-show="{{!loading}}" ba-event:loadmore="moreitems">
