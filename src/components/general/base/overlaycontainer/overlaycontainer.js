@@ -12,9 +12,12 @@ Scoped.define("module:Overlaycontainer", [
 
         attrs: function() {
             return {
+                overlaysplit: true,
+
                 view: {
                     overlay: "",
-                    fullpage: false
+                    fullpage: false,
+                    overlaysplit: true
                 },
                 model: {
                     message: "This is a message"

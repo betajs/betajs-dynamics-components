@@ -3,8 +3,15 @@
     ba-if="{{showoverlay}}"
     ba-class="{{{
                 normal : !view.fullpage,
-                fullpage : view.fullpage
+                fullpage : view.fullpage,
+                overlaysplit: view.overlaysplit
             }}}">
+
+    <overlaysplit ba-if="{{view.overlaysplit}}">
+        <top style="height: {{view.offsetTop}}px"></top>
+        <split style="height: {{view.offsetHeight}}px"></split>
+        <bottom></bottom>
+    </overlaysplit>
 
     <overlayinner>
 

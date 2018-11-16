@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.73 - 2018-11-11
+betajs-dynamics-components - v0.1.74 - 2018-11-15
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1006,7 +1006,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.73 - 2018-11-11
+betajs-dynamics-components - v0.1.74 - 2018-11-15
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1021,7 +1021,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.73"
+    "version": "0.1.74"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1581,13 +1581,16 @@ Scoped.define("module:Overlaycontainer", [
         scoped: scoped
     }, {
 
-        template: "<overlaycontainer\n    ba-click=\"{{showoverlay = false}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage\n            }}}\">\n\n    <overlayinner>\n\n        <ba-{{view.overlay}}\n            ba-event-forward\n            ba-noscope>\n        <!--<ba-{{view.overlay}} ba-model=\"{{model}}\">-->\n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
+        template: "<overlaycontainer\n    ba-click=\"{{showoverlay = false}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage,\n                overlaysplit: view.overlaysplit\n            }}}\">\n\n    <overlaysplit ba-if=\"{{view.overlaysplit}}\">\n        <top style=\"height: {{view.offsetTop}}px\"></top>\n        <split style=\"height: {{view.offsetHeight}}px\"></split>\n        <bottom></bottom>\n    </overlaysplit>\n\n    <overlayinner>\n\n        <ba-{{view.overlay}}\n            ba-event-forward\n            ba-noscope>\n        <!--<ba-{{view.overlay}} ba-model=\"{{model}}\">-->\n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
 
         attrs: function() {
             return {
+                overlaysplit: true,
+
                 view: {
                     overlay: "",
-                    fullpage: false
+                    fullpage: false,
+                    overlaysplit: true
                 },
                 model: {
                     message: "This is a message"
@@ -1597,10 +1600,11 @@ Scoped.define("module:Overlaycontainer", [
             };
         }
 
-    }).registerFunctions({ /**/"showoverlay = false": function (obj) { with (obj) { return showoverlay = false; } }, "showoverlay": function (obj) { with (obj) { return showoverlay; } }, "{\n                normal : !view.fullpage,\n                fullpage : view.fullpage\n            }": function (obj) { with (obj) { return {
+    }).registerFunctions({ /**/"showoverlay = false": function (obj) { with (obj) { return showoverlay = false; } }, "showoverlay": function (obj) { with (obj) { return showoverlay; } }, "{\n                normal : !view.fullpage,\n                fullpage : view.fullpage,\n                overlaysplit: view.overlaysplit\n            }": function (obj) { with (obj) { return {
                 normal : !view.fullpage,
-                fullpage : view.fullpage
-            }; } }, "view.overlay": function (obj) { with (obj) { return view.overlay; } }, "model.message": function (obj) { with (obj) { return model.message; } }/**/ }).register();
+                fullpage : view.fullpage,
+                overlaysplit: view.overlaysplit
+            }; } }, "view.overlaysplit": function (obj) { with (obj) { return view.overlaysplit; } }, "view.offsetTop": function (obj) { with (obj) { return view.offsetTop; } }, "view.offsetHeight": function (obj) { with (obj) { return view.offsetHeight; } }, "view.overlay": function (obj) { with (obj) { return view.overlay; } }, "model.message": function (obj) { with (obj) { return model.message; } }/**/ }).register();
 
 });
 Scoped.define("module:Jsconsole", [
