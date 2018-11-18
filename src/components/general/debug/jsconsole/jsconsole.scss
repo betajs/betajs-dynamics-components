@@ -4,7 +4,7 @@ ba-jsconsole {
   width: 100%;
   z-index: 10000;
   background: white;
-  opacity: 0.5;
+  opacity: 0.8;
 }
 
 ba-jsconsole console-output {
@@ -16,4 +16,7 @@ ba-jsconsole console-output {
 
 ba-jsconsole console-input {
   background: yellow;
+  input {
+    width:100%;
+  }
 }
