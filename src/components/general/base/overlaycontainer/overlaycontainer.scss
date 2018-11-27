@@ -12,15 +12,36 @@ ba-overlaycontainer {
 
     @include display-flex;
 
-    overlayinner {
-      message {
-        background: white;
-        border-radius: 2px;
-        padding: 10px;
-      }
+    message {
+      background: white;
+      border-radius: 2px;
+      padding: 10px;
     }
   }
 
+  .overlaysplit {
+    background: none !important;
+
+    overlaysplit {
+      @include display-flex;
+      @include flex-direction(column);
+      @include flex(1 1 0);
+      top {
+        //@include flex(1 1 0);
+        background: rgba(0, 0, 0, 0.5);
+      }
+      split {
+        //@include flex(0 0 $listitemheight);
+      }
+      bottom {
+        @include flex(2 1 0);
+        background: rgba(0, 0, 0, 0.5);
+      }
+    }
+    overlayinner {
+      @include flex(1 1 0);
+    }
+  }
 
   .normal {
     overlayinner {
@@ -31,7 +52,7 @@ ba-overlaycontainer {
   }
 
   .fullpage {
-    $timer : 1000;
+    $timer: 1000;
     transition: top $timer;
     -webkit-transition: top $timer;
 
