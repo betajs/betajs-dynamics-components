@@ -46,8 +46,9 @@ ba-overlaycontainer {
   .normal {
     overlayinner {
       margin: auto;
-      max-width: 85%;
-      max-height: 80%;
+      height: 100%;
+      //max-width: 85%;
+      //max-height: 80%;
     }
   }
 
