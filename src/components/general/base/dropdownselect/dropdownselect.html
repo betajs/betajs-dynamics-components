@@ -4,6 +4,9 @@
         class="{{model.icon}}"
         style="color: {{model.icon_color}}; background: {{model.background}}" >
     <dropdownselect ba-show="{{showdropdown}}">
+        <description ba-if="{{view.description}}">
+            {{view.description}}
+        </description>
         <ba-{{view.dropdown}}
             ba-view.listitem="{{view.listitem}}"
             ba-event:item-click="hide_dropdown"
@@ -19,5 +22,4 @@
                 ba-event-forward:dropdownselect="{{[]}}"
         ></ba-clickitem>
     </dropdownselect>
-    <div></div>
 </button>

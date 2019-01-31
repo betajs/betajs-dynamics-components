@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.76 - 2019-01-26
+betajs-dynamics-components - v0.1.77 - 2019-01-30
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -58,6 +58,15 @@ ba-dropdown {
       border: 1px solid #777;
       background: white;
       z-index: 1000; }
+      ba-dropdown button dropdown description {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        line-height: 44px;
+        border-bottom: 1px solid #777;
+        margin: 0 15px; }
       ba-dropdown button dropdown button {
         white-space: nowrap;
         min-height: 20px; }
@@ -93,6 +102,15 @@ ba-dropdownselect {
       border: 1px solid #777;
       background: white;
       z-index: 1000; }
+      ba-dropdownselect button dropdownselect description {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+        line-height: 44px;
+        border-bottom: 1px solid #777;
+        margin: 0 15px; }
       ba-dropdownselect button dropdownselect button {
         white-space: nowrap; }
       ba-dropdownselect button dropdownselect button:hover {

@@ -18,6 +18,13 @@ ba-dropdownselect {
       background: white;
       z-index: 1000;
 
+      description {
+        @include display-flex;
+        line-height: $listitemheight;
+        border-bottom: 1px solid $grey3;
+        margin: 0 15px;
+      }
+
       button {white-space: nowrap}
       button:hover {background: $grey1}
       list {@include flex-direction(column)}

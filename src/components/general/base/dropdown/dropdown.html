@@ -3,6 +3,9 @@
         ba-tap="{{click()}}"
         class="{{view.icon}}">
     <dropdown ba-show="{{showdropdown}}">
+        <description ba-if="{{view.description}}">
+            {{view.description}}
+        </description>
         <ba-{{view.dropdown}}
             ba-view.listitem="{{view.listitem}}"
             ba-event:item-click="hide_dropdown"

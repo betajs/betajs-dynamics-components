@@ -18,6 +18,7 @@ Scoped.define("module:Dropdownselect", [
         attrs: function() {
             return {
                 view: {
+                    description: null,
                     dropdown: 'list',
                     icon: 'icon-more_vert',
                     color: null,
@@ -32,7 +33,7 @@ Scoped.define("module:Dropdownselect", [
                 removemodel: new Properties({
                     icon: 'icon-remove',
                     background: 'white',
-                    value: 'Remove'
+                    value: 'None'
                 }),
                 dropdownmodel: {},
                 value: null,

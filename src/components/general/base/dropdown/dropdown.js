@@ -17,6 +17,7 @@ Scoped.define("module:Dropdown", [
         attrs: function() {
             return {
                 view: {
+                    description: null,
                     dropdown: 'list',
                     icon: 'icon-more_vert',
                     useremove: true
