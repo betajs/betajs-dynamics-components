@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.77 - 2019-01-30
+betajs-dynamics-components - v0.1.78 - 2019-02-12
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1006,7 +1006,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.77 - 2019-01-30
+betajs-dynamics-components - v0.1.78 - 2019-02-12
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1021,7 +1021,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.77"
+    "version": "0.1.78"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1315,14 +1315,18 @@ Scoped.define("module:Clickinput", [
 
         functions: {
             edititem: function() {
+                console.log('Clickinput: Edititem');
 
-                this.setProp('view.edit', true);
+                if (this.getProp('view.externaledit')) {
 
-                var SearchInput = this.activeElement().querySelector("input");
-                var strLength = this.getProp('model.value').length;
-                SearchInput.focus();
-                SearchInput.setSelectionRange(strLength, strLength);
+                    this.setProp('view.edit', true);
 
+                    var SearchInput = this.activeElement().querySelector("input");
+                    var strLength = this.getProp('model.value').length;
+                    SearchInput.focus();
+                    SearchInput.setSelectionRange(strLength, strLength);
+
+                }
             }
         }
 

@@ -23,14 +23,18 @@ Scoped.define("module:Clickinput", [
 
         functions: {
             edititem: function() {
+                console.log('Clickinput: Edititem');
 
-                this.setProp('view.edit', true);
+                if (this.getProp('view.externaledit')) {
 
-                var SearchInput = this.activeElement().querySelector("input");
-                var strLength = this.getProp('model.value').length;
-                SearchInput.focus();
-                SearchInput.setSelectionRange(strLength, strLength);
+                    this.setProp('view.edit', true);
 
+                    var SearchInput = this.activeElement().querySelector("input");
+                    var strLength = this.getProp('model.value').length;
+                    SearchInput.focus();
+                    SearchInput.setSelectionRange(strLength, strLength);
+
+                }
             }
         }
 
