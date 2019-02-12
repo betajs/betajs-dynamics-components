@@ -20,7 +20,7 @@
         ba-functions="{{collectionitem.callbacks}}"
         ba-isselected="{{isEqual(collectionitem, selected)}}"
         ba-event-forward:item="{{[collectionitem]}}"
-        ba-view="{{collectionitem.view||view.listinner}}"
+        ba-view="{{collectionitem.view||view.listinner||{}}}"
         ba-model="{{collectionitem}}">
 
     </ba-{{getview(collectionitem)}}>
