@@ -1,5 +1,5 @@
 {
-    "homepage": "http://betajs.com",
+    "homepage": "https://betajs.com",
     "license": "Apache-2.0",
     "licenses": [
         {
@@ -15,7 +15,7 @@
         "url": "https://github.com/betajs/betajs-dynamics-components/issues"
     },
     "name": "betajs-dynamics-components",
-    "version": "0.1.79",
+    "version": "0.1.80",
     "description": "BetaJS-Dynamics-Components is a Library of DOM Components that are built in BetaJS-Dynamics",
     "contributors": [
         "Victor Lingenthal",
@@ -26,7 +26,7 @@
         "grunt": "",
         "grunt-contrib-jshint": "",
         "grunt-contrib-concat": "",
-        "grunt-contrib-uglify": "~2.3.0",
+        "grunt-contrib-uglify": "^4.0.0",
         "grunt-contrib-clean": "",
         "grunt-contrib-copy": "",
         "grunt-preprocess": "",
@@ -53,15 +53,16 @@
     },
     "main": "dist/betajs-dynamics-components.js",
     "scripts": {
-        "relink": "npm link betajs && npm link betajs-compile && npm link betajs-scoped && npm link betajs-shims && npm link betajs-browser && npm link betajs-dynamics && npm link grunt-betajs-templates && npm link betajs-simulator && npm link betajs-ui"
+        "relink": "npm link betajs && npm link betajs-compile && npm link betajs-scoped && npm link betajs-shims && npm link betajs-browser && npm link betajs-dynamics && npm link grunt-betajs-templates && npm link betajs-simulator && npm link betajs-ui",
+        "reinstall": "rm -f package-lock.json && rm -rf node_modules && npm i && npm run relink"
     },
     "repository": {
         "type": "git",
         "url": "git://github.com/betajs/betajs-dynamics-components.git"
     },
     "meta": {
-        "blog": "http://blog.betajs.com",
-        "twitter": "http://twitter.com/thebetajs",
+        "blog": "https://blog.betajs.com",
+        "twitter": "https://twitter.com/thebetajs",
         "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d"
     }
 }
