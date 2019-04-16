@@ -21,9 +21,8 @@
         ba-isselected="{{isEqual(collectionitem, selected)}}"
         ba-event-forward:item="{{[collectionitem]}}"
         ba-view="{{collectionitem.view||view.listinner||{}}}"
-        ba-model="{{collectionitem}}">
-
-    </ba-{{getview(collectionitem)}}>
+        ba-model="{{collectionitem}}"
+    ></ba-{{getview(collectionitem)}}>
 
 </list>
 
@@ -32,7 +31,10 @@
         Move Here
     </div>
 </div>
-<ba-loadmore ba-if="{{!!loadmore && loadmorestyle !== 'infinite'}}" ba-show="{{!loading}}" ba-event:loadmore="moreitems">
-</ba-loadmore>
+<ba-loadmore
+        ba-if="{{!!loadmore && loadmorestyle !== 'infinite'}}"
+        ba-show="{{!loading}}"
+        ba-event:loadmore="moreitems"
+></ba-loadmore>
 <ba-loading ba-show="{{loading}}">
 </ba-loading>

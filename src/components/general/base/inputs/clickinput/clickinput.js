@@ -23,8 +23,6 @@ Scoped.define("module:Clickinput", [
 
         functions: {
             edititem: function() {
-                console.log('Clickinput: Edititem');
-
                 if (this.getProp('view.externaledit')) {
 
                     this.setProp('view.edit', true);
