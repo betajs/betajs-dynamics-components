@@ -64,9 +64,9 @@
             callbacks : {
                 //Function to be pushed into clickitem
                 click : function () {
-                    console.log("The Old Value is : " + this.properties().getProp('model.value'));
+                    //console.log("The Old Value is : " + this.properties().getProp('model.value'));
                     this.properties().setProp('model.value', this.get('new_value'));
-                    console.log("The New Value is : " + this.properties().getProp('model.value'));
+                    //console.log("The New Value is : " + this.properties().getProp('model.value'));
                 }
             }
         },

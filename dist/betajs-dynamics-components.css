@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.78 - 2019-02-12
+betajs-dynamics-components - v0.1.80 - 2019-04-16
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -123,11 +123,6 @@ ba-dropdownselect {
     opacity: 0.99; }
 
 ba-clickinput {
-  -webkit-box-flex: 0 0 44px;
-  -moz-box-flex: 0 0 44px;
-  -webkit-flex: 0 0 44px;
-  -ms-flex: 0 0 44px;
-  flex: 0 0 44px;
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -139,8 +134,6 @@ ba-clickinput {
   -ms-user-select: none;
   user-select: none;
   -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-  height: 44px;
-  line-height: 44px;
   list-style: none;
   margin: 0;
   vertical-align: middle; }
