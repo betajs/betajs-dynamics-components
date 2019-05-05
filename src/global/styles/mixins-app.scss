@@ -1,0 +1,147 @@
+
+@mixin oneline {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin list {
+  @include display-flex;
+  @include flex(1 1 0);
+  @include flex-direction(column);
+  overflow-y: scroll;
+}
+
+//This mixin is for Stickybottom during Keyboardup movement on mobile
+@mixin reverselist ($marginbottom) {
+
+  reverselist {
+    @include flex(1 1 0);
+    @include display-flex;
+    @include flex-direction(column-reverse);
+    justify-content: flex-end;
+    overflow: hidden;
+
+    >ba-list>list {
+      @include display-flex;
+      @include flex-direction(column-reverse);
+      margin-bottom: $marginbottom;
+    }
+  }
+}
+
+@mixin user-select($value) {
+  -webkit-touch-callout: $value;
+  -webkit-user-select: $value;
+  -moz-user-select: $value;
+  -ms-user-select: $value;
+  user-select: $value;
+}
+
+@mixin noselect {
+  -webkit-touch-callout: none;
+  @include user-select(none);
+  -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+
+@mixin placeholder-color($color) {
+  input::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color: $color;
+  }
+  input:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+    color: $color;
+    opacity: 1;
+  }
+  input::-moz-placeholder { /* Mozilla Firefox 19+ */
+    color: $color;
+    opacity: 1;
+  }
+  input:-ms-input-placeholder { /* Internet Explorer 10-11 */
+    color: $color;
+  }
+  input::-ms-input-placeholder { /* Microsoft Edge */
+    color: $color;
+  }
+}
+
+
+@mixin overlaypicker {
+  ba-timepicker, ba-grouppicker, ba-durationpicker, ba-repeatpicker, ba-snoozepicker {
+    top: 0;
+    bottom: 0;
+    overflow: hidden;
+    background: $greywhite3;
+  }
+
+  ba-overlaycontainer {
+    ba-timepicker, ba-grouppicker, ba-durationpicker, ba-repeatpicker, ba-snoozepicker  {
+      position: absolute;
+      width: 50%;
+      border-left: 1px solid $grey1;
+      right: 0px;
+    }
+  }
+}
+
+@mixin dropdowncontainer {
+  dropdowncontainer {
+    position: relative;
+    z-index: 2;
+
+    dropdown {
+      position: absolute;
+      background: white;
+      left: $listitemheight;
+
+      @include display-flex;
+      border: 1px solid $grey1;
+      border-radius: 3px;
+      min-height: 500px;
+      min-width: 200px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2), 0 3px 10px 0 rgba(0, 0, 0, 0.19);
+
+      ba-timepicker, ba-grouppicker, ba-durationpicker, ba-repeatpicker, ba-snoozepicker {
+        @include flex(1 1 0);
+        margin: 20px;
+      }
+    }
+  }
+}
+
+@mixin icon {
+  @include display-flex;
+  span {
+    padding : 4px 0;
+
+    //Icon full background
+    //line-height: 44px;
+    //height: 44px;
+    //width: 100%;
+
+    //Smaill icon backgrounds
+    width: 26px;
+    height: 26px;
+    border-radius : 5px;
+
+    margin: auto;
+    //font-size: $groupbarfont;
+  }
+
+  //[class^="icon-"], [class*=" icon-"] {
+  //  //font-size: $groupbarfont;
+  //}
+
+  //[class^="box-"], [class*=" box-"] {
+  //  //@include flex(0 0 $groupbarfont);
+  //  //height: $groupbarfont;
+  //  //margin: 0 ($groupbarheight - $groupbarfont)/2;
+  //  border-radius: 3px;
+  //}
+
+  //[class^="box-"], [class*=" box-"] {
+  //  @include flex(0 0 $groupbarfont);
+  //  height: $groupbarfont;
+  //  margin: 0 ($groupbarheight - $groupbarfont)/2;
+  //  border-radius: 3px;
+  //}
+}
