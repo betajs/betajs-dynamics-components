@@ -21,8 +21,8 @@ Scoped.define("module:Removableclickcontainer", [
             click: function() {
                 this.trigger('click', this.get('model'));
             },
-            remove: function() {
-                this.trigger('remove', this.get('model'));
+            removed: function() {
+                this.trigger('removed', this.get('model'));
             }
         }
 

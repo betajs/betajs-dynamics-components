@@ -57,5 +57,7 @@ Scoped.define("module:Selectableitem", [
 
         }
 
-    }).registerFunctions({ /*<%= template_function_cache(filepathnoext + '.html') %>*/ }).register();
+    }).registerFunctions({
+        /*<%= template_function_cache(filepathnoext + '.html') %>*/
+    }).register();
 });

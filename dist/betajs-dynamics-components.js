@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.80 - 2019-04-16
+betajs-dynamics-components - v0.1.81 - 2019-05-13
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1006,7 +1006,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.80 - 2019-04-16
+betajs-dynamics-components - v0.1.81 - 2019-05-13
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1021,7 +1021,8 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.80"
+    "version": "0.1.81",
+    "datetime": 1557794408749
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1078,7 +1079,9 @@ Scoped.define("module:Dropdown", [
             }
         }
 
-    }).registerFunctions({ /**/"this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "click()": function (obj) { with (obj) { return click(); } }, "view.icon": function (obj) { with (obj) { return view.icon; } }, "showdropdown": function (obj) { with (obj) { return showdropdown; } }, "view.description": function (obj) { with (obj) { return view.description; } }, "view.dropdown": function (obj) { with (obj) { return view.dropdown; } }, "view.listitem": function (obj) { with (obj) { return view.listitem; } }, "dropdownmodel": function (obj) { with (obj) { return dropdownmodel; } }/**/ }).register();
+    }).registerFunctions({
+        /**/"this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "click()": function (obj) { with (obj) { return click(); } }, "view.icon": function (obj) { with (obj) { return view.icon; } }, "showdropdown": function (obj) { with (obj) { return showdropdown; } }, "view.description": function (obj) { with (obj) { return view.description; } }, "view.dropdown": function (obj) { with (obj) { return view.dropdown; } }, "view.listitem": function (obj) { with (obj) { return view.listitem; } }, "dropdownmodel": function (obj) { with (obj) { return dropdownmodel; } }/**/
+    }).register();
 
 });
 Scoped.define("module:Dropdownselect", [
@@ -1152,7 +1155,9 @@ Scoped.define("module:Dropdownselect", [
             }
         }
 
-    }).registerFunctions({ /**/"this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "click()": function (obj) { with (obj) { return click(); } }, "model.icon": function (obj) { with (obj) { return model.icon; } }, "model.icon_color": function (obj) { with (obj) { return model.icon_color; } }, "model.background": function (obj) { with (obj) { return model.background; } }, "showdropdown": function (obj) { with (obj) { return showdropdown; } }, "view.description": function (obj) { with (obj) { return view.description; } }, "view.dropdown": function (obj) { with (obj) { return view.dropdown; } }, "view.listitem": function (obj) { with (obj) { return view.listitem; } }, "[]": function (obj) { with (obj) { return []; } }, "dropdownmodel": function (obj) { with (obj) { return dropdownmodel; } }, "removemodel": function (obj) { with (obj) { return removemodel; } }, "view.useremove": function (obj) { with (obj) { return view.useremove; } }/**/ }).register();
+    }).registerFunctions({
+        /**/"this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "click()": function (obj) { with (obj) { return click(); } }, "model.icon": function (obj) { with (obj) { return model.icon; } }, "model.icon_color": function (obj) { with (obj) { return model.icon_color; } }, "model.background": function (obj) { with (obj) { return model.background; } }, "showdropdown": function (obj) { with (obj) { return showdropdown; } }, "view.description": function (obj) { with (obj) { return view.description; } }, "view.dropdown": function (obj) { with (obj) { return view.dropdown; } }, "view.listitem": function (obj) { with (obj) { return view.listitem; } }, "[]": function (obj) { with (obj) { return []; } }, "dropdownmodel": function (obj) { with (obj) { return dropdownmodel; } }, "removemodel": function (obj) { with (obj) { return removemodel; } }, "view.useremove": function (obj) { with (obj) { return view.useremove; } }/**/
+    }).register();
 
 });
 Scoped.define("module:Htmlview", [
@@ -1287,7 +1292,9 @@ Scoped.define("module:Htmlview", [
             iframe.style.width = iframe.parentNode.offsetWidth + "px";
             iframe.style.height = Math.ceil(inner_height * scale + 10) + "px";
         }
-    }).registerFunctions({ /**//**/ }).register();
+    }).registerFunctions({
+        /**//**/
+    }).register();
 
 });
 Scoped.define("module:Clickinput", [
@@ -1330,7 +1337,9 @@ Scoped.define("module:Clickinput", [
             }
         }
 
-    }).registerFunctions({ /**/"!view.edit || !view.externaledit": function (obj) { with (obj) { return !view.edit || !view.externaledit; } }, "edititem()": function (obj) { with (obj) { return edititem(); } }, "model.value": function (obj) { with (obj) { return model.value; } }, "view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }, "view.edit": function (obj) { with (obj) { return view.edit; } }, "view.edit = false": function (obj) { with (obj) { return view.edit = false; } }/**/ }).register();
+    }).registerFunctions({
+        /**/"!view.edit || !view.externaledit": function (obj) { with (obj) { return !view.edit || !view.externaledit; } }, "edititem()": function (obj) { with (obj) { return edititem(); } }, "model.value": function (obj) { with (obj) { return model.value; } }, "view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }, "view.edit": function (obj) { with (obj) { return view.edit; } }, "view.edit = false": function (obj) { with (obj) { return view.edit = false; } }/**/
+    }).register();
 
 });
 Scoped.define("module:Input", [
@@ -1367,7 +1376,9 @@ Scoped.define("module:Input", [
 
         }
 
-    }).registerFunctions({ /**/"value": function (obj) { with (obj) { return value; } }, "keydown(event)": function (obj) { with (obj) { return keydown(event); } }, "view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }/**/ }).register();
+    }).registerFunctions({
+        /**/"value": function (obj) { with (obj) { return value; } }, "keydown(event)": function (obj) { with (obj) { return keydown(event); } }, "view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }/**/
+    }).register();
 
 });
 Scoped.define("module:Scrollpicker", [
@@ -1475,9 +1486,11 @@ Scoped.define("module:Scrollpicker", [
             }, this);
         }
 
-    }).registerFunctions({ /**/"loopscroll": function (obj) { with (obj) { return loopscroll; } }, "values": function (obj) { with (obj) { return values; } }, "value": function (obj) { with (obj) { return value; } }, "{\n                  valuetop : top\n               }": function (obj) { with (obj) { return {
+    }).registerFunctions({
+        /**/"loopscroll": function (obj) { with (obj) { return loopscroll; } }, "values": function (obj) { with (obj) { return values; } }, "value": function (obj) { with (obj) { return value; } }, "{\n                  valuetop : top\n               }": function (obj) { with (obj) { return {
                   valuetop : top
-               }; } }/**/ }).register();
+               }; } }/**/
+    }).register();
 
 });
 Scoped.define("module:Search", [
@@ -1521,7 +1534,9 @@ Scoped.define("module:Search", [
             }
         }
 
-    }).registerFunctions({ /**/"!searching": function (obj) { with (obj) { return !searching; } }, "searching": function (obj) { with (obj) { return searching; } }, "this.execute('onfocus')": function (obj) { with (obj) { return this.execute('onfocus'); } }, "this.execute('onblur')": function (obj) { with (obj) { return this.execute('onblur'); } }, "view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }, "value": function (obj) { with (obj) { return value; } }, "view.searchbuttons": function (obj) { with (obj) { return view.searchbuttons; } }, "nosearch": function (obj) { with (obj) { return nosearch; } }, "view.filter_visible": function (obj) { with (obj) { return view.filter_visible; } }, "view.dropdownmodel": function (obj) { with (obj) { return view.dropdownmodel; } }/**/ }).register();
+    }).registerFunctions({
+        /**/"!searching": function (obj) { with (obj) { return !searching; } }, "searching": function (obj) { with (obj) { return searching; } }, "this.execute('onfocus')": function (obj) { with (obj) { return this.execute('onfocus'); } }, "this.execute('onblur')": function (obj) { with (obj) { return this.execute('onblur'); } }, "view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }, "value": function (obj) { with (obj) { return value; } }, "view.searchbuttons": function (obj) { with (obj) { return view.searchbuttons; } }, "nosearch": function (obj) { with (obj) { return nosearch; } }, "view.filter_visible": function (obj) { with (obj) { return view.filter_visible; } }, "view.dropdownmodel": function (obj) { with (obj) { return view.dropdownmodel; } }/**/
+    }).register();
 
 });
 Scoped.define("module:Textinput", [
@@ -1534,7 +1549,7 @@ Scoped.define("module:Textinput", [
         scoped: scoped
     }, {
 
-        template: "<placeholder\n        ba-if=\"{{view.placeholder_visible && !value}}\"\n>{{view.placeholder}}</placeholder>\n\n<!--ba-tap=\"{{click_textarea()}}\"-->\n<!--onfocus=\"{{this.execute('onfocus')}}\"-->\n<!--onfocusout=\"{{this.execute('blur')}}\"-->\n<textarea\n        onfocus=\"{{this.execute('onfocus')}}\"\n        value=\"{{=value}}\"\n></textarea>\n<pre>{{=preheighttext}}</pre>\n",
+        template: "<placeholder\n        ba-if=\"{{view.placeholder_visible && !value}}\"\n>{{view.placeholder}}</placeholder>\n\n\n\n\n<textarea\n        onfocus=\"{{this.execute('onfocus')}}\"\n        value=\"{{=value}}\"\n></textarea>\n<pre>{{=preheighttext}}</pre>\n",
 
         attrs: {
             value: null,
@@ -1574,7 +1589,9 @@ Scoped.define("module:Textinput", [
             }
         }
 
-    }).registerFunctions({ /**/"view.placeholder_visible && !value": function (obj) { with (obj) { return view.placeholder_visible && !value; } }, "view.placeholder": function (obj) { with (obj) { return view.placeholder; } }, "this.execute('onfocus')": function (obj) { with (obj) { return this.execute('onfocus'); } }, "value": function (obj) { with (obj) { return value; } }, "preheighttext": function (obj) { with (obj) { return preheighttext; } }/**/ }).register();
+    }).registerFunctions({
+        /**/"view.placeholder_visible && !value": function (obj) { with (obj) { return view.placeholder_visible && !value; } }, "view.placeholder": function (obj) { with (obj) { return view.placeholder; } }, "this.execute('onfocus')": function (obj) { with (obj) { return this.execute('onfocus'); } }, "value": function (obj) { with (obj) { return value; } }, "preheighttext": function (obj) { with (obj) { return preheighttext; } }/**/
+    }).register();
 
 });
 Scoped.define("module:Overlaycontainer", [
@@ -1587,7 +1604,7 @@ Scoped.define("module:Overlaycontainer", [
         scoped: scoped
     }, {
 
-        template: "<overlaycontainer\n    ba-click=\"{{showoverlay = false}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage,\n                overlaysplit: view.overlaysplit\n            }}}\">\n\n    <overlaysplit ba-if=\"{{view.overlaysplit}}\">\n        <top style=\"height: {{view.offsetTop}}px\"></top>\n        <split style=\"height: {{view.offsetHeight}}px\"></split>\n        <bottom></bottom>\n    </overlaysplit>\n\n    <overlayinner>\n\n        <ba-{{view.overlay}}\n            ba-event-forward\n            ba-noscope>\n        <!--<ba-{{view.overlay}} ba-model=\"{{model}}\">-->\n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
+        template: "<overlaycontainer\n    ba-click=\"{{showoverlay = false}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage,\n                overlaysplit: view.overlaysplit\n            }}}\">\n\n    <overlaysplit ba-if=\"{{view.overlaysplit}}\">\n        <top style=\"height: {{view.offsetTop}}px\"></top>\n        <split style=\"height: {{view.offsetHeight}}px\"></split>\n        <bottom></bottom>\n    </overlaysplit>\n\n    <overlayinner>\n\n        <ba-{{view.overlay}}\n            ba-event-forward\n            ba-noscope>\n        \n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
 
         attrs: function() {
             return {
@@ -1606,11 +1623,13 @@ Scoped.define("module:Overlaycontainer", [
             };
         }
 
-    }).registerFunctions({ /**/"showoverlay = false": function (obj) { with (obj) { return showoverlay = false; } }, "showoverlay": function (obj) { with (obj) { return showoverlay; } }, "{\n                normal : !view.fullpage,\n                fullpage : view.fullpage,\n                overlaysplit: view.overlaysplit\n            }": function (obj) { with (obj) { return {
+    }).registerFunctions({
+        /**/"showoverlay = false": function (obj) { with (obj) { return showoverlay = false; } }, "showoverlay": function (obj) { with (obj) { return showoverlay; } }, "{\n                normal : !view.fullpage,\n                fullpage : view.fullpage,\n                overlaysplit: view.overlaysplit\n            }": function (obj) { with (obj) { return {
                 normal : !view.fullpage,
                 fullpage : view.fullpage,
                 overlaysplit: view.overlaysplit
-            }; } }, "view.overlaysplit": function (obj) { with (obj) { return view.overlaysplit; } }, "view.offsetTop": function (obj) { with (obj) { return view.offsetTop; } }, "view.offsetHeight": function (obj) { with (obj) { return view.offsetHeight; } }, "view.overlay": function (obj) { with (obj) { return view.overlay; } }, "model.message": function (obj) { with (obj) { return model.message; } }/**/ }).register();
+            }; } }, "view.overlaysplit": function (obj) { with (obj) { return view.overlaysplit; } }, "view.offsetTop": function (obj) { with (obj) { return view.offsetTop; } }, "view.offsetHeight": function (obj) { with (obj) { return view.offsetHeight; } }, "view.overlay": function (obj) { with (obj) { return view.overlay; } }, "model.message": function (obj) { with (obj) { return model.message; } }/**/
+    }).register();
 
 });
 Scoped.define("module:Jsconsole", [
@@ -1657,7 +1676,9 @@ Scoped.define("module:Jsconsole", [
             }
         }
 
-    }).registerFunctions({ /**/"logs": function (obj) { with (obj) { return logs; } }, "log.color": function (obj) { with (obj) { return log.color; } }, "log.text": function (obj) { with (obj) { return log.text; } }, "command": function (obj) { with (obj) { return command; } }, "run_command()": function (obj) { with (obj) { return run_command(); } }/**/ }).register();
+    }).registerFunctions({
+        /**/"logs": function (obj) { with (obj) { return logs; } }, "log.color": function (obj) { with (obj) { return log.color; } }, "log.text": function (obj) { with (obj) { return log.text; } }, "command": function (obj) { with (obj) { return command; } }, "run_command()": function (obj) { with (obj) { return run_command(); } }/**/
+    }).register();
 
 });
 Scoped.define("module:Clickcontainer", [
@@ -1685,6 +1706,37 @@ Scoped.define("module:Clickcontainer", [
     }).register();
 
 });
+Scoped.define("module:Removableclickcontainer", [
+    "dynamics:Dynamic"
+], function(Dynamic, scoped) {
+
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
+
+        template: "\n<removableclickcontainer>\n\n    <ba-{{view.inner}}\n        class=\"inner\"\n        ba-noscope\n        ba-click=\"click()\"\n    ></ba-{{view.inner}}>\n\n    <icon\n            class=\"{{view.removeicon}}\"\n            ba-click=\"removed()\"\n    ></icon>\n\n</removableclickcontainer>\n\n",
+
+        attrs: {
+            view: {
+                inner: 'eventitem',
+                removeicon: 'icon-remove'
+            }
+        },
+
+        extendables: ['view'],
+
+        functions: {
+            click: function() {
+                this.trigger('click', this.get('model'));
+            },
+            removed: function() {
+                this.trigger('removed', this.get('model'));
+            }
+        }
+
+    }).register();
+
+});
 Scoped.define("module:Loading", [
     "dynamics:Dynamic"
 ], function(Dynamic, scoped) {
@@ -1695,7 +1747,9 @@ Scoped.define("module:Loading", [
 
         template: "\n<div class=\"sk-circle\">\n    <div class=\"sk-circle1 sk-child\"></div>\n    <div class=\"sk-circle2 sk-child\"></div>\n    <div class=\"sk-circle3 sk-child\"></div>\n    <div class=\"sk-circle4 sk-child\"></div>\n    <div class=\"sk-circle5 sk-child\"></div>\n    <div class=\"sk-circle6 sk-child\"></div>\n    <div class=\"sk-circle7 sk-child\"></div>\n    <div class=\"sk-circle8 sk-child\"></div>\n    <div class=\"sk-circle9 sk-child\"></div>\n    <div class=\"sk-circle10 sk-child\"></div>\n    <div class=\"sk-circle11 sk-child\"></div>\n    <div class=\"sk-circle12 sk-child\"></div>\n</div>\n"
 
-    }).registerFunctions({ /**//**/ }).register();
+    }).registerFunctions({
+        /**//**/
+    }).register();
 
 });
 Scoped.define("module:Loadmore", [
@@ -1722,7 +1776,9 @@ Scoped.define("module:Loadmore", [
 
         }
 
-    }).registerFunctions({ /**/"load_more()": function (obj) { with (obj) { return load_more(); } }/**/ }).register();
+    }).registerFunctions({
+        /**/"load_more()": function (obj) { with (obj) { return load_more(); } }/**/
+    }).register();
 
 });
 Scoped.define("module:Clickitem", [
@@ -1751,10 +1807,12 @@ Scoped.define("module:Clickitem", [
             }
         }
 
-    }).registerFunctions({ /**/"{\n            'icon' : model.background || model.icon,\n            'noicon' : !model.icon && !model.background\n        }": function (obj) { with (obj) { return {
+    }).registerFunctions({
+        /**/"{\n            'icon' : model.background || model.icon,\n            'noicon' : !model.icon && !model.background\n        }": function (obj) { with (obj) { return {
             'icon' : model.background || model.icon,
             'noicon' : !model.icon && !model.background
-        }; } }, "click()": function (obj) { with (obj) { return click(); } }, "model.icon": function (obj) { with (obj) { return model.icon; } }, "model.background": function (obj) { with (obj) { return model.background; } }, "model.icon_color": function (obj) { with (obj) { return model.icon_color; } }, "model.value || model.name": function (obj) { with (obj) { return model.value || model.name; } }/**/ }).register();
+        }; } }, "click()": function (obj) { with (obj) { return click(); } }, "model.icon": function (obj) { with (obj) { return model.icon; } }, "model.background": function (obj) { with (obj) { return model.background; } }, "model.icon_color": function (obj) { with (obj) { return model.icon_color; } }, "model.value || model.name": function (obj) { with (obj) { return model.value || model.name; } }/**/
+    }).register();
 
 });
 Scoped.define("module:Eventitem", [
@@ -1788,7 +1846,9 @@ Scoped.define("module:Eventitem", [
 
         }
 
-    }).registerFunctions({ /**/"model['class']": function (obj) { with (obj) { return model['class']; } }, "model.value": function (obj) { with (obj) { return model.value; } }, "counter": function (obj) { with (obj) { return counter; } }/**/ }).register();
+    }).registerFunctions({
+        /**/"model['class']": function (obj) { with (obj) { return model['class']; } }, "model.value": function (obj) { with (obj) { return model.value; } }, "counter": function (obj) { with (obj) { return counter; } }/**/
+    }).register();
 
 });
 /*
@@ -1850,7 +1910,9 @@ Scoped.define("module:Selectableitem", [
 
         }
 
-    }).registerFunctions({ /**/"{selected : selected.cid == this.cid()}": function (obj) { with (obj) { return {selected : selected.cid == this.cid()}; } }, "select()": function (obj) { with (obj) { return select(); } }, "model.value": function (obj) { with (obj) { return model.value; } }/**/ }).register();
+    }).registerFunctions({
+        /**/"{selected : selected.cid == this.cid()}": function (obj) { with (obj) { return {selected : selected.cid == this.cid()}; } }, "select()": function (obj) { with (obj) { return select(); } }, "model.value": function (obj) { with (obj) { return model.value; } }/**/
+    }).register();
 });
 Scoped.define("module:List", [
     "dynamics:Dynamic",
@@ -1874,7 +1936,7 @@ Scoped.define("module:List", [
         scoped: scoped
     }, {
 
-        template: "<!--<ba-loadmore ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitemsbackwards\">-->\n<!--</ba-loadmore>-->\n<ba-loading ba-show=\"{{loadmorebackwards && loading}}\">\n</ba-loading>\n\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\"\n      ba-interaction:scroll=\"{{infinite_scroll_options}}\"\n      ba-interaction:droplist=\"{{drop_list_options}}\">\n<!--<list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">-->\n    <!--ba-isselected=\"{{isselected(collectionitem)}}\"-->\n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-experimental=\"{{!!collectionitem.experimental}}\"\n        data-id=\"{{collectionitem.cid()}}\"\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-selection=\"{{=selection}}\"\n        ba-droplist=\"{{droplist}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-isselected=\"{{isEqual(collectionitem, selected)}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner||{}}}\"\n        ba-model=\"{{collectionitem}}\"\n    ></ba-{{getview(collectionitem)}}>\n\n</list>\n\n<div class=\"doodad\" data-id=\"floater\" style=\"display:none\">\n    <div class=\"inner\" style=\"height: 44px; line-height: 44px; background-color: #EEEEEE\">\n        Move Here\n    </div>\n</div>\n<ba-loadmore\n        ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite'}}\"\n        ba-show=\"{{!loading}}\"\n        ba-event:loadmore=\"moreitems\"\n></ba-loadmore>\n<ba-loading ba-show=\"{{loading}}\">\n</ba-loading>\n",
+        template: "\n\n<ba-loading ba-show=\"{{loadmorebackwards && loading}}\">\n</ba-loading>\n\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\"\n      ba-interaction:scroll=\"{{infinite_scroll_options}}\"\n      ba-interaction:droplist=\"{{drop_list_options}}\">\n\n    \n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-experimental=\"{{!!collectionitem.experimental}}\"\n        data-id=\"{{collectionitem.cid()}}\"\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-selection=\"{{=selection}}\"\n        ba-droplist=\"{{droplist}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-isselected=\"{{isEqual(collectionitem, selected)}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner||{}}}\"\n        ba-model=\"{{collectionitem}}\"\n    ></ba-{{getview(collectionitem)}}>\n\n</list>\n\n<div class=\"doodad\" data-id=\"floater\" style=\"display:none\">\n    <div class=\"inner\" style=\"height: 44px; line-height: 44px; background-color: #EEEEEE\">\n        Move Here\n    </div>\n</div>\n<ba-loadmore\n        ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite'}}\"\n        ba-show=\"{{!loading}}\"\n        ba-event:loadmore=\"moreitems\"\n></ba-loadmore>\n<ba-loading ba-show=\"{{loading}}\">\n</ba-loading>\n",
 
         attrs: function() {
             return {
@@ -2068,7 +2130,9 @@ Scoped.define("module:List", [
             }
         }
 
-    }).registerFunctions({ /**/"loadmorebackwards && loading": function (obj) { with (obj) { return loadmorebackwards && loading; } }, "(model.listcollection||listcollection)": function (obj) { with (obj) { return (model.listcollection||listcollection); } }, "infinite_scroll_options": function (obj) { with (obj) { return infinite_scroll_options; } }, "drop_list_options": function (obj) { with (obj) { return drop_list_options; } }, "getview(collectionitem)": function (obj) { with (obj) { return getview(collectionitem); } }, "!!collectionitem.experimental": function (obj) { with (obj) { return !!collectionitem.experimental; } }, "collectionitem.cid()": function (obj) { with (obj) { return collectionitem.cid(); } }, "collectionitem.pid()": function (obj) { with (obj) { return collectionitem.pid(); } }, "selection": function (obj) { with (obj) { return selection; } }, "droplist": function (obj) { with (obj) { return droplist; } }, "collectionitem.callbacks": function (obj) { with (obj) { return collectionitem.callbacks; } }, "isEqual(collectionitem, selected)": function (obj) { with (obj) { return isEqual(collectionitem, selected); } }, "[collectionitem]": function (obj) { with (obj) { return [collectionitem]; } }, "collectionitem.view||view.listinner||{}": function (obj) { with (obj) { return collectionitem.view||view.listinner||{}; } }, "collectionitem": function (obj) { with (obj) { return collectionitem; } }, "!!loadmore && loadmorestyle !== 'infinite'": function (obj) { with (obj) { return !!loadmore && loadmorestyle !== 'infinite'; } }, "!loading": function (obj) { with (obj) { return !loading; } }, "loading": function (obj) { with (obj) { return loading; } }/**/ }).register();
+    }).registerFunctions({
+        /**/"loadmorebackwards && loading": function (obj) { with (obj) { return loadmorebackwards && loading; } }, "(model.listcollection||listcollection)": function (obj) { with (obj) { return (model.listcollection||listcollection); } }, "infinite_scroll_options": function (obj) { with (obj) { return infinite_scroll_options; } }, "drop_list_options": function (obj) { with (obj) { return drop_list_options; } }, "getview(collectionitem)": function (obj) { with (obj) { return getview(collectionitem); } }, "!!collectionitem.experimental": function (obj) { with (obj) { return !!collectionitem.experimental; } }, "collectionitem.cid()": function (obj) { with (obj) { return collectionitem.cid(); } }, "collectionitem.pid()": function (obj) { with (obj) { return collectionitem.pid(); } }, "selection": function (obj) { with (obj) { return selection; } }, "droplist": function (obj) { with (obj) { return droplist; } }, "collectionitem.callbacks": function (obj) { with (obj) { return collectionitem.callbacks; } }, "isEqual(collectionitem, selected)": function (obj) { with (obj) { return isEqual(collectionitem, selected); } }, "[collectionitem]": function (obj) { with (obj) { return [collectionitem]; } }, "collectionitem.view||view.listinner||{}": function (obj) { with (obj) { return collectionitem.view||view.listinner||{}; } }, "collectionitem": function (obj) { with (obj) { return collectionitem; } }, "!!loadmore && loadmorestyle !== 'infinite'": function (obj) { with (obj) { return !!loadmore && loadmorestyle !== 'infinite'; } }, "!loading": function (obj) { with (obj) { return !loading; } }, "loading": function (obj) { with (obj) { return loading; } }/**/
+    }).register();
 
 });
 // TODO:
@@ -2119,7 +2183,9 @@ Scoped.define("module:Searchlist", [
             });
         }
 
-    }).registerFunctions({ /**/"searchingindication": function (obj) { with (obj) { return searchingindication; } }, "searchvalue": function (obj) { with (obj) { return searchvalue; } }, "view.showsearch": function (obj) { with (obj) { return view.showsearch; } }, "view.searchview": function (obj) { with (obj) { return view.searchview; } }/**/ }).register();
+    }).registerFunctions({
+        /**/"searchingindication": function (obj) { with (obj) { return searchingindication; } }, "searchvalue": function (obj) { with (obj) { return searchvalue; } }, "view.showsearch": function (obj) { with (obj) { return view.showsearch; } }, "view.searchview": function (obj) { with (obj) { return view.searchview; } }/**/
+    }).register();
 
 });
 Scoped.define("module:Titledlist", [
@@ -2176,7 +2242,9 @@ Scoped.define("module:Titledlist", [
 
         }
 
-    }).registerFunctions({ /**/"view.titleitem": function (obj) { with (obj) { return view.titleitem; } }, "click_title()": function (obj) { with (obj) { return click_title(); } }, "[]": function (obj) { with (obj) { return []; } }, "model.title_model": function (obj) { with (obj) { return model.title_model; } }, "model.title_model.value": function (obj) { with (obj) { return model.title_model.value; } }, "!collapsed": function (obj) { with (obj) { return !collapsed; } }/**/ }).register();
+    }).registerFunctions({
+        /**/"view.titleitem": function (obj) { with (obj) { return view.titleitem; } }, "click_title()": function (obj) { with (obj) { return click_title(); } }, "[]": function (obj) { with (obj) { return []; } }, "model.title_model": function (obj) { with (obj) { return model.title_model; } }, "model.title_model.value": function (obj) { with (obj) { return model.title_model.value; } }, "!collapsed": function (obj) { with (obj) { return !collapsed; } }/**/
+    }).register();
 
 });
 Scoped.define("module:Addtitle", [
@@ -2206,7 +2274,9 @@ Scoped.define("module:Addtitle", [
 
         }
 
-    }).registerFunctions({ /**/"clicktitle()": function (obj) { with (obj) { return clicktitle(); } }, "model.value": function (obj) { with (obj) { return model.value; } }, "addbutton()": function (obj) { with (obj) { return addbutton(); } }/**/ }).register();
+    }).registerFunctions({
+        /**/"clicktitle()": function (obj) { with (obj) { return clicktitle(); } }, "model.value": function (obj) { with (obj) { return model.value; } }, "addbutton()": function (obj) { with (obj) { return addbutton(); } }/**/
+    }).register();
 
 });
 }).call(Scoped);

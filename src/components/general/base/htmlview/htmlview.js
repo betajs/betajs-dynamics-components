@@ -130,6 +130,8 @@ Scoped.define("module:Htmlview", [
             iframe.style.width = iframe.parentNode.offsetWidth + "px";
             iframe.style.height = Math.ceil(inner_height * scale + 10) + "px";
         }
-    }).registerFunctions({ /*<%= template_function_cache(filepathnoext + '.html') %>*/ }).register();
+    }).registerFunctions({
+        /*<%= template_function_cache(filepathnoext + '.html') %>*/
+    }).register();
 
 });

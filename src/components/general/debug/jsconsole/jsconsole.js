@@ -42,6 +42,8 @@ Scoped.define("module:Jsconsole", [
             }
         }
 
-    }).registerFunctions({ /*<%= template_function_cache(filepathnoext + '.html') %>*/ }).register();
+    }).registerFunctions({
+        /*<%= template_function_cache(filepathnoext + '.html') %>*/
+    }).register();
 
 });
