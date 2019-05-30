@@ -49,6 +49,9 @@ Scoped.define("module:List", [
                     disabled: true,
                     type: "droplist",
                     floater: "[data-id='floater']",
+                    droppable: function(source) {
+                        return this.get("droplistcheck") ? this.get("droplistcheck").call(this, source.data) : true;
+                    },
                     bounding_box: function(bb) {
                         var height = bb.bottom - bb.top + 1;
                         var margin = Math.floor(height * 0.2);

@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.81 - 2019-05-13
+betajs-dynamics-components - v0.1.82 - 2019-05-29
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1006,7 +1006,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.81 - 2019-05-13
+betajs-dynamics-components - v0.1.82 - 2019-05-29
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1021,8 +1021,8 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.81",
-    "datetime": 1557794408749
+    "version": "0.1.82",
+    "datetime": 1559186953389
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1965,6 +1965,9 @@ Scoped.define("module:List", [
                     disabled: true,
                     type: "droplist",
                     floater: "[data-id='floater']",
+                    droppable: function(source) {
+                        return this.get("droplistcheck") ? this.get("droplistcheck").call(this, source.data) : true;
+                    },
                     bounding_box: function(bb) {
                         var height = bb.bottom - bb.top + 1;
                         var margin = Math.floor(height * 0.2);
