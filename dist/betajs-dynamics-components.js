@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.82 - 2019-05-29
+betajs-dynamics-components - v0.1.83 - 2019-06-04
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1006,7 +1006,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.82 - 2019-05-29
+betajs-dynamics-components - v0.1.83 - 2019-06-04
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1021,8 +1021,8 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.82",
-    "datetime": 1559186953389
+    "version": "0.1.83",
+    "datetime": 1559699035013
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1714,7 +1714,7 @@ Scoped.define("module:Removableclickcontainer", [
         scoped: scoped
     }, {
 
-        template: "\n<removableclickcontainer>\n\n    <ba-{{view.inner}}\n        class=\"inner\"\n        ba-noscope\n        ba-click=\"click()\"\n    ></ba-{{view.inner}}>\n\n    <icon\n            class=\"{{view.removeicon}}\"\n            ba-click=\"removed()\"\n    ></icon>\n\n</removableclickcontainer>\n\n",
+        template: "\n<removableclickcontainer>\n\n    <ba-{{view.inner}}\n        class=\"inner\"\n        ba-noscope\n        ba-click=\"click()\"\n    ></ba-{{view.inner}}>\n\n    <icon ba-show=\"{{!itemcontext || !itemcontext.readonly}}\"\n            class=\"{{view.removeicon}}\"\n            ba-click=\"removed()\"\n    ></icon>\n\n</removableclickcontainer>\n\n",
 
         attrs: {
             view: {
@@ -1918,7 +1918,8 @@ Scoped.define("module:List", [
     "dynamics:Dynamic",
     "browser:Dom",
     "base:Async",
-    "base:Promise"
+    "base:Promise",
+    "base:Types"
 ], [
     "dynamics:Partials.EventForwardPartial",
     "dynamics:Partials.RepeatPartial",
@@ -1930,13 +1931,13 @@ Scoped.define("module:List", [
     "module:Loadmore",
     "ui:Interactions.Infinitescroll",
     "ui:Interactions.Droplist"
-], function(Dynamic, Dom, Async, Promise, scoped) {
+], function(Dynamic, Dom, Async, Promise, Types, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
     }, {
 
-        template: "\n\n<ba-loading ba-show=\"{{loadmorebackwards && loading}}\">\n</ba-loading>\n\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\"\n      ba-interaction:scroll=\"{{infinite_scroll_options}}\"\n      ba-interaction:droplist=\"{{drop_list_options}}\">\n\n    \n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-experimental=\"{{!!collectionitem.experimental}}\"\n        data-id=\"{{collectionitem.cid()}}\"\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-selection=\"{{=selection}}\"\n        ba-droplist=\"{{droplist}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-isselected=\"{{isEqual(collectionitem, selected)}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner||{}}}\"\n        ba-model=\"{{collectionitem}}\"\n    ></ba-{{getview(collectionitem)}}>\n\n</list>\n\n<div class=\"doodad\" data-id=\"floater\" style=\"display:none\">\n    <div class=\"inner\" style=\"height: 44px; line-height: 44px; background-color: #EEEEEE\">\n        Move Here\n    </div>\n</div>\n<ba-loadmore\n        ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite'}}\"\n        ba-show=\"{{!loading}}\"\n        ba-event:loadmore=\"moreitems\"\n></ba-loadmore>\n<ba-loading ba-show=\"{{loading}}\">\n</ba-loading>\n",
+        template: "\n\n<ba-loading ba-show=\"{{loadmorebackwards && loading}}\">\n</ba-loading>\n\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\"\n      ba-interaction:scroll=\"{{infinite_scroll_options}}\"\n      ba-interaction:droplist=\"{{drop_list_options}}\">\n\n    \n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-experimental=\"{{!!collectionitem.experimental}}\"\n        data-id=\"{{collectionitem.cid()}}\"\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-selection=\"{{=selection}}\"\n        ba-droplist=\"{{droplist}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-itemcontext=\"{{itemContext(collectionitem)}}\"\n        ba-isselected=\"{{isEqual(collectionitem, selected)}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner||{}}}\"\n        ba-model=\"{{collectionitem}}\"\n    ></ba-{{getview(collectionitem)}}>\n\n</list>\n\n<div class=\"doodad\" data-id=\"floater\" style=\"display:none\">\n    <div class=\"inner\" style=\"height: 44px; line-height: 44px; background-color: #EEEEEE\">\n        Move Here\n    </div>\n</div>\n<ba-loadmore\n        ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite'}}\"\n        ba-show=\"{{!loading}}\"\n        ba-event:loadmore=\"moreitems\"\n></ba-loadmore>\n<ba-loading ba-show=\"{{loading}}\">\n</ba-loading>\n",
 
         attrs: function() {
             return {
@@ -2130,11 +2131,15 @@ Scoped.define("module:List", [
                     else if (selected.pid() === collectionitem.pid()) return true;
                 }
                 return false;
+            },
+
+            itemContext: function(collectionitem) {
+                return this.get("itemcontext") && Types.is_function(this.get("itemcontext")) ? this.get("itemcontext")(collectionitem) : {};
             }
         }
 
     }).registerFunctions({
-        /**/"loadmorebackwards && loading": function (obj) { with (obj) { return loadmorebackwards && loading; } }, "(model.listcollection||listcollection)": function (obj) { with (obj) { return (model.listcollection||listcollection); } }, "infinite_scroll_options": function (obj) { with (obj) { return infinite_scroll_options; } }, "drop_list_options": function (obj) { with (obj) { return drop_list_options; } }, "getview(collectionitem)": function (obj) { with (obj) { return getview(collectionitem); } }, "!!collectionitem.experimental": function (obj) { with (obj) { return !!collectionitem.experimental; } }, "collectionitem.cid()": function (obj) { with (obj) { return collectionitem.cid(); } }, "collectionitem.pid()": function (obj) { with (obj) { return collectionitem.pid(); } }, "selection": function (obj) { with (obj) { return selection; } }, "droplist": function (obj) { with (obj) { return droplist; } }, "collectionitem.callbacks": function (obj) { with (obj) { return collectionitem.callbacks; } }, "isEqual(collectionitem, selected)": function (obj) { with (obj) { return isEqual(collectionitem, selected); } }, "[collectionitem]": function (obj) { with (obj) { return [collectionitem]; } }, "collectionitem.view||view.listinner||{}": function (obj) { with (obj) { return collectionitem.view||view.listinner||{}; } }, "collectionitem": function (obj) { with (obj) { return collectionitem; } }, "!!loadmore && loadmorestyle !== 'infinite'": function (obj) { with (obj) { return !!loadmore && loadmorestyle !== 'infinite'; } }, "!loading": function (obj) { with (obj) { return !loading; } }, "loading": function (obj) { with (obj) { return loading; } }/**/
+        /**/"loadmorebackwards && loading": function (obj) { with (obj) { return loadmorebackwards && loading; } }, "(model.listcollection||listcollection)": function (obj) { with (obj) { return (model.listcollection||listcollection); } }, "infinite_scroll_options": function (obj) { with (obj) { return infinite_scroll_options; } }, "drop_list_options": function (obj) { with (obj) { return drop_list_options; } }, "getview(collectionitem)": function (obj) { with (obj) { return getview(collectionitem); } }, "!!collectionitem.experimental": function (obj) { with (obj) { return !!collectionitem.experimental; } }, "collectionitem.cid()": function (obj) { with (obj) { return collectionitem.cid(); } }, "collectionitem.pid()": function (obj) { with (obj) { return collectionitem.pid(); } }, "selection": function (obj) { with (obj) { return selection; } }, "droplist": function (obj) { with (obj) { return droplist; } }, "collectionitem.callbacks": function (obj) { with (obj) { return collectionitem.callbacks; } }, "itemContext(collectionitem)": function (obj) { with (obj) { return itemContext(collectionitem); } }, "isEqual(collectionitem, selected)": function (obj) { with (obj) { return isEqual(collectionitem, selected); } }, "[collectionitem]": function (obj) { with (obj) { return [collectionitem]; } }, "collectionitem.view||view.listinner||{}": function (obj) { with (obj) { return collectionitem.view||view.listinner||{}; } }, "collectionitem": function (obj) { with (obj) { return collectionitem; } }, "!!loadmore && loadmorestyle !== 'infinite'": function (obj) { with (obj) { return !!loadmore && loadmorestyle !== 'infinite'; } }, "!loading": function (obj) { with (obj) { return !loading; } }, "loading": function (obj) { with (obj) { return loading; } }/**/
     }).register();
 
 });
