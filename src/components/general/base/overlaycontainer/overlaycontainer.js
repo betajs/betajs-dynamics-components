@@ -15,6 +15,7 @@ Scoped.define("module:Overlaycontainer", [
                 overlaysplit: true,
 
                 view: {
+                    insertsubview: false,
                     overlay: "",
                     fullpage: false,
                     overlaysplit: true
@@ -25,6 +26,13 @@ Scoped.define("module:Overlaycontainer", [
                 value: null,
                 showoverlay: true
             };
+        },
+
+        create: function() {
+            console.log('Overlaycontainer created?');
+            console.log(this);
+            console.log(this.get('showoverlay'));
+
         }
 
     }).registerFunctions({

@@ -15,7 +15,7 @@ Scoped.define("module:Clickinput", [
                 placeholder: "",
                 edit: false,
                 autofocus: true,
-                externaledit: true
+                externaledit: false
             }
         },
 
@@ -23,6 +23,7 @@ Scoped.define("module:Clickinput", [
 
         functions: {
             edititem: function() {
+
                 this.trigger('edititem');
 
                 if (this.getProp('view.externaledit')) {

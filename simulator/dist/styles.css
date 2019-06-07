@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.82 - 2019-05-21
+betajs-dynamics-components - v0.1.82 - 2019-06-02
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */

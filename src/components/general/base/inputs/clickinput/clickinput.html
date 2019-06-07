@@ -1,6 +1,6 @@
 
 <title
-        ba-if="{{!view.edit || !view.externaledit}}"
+        ba-if="{{!view.edit && !view.externaledit}}"
         ba-click="{{edititem()}}"
 >
     {{model.value}}
@@ -8,7 +8,7 @@
 
 <input
         placeholder="{{view.placeholder || ''}}"
-        ba-if="{{view.edit}}"
+        ba-if="{{view.edit || view.externaledit}}"
         ba-return="{{view.edit = false}}"
         onblur="{{view.edit = false}}"
         value="{{=model.value}}" />
