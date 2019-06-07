@@ -7,7 +7,7 @@
         ba-click="click()"
     ></ba-{{view.inner}}>
 
-    <icon
+    <icon ba-show="{{!itemcontext || !itemcontext.readonly}}"
             class="{{view.removeicon}}"
             ba-click="removed()"
     ></icon>

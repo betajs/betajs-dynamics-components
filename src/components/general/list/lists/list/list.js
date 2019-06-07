@@ -2,7 +2,8 @@ Scoped.define("module:List", [
     "dynamics:Dynamic",
     "browser:Dom",
     "base:Async",
-    "base:Promise"
+    "base:Promise",
+    "base:Types"
 ], [
     "dynamics:Partials.EventForwardPartial",
     "dynamics:Partials.RepeatPartial",
@@ -14,7 +15,7 @@ Scoped.define("module:List", [
     "module:Loadmore",
     "ui:Interactions.Infinitescroll",
     "ui:Interactions.Droplist"
-], function(Dynamic, Dom, Async, Promise, scoped) {
+], function(Dynamic, Dom, Async, Promise, Types, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
@@ -214,6 +215,10 @@ Scoped.define("module:List", [
                     else if (selected.pid() === collectionitem.pid()) return true;
                 }
                 return false;
+            },
+
+            itemContext: function(collectionitem) {
+                return this.get("itemcontext") && Types.is_function(this.get("itemcontext")) ? this.get("itemcontext")(collectionitem) : {};
             }
         }
 

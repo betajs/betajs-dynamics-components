@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.82 - 2019-05-29
+betajs-dynamics-components - v0.1.83 - 2019-06-07
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1006,7 +1006,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.82 - 2019-05-29
+betajs-dynamics-components - v0.1.83 - 2019-06-07
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1021,8 +1021,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.82",
-    "datetime": 1559186953389
+    "version": "0.1.83"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1304,7 +1303,7 @@ Scoped.define("module:Clickinput", [
         scoped: scoped
     }, {
 
-        template: "\n<title\n        ba-if=\"{{!view.edit || !view.externaledit}}\"\n        ba-click=\"{{edititem()}}\"\n>\n    {{model.value}}\n</title>\n\n<input\n        placeholder=\"{{view.placeholder || ''}}\"\n        ba-if=\"{{view.edit}}\"\n        ba-return=\"{{view.edit = false}}\"\n        onblur=\"{{view.edit = false}}\"\n        value=\"{{=model.value}}\" />\n",
+        template: "\n<title\n        ba-if=\"{{!view.edit && !view.externaledit}}\"\n        ba-click=\"{{edititem()}}\"\n>\n    {{model.value}}\n</title>\n\n<input\n        placeholder=\"{{view.placeholder || ''}}\"\n        ba-if=\"{{view.edit || view.externaledit}}\"\n        ba-return=\"{{view.edit = false}}\"\n        onblur=\"{{view.edit = false}}\"\n        value=\"{{=model.value}}\" />\n",
 
         attrs: {
             model: {
@@ -1314,7 +1313,7 @@ Scoped.define("module:Clickinput", [
                 placeholder: "",
                 edit: false,
                 autofocus: true,
-                externaledit: true
+                externaledit: false
             }
         },
 
@@ -1322,6 +1321,7 @@ Scoped.define("module:Clickinput", [
 
         functions: {
             edititem: function() {
+
                 this.trigger('edititem');
 
                 if (this.getProp('view.externaledit')) {
@@ -1338,7 +1338,7 @@ Scoped.define("module:Clickinput", [
         }
 
     }).registerFunctions({
-        /**/"!view.edit || !view.externaledit": function (obj) { with (obj) { return !view.edit || !view.externaledit; } }, "edititem()": function (obj) { with (obj) { return edititem(); } }, "model.value": function (obj) { with (obj) { return model.value; } }, "view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }, "view.edit": function (obj) { with (obj) { return view.edit; } }, "view.edit = false": function (obj) { with (obj) { return view.edit = false; } }/**/
+        /**/"!view.edit && !view.externaledit": function (obj) { with (obj) { return !view.edit && !view.externaledit; } }, "edititem()": function (obj) { with (obj) { return edititem(); } }, "model.value": function (obj) { with (obj) { return model.value; } }, "view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }, "view.edit || view.externaledit": function (obj) { with (obj) { return view.edit || view.externaledit; } }, "view.edit = false": function (obj) { with (obj) { return view.edit = false; } }/**/
     }).register();
 
 });
@@ -1549,7 +1549,7 @@ Scoped.define("module:Textinput", [
         scoped: scoped
     }, {
 
-        template: "<placeholder\n        ba-if=\"{{view.placeholder_visible && !value}}\"\n>{{view.placeholder}}</placeholder>\n\n\n\n\n<textarea\n        onfocus=\"{{this.execute('onfocus')}}\"\n        value=\"{{=value}}\"\n></textarea>\n<pre>{{=preheighttext}}</pre>\n",
+        template: "<placeholder\n        ba-if=\"{{view.placeholder_visible && !value}}\"\n>{{view.placeholder}}</placeholder>\n\n<!--ba-tap=\"{{click_textarea()}}\"-->\n<!--onfocus=\"{{this.execute('onfocus')}}\"-->\n<!--onfocusout=\"{{this.execute('blur')}}\"-->\n<textarea\n        onfocus=\"{{this.execute('onfocus')}}\"\n        value=\"{{=value}}\"\n></textarea>\n<pre>{{=preheighttext}}</pre>\n",
 
         attrs: {
             value: null,
@@ -1604,13 +1604,14 @@ Scoped.define("module:Overlaycontainer", [
         scoped: scoped
     }, {
 
-        template: "<overlaycontainer\n    ba-click=\"{{showoverlay = false}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage,\n                overlaysplit: view.overlaysplit\n            }}}\">\n\n    <overlaysplit ba-if=\"{{view.overlaysplit}}\">\n        <top style=\"height: {{view.offsetTop}}px\"></top>\n        <split style=\"height: {{view.offsetHeight}}px\"></split>\n        <bottom></bottom>\n    </overlaysplit>\n\n    <overlayinner>\n\n        <ba-{{view.overlay}}\n            ba-event-forward\n            ba-noscope>\n        \n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
+        template: "<overlaycontainer\n    ba-click=\"{{showoverlay = false}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage,\n                overlaysplit: view.overlaysplit\n            }}}\">\n\n    <overlaysplit ba-if=\"{{view.overlaysplit}}\">\n        <top style=\"height: {{view.offsetTop}}px\"></top>\n        <split style=\"height: {{view.offsetHeight}}px\"></split>\n        <bottom></bottom>\n    </overlaysplit>\n\n    <overlayinner>\n\n        <ba-{{view.overlay}}\n            ba-event-forward\n            ba-noscope>\n        <!--<ba-{{view.overlay}} ba-model=\"{{model}}\">-->\n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
 
         attrs: function() {
             return {
                 overlaysplit: true,
 
                 view: {
+                    insertsubview: false,
                     overlay: "",
                     fullpage: false,
                     overlaysplit: true
@@ -1621,6 +1622,13 @@ Scoped.define("module:Overlaycontainer", [
                 value: null,
                 showoverlay: true
             };
+        },
+
+        create: function() {
+            console.log('Overlaycontainer created?');
+            console.log(this);
+            console.log(this.get('showoverlay'));
+
         }
 
     }).registerFunctions({
@@ -1714,7 +1722,7 @@ Scoped.define("module:Removableclickcontainer", [
         scoped: scoped
     }, {
 
-        template: "\n<removableclickcontainer>\n\n    <ba-{{view.inner}}\n        class=\"inner\"\n        ba-noscope\n        ba-click=\"click()\"\n    ></ba-{{view.inner}}>\n\n    <icon\n            class=\"{{view.removeicon}}\"\n            ba-click=\"removed()\"\n    ></icon>\n\n</removableclickcontainer>\n\n",
+        template: "\n<removableclickcontainer>\n\n    <ba-{{view.inner}}\n        class=\"inner\"\n        ba-noscope\n        ba-click=\"click()\"\n    ></ba-{{view.inner}}>\n\n    <icon ba-show=\"{{!itemcontext || !itemcontext.readonly}}\"\n            class=\"{{view.removeicon}}\"\n            ba-click=\"removed()\"\n    ></icon>\n\n</removableclickcontainer>\n\n",
 
         attrs: {
             view: {
@@ -1918,7 +1926,8 @@ Scoped.define("module:List", [
     "dynamics:Dynamic",
     "browser:Dom",
     "base:Async",
-    "base:Promise"
+    "base:Promise",
+    "base:Types"
 ], [
     "dynamics:Partials.EventForwardPartial",
     "dynamics:Partials.RepeatPartial",
@@ -1930,13 +1939,13 @@ Scoped.define("module:List", [
     "module:Loadmore",
     "ui:Interactions.Infinitescroll",
     "ui:Interactions.Droplist"
-], function(Dynamic, Dom, Async, Promise, scoped) {
+], function(Dynamic, Dom, Async, Promise, Types, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
     }, {
 
-        template: "\n\n<ba-loading ba-show=\"{{loadmorebackwards && loading}}\">\n</ba-loading>\n\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\"\n      ba-interaction:scroll=\"{{infinite_scroll_options}}\"\n      ba-interaction:droplist=\"{{drop_list_options}}\">\n\n    \n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-experimental=\"{{!!collectionitem.experimental}}\"\n        data-id=\"{{collectionitem.cid()}}\"\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-selection=\"{{=selection}}\"\n        ba-droplist=\"{{droplist}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-isselected=\"{{isEqual(collectionitem, selected)}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner||{}}}\"\n        ba-model=\"{{collectionitem}}\"\n    ></ba-{{getview(collectionitem)}}>\n\n</list>\n\n<div class=\"doodad\" data-id=\"floater\" style=\"display:none\">\n    <div class=\"inner\" style=\"height: 44px; line-height: 44px; background-color: #EEEEEE\">\n        Move Here\n    </div>\n</div>\n<ba-loadmore\n        ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite'}}\"\n        ba-show=\"{{!loading}}\"\n        ba-event:loadmore=\"moreitems\"\n></ba-loadmore>\n<ba-loading ba-show=\"{{loading}}\">\n</ba-loading>\n",
+        template: "<!--<ba-loadmore ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitemsbackwards\">-->\n<!--</ba-loadmore>-->\n<ba-loading ba-show=\"{{loadmorebackwards && loading}}\">\n</ba-loading>\n\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\"\n      ba-interaction:scroll=\"{{infinite_scroll_options}}\"\n      ba-interaction:droplist=\"{{drop_list_options}}\">\n<!--<list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">-->\n    <!--ba-isselected=\"{{isselected(collectionitem)}}\"-->\n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-experimental=\"{{!!collectionitem.experimental}}\"\n        data-id=\"{{collectionitem.cid()}}\"\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-selection=\"{{=selection}}\"\n        ba-droplist=\"{{droplist}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-itemcontext=\"{{itemContext(collectionitem)}}\"\n        ba-isselected=\"{{isEqual(collectionitem, selected)}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner||{}}}\"\n        ba-model=\"{{collectionitem}}\"\n    ></ba-{{getview(collectionitem)}}>\n\n</list>\n\n<div class=\"doodad\" data-id=\"floater\" style=\"display:none\">\n    <div class=\"inner\" style=\"height: 44px; line-height: 44px; background-color: #EEEEEE\">\n        Move Here\n    </div>\n</div>\n<ba-loadmore\n        ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite'}}\"\n        ba-show=\"{{!loading}}\"\n        ba-event:loadmore=\"moreitems\"\n></ba-loadmore>\n<ba-loading ba-show=\"{{loading}}\">\n</ba-loading>\n",
 
         attrs: function() {
             return {
@@ -2130,11 +2139,15 @@ Scoped.define("module:List", [
                     else if (selected.pid() === collectionitem.pid()) return true;
                 }
                 return false;
+            },
+
+            itemContext: function(collectionitem) {
+                return this.get("itemcontext") && Types.is_function(this.get("itemcontext")) ? this.get("itemcontext")(collectionitem) : {};
             }
         }
 
     }).registerFunctions({
-        /**/"loadmorebackwards && loading": function (obj) { with (obj) { return loadmorebackwards && loading; } }, "(model.listcollection||listcollection)": function (obj) { with (obj) { return (model.listcollection||listcollection); } }, "infinite_scroll_options": function (obj) { with (obj) { return infinite_scroll_options; } }, "drop_list_options": function (obj) { with (obj) { return drop_list_options; } }, "getview(collectionitem)": function (obj) { with (obj) { return getview(collectionitem); } }, "!!collectionitem.experimental": function (obj) { with (obj) { return !!collectionitem.experimental; } }, "collectionitem.cid()": function (obj) { with (obj) { return collectionitem.cid(); } }, "collectionitem.pid()": function (obj) { with (obj) { return collectionitem.pid(); } }, "selection": function (obj) { with (obj) { return selection; } }, "droplist": function (obj) { with (obj) { return droplist; } }, "collectionitem.callbacks": function (obj) { with (obj) { return collectionitem.callbacks; } }, "isEqual(collectionitem, selected)": function (obj) { with (obj) { return isEqual(collectionitem, selected); } }, "[collectionitem]": function (obj) { with (obj) { return [collectionitem]; } }, "collectionitem.view||view.listinner||{}": function (obj) { with (obj) { return collectionitem.view||view.listinner||{}; } }, "collectionitem": function (obj) { with (obj) { return collectionitem; } }, "!!loadmore && loadmorestyle !== 'infinite'": function (obj) { with (obj) { return !!loadmore && loadmorestyle !== 'infinite'; } }, "!loading": function (obj) { with (obj) { return !loading; } }, "loading": function (obj) { with (obj) { return loading; } }/**/
+        /**/"loadmorebackwards && loading": function (obj) { with (obj) { return loadmorebackwards && loading; } }, "(model.listcollection||listcollection)": function (obj) { with (obj) { return (model.listcollection||listcollection); } }, "infinite_scroll_options": function (obj) { with (obj) { return infinite_scroll_options; } }, "drop_list_options": function (obj) { with (obj) { return drop_list_options; } }, "getview(collectionitem)": function (obj) { with (obj) { return getview(collectionitem); } }, "!!collectionitem.experimental": function (obj) { with (obj) { return !!collectionitem.experimental; } }, "collectionitem.cid()": function (obj) { with (obj) { return collectionitem.cid(); } }, "collectionitem.pid()": function (obj) { with (obj) { return collectionitem.pid(); } }, "selection": function (obj) { with (obj) { return selection; } }, "droplist": function (obj) { with (obj) { return droplist; } }, "collectionitem.callbacks": function (obj) { with (obj) { return collectionitem.callbacks; } }, "itemContext(collectionitem)": function (obj) { with (obj) { return itemContext(collectionitem); } }, "isEqual(collectionitem, selected)": function (obj) { with (obj) { return isEqual(collectionitem, selected); } }, "[collectionitem]": function (obj) { with (obj) { return [collectionitem]; } }, "collectionitem.view||view.listinner||{}": function (obj) { with (obj) { return collectionitem.view||view.listinner||{}; } }, "collectionitem": function (obj) { with (obj) { return collectionitem; } }, "!!loadmore && loadmorestyle !== 'infinite'": function (obj) { with (obj) { return !!loadmore && loadmorestyle !== 'infinite'; } }, "!loading": function (obj) { with (obj) { return !loading; } }, "loading": function (obj) { with (obj) { return loading; } }/**/
     }).register();
 
 });

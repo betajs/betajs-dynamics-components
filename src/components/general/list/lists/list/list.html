@@ -18,6 +18,7 @@
         ba-selection="{{=selection}}"
         ba-droplist="{{droplist}}"
         ba-functions="{{collectionitem.callbacks}}"
+        ba-itemcontext="{{itemContext(collectionitem)}}"
         ba-isselected="{{isEqual(collectionitem, selected)}}"
         ba-event-forward:item="{{[collectionitem]}}"
         ba-view="{{collectionitem.view||view.listinner||{}}}"
