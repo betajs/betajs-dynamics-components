@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.83 - 2019-06-07
+betajs-dynamics-components - v0.1.84 - 2019-06-08
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -300,7 +300,7 @@ ba-textinput {
     word-break: break-word;
     white-space: pre-wrap; }
 
-ba-overlaycontainer overlaycontainer {
+baoverlaycontainer overlaycontainer, ba-overlaycontainer overlaycontainer {
   position: absolute;
   top: 0;
   bottom: 0;
@@ -314,13 +314,13 @@ ba-overlaycontainer overlaycontainer {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex; }
-  ba-overlaycontainer overlaycontainer message {
+  baoverlaycontainer overlaycontainer message, ba-overlaycontainer overlaycontainer message {
     background: white;
     border-radius: 2px;
     padding: 10px; }
-ba-overlaycontainer .overlaysplit {
+baoverlaycontainer .overlaysplit, ba-overlaycontainer .overlaysplit {
   background: none !important; }
-  ba-overlaycontainer .overlaysplit overlaysplit {
+  baoverlaycontainer .overlaysplit overlaysplit, ba-overlaycontainer .overlaysplit overlaysplit {
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
@@ -334,28 +334,28 @@ ba-overlaycontainer .overlaysplit {
     -webkit-flex: 1 1 0;
     -ms-flex: 1 1 0;
     flex: 1 1 0; }
-    ba-overlaycontainer .overlaysplit overlaysplit top {
+    baoverlaycontainer .overlaysplit overlaysplit top, ba-overlaycontainer .overlaysplit overlaysplit top {
       background: rgba(0, 0, 0, 0.5); }
-    ba-overlaycontainer .overlaysplit overlaysplit bottom {
+    baoverlaycontainer .overlaysplit overlaysplit bottom, ba-overlaycontainer .overlaysplit overlaysplit bottom {
       -webkit-box-flex: 2 1 0;
       -moz-box-flex: 2 1 0;
       -webkit-flex: 2 1 0;
       -ms-flex: 2 1 0;
       flex: 2 1 0;
       background: rgba(0, 0, 0, 0.5); }
-  ba-overlaycontainer .overlaysplit overlayinner {
+  baoverlaycontainer .overlaysplit overlayinner, ba-overlaycontainer .overlaysplit overlayinner {
     -webkit-box-flex: 1 1 0;
     -moz-box-flex: 1 1 0;
     -webkit-flex: 1 1 0;
     -ms-flex: 1 1 0;
     flex: 1 1 0; }
-ba-overlaycontainer .normal overlayinner {
+baoverlaycontainer .normal overlayinner, ba-overlaycontainer .normal overlayinner {
   margin: auto;
   height: 100%; }
-ba-overlaycontainer .fullpage {
+baoverlaycontainer .fullpage, ba-overlaycontainer .fullpage {
   transition: top 1000;
   -webkit-transition: top 1000; }
-  ba-overlaycontainer .fullpage overlayinner {
+  baoverlaycontainer .fullpage overlayinner, ba-overlaycontainer .fullpage overlayinner {
     position: absolute;
     top: 44px;
     bottom: 0;

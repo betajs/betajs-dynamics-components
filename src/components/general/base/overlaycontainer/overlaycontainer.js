@@ -10,29 +10,20 @@ Scoped.define("module:Overlaycontainer", [
 
         template: "<%= template(filepathnoext + '.html') %>",
 
-        attrs: function() {
-            return {
-                overlaysplit: true,
+        attrs: {
+            overlaysplit: true,
 
-                view: {
-                    insertsubview: false,
-                    overlay: "",
-                    fullpage: false,
-                    overlaysplit: true
-                },
-                model: {
-                    message: "This is a message"
-                },
-                value: null,
-                showoverlay: true
-            };
-        },
-
-        create: function() {
-            console.log('Overlaycontainer created?');
-            console.log(this);
-            console.log(this.get('showoverlay'));
-
+            view: {
+                insertsubview: false,
+                overlay: "",
+                fullpage: false,
+                overlaysplit: true
+            },
+            model: {
+                message: "This is a message"
+            },
+            value: null,
+            showoverlay: true
         }
 
     }).registerFunctions({
