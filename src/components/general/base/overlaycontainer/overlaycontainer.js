@@ -26,13 +26,6 @@ Scoped.define("module:Overlaycontainer", [
                 value: null,
                 showoverlay: true
             };
-        },
-
-        create: function() {
-            console.log('Overlaycontainer created?');
-            console.log(this);
-            console.log(this.get('showoverlay'));
-
         }
 
     }).registerFunctions({
