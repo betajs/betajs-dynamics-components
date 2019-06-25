@@ -1305,16 +1305,18 @@ Scoped.define("module:Clickinput", [
 
         template: "\n<title\n        ba-if=\"{{!view.edit && !view.externaledit}}\"\n        ba-click=\"{{edititem()}}\"\n>{{model.value}}</title>\n\n<input\n        placeholder=\"{{view.placeholder || ''}}\"\n        ba-if=\"{{view.edit || view.externaledit}}\"\n        ba-return=\"{{view.edit = false}}\"\n        onblur=\"{{view.edit = false}}\"\n        value=\"{{=model.value}}\" />\n",
 
-        attrs: {
-            model: {
-                value: "Test"
-            },
-            view: {
-                placeholder: "",
-                edit: false,
-                autofocus: true,
-                externaledit: false
-            }
+        attrs: function() {
+            return {
+                model: {
+                    value: "Test"
+                },
+                view: {
+                    placeholder: "",
+                    edit: false,
+                    autofocus: true,
+                    externaledit: false
+                }
+            };
         },
 
         extendables: ['view'],
