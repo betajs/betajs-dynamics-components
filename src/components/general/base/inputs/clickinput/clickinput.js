@@ -7,16 +7,18 @@ Scoped.define("module:Clickinput", [
 
         template: "<%= template(filepathnoext + '.html') %>",
 
-        attrs: {
-            model: {
-                value: "Test"
-            },
-            view: {
-                placeholder: "",
-                edit: false,
-                autofocus: true,
-                externaledit: false
-            }
+        attrs: function() {
+            return {
+                model: {
+                    value: "Test"
+                },
+                view: {
+                    placeholder: "",
+                    edit: false,
+                    autofocus: true,
+                    externaledit: false
+                }
+            };
         },
 
         extendables: ['view'],
