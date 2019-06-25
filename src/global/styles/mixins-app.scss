@@ -73,7 +73,7 @@
     background: $greywhite3;
   }
 
-  ba-overlaycontainer {
+  baoverlaycontainer, ba-overlaycontainer {
     ba-timepicker, ba-grouppicker, ba-durationpicker, ba-repeatpicker, ba-snoozepicker  {
       position: absolute;
       width: 50%;

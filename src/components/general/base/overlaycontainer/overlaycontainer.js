@@ -26,6 +26,13 @@ Scoped.define("module:Overlaycontainer", [
                 value: null,
                 showoverlay: true
             };
+        },
+
+        functions: {
+            hide_overlay: function() {
+                this.set('showoverlay', false);
+                this.trigger('hide_overlay');
+            }
         }
 
     }).registerFunctions({
