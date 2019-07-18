@@ -1,5 +1,5 @@
 
-$clickitemheigth : 44px;
+$clickitemheigth : 50px;
 
 ba-eventitem {
   @include display-flex;
@@ -9,7 +9,7 @@ ba-eventitem {
     @include flex(1 1 0);
     @include noselect;
     padding: 0 $clickitemheigth/2;
-    min-height: 44px;
+    min-height: 50px;
     text-align: center;
     display: block;
     color : inherit;

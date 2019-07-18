@@ -60,7 +60,7 @@ baoverlaycontainer, ba-overlaycontainer {
 
     overlayinner {
       position: absolute;
-      top: $listitemheight;
+      top: $listitemheight*2;
       bottom: 0;
       width: 100%;
       max-width: 100%;
