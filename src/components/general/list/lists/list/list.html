@@ -34,8 +34,11 @@
 </div>
 <ba-loadmore
         ba-if="{{!!loadmore && loadmorestyle !== 'infinite'}}"
-        ba-show="{{!loading}}"
+        ba-show="{{!loading && collection_count > 0}}"
         ba-event:loadmore="moreitems"
 ></ba-loadmore>
 <ba-loading ba-show="{{loading}}">
 </ba-loading>
+<div ba-if="{{emptymessage && !loading && collection_count === 0}}">
+    {{emptymessage}}
+</div>

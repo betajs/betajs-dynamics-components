@@ -33,6 +33,7 @@ Scoped.define("module:List", [
                 scrolltofirst: null,
                 autoscroll: false,
                 stickybottom: false,
+                emptymessage: false,
                 droplist: false,
                 view: {},
                 infinite_scroll_options: {
@@ -86,6 +87,7 @@ Scoped.define("module:List", [
         },
 
         create: function() {
+            this.set("collection_count", 0);
             if (this.get("loadmore") && this.get("loadmorestyle") === "infinite")
                 this.setProp("infinite_scroll_options.disabled", false);
             if (this.get("droplist"))
@@ -108,6 +110,10 @@ Scoped.define("module:List", [
                 if (this.destroyed())
                     return;
                 if (this.getCollection() && this.getCollection().on) {
+                    this.set("collection_count", this.getCollection().count());
+                    this.listenOn(this.getCollection(), "replaced-objects add remove collection-updating collection-updated", function() {
+                        this.set("collection_count", this.getCollection().count());
+                    });
                     if (this.get("scrolltolast")) {
                         this.listenOn(this.getCollection(), evts, function() {
                             this.execute("scrollToLast");

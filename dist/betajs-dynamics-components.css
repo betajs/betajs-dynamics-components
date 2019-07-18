@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.87 - 2019-06-25
+betajs-dynamics-components - v0.1.88 - 2019-07-18
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -53,7 +53,7 @@ ba-dropdown {
     ba-dropdown button dropdown {
       position: absolute;
       right: 0;
-      top: 43px;
+      top: 49px;
       min-height: 20px;
       border: 1px solid #777;
       background: white;
@@ -64,7 +64,7 @@ ba-dropdown {
         display: -ms-flexbox;
         display: -webkit-flex;
         display: flex;
-        line-height: 44px;
+        line-height: 50px;
         border-bottom: 1px solid #777;
         margin: 0 15px; }
       ba-dropdown button dropdown button {
@@ -98,7 +98,7 @@ ba-dropdownselect {
     ba-dropdownselect button dropdownselect {
       position: absolute;
       right: 0;
-      top: 43px;
+      top: 49px;
       border: 1px solid #777;
       background: white;
       z-index: 1000; }
@@ -108,7 +108,7 @@ ba-dropdownselect {
         display: -ms-flexbox;
         display: -webkit-flex;
         display: flex;
-        line-height: 44px;
+        line-height: 50px;
         border-bottom: 1px solid #777;
         margin: 0 15px; }
       ba-dropdownselect button dropdownselect button {
@@ -248,11 +248,11 @@ ba-search {
       height: 36px;
       padding: 0 5px 0 0; }
   ba-search ba-loading, ba-search icon, ba-search ba-dropdown {
-    -webkit-box-flex: 0 0 44px;
-    -moz-box-flex: 0 0 44px;
-    -webkit-flex: 0 0 44px;
-    -ms-flex: 0 0 44px;
-    flex: 0 0 44px; }
+    -webkit-box-flex: 0 0 50px;
+    -moz-box-flex: 0 0 50px;
+    -webkit-flex: 0 0 50px;
+    -ms-flex: 0 0 50px;
+    flex: 0 0 50px; }
   ba-search icon {
     line-height: 36px;
     text-align: center; }
@@ -357,7 +357,7 @@ baoverlaycontainer .fullpage, ba-overlaycontainer .fullpage {
   -webkit-transition: top 1000; }
   baoverlaycontainer .fullpage overlayinner, ba-overlaycontainer .fullpage overlayinner {
     position: absolute;
-    top: 44px;
+    top: 100px;
     bottom: 0;
     width: 100%;
     max-width: 100%;
@@ -407,11 +407,11 @@ ba-removableclickcontainer removableclickcontainer {
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
-    -webkit-box-flex: 0 0 44px;
-    -moz-box-flex: 0 0 44px;
-    -webkit-flex: 0 0 44px;
-    -ms-flex: 0 0 44px;
-    flex: 0 0 44px; }
+    -webkit-box-flex: 0 0 50px;
+    -moz-box-flex: 0 0 50px;
+    -webkit-flex: 0 0 50px;
+    -ms-flex: 0 0 50px;
+    flex: 0 0 50px; }
     ba-removableclickcontainer removableclickcontainer icon span {
       padding: 4px 0;
       width: 26px;
@@ -490,13 +490,13 @@ ba-removableclickcontainer removableclickcontainer {
   40% {
     transform: scale(1); } }
 ba-loadmore {
-  -webkit-box-flex: auto auto 44px;
-  -moz-box-flex: auto auto 44px;
-  -webkit-flex: auto auto 44px;
-  -ms-flex: auto auto 44px;
-  flex: auto auto 44px; }
+  -webkit-box-flex: auto auto 50px;
+  -moz-box-flex: auto auto 50px;
+  -webkit-flex: auto auto 50px;
+  -ms-flex: auto auto 50px;
+  flex: auto auto 50px; }
   ba-loadmore loadmore {
-    height: 44px;
+    height: 50px;
     display: flex; }
     ba-loadmore loadmore button {
       flex: 1 1 0; }
@@ -529,11 +529,11 @@ ba-clickitem {
       -ms-flex: 1 1 0;
       flex: 1 1 0; }
   ba-clickitem .icon icon {
-    -webkit-box-flex: 0 0 44px;
-    -moz-box-flex: 0 0 44px;
-    -webkit-flex: 0 0 44px;
-    -ms-flex: 0 0 44px;
-    flex: 0 0 44px; }
+    -webkit-box-flex: 0 0 50px;
+    -moz-box-flex: 0 0 50px;
+    -webkit-flex: 0 0 50px;
+    -ms-flex: 0 0 50px;
+    flex: 0 0 50px; }
   ba-clickitem .icon value {
     text-align: left; }
   ba-clickitem .noicon icon {
@@ -563,8 +563,8 @@ ba-eventitem {
     -ms-user-select: none;
     user-select: none;
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
-    padding: 0 22px;
-    min-height: 44px;
+    padding: 0 25px;
+    min-height: 50px;
     text-align: center;
     display: block;
     color: inherit; }
@@ -597,26 +597,26 @@ ba-searchlist {
   flex-direction: column;
   width: 100%; }
   ba-searchlist ba-search {
-    -webkit-box-flex: 0 0 44px;
-    -moz-box-flex: 0 0 44px;
-    -webkit-flex: 0 0 44px;
-    -ms-flex: 0 0 44px;
-    flex: 0 0 44px;
+    -webkit-box-flex: 0 0 50px;
+    -moz-box-flex: 0 0 50px;
+    -webkit-flex: 0 0 50px;
+    -ms-flex: 0 0 50px;
+    flex: 0 0 50px;
     display: -webkit-box;
     display: -moz-box;
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
     width: 100%;
-    line-height: 44px;
+    line-height: 50px;
     border-bottom: 1px solid #ddd;
     z-index: 1; }
     ba-searchlist ba-search ba-loading {
-      -webkit-box-flex: 0 0 44px;
-      -moz-box-flex: 0 0 44px;
-      -webkit-flex: 0 0 44px;
-      -ms-flex: 0 0 44px;
-      flex: 0 0 44px; }
+      -webkit-box-flex: 0 0 50px;
+      -moz-box-flex: 0 0 50px;
+      -webkit-flex: 0 0 50px;
+      -ms-flex: 0 0 50px;
+      flex: 0 0 50px; }
       ba-searchlist ba-search ba-loading .sk-circle {
         margin: 14px auto; }
     ba-searchlist ba-search input {
@@ -627,12 +627,12 @@ ba-searchlist {
       flex: 1 1 0;
       color: #777; }
     ba-searchlist ba-search icon {
-      -webkit-box-flex: 0 0 44px;
-      -moz-box-flex: 0 0 44px;
-      -webkit-flex: 0 0 44px;
-      -ms-flex: 0 0 44px;
-      flex: 0 0 44px;
-      line-height: 44px;
+      -webkit-box-flex: 0 0 50px;
+      -moz-box-flex: 0 0 50px;
+      -webkit-flex: 0 0 50px;
+      -ms-flex: 0 0 50px;
+      flex: 0 0 50px;
+      line-height: 50px;
       text-align: center; }
   ba-searchlist ba-list {
     z-index: 0; }

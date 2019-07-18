@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.87 - 2019-06-25
+betajs-dynamics-components - v0.1.88 - 2019-07-18
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1006,7 +1006,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.87 - 2019-06-25
+betajs-dynamics-components - v0.1.88 - 2019-07-18
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1021,8 +1021,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.87",
-    "datetime": 1561491027376
+    "version": "0.1.88"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1552,7 +1551,7 @@ Scoped.define("module:Textinput", [
         scoped: scoped
     }, {
 
-        template: "<placeholder\n        ba-if=\"{{view.placeholder_visible && !value}}\"\n>{{view.placeholder}}</placeholder>\n\n\n\n\n<textarea\n        onfocus=\"{{this.execute('onfocus')}}\"\n        value=\"{{=value}}\"\n></textarea>\n<pre>{{=preheighttext}}</pre>\n",
+        template: "<placeholder\n        ba-if=\"{{view.placeholder_visible && !value}}\"\n>{{view.placeholder}}</placeholder>\n\n<!--ba-tap=\"{{click_textarea()}}\"-->\n<!--onfocus=\"{{this.execute('onfocus')}}\"-->\n<!--onfocusout=\"{{this.execute('blur')}}\"-->\n<textarea\n        onfocus=\"{{this.execute('onfocus')}}\"\n        value=\"{{=value}}\"\n></textarea>\n<pre>{{=preheighttext}}</pre>\n",
 
         attrs: {
             value: null,
@@ -1640,7 +1639,7 @@ Scoped.define("module:Overlaycontainer", [
         scoped: scoped
     }, {
 
-        template: "<overlaycontainer\n    ba-click=\"{{hide_overlay()}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage,\n                overlaysplit: view.overlaysplit\n            }}}\">\n\n    <overlaysplit ba-if=\"{{view.overlaysplit}}\">\n        <top style=\"height: {{view.offsetTop}}px\"></top>\n        <split style=\"height: {{view.offsetHeight}}px\"></split>\n        <bottom></bottom>\n    </overlaysplit>\n\n    <overlayinner>\n\n        <ba-{{view.overlay}}\n            ba-event-forward\n            ba-noscope>\n        \n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
+        template: "<overlaycontainer\n    ba-click=\"{{hide_overlay()}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage,\n                overlaysplit: view.overlaysplit\n            }}}\">\n\n    <overlaysplit ba-if=\"{{view.overlaysplit}}\">\n        <top style=\"height: {{view.offsetTop}}px\"></top>\n        <split style=\"height: {{view.offsetHeight}}px\"></split>\n        <bottom></bottom>\n    </overlaysplit>\n\n    <overlayinner>\n\n        <ba-{{view.overlay}}\n            ba-event-forward\n            ba-noscope>\n        <!--<ba-{{view.overlay}} ba-model=\"{{model}}\">-->\n            <message>{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
 
         attrs: function() {
             return {
@@ -1981,7 +1980,7 @@ Scoped.define("module:List", [
         scoped: scoped
     }, {
 
-        template: "\n\n<ba-loading ba-show=\"{{loadmorebackwards && loading}}\">\n</ba-loading>\n\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\"\n      ba-interaction:scroll=\"{{infinite_scroll_options}}\"\n      ba-interaction:droplist=\"{{drop_list_options}}\">\n\n    \n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-experimental=\"{{!!collectionitem.experimental}}\"\n        data-id=\"{{collectionitem.cid()}}\"\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-selection=\"{{=selection}}\"\n        ba-droplist=\"{{droplist}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-itemcontext=\"{{itemContext(collectionitem)}}\"\n        ba-isselected=\"{{isEqual(collectionitem, selected)}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner||{}}}\"\n        ba-model=\"{{collectionitem}}\"\n    ></ba-{{getview(collectionitem)}}>\n\n</list>\n\n<div class=\"doodad\" data-id=\"floater\" style=\"display:none\">\n    <div class=\"inner\" style=\"height: 44px; line-height: 44px; background-color: #EEEEEE\">\n        Move Here\n    </div>\n</div>\n<ba-loadmore\n        ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite'}}\"\n        ba-show=\"{{!loading}}\"\n        ba-event:loadmore=\"moreitems\"\n></ba-loadmore>\n<ba-loading ba-show=\"{{loading}}\">\n</ba-loading>\n",
+        template: "<!--<ba-loadmore ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitemsbackwards\">-->\n<!--</ba-loadmore>-->\n<ba-loading ba-show=\"{{loadmorebackwards && loading}}\">\n</ba-loading>\n\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\"\n      ba-interaction:scroll=\"{{infinite_scroll_options}}\"\n      ba-interaction:droplist=\"{{drop_list_options}}\">\n<!--<list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">-->\n    <!--ba-isselected=\"{{isselected(collectionitem)}}\"-->\n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-experimental=\"{{!!collectionitem.experimental}}\"\n        data-id=\"{{collectionitem.cid()}}\"\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-selection=\"{{=selection}}\"\n        ba-droplist=\"{{droplist}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-itemcontext=\"{{itemContext(collectionitem)}}\"\n        ba-isselected=\"{{isEqual(collectionitem, selected)}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner||{}}}\"\n        ba-model=\"{{collectionitem}}\"\n    ></ba-{{getview(collectionitem)}}>\n\n</list>\n\n<div class=\"doodad\" data-id=\"floater\" style=\"display:none\">\n    <div class=\"inner\" style=\"height: 44px; line-height: 44px; background-color: #EEEEEE\">\n        Move Here\n    </div>\n</div>\n<ba-loadmore\n        ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite'}}\"\n        ba-show=\"{{!loading && collection_count > 0}}\"\n        ba-event:loadmore=\"moreitems\"\n></ba-loadmore>\n<ba-loading ba-show=\"{{loading}}\">\n</ba-loading>\n<div ba-if=\"{{emptymessage && !loading && collection_count === 0}}\">\n    {{emptymessage}}\n</div>",
 
         attrs: function() {
             return {
@@ -1993,6 +1992,7 @@ Scoped.define("module:List", [
                 scrolltofirst: null,
                 autoscroll: false,
                 stickybottom: false,
+                emptymessage: false,
                 droplist: false,
                 view: {},
                 infinite_scroll_options: {
@@ -2046,6 +2046,7 @@ Scoped.define("module:List", [
         },
 
         create: function() {
+            this.set("collection_count", 0);
             if (this.get("loadmore") && this.get("loadmorestyle") === "infinite")
                 this.setProp("infinite_scroll_options.disabled", false);
             if (this.get("droplist"))
@@ -2068,6 +2069,10 @@ Scoped.define("module:List", [
                 if (this.destroyed())
                     return;
                 if (this.getCollection() && this.getCollection().on) {
+                    this.set("collection_count", this.getCollection().count());
+                    this.listenOn(this.getCollection(), "replaced-objects add remove collection-updating collection-updated", function() {
+                        this.set("collection_count", this.getCollection().count());
+                    });
                     if (this.get("scrolltolast")) {
                         this.listenOn(this.getCollection(), evts, function() {
                             this.execute("scrollToLast");
@@ -2183,7 +2188,7 @@ Scoped.define("module:List", [
         }
 
     }).registerFunctions({
-        /**/"loadmorebackwards && loading": function (obj) { with (obj) { return loadmorebackwards && loading; } }, "(model.listcollection||listcollection)": function (obj) { with (obj) { return (model.listcollection||listcollection); } }, "infinite_scroll_options": function (obj) { with (obj) { return infinite_scroll_options; } }, "drop_list_options": function (obj) { with (obj) { return drop_list_options; } }, "getview(collectionitem)": function (obj) { with (obj) { return getview(collectionitem); } }, "!!collectionitem.experimental": function (obj) { with (obj) { return !!collectionitem.experimental; } }, "collectionitem.cid()": function (obj) { with (obj) { return collectionitem.cid(); } }, "collectionitem.pid()": function (obj) { with (obj) { return collectionitem.pid(); } }, "selection": function (obj) { with (obj) { return selection; } }, "droplist": function (obj) { with (obj) { return droplist; } }, "collectionitem.callbacks": function (obj) { with (obj) { return collectionitem.callbacks; } }, "itemContext(collectionitem)": function (obj) { with (obj) { return itemContext(collectionitem); } }, "isEqual(collectionitem, selected)": function (obj) { with (obj) { return isEqual(collectionitem, selected); } }, "[collectionitem]": function (obj) { with (obj) { return [collectionitem]; } }, "collectionitem.view||view.listinner||{}": function (obj) { with (obj) { return collectionitem.view||view.listinner||{}; } }, "collectionitem": function (obj) { with (obj) { return collectionitem; } }, "!!loadmore && loadmorestyle !== 'infinite'": function (obj) { with (obj) { return !!loadmore && loadmorestyle !== 'infinite'; } }, "!loading": function (obj) { with (obj) { return !loading; } }, "loading": function (obj) { with (obj) { return loading; } }/**/
+        /**/"loadmorebackwards && loading": function (obj) { with (obj) { return loadmorebackwards && loading; } }, "(model.listcollection||listcollection)": function (obj) { with (obj) { return (model.listcollection||listcollection); } }, "infinite_scroll_options": function (obj) { with (obj) { return infinite_scroll_options; } }, "drop_list_options": function (obj) { with (obj) { return drop_list_options; } }, "getview(collectionitem)": function (obj) { with (obj) { return getview(collectionitem); } }, "!!collectionitem.experimental": function (obj) { with (obj) { return !!collectionitem.experimental; } }, "collectionitem.cid()": function (obj) { with (obj) { return collectionitem.cid(); } }, "collectionitem.pid()": function (obj) { with (obj) { return collectionitem.pid(); } }, "selection": function (obj) { with (obj) { return selection; } }, "droplist": function (obj) { with (obj) { return droplist; } }, "collectionitem.callbacks": function (obj) { with (obj) { return collectionitem.callbacks; } }, "itemContext(collectionitem)": function (obj) { with (obj) { return itemContext(collectionitem); } }, "isEqual(collectionitem, selected)": function (obj) { with (obj) { return isEqual(collectionitem, selected); } }, "[collectionitem]": function (obj) { with (obj) { return [collectionitem]; } }, "collectionitem.view||view.listinner||{}": function (obj) { with (obj) { return collectionitem.view||view.listinner||{}; } }, "collectionitem": function (obj) { with (obj) { return collectionitem; } }, "!!loadmore && loadmorestyle !== 'infinite'": function (obj) { with (obj) { return !!loadmore && loadmorestyle !== 'infinite'; } }, "!loading && collection_count > 0": function (obj) { with (obj) { return !loading && collection_count > 0; } }, "loading": function (obj) { with (obj) { return loading; } }, "emptymessage && !loading && collection_count === 0": function (obj) { with (obj) { return emptymessage && !loading && collection_count === 0; } }, "emptymessage": function (obj) { with (obj) { return emptymessage; } }/**/
     }).register();
 
 });

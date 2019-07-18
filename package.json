@@ -1,5 +1,5 @@
 {
-    "homepage": "https://betajs.com",
+    "homepage": "http://betajs.com",
     "license": "Apache-2.0",
     "licenses": [
         {
@@ -15,7 +15,7 @@
         "url": "https://github.com/betajs/betajs-dynamics-components/issues"
     },
     "name": "betajs-dynamics-components",
-    "version": "0.1.87",
+    "version": "0.1.88",
     "description": "BetaJS-Dynamics-Components is a Library of DOM Components that are built in BetaJS-Dynamics",
     "contributors": [
         "Victor Lingenthal",
@@ -61,8 +61,8 @@
         "url": "git://github.com/betajs/betajs-dynamics-components.git"
     },
     "meta": {
-        "blog": "https://blog.betajs.com",
-        "twitter": "https://twitter.com/thebetajs",
+        "blog": "http://blog.betajs.com",
+        "twitter": "http://twitter.com/thebetajs",
         "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d"
     }
 }
