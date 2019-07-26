@@ -20,6 +20,8 @@ Scoped.define("module:Textinput", [
             }
         },
 
+        extendables: ['view'],
+
         computed: {
             "preheighttext:value": function() {
                 var s = this.get('value');
@@ -35,7 +37,7 @@ Scoped.define("module:Textinput", [
         },
 
         functions: {
-            click_textarea: function() {
+            focus_textarea: function() {
                 if (document.activeElement.nodeName == 'TEXTAREA') return;
                 else this.element()[1].select();
             },

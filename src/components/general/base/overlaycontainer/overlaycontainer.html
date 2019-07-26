@@ -10,16 +10,18 @@
     <overlaysplit ba-if="{{view.overlaysplit}}">
         <top style="height: {{view.offsetTop}}px"></top>
         <split style="height: {{view.offsetHeight}}px"></split>
-        <bottom></bottom>
+        <bottom ba-if="{{view.offsetHeight}}"></bottom>
     </overlaysplit>
 
-    <overlayinner>
+    <overlayinner
+            ba-tap=""
+            ba-if="{{view.overlay || model.message}}">
 
         <ba-{{view.overlay}}
             ba-event-forward
             ba-noscope>
         <!--<ba-{{view.overlay}} ba-model="{{model}}">-->
-            <message>{{model.message}}</message>
+            <message ba-if="{{model.message}}">{{model.message}}</message>
         </ba-{{view.overlay}}>
 
     </overlayinner>

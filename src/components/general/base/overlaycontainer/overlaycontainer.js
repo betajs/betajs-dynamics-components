@@ -12,7 +12,7 @@ Scoped.define("module:Overlaycontainer", [
 
         attrs: function() {
             return {
-                overlaysplit: true,
+                // overlaysplit: true,
 
                 view: {
                     insertsubview: false,
