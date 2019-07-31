@@ -1,7 +1,7 @@
 <button
         onblur="{{this.execute('blur')}}"
         ba-tap="{{click()}}"
-        class="{{model.icon}}"
+        class="{{model.icon || view.icon}}"
         style="color: {{model.icon_color}}; background: {{model.background}}" >
     <dropdownselect ba-show="{{showdropdown}}">
         <description ba-if="{{view.description}}">
