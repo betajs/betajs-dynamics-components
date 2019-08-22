@@ -21,7 +21,9 @@ baoverlaycontainer, ba-overlaycontainer {
   }
 
   .overlaysplit {
-    background: none !important;
+    //TODO: ? Which view uses the background: none; ?
+    //In chatsettings we don't want this one?
+    //background: none !important;
 
     overlaysplit {
       @include display-flex;
