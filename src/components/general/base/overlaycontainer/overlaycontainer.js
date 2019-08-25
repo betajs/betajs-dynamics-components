@@ -1,8 +1,9 @@
 Scoped.define("module:Overlaycontainer", [
-    "dynamics:Dynamic"
+    "dynamics:Dynamic",
+    "base:Objs"
 ], [
     "dynamics:Partials.TapPartial"
-], function(Dynamic, scoped) {
+], function(Dynamic, Objs, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
@@ -28,9 +29,10 @@ Scoped.define("module:Overlaycontainer", [
             };
         },
 
+        extendables: ['view'],
+
         create: function() {
-            console.log('Overlaycontainer');
-            console.log(this.get('view'));
+            this.set("view", Objs.tree_extend(this.attrs().view, this.get("view")));
         },
 
         functions: {

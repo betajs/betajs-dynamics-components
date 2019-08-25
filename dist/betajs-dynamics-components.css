@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.94 - 2019-08-15
+betajs-dynamics-components - v0.1.95 - 2019-08-25
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -308,7 +308,6 @@ baoverlaycontainer overlaycontainer, ba-overlaycontainer overlaycontainer {
   left: 0;
   overflow: scroll;
   z-index: 100;
-  background: rgba(0, 0, 0, 0.5);
   display: -webkit-box;
   display: -moz-box;
   display: -ms-flexbox;
@@ -318,38 +317,38 @@ baoverlaycontainer overlaycontainer, ba-overlaycontainer overlaycontainer {
     background: white;
     border-radius: 2px;
     padding: 10px; }
-baoverlaycontainer .overlaysplit, ba-overlaycontainer .overlaysplit {
-  background: none !important; }
-  baoverlaycontainer .overlaysplit overlaysplit, ba-overlaycontainer .overlaysplit overlaysplit {
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    display: flex;
-    -webkit-flex-direction: column;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    -webkit-box-flex: 1 1 0;
-    -moz-box-flex: 1 1 0;
-    -webkit-flex: 1 1 0;
-    -ms-flex: 1 1 0;
-    flex: 1 1 0; }
-    baoverlaycontainer .overlaysplit overlaysplit top, ba-overlaycontainer .overlaysplit overlaysplit top {
-      background: rgba(0, 0, 0, 0.5); }
-    baoverlaycontainer .overlaysplit overlaysplit bottom, ba-overlaycontainer .overlaysplit overlaysplit bottom {
-      -webkit-box-flex: 2 1 0;
-      -moz-box-flex: 2 1 0;
-      -webkit-flex: 2 1 0;
-      -ms-flex: 2 1 0;
-      flex: 2 1 0;
-      background: rgba(0, 0, 0, 0.5); }
-  baoverlaycontainer .overlaysplit overlayinner, ba-overlaycontainer .overlaysplit overlayinner {
-    -webkit-box-flex: 1 1 0;
-    -moz-box-flex: 1 1 0;
-    -webkit-flex: 1 1 0;
-    -ms-flex: 1 1 0;
-    flex: 1 1 0;
-    max-width: 50%; }
+baoverlaycontainer .overlaysplit overlaysplit, ba-overlaycontainer .overlaysplit overlaysplit {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0; }
+  baoverlaycontainer .overlaysplit overlaysplit top, ba-overlaycontainer .overlaysplit overlaysplit top {
+    background: rgba(0, 0, 0, 0.5); }
+  baoverlaycontainer .overlaysplit overlaysplit bottom, ba-overlaycontainer .overlaysplit overlaysplit bottom {
+    -webkit-box-flex: 2 1 0;
+    -moz-box-flex: 2 1 0;
+    -webkit-flex: 2 1 0;
+    -ms-flex: 2 1 0;
+    flex: 2 1 0;
+    background: rgba(0, 0, 0, 0.5); }
+baoverlaycontainer .overlaysplit overlayinner, ba-overlaycontainer .overlaysplit overlayinner {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  max-width: 50%; }
+baoverlaycontainer .nosplit, ba-overlaycontainer .nosplit {
+  background: rgba(0, 0, 0, 0.5); }
 baoverlaycontainer .normal overlayinner, ba-overlaycontainer .normal overlayinner {
   margin: auto;
   height: 100%; }

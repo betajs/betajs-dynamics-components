@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.94 - 2019-08-15
+betajs-dynamics-components - v0.1.95 - 2019-08-25
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.94"
+    "version": "0.1.95"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -35,7 +35,7 @@ Scoped.define("module:Dropdown", [
         scoped: scoped
     }, {
 
-        template: "<button\n        onblur=\"{{this.execute('blur')}}\"\n        ba-tap=\"{{click()}}\"\n        class=\"{{view.icon}}\">\n    <dropdown ba-show=\"{{showdropdown}}\">\n        <description ba-if=\"{{view.description}}\">\n            {{view.description}}\n        </description>\n        <ba-{{view.dropdown}}\n            ba-view.listitem=\"{{view.listitem}}\"\n            ba-event:item-click=\"hide_dropdown\"\n            ba-event-forward:dropdown\n            ba-model='{{dropdownmodel}}'\n            ba-listcollection='{{dropdownmodel}}'\n\n        ></ba-{{view.dropdown}}>\n    </dropdown>\n</button>\n",
+        template: "<button\n        onblur=\"{{this.execute('blur')}}\"\n        ba-tap=\"{{click()}}\"\n        class=\"{{view.icon}}\">\n    <dropdown ba-show=\"{{showdropdown}}\">\n        <description ba-if=\"{{view.description}}\">\n            {{view.description}}\n        </description>\n        <ba-{{view.dropdown}}\n            ba-view.listitem=\"{{view.listitem}}\"\n            ba-event:item-click=\"hide_dropdown\"\n            ba-event-forward:dropdown\n            ba-event-forward\n            ba-model='{{dropdownmodel}}'\n            ba-listcollection='{{dropdownmodel}}'\n        ></ba-{{view.dropdown}}>\n    </dropdown>\n</button>\n",
 
         attrs: function() {
             return {
@@ -625,16 +625,17 @@ Scoped.define("module:Externaloverlaycontainer", [
 
 });
 Scoped.define("module:Overlaycontainer", [
-    "dynamics:Dynamic"
+    "dynamics:Dynamic",
+    "base:Objs"
 ], [
     "dynamics:Partials.TapPartial"
-], function(Dynamic, scoped) {
+], function(Dynamic, Objs, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
     }, {
 
-        template: "<overlaycontainer\n    ba-click=\"{{hide_overlay()}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage,\n                overlaysplit: view.overlaysplit\n            }}}\">\n\n    <overlaysplit ba-if=\"{{view.overlaysplit}}\">\n        <top style=\"height: {{view.offsetTop}}px\"></top>\n        <split style=\"height: {{view.offsetHeight}}px\"></split>\n        <bottom ba-if=\"{{view.offsetHeight}}\"></bottom>\n    </overlaysplit>\n\n    <overlayinner\n            ba-click=\"\"\n            ba-if=\"{{view.overlay || model.message}}\">\n\n        <ba-{{view.overlay}}\n            ba-event-forward\n            ba-noscope>\n        <!--<ba-{{view.overlay}} ba-model=\"{{model}}\">-->\n            <message ba-if=\"{{model.message}}\">{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
+        template: "<overlaycontainer\n    ba-click=\"{{hide_overlay()}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage,\n                overlaysplit: view.overlaysplit,\n                nosplit: !view.overlaysplit\n            }}}\">\n\n    <overlaysplit ba-if=\"{{view.overlaysplit}}\">\n        <top style=\"height: {{view.offsetTop}}px\"></top>\n        <split style=\"height: {{view.offsetHeight}}px\"></split>\n        <bottom ba-if=\"{{view.offsetHeight}}\"></bottom>\n    </overlaysplit>\n\n    <overlayinner\n            ba-click=\"\"\n            ba-if=\"{{view.overlay || model.message}}\">\n\n        <ba-{{view.overlay}}\n            ba-event-forward\n            ba-noscope>\n        <!--<ba-{{view.overlay}} ba-model=\"{{model}}\">-->\n            <message ba-if=\"{{model.message}}\">{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
 
         attrs: function() {
             return {
@@ -644,7 +645,7 @@ Scoped.define("module:Overlaycontainer", [
                     insertsubview: false,
                     overlay: "",
                     fullpage: false,
-                    overlaysplit: true
+                    overlaysplit: false
                 },
                 model: {
                     message: "This is a message"
@@ -652,6 +653,12 @@ Scoped.define("module:Overlaycontainer", [
                 value: null,
                 showoverlay: true
             };
+        },
+
+        extendables: ['view'],
+
+        create: function() {
+            this.set("view", Objs.tree_extend(this.attrs().view, this.get("view")));
         },
 
         functions: {
@@ -662,10 +669,11 @@ Scoped.define("module:Overlaycontainer", [
         }
 
     }).registerFunctions({
-        /**/"hide_overlay()": function (obj) { with (obj) { return hide_overlay(); } }, "showoverlay": function (obj) { with (obj) { return showoverlay; } }, "{\n                normal : !view.fullpage,\n                fullpage : view.fullpage,\n                overlaysplit: view.overlaysplit\n            }": function (obj) { with (obj) { return {
+        /**/"hide_overlay()": function (obj) { with (obj) { return hide_overlay(); } }, "showoverlay": function (obj) { with (obj) { return showoverlay; } }, "{\n                normal : !view.fullpage,\n                fullpage : view.fullpage,\n                overlaysplit: view.overlaysplit,\n                nosplit: !view.overlaysplit\n            }": function (obj) { with (obj) { return {
                 normal : !view.fullpage,
                 fullpage : view.fullpage,
-                overlaysplit: view.overlaysplit
+                overlaysplit: view.overlaysplit,
+                nosplit: !view.overlaysplit
             }; } }, "view.overlaysplit": function (obj) { with (obj) { return view.overlaysplit; } }, "view.offsetTop": function (obj) { with (obj) { return view.offsetTop; } }, "view.offsetHeight": function (obj) { with (obj) { return view.offsetHeight; } }, "view.overlay || model.message": function (obj) { with (obj) { return view.overlay || model.message; } }, "view.overlay": function (obj) { with (obj) { return view.overlay; } }, "model.message": function (obj) { with (obj) { return model.message; } }/**/
     }).register();
 
@@ -1253,7 +1261,7 @@ Scoped.define("module:Titledlist", [
         scoped: scoped
     }, {
 
-        template: "\n<ba-{{view.titleitem}}\n    ba-click=\"{{click_title()}}\"\n    ba-event-forward:title=\"{{[]}}\"\n    ba-model=\"{{model.title_model}}\">{{model.title_model.value}}</ba-{{view.titleitem}}>\n\n<ba-list\n        ba-noscope\n        ba-event-forward=\"{{[]}}\"\n        ba-show=\"{{!collapsed}}\">\n\n</ba-list>\n",
+        template: "\n<ba-{{view.titleitem}}\n    ba-click=\"{{click_title()}}\"\n    ba-event-forward:title=\"{{[]}}\"\n    ba-model=\"{{model.title_model}}\">{{model.title_model.value}}</ba-{{view.titleitem}}>\n\n<ba-list\n        ba-noscope\n        ba-event-forward\n        ba-show=\"{{!collapsed}}\">\n\n</ba-list>\n",
 
         attrs: {
             model: {
