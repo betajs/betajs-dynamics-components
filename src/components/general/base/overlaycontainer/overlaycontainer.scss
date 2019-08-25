@@ -9,7 +9,6 @@ baoverlaycontainer, ba-overlaycontainer {
     left: 0;
     overflow: scroll;
     z-index: 100;
-    background: rgba(0, 0, 0, 0.5);
 
     @include display-flex;
 
@@ -40,6 +39,8 @@ baoverlaycontainer, ba-overlaycontainer {
       max-width: 50%;
     }
   }
+
+  .nosplit {background: rgba(0, 0, 0, 0.5)}
 
   .normal {
     overlayinner {

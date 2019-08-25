@@ -18,7 +18,7 @@ Scoped.define("module:Overlaycontainer", [
                     insertsubview: false,
                     overlay: "",
                     fullpage: false,
-                    overlaysplit: true
+                    overlaysplit: false
                 },
                 model: {
                     message: "This is a message"
@@ -26,6 +26,11 @@ Scoped.define("module:Overlaycontainer", [
                 value: null,
                 showoverlay: true
             };
+        },
+
+        create: function() {
+            console.log('Overlaycontainer');
+            console.log(this.get('view'));
         },
 
         functions: {
