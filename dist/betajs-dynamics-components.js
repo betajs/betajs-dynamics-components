@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.95 - 2019-08-25
+betajs-dynamics-components - v0.1.96 - 2019-08-27
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1006,7 +1006,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.95 - 2019-08-25
+betajs-dynamics-components - v0.1.96 - 2019-08-27
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1021,7 +1021,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.95"
+    "version": "0.1.96"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1752,6 +1752,34 @@ Scoped.define("module:Clickcontainer", [
 
         functions: {
             click: function() {
+                this.trigger('clickcontainerclick', this.get('model'));
+            }
+        }
+
+    }).register();
+
+});
+Scoped.define("module:Multiselectcontainer", [
+    "dynamics:Dynamic"
+], function(Dynamic, scoped) {
+
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
+
+        template: "\n<multiselectcontainer ba-click=\"click()\">\n    <selecticon ba-class=\"{{{\n        'icon-radio_button_unchecked' : !selected,\n        'icon-lens' : selected\n    }}}\"></selecticon>\n    <ba-{{view.inner}}\n        class=\"container\"\n        ba-noscope\n    ></ba-{{view.inner}}>\n</multiselectcontainer>\n\n",
+
+        attrs: {
+            selected: false,
+            view: {
+                inner: 'eventitem'
+            }
+        },
+
+        functions: {
+            click: function() {
+                console.log('Multiselectcontainer');
+                this.flipProp('selected');
                 this.trigger('clickcontainerclick', this.get('model'));
             }
         }

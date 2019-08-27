@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.95 - 2019-08-25
+betajs-dynamics-components - v0.1.96 - 2019-08-27
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -388,6 +388,33 @@ ba-clickcontainer {
   display: -ms-flexbox;
   display: -webkit-flex;
   display: flex; }
+
+ba-multiselectcontainer {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex; }
+  ba-multiselectcontainer multiselectcontainer {
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex; }
+    ba-multiselectcontainer multiselectcontainer selecticon {
+      -webkit-box-flex: 0 0 50px;
+      -moz-box-flex: 0 0 50px;
+      -webkit-flex: 0 0 50px;
+      -ms-flex: 0 0 50px;
+      flex: 0 0 50px;
+      line-height: 50px;
+      font-size: 18px; }
+    ba-multiselectcontainer multiselectcontainer .container {
+      -webkit-box-flex: 1 1 0;
+      -moz-box-flex: 1 1 0;
+      -webkit-flex: 1 1 0;
+      -ms-flex: 1 1 0;
+      flex: 1 1 0; }
 
 ba-removableclickcontainer removableclickcontainer {
   display: -webkit-box;

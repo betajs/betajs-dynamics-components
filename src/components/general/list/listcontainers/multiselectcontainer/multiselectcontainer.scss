@@ -1,0 +1,15 @@
+
+ba-multiselectcontainer {
+  @include display-flex;
+
+  multiselectcontainer {
+    @include display-flex;
+
+    selecticon {
+      @include flex(0 0 $listitemheight);
+      line-height: $listitemheight;
+      font-size: 18px;
+    }
+    .container {@include flex(1 1 0)}
+  }
+}

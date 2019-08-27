@@ -1,0 +1,12 @@
+
+<multiselectcontainer ba-click="click()">
+    <selecticon ba-class="{{{
+        'icon-radio_button_unchecked' : !selected,
+        'icon-lens' : selected
+    }}}"></selecticon>
+    <ba-{{view.inner}}
+        class="container"
+        ba-noscope
+    ></ba-{{view.inner}}>
+</multiselectcontainer>
+
