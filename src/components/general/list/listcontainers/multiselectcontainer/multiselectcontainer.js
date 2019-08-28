@@ -17,9 +17,8 @@ Scoped.define("module:Multiselectcontainer", [
 
         functions: {
             click: function() {
-                console.log('Multiselectcontainer');
                 this.flipProp('selected');
-                this.trigger('clickcontainerclick', this.get('model'));
+                this.trigger('multiselect');
             }
         }
 

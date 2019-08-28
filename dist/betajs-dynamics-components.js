@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.96 - 2019-08-27
+betajs-dynamics-components - v0.1.97 - 2019-08-28
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1006,7 +1006,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.96 - 2019-08-27
+betajs-dynamics-components - v0.1.97 - 2019-08-28
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1021,7 +1021,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.96"
+    "version": "0.1.97"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1778,9 +1778,8 @@ Scoped.define("module:Multiselectcontainer", [
 
         functions: {
             click: function() {
-                console.log('Multiselectcontainer');
                 this.flipProp('selected');
-                this.trigger('clickcontainerclick', this.get('model'));
+                this.trigger('multiselect');
             }
         }
 
