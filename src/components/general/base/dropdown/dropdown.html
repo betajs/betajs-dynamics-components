@@ -1,7 +1,7 @@
 <button
         onblur="{{this.execute('blur')}}"
         ba-tap="{{click()}}"
-        class="{{view.icon}}">
+        class="{{showdropdown ? 'icon-angle-up' : view.icon}}">
     <dropdown ba-show="{{showdropdown}}">
         <description ba-if="{{view.description}}">
             {{view.description}}

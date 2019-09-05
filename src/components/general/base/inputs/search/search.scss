@@ -1,5 +1,5 @@
 
-$searchboxheight: 36px!default;
+$searchboxheight: 50px!default;
 $spinkit-size: 16px !default;
 
 //Layout
@@ -10,10 +10,17 @@ ba-search {
 
   div {
     @include flex(1 1 0);
+    @include display-flex;
+
     input {
+      @include flex(1 1 0);
       width: 100%;
       height: $searchboxheight;
       padding: 0 5px 0 0;
+    }
+    span {
+      @include flex(0 0 $searchboxheight);
+      color: $grey3;
     }
   }
 

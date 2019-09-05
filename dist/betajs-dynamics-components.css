@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.98 - 2019-09-01
+betajs-dynamics-components - v0.1.100 - 2019-09-05
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -227,7 +227,7 @@ ba-scrollpicker {
       border-top: 1px solid grey; }
 
 ba-search {
-  height: 36px;
+  height: 50px;
   -webkit-box-flex: 1 1 0;
   -moz-box-flex: 1 1 0;
   -webkit-flex: 1 1 0;
@@ -243,11 +243,28 @@ ba-search {
     -moz-box-flex: 1 1 0;
     -webkit-flex: 1 1 0;
     -ms-flex: 1 1 0;
-    flex: 1 1 0; }
+    flex: 1 1 0;
+    display: -webkit-box;
+    display: -moz-box;
+    display: -ms-flexbox;
+    display: -webkit-flex;
+    display: flex; }
     ba-search div input {
+      -webkit-box-flex: 1 1 0;
+      -moz-box-flex: 1 1 0;
+      -webkit-flex: 1 1 0;
+      -ms-flex: 1 1 0;
+      flex: 1 1 0;
       width: 100%;
-      height: 36px;
+      height: 50px;
       padding: 0 5px 0 0; }
+    ba-search div span {
+      -webkit-box-flex: 0 0 50px;
+      -moz-box-flex: 0 0 50px;
+      -webkit-flex: 0 0 50px;
+      -ms-flex: 0 0 50px;
+      flex: 0 0 50px;
+      color: #777; }
   ba-search ba-loading, ba-search icon, ba-search ba-dropdown {
     -webkit-box-flex: 0 0 50px;
     -moz-box-flex: 0 0 50px;
@@ -255,10 +272,10 @@ ba-search {
     -ms-flex: 0 0 50px;
     flex: 0 0 50px; }
   ba-search icon {
-    line-height: 36px;
+    line-height: 50px;
     text-align: center; }
   ba-search ba-loading .sk-circle {
-    margin: 10px auto; }
+    margin: 17px auto; }
 
 ba-textinput {
   -webkit-box-flex: 1 1 0;

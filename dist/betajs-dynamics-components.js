@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.98 - 2019-09-01
+betajs-dynamics-components - v0.1.100 - 2019-09-05
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1006,7 +1006,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.98 - 2019-09-01
+betajs-dynamics-components - v0.1.100 - 2019-09-05
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1021,7 +1021,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.98"
+    "version": "0.1.100"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1042,7 +1042,7 @@ Scoped.define("module:Dropdown", [
         scoped: scoped
     }, {
 
-        template: "<button\n        onblur=\"{{this.execute('blur')}}\"\n        ba-tap=\"{{click()}}\"\n        class=\"{{view.icon}}\">\n    <dropdown ba-show=\"{{showdropdown}}\">\n        <description ba-if=\"{{view.description}}\">\n            {{view.description}}\n        </description>\n        <ba-{{view.dropdown}}\n            ba-view.listitem=\"{{view.listitem}}\"\n            ba-event:item-click=\"hide_dropdown\"\n            ba-event-forward:dropdown\n            ba-event-forward\n            ba-model='{{dropdownmodel}}'\n            ba-listcollection='{{dropdownmodel}}'\n        ></ba-{{view.dropdown}}>\n    </dropdown>\n</button>\n",
+        template: "<button\n        onblur=\"{{this.execute('blur')}}\"\n        ba-tap=\"{{click()}}\"\n        class=\"{{showdropdown ? 'icon-angle-up' : view.icon}}\">\n    <dropdown ba-show=\"{{showdropdown}}\">\n        <description ba-if=\"{{view.description}}\">\n            {{view.description}}\n        </description>\n        <ba-{{view.dropdown}}\n            ba-view.listitem=\"{{view.listitem}}\"\n            ba-event:item-click=\"hide_dropdown\"\n            ba-event-forward:dropdown\n            ba-event-forward\n            ba-model='{{dropdownmodel}}'\n            ba-listcollection='{{dropdownmodel}}'\n        ></ba-{{view.dropdown}}>\n    </dropdown>\n</button>\n",
 
         attrs: function() {
             return {
@@ -1079,7 +1079,7 @@ Scoped.define("module:Dropdown", [
         }
 
     }).registerFunctions({
-        /**/"this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "click()": function (obj) { with (obj) { return click(); } }, "view.icon": function (obj) { with (obj) { return view.icon; } }, "showdropdown": function (obj) { with (obj) { return showdropdown; } }, "view.description": function (obj) { with (obj) { return view.description; } }, "view.dropdown": function (obj) { with (obj) { return view.dropdown; } }, "view.listitem": function (obj) { with (obj) { return view.listitem; } }, "dropdownmodel": function (obj) { with (obj) { return dropdownmodel; } }/**/
+        /**/"this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "click()": function (obj) { with (obj) { return click(); } }, "showdropdown ? 'icon-angle-up' : view.icon": function (obj) { with (obj) { return showdropdown ? 'icon-angle-up' : view.icon; } }, "showdropdown": function (obj) { with (obj) { return showdropdown; } }, "view.description": function (obj) { with (obj) { return view.description; } }, "view.dropdown": function (obj) { with (obj) { return view.dropdown; } }, "view.listitem": function (obj) { with (obj) { return view.listitem; } }, "dropdownmodel": function (obj) { with (obj) { return dropdownmodel; } }/**/
     }).register();
 
 });
@@ -1505,7 +1505,7 @@ Scoped.define("module:Search", [
         scoped: scoped
     }, {
 
-        template: "\n<icon\n        ba-if=\"{{!searching}}\"\n        class=\"icon-search\"\n></icon>\n\n<ba-loading ba-if=\"{{searching}}\"></ba-loading>\n\n<div>\n    <input\n            onfocus=\"{{this.execute('onfocus')}}\"\n            onblur=\"{{this.execute('onblur')}}\"\n            placeholder=\"{{view.placeholder || ''}}\"\n            value=\"{{=value}}\"\n    />\n</div>\n\n<ba-{{view.searchbuttons}}\n        ba-if=\"{{nosearch}}\"\n        ba-event-forward\n></ba-{{view.searchbuttons}}>\n\n<ba-dropdown\n        ba-if=\"{{view.filter_visible}}\"\n        ba-event:~dropdown-item-click=\"searchdropdown-click\"\n        ba-view.icon=\"icon-filter\"\n        ba-dropdownmodel=\"{{view.dropdownmodel}}\"\n></ba-dropdown>\n",
+        template: "\n<icon\n        ba-if=\"{{!searching}}\"\n        class=\"icon-search\"\n></icon>\n\n<ba-loading ba-if=\"{{searching}}\"></ba-loading>\n\n<div>\n    <input\n            onfocus=\"{{this.execute('onfocus')}}\"\n            onblur=\"{{this.execute('onblur')}}\"\n            placeholder=\"{{view.placeholder || ''}}\"\n            value=\"{{=value}}\"\n    />\n    <span\n            class=\"icon-remove\"\n            ba-if=\"{{value}}\"\n            ba-tap=\"{{clearsearch()}}\"\n    ></span>\n</div>\n\n<ba-{{view.searchbuttons}}\n        ba-if=\"{{nosearch}}\"\n        ba-event-forward\n></ba-{{view.searchbuttons}}>\n\n<ba-dropdown\n        ba-if=\"{{view.filter_visible}}\"\n        ba-event:~dropdown-item-click=\"searchdropdown-click\"\n        ba-view.icon=\"icon-filter\"\n        ba-dropdownmodel=\"{{view.dropdownmodel}}\"\n></ba-dropdown>\n",
 
         attrs: {
             value: "",
@@ -1533,11 +1533,14 @@ Scoped.define("module:Search", [
             },
             onblur: function() {
                 this.set('nosearch', true);
+            },
+            clearsearch: function() {
+                this.set('value', '');
             }
         }
 
     }).registerFunctions({
-        /**/"!searching": function (obj) { with (obj) { return !searching; } }, "searching": function (obj) { with (obj) { return searching; } }, "this.execute('onfocus')": function (obj) { with (obj) { return this.execute('onfocus'); } }, "this.execute('onblur')": function (obj) { with (obj) { return this.execute('onblur'); } }, "view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }, "value": function (obj) { with (obj) { return value; } }, "view.searchbuttons": function (obj) { with (obj) { return view.searchbuttons; } }, "nosearch": function (obj) { with (obj) { return nosearch; } }, "view.filter_visible": function (obj) { with (obj) { return view.filter_visible; } }, "view.dropdownmodel": function (obj) { with (obj) { return view.dropdownmodel; } }/**/
+        /**/"!searching": function (obj) { with (obj) { return !searching; } }, "searching": function (obj) { with (obj) { return searching; } }, "this.execute('onfocus')": function (obj) { with (obj) { return this.execute('onfocus'); } }, "this.execute('onblur')": function (obj) { with (obj) { return this.execute('onblur'); } }, "view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }, "value": function (obj) { with (obj) { return value; } }, "clearsearch()": function (obj) { with (obj) { return clearsearch(); } }, "view.searchbuttons": function (obj) { with (obj) { return view.searchbuttons; } }, "nosearch": function (obj) { with (obj) { return nosearch; } }, "view.filter_visible": function (obj) { with (obj) { return view.filter_visible; } }, "view.dropdownmodel": function (obj) { with (obj) { return view.dropdownmodel; } }/**/
     }).register();
 
 });
@@ -1611,6 +1614,14 @@ Scoped.define("module:Externaloverlaycontainer", [
                 // intentionally written differently
                 var element = document.createElement("baoverlaycontainer");
 
+                var anchorChildren = document.getElementsByTagName(options.anchor)[0].children;
+                for (var i = 0; i < anchorChildren.length; i++) {
+                    if (anchorChildren[i].tagName.toLowerCase() == 'baoverlaycontainer') {
+                        console.log('Externaloverlaycontainer - Break, not multiple containers');
+                        return;
+                    }
+                }
+
                 document.querySelector(options.anchor).appendChild(element);
 
                 delete options.anchor;
@@ -1642,7 +1653,7 @@ Scoped.define("module:Overlaycontainer", [
         scoped: scoped
     }, {
 
-        template: "<overlaycontainer\n    ba-click=\"{{hide_overlay()}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage,\n                overlaysplit: view.overlaysplit,\n                nosplit: !view.overlaysplit\n            }}}\">\n\n    <overlaysplit ba-if=\"{{view.overlaysplit}}\">\n        <top style=\"height: {{view.offsetTop}}px\"></top>\n        <split style=\"height: {{view.offsetHeight}}px\"></split>\n        <bottom ba-if=\"{{view.offsetHeight}}\"></bottom>\n    </overlaysplit>\n\n    <overlayinner\n            ba-click=\"\"\n            ba-if=\"{{view.overlay || model.message}}\">\n\n        <ba-{{view.overlay}}\n            ba-event-forward\n            ba-event:hide-overlay='hide_overlay'\n            ba-noscope>\n        <!--<ba-{{view.overlay}} ba-model=\"{{model}}\">-->\n            <message ba-if=\"{{model.message}}\">{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
+        template: "<overlaycontainer\n    ba-click=\"{{hide_overlay()}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage,\n                overlaysplit: view.overlaysplit,\n                nosplit: !view.overlaysplit\n            }}}\">\n\n    <overlaysplit ba-if=\"{{view.overlaysplit}}\">\n        <top style=\"height: {{view.offsetTop}}px\"></top>\n        <ba-{{view.splitinsert}}\n            ba-if={{view.splitinsert}}\n            ba-model={{model}}\n        ></ba-{{view.splitinsert}}>\n        <split style=\"height: {{view.offsetHeight}}px\"></split>\n        <bottom ba-if=\"{{view.offsetHeight}}\"></bottom>\n    </overlaysplit>\n\n    <overlayinner\n            ba-click=\"\"\n            ba-if=\"{{view.overlay || model.message}}\">\n\n        <ba-{{view.overlay}}\n            ba-event-forward\n            ba-event:hide-overlay='hide_overlay'\n            ba-noscope>\n        <!--<ba-{{view.overlay}} ba-model=\"{{model}}\">-->\n            <message ba-if=\"{{model.message}}\">{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
 
         attrs: function() {
             return {
@@ -1664,7 +1675,6 @@ Scoped.define("module:Overlaycontainer", [
 
         events: {
             "hide-overlay": function() {
-                console.log('Hide Overlay');
                 this.execute('hide_overlay');
             }
         },
@@ -1688,7 +1698,7 @@ Scoped.define("module:Overlaycontainer", [
                 fullpage : view.fullpage,
                 overlaysplit: view.overlaysplit,
                 nosplit: !view.overlaysplit
-            }; } }, "view.overlaysplit": function (obj) { with (obj) { return view.overlaysplit; } }, "view.offsetTop": function (obj) { with (obj) { return view.offsetTop; } }, "view.offsetHeight": function (obj) { with (obj) { return view.offsetHeight; } }, "view.overlay || model.message": function (obj) { with (obj) { return view.overlay || model.message; } }, "view.overlay": function (obj) { with (obj) { return view.overlay; } }, "model.message": function (obj) { with (obj) { return model.message; } }/**/
+            }; } }, "view.overlaysplit": function (obj) { with (obj) { return view.overlaysplit; } }, "view.offsetTop": function (obj) { with (obj) { return view.offsetTop; } }, "view.splitinsert": function (obj) { with (obj) { return view.splitinsert; } }, "model": function (obj) { with (obj) { return model; } }, "view.offsetHeight": function (obj) { with (obj) { return view.offsetHeight; } }, "view.overlay || model.message": function (obj) { with (obj) { return view.overlay || model.message; } }, "view.overlay": function (obj) { with (obj) { return view.overlay; } }, "model.message": function (obj) { with (obj) { return model.message; } }/**/
     }).register();
 
 });

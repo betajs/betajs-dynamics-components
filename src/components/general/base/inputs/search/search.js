@@ -36,6 +36,9 @@ Scoped.define("module:Search", [
             },
             onblur: function() {
                 this.set('nosearch', true);
+            },
+            clearsearch: function() {
+                this.set('value', '');
             }
         }
 

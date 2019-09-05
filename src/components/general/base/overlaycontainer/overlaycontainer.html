@@ -10,6 +10,10 @@
 
     <overlaysplit ba-if="{{view.overlaysplit}}">
         <top style="height: {{view.offsetTop}}px"></top>
+        <ba-{{view.splitinsert}}
+            ba-if={{view.splitinsert}}
+            ba-model={{model}}
+        ></ba-{{view.splitinsert}}>
         <split style="height: {{view.offsetHeight}}px"></split>
         <bottom ba-if="{{view.offsetHeight}}"></bottom>
     </overlaysplit>

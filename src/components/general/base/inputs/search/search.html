@@ -13,6 +13,11 @@
             placeholder="{{view.placeholder || ''}}"
             value="{{=value}}"
     />
+    <span
+            class="icon-remove"
+            ba-if="{{value}}"
+            ba-tap="{{clearsearch()}}"
+    ></span>
 </div>
 
 <ba-{{view.searchbuttons}}
