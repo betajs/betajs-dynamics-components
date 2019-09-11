@@ -13,10 +13,8 @@ Scoped.define("module:Externaloverlaycontainer", [
 
                 var anchorChildren = document.getElementsByTagName(options.anchor)[0].children;
                 for (var i = 0; i < anchorChildren.length; i++) {
-                    if (anchorChildren[i].tagName.toLowerCase() == 'baoverlaycontainer') {
-                        console.log('Externaloverlaycontainer - Break, not multiple containers');
+                    if (anchorChildren[i].tagName.toLowerCase() == 'baoverlaycontainer')
                         return;
-                    }
                 }
 
                 document.querySelector(options.anchor).appendChild(element);

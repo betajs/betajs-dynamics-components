@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.100 - 2019-09-05
+betajs-dynamics-components - v0.1.101 - 2019-09-11
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.100"
+    "version": "0.1.101"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -609,10 +609,8 @@ Scoped.define("module:Externaloverlaycontainer", [
 
                 var anchorChildren = document.getElementsByTagName(options.anchor)[0].children;
                 for (var i = 0; i < anchorChildren.length; i++) {
-                    if (anchorChildren[i].tagName.toLowerCase() == 'baoverlaycontainer') {
-                        console.log('Externaloverlaycontainer - Break, not multiple containers');
+                    if (anchorChildren[i].tagName.toLowerCase() == 'baoverlaycontainer')
                         return;
-                    }
                 }
 
                 document.querySelector(options.anchor).appendChild(element);
@@ -646,7 +644,7 @@ Scoped.define("module:Overlaycontainer", [
         scoped: scoped
     }, {
 
-        template: "<overlaycontainer\n    ba-click=\"{{hide_overlay()}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage,\n                overlaysplit: view.overlaysplit,\n                nosplit: !view.overlaysplit\n            }}}\">\n\n    <overlaysplit ba-if=\"{{view.overlaysplit}}\">\n        <top style=\"height: {{view.offsetTop}}px\"></top>\n        <ba-{{view.splitinsert}}\n            ba-if={{view.splitinsert}}\n            ba-model={{model}}\n        ></ba-{{view.splitinsert}}>\n        <split style=\"height: {{view.offsetHeight}}px\"></split>\n        <bottom ba-if=\"{{view.offsetHeight}}\"></bottom>\n    </overlaysplit>\n\n    <overlayinner\n            ba-click=\"\"\n            ba-if=\"{{view.overlay || model.message}}\">\n\n        <ba-{{view.overlay}}\n            ba-event-forward\n            ba-event:hide-overlay='hide_overlay'\n            ba-noscope>\n        <!--<ba-{{view.overlay}} ba-model=\"{{model}}\">-->\n            <message ba-if=\"{{model.message}}\">{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
+        template: "<overlaycontainer\n    ba-click=\"{{check_split()}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage,\n                overlaysplit: view.overlaysplit,\n                nosplit: !view.overlaysplit\n            }}}\">\n\n    <overlaysplit ba-if=\"{{view.overlaysplit}}\">\n        <top ba-click=\"{{hide_overlay()}}\"\n                 style=\"height: {{view.offsetTop}}px\"></top>\n        <ba-{{view.splitinsert}}\n            ba-if={{view.splitinsert}}\n            ba-model={{model}}\n        ></ba-{{view.splitinsert}}>\n        <split style=\"height: {{view.offsetHeight}}px\"></split>\n        <bottom ba-click=\"{{hide_overlay()}}\"\n                    ba-if=\"{{view.offsetHeight}}\"></bottom>\n    </overlaysplit>\n\n    <overlayinner\n            ba-click=\"\"\n            ba-if=\"{{view.overlay || model.message}}\">\n\n        <ba-{{view.overlay}}\n            ba-event-forward\n            ba-event:hide-overlay='hide_overlay'\n            ba-noscope>\n        <!--<ba-{{view.overlay}} ba-model=\"{{model}}\">-->\n            <message ba-if=\"{{model.message}}\">{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
 
         attrs: function() {
             return {
@@ -679,6 +677,12 @@ Scoped.define("module:Overlaycontainer", [
         },
 
         functions: {
+            check_split: function() {
+                if (this.getProp('view.overlaysplit'))
+                    return;
+                else
+                    this.execute('hide_overlay');
+            },
             hide_overlay: function() {
                 this.set('showoverlay', false);
                 this.trigger('hide_overlay');
@@ -686,12 +690,12 @@ Scoped.define("module:Overlaycontainer", [
         }
 
     }).registerFunctions({
-        /**/"hide_overlay()": function (obj) { with (obj) { return hide_overlay(); } }, "showoverlay": function (obj) { with (obj) { return showoverlay; } }, "{\n                normal : !view.fullpage,\n                fullpage : view.fullpage,\n                overlaysplit: view.overlaysplit,\n                nosplit: !view.overlaysplit\n            }": function (obj) { with (obj) { return {
+        /**/"check_split()": function (obj) { with (obj) { return check_split(); } }, "showoverlay": function (obj) { with (obj) { return showoverlay; } }, "{\n                normal : !view.fullpage,\n                fullpage : view.fullpage,\n                overlaysplit: view.overlaysplit,\n                nosplit: !view.overlaysplit\n            }": function (obj) { with (obj) { return {
                 normal : !view.fullpage,
                 fullpage : view.fullpage,
                 overlaysplit: view.overlaysplit,
                 nosplit: !view.overlaysplit
-            }; } }, "view.overlaysplit": function (obj) { with (obj) { return view.overlaysplit; } }, "view.offsetTop": function (obj) { with (obj) { return view.offsetTop; } }, "view.splitinsert": function (obj) { with (obj) { return view.splitinsert; } }, "model": function (obj) { with (obj) { return model; } }, "view.offsetHeight": function (obj) { with (obj) { return view.offsetHeight; } }, "view.overlay || model.message": function (obj) { with (obj) { return view.overlay || model.message; } }, "view.overlay": function (obj) { with (obj) { return view.overlay; } }, "model.message": function (obj) { with (obj) { return model.message; } }/**/
+            }; } }, "view.overlaysplit": function (obj) { with (obj) { return view.overlaysplit; } }, "hide_overlay()": function (obj) { with (obj) { return hide_overlay(); } }, "view.offsetTop": function (obj) { with (obj) { return view.offsetTop; } }, "view.splitinsert": function (obj) { with (obj) { return view.splitinsert; } }, "model": function (obj) { with (obj) { return model; } }, "view.offsetHeight": function (obj) { with (obj) { return view.offsetHeight; } }, "view.overlay || model.message": function (obj) { with (obj) { return view.overlay || model.message; } }, "view.overlay": function (obj) { with (obj) { return view.overlay; } }, "model.message": function (obj) { with (obj) { return model.message; } }/**/
     }).register();
 
 });
