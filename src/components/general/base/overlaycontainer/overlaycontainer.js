@@ -43,8 +43,7 @@ Scoped.define("module:Overlaycontainer", [
 
         functions: {
             check_split: function() {
-                if (this.getProp('view.overlaysplit'))
-                    return;
+                if (this.getProp('view.overlaysplit')) return;
                 else
                     this.execute('hide_overlay');
             },

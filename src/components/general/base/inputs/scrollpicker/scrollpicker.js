@@ -101,6 +101,9 @@ Scoped.define("module:Scrollpicker", [
                 this.set("value", this.getValueByElement(element));
                 this.__ignoreValue = false;
             }, this);
+
+            console.log('Scrollpicker - after activate');
+            console.log(this.get('value'));
         }
 
     }).registerFunctions({

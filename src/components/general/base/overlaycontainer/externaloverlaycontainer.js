@@ -32,7 +32,6 @@ Scoped.define("module:Externaloverlaycontainer", [
                 }, this);
             }
 
-
         };
     });
 

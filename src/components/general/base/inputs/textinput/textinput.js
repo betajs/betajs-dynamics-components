@@ -38,12 +38,12 @@ Scoped.define("module:Textinput", [
 
         functions: {
             focus_textarea: function() {
+                console.log('Textinput - Focus Textarea');
                 if (document.activeElement.nodeName == 'TEXTAREA') return;
                 else this.element()[1].select();
             },
             blur: function() {
-                this.trigger('blur');
-                this.element()[1].blur();
+                this.trigger('onblur');
             },
             onfocus: function() {
                 this.trigger('onfocus');

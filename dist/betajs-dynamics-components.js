@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.101 - 2019-09-11
+betajs-dynamics-components - v0.1.102 - 2019-09-16
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1006,7 +1006,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.101 - 2019-09-11
+betajs-dynamics-components - v0.1.102 - 2019-09-16
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1021,7 +1021,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.101"
+    "version": "0.1.102"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1486,6 +1486,9 @@ Scoped.define("module:Scrollpicker", [
                 this.set("value", this.getValueByElement(element));
                 this.__ignoreValue = false;
             }, this);
+
+            console.log('Scrollpicker - after activate');
+            console.log(this.get('value'));
         }
 
     }).registerFunctions({
@@ -1554,7 +1557,7 @@ Scoped.define("module:Textinput", [
         scoped: scoped
     }, {
 
-        template: "<placeholder\n        ba-if=\"{{view.placeholder_visible && !value}}\"\n>{{view.placeholder}}</placeholder>\n\n<!--ba-tap=\"{{focus_textarea()}}\"-->\n<!--onfocus=\"{{this.execute('onfocus')}}\"-->\n<!--onfocusout=\"{{this.execute('blur')}}\"-->\n<textarea\n        onfocus=\"{{this.execute('onfocus')}}\"\n        value=\"{{=value}}\"\n></textarea>\n<pre>{{=preheighttext}}</pre>\n",
+        template: "<placeholder\n        ba-if=\"{{view.placeholder_visible && !value}}\"\n>{{view.placeholder}}</placeholder>\n\n<!--ba-tap=\"{{focus_textarea()}}\"-->\n<!--onfocus=\"{{this.execute('onfocus')}}\"-->\n<!--onfocusout=\"{{this.execute('blur')}}\"-->\n<textarea\n        onfocus=\"{{this.execute('onfocus')}}\"\n        onfocusout=\"{{this.execute('blur')}}\"\n        value=\"{{=value}}\"\n></textarea>\n<pre>{{=preheighttext}}</pre>\n",
 
         attrs: {
             value: null,
@@ -1584,12 +1587,12 @@ Scoped.define("module:Textinput", [
 
         functions: {
             focus_textarea: function() {
+                console.log('Textinput - Focus Textarea');
                 if (document.activeElement.nodeName == 'TEXTAREA') return;
                 else this.element()[1].select();
             },
             blur: function() {
-                this.trigger('blur');
-                this.element()[1].blur();
+                this.trigger('onblur');
             },
             onfocus: function() {
                 this.trigger('onfocus');
@@ -1597,7 +1600,7 @@ Scoped.define("module:Textinput", [
         }
 
     }).registerFunctions({
-        /**/"view.placeholder_visible && !value": function (obj) { with (obj) { return view.placeholder_visible && !value; } }, "view.placeholder": function (obj) { with (obj) { return view.placeholder; } }, "this.execute('onfocus')": function (obj) { with (obj) { return this.execute('onfocus'); } }, "value": function (obj) { with (obj) { return value; } }, "preheighttext": function (obj) { with (obj) { return preheighttext; } }/**/
+        /**/"view.placeholder_visible && !value": function (obj) { with (obj) { return view.placeholder_visible && !value; } }, "view.placeholder": function (obj) { with (obj) { return view.placeholder; } }, "this.execute('onfocus')": function (obj) { with (obj) { return this.execute('onfocus'); } }, "this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "value": function (obj) { with (obj) { return value; } }, "preheighttext": function (obj) { with (obj) { return preheighttext; } }/**/
     }).register();
 
 });
@@ -1634,7 +1637,6 @@ Scoped.define("module:Externaloverlaycontainer", [
 
                 }, this);
             }
-
 
         };
     });
@@ -1685,8 +1687,7 @@ Scoped.define("module:Overlaycontainer", [
 
         functions: {
             check_split: function() {
-                if (this.getProp('view.overlaysplit'))
-                    return;
+                if (this.getProp('view.overlaysplit')) return;
                 else
                     this.execute('hide_overlay');
             },
