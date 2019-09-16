@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.103 - 2019-09-16
+betajs-dynamics-components - v0.1.104 - 2019-09-16
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,7 +14,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.103"
+    "version": "0.1.104"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -542,15 +542,16 @@ Scoped.define("module:Search", [
 });
 Scoped.define("module:Textinput", [
     "dynamics:Dynamic",
+    'base:Async',
     'base:Strings'
 ], [
     "dynamics:Partials.OnPartial"
-], function(Dynamic, Strings, scoped) {
+], function(Dynamic, Async, Strings, scoped) {
     return Dynamic.extend({
         scoped: scoped
     }, {
 
-        template: "<placeholder\n        ba-if=\"{{view.placeholder_visible && !value}}\"\n>{{view.placeholder}}</placeholder>\n\n<!--ba-tap=\"{{focus_textarea()}}\"-->\n<!--onfocus=\"{{this.execute('onfocus')}}\"-->\n<!--onfocusout=\"{{this.execute('blur')}}\"-->\n<textarea\n        onfocus=\"{{this.execute('onfocus')}}\"\n        onfocusout=\"{{this.execute('blur')}}\"\n        value=\"{{=value}}\"\n></textarea>\n<pre>{{=preheighttext}}</pre>\n",
+        template: "<placeholder\n        ba-if=\"{{view.placeholder_visible && !value}}\"\n>{{view.placeholder}}</placeholder>\n\n<!--ba-tap=\"{{focus_textarea()}}\"-->\n<!--onfocus=\"{{this.execute('onfocus')}}\"-->\n<!--onfocusout=\"{{this.execute('blur')}}\"-->\n<textarea\n        onfocus=\"{{this.execute('onfocus')}}\"\n        onfocusout=\"{{this.execute('onblur')}}\"\n        value=\"{{=value}}\"\n></textarea>\n<pre>{{=preheighttext}}</pre>\n",
 
         attrs: {
             value: null,
@@ -579,12 +580,20 @@ Scoped.define("module:Textinput", [
         },
 
         functions: {
+            caretPos: function(position) {
+                if (position)
+                    this.activeElement().querySelector("textarea").selectionStart = position;
+                else
+                    return this.activeElement().querySelector("textarea").selectionStart;
+            },
             focus_textarea: function() {
                 if (document.activeElement.nodeName == 'TEXTAREA') console.log('Textarea already focused');
                 else this.element()[1].select();
             },
             blur: function() {
                 this.element()[1].blur();
+            },
+            onblur: function() {
                 this.trigger('onblur');
             },
             onfocus: function() {
@@ -593,7 +602,7 @@ Scoped.define("module:Textinput", [
         }
 
     }).registerFunctions({
-        /**/"view.placeholder_visible && !value": function (obj) { with (obj) { return view.placeholder_visible && !value; } }, "view.placeholder": function (obj) { with (obj) { return view.placeholder; } }, "this.execute('onfocus')": function (obj) { with (obj) { return this.execute('onfocus'); } }, "this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "value": function (obj) { with (obj) { return value; } }, "preheighttext": function (obj) { with (obj) { return preheighttext; } }/**/
+        /**/"view.placeholder_visible && !value": function (obj) { with (obj) { return view.placeholder_visible && !value; } }, "view.placeholder": function (obj) { with (obj) { return view.placeholder; } }, "this.execute('onfocus')": function (obj) { with (obj) { return this.execute('onfocus'); } }, "this.execute('onblur')": function (obj) { with (obj) { return this.execute('onblur'); } }, "value": function (obj) { with (obj) { return value; } }, "preheighttext": function (obj) { with (obj) { return preheighttext; } }/**/
     }).register();
 
 });
@@ -611,10 +620,12 @@ Scoped.define("module:Externaloverlaycontainer", [
                 var element = document.createElement("baoverlaycontainer");
 
                 var anchorChildren = document.getElementsByTagName(options.anchor)[0].children;
-                for (var i = 0; i < anchorChildren.length; i++) {
-                    if (anchorChildren[i].tagName.toLowerCase() == 'baoverlaycontainer')
-                        return;
-                }
+                if (anchorChildren)
+                    for (var i = 0; i < anchorChildren.length; i++) {
+                        if (anchorChildren[i].tagName.toLowerCase() == 'baoverlaycontainer')
+                            return;
+                    }
+
 
                 document.querySelector(options.anchor).appendChild(element);
 

@@ -12,10 +12,12 @@ Scoped.define("module:Externaloverlaycontainer", [
                 var element = document.createElement("baoverlaycontainer");
 
                 var anchorChildren = document.getElementsByTagName(options.anchor)[0].children;
-                for (var i = 0; i < anchorChildren.length; i++) {
-                    if (anchorChildren[i].tagName.toLowerCase() == 'baoverlaycontainer')
-                        return;
-                }
+                if (anchorChildren)
+                    for (var i = 0; i < anchorChildren.length; i++) {
+                        if (anchorChildren[i].tagName.toLowerCase() == 'baoverlaycontainer')
+                            return;
+                    }
+
 
                 document.querySelector(options.anchor).appendChild(element);
 

@@ -1,9 +1,10 @@
 Scoped.define("module:Textinput", [
     "dynamics:Dynamic",
+    'base:Async',
     'base:Strings'
 ], [
     "dynamics:Partials.OnPartial"
-], function(Dynamic, Strings, scoped) {
+], function(Dynamic, Async, Strings, scoped) {
     return Dynamic.extend({
         scoped: scoped
     }, {
@@ -37,12 +38,20 @@ Scoped.define("module:Textinput", [
         },
 
         functions: {
+            caretPos: function(position) {
+                if (position)
+                    this.activeElement().querySelector("textarea").selectionStart = position;
+                else
+                    return this.activeElement().querySelector("textarea").selectionStart;
+            },
             focus_textarea: function() {
                 if (document.activeElement.nodeName == 'TEXTAREA') console.log('Textarea already focused');
                 else this.element()[1].select();
             },
             blur: function() {
                 this.element()[1].blur();
+            },
+            onblur: function() {
                 this.trigger('onblur');
             },
             onfocus: function() {
