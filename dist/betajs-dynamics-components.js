@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.102 - 2019-09-16
+betajs-dynamics-components - v0.1.103 - 2019-09-16
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1006,7 +1006,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.102 - 2019-09-16
+betajs-dynamics-components - v0.1.103 - 2019-09-16
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1021,7 +1021,7 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.102"
+    "version": "0.1.103"
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1587,11 +1587,11 @@ Scoped.define("module:Textinput", [
 
         functions: {
             focus_textarea: function() {
-                console.log('Textinput - Focus Textarea');
-                if (document.activeElement.nodeName == 'TEXTAREA') return;
+                if (document.activeElement.nodeName == 'TEXTAREA') console.log('Textarea already focused');
                 else this.element()[1].select();
             },
             blur: function() {
+                this.element()[1].blur();
                 this.trigger('onblur');
             },
             onfocus: function() {
