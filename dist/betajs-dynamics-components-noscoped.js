@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.104 - 2019-09-16
+betajs-dynamics-components - v0.1.105 - 2019-09-16
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,7 +14,8 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.104"
+    "version": "0.1.105",
+    "datetime": 1568670157983
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -378,11 +379,12 @@ Scoped.define("module:Input", [
 });
 Scoped.define("module:Scrollpicker", [
     "dynamics:Dynamic",
-    "ui:Interactions.Loopscroll"
+    "ui:Interactions.Loopscroll",
+    "base:Async"
 ], [
     // It has to be a repeat element partial, otherwise whitespace is removed from container
     "dynamics:Partials.RepeatElementPartial"
-], function(Dynamic, Loopscroll, scoped) {
+], function(Dynamic, Loopscroll, Async, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
@@ -473,15 +475,14 @@ Scoped.define("module:Scrollpicker", [
         _afterActivate: function(element) {
             // This is a massive hack.
             this.activeElement().querySelector("[ba-repeat-element]").remove();
-            this._loopScroll().scrollToElement(this.getElementByValue(this.get("value")));
-            this._loopScroll().on("change-current-element", function(element) {
-                this.__ignoreValue = true;
-                this.set("value", this.getValueByElement(element));
-                this.__ignoreValue = false;
+            Async.eventually(function() {
+                this._loopScroll().scrollToElement(this.getElementByValue(this.get("value")));
+                this._loopScroll().on("change-current-element", function(element) {
+                    this.__ignoreValue = true;
+                    this.set("value", this.getValueByElement(element));
+                    this.__ignoreValue = false;
+                }, this);
             }, this);
-
-            console.log('Scrollpicker - after activate');
-            console.log(this.get('value'));
         }
 
     }).registerFunctions({
@@ -551,7 +552,7 @@ Scoped.define("module:Textinput", [
         scoped: scoped
     }, {
 
-        template: "<placeholder\n        ba-if=\"{{view.placeholder_visible && !value}}\"\n>{{view.placeholder}}</placeholder>\n\n<!--ba-tap=\"{{focus_textarea()}}\"-->\n<!--onfocus=\"{{this.execute('onfocus')}}\"-->\n<!--onfocusout=\"{{this.execute('blur')}}\"-->\n<textarea\n        onfocus=\"{{this.execute('onfocus')}}\"\n        onfocusout=\"{{this.execute('onblur')}}\"\n        value=\"{{=value}}\"\n></textarea>\n<pre>{{=preheighttext}}</pre>\n",
+        template: "<placeholder\n        ba-if=\"{{view.placeholder_visible && !value}}\"\n>{{view.placeholder}}</placeholder>\n\n\n\n\n<textarea\n        onfocus=\"{{this.execute('onfocus')}}\"\n        onfocusout=\"{{this.execute('onblur')}}\"\n        value=\"{{=value}}\"\n></textarea>\n<pre>{{=preheighttext}}</pre>\n",
 
         attrs: {
             value: null,
@@ -657,7 +658,7 @@ Scoped.define("module:Overlaycontainer", [
         scoped: scoped
     }, {
 
-        template: "<overlaycontainer\n    ba-click=\"{{check_split()}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage,\n                overlaysplit: view.overlaysplit,\n                nosplit: !view.overlaysplit\n            }}}\">\n\n    <overlaysplit ba-if=\"{{view.overlaysplit}}\">\n        <top ba-click=\"{{hide_overlay()}}\"\n                 style=\"height: {{view.offsetTop}}px\"></top>\n        <ba-{{view.splitinsert}}\n            ba-if={{view.splitinsert}}\n            ba-model={{model}}\n        ></ba-{{view.splitinsert}}>\n        <split style=\"height: {{view.offsetHeight}}px\"></split>\n        <bottom ba-click=\"{{hide_overlay()}}\"\n                    ba-if=\"{{view.offsetHeight}}\"></bottom>\n    </overlaysplit>\n\n    <overlayinner\n            ba-click=\"\"\n            ba-if=\"{{view.overlay || model.message}}\">\n\n        <ba-{{view.overlay}}\n            ba-event-forward\n            ba-event:hide-overlay='hide_overlay'\n            ba-noscope>\n        <!--<ba-{{view.overlay}} ba-model=\"{{model}}\">-->\n            <message ba-if=\"{{model.message}}\">{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
+        template: "<overlaycontainer\n    ba-click=\"{{check_split()}}\"\n    ba-if=\"{{showoverlay}}\"\n    ba-class=\"{{{\n                normal : !view.fullpage,\n                fullpage : view.fullpage,\n                overlaysplit: view.overlaysplit,\n                nosplit: !view.overlaysplit\n            }}}\">\n\n    <overlaysplit ba-if=\"{{view.overlaysplit}}\">\n        <top ba-click=\"{{hide_overlay()}}\"\n                 style=\"height: {{view.offsetTop}}px\"></top>\n        <ba-{{view.splitinsert}}\n            ba-if={{view.splitinsert}}\n            ba-model={{model}}\n        ></ba-{{view.splitinsert}}>\n        <split style=\"height: {{view.offsetHeight}}px\"></split>\n        <bottom ba-click=\"{{hide_overlay()}}\"\n                    ba-if=\"{{view.offsetHeight}}\"></bottom>\n    </overlaysplit>\n\n    <overlayinner\n            ba-click=\"\"\n            ba-if=\"{{view.overlay || model.message}}\">\n\n        <ba-{{view.overlay}}\n            ba-event-forward\n            ba-event:hide-overlay='hide_overlay'\n            ba-noscope>\n        \n            <message ba-if=\"{{model.message}}\">{{model.message}}</message>\n        </ba-{{view.overlay}}>\n\n    </overlayinner>\n\n</overlaycontainer>",
 
         attrs: function() {
             return {
@@ -1043,7 +1044,7 @@ Scoped.define("module:List", [
         scoped: scoped
     }, {
 
-        template: "<!--<ba-loadmore ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}\" ba-show=\"{{!loading}}\" ba-event:loadmore=\"moreitemsbackwards\">-->\n<!--</ba-loadmore>-->\n<ba-loading ba-show=\"{{loadmorebackwards && loading}}\">\n</ba-loading>\n\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\"\n      ba-interaction:scroll=\"{{infinite_scroll_options}}\"\n      ba-interaction:droplist=\"{{drop_list_options}}\">\n<!--<list ba-repeat=\"{{collectionitem :: (model.listcollection||listcollection)}}\">-->\n    <!--ba-isselected=\"{{isselected(collectionitem)}}\"-->\n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-experimental=\"{{!!collectionitem.experimental}}\"\n        data-id=\"{{collectionitem.cid()}}\"\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-selection=\"{{=selection}}\"\n        ba-droplist=\"{{droplist}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-itemcontext=\"{{itemContext(collectionitem)}}\"\n        ba-isselected=\"{{isEqual(collectionitem, selected)}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner||{}}}\"\n        ba-model=\"{{collectionitem}}\"\n    ></ba-{{getview(collectionitem)}}>\n\n</list>\n\n<div class=\"doodad\" data-id=\"floater\" style=\"display:none\">\n    <div class=\"inner\" style=\"height: 44px; line-height: 44px; background-color: #EEEEEE\">\n        Move Here\n    </div>\n</div>\n<ba-loadmore\n        ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite'}}\"\n        ba-show=\"{{!loading && collection_count > 0}}\"\n        ba-event:loadmore=\"moreitems\"\n></ba-loadmore>\n<ba-loading ba-show=\"{{loading}}\">\n</ba-loading>\n<div ba-if=\"{{emptymessage && !loading && collection_count === 0}}\">\n    {{emptymessage}}\n</div>",
+        template: "\n\n<ba-loading ba-show=\"{{loadmorebackwards && loading}}\">\n</ba-loading>\n\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\"\n      ba-interaction:scroll=\"{{infinite_scroll_options}}\"\n      ba-interaction:droplist=\"{{drop_list_options}}\">\n\n    \n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-experimental=\"{{!!collectionitem.experimental}}\"\n        data-id=\"{{collectionitem.cid()}}\"\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-selection=\"{{=selection}}\"\n        ba-droplist=\"{{droplist}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-itemcontext=\"{{itemContext(collectionitem)}}\"\n        ba-isselected=\"{{isEqual(collectionitem, selected)}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner||{}}}\"\n        ba-model=\"{{collectionitem}}\"\n    ></ba-{{getview(collectionitem)}}>\n\n</list>\n\n<div class=\"doodad\" data-id=\"floater\" style=\"display:none\">\n    <div class=\"inner\" style=\"height: 44px; line-height: 44px; background-color: #EEEEEE\">\n        Move Here\n    </div>\n</div>\n<ba-loadmore\n        ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite'}}\"\n        ba-show=\"{{!loading && collection_count > 0}}\"\n        ba-event:loadmore=\"moreitems\"\n></ba-loadmore>\n<ba-loading ba-show=\"{{loading}}\">\n</ba-loading>\n<div ba-if=\"{{emptymessage && !loading && collection_count === 0}}\">\n    {{emptymessage}}\n</div>",
 
         attrs: function() {
             return {

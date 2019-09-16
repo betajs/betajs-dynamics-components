@@ -1,10 +1,11 @@
 Scoped.define("module:Scrollpicker", [
     "dynamics:Dynamic",
-    "ui:Interactions.Loopscroll"
+    "ui:Interactions.Loopscroll",
+    "base:Async"
 ], [
     // It has to be a repeat element partial, otherwise whitespace is removed from container
     "dynamics:Partials.RepeatElementPartial"
-], function(Dynamic, Loopscroll, scoped) {
+], function(Dynamic, Loopscroll, Async, scoped) {
 
     return Dynamic.extend({
         scoped: scoped
@@ -95,15 +96,14 @@ Scoped.define("module:Scrollpicker", [
         _afterActivate: function(element) {
             // This is a massive hack.
             this.activeElement().querySelector("[ba-repeat-element]").remove();
-            this._loopScroll().scrollToElement(this.getElementByValue(this.get("value")));
-            this._loopScroll().on("change-current-element", function(element) {
-                this.__ignoreValue = true;
-                this.set("value", this.getValueByElement(element));
-                this.__ignoreValue = false;
+            Async.eventually(function() {
+                this._loopScroll().scrollToElement(this.getElementByValue(this.get("value")));
+                this._loopScroll().on("change-current-element", function(element) {
+                    this.__ignoreValue = true;
+                    this.set("value", this.getValueByElement(element));
+                    this.__ignoreValue = false;
+                }, this);
             }, this);
-
-            console.log('Scrollpicker - after activate');
-            console.log(this.get('value'));
         }
 
     }).registerFunctions({
