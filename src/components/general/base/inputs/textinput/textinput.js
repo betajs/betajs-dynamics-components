@@ -45,7 +45,7 @@ Scoped.define("module:Textinput", [
                     return this.activeElement().querySelector("textarea").selectionStart;
             },
             focus_textarea: function() {
-                if (document.activeElement.nodeName == 'TEXTAREA') console.log('Textarea already focused');
+                if (document.activeElement.nodeName == 'TEXTAREA') console.log('Textinput - focus_textarea() - Textarea already focused');
                 else this.element()[1].select();
             },
             blur: function() {
