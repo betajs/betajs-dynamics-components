@@ -34,6 +34,7 @@ Scoped.define("module:List", [
                 autoscroll: false,
                 stickybottom: false,
                 emptymessage: false,
+                refreshable: null,
                 droplist: false,
                 view: {},
                 infinite_scroll_options: {

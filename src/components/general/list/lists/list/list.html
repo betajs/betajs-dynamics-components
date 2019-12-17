@@ -42,3 +42,6 @@
 <div ba-if="{{emptymessage && !loading && collection_count === 0}}">
     {{emptymessage}}
 </div>
+<div ba-if="{{emptymessage && !loading && collection_count === 0 && refreshable}}">
+    <button ba-click="refreshable.refresh()">Refresh</button>
+</div>
