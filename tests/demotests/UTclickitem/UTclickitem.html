@@ -82,19 +82,26 @@
 
     function test(assert) {
 
+        var done = assert.async();
+
         //0. Dynamics working?
         assert.equal(dynamic.get("test_dynamics"), document.querySelector('#dynamicsworking').innerHTML.trim());
 
         //1. Event Listener
         assert.equal(dynamic.get('event_notifier'), document.querySelector('#event_notifier').innerHTML.trim());
         BetaJS.Browser.Dom.triggerDomEvent(document.querySelector('#test_event button'), "click");
-        assert.equal(dynamic.get('event_notifier_after'), document.querySelector('#event_notifier').innerHTML.trim());
+        BetaJS.Async.eventually(function () {
+            assert.equal(dynamic.get('event_notifier_after'), document.querySelector('#event_notifier').innerHTML.trim());
 
-        //2. Insert a Function to change the model.value to a model.new_value
-        var pushfunc_item = document.querySelector('#test_pushfunction button');
-        assert.equal(dynamic.scope('>[id="test_pushfunction"]').getProp('model.value'), pushfunc_item.querySelector('value').innerHTML.trim());
-        pushfunc_item.click();
-        assert.equal(dynamic.get('new_value'), pushfunc_item.querySelector('value').innerHTML.trim());
+            //2. Insert a Function to change the model.value to a model.new_value
+            var pushfunc_item = document.querySelector('#test_pushfunction button');
+            assert.equal(dynamic.scope('>[id="test_pushfunction"]').getProp('model.value'), pushfunc_item.querySelector('value').innerHTML.trim());
+            pushfunc_item.click();
+            BetaJS.Async.eventually(function () {
+                assert.equal(dynamic.get('new_value'), pushfunc_item.querySelector('value').innerHTML.trim());
+                done();
+            }, 250);
+        }, 250);
 
     }
 

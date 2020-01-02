@@ -65,23 +65,30 @@
 
     function test(assert) {
 
+        var done = assert.async();
+
         //0. Dynamics working?
         assert.equal(dynamic.get("test_dynamics"), document.querySelector('#dynamicsworking').innerHTML.trim());
 
         var getDisplayValue = function (selector) {
             return document.defaultView.getComputedStyle(document.querySelector(selector)).display;
-        }
+        };
 
         //1. Dropdown opening
         assert.equal('none',getDisplayValue('ba-dropdown dropdown'));
         BetaJS.Browser.Dom.triggerDomEvent(document.querySelector('ba-dropdown button'), "click");
-        assert.notEqual('none',getDisplayValue('ba-dropdown dropdown'));
+        BetaJS.Async.eventually(function (){
+            assert.notEqual('none',getDisplayValue('ba-dropdown dropdown'));
 
-        //2. Dropdown closing after click on an item
-        assert.notEqual('none',getDisplayValue('ba-dropdown dropdown'));
-        BetaJS.Browser.Dom.triggerDomEvent(document.querySelector('ba-dropdown dropdown button'), "click");
-        assert.equal('none',getDisplayValue('ba-dropdown dropdown'));
+            //2. Dropdown closing after click on an item
+            assert.notEqual('none',getDisplayValue('ba-dropdown dropdown'));
 
+            BetaJS.Browser.Dom.triggerDomEvent(document.querySelector('ba-dropdown dropdown button'), "click");
+            BetaJS.Async.eventually(function (){
+                assert.equal('none',getDisplayValue('ba-dropdown dropdown'));
+                done();
+            }, 250);
+        }, 250);
     }
 
 </script>
