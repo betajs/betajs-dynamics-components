@@ -19,7 +19,8 @@ Scoped.define("module:Overlaycontainer", [
                     insertsubview: false,
                     overlay: "",
                     fullpage: false,
-                    overlaysplit: false
+                    overlaysplit: false,
+                    externalstyle: ''
                 },
                 model: {
                     message: "This is a message"

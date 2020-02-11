@@ -22,7 +22,8 @@
 
     <overlayinner
             ba-click=""
-            ba-if="{{view.overlay || model.message}}">
+            ba-if="{{view.overlay || model.message}}"
+            style="{{=view.externalstyle}}">
 
         <ba-{{view.overlay}}
             ba-event-forward
