@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.108 - 2020-02-11
+betajs-dynamics-components - v0.1.109 - 2020-03-06
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1010,7 +1010,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.108 - 2020-02-11
+betajs-dynamics-components - v0.1.109 - 2020-03-06
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1025,8 +1025,8 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.108",
-    "datetime": 1581404699400
+    "version": "0.1.109",
+    "datetime": 1583476522234
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1432,6 +1432,7 @@ Scoped.define("module:Scrollpicker", [
         },
 
         create: function() {
+            console.log('Scrollpicker');
             var values = [];
             var dir = (this.get("first") <= this.get("last") ? 1 : -1);
             while (values.length < this.get("atleast")) {
@@ -1456,8 +1457,31 @@ Scoped.define("module:Scrollpicker", [
         },
 
         _loopScroll: function() {
+            console.log('Scrollpicker - _loopScroll() - 1');
+            console.log(this.activeElement());
+            console.log('1');
+            console.log(this.activeElement().querySelector("container"));
+            console.log('2');
+            console.log(this.activeElement().querySelector("container").dynnodehandler);
+            console.log('3');
+            console.log(this.activeElement().querySelector("container").dynnodehandler.interactions);
+
+            var loopscroll = null;
             // This is not particularly nice, but we'll improve on this later.
-            return this.activeElement().querySelector("container").dynnodehandler.interactions.loopscroll;
+            var interactions = this.activeElement().querySelector("container").dynnodehandler.interactions;
+            if (interactions) {
+                console.log('4');
+                console.log(this.activeElement().querySelector("container").dynnodehandler.interactions.loopscroll);
+                loopscroll = interactions.loopscroll;
+            } else {
+                console.log('No interactions');
+                return;
+            }
+
+            console.log('Scrollpicker - _loopScroll() - 2');
+
+            return loopscroll;
+
         },
 
         _encodeValue: function(value) {
