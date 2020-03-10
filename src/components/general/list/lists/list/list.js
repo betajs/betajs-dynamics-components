@@ -164,12 +164,17 @@ Scoped.define("module:List", [
             return coll && coll.value ? coll.value() : coll;
         },
 
+        getLoadMore: function() {
+            var coll = this.get("loadmore");
+            return coll && coll.value ? coll.value() : coll;
+        },
+
         functions: {
             moreitems: function() {
                 var promise = Promise.create();
                 this.set("loading", true);
                 Async.eventually(function() {
-                    this.get("loadmore").increase_forwards(this.get("loadmoresteps")).callback(function() {
+                    this.getLoadMore().increase_forwards(this.get("loadmoresteps")).callback(function() {
                         promise.asyncSuccess(true);
                         this.set("loading", false);
                     }, this);
@@ -181,7 +186,7 @@ Scoped.define("module:List", [
                 var promise = Promise.create();
                 this.set("loading", true);
                 Async.eventually(function() {
-                    this.get("loadmore").increase_backwards(this.get("loadmoresteps")).callback(function() {
+                    this.getLoadMore().increase_backwards(this.get("loadmoresteps")).callback(function() {
                         promise.asyncSuccess(true);
                         this.set("loading", false);
                     }, this);
