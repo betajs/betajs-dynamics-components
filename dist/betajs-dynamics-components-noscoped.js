@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.109 - 2020-03-06
+betajs-dynamics-components - v0.1.109 - 2020-03-09
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -15,7 +15,7 @@ Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
     "version": "0.1.109",
-    "datetime": 1583476522234
+    "datetime": 1583811720354
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1212,12 +1212,17 @@ Scoped.define("module:List", [
             return coll && coll.value ? coll.value() : coll;
         },
 
+        getLoadMore: function() {
+            var coll = this.get("loadmore");
+            return coll && coll.value ? coll.value() : coll;
+        },
+
         functions: {
             moreitems: function() {
                 var promise = Promise.create();
                 this.set("loading", true);
                 Async.eventually(function() {
-                    this.get("loadmore").increase_forwards(this.get("loadmoresteps")).callback(function() {
+                    this.getLoadMore().increase_forwards(this.get("loadmoresteps")).callback(function() {
                         promise.asyncSuccess(true);
                         this.set("loading", false);
                     }, this);
@@ -1229,7 +1234,7 @@ Scoped.define("module:List", [
                 var promise = Promise.create();
                 this.set("loading", true);
                 Async.eventually(function() {
-                    this.get("loadmore").increase_backwards(this.get("loadmoresteps")).callback(function() {
+                    this.getLoadMore().increase_backwards(this.get("loadmoresteps")).callback(function() {
                         promise.asyncSuccess(true);
                         this.set("loading", false);
                     }, this);
