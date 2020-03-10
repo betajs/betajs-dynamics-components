@@ -42,7 +42,6 @@ Scoped.define("module:Scrollpicker", [
         },
 
         create: function() {
-            console.log('Scrollpicker');
             var values = [];
             var dir = (this.get("first") <= this.get("last") ? 1 : -1);
             while (values.length < this.get("atleast")) {
@@ -67,28 +66,13 @@ Scoped.define("module:Scrollpicker", [
         },
 
         _loopScroll: function() {
-            console.log('Scrollpicker - _loopScroll() - 1');
-            console.log(this.activeElement());
-            console.log('1');
-            console.log(this.activeElement().querySelector("container"));
-            console.log('2');
-            console.log(this.activeElement().querySelector("container").dynnodehandler);
-            console.log('3');
-            console.log(this.activeElement().querySelector("container").dynnodehandler.interactions);
 
             var loopscroll = null;
             // This is not particularly nice, but we'll improve on this later.
             var interactions = this.activeElement().querySelector("container").dynnodehandler.interactions;
-            if (interactions) {
-                console.log('4');
-                console.log(this.activeElement().querySelector("container").dynnodehandler.interactions.loopscroll);
+            if (interactions)
                 loopscroll = interactions.loopscroll;
-            } else {
-                console.log('No interactions');
-                return;
-            }
-
-            console.log('Scrollpicker - _loopScroll() - 2');
+            else return;
 
             return loopscroll;
 

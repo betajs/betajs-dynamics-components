@@ -169,6 +169,9 @@ Scoped.define("module:List", [
                 var promise = Promise.create();
                 this.set("loading", true);
                 Async.eventually(function() {
+                    console.log('List');
+                    console.log(this.get("loadmore"));
+                    console.log(this.get("loadmore").increase_forwards);
                     this.get("loadmore").increase_forwards(this.get("loadmoresteps")).callback(function() {
                         promise.asyncSuccess(true);
                         this.set("loading", false);
