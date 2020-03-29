@@ -72,6 +72,8 @@ Scoped.define("module:List", [
                     }
                 },
                 loadmorebackwards: false,
+                loadmoreforwards: true,
+                loadmorereverse: false,
                 loadmoresteps: undefined,
                 "async-timeout": false,
                 loadmorestyle: "button" //infinite
@@ -84,7 +86,10 @@ Scoped.define("module:List", [
             autoscroll: "boolean",
             stickybottom: "boolean",
             "async-timeout": "int",
-            droplist: "boolean"
+            droplist: "boolean",
+            loadmorebackwards: "boolean",
+            loadmoreforwards: "boolean",
+            loadmorereverse: "boolean"
         },
 
         create: function() {
@@ -174,7 +179,8 @@ Scoped.define("module:List", [
                 var promise = Promise.create();
                 this.set("loading", true);
                 Async.eventually(function() {
-                    this.getLoadMore().increase_forwards(this.get("loadmoresteps")).callback(function() {
+                    var promise = this.get("loadmorereverse") ? this.getLoadMore().increase_backwards(this.get("loadmoresteps")) : this.getLoadMore().increase_forwards(this.get("loadmoresteps"));
+                    promise.callback(function() {
                         promise.asyncSuccess(true);
                         this.set("loading", false);
                     }, this);
@@ -186,7 +192,8 @@ Scoped.define("module:List", [
                 var promise = Promise.create();
                 this.set("loading", true);
                 Async.eventually(function() {
-                    this.getLoadMore().increase_backwards(this.get("loadmoresteps")).callback(function() {
+                    var promise = this.get("loadmorereverse") ? this.getLoadMore().increase_forwards(this.get("loadmoresteps")) : this.getLoadMore().increase_backwards(this.get("loadmoresteps"));
+                    promise.callback(function() {
                         promise.asyncSuccess(true);
                         this.set("loading", false);
                     }, this);

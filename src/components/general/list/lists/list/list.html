@@ -1,5 +1,6 @@
-<!--<ba-loadmore ba-if="{{!!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}" ba-show="{{!loading}}" ba-event:loadmore="moreitemsbackwards">-->
-<!--</ba-loadmore>-->
+<ba-loadmore ba-if="{{!!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}"
+             ba-show="{{!loading && !!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}" ba-event:loadmore="moreitemsbackwards">
+</ba-loadmore>
 <ba-loading ba-show="{{loadmorebackwards && loading}}">
 </ba-loading>
 
@@ -33,8 +34,8 @@
     </div>
 </div>
 <ba-loadmore
-        ba-if="{{!!loadmore && loadmorestyle !== 'infinite'}}"
-        ba-show="{{!loading && collection_count > 0}}"
+        ba-if="{{!!loadmore && loadmorestyle !== 'infinite' && loadmoreforwards}}"
+        ba-show="{{!loading && collection_count > 0 && !!loadmore && loadmorestyle !== 'infinite' && loadmoreforwards}}"
         ba-event:loadmore="moreitems"
 ></ba-loadmore>
 <ba-loading ba-show="{{loading}}">
