@@ -33,16 +33,24 @@
         Move Here
     </div>
 </div>
+
 <ba-loadmore
         ba-if="{{!!loadmore && loadmorestyle !== 'infinite' && loadmoreforwards}}"
         ba-show="{{!loading && collection_count > 0 && !!loadmore && loadmorestyle !== 'infinite' && loadmoreforwards}}"
         ba-event:loadmore="moreitems"
 ></ba-loadmore>
+
 <ba-loading ba-show="{{loading}}">
 </ba-loading>
-<div ba-if="{{emptymessage && !loading && collection_count === 0}}">
+
+<div
+        ba-if="{{emptymessage && !loading && collection_count === 0}}"
+        class="emptymessage">
     {{emptymessage}}
 </div>
-<div ba-if="{{emptymessage && !loading && collection_count === 0 && refreshable}}">
+
+<div
+        ba-if="{{emptymessage && !loading && collection_count === 0 && refreshable}}"
+        class="refresh">
     <button ba-click="refreshable.refresh()">Refresh</button>
 </div>

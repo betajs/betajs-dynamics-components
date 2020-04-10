@@ -4,4 +4,6 @@ ba-list {
   overflow-y: scroll;
   overflow-x: hidden;
   -webkit-overflow-scrolling: touch;
+
+  .emptymessage, .refresh {text-align: center}
 }
