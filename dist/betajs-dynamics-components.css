@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.111 - 2020-04-10
+betajs-dynamics-components - v0.1.113 - 2020-08-03
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -742,8 +742,8 @@ ba-list {
 }
 ba-list .emptymessage, ba-list .refresh {
   text-align: center;
-  height: 50px;
 }
+
 ba-searchlist {
   -webkit-box-flex: 1 1 0;
   -moz-box-flex: 1 1 0;
