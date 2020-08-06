@@ -8,8 +8,6 @@ Scoped.define("module:Externaloverlaycontainer", [
         return {
 
             constructor: function(options) {
-                console.log('Externaloverlaycontainer');
-                console.log(options);
 
                 // intentionally written differently
                 var element = document.createElement("baoverlaycontainer");
