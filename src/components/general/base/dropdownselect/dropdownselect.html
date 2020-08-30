@@ -7,6 +7,12 @@
         <description ba-if="{{view.description}}">
             {{view.description}}
         </description>
+        <ba-clickitem
+                ba-model="{{addmodel}}"
+                ba-if="{{view.useradd}}"
+                ba-event:click="add_model"
+                ba-event-forward:dropdownselect="{{[]}}"
+        ></ba-clickitem>
         <ba-{{view.dropdown}}
             ba-view.listitem="{{view.listitem}}"
             ba-event:item-click="hide_dropdown"

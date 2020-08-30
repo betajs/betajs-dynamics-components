@@ -23,12 +23,18 @@ Scoped.define("module:Dropdownselect", [
                     icon: 'icon-more_vert',
                     color: null,
                     background: null,
-                    useremove: true
+                    useremove: true,
+                    useradd: true
                 },
                 model: new Properties({
                     icon: 'icon-more_vert',
                     color: null,
                     background: null
+                }),
+                addmodel: new Properties({
+                    icon: 'icon-plus',
+                    background: 'white',
+                    value: 'New Group'
                 }),
                 removemodel: new Properties({
                     icon: 'icon-remove',
@@ -37,7 +43,7 @@ Scoped.define("module:Dropdownselect", [
                 }),
                 dropdownmodel: {},
                 value: null,
-                showdropdown: false
+                showdropdown: true
             };
         },
 
@@ -62,6 +68,10 @@ Scoped.define("module:Dropdownselect", [
             },
             hide_dropdown: function() {
                 this.set('showdropdown', false);
+            },
+            add_model: function() {
+                this.trigger('add-model');
+                this.execute('hide_dropdown');
             },
             remove_selected: function() {
                 this.set('model', this.get('view'));

@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.115 - 2020-08-29
+betajs-dynamics-components - v0.1.116 - 2020-08-30
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,8 +14,8 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.115",
-    "datetime": 1598684934375
+    "version": "0.1.116",
+    "datetime": 1598794942375
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -92,7 +92,7 @@ Scoped.define("module:Dropdownselect", [
         scoped: scoped
     }, {
 
-        template: "<button\n        onblur=\"{{this.execute('blur')}}\"\n        ba-tap=\"{{click()}}\"\n        class=\"{{model.icon || view.icon}}\"\n        style=\"color: {{model.icon_color}}; background: {{model.background}}\" >\n    <dropdownselect ba-show=\"{{showdropdown}}\">\n        <description ba-if=\"{{view.description}}\">\n            {{view.description}}\n        </description>\n        <ba-{{view.dropdown}}\n            ba-view.listitem=\"{{view.listitem}}\"\n            ba-event:item-click=\"hide_dropdown\"\n            ba-event-forward:dropdownselect=\"{{[]}}\"\n            ba-model='{{dropdownmodel}}'\n            ba-listcollection='{{dropdownmodel}}'\n\n        ></ba-{{view.dropdown}}>\n        <ba-clickitem\n                ba-model=\"{{removemodel}}\"\n                ba-if=\"{{view.useremove}}\"\n                ba-event:click=\"remove_selected\"\n                ba-event-forward:dropdownselect=\"{{[]}}\"\n        ></ba-clickitem>\n    </dropdownselect>\n</button>\n",
+        template: "<button\n        onblur=\"{{this.execute('blur')}}\"\n        ba-tap=\"{{click()}}\"\n        class=\"{{model.icon || view.icon}}\"\n        style=\"color: {{model.icon_color}}; background: {{model.background}}\" >\n    <dropdownselect ba-show=\"{{showdropdown}}\">\n        <description ba-if=\"{{view.description}}\">\n            {{view.description}}\n        </description>\n        <ba-clickitem\n                ba-model=\"{{addmodel}}\"\n                ba-if=\"{{view.useradd}}\"\n                ba-event:click=\"add_model\"\n                ba-event-forward:dropdownselect=\"{{[]}}\"\n        ></ba-clickitem>\n        <ba-{{view.dropdown}}\n            ba-view.listitem=\"{{view.listitem}}\"\n            ba-event:item-click=\"hide_dropdown\"\n            ba-event-forward:dropdownselect=\"{{[]}}\"\n            ba-model='{{dropdownmodel}}'\n            ba-listcollection='{{dropdownmodel}}'\n\n        ></ba-{{view.dropdown}}>\n        <ba-clickitem\n                ba-model=\"{{removemodel}}\"\n                ba-if=\"{{view.useremove}}\"\n                ba-event:click=\"remove_selected\"\n                ba-event-forward:dropdownselect=\"{{[]}}\"\n        ></ba-clickitem>\n    </dropdownselect>\n</button>\n",
 
         attrs: function() {
             return {
@@ -102,12 +102,18 @@ Scoped.define("module:Dropdownselect", [
                     icon: 'icon-more_vert',
                     color: null,
                     background: null,
-                    useremove: true
+                    useremove: true,
+                    useradd: true
                 },
                 model: new Properties({
                     icon: 'icon-more_vert',
                     color: null,
                     background: null
+                }),
+                addmodel: new Properties({
+                    icon: 'icon-plus',
+                    background: 'white',
+                    value: 'New Group'
                 }),
                 removemodel: new Properties({
                     icon: 'icon-remove',
@@ -116,7 +122,7 @@ Scoped.define("module:Dropdownselect", [
                 }),
                 dropdownmodel: {},
                 value: null,
-                showdropdown: false
+                showdropdown: true
             };
         },
 
@@ -142,6 +148,10 @@ Scoped.define("module:Dropdownselect", [
             hide_dropdown: function() {
                 this.set('showdropdown', false);
             },
+            add_model: function() {
+                this.trigger('add-model');
+                this.execute('hide_dropdown');
+            },
             remove_selected: function() {
                 this.set('model', this.get('view'));
                 this.execute('hide_dropdown');
@@ -149,7 +159,7 @@ Scoped.define("module:Dropdownselect", [
         }
 
     }).registerFunctions({
-        /**/"this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "click()": function (obj) { with (obj) { return click(); } }, "model.icon || view.icon": function (obj) { with (obj) { return model.icon || view.icon; } }, "model.icon_color": function (obj) { with (obj) { return model.icon_color; } }, "model.background": function (obj) { with (obj) { return model.background; } }, "showdropdown": function (obj) { with (obj) { return showdropdown; } }, "view.description": function (obj) { with (obj) { return view.description; } }, "view.dropdown": function (obj) { with (obj) { return view.dropdown; } }, "view.listitem": function (obj) { with (obj) { return view.listitem; } }, "[]": function (obj) { with (obj) { return []; } }, "dropdownmodel": function (obj) { with (obj) { return dropdownmodel; } }, "removemodel": function (obj) { with (obj) { return removemodel; } }, "view.useremove": function (obj) { with (obj) { return view.useremove; } }/**/
+        /**/"this.execute('blur')": function (obj) { with (obj) { return this.execute('blur'); } }, "click()": function (obj) { with (obj) { return click(); } }, "model.icon || view.icon": function (obj) { with (obj) { return model.icon || view.icon; } }, "model.icon_color": function (obj) { with (obj) { return model.icon_color; } }, "model.background": function (obj) { with (obj) { return model.background; } }, "showdropdown": function (obj) { with (obj) { return showdropdown; } }, "view.description": function (obj) { with (obj) { return view.description; } }, "addmodel": function (obj) { with (obj) { return addmodel; } }, "view.useradd": function (obj) { with (obj) { return view.useradd; } }, "[]": function (obj) { with (obj) { return []; } }, "view.dropdown": function (obj) { with (obj) { return view.dropdown; } }, "view.listitem": function (obj) { with (obj) { return view.listitem; } }, "dropdownmodel": function (obj) { with (obj) { return dropdownmodel; } }, "removemodel": function (obj) { with (obj) { return removemodel; } }, "view.useremove": function (obj) { with (obj) { return view.useremove; } }/**/
     }).register();
 
 });
