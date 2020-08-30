@@ -14,7 +14,6 @@ ba-dropdownselect {
       right: 0;
       top: ($listitemheight - 1px);
 
-      border: 1px solid $grey3;
       background: white;
       z-index: 1000;
 
@@ -22,7 +21,7 @@ ba-dropdownselect {
         @include display-flex;
         line-height: $listitemheight;
         border-bottom: 1px solid $grey3;
-        margin: 0 15px;
+        padding: 0 15px;
         color: $grey3;
       }
 

@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.116 - 2020-08-30
+betajs-dynamics-components - v0.1.118 - 2020-08-30
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,8 +14,8 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.116",
-    "datetime": 1598795058564
+    "version": "0.1.118",
+    "datetime": 1598797226293
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');

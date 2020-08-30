@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.116 - 2020-08-30
+betajs-dynamics-components - v0.1.118 - 2020-08-30
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -115,7 +115,6 @@ ba-dropdownselect button dropdownselect {
   position: absolute;
   right: 0;
   top: 49px;
-  border: 1px solid #777;
   background: white;
   z-index: 1000;
 }
@@ -127,7 +126,7 @@ ba-dropdownselect button dropdownselect description {
   display: flex;
   line-height: 50px;
   border-bottom: 1px solid #777;
-  margin: 0 15px;
+  padding: 0 15px;
   color: #777;
 }
 ba-dropdownselect button dropdownselect button {
