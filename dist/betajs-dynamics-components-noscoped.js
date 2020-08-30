@@ -15,7 +15,7 @@ Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
     "version": "0.1.116",
-    "datetime": 1598794942375
+    "datetime": 1598795058564
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -122,7 +122,7 @@ Scoped.define("module:Dropdownselect", [
                 }),
                 dropdownmodel: {},
                 value: null,
-                showdropdown: true
+                showdropdown: false
             };
         },
 
