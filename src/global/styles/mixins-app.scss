@@ -83,6 +83,16 @@
   }
 }
 
+@mixin boxshadownotop {
+  box-shadow: -2px 2px 4px rgba(0, 0, 0, .3), 2px 2px 4px rgba(0, 0, 0, .3);
+}
+
+@mixin dropdown {
+  @include boxshadownotop;
+  padding: 10px 15px;
+  border-radius: 5px;
+}
+
 @mixin dropdowncontainer {
   dropdowncontainer {
     position: relative;

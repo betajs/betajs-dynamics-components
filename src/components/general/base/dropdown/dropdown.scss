@@ -10,12 +10,13 @@ ba-dropdown {
     color: $grey3;
 
     dropdown {
+      @include dropdown;
       position: absolute;
       right: 0;
       top: ($listitemheight - 1px);
 
       min-height: 20px;
-      border: 1px solid $grey3;
+
       background: white;
       z-index: 1000;
 
