@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.118 - 2020-08-30
+betajs-dynamics-components - v0.1.118 - 2020-09-02
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -59,11 +59,13 @@ ba-dropdown button {
   opacity: 1;
 }
 ba-dropdown button dropdown {
+  box-shadow: -2px 2px 4px rgba(0, 0, 0, 0.3), 2px 2px 4px rgba(0, 0, 0, 0.3);
+  padding: 10px 15px;
+  border-radius: 5px;
   position: absolute;
   right: 0;
   top: 49px;
   min-height: 20px;
-  border: 1px solid #777;
   background: white;
   z-index: 1000;
 }
