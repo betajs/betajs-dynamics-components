@@ -32,6 +32,7 @@ Scoped.define("module:List", [
                 scrolltolast: null,
                 scrolltofirst: null,
                 autoscroll: false,
+                scrolling_disabled: false,
                 stickybottom: false,
                 emptymessage: false,
                 refreshable: null,
@@ -99,12 +100,12 @@ Scoped.define("module:List", [
             if (this.get("droplist"))
                 this.setProp("drop_list_options.disabled", false);
             if (this.get("listcollection"))
-                this._setupListCollection();
+                this._setupListCollection(true);
         },
 
         events: {
             "change:listcollection": function() {
-                this._setupListCollection();
+                this._setupListCollection(false);
             }
         },
 
@@ -120,9 +121,11 @@ Scoped.define("module:List", [
                     this.listenOn(this.getCollection(), "replaced-objects add remove collection-updating collection-updated", function() {
                         this.set("collection_count", this.getCollection().count());
                     });
+
                     if (this.get("scrolltolast")) {
                         this.listenOn(this.getCollection(), evts, function() {
-                            this.execute("scrollToLast");
+                            if (!this.get('scrolling_disabled'))
+                                this.execute("scrollToLast");
                         }, {
                             eventually: true,
                             off_on_destroyed: true
@@ -131,7 +134,8 @@ Scoped.define("module:List", [
                     }
                     if (this.get("scrolltofirst")) {
                         this.listenOn(this.getCollection(), evts, function() {
-                            this.execute("scrollToFirst");
+                            if (!this.get('scrolling_disabled'))
+                                this.execute("scrollToFirst");
                         }, {
                             eventually: true,
                             off_on_destroyed: true
@@ -175,6 +179,7 @@ Scoped.define("module:List", [
         },
 
         functions: {
+
             moreitems: function() {
                 var promise = Promise.create();
                 this.set("loading", true);
@@ -194,8 +199,13 @@ Scoped.define("module:List", [
                 Async.eventually(function() {
                     var promise = this.get("loadmorereverse") ? this.getLoadMore().increase_forwards(this.get("loadmoresteps")) : this.getLoadMore().increase_backwards(this.get("loadmoresteps"));
                     promise.callback(function() {
+
                         promise.asyncSuccess(true);
-                        this.set("loading", false);
+
+                        Async.eventually(function() {
+                            this.set("loading", false);
+                        }, this);
+
                     }, this);
                 }, this);
                 return promise;

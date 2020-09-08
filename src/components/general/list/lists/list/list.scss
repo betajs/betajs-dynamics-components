@@ -6,4 +6,9 @@ ba-list {
   -webkit-overflow-scrolling: touch;
 
   .emptymessage, .refresh {text-align: center}
+  .moveplaceholder .inner {
+    height: $listitemheight;
+    line-height: $listitemheight;
+    background: $grey5;
+  }
 }

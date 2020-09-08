@@ -6,7 +6,8 @@
 
 <list ba-repeat="{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}"
       ba-interaction:scroll="{{infinite_scroll_options}}"
-      ba-interaction:droplist="{{drop_list_options}}">
+      ba-interaction:droplist="{{drop_list_options}}"
+>
 <!--<list ba-repeat="{{collectionitem :: (model.listcollection||listcollection)}}">-->
     <!--ba-isselected="{{isselected(collectionitem)}}"-->
 
@@ -28,10 +29,8 @@
 
 </list>
 
-<div class="doodad" data-id="floater" style="display:none">
-    <div class="inner" style="height: 44px; line-height: 44px; background-color: #EEEEEE">
-        Move Here
-    </div>
+<div class="moveplaceholder" data-id="floater" style="display:none">
+    <div class="inner">Move Here</div>
 </div>
 
 <ba-loadmore

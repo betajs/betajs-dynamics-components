@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.118 - 2020-09-02
+betajs-dynamics-components - v0.1.120 - 2020-09-08
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,8 +14,8 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.118",
-    "datetime": 1599031532397
+    "version": "0.1.120",
+    "datetime": 1599563833942
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1064,7 +1064,7 @@ Scoped.define("module:List", [
         scoped: scoped
     }, {
 
-        template: "<ba-loadmore ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}\"\n             ba-show=\"{{!loading && !!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}\" ba-event:loadmore=\"moreitemsbackwards\">\n</ba-loadmore>\n<ba-loading ba-show=\"{{loadmorebackwards && loading}}\">\n</ba-loading>\n\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\"\n      ba-interaction:scroll=\"{{infinite_scroll_options}}\"\n      ba-interaction:droplist=\"{{drop_list_options}}\">\n\n    \n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-experimental=\"{{!!collectionitem.experimental}}\"\n        data-id=\"{{collectionitem.cid()}}\"\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-selection=\"{{=selection}}\"\n        ba-droplist=\"{{droplist}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-itemcontext=\"{{itemContext(collectionitem)}}\"\n        ba-isselected=\"{{isEqual(collectionitem, selected)}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner||{}}}\"\n        ba-model=\"{{collectionitem}}\"\n    ></ba-{{getview(collectionitem)}}>\n\n</list>\n\n<div class=\"doodad\" data-id=\"floater\" style=\"display:none\">\n    <div class=\"inner\" style=\"height: 44px; line-height: 44px; background-color: #EEEEEE\">\n        Move Here\n    </div>\n</div>\n\n<ba-loadmore\n        ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite' && loadmoreforwards}}\"\n        ba-show=\"{{!loading && collection_count > 0 && !!loadmore && loadmorestyle !== 'infinite' && loadmoreforwards}}\"\n        ba-event:loadmore=\"moreitems\"\n></ba-loadmore>\n\n<ba-loading ba-show=\"{{loading}}\">\n</ba-loading>\n\n<div\n        ba-if=\"{{emptymessage && !loading && collection_count === 0}}\"\n        class=\"emptymessage\">\n    {{emptymessage}}\n</div>\n\n<div\n        ba-if=\"{{emptymessage && !loading && collection_count === 0 && refreshable}}\"\n        class=\"refresh\">\n    <button ba-click=\"refreshable.refresh()\">Refresh</button>\n</div>",
+        template: "<ba-loadmore ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}\"\n             ba-show=\"{{!loading && !!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}\" ba-event:loadmore=\"moreitemsbackwards\">\n</ba-loadmore>\n<ba-loading ba-show=\"{{loadmorebackwards && loading}}\">\n</ba-loading>\n\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\"\n      ba-interaction:scroll=\"{{infinite_scroll_options}}\"\n      ba-interaction:droplist=\"{{drop_list_options}}\"\n>\n\n    \n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-experimental=\"{{!!collectionitem.experimental}}\"\n        data-id=\"{{collectionitem.cid()}}\"\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-selection=\"{{=selection}}\"\n        ba-droplist=\"{{droplist}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-itemcontext=\"{{itemContext(collectionitem)}}\"\n        ba-isselected=\"{{isEqual(collectionitem, selected)}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner||{}}}\"\n        ba-model=\"{{collectionitem}}\"\n    ></ba-{{getview(collectionitem)}}>\n\n</list>\n\n<div class=\"moveplaceholder\" data-id=\"floater\" style=\"display:none\">\n    <div class=\"inner\">Move Here</div>\n</div>\n\n<ba-loadmore\n        ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite' && loadmoreforwards}}\"\n        ba-show=\"{{!loading && collection_count > 0 && !!loadmore && loadmorestyle !== 'infinite' && loadmoreforwards}}\"\n        ba-event:loadmore=\"moreitems\"\n></ba-loadmore>\n\n<ba-loading ba-show=\"{{loading}}\">\n</ba-loading>\n\n<div\n        ba-if=\"{{emptymessage && !loading && collection_count === 0}}\"\n        class=\"emptymessage\">\n    {{emptymessage}}\n</div>\n\n<div\n        ba-if=\"{{emptymessage && !loading && collection_count === 0 && refreshable}}\"\n        class=\"refresh\">\n    <button ba-click=\"refreshable.refresh()\">Refresh</button>\n</div>",
 
         attrs: function() {
             return {
@@ -1075,6 +1075,7 @@ Scoped.define("module:List", [
                 scrolltolast: null,
                 scrolltofirst: null,
                 autoscroll: false,
+                scrolling_disabled: false,
                 stickybottom: false,
                 emptymessage: false,
                 refreshable: null,
@@ -1142,12 +1143,12 @@ Scoped.define("module:List", [
             if (this.get("droplist"))
                 this.setProp("drop_list_options.disabled", false);
             if (this.get("listcollection"))
-                this._setupListCollection();
+                this._setupListCollection(true);
         },
 
         events: {
             "change:listcollection": function() {
-                this._setupListCollection();
+                this._setupListCollection(false);
             }
         },
 
@@ -1163,9 +1164,11 @@ Scoped.define("module:List", [
                     this.listenOn(this.getCollection(), "replaced-objects add remove collection-updating collection-updated", function() {
                         this.set("collection_count", this.getCollection().count());
                     });
+
                     if (this.get("scrolltolast")) {
                         this.listenOn(this.getCollection(), evts, function() {
-                            this.execute("scrollToLast");
+                            if (!this.get('scrolling_disabled'))
+                                this.execute("scrollToLast");
                         }, {
                             eventually: true,
                             off_on_destroyed: true
@@ -1174,7 +1177,8 @@ Scoped.define("module:List", [
                     }
                     if (this.get("scrolltofirst")) {
                         this.listenOn(this.getCollection(), evts, function() {
-                            this.execute("scrollToFirst");
+                            if (!this.get('scrolling_disabled'))
+                                this.execute("scrollToFirst");
                         }, {
                             eventually: true,
                             off_on_destroyed: true
@@ -1218,6 +1222,7 @@ Scoped.define("module:List", [
         },
 
         functions: {
+
             moreitems: function() {
                 var promise = Promise.create();
                 this.set("loading", true);
@@ -1237,8 +1242,13 @@ Scoped.define("module:List", [
                 Async.eventually(function() {
                     var promise = this.get("loadmorereverse") ? this.getLoadMore().increase_forwards(this.get("loadmoresteps")) : this.getLoadMore().increase_backwards(this.get("loadmoresteps"));
                     promise.callback(function() {
+
                         promise.asyncSuccess(true);
-                        this.set("loading", false);
+
+                        Async.eventually(function() {
+                            this.set("loading", false);
+                        }, this);
+
                     }, this);
                 }, this);
                 return promise;
