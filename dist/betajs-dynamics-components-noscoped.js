@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.120 - 2020-09-08
+betajs-dynamics-components - v0.1.120 - 2020-09-09
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -15,7 +15,7 @@ Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
     "version": "0.1.120",
-    "datetime": 1599563833942
+    "datetime": 1599664404631
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1224,19 +1224,26 @@ Scoped.define("module:List", [
         functions: {
 
             moreitems: function() {
+                var oldCount = this.getCollection().count();
                 var promise = Promise.create();
                 this.set("loading", true);
                 Async.eventually(function() {
                     var promise = this.get("loadmorereverse") ? this.getLoadMore().increase_backwards(this.get("loadmoresteps")) : this.getLoadMore().increase_forwards(this.get("loadmoresteps"));
                     promise.callback(function() {
                         promise.asyncSuccess(true);
-                        this.set("loading", false);
+                        Async.eventually(function() {
+                            this.set("loading", false);
+                            var newCount = this.getCollection().count();
+                            if (newCount === oldCount)
+                                this.set("loadmoreforwards", false);
+                        }, this);
                     }, this);
                 }, this);
                 return promise;
             },
 
             moreitemsbackwards: function() {
+                var oldCount = this.getCollection().count();
                 var promise = Promise.create();
                 this.set("loading", true);
                 Async.eventually(function() {
@@ -1247,6 +1254,9 @@ Scoped.define("module:List", [
 
                         Async.eventually(function() {
                             this.set("loading", false);
+                            var newCount = this.getCollection().count();
+                            if (newCount === oldCount)
+                                this.set("loadmorebackwards", false);
                         }, this);
 
                     }, this);

@@ -181,19 +181,26 @@ Scoped.define("module:List", [
         functions: {
 
             moreitems: function() {
+                var oldCount = this.getCollection().count();
                 var promise = Promise.create();
                 this.set("loading", true);
                 Async.eventually(function() {
                     var promise = this.get("loadmorereverse") ? this.getLoadMore().increase_backwards(this.get("loadmoresteps")) : this.getLoadMore().increase_forwards(this.get("loadmoresteps"));
                     promise.callback(function() {
                         promise.asyncSuccess(true);
-                        this.set("loading", false);
+                        Async.eventually(function() {
+                            this.set("loading", false);
+                            var newCount = this.getCollection().count();
+                            if (newCount === oldCount)
+                                this.set("loadmoreforwards", false);
+                        }, this);
                     }, this);
                 }, this);
                 return promise;
             },
 
             moreitemsbackwards: function() {
+                var oldCount = this.getCollection().count();
                 var promise = Promise.create();
                 this.set("loading", true);
                 Async.eventually(function() {
@@ -204,6 +211,9 @@ Scoped.define("module:List", [
 
                         Async.eventually(function() {
                             this.set("loading", false);
+                            var newCount = this.getCollection().count();
+                            if (newCount === oldCount)
+                                this.set("loadmorebackwards", false);
                         }, this);
 
                     }, this);
