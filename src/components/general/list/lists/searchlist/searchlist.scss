@@ -35,5 +35,14 @@ ba-searchlist {
   }
   ba-list {z-index: 0}
   ba-listitem {display: block}
+}
 
+.design_alternative ba-searchlist {
+  background: #E2E2E2;
+
+  ba-swipeclickcontainer {
+    margin: 5px;
+    overflow: hidden;
+    border-radius: 5px;
+  }
 }
