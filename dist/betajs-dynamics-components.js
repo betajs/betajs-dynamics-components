@@ -1026,7 +1026,7 @@ Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
     "version": "0.1.121",
-    "datetime": 1599735053427
+    "datetime": 1599735148117
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -2235,19 +2235,26 @@ Scoped.define("module:List", [
         functions: {
 
             moreitems: function() {
+                var oldCount = this.getCollection().count();
                 var promise = Promise.create();
                 this.set("loading", true);
                 Async.eventually(function() {
                     var promise = this.get("loadmorereverse") ? this.getLoadMore().increase_backwards(this.get("loadmoresteps")) : this.getLoadMore().increase_forwards(this.get("loadmoresteps"));
                     promise.callback(function() {
                         promise.asyncSuccess(true);
-                        this.set("loading", false);
+                        Async.eventually(function() {
+                            this.set("loading", false);
+                            var newCount = this.getCollection().count();
+                            if (newCount === oldCount)
+                                this.set("loadmoreforwards", false);
+                        }, this);
                     }, this);
                 }, this);
                 return promise;
             },
 
             moreitemsbackwards: function() {
+                var oldCount = this.getCollection().count();
                 var promise = Promise.create();
                 this.set("loading", true);
                 Async.eventually(function() {
@@ -2258,6 +2265,9 @@ Scoped.define("module:List", [
 
                         Async.eventually(function() {
                             this.set("loading", false);
+                            var newCount = this.getCollection().count();
+                            if (newCount === oldCount)
+                                this.set("loadmorebackwards", false);
                         }, this);
 
                     }, this);
