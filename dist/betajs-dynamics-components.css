@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.121 - 2020-09-10
+betajs-dynamics-components - v0.1.123 - 2020-09-11
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -858,7 +858,7 @@ ba-addtitle addtitle {
   height: 44px;
   line-height: 44px;
 }
-ba-addtitle addtitle title {
+ba-addtitle addtitle div {
   -webkit-box-flex: 1 1 0;
   -moz-box-flex: 1 1 0;
   -webkit-flex: 1 1 0;

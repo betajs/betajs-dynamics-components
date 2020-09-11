@@ -1,6 +1,9 @@
 
 <addtitle>
-    <title ba-click="{{clicktitle()}}">{{model.value}}</title>
+    <div ba-click="{{clicktitle()}}">
+        <span>{{model.value}}</span>
+        <span ba-if="{{listcount}}"> - ({{listcount}})</span>
+    </div>
     <button ba-click="{{addbutton()}}">
         <span class="icon-plus"></span>
     </button>

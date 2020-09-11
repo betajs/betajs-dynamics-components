@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.121 - 2020-09-10
+betajs-dynamics-components - v0.1.123 - 2020-09-11
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1010,7 +1010,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.121 - 2020-09-10
+betajs-dynamics-components - v0.1.123 - 2020-09-11
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1025,8 +1025,8 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.121",
-    "datetime": 1599735148117
+    "version": "0.1.123",
+    "datetime": 1599841089028
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -2386,7 +2386,7 @@ Scoped.define("module:Titledlist", [
         scoped: scoped
     }, {
 
-        template: "\n<ba-{{view.titleitem}}\n    ba-click=\"{{click_title()}}\"\n    ba-event-forward:title=\"{{[]}}\"\n    ba-model=\"{{model.title_model}}\">{{model.title_model.value}}</ba-{{view.titleitem}}>\n\n<ba-list\n        ba-noscope\n        ba-event-forward\n        ba-show=\"{{!collapsed}}\">\n\n</ba-list>\n",
+        template: "\n<ba-{{view.titleitem}}\n    ba-click=\"{{click_title()}}\"\n    ba-event-forward:title=\"{{[]}}\"\n    ba-model=\"{{model.title_model}}\"\n    ba-listcount=\"{{listcount}}\"\n>{{model.title_model.value}}</ba-{{view.titleitem}}>\n\n<ba-list\n        ba-noscope\n        ba-event-forward\n        ba-show=\"{{!collapsed}}\">\n\n</ba-list>\n",
 
         attrs: {
             model: {
@@ -2398,7 +2398,17 @@ Scoped.define("module:Titledlist", [
             collapsed: false,
             collapsible: true,
             listitem: 'selectableitem',
-            titleitem: 'title'
+            titleitem: 'title',
+            listcount: null
+        },
+
+        create: function() {
+            this.listenOn(this.get('model').listcollection, "add", function() {
+                this._set_count();
+            });
+            this.listenOn(this.get('model').listcollection, "remove", function() {
+                this._set_count();
+            });
         },
 
         functions: {
@@ -2425,10 +2435,15 @@ Scoped.define("module:Titledlist", [
                 this.call('togglelist');
             }
 
+        },
+
+        _set_count: function() {
+            var count = this.get('model').listcollection.count();
+            this.set('listcount', count);
         }
 
     }).registerFunctions({
-        /**/"view.titleitem": function (obj) { with (obj) { return view.titleitem; } }, "click_title()": function (obj) { with (obj) { return click_title(); } }, "[]": function (obj) { with (obj) { return []; } }, "model.title_model": function (obj) { with (obj) { return model.title_model; } }, "model.title_model.value": function (obj) { with (obj) { return model.title_model.value; } }, "!collapsed": function (obj) { with (obj) { return !collapsed; } }/**/
+        /**/"view.titleitem": function (obj) { with (obj) { return view.titleitem; } }, "click_title()": function (obj) { with (obj) { return click_title(); } }, "[]": function (obj) { with (obj) { return []; } }, "model.title_model": function (obj) { with (obj) { return model.title_model; } }, "listcount": function (obj) { with (obj) { return listcount; } }, "model.title_model.value": function (obj) { with (obj) { return model.title_model.value; } }, "!collapsed": function (obj) { with (obj) { return !collapsed; } }/**/
     }).register();
 
 });
@@ -2440,27 +2455,26 @@ Scoped.define("module:Addtitle", [
         scoped: scoped
     }, {
 
-        template: "\n<addtitle>\n    <title ba-click=\"{{clicktitle()}}\">{{model.value}}</title>\n    <button ba-click=\"{{addbutton()}}\">\n        <span class=\"icon-plus\"></span>\n    </button>\n</addtitle>",
+        template: "\n<addtitle>\n    <div ba-click=\"{{clicktitle()}}\">\n        <span>{{model.value}}</span>\n        <span ba-if=\"{{listcount}}\"> - ({{listcount}})</span>\n    </div>\n    <button ba-click=\"{{addbutton()}}\">\n        <span class=\"icon-plus\"></span>\n    </button>\n</addtitle>",
 
         attrs: {
+            listcount: null,
             model: {
                 value: 'Title'
             }
         },
 
         functions: {
-
             clicktitle: function() {
                 this.parent().call('togglelist');
             },
             addbutton: function() {
                 this.trigger("add-button");
             }
-
         }
 
     }).registerFunctions({
-        /**/"clicktitle()": function (obj) { with (obj) { return clicktitle(); } }, "model.value": function (obj) { with (obj) { return model.value; } }, "addbutton()": function (obj) { with (obj) { return addbutton(); } }/**/
+        /**/"clicktitle()": function (obj) { with (obj) { return clicktitle(); } }, "model.value": function (obj) { with (obj) { return model.value; } }, "listcount": function (obj) { with (obj) { return listcount; } }, "addbutton()": function (obj) { with (obj) { return addbutton(); } }/**/
     }).register();
 
 });

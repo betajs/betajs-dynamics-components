@@ -23,7 +23,17 @@ Scoped.define("module:Titledlist", [
             collapsed: false,
             collapsible: true,
             listitem: 'selectableitem',
-            titleitem: 'title'
+            titleitem: 'title',
+            listcount: null
+        },
+
+        create: function() {
+            this.listenOn(this.get('model').listcollection, "add", function() {
+                this._set_count();
+            });
+            this.listenOn(this.get('model').listcollection, "remove", function() {
+                this._set_count();
+            });
         },
 
         functions: {
@@ -50,6 +60,11 @@ Scoped.define("module:Titledlist", [
                 this.call('togglelist');
             }
 
+        },
+
+        _set_count: function() {
+            var count = this.get('model').listcollection.count();
+            this.set('listcount', count);
         }
 
     }).registerFunctions({

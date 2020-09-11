@@ -9,20 +9,19 @@ Scoped.define("module:Addtitle", [
         template: "<%= template(filepathnoext + '.html') %>",
 
         attrs: {
+            listcount: null,
             model: {
                 value: 'Title'
             }
         },
 
         functions: {
-
             clicktitle: function() {
                 this.parent().call('togglelist');
             },
             addbutton: function() {
                 this.trigger("add-button");
             }
-
         }
 
     }).registerFunctions({
