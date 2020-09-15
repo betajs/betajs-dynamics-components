@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.123 - 2020-09-11
+betajs-dynamics-components - v0.1.124 - 2020-09-15
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1010,7 +1010,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.123 - 2020-09-11
+betajs-dynamics-components - v0.1.124 - 2020-09-15
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1025,8 +1025,8 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.123",
-    "datetime": 1599841089028
+    "version": "0.1.124",
+    "datetime": 1600177761699
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -2386,7 +2386,7 @@ Scoped.define("module:Titledlist", [
         scoped: scoped
     }, {
 
-        template: "\n<ba-{{view.titleitem}}\n    ba-click=\"{{click_title()}}\"\n    ba-event-forward:title=\"{{[]}}\"\n    ba-model=\"{{model.title_model}}\"\n    ba-listcount=\"{{listcount}}\"\n>{{model.title_model.value}}</ba-{{view.titleitem}}>\n\n<ba-list\n        ba-noscope\n        ba-event-forward\n        ba-show=\"{{!collapsed}}\">\n\n</ba-list>\n",
+        template: "\n<ba-{{view.titleitem}}\n    ba-click=\"{{click_title()}}\"\n    ba-event-forward:title=\"{{[]}}\"\n    ba-model=\"{{model.title_model}}\"\n    ba-listcount=\"{{listcount}}\"\n>{{model.title_model.value}}</ba-{{view.titleitem}}>\n\n<ba-list\n        ba-noscope\n        ba-event-forward\n        ba-show=\"{{!collapsed}}\"\n></ba-list>\n",
 
         attrs: {
             model: {
