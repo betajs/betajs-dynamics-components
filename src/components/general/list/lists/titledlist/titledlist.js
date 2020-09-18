@@ -16,7 +16,8 @@ Scoped.define("module:Titledlist", [
         attrs: {
             model: {
                 title_model: {
-                    value: 'Titledlist - Title'
+                    value: 'Titledlist - Title',
+                    collapsed: true
                 }
             },
             selectable: true,
@@ -41,7 +42,7 @@ Scoped.define("module:Titledlist", [
             togglelist: function() {
 
                 if (this.get('collapsible'))
-                    this.set('collapsed', !this.get('collapsed'));
+                    this.setProp('model.collapsed', !this.getProp('model.collapsed'));
 
             },
 

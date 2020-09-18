@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.124 - 2020-09-15
+betajs-dynamics-components - v0.1.125 - 2020-09-18
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1010,7 +1010,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.124 - 2020-09-15
+betajs-dynamics-components - v0.1.125 - 2020-09-18
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1025,8 +1025,8 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.124",
-    "datetime": 1600177761699
+    "version": "0.1.125",
+    "datetime": 1600453623603
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -2386,12 +2386,13 @@ Scoped.define("module:Titledlist", [
         scoped: scoped
     }, {
 
-        template: "\n<ba-{{view.titleitem}}\n    ba-click=\"{{click_title()}}\"\n    ba-event-forward:title=\"{{[]}}\"\n    ba-model=\"{{model.title_model}}\"\n    ba-listcount=\"{{listcount}}\"\n>{{model.title_model.value}}</ba-{{view.titleitem}}>\n\n<ba-list\n        ba-noscope\n        ba-event-forward\n        ba-show=\"{{!collapsed}}\"\n></ba-list>\n",
+        template: "\n<ba-{{view.titleitem}}\n    ba-click=\"{{click_title()}}\"\n    ba-event-forward:title=\"{{[]}}\"\n    ba-model=\"{{model.title_model}}\"\n    ba-listcount=\"{{listcount}}\"\n>{{model.title_model.value}}</ba-{{view.titleitem}}>\n\n<ba-list\n        ba-noscope\n        ba-event-forward\n        ba-show=\"{{!model.collapsed}}\"\n></ba-list>\n\n\n\n        \n        \n        \n\n",
 
         attrs: {
             model: {
                 title_model: {
-                    value: 'Titledlist - Title'
+                    value: 'Titledlist - Title',
+                    collapsed: true
                 }
             },
             selectable: true,
@@ -2416,7 +2417,7 @@ Scoped.define("module:Titledlist", [
             togglelist: function() {
 
                 if (this.get('collapsible'))
-                    this.set('collapsed', !this.get('collapsed'));
+                    this.setProp('model.collapsed', !this.getProp('model.collapsed'));
 
             },
 
@@ -2443,7 +2444,7 @@ Scoped.define("module:Titledlist", [
         }
 
     }).registerFunctions({
-        /**/"view.titleitem": function (obj) { with (obj) { return view.titleitem; } }, "click_title()": function (obj) { with (obj) { return click_title(); } }, "[]": function (obj) { with (obj) { return []; } }, "model.title_model": function (obj) { with (obj) { return model.title_model; } }, "listcount": function (obj) { with (obj) { return listcount; } }, "model.title_model.value": function (obj) { with (obj) { return model.title_model.value; } }, "!collapsed": function (obj) { with (obj) { return !collapsed; } }/**/
+        /**/"view.titleitem": function (obj) { with (obj) { return view.titleitem; } }, "click_title()": function (obj) { with (obj) { return click_title(); } }, "[]": function (obj) { with (obj) { return []; } }, "model.title_model": function (obj) { with (obj) { return model.title_model; } }, "listcount": function (obj) { with (obj) { return listcount; } }, "model.title_model.value": function (obj) { with (obj) { return model.title_model.value; } }, "!model.collapsed": function (obj) { with (obj) { return !model.collapsed; } }/**/
     }).register();
 
 });
