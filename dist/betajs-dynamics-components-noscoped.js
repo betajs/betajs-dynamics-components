@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.125 - 2020-09-18
+betajs-dynamics-components - v0.1.126 - 2020-09-24
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,8 +14,8 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.125",
-    "datetime": 1600453623603
+    "version": "0.1.126",
+    "datetime": 1600927284274
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -556,6 +556,129 @@ Scoped.define("module:Search", [
 
     }).registerFunctions({
         /**/"!searching": function (obj) { with (obj) { return !searching; } }, "searching": function (obj) { with (obj) { return searching; } }, "this.execute('onfocus')": function (obj) { with (obj) { return this.execute('onfocus'); } }, "this.execute('onblur')": function (obj) { with (obj) { return this.execute('onblur'); } }, "view.placeholder || ''": function (obj) { with (obj) { return view.placeholder || ''; } }, "value": function (obj) { with (obj) { return value; } }, "clearsearch()": function (obj) { with (obj) { return clearsearch(); } }, "view.searchbuttons": function (obj) { with (obj) { return view.searchbuttons; } }, "nosearch": function (obj) { with (obj) { return nosearch; } }, "view.filter_visible": function (obj) { with (obj) { return view.filter_visible; } }, "view.dropdownmodel": function (obj) { with (obj) { return view.dropdownmodel; } }/**/
+    }).register();
+
+});
+Scoped.define("module:Swipepicker", [
+    "dynamics:Dynamic",
+    "ui:Interactions.Loopscroll",
+    "base:Async"
+], [
+    // It has to be a repeat element partial, otherwise whitespace is removed from container
+    "dynamics:Partials.RepeatElementPartial"
+], function(Dynamic, Loopscroll, Async, scoped) {
+
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
+
+        template: "\n<container ba-interaction:loopscroll=\"{{loopscroll}}\">\n        <element ba-repeat-element=\"{{value :: values}}\" data-value=\"{{value}}\">\n                {{value}}\n        </element>\n</container>\n<scrolloverlay ba-class=\"{{{\n                  valuetop : top\n               }}}\">\n        <pickeroverlay></pickeroverlay>\n        <valueoverlay></valueoverlay>\n</scrolloverlay>\n",
+
+        attrs: {
+            first: 0,
+            last: 23,
+            atleast: 100,
+            increment: 1,
+            top: false,
+            value: 10,
+            valueadd: 0
+        },
+
+        types: {
+            first: "int",
+            last: "int",
+            increment: "int",
+            top: "bool",
+            value: "int",
+            valueadd: "int"
+        },
+
+        events: {
+            "change:value": function(value) {
+                if (!this.activeElement() || !this.activeElement().querySelector("container"))
+                    return;
+                if (!this.__ignoreValue)
+                    this._loopScroll().scrollToElement(this.getElementByValue(this.get("value")));
+            }
+        },
+
+        create: function() {
+            var values = [];
+            var dir = (this.get("first") <= this.get("last") ? 1 : -1);
+            while (values.length < this.get("atleast")) {
+                for (var i = this.get("first"); dir * (this.get("last") - i) >= 0; i += dir * this.get("increment"))
+                    values.push(i);
+            }
+            this.set('values', values);
+
+            this.set("loopscroll", {
+                type: "loopscroll",
+                enabled: true,
+                currentTop: this.get("top"),
+                discrete: true,
+                scrollEndTimeout: 200,
+                elementMargin: 0,
+                currentCenter: true,
+                currentElementClass: "selected",
+                discreteUpperThreshold: 0.99,
+                discreteLowerThreshold: 0.01,
+                scrollToOnClick: true
+            });
+        },
+
+        _loopScroll: function() {
+
+            var loopscroll = null;
+            // This is not particularly nice, but we'll improve on this later.
+            var interactions = this.activeElement().querySelector("container").dynnodehandler.interactions;
+            if (interactions)
+                loopscroll = interactions.loopscroll;
+            else return;
+
+            return loopscroll;
+
+        },
+
+        _encodeValue: function(value) {
+            value += this.get("valueadd");
+            var delta = this.get("first") - value;
+            delta = Math.round(delta / this.get("increment")) * this.get("increment");
+            value = this.get("first") - delta;
+            value = this.get("first") <= this.get("last") ?
+                Math.max(this.get("first"), Math.min(this.get('last'), value)) :
+                Math.max(this.get("last"), Math.min(this.get('first'), value));
+            return value;
+        },
+
+        _decodeValue: function(value) {
+            return value - this.get("valueadd");
+        },
+
+        getElementByValue: function(value) {
+            return this.activeElement().querySelector("[data-value='" + this._encodeValue(value) + "']");
+        },
+
+        getValueByElement: function(element) {
+            return this._decodeValue(parseInt(element.dataset.value, 10));
+        },
+
+        _afterActivate: function(element) {
+            // This is a massive hack.
+            this.activeElement().querySelector("[ba-repeat-element]").remove();
+            Async.eventually(function() {
+                this._loopScroll().scrollToElement(this.getElementByValue(this.get("value")));
+                this._loopScroll().on("change-current-element", function(element) {
+                    this.__ignoreValue = true;
+                    this.set("value", this.getValueByElement(element));
+                    this.__ignoreValue = false;
+                }, this);
+            }, this);
+        }
+
+    }).registerFunctions({
+        /**/"loopscroll": function (obj) { with (obj) { return loopscroll; } }, "values": function (obj) { with (obj) { return values; } }, "value": function (obj) { with (obj) { return value; } }, "{\n                  valuetop : top\n               }": function (obj) { with (obj) { return {
+                  valuetop : top
+               }; } }/**/
     }).register();
 
 });

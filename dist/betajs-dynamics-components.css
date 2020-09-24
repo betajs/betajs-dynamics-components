@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.125 - 2020-09-18
+betajs-dynamics-components - v0.1.126 - 2020-09-24
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -315,6 +315,86 @@ ba-search icon {
 }
 ba-search ba-loading .sk-circle {
   margin: 17px auto;
+}
+
+ba-swipepicker {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  position: relative;
+}
+ba-swipepicker container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  overflow-y: scroll;
+  -webkit-overflow-scrolling: touch;
+}
+ba-swipepicker container element {
+  -webkit-box-flex: 0 0 30px;
+  -moz-box-flex: 0 0 30px;
+  -webkit-flex: 0 0 30px;
+  -ms-flex: 0 0 30px;
+  flex: 0 0 30px;
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  line-height: 30px;
+  display: block;
+  text-align: center;
+  box-sizing: border-box;
+}
+ba-swipepicker scrolloverlay {
+  display: -webkit-box;
+  display: -moz-box;
+  display: -ms-flexbox;
+  display: -webkit-flex;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+}
+ba-swipepicker scrolloverlay pickeroverlay {
+  -webkit-box-flex: 1 1 0;
+  -moz-box-flex: 1 1 0;
+  -webkit-flex: 1 1 0;
+  -ms-flex: 1 1 0;
+  flex: 1 1 0;
+  background: gainsboro;
+  opacity: 0.7;
+  border-bottom: 1px solid grey;
+}
+ba-swipepicker scrolloverlay valueoverlay {
+  -webkit-box-flex: 0 0 30px;
+  -moz-box-flex: 0 0 30px;
+  -webkit-flex: 0 0 30px;
+  -ms-flex: 0 0 30px;
+  flex: 0 0 30px;
+}
+ba-swipepicker .valuetop {
+  -webkit-flex-direction: column-reverse;
+  -ms-flex-direction: column-reverse;
+  flex-direction: column-reverse;
+}
+ba-swipepicker .valuetop pickeroverlay {
+  border-bottom: none !important;
+  border-top: 1px solid grey;
 }
 
 ba-textinput {
