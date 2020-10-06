@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.126 - 2020-09-24
+betajs-dynamics-components - v0.1.127 - 2020-10-06
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,8 +14,8 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.126",
-    "datetime": 1600927284274
+    "version": "0.1.127",
+    "datetime": 1601972372078
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -431,6 +431,10 @@ Scoped.define("module:Scrollpicker", [
         },
 
         create: function() {
+
+            console.log('Scrollpicker');
+            console.log(this.get('value'));
+
             var values = [];
             var dir = (this.get("first") <= this.get("last") ? 1 : -1);
             while (values.length < this.get("atleast")) {
@@ -494,8 +498,14 @@ Scoped.define("module:Scrollpicker", [
             // This is a massive hack.
             this.activeElement().querySelector("[ba-repeat-element]").remove();
             Async.eventually(function() {
+
+                console.log('Scrollpicker - Async');
+                console.log(this.get('value'));
+
                 this._loopScroll().scrollToElement(this.getElementByValue(this.get("value")));
                 this._loopScroll().on("change-current-element", function(element) {
+                    console.log('Scrollpicker - change-current-element');
+
                     this.__ignoreValue = true;
                     this.set("value", this.getValueByElement(element));
                     this.__ignoreValue = false;
@@ -1051,7 +1061,6 @@ Scoped.define("module:Clickitem", [
 
         functions: {
             click: function() {
-
                 this.trigger('click', this.get('model'));
                 this.trigger('event', this.cid());
             }

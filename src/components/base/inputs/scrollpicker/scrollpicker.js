@@ -42,6 +42,10 @@ Scoped.define("module:Scrollpicker", [
         },
 
         create: function() {
+
+            console.log('Scrollpicker');
+            console.log(this.get('value'));
+
             var values = [];
             var dir = (this.get("first") <= this.get("last") ? 1 : -1);
             while (values.length < this.get("atleast")) {
@@ -105,8 +109,14 @@ Scoped.define("module:Scrollpicker", [
             // This is a massive hack.
             this.activeElement().querySelector("[ba-repeat-element]").remove();
             Async.eventually(function() {
+
+                console.log('Scrollpicker - Async');
+                console.log(this.get('value'));
+
                 this._loopScroll().scrollToElement(this.getElementByValue(this.get("value")));
                 this._loopScroll().on("change-current-element", function(element) {
+                    console.log('Scrollpicker - change-current-element');
+
                     this.__ignoreValue = true;
                     this.set("value", this.getValueByElement(element));
                     this.__ignoreValue = false;

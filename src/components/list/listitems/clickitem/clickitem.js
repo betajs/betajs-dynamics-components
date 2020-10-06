@@ -18,7 +18,6 @@ Scoped.define("module:Clickitem", [
 
         functions: {
             click: function() {
-
                 this.trigger('click', this.get('model'));
                 this.trigger('event', this.cid());
             }
