@@ -1,0 +1,58 @@
+<ba-loadmore ba-if="{{!!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}"
+             ba-show="{{!loading && !!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}" ba-event:loadmore="moreitemsbackwards">
+</ba-loadmore>
+<ba-loading ba-show="{{loadmorebackwards && loading}}">
+</ba-loading>
+
+<list ba-repeat="{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}"
+      ba-interaction:scroll="{{infinite_scroll_options}}"
+      ba-interaction:droplist="{{drop_list_options}}"
+>
+<!--<list ba-repeat="{{collectionitem :: (model.listcollection||listcollection)}}">-->
+    <!--ba-isselected="{{isselected(collectionitem)}}"-->
+
+    <ba-{{getview(collectionitem)}}
+        ba-cache
+        ba-experimental="{{!!collectionitem.experimental}}"
+        data-id="{{collectionitem.cid()}}"
+        ba-data:id="{{collectionitem.cid()}}"
+        ba-data:pid="{{collectionitem.pid()}}"
+        ba-selection="{{=selection}}"
+        ba-droplist="{{droplist}}"
+        ba-functions="{{collectionitem.callbacks}}"
+        ba-itemcontext="{{itemContext(collectionitem)}}"
+        ba-isselected="{{isEqual(collectionitem, selected)}}"
+        ba-event-forward:item="{{[collectionitem]}}"
+        ba-view="{{collectionitem.view||view.listinner||{}}}"
+        ba-model="{{collectionitem}}"
+
+
+
+    ></ba-{{getview(collectionitem)}}>
+
+</list>
+
+<div class="moveplaceholder" data-id="floater" style="display:none">
+    <div class="inner">Move Here</div>
+</div>
+
+<ba-loadmore
+        ba-if="{{!!loadmore && loadmorestyle !== 'infinite' && loadmoreforwards}}"
+        ba-show="{{!loading && collection_count > 0 && !!loadmore && loadmorestyle !== 'infinite' && loadmoreforwards}}"
+        ba-event:loadmore="moreitems"
+></ba-loadmore>
+
+<ba-loading ba-show="{{loading}}">
+</ba-loading>
+
+<div
+        ba-if="{{emptymessage && !loading && collection_count === 0}}"
+        class="emptymessage">
+    {{emptymessage}}
+</div>
+
+<div
+        ba-if="{{emptymessage && !loading && collection_count === 0 && refreshable}}"
+        class="refresh">
+    <button ba-click="refreshable.refresh()">Refresh</button>
+</div>

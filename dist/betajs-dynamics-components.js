@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.127 - 2020-10-06
+betajs-dynamics-components - v0.1.128 - 2020-10-25
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1010,7 +1010,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.127 - 2020-10-06
+betajs-dynamics-components - v0.1.128 - 2020-10-25
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1025,8 +1025,8 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.127",
-    "datetime": 1601972372078
+    "version": "0.1.128",
+    "datetime": 1603656902626
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1977,6 +1977,34 @@ Scoped.define("module:Multiselectcontainer", [
     }).register();
 
 });
+Scoped.define("module:Positioncontainer", [
+    "dynamics:Dynamic",
+    "base:Time"
+], function(Dynamic, Time, scoped) {
+
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
+
+        template: "\n<positioncontainer style=\"top: {{top}}%\">\n\n    <ba-{{view.inner}}\n        ba-noscope\n    ></ba-{{view.inner}}>\n\n</positioncontainer>\n\n",
+
+        attrs: {
+            view: {
+                inner: 'eventitem'
+            },
+            top: 20
+        },
+
+        create: function() {
+            console.log('Positioncontainer');
+            var hour = Time.decodeTime(this.getProp('model.start_date_utc')).hour;
+            var percentage = (hour - 5) / 19 * 100;
+            this.set('top', percentage);
+        }
+
+    }).register();
+
+});
 Scoped.define("module:Removableclickcontainer", [
     "dynamics:Dynamic"
 ], function(Dynamic, scoped) {
@@ -2433,6 +2461,274 @@ Scoped.define("module:List", [
             scrollToFirst: function() {
                 this.execute("scrollTo", this.getCollection().first());
             },
+
+            isEqual: function(collectionitem, selected) {
+                if (selected) {
+                    if (selected === collectionitem) return true;
+                    else if (selected.pid() === collectionitem.pid()) return true;
+                }
+                return false;
+            },
+
+            itemContext: function(collectionitem) {
+                return this.get("itemcontext") && Types.is_function(this.get("itemcontext")) ? this.get("itemcontext")(collectionitem) : {};
+            }
+        }
+
+    }).registerFunctions({
+        /**/"!!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards": function (obj) { with (obj) { return !!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards; } }, "!loading && !!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards": function (obj) { with (obj) { return !loading && !!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards; } }, "loadmorebackwards && loading": function (obj) { with (obj) { return loadmorebackwards && loading; } }, "(model.listcollection||listcollection)": function (obj) { with (obj) { return (model.listcollection||listcollection); } }, "infinite_scroll_options": function (obj) { with (obj) { return infinite_scroll_options; } }, "drop_list_options": function (obj) { with (obj) { return drop_list_options; } }, "getview(collectionitem)": function (obj) { with (obj) { return getview(collectionitem); } }, "!!collectionitem.experimental": function (obj) { with (obj) { return !!collectionitem.experimental; } }, "collectionitem.cid()": function (obj) { with (obj) { return collectionitem.cid(); } }, "collectionitem.pid()": function (obj) { with (obj) { return collectionitem.pid(); } }, "selection": function (obj) { with (obj) { return selection; } }, "droplist": function (obj) { with (obj) { return droplist; } }, "collectionitem.callbacks": function (obj) { with (obj) { return collectionitem.callbacks; } }, "itemContext(collectionitem)": function (obj) { with (obj) { return itemContext(collectionitem); } }, "isEqual(collectionitem, selected)": function (obj) { with (obj) { return isEqual(collectionitem, selected); } }, "[collectionitem]": function (obj) { with (obj) { return [collectionitem]; } }, "collectionitem.view||view.listinner||{}": function (obj) { with (obj) { return collectionitem.view||view.listinner||{}; } }, "collectionitem": function (obj) { with (obj) { return collectionitem; } }, "!!loadmore && loadmorestyle !== 'infinite' && loadmoreforwards": function (obj) { with (obj) { return !!loadmore && loadmorestyle !== 'infinite' && loadmoreforwards; } }, "!loading && collection_count > 0 && !!loadmore && loadmorestyle !== 'infinite' && loadmoreforwards": function (obj) { with (obj) { return !loading && collection_count > 0 && !!loadmore && loadmorestyle !== 'infinite' && loadmoreforwards; } }, "loading": function (obj) { with (obj) { return loading; } }, "emptymessage && !loading && collection_count === 0": function (obj) { with (obj) { return emptymessage && !loading && collection_count === 0; } }, "emptymessage": function (obj) { with (obj) { return emptymessage; } }, "emptymessage && !loading && collection_count === 0 && refreshable": function (obj) { with (obj) { return emptymessage && !loading && collection_count === 0 && refreshable; } }/**/
+    }).register();
+
+});
+Scoped.define("module:Positionlist", [
+    "dynamics:Dynamic",
+    "browser:Dom",
+    "base:Async",
+    "base:Promise",
+    "base:Types"
+], [
+    "dynamics:Partials.EventForwardPartial",
+    "dynamics:Partials.RepeatPartial",
+    "dynamics:Partials.IfPartial",
+    "dynamics:Partials.DataPartial",
+    "dynamics:Partials.FunctionsPartial",
+    "dynamics:Partials.CachePartial",
+    "module:Loading",
+    "module:Loadmore",
+    "ui:Interactions.Infinitescroll",
+    "ui:Interactions.Droplist"
+], function(Dynamic, Dom, Async, Promise, Types, scoped) {
+
+    return Dynamic.extend({
+        scoped: scoped
+    }, {
+
+        template: "<ba-loadmore ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}\"\n             ba-show=\"{{!loading && !!loadmore && loadmorestyle !== 'infinite' && loadmorebackwards}}\" ba-event:loadmore=\"moreitemsbackwards\">\n</ba-loadmore>\n<ba-loading ba-show=\"{{loadmorebackwards && loading}}\">\n</ba-loading>\n\n<list ba-repeat=\"{{view.repeatoptions :: collectionitem :: (model.listcollection||listcollection)}}\"\n      ba-interaction:scroll=\"{{infinite_scroll_options}}\"\n      ba-interaction:droplist=\"{{drop_list_options}}\"\n>\n\n    \n\n    <ba-{{getview(collectionitem)}}\n        ba-cache\n        ba-experimental=\"{{!!collectionitem.experimental}}\"\n        data-id=\"{{collectionitem.cid()}}\"\n        ba-data:id=\"{{collectionitem.cid()}}\"\n        ba-data:pid=\"{{collectionitem.pid()}}\"\n        ba-selection=\"{{=selection}}\"\n        ba-droplist=\"{{droplist}}\"\n        ba-functions=\"{{collectionitem.callbacks}}\"\n        ba-itemcontext=\"{{itemContext(collectionitem)}}\"\n        ba-isselected=\"{{isEqual(collectionitem, selected)}}\"\n        ba-event-forward:item=\"{{[collectionitem]}}\"\n        ba-view=\"{{collectionitem.view||view.listinner||{}}}\"\n        ba-model=\"{{collectionitem}}\"\n\n\n\n    ></ba-{{getview(collectionitem)}}>\n\n</list>\n\n<div class=\"moveplaceholder\" data-id=\"floater\" style=\"display:none\">\n    <div class=\"inner\">Move Here</div>\n</div>\n\n<ba-loadmore\n        ba-if=\"{{!!loadmore && loadmorestyle !== 'infinite' && loadmoreforwards}}\"\n        ba-show=\"{{!loading && collection_count > 0 && !!loadmore && loadmorestyle !== 'infinite' && loadmoreforwards}}\"\n        ba-event:loadmore=\"moreitems\"\n></ba-loadmore>\n\n<ba-loading ba-show=\"{{loading}}\">\n</ba-loading>\n\n<div\n        ba-if=\"{{emptymessage && !loading && collection_count === 0}}\"\n        class=\"emptymessage\">\n    {{emptymessage}}\n</div>\n\n<div\n        ba-if=\"{{emptymessage && !loading && collection_count === 0 && refreshable}}\"\n        class=\"refresh\">\n    <button ba-click=\"refreshable.refresh()\">Refresh</button>\n</div>",
+
+        attrs: function() {
+            return {
+                listitem: "clickitem",
+                model: false,
+                selected: null,
+                selection: null,
+                scrolltolast: null,
+                scrolltofirst: null,
+                autoscroll: false,
+                scrolling_disabled: false,
+                stickybottom: false,
+                emptymessage: false,
+                refreshable: null,
+                droplist: false,
+                view: {},
+                infinite_scroll_options: {
+                    disabled: true,
+                    parent_elem: true,
+                    enable_scroll_modifier: "",
+                    type: "infinitescroll",
+                    append: function(count, callback) {
+                        this.execute("moreitems").success(function() {
+                            callback(1, true);
+                        });
+                    }
+                },
+                drop_list_options: {
+                    disabled: true,
+                    type: "droplist",
+                    floater: "[data-id='floater']",
+                    droppable: function(source) {
+                        return this.get("droplistcheck") ? this.get("droplistcheck").call(this, source.data) : true;
+                    },
+                    bounding_box: function(bb) {
+                        var height = bb.bottom - bb.top + 1;
+                        var margin = Math.floor(height * 0.2);
+                        bb.top += margin;
+                        bb.bottom -= margin;
+                        return bb;
+                    },
+                    events: {
+                        "dropped": function(dummy, event) {
+                            var item = event.source.data;
+                            var before = this.getCollection().getByIndex(event.index - 1);
+                            var after = this.getCollection().getByIndex(event.index);
+                            this.trigger("droplist-dropped", item, before, after);
+                        }
+                    }
+                },
+                loadmorebackwards: false,
+                loadmoreforwards: true,
+                loadmorereverse: false,
+                loadmoresteps: undefined,
+                "async-timeout": false,
+                loadmorestyle: "button" //infinite
+            };
+        },
+
+        types: {
+            scrolltolast: "boolean",
+            scrolltofirst: "boolean",
+            autoscroll: "boolean",
+            stickybottom: "boolean",
+            "async-timeout": "int",
+            droplist: "boolean",
+            loadmorebackwards: "boolean",
+            loadmoreforwards: "boolean",
+            loadmorereverse: "boolean"
+        },
+
+        create: function() {
+            this.set("collection_count", 0);
+            if (this.get("loadmore") && this.get("loadmorestyle") === "infinite")
+                this.setProp("infinite_scroll_options.disabled", false);
+            if (this.get("droplist"))
+                this.setProp("drop_list_options.disabled", false);
+            if (this.get("listcollection"))
+                this._setupListCollection(true);
+        },
+
+        events: {
+            "change:listcollection": function() {
+                this._setupListCollection(false);
+            }
+        },
+
+        _setupListCollection: function() {
+            var evts = "replaced-objects";
+            if (this.get("autoscroll"))
+                evts += " add";
+            Async.eventually(function() {
+                if (this.destroyed())
+                    return;
+                if (this.getCollection() && this.getCollection().on) {
+                    this.set("collection_count", this.getCollection().count());
+                    this.listenOn(this.getCollection(), "replaced-objects add remove collection-updating collection-updated", function() {
+                        this.set("collection_count", this.getCollection().count());
+                    });
+
+                    if (this.get("scrolltolast")) {
+                        this.listenOn(this.getCollection(), evts, function() {
+                            if (!this.get('scrolling_disabled'))
+                                this.execute("scrollToLast");
+                        }, {
+                            eventually: true,
+                            off_on_destroyed: true
+                        });
+                        this.execute("scrollToLast");
+                    }
+                    if (this.get("scrolltofirst")) {
+                        this.listenOn(this.getCollection(), evts, function() {
+                            if (!this.get('scrolling_disabled'))
+                                this.execute("scrollToFirst");
+                        }, {
+                            eventually: true,
+                            off_on_destroyed: true
+                        });
+                        this.execute("scrollToFirst");
+                    }
+                    this.listenOn(this.getCollection(), "collection-updating", function() {
+                        this.set("loading", true);
+                    });
+                    this.listenOn(this.getCollection(), "collection-updated", function() {
+                        this.set("loading", false);
+                    });
+                    if (this.getCollection().count() === 0 && this.get("async-timeout")) {
+                        /*
+                        this.getCollection().once("add", function() {
+                            this.set("loading", false);
+                        }, this);
+                        */
+                        this.set("loading", true);
+                        Async.eventually(function() {
+                            this.set("loading", false);
+                        }, this, this.get("async-timeout"));
+                    }
+                }
+            }, this);
+        },
+
+        _afterActivate: function() {
+            if (this.get("stickybottom"))
+                Dom.containerStickyBottom(this.activeElement());
+        },
+
+        getCollection: function() {
+            var coll = this.get("listcollection");
+            return coll && coll.value ? coll.value() : coll;
+        },
+
+        getLoadMore: function() {
+            var coll = this.get("loadmore");
+            return coll && coll.value ? coll.value() : coll;
+        },
+
+        functions: {
+
+            // moreitems: function() {
+            //     var oldCount = this.getCollection().count();
+            //     var promise = Promise.create();
+            //     this.set("loading", true);
+            //     Async.eventually(function() {
+            //         var promise = this.get("loadmorereverse") ? this.getLoadMore().increase_backwards(this.get("loadmoresteps")) : this.getLoadMore().increase_forwards(this.get("loadmoresteps"));
+            //         promise.callback(function() {
+            //             promise.asyncSuccess(true);
+            //             Async.eventually(function() {
+            //                 this.set("loading", false);
+            //                 var newCount = this.getCollection().count();
+            //                 if (newCount === oldCount)
+            //                     this.set("loadmoreforwards", false);
+            //             }, this);
+            //         }, this);
+            //     }, this);
+            //     return promise;
+            // },
+            //
+            // moreitemsbackwards: function() {
+            //     var oldCount = this.getCollection().count();
+            //     var promise = Promise.create();
+            //     this.set("loading", true);
+            //     Async.eventually(function() {
+            //         var promise = this.get("loadmorereverse") ? this.getLoadMore().increase_forwards(this.get("loadmoresteps")) : this.getLoadMore().increase_backwards(this.get("loadmoresteps"));
+            //         promise.callback(function() {
+            //
+            //             promise.asyncSuccess(true);
+            //
+            //             Async.eventually(function() {
+            //                 this.set("loading", false);
+            //                 var newCount = this.getCollection().count();
+            //                 if (newCount === oldCount)
+            //                     this.set("loadmorebackwards", false);
+            //             }, this);
+            //
+            //         }, this);
+            //     }, this);
+            //     return promise;
+            // },
+
+            getview: function(item) {
+                return this.getProp("view.listitem") || item.get("listitem") || (this.get("listitemfunc") ? (this.get("listitemfunc"))(item) : this.get("listitem"));
+            },
+
+            elementByItem: function(item) {
+                return item ? this.activeElement().querySelector("[data-id='" + item.cid() + "']") : null;
+            },
+
+            // scrollTo: function(item) {
+            //     if (!item)
+            //         return;
+            //     var element = this.execute("elementByItem", item);
+            //     if (!element)
+            //         return;
+            //     var parent = this.activeElement();
+            //
+            //     parent.scrollTop = element.offsetTop - parent.offsetTop;
+            // },
+            //
+            // scrollToLast: function() {
+            //     this.execute("scrollTo", this.getCollection().last());
+            // },
+            //
+            // scrollToFirst: function() {
+            //     this.execute("scrollTo", this.getCollection().first());
+            // },
 
             isEqual: function(collectionitem, selected) {
                 if (selected) {
