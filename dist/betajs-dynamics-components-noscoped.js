@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.129 - 2020-10-26
+betajs-dynamics-components - v0.1.130 - 2020-10-26
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,8 +14,8 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.129",
-    "datetime": 1603697216228
+    "version": "0.1.130",
+    "datetime": 1603742987620
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -989,6 +989,10 @@ Scoped.define("module:Positioncontainer", [
                 inner: 'eventitem'
             },
             top: 20,
+            listPos: {
+                top: 0,
+                height: 0
+            },
             click_gesture: {
                 mouse_up_activate: true,
                 up_event_allow_propagation: Info.isMobile(),
@@ -1003,7 +1007,7 @@ Scoped.define("module:Positioncontainer", [
             swipe_gesture: {
                 mouse_up_activate: false,
                 up_event_allow_propagation: Info.isMobile(),
-                wait_time: 250,
+                wait_time: 750,
                 wait_activate: false,
                 disable_x: -1,
                 disable_y: 10,
@@ -1014,7 +1018,7 @@ Scoped.define("module:Positioncontainer", [
             drag_gesture: {
                 mouse_up_activate: false,
                 up_event_allow_propagation: Info.isMobile(),
-                wait_time: 750,
+                wait_time: 250,
                 wait_activate: true,
                 disable_x: 10,
                 disable_y: 10,
@@ -1027,10 +1031,38 @@ Scoped.define("module:Positioncontainer", [
                 type: "drag",
                 clone_element: false,
                 start_event: null,
+                no_animation: true,
                 events: {
                     "move": function(model, event) {
+                        // console.log(event);
                         event.actionable_modifier.csscls("focus", true);
                         event.modifier.csscls("unfocus", true);
+                    },
+                    "release": function(model, event) {
+                        console.log('release');
+                        console.log(model);
+                        console.log(event);
+                        console.log(event.page_coords.y);
+
+                        var listHeight = this.getProp('listPos.height');
+                        var listTop = this.getProp('listPos.top');
+                        var relativePos = event.page_coords.y - listTop;
+
+                        console.log('listHeight: ' + listHeight);
+                        console.log('listTop: ' + listTop);
+                        console.log('event.page_coords.top: ' + event.page_coords.y);
+                        console.log('relativePos: ' + relativePos);
+
+
+                        if (0 > relativePos || listHeight < relativePos) {
+                            console.log('Positioncontainer: Outside Range');
+                        } else {
+                            var newPos = relativePos / listHeight * 100;
+                            this.set('top', newPos);
+                            console.log(this.get('top'));
+
+                        }
+
                     }
                 }
             },
@@ -1123,12 +1155,28 @@ Scoped.define("module:Positioncontainer", [
 
         create: function() {
             console.log('Positioncontainer');
-            // var hour = Time.decodeTime(this.getProp('model.start_date_utc')).hour;
-            // var minute = Time.decodeTime(this.getProp('model.start_date_utc')).minute/60;
+            this._setinitialTop();
+            this._getListPos();
+        },
+
+        _setinitialTop: function() {
             var decodeTime = Time.decodeTime(this.getProp('model.start_date_utc'));
             var hour = decodeTime.hour + decodeTime.minute / 60;
             var percentage = hour < 5 ? 0 : (hour - 5) / 19 * 100;
+
             this.set('top', percentage);
+        },
+
+        _getListPos: function() {
+            console.log('TODO: move to positionlist?');
+            var bounding = this.parent().activeElement().getBoundingClientRect();
+            console.log(bounding.x);
+            console.log(bounding.top);
+            this.set('listPos', {
+                top: bounding.top,
+                height: bounding.height
+            });
+            console.log(this.get('listPos'));
         }
 
     }).register();
