@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.131 - 2020-10-27
+betajs-dynamics-components - v0.1.132 - 2020-10-27
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,8 +14,8 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.131",
-    "datetime": 1603803601733
+    "version": "0.1.132",
+    "datetime": 1603813233863
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1029,14 +1029,8 @@ Scoped.define("module:Positioncontainer", [
                         event.modifier.csscls("unfocus", true);
                     },
                     "release": function(model, event) {
-                        console.log('release');
-                        console.log(model);
-                        console.log(event);
-                        console.log(event.page_coords.y);
-
                         this.set('top', this._coordToPercent(event));
-                        console.log(this.get('top'));
-
+                        this.trigger('release', this._coordToPercent(event));
                     }
                 }
             },

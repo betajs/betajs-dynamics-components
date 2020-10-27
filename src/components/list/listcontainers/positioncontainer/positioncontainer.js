@@ -61,14 +61,8 @@ Scoped.define("module:Positioncontainer", [
                         event.modifier.csscls("unfocus", true);
                     },
                     "release": function(model, event) {
-                        console.log('release');
-                        console.log(model);
-                        console.log(event);
-                        console.log(event.page_coords.y);
-
                         this.set('top', this._coordToPercent(event));
-                        console.log(this.get('top'));
-
+                        this.trigger('release', this._coordToPercent(event));
                     }
                 }
             },
