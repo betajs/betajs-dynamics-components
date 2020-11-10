@@ -15,7 +15,7 @@ Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
     "version": "0.1.133",
-    "datetime": 1605025712163
+    "datetime": 1605025769047
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -402,6 +402,8 @@ Scoped.define("module:Scrollpicker", [
 
         template: "<container ba-interaction:loopscroll=\"{{loopscroll}}\">\n        <element ba-repeat-element=\"{{value :: values}}\" data-value=\"{{value}}\">\n                {{value}}\n        </element>\n</container>\n<scrolloverlay ba-class=\"{{{\n                  valuetop : top\n               }}}\">\n        <pickeroverlay></pickeroverlay>\n        <valueoverlay></valueoverlay>\n</scrolloverlay>",
 
+        proxyAttrs: true,
+
         attrs: {
             first: 0,
             last: 23,
@@ -426,19 +428,16 @@ Scoped.define("module:Scrollpicker", [
                 if (!this.activeElement() || !this.activeElement().querySelector("container"))
                     return;
                 if (!this.__ignoreValue)
-                    this._loopScroll().scrollToElement(this.getElementByValue(this.get("value")));
+                    this._loopScroll().scrollToElement(this.getElementByValue(this.attrs.value));
             }
         },
 
         create: function() {
 
-            console.log('Scrollpicker');
-            console.log(this.get('value'));
-
             var values = [];
-            var dir = (this.get("first") <= this.get("last") ? 1 : -1);
-            while (values.length < this.get("atleast")) {
-                for (var i = this.get("first"); dir * (this.get("last") - i) >= 0; i += dir * this.get("increment"))
+            var dir = (this.attrs.first <= this.attrs.last ? 1 : -1);
+            while (values.length < this.attrs.atleast) {
+                for (var i = this.attrs.first; dir * (this.attrs.last - i) >= 0; i += dir * this.attrs.increment)
                     values.push(i);
             }
             this.set('values', values);
@@ -446,7 +445,7 @@ Scoped.define("module:Scrollpicker", [
             this.set("loopscroll", {
                 type: "loopscroll",
                 enabled: true,
-                currentTop: this.get("top"),
+                currentTop: this.attrs.top,
                 discrete: true,
                 scrollEndTimeout: 200,
                 elementMargin: 0,
@@ -472,18 +471,18 @@ Scoped.define("module:Scrollpicker", [
         },
 
         _encodeValue: function(value) {
-            value += this.get("valueadd");
-            var delta = this.get("first") - value;
-            delta = Math.round(delta / this.get("increment")) * this.get("increment");
-            value = this.get("first") - delta;
-            value = this.get("first") <= this.get("last") ?
-                Math.max(this.get("first"), Math.min(this.get('last'), value)) :
-                Math.max(this.get("last"), Math.min(this.get('first'), value));
+            value += this.attrs.valueadd;
+            var delta = this.attrs.first - value;
+            delta = Math.round(delta / this.attrs.increment) * this.attrs.increment;
+            value = this.attrs.first - delta;
+            value = this.attrs.first <= this.attrs.last ?
+                Math.max(this.attrs.first, Math.min(this.attrs.last, value)) :
+                Math.max(this.attrs.last, Math.min(this.attrs.first, value));
             return value;
         },
 
         _decodeValue: function(value) {
-            return value - this.get("valueadd");
+            return value - this.attrs.valueadd;
         },
 
         getElementByValue: function(value) {
@@ -498,16 +497,10 @@ Scoped.define("module:Scrollpicker", [
             // This is a massive hack.
             this.activeElement().querySelector("[ba-repeat-element]").remove();
             Async.eventually(function() {
-
-                console.log('Scrollpicker - Async');
-                console.log(this.get('value'));
-
-                this._loopScroll().scrollToElement(this.getElementByValue(this.get("value")));
+                this._loopScroll().scrollToElement(this.getElementByValue(this.attrs.value));
                 this._loopScroll().on("change-current-element", function(element) {
-                    console.log('Scrollpicker - change-current-element');
-
                     this.__ignoreValue = true;
-                    this.set("value", this.getValueByElement(element));
+                    this.attrs.value = this.getValueByElement(element);
                     this.__ignoreValue = false;
                 }, this);
             }, this);
