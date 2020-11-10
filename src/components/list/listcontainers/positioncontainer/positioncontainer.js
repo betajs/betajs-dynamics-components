@@ -20,6 +20,7 @@ Scoped.define("module:Positioncontainer", [
             view: {
                 inner: 'eventitem'
             },
+            dragMouseOffset: null,
             dragY: 0,
             top: 20,
             listPos: {
@@ -62,6 +63,7 @@ Scoped.define("module:Positioncontainer", [
                     },
                     "release": function(model, event) {
                         this.set('top', this._coordToPercent(event));
+                        this.set('dragMouseOffset', null);
                         this.trigger('release', this._coordToPercent(event));
                     }
                 }
@@ -80,8 +82,10 @@ Scoped.define("module:Positioncontainer", [
         },
 
         create: function() {
-            console.log('Positioncontainer');
             this._setinitialTop();
+        },
+
+        _afterActivate: function() {
             this._getListPos();
         },
 
@@ -94,15 +98,11 @@ Scoped.define("module:Positioncontainer", [
         },
 
         _getListPos: function() {
-            console.log('TODO: move to positionlist?');
             var bounding = this.parent().activeElement().getBoundingClientRect();
-            console.log(bounding.x);
-            console.log(bounding.top);
             this.set('listPos', {
                 top: bounding.top,
                 height: bounding.height
             });
-            console.log(this.get('listPos'));
         },
 
         _coordToPercent: function(event) {
@@ -110,15 +110,15 @@ Scoped.define("module:Positioncontainer", [
             var listTop = this.getProp('listPos.top');
             var relativePos = event.page_coords.y - listTop;
 
-            // console.log('listHeight: ' + listHeight);
-            // console.log('listTop: ' + listTop);
-            // console.log('event.page_coords.top: ' + event.page_coords.y);
-            // console.log('relativePos: ' + relativePos);
+            if (!this.get('dragMouseOffset')) {
+                var offsetTop = this.activeElement().getElementsByTagName('positioncontainer')[0].offsetTop;
+                this.set('dragMouseOffset', relativePos - offsetTop);
+            }
 
             if (0 > relativePos || listHeight < relativePos) {
                 console.log('Positioncontainer: Outside Range');
             } else
-                return newPos = relativePos / listHeight * 100;
+                return newPos = (relativePos - this.get('dragMouseOffset')) / listHeight * 100;
 
         }
 

@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.132 - 2020-10-27
+betajs-dynamics-components - v0.1.133 - 2020-11-10
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1010,7 +1010,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.132 - 2020-10-27
+betajs-dynamics-components - v0.1.133 - 2020-11-10
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1025,8 +1025,8 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.132",
-    "datetime": 1603813233863
+    "version": "0.1.133",
+    "datetime": 1605025712163
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1999,6 +1999,7 @@ Scoped.define("module:Positioncontainer", [
             view: {
                 inner: 'eventitem'
             },
+            dragMouseOffset: null,
             dragY: 0,
             top: 20,
             listPos: {
@@ -2041,6 +2042,7 @@ Scoped.define("module:Positioncontainer", [
                     },
                     "release": function(model, event) {
                         this.set('top', this._coordToPercent(event));
+                        this.set('dragMouseOffset', null);
                         this.trigger('release', this._coordToPercent(event));
                     }
                 }
@@ -2059,8 +2061,10 @@ Scoped.define("module:Positioncontainer", [
         },
 
         create: function() {
-            console.log('Positioncontainer');
             this._setinitialTop();
+        },
+
+        _afterActivate: function() {
             this._getListPos();
         },
 
@@ -2073,15 +2077,11 @@ Scoped.define("module:Positioncontainer", [
         },
 
         _getListPos: function() {
-            console.log('TODO: move to positionlist?');
             var bounding = this.parent().activeElement().getBoundingClientRect();
-            console.log(bounding.x);
-            console.log(bounding.top);
             this.set('listPos', {
                 top: bounding.top,
                 height: bounding.height
             });
-            console.log(this.get('listPos'));
         },
 
         _coordToPercent: function(event) {
@@ -2089,15 +2089,15 @@ Scoped.define("module:Positioncontainer", [
             var listTop = this.getProp('listPos.top');
             var relativePos = event.page_coords.y - listTop;
 
-            // console.log('listHeight: ' + listHeight);
-            // console.log('listTop: ' + listTop);
-            // console.log('event.page_coords.top: ' + event.page_coords.y);
-            // console.log('relativePos: ' + relativePos);
+            if (!this.get('dragMouseOffset')) {
+                var offsetTop = this.activeElement().getElementsByTagName('positioncontainer')[0].offsetTop;
+                this.set('dragMouseOffset', relativePos - offsetTop);
+            }
 
             if (0 > relativePos || listHeight < relativePos) {
                 console.log('Positioncontainer: Outside Range');
             } else
-                return newPos = relativePos / listHeight * 100;
+                return newPos = (relativePos - this.get('dragMouseOffset')) / listHeight * 100;
 
         }
 
