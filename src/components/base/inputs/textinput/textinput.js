@@ -38,6 +38,9 @@ Scoped.define("module:Textinput", [
         },
 
         functions: {
+            pressEnter: function() {
+                console.log('Enter');
+            },
             caretPos: function(position) {
                 if (position)
                     this.activeElement().querySelector("textarea").selectionStart = position;

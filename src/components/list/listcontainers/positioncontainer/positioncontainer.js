@@ -73,6 +73,7 @@ Scoped.define("module:Positioncontainer", [
                 type: "drop",
                 events: {
                     "dropped": function(data, event) {
+                        console.log('dropped');
                         this.execute('dropped', event.source.data);
                     }
                 }
