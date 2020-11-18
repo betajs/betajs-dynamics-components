@@ -41,6 +41,7 @@
         "grunt-contrib-csslint": "",
         "grunt-contrib-connect": "",
         "grunt-githooks": "",
+        "grunt-shell": "",
         "betajs-scoped": "~0.0.13",
         "betajs-compile": "~0.0.37",
         "betajs": "~1.0.96",
