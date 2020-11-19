@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.134 - 2020-11-10
+betajs-dynamics-components - v0.1.136 - 2020-11-19
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,8 +14,8 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.134",
-    "datetime": 1605060663317
+    "version": "0.1.136",
+    "datetime": 1605775634651
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1387,6 +1387,8 @@ Scoped.define("module:List", [
         },
 
         _setupListCollection: function() {
+            this.__oldloadmoreforwards = this.get("loadmoreforwards");
+            this.__oldloadmorebackwards = this.get("loadmorebackwards");
             var evts = "replaced-objects";
             if (this.get("autoscroll"))
                 evts += " add";
@@ -1397,6 +1399,8 @@ Scoped.define("module:List", [
                     this.set("collection_count", this.getCollection().count());
                     this.listenOn(this.getCollection(), "replaced-objects add remove collection-updating collection-updated", function() {
                         this.set("collection_count", this.getCollection().count());
+                        this.set("loadmoreforwards", this.__oldloadmoreforwards);
+                        this.set("loadmorebackwards", this.__oldloadmorebackwards);
                     });
 
                     if (this.get("scrolltolast")) {
@@ -1468,8 +1472,10 @@ Scoped.define("module:List", [
                         Async.eventually(function() {
                             this.set("loading", false);
                             var newCount = this.getCollection().count();
-                            if (newCount === oldCount)
+                            if (newCount === oldCount) {
+                                this.__oldloadmoreforwards = this.get("loadmoreforwards");
                                 this.set("loadmoreforwards", false);
+                            }
                         }, this);
                     }, this);
                 }, this);
@@ -1489,8 +1495,10 @@ Scoped.define("module:List", [
                         Async.eventually(function() {
                             this.set("loading", false);
                             var newCount = this.getCollection().count();
-                            if (newCount === oldCount)
+                            if (newCount === oldCount) {
+                                this.__oldloadmorebackwards = this.get("loadmorebackwards");
                                 this.set("loadmorebackwards", false);
+                            }
                         }, this);
 
                     }, this);
