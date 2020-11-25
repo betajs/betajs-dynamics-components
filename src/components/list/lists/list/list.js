@@ -110,6 +110,8 @@ Scoped.define("module:List", [
         },
 
         _setupListCollection: function() {
+            this.__oldloadmoreforwards = this.get("loadmoreforwards");
+            this.__oldloadmorebackwards = this.get("loadmorebackwards");
             var evts = "replaced-objects";
             if (this.get("autoscroll"))
                 evts += " add";
@@ -120,6 +122,8 @@ Scoped.define("module:List", [
                     this.set("collection_count", this.getCollection().count());
                     this.listenOn(this.getCollection(), "replaced-objects add remove collection-updating collection-updated", function() {
                         this.set("collection_count", this.getCollection().count());
+                        this.set("loadmoreforwards", this.__oldloadmoreforwards);
+                        this.set("loadmorebackwards", this.__oldloadmorebackwards);
                     });
 
                     if (this.get("scrolltolast")) {
@@ -191,8 +195,10 @@ Scoped.define("module:List", [
                         Async.eventually(function() {
                             this.set("loading", false);
                             var newCount = this.getCollection().count();
-                            if (newCount === oldCount)
+                            if (newCount === oldCount) {
+                                this.__oldloadmoreforwards = this.get("loadmoreforwards");
                                 this.set("loadmoreforwards", false);
+                            }
                         }, this);
                     }, this);
                 }, this);
@@ -212,8 +218,10 @@ Scoped.define("module:List", [
                         Async.eventually(function() {
                             this.set("loading", false);
                             var newCount = this.getCollection().count();
-                            if (newCount === oldCount)
+                            if (newCount === oldCount) {
+                                this.__oldloadmorebackwards = this.get("loadmorebackwards");
                                 this.set("loadmorebackwards", false);
+                            }
                         }, this);
 
                     }, this);
