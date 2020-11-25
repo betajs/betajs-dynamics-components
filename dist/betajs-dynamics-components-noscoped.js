@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.133 - 2020-11-10
+betajs-dynamics-components - v0.1.134 - 2020-11-10
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -14,8 +14,8 @@ Scoped.binding('ui', 'global:BetaJS.UI');
 Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
-    "version": "0.1.133",
-    "datetime": 1605025769047
+    "version": "0.1.134",
+    "datetime": 1605060663317
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -394,16 +394,12 @@ Scoped.define("module:Scrollpicker", [
 ], [
     // It has to be a repeat element partial, otherwise whitespace is removed from container
     "dynamics:Partials.RepeatElementPartial"
-], function(Dynamic, Loopscroll, Async, scoped) {
-
+], function (Dynamic, Loopscroll, Async, scoped) {
     return Dynamic.extend({
         scoped: scoped
     }, {
-
         template: "<container ba-interaction:loopscroll=\"{{loopscroll}}\">\n        <element ba-repeat-element=\"{{value :: values}}\" data-value=\"{{value}}\">\n                {{value}}\n        </element>\n</container>\n<scrolloverlay ba-class=\"{{{\n                  valuetop : top\n               }}}\">\n        <pickeroverlay></pickeroverlay>\n        <valueoverlay></valueoverlay>\n</scrolloverlay>",
-
         proxyAttrs: true,
-
         attrs: {
             first: 0,
             last: 23,
@@ -413,7 +409,6 @@ Scoped.define("module:Scrollpicker", [
             value: 10,
             valueadd: 0
         },
-
         types: {
             first: "int",
             last: "int",
@@ -422,18 +417,15 @@ Scoped.define("module:Scrollpicker", [
             value: "int",
             valueadd: "int"
         },
-
         events: {
-            "change:value": function(value) {
+            "change:value": function (value) {
                 if (!this.activeElement() || !this.activeElement().querySelector("container"))
                     return;
                 if (!this.__ignoreValue)
                     this._loopScroll().scrollToElement(this.getElementByValue(this.attrs.value));
             }
         },
-
-        create: function() {
-
+        create: function () {
             var values = [];
             var dir = (this.attrs.first <= this.attrs.last ? 1 : -1);
             while (values.length < this.attrs.atleast) {
@@ -441,7 +433,6 @@ Scoped.define("module:Scrollpicker", [
                     values.push(i);
             }
             this.set('values', values);
-
             this.set("loopscroll", {
                 type: "loopscroll",
                 enabled: true,
@@ -456,21 +447,17 @@ Scoped.define("module:Scrollpicker", [
                 scrollToOnClick: true
             });
         },
-
-        _loopScroll: function() {
-
+        _loopScroll: function () {
             var loopscroll = null;
             // This is not particularly nice, but we'll improve on this later.
             var interactions = this.activeElement().querySelector("container").dynnodehandler.interactions;
             if (interactions)
                 loopscroll = interactions.loopscroll;
-            else return;
-
+            else
+                return;
             return loopscroll;
-
         },
-
-        _encodeValue: function(value) {
+        _encodeValue: function (value) {
             value += this.attrs.valueadd;
             var delta = this.attrs.first - value;
             delta = Math.round(delta / this.attrs.increment) * this.attrs.increment;
@@ -480,39 +467,34 @@ Scoped.define("module:Scrollpicker", [
                 Math.max(this.attrs.last, Math.min(this.attrs.first, value));
             return value;
         },
-
-        _decodeValue: function(value) {
+        _decodeValue: function (value) {
             return value - this.attrs.valueadd;
         },
-
-        getElementByValue: function(value) {
+        getElementByValue: function (value) {
             return this.activeElement().querySelector("[data-value='" + this._encodeValue(value) + "']");
         },
-
-        getValueByElement: function(element) {
+        getValueByElement: function (element) {
             return this._decodeValue(parseInt(element.dataset.value, 10));
         },
-
-        _afterActivate: function(element) {
+        _afterActivate: function (element) {
             // This is a massive hack.
             this.activeElement().querySelector("[ba-repeat-element]").remove();
-            Async.eventually(function() {
+            Async.eventually(function () {
                 this._loopScroll().scrollToElement(this.getElementByValue(this.attrs.value));
-                this._loopScroll().on("change-current-element", function(element) {
+                this._loopScroll().on("change-current-element", function (element) {
                     this.__ignoreValue = true;
                     this.attrs.value = this.getValueByElement(element);
                     this.__ignoreValue = false;
                 }, this);
             }, this);
         }
-
     }).registerFunctions({
-        /**/"loopscroll": function (obj) { with (obj) { return loopscroll; } }, "values": function (obj) { with (obj) { return values; } }, "value": function (obj) { with (obj) { return value; } }, "{\n                  valuetop : top\n               }": function (obj) { with (obj) { return {
+    /**/"loopscroll": function (obj) { with (obj) { return loopscroll; } }, "values": function (obj) { with (obj) { return values; } }, "value": function (obj) { with (obj) { return value; } }, "{\n                  valuetop : top\n               }": function (obj) { with (obj) { return {
                   valuetop : top
                }; } }/**/
     }).register();
-
 });
+
 Scoped.define("module:Search", [
     "dynamics:Dynamic"
 ], [
