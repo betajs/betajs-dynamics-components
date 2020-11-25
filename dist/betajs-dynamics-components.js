@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.136 - 2020-11-19
+betajs-dynamics-components - v0.1.136 - 2020-11-25
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1010,7 +1010,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.136 - 2020-11-19
+betajs-dynamics-components - v0.1.136 - 2020-11-25
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1026,7 +1026,7 @@ Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
     "version": "0.1.136",
-    "datetime": 1605775634651
+    "datetime": 1606305711337
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');
@@ -1718,6 +1718,9 @@ Scoped.define("module:Textinput", [
         },
 
         functions: {
+            pressEnter: function() {
+                console.log('Enter');
+            },
             caretPos: function(position) {
                 if (position)
                     this.activeElement().querySelector("textarea").selectionStart = position;
@@ -2027,6 +2030,7 @@ Scoped.define("module:Positioncontainer", [
                 type: "drop",
                 events: {
                     "dropped": function(data, event) {
+                        console.log('dropped');
                         this.execute('dropped', event.source.data);
                     }
                 }
