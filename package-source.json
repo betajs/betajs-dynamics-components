@@ -18,6 +18,7 @@
         "grunt-template": "",
         "grunt-closure-tools": "",
         "grunt-node-qunit": "",
+        "grunt-shell": "",
         "qunit": "",
         "jsdom": "",
         "js-yaml": "",

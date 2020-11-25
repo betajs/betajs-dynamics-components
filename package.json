@@ -30,6 +30,7 @@
         "grunt-contrib-clean": "",
         "grunt-contrib-copy": "",
         "grunt-preprocess": "",
+        "grunt-shell": "",
         "grunt-template": "",
         "grunt-closure-tools": "",
         "grunt-node-qunit": "",
