@@ -38,6 +38,7 @@ Scoped.define("module:List", [
                 refreshable: null,
                 droplist: false,
                 view: {},
+                itemattrs: {},
                 infinite_scroll_options: {
                     disabled: true,
                     parent_elem: true,
