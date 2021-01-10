@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.138 - 2020-12-26
+betajs-dynamics-components - v0.1.138 - 2021-01-10
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1010,7 +1010,7 @@ Public.exports();
 	return Public;
 }).call(this);
 /*!
-betajs-dynamics-components - v0.1.138 - 2020-12-26
+betajs-dynamics-components - v0.1.138 - 2021-01-10
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -1026,7 +1026,7 @@ Scoped.define("module:", function () {
 	return {
     "guid": "ced27948-1e6f-490d-b6c1-548d39e8cd8d",
     "version": "0.1.138",
-    "datetime": 1608940023123
+    "datetime": 1610290340660
 };
 });
 Scoped.assumeVersion('base:version', '~1.0.96');

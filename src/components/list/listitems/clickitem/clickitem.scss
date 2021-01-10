@@ -18,7 +18,10 @@ ba-clickitem {
   }
   .noicon {
     icon {display: none}
-    value {text-align: center}
+    value {
+      text-align: center;
+      margin: auto;
+    }
   }
 
 }

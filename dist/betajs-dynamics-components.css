@@ -1,5 +1,5 @@
 /*!
-betajs-dynamics-components - v0.1.138 - 2020-12-26
+betajs-dynamics-components - v0.1.138 - 2021-01-10
 Copyright (c) Victor Lingenthal,Oliver Friedmann
 Apache-2.0 Software License.
 */
@@ -785,6 +785,7 @@ ba-clickitem .noicon icon {
 }
 ba-clickitem .noicon value {
   text-align: center;
+  margin: auto;
 }
 
 ba-eventitem {
